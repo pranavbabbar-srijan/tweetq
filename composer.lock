@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e3d5beb109a16a7266336b841f8cbbae",
-    "content-hash": "cdce9c2be5d1def34515639f92c1b92b",
+    "hash": "84003c81087e4dfb93de6fef65b31f91",
+    "content-hash": "cb3e4967323bd52ba260c1cc214dca2e",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1065,56 +1065,6 @@
             "time": "2016-11-05 10:46:44"
         },
         {
-            "name": "drupal/config_update",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/config_update",
-                "reference": "8.x-1.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/config_update-8.x-1.2.zip",
-                "reference": null,
-                "shasum": "9490c58d1b7e58c5c08533c93d5565f356144591"
-            },
-            "require": {
-                "drupal/core": "*"
-            },
-            "suggest": {
-                "drupal/core": "Required by drupal/config_update_ui"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1477674962"
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "jhodgdon",
-                    "homepage": "https://www.drupal.org/user/155601"
-                },
-                {
-                    "name": "nedjo",
-                    "homepage": "https://www.drupal.org/user/4481"
-                }
-            ],
-            "description": "Provides basic revert and update functionality for other modules",
-            "homepage": "https://www.drupal.org/project/config_update",
-            "support": {
-                "source": "http://cgit.drupalcode.org/config_update"
-            }
-        },
-        {
             "name": "drupal/console",
             "version": "1.0.0-rc10",
             "source": {
@@ -1509,31 +1459,30 @@
             "time": "2016-11-16 18:45:36"
         },
         {
-            "name": "drupal/features",
-            "version": "3.0.0-rc1",
+            "name": "drupal/entity",
+            "version": "1.0.0-alpha3",
             "source": {
                 "type": "git",
-                "url": "https://git.drupal.org/project/features",
-                "reference": "8.x-3.0-rc1"
+                "url": "https://git.drupal.org/project/entity",
+                "reference": "8.x-1.0-alpha3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/features-8.x-3.0-rc1.zip",
+                "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.0-alpha3.zip",
                 "reference": null,
-                "shasum": "bb7481ef6a487936e342bdbb8fbbf2b8896b8a2b"
+                "shasum": "67d7da97ca43468880426d1deeeccf87de7f1f40"
             },
             "require": {
-                "drupal/config_update": "*",
-                "drupal/core": "*"
+                "drupal/core": "~8.1"
             },
             "type": "drupal-module",
             "extra": {
                 "branch-alias": {
-                    "dev-3.x": "3.x-dev"
+                    "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.0-rc1",
-                    "datestamp": "1478188444"
+                    "version": "8.x-1.0-alpha3",
+                    "datestamp": "1461748139"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -1542,38 +1491,30 @@
             ],
             "authors": [
                 {
+                    "name": "Berdir",
+                    "homepage": "https://www.drupal.org/user/214652"
+                },
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
                     "name": "dawehner",
                     "homepage": "https://www.drupal.org/user/99340"
                 },
                 {
-                    "name": "e2thex",
-                    "homepage": "https://www.drupal.org/user/189123"
+                    "name": "dixon_",
+                    "homepage": "https://www.drupal.org/user/239911"
                 },
                 {
-                    "name": "febbraro",
-                    "homepage": "https://www.drupal.org/user/43670"
-                },
-                {
-                    "name": "jmiccolis",
-                    "homepage": "https://www.drupal.org/user/31731"
-                },
-                {
-                    "name": "mpotter",
-                    "homepage": "https://www.drupal.org/user/616192"
-                },
-                {
-                    "name": "nedjo",
-                    "homepage": "https://www.drupal.org/user/4481"
-                },
-                {
-                    "name": "tim.plunkett",
-                    "homepage": "https://www.drupal.org/user/241634"
+                    "name": "fago",
+                    "homepage": "https://www.drupal.org/user/16747"
                 }
             ],
-            "description": "Enables administrators to package configuration into modules.",
-            "homepage": "https://www.drupal.org/project/features",
+            "description": "Provides expanded entity APIs, which will be moved to Drupal core one day.",
+            "homepage": "http://drupal.org/project/entity",
             "support": {
-                "source": "http://cgit.drupalcode.org/features"
+                "source": "http://cgit.drupalcode.org/entity"
             }
         },
         {
