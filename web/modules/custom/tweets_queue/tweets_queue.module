@@ -125,6 +125,7 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
  */
 function tweets_queue_tweet_cron_message() {
   $status = array('success' => 0);
+  $text_size = 140;
   $nids = tweets_queue_get_tweets_cron_list();
   $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
   $total = count($nids);
@@ -135,6 +136,12 @@ function tweets_queue_tweet_cron_message() {
     $nid = array_rand($nids, 1);
     unset($nids[$nid]);
     $message  = tweets_queue_load_tweet_message($nid);
+    $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
+    if ($tweet_size > $text_size) {
+      drupal_set_message(t("Tweet :message exceeds :text_size limit, so skipped",
+        array(':message' => $message, ':text_size' => $text_size)));
+      contine;
+    }
     $status = tweets_queue_tweet_message($message);
     tweets_queue_update_priority($nid);
     if ($status['success']) {
