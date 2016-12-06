@@ -103,8 +103,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
 
     if ($file && $import_id && function_exists('drush_get_option')) {
       drupal_set_message("Migration successfully completed.");
-      drupal_set_message("Migration file: $file");
-      drupal_set_message("Migration class id : $import_id");
       $this->setFilePathConfiguration($table = 'config', $import_id, $file);
       drush_migrate_tools_migrate_import($import_id);
     }
