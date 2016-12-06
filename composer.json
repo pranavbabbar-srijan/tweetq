@@ -27,7 +27,8 @@
         "drupal/migrate_source_csv": "2.0-rc2",
         "drupal/migrate_tools": "3.0-beta1",
         "drupal/entity": "1.0-alpha3",
-        "drupal/config_update": "1.1"
+        "drupal/config_update": "1.1",
+        "drupal/features": "3.0-rc1"
     },
     "require-dev": {
         "behat/mink": "~1.7",
