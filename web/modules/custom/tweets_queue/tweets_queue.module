@@ -288,6 +288,14 @@ function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
       $data = intval($config->get(CRON_TWEET_RETWEET_INTERVAL));
       $data = ($data == 0) ? 0 : $data * 60;
       break;
+    case CRON_TWEET_MIN_INTERVAL:
+      $data = intval($config->get(CRON_TWEET_MIN_INTERVAL));
+      $data = ($data == 0) ? 0 : $data;
+      break;
+    case CRON_TWEET_MAX_INTERVAL:
+      $data = intval($config->get(CRON_TWEET_MAX_INTERVAL));
+      $data = ($data == 0) ? 0 : $data;
+      break;
     default:
       $data = '';
       break;
@@ -371,11 +379,28 @@ function tweets_queue_update_priority($nid) {
  * @param integer $increase_cron_run_limit
  *   Whether add extra time for cron run due to duplicate tweets.
  */
-function tweets_queue_schedule_cron($increase_cron_run_limit = 0) {
+function tweets_queue_schedule_cron_old($increase_cron_run_limit = 0) {
   global $base_url;
   $extend_cron_limit = ($increase_cron_run_limit) ? '&extend=1' : '';
   $path = $base_url . '/admin/structure/tweets_queue/settings?set_cron=1' . $extend_cron_limit;
   $response = new RedirectResponse($path, 302);
   $response->send();
   return;
+}
+
+/**
+ * Schedule the cron run.
+ *
+ * @param integer $increase_cron_run_limit
+ *   Whether add extra time for cron run due to duplicate tweets.
+ */
+function tweets_queue_schedule_cron($increase_cron_run_limit = 0) {
+  $min_interval = tweets_queue_get_tweet_configuration_data(CRON_TWEET_MIN_INTERVAL);
+  $max_interval = tweets_queue_get_tweet_configuration_data(CRON_TWEET_MAX_INTERVAL);
+  $cron_interval = rand($min_interval, $max_interval);
+  $cron_interval = $cron_interval * 60;
+  \Drupal::configFactory()->getEditable('automated_cron.settings')
+    ->set('interval', $cron_interval)
+    ->save();
+  exit;
 }
