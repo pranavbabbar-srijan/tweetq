@@ -140,6 +140,7 @@ function tweets_queue_tweet_cron_message() {
     if ($tweet_size > $text_size) {
       drupal_set_message(t("Tweet :message exceeds :text_size limit, so skipped",
         array(':message' => $message, ':text_size' => $text_size)));
+      tweets_queue_update_priority($nid);
       continue;
     }
     $status = tweets_queue_tweet_message($message);
