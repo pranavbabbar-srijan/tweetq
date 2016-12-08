@@ -186,7 +186,7 @@ function tweets_queue_get_tweets_cron_list() {
   $query->fields('p', ['nid']);
 
   if ($minimum_lapse_interval > 0) {
-    $minimum_lapse_time = time() - $minimum_lapse_interval;
+    $minimum_lapse_time = time() - ($minimum_lapse_interval * 60);
     $db_or = db_or();
     $db_or->condition('p.last_run', '0' , '=');
     $db_or->condition('p.last_run', $minimum_lapse_time , '<=');
