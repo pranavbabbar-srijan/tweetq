@@ -115,6 +115,13 @@ class TweetsQueueSettingsForm extends ConfigFormBase {
       '#description' => t('Specify the cron run maximun interval in minutes.'),
       '#required' => FALSE,
     );
+    $form[CRON_TWEET_LAST_RUN] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Last Cron run time'),
+      '#default_value' => $config->get(CRON_TWEET_LAST_RUN),
+      '#description' => t('Specify the cron run last time.'),
+      '#required' => FALSE,
+    );
     $form[CRON_TWEET_NEXT_RUN] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Next Cron run time'),

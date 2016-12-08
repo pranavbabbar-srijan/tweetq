@@ -29,6 +29,7 @@ const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
 const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
 const CRON_TWEET_RETWEET_INTERVAL = 'cron_tweet_retweet_interval';
 const CRON_TWEET_NEXT_RUN = 'cron_tweet_next_run';
+const CRON_TWEET_LAST_RUN = 'cron_tweet_last_run';
 
 /**
  * Implements hook_form_alter().
@@ -397,5 +398,6 @@ function tweets_queue_schedule_cron($increase_cron_run_limit = 0) {
 
   $next_run = time() + $cron_interval;
   $config = \Drupal::service('config.factory')->getEditable('tweets_queue.settings');
-  $config->set(CRON_TWEET_NEXT_RUN,  $next_run)->save();
+  $config->set(CRON_TWEET_LAST_RUN, time())->save();
+  $config->set(CRON_TWEET_NEXT_RUN, $next_run)->save();
 }
