@@ -25,6 +25,7 @@ const IMPORT_CONFIGURATION = 'import_configuration';
 const TWEET_QUEUE_CSV_FILE_UPLOAD = 'tweet_queue_csv_file_upload';
 const TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY = 'public://tweets_queue/';
 const TWEETS_PRIORITY_TABLE = 'tweets_priority';
+const TWEETS_URL_TABLE = 'tweets_url';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
 const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
 const CRON_TWEET_RETWEET_INTERVAL = 'cron_tweet_retweet_interval';
@@ -341,6 +342,32 @@ function tweets_queue_schema() {
       'tweet_weight' => array('weight'),
       'tweet_last_run' => array('last_run')
     )
+  );
+  $schema[TWEETS_URL_TABLE] = array(
+    'description' => 'My description',
+    'fields' => array(
+      'path' => array(
+        'description' => 'Name of the tweet url.',
+        'type' => 'varchar',
+        'length' => 140,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'api' => array(
+        'description' => 'Name of the api.',
+        'type' => 'varchar',
+        'length' => 155,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'last_run' => array(
+        'description' => 'last run time.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('path', 'api'),
   );
   return $schema;
 }
