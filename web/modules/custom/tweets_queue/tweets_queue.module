@@ -136,8 +136,14 @@ function tweets_queue_tweet_cron_message() {
       tweets_queue_update_priority($nid);
       continue;
     }
+    if (!tweets_queue_authenticate_url($message)) {
+      tweets_queue_update_priority($nid);
+      continue;
+    }
+
     $status = tweets_queue_tweet_message($message);
     tweets_queue_update_priority($nid);
+    tweets_queue_update_url($message);
     if ($status['success']) {
       tweets_queue_schedule_cron(0);
       return $status;
@@ -148,6 +154,36 @@ function tweets_queue_tweet_cron_message() {
     drupal_set_message(t('Maximun tweet attempt reached.'));
   }
   return $status;
+}
+
+/**
+ * Test whether text contains url and passed execution time line.
+ *
+ * @param string $message
+ * @return integer
+ */
+function tweets_queue_authenticate_url($message) {
+  $tweet_allowed = 1;
+  $tweet_disallowed = 0;
+  preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
+  if ($match[0][0] == '') {
+    return $tweet_allowed;
+  }
+  $url = $match[0][0];
+  $query = \Drupal::database()->select(TWEETS_URL_TABLE, 'p');
+  $query->addField('p', 'last_run');
+  $query->condition('p.path', $url);
+  $last_run = $query->execute()->fetchField();
+  if ($last_run == 0 or $last_run == '') {
+    return $tweet_allowed;
+  }
+  $minimum_lapse_interval = tweets_queue_get_tweet_configuration_data(CRON_TWEET_RETWEET_INTERVAL);
+  $next_reweet = $last_run + $minimum_lapse_interval;
+  $now = time();
+  if ($next_reweet <= $now) {
+    return $tweet_allowed;;
+  }
+  return $tweet_disallowed;
 }
 
 /**
@@ -370,6 +406,41 @@ function tweets_queue_schema() {
     'primary key' => array('path', 'api'),
   );
   return $schema;
+}
+
+/**
+ * Update the weight for the current tweet.
+ *
+ * @param integer $nid
+ *   Entity nid.
+ */
+function tweets_queue_update_url($message) {
+  preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
+  if ($match[0][0] == '') {
+    return;
+  }
+  $url = $match[0][0];
+  $query = \Drupal::database()->select(TWEETS_URL_TABLE, 'p');
+  $query->addField('p', 'path');
+  $query->condition('p.path', $url);
+  $path = $query->execute()->fetchField();
+
+  $last_run = time();
+  if ($path) {
+  \Drupal::database()->update(TWEETS_URL_TABLE)
+    ->condition('path', $path)
+    ->fields(['last_run' => time()])
+    ->execute();
+  }
+  else {
+     db_insert(TWEETS_URL_TABLE)
+        ->fields(array(
+          'path' => $url,
+          'api' => '',
+          'last_run' => time(),
+        ))
+      ->execute();
+  }
 }
 
 /**
