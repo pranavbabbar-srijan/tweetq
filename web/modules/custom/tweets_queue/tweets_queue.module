@@ -9,6 +9,7 @@
 
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Form\ConfigFormBase;
 
 const CONSUMER_KEY = 'consumer_key';
 const CONSUMER_SECRET_KEY = 'consumer_secret_key';
@@ -27,6 +28,7 @@ const TWEETS_PRIORITY_TABLE = 'tweets_priority';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
 const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
 const CRON_TWEET_RETWEET_INTERVAL = 'cron_tweet_retweet_interval';
+const CRON_TWEET_NEXT_RUN = 'cron_tweet_next_run';
 
 /**
  * Implements hook_form_alter().
@@ -74,22 +76,11 @@ function tweets_queue_set_single_post($message = 'Good Evening!!') {
  * Implements hook_cron().
  */
 function tweets_queue_cron() {
-  tweets_queue_compile_tweets('', TRUE);
-  return;
-  // Default to an hourly interval. Of course, cron has to be running at least
-  // hourly for this to work.
-  $interval = variable_get('cron_example_interval', 60 * 60);
-  // We usually don't want to act every time cron runs (which could be every
-  // minute) so keep a time for the next run in a variable.
-  if (time() >= variable_get('cron_example_next_execution', 0)) {
-    // This is a silly example of a cron job.
-    // It just makes it obvious that the job has run without
-    // making any changes to your database.
-    watchdog('cron_example', 'cron_example ran');
-    if (!empty($GLOBALS['cron_example_show_status_message'])) {
-      drupal_set_message(t('cron_example executed at %time', array('%time' => date_iso8601(time(0)))));
-    }
-    variable_set('cron_example_next_execution', time() + $interval);
+  $config = \Drupal::config('tweets_queue.settings');
+  $current_time = time();
+  $next_run = intval($config->get(CRON_TWEET_NEXT_RUN));
+  if ($current_time >= $next_run) {
+    tweets_queue_compile_tweets('', TRUE);
   }
 }
 
@@ -403,5 +394,8 @@ function tweets_queue_schedule_cron($increase_cron_run_limit = 0) {
   \Drupal::configFactory()->getEditable('automated_cron.settings')
     ->set('interval', $cron_interval)
     ->save();
-  exit;
+
+  $next_run = time() + $cron_interval;
+  $config = \Drupal::service('config.factory')->getEditable('tweets_queue.settings');
+  $config->set(CRON_TWEET_NEXT_RUN,  $next_run)->save();
 }

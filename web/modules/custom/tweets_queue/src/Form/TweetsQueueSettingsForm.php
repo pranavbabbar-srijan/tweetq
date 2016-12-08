@@ -115,6 +115,13 @@ class TweetsQueueSettingsForm extends ConfigFormBase {
       '#description' => t('Specify the cron run maximun interval in minutes.'),
       '#required' => FALSE,
     );
+    $form[CRON_TWEET_NEXT_RUN] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Next Cron run time'),
+      '#default_value' => $config->get(CRON_TWEET_NEXT_RUN),
+      '#description' => t('Specify the cron run next time.'),
+      '#required' => FALSE,
+    );
     $retweet_interval = intval($config->get(CRON_TWEET_RETWEET_INTERVAL));
     $retweet_interval = ($retweet_interval == 0) ? 300 : $retweet_interval;
     $form[CRON_TWEET_RETWEET_INTERVAL] = array(
@@ -196,6 +203,8 @@ destination:
     $config->set(CRON_TWEET_MIN_INTERVAL, $form_state->getValue(CRON_TWEET_MIN_INTERVAL))
       ->save();
     $config->set(CRON_TWEET_MAX_INTERVAL, $form_state->getValue(CRON_TWEET_MAX_INTERVAL))
+      ->save();
+    $config->set(CRON_TWEET_NEXT_RUN, $form_state->getValue(CRON_TWEET_NEXT_RUN))
       ->save();
     $config->set(CRON_TWEET_RETWEET_INTERVAL, $form_state->getValue(CRON_TWEET_RETWEET_INTERVAL))
       ->save();
