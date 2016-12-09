@@ -31,6 +31,9 @@ const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
 const CRON_TWEET_RETWEET_INTERVAL = 'cron_tweet_retweet_interval';
 const CRON_TWEET_NEXT_RUN = 'cron_tweet_next_run';
 const CRON_TWEET_LAST_RUN = 'cron_tweet_last_run';
+const CRON_TWEET_DEBUG_INFO = 'cron_tweet_debug_info';
+const CRON_TWEET_MESSAGES_SKIPPED = 'Tweet message skipped';
+
 
 /**
  * Implements hook_form_alter().
@@ -82,6 +85,7 @@ function tweets_queue_cron() {
   $current_time = time();
   $next_run = intval($config->get(CRON_TWEET_NEXT_RUN));
   if ($current_time >= $next_run) {
+    tweets_queue_debug_info('Starting Cron tweet process');
     tweets_queue_compile_tweets('', TRUE);
   }
 }
@@ -122,6 +126,7 @@ function tweets_queue_tweet_cron_message() {
   $nids = tweets_queue_get_tweets_cron_list();
   $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
   $total = count($nids);
+  tweets_queue_debug_info("Process started for $total items");
   if ($tweet_max_attempt > $total) {
     $tweet_max_attempt = $total;
   }
@@ -130,17 +135,21 @@ function tweets_queue_tweet_cron_message() {
     unset($nids[$nid]);
     $message  = tweets_queue_load_tweet_message($nid);
     $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
+    tweets_queue_debug_info("Process progress for $nid:$message::size:$tweet_size");
     if ($tweet_size > $text_size) {
-      drupal_set_message(t("Tweet :message exceeds :text_size limit, so skipped",
-        array(':message' => $message, ':text_size' => $text_size)));
+      tweets_queue_debug_info(t(':message for :nid',
+        array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
       tweets_queue_update_priority($nid);
       continue;
     }
     if (!tweets_queue_authenticate_url($message)) {
-      tweets_queue_update_priority($nid);
+      tweets_queue_debug_info('Tweet from same article already exists.');
+      tweets_queue_debug_info(t(':message for :nid',
+        array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
+      // tweets_queue_update_priority($nid);
       continue;
     }
-
+    tweets_queue_debug_info("Process Send started.");
     $status = tweets_queue_tweet_message($message);
     tweets_queue_update_priority($nid);
     tweets_queue_update_url($message);
@@ -150,7 +159,7 @@ function tweets_queue_tweet_cron_message() {
     }
   }
   if ($attempt >= $tweet_max_attempt-1) {
-    tweets_queue_schedule_cron(1);
+    // tweets_queue_schedule_cron(1);
     drupal_set_message(t('Maximun tweet attempt reached.'));
   }
   return $status;
@@ -183,6 +192,10 @@ function tweets_queue_authenticate_url($message) {
   if ($next_reweet <= $now) {
     return $tweet_allowed;;
   }
+  tweets_queue_debug_info(t("Same article tweet was last run at :last_run",
+    array(':last_run' => $last_run)));
+  tweets_queue_debug_info(t("Next run time is :next_reweet",
+    array(':next_reweet' => $next_reweet)));
   return $tweet_disallowed;
 }
 
@@ -327,7 +340,7 @@ function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
       $data = ($data == 0) ? 0 : $data;
       break;
     default:
-      $data = '';
+      $data = $config->get($key);
       break;
   }
   return $data;
@@ -450,6 +463,7 @@ function tweets_queue_update_url($message) {
  *   Entity nid.
  */
 function tweets_queue_update_priority($nid) {
+  tweets_queue_debug_info(t("Updating weight for :nid", array(':nid' => $nid)));
   $nid = intval($nid);
   $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
   $query->addField('p', 'weight');
@@ -457,11 +471,12 @@ function tweets_queue_update_priority($nid) {
   $weight = $query->execute()->fetchField();
   $weight = $weight + 1;
 
-
   \Drupal::database()->update(TWEETS_PRIORITY_TABLE)
     ->condition('nid', $nid)
     ->fields(['weight' => $weight, 'last_run' => time()])
     ->execute();
+  tweets_queue_debug_info(t("Updated weight for :nid to :weight",
+    array(':nid' => $nid, ':weight' => $weight)));
 }
 
 /**
@@ -498,4 +513,20 @@ function tweets_queue_schedule_cron($increase_cron_run_limit = 0) {
   $config = \Drupal::service('config.factory')->getEditable('tweets_queue.settings');
   $config->set(CRON_TWEET_LAST_RUN, time())->save();
   $config->set(CRON_TWEET_NEXT_RUN, $next_run)->save();
+  tweets_queue_debug_info(t('Cron scheduled for next run on :next_run',
+    array(':next_run' => $next_run)));
+}
+
+/**
+ * Display the debug information on the screen.
+ *
+ * @param string $message
+ *   Message to be displayed.
+ */
+function tweets_queue_debug_info ($message, $repeat = TRUE) {
+  $debug = tweets_queue_get_tweet_configuration_data(CRON_TWEET_DEBUG_INFO);
+  if ($debug) {
+    echo $message;
+    drupal_set_message($message, $repeat);
+  }
 }

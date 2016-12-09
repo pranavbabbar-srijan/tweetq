@@ -183,6 +183,13 @@ destination:
       '#default_value' => $configuration,
       '#required' => FALSE,
     );
+    $form[CRON_TWEET_DEBUG_INFO] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('Current cron run schedule interval'),
+      '#default_value' => $config->get(CRON_TWEET_DEBUG_INFO),
+      '#description' => t('Find the cron run current interval in minutes.'),
+      '#required' => FALSE,
+    );
     return parent::buildForm($form, $form_state);
   }
 
@@ -214,6 +221,8 @@ destination:
     $config->set(CRON_TWEET_NEXT_RUN, $form_state->getValue(CRON_TWEET_NEXT_RUN))
       ->save();
     $config->set(CRON_TWEET_RETWEET_INTERVAL, $form_state->getValue(CRON_TWEET_RETWEET_INTERVAL))
+      ->save();
+    $config->set(CRON_TWEET_DEBUG_INFO, $form_state->getValue(CRON_TWEET_DEBUG_INFO))
       ->save();
 
     parent::submitForm($form, $form_state);
