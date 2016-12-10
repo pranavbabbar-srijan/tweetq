@@ -185,9 +185,9 @@ destination:
     );
     $form[CRON_TWEET_DEBUG_INFO] = array(
       '#type' => 'checkbox',
-      '#title' => $this->t('Current cron run schedule interval'),
+      '#title' => $this->t('Current cron run debugging'),
       '#default_value' => $config->get(CRON_TWEET_DEBUG_INFO),
-      '#description' => t('Find the cron run current interval in minutes.'),
+      '#description' => t('Will get execution messages when the cron runs.'),
       '#required' => FALSE,
     );
     return parent::buildForm($form, $form_state);
