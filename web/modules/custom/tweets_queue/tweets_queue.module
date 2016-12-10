@@ -346,6 +346,49 @@ function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
   return $data;
 }
 
+function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
+  switch ($node->bundle()) {
+    case 'tweet':
+      $title = $node->get('title')->getValue();
+      $hashtag = $node->get('field_hash_tag')->getValue();
+      $node->title->value = tweets_queue_get_urls_present($title[0]['value']);
+      $node->field_hash_tag->value = tweets_queue_get_urls_present($hashtag[0]['value']);
+  }
+}
+
+function tweets_queue_get_urls_present($message) {
+  preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
+  if ($match[0][0] == '') {
+    return $message;
+  }
+  foreach ($match[0] as $url) {
+    $bit_url = tweets_queue_make_bitly_url($url, 'dsfser', 'R_5aafdd2f8d67f78150e52ffbd0613519', 'json');
+    if ($bit_url) {
+      $message = str_ireplace($url, $bit_url, $message);
+    }
+  }
+  return $message;
+}
+
+
+function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$version = '2.0.1') {
+  //create the URL
+  $bitly = 'http://api.bit.ly/shorten?version='.$version.'&longUrl='.urlencode($url).'&login='.$login.'&apiKey='.$appkey.'&format='.$format;
+  //get the url
+  //could also use cURL here
+  $response = file_get_contents($bitly);
+  //parse depending on desired format
+  if(strtolower($format) == 'json') {
+    $json = @json_decode($response,true);
+    return $json['results'][$url]['shortUrl'];
+  }
+  else //xml
+  {
+    $xml = simplexml_load_string($response);
+    return 'http://bit.ly/'.$xml->results->nodeKeyVal->hash;
+  }
+}
+
 /**
  * Implements hook_node_insert().
  */
