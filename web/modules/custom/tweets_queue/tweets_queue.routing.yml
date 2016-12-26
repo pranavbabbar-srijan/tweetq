@@ -1,7 +1,7 @@
 # Test API endpoints
 
 tweets_queue.settings:
-  path: '/admin/structure/tweets_queue/settings'
+  path: '/admin/config/services/tweets_queue/settings'
   defaults:
     _form: '\Drupal\tweets_queue\Form\TweetsQueueSettingsForm'
     _title: 'Tweeter Api configuration'
@@ -9,7 +9,7 @@ tweets_queue.settings:
     _permission: 'administer site configuration'
 
 tweets_queue.send_tweets:
-  path: '/admin/structure/tweets_queue/send_tweets'
+  path: '/admin/config/services/tweets_queue/send_tweets'
   defaults:
     _form: '\Drupal\tweets_queue\Form\SendTweetsForm'
     _title: 'Send Tweets'
@@ -17,7 +17,7 @@ tweets_queue.send_tweets:
     _permission: 'administer site configuration'
 
 tweets_queue.file_upload:
-  path: '/tweets-queue/upload-file'
+  path: '/admin/config/services/tweets_queue/upload-file'
   defaults:
     _form: '\Drupal\tweets_queue\Form\TweetsQueueCsvUploadForm'
     _title: 'Form test'
