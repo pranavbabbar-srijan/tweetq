@@ -26,6 +26,7 @@ const TWEET_QUEUE_CSV_FILE_UPLOAD = 'tweet_queue_csv_file_upload';
 const TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY = 'public://tweets_queue/';
 const TWEETS_PRIORITY_TABLE = 'tweets_priority';
 const TWEETS_URL_TABLE = 'tweets_url';
+const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
 const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
 const CRON_TWEET_RETWEET_INTERVAL = 'cron_tweet_retweet_interval';
@@ -421,6 +422,34 @@ function tweets_queue_node_delete(\Drupal\Core\Entity\EntityInterface $node) {
  * Implements hook_schema().
  */
 function tweets_queue_schema() {
+  $schema[TWEETS_HANDLER_TABLE] = array(
+    'description' => 'The base table for tweet handler specific information.',
+    'fields' => array(
+      'uid' => array('type' => 'int', 'not null' => TRUE),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      CONSUMER_KEY => array('type' => 'varchar', 'length' => 100,
+        'not null' => TRUE, 'default' => ''),
+      CONSUMER_SECRET_KEY => array('type' => 'varchar', 'length' => 100,
+        'not null' => TRUE, 'default' => ''),
+      ACCESS_TOKEN => array('type' => 'varchar', 'length' => 100,
+        'not null' => TRUE, 'default' => ''),
+      ACCESS_SECRET_TOKEN => array('type' => 'varchar', 'length' => 100,
+        'not null' => TRUE, 'default' => ''),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'updated' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      CRON_TWEET_LAST_RUN => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      CRON_TWEET_NEXT_RUN => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      CRON_TWEET_RETWEET_INTERVAL => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('uid'),
+    'indexes' => array(
+      'tweets_handler_status' => array('status'),
+      'tweets_handler_updated' => array('updated'),
+      'tweets_handler_next_run' => array(CRON_TWEET_NEXT_RUN),
+      'tweets_handler_last_run' => array(CRON_TWEET_LAST_RUN),
+      'tweets_handler_retweet_interval' => array(CRON_TWEET_RETWEET_INTERVAL),
+    )
+  );
   $schema[TWEETS_PRIORITY_TABLE] = array(
     'description' => 'The base table for tweet priority.',
     'fields' => array(
@@ -572,4 +601,26 @@ function tweets_queue_debug_info ($message, $repeat = TRUE) {
     echo $message;
     drupal_set_message($message, $repeat);
   }
+}
+
+/**
+ * Update tweets handler information for specific user.
+ *
+ * @param array $tweet_handler_info
+ *   Array containing tweet handler information.
+ * @param array $uid
+ *   Array containing tweet handler information.
+ *
+ */
+function tweets_queue_update_handler_info($tweet_handler_info, $uid = '') {
+  $uid = (!$uid) ? \Drupal::currentUser()->id() : $uid;
+  $tweet_handler_info['updated'] = time();
+  $created_tweet_handler_info = $tweet_handler_info;
+  $created_tweet_handler_info['created'] = time();
+
+  db_merge(TWEETS_HANDLER_TABLE)
+    ->insertFields($created_tweet_handler_info)
+    ->updateFields($tweet_handler_info)
+  ->key(array('uid' => $uid))
+  ->execute();
 }

@@ -226,6 +226,15 @@ destination:
       ->save();
 
     parent::submitForm($form, $form_state);
+
+    $tweet_handler_info = array(
+      ACCESS_TOKEN => $form_state->getValue(ACCESS_TOKEN),
+      ACCESS_SECRET_TOKEN => $form_state->getValue(ACCESS_SECRET_TOKEN),
+      CONSUMER_KEY => $form_state->getValue(CONSUMER_KEY),
+      CONSUMER_SECRET_KEY => $form_state->getValue(CONSUMER_SECRET_KEY),
+      CRON_TWEET_RETWEET_INTERVAL => $form_state->getValue(CRON_TWEET_RETWEET_INTERVAL),
+    );
+    tweets_queue_update_handler_info($tweet_handler_info);
   }
 
   public function scheduleNextCron($min_interval = 30, $max_interval = 60, $extra = 0) {
