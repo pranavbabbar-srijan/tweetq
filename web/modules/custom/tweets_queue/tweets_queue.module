@@ -310,6 +310,7 @@ function tweets_queue_load_field_info($entity, $field_name = 'title') {
  */
 function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
   $config = \Drupal::config('tweets_queue.settings');
+  $admin_config = \Drupal::config('tweets_queue_admin.settings');
   $data = '';
   switch ($key) {
     case ACCESS_TOKEN:
@@ -623,4 +624,47 @@ function tweets_queue_update_handler_info($tweet_handler_info, $uid = '') {
     ->updateFields($tweet_handler_info)
   ->key(array('uid' => $uid))
   ->execute();
+  drupal_set_message(t('Twitter handler configuration saved successfully.'));
+}
+
+/**
+ * fetch tweets handler information for specific user.
+ *
+ * @param array $tweet_handler_info
+ *   Array containing tweet handler information.
+ * @param array $uid
+ *   Array containing tweet handler information.
+ *
+ * @return object
+ *   Returns twitter handler specific information.
+ */
+function tweets_queue_fetch_client_handler_info($uid = '') {
+  $uid = (!$uid) ? \Drupal::currentUser()->id() : $uid;
+  
+  $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
+  $query->fields('p', ['uid', 'status', 'created','updated', 'consumer_key',
+    'consumer_secret_key', 'access_token', 'access_secret_token', 'cron_tweet_last_run',
+    'cron_tweet_next_run', 'cron_tweet_retweet_interval']);
+  $query->condition('p.uid', $uid , '=');
+  $data = $query->execute()->fetchObject();
+  return $data;
+}
+
+/**
+ * Get twitter handler specific field information.
+ *
+ * @param object $data
+ *   Contains client handler information.
+ * @param string $field_name
+ *   Name of the twitter handler field.
+ *
+ * @return string
+ *   Returns handler specific field information.
+ */
+function tweets_queue_get_client_field_info($data, $field_name) {
+  $field_value = '';
+  if (is_object($data) && isset($data->{$field_name})) {
+    $field_value = $data->{$field_name};
+  }
+  return $field_value;
 }

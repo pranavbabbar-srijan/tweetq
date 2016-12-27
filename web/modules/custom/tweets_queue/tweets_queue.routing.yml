@@ -1,10 +1,18 @@
 # Test API endpoints
 
+tweets_queue_admin.settings:
+  path: '/admin/config/services/tweets_queue/admin_settings'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\TweetsQueueAdminSettingsForm'
+    _title: 'Tweeter Api admin configuration'
+  requirements:
+    _permission: 'administer site configuration'
+
 tweets_queue.settings:
-  path: '/admin/config/services/tweets_queue/settings'
+  path: '/admin/config/services/tweets_queue/client_settings'
   defaults:
     _form: '\Drupal\tweets_queue\Form\TweetsQueueSettingsForm'
-    _title: 'Tweeter Api configuration'
+    _title: 'Tweeter Api client configuration'
   requirements:
     _permission: 'administer site configuration'
 

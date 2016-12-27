@@ -1,5 +1,12 @@
+tweets_queue_admin.settings:
+  title: 'Twitter Admin configuration'
+  description: 'Add/Modify twitter generic configuration.'
+  parent: system.admin_config_services
+  route_name: tweets_queue_admin.settings
+  weight: -15
+
 tweets_queue.settings:
-  title: 'Twitter configuration'
+  title: 'Twitter Client configuration'
   description: 'Add/Modify twitter api configuration.'
   parent: system.admin_config_services
   route_name: tweets_queue.settings
