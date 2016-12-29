@@ -76,11 +76,22 @@ class TweetsQueueSettingsForm extends ConfigFormBase {
       '#description' => t('Specify the cron run last time.'),
       '#required' => FALSE,
     );
+    $now = time();
+
+    $next_run = tweets_queue_get_client_field_info($client_info, CRON_TWEET_NEXT_RUN);
+    if ($next_run > $now) {
+      $time_left = ($next_run - $now)/60;
+      $show_time = intval($time_left) . ' Minutes left';
+    }
+    else {
+      $show_time = '0 Minute left';
+    }
+
     $form[CRON_TWEET_NEXT_RUN] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Next Cron run time'),
-      '#default_value' => tweets_queue_get_client_field_info($client_info, CRON_TWEET_NEXT_RUN),
-      '#description' => t('Specify the cron run next time.'),
+      '#default_value' => $show_time,
+      '#description' => t('Find the next cron run time.'),
       '#required' => FALSE,
     );
     $retweet_interval = tweets_queue_get_client_field_info($client_info, CRON_TWEET_RETWEET_INTERVAL);
