@@ -105,8 +105,19 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
       $status = tweets_queue_tweet_cron_message();
       break;
     case FALSE:
+      $uid = \Drupal::currentUser()->id();
       $twitter_handler = tweets_queue_fetch_client_handler_info();
       $status = tweets_queue_tweet_message($message, $twitter_handler);
+      if ($status['code'] == TWITTER_HANDLER_INVALID_CODE) {
+        drupal_set_message(t($status['message']));
+        if ($twitter_handler->status != TWITTER_HANDLER_INVALID) {
+          tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_INVALID);
+        }
+        return $status;
+      }
+      if ($twitter_handler->status != TWITTER_HANDLER_VALID) {
+        tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_VALID);
+      }
       break;
   }
   switch ($status['success']) {
@@ -202,8 +213,9 @@ function tweets_queue_mark_handler_status($uid, $status) {
     'status' => $status,
   );
   tweets_queue_update_handler_info($tweet_handler_info, $uid);
+  $state = array(TWITTER_HANDLER_VALID => 'active', TWITTER_HANDLER_INVALID => 'inactive');
   drupal_set_message(t('Twitter handler status @status marked successfully.',
-    array('@status' => $status)));
+    array('@status' => $state[$status])));
 }
 
 /**
@@ -737,6 +749,9 @@ function tweets_queue_fetch_all_client_handler_info() {
   $db_or->condition('p.cron_tweet_next_run', '0' , '=');
   $db_or->condition('p.cron_tweet_next_run', $time , '<=');
   $query->condition($db_or);
+
+  // Only bring active handlers.
+  $query->condition('p.status', array('0', '1') , 'IN');
 
   $data = $query->execute()->fetchAll();
   $result = array('total' => 0);
