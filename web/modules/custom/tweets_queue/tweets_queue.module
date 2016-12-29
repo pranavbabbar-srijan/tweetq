@@ -141,6 +141,7 @@ function tweets_queue_tweet_cron_message() {
   $status = array('success' => 0);
   $handler_info = tweets_queue_fetch_all_client_handler_info();
   if ($handler_info['total'] <= 0) {
+    drupal_set_message(t('There is no active handler present or tweets to be sent.'));
     return;
   }
   $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
@@ -149,6 +150,19 @@ function tweets_queue_tweet_cron_message() {
   }
 }
 
+/**
+ * Send message from the specific user twitter handler.
+ *
+ * @param object $client_twitter_handler
+ *   Twitter handler.
+ * @param integer $uid
+ *   User uid.
+ * @param integer $tweet_max_attempt
+ *   Maximum tweet attempt for an user.
+ *
+ * @return array
+ *   Returns status containing the tweets.
+ */
 function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $tweet_max_attempt = 3) {
   $text_size = 140;
   $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
@@ -186,7 +200,7 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
     tweets_queue_update_priority($nid);
     tweets_queue_update_url($message, $uid);
     if ($status['success']) {
-      tweets_queue_schedule_cron(0);
+      tweets_queue_mark_handler_next_run($uid);
       return $status;
     }
   }
@@ -195,6 +209,26 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
     drupal_set_message(t('Maximun tweet attempt reached.'));
   }
   return $status;
+}
+
+/**
+ * Mark specific user handler next run.
+ *
+ * @param integer $uid
+ *   User uid.
+ */
+function tweets_queue_mark_handler_next_run($uid) {
+  if (!$uid) {
+    return;
+  }
+  $min_interval = tweets_queue_get_tweet_configuration_data(CRON_TWEET_MIN_INTERVAL);
+  $max_interval = tweets_queue_get_tweet_configuration_data(CRON_TWEET_MAX_INTERVAL);
+  $cron_interval = rand($min_interval, $max_interval);
+  $cron_interval = $cron_interval * 60;
+  $tweet_handler_info = array(
+    CRON_TWEET_NEXT_RUN =>  time() + $cron_interval,
+  );
+  tweets_queue_update_handler_info($tweet_handler_info, $uid);
 }
 
 /**
@@ -430,7 +464,8 @@ function tweets_queue_get_urls_present($message) {
 
 function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$version = '2.0.1') {
   //create the URL
-  $bitly = 'http://api.bit.ly/shorten?version='.$version.'&longUrl='.urlencode($url).'&login='.$login.'&apiKey='.$appkey.'&format='.$format;
+  $bitly = 'http://api.bit.ly/shorten?version=' . $version . '&longUrl=' . urlencode($url)
+    . '&login=' . $login . '&apiKey=' . $appkey . '&format=' . $format;
   //get the url
   //could also use cURL here
   $response = file_get_contents($bitly);
