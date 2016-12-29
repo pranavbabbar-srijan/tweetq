@@ -34,6 +34,9 @@ const CRON_TWEET_NEXT_RUN = 'cron_tweet_next_run';
 const CRON_TWEET_LAST_RUN = 'cron_tweet_last_run';
 const CRON_TWEET_DEBUG_INFO = 'cron_tweet_debug_info';
 const CRON_TWEET_MESSAGES_SKIPPED = 'Tweet message skipped';
+const TWITTER_HANDLER_INVALID = '2';
+const TWITTER_HANDLER_VALID = '1';
+const TWITTER_HANDLER_INVALID_CODE = '32';
 
 
 /**
@@ -51,13 +54,13 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
  * @return string
  *   Returns the tweets message.
  */
-function tweets_queue_set_single_post($message = 'Good Evening!!') {
+function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle) {
   require_once   './libraries/codebird-php/codebird.php';
   $status = array('success' => 0, 'message' => 'unsuccessful');
-  $consumer_key = tweets_queue_get_tweet_configuration_data(CONSUMER_KEY);
-  $consumer_secret_key = tweets_queue_get_tweet_configuration_data(CONSUMER_SECRET_KEY);
-  $access_token = tweets_queue_get_tweet_configuration_data(ACCESS_TOKEN);
-  $access_secret_token = tweets_queue_get_tweet_configuration_data(ACCESS_SECRET_TOKEN);
+  $consumer_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_KEY);
+  $consumer_secret_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_SECRET_KEY);
+  $access_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_TOKEN);
+  $access_secret_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_SECRET_TOKEN);
 
   \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
   $cb = \Codebird\Codebird::getInstance();
@@ -70,6 +73,7 @@ function tweets_queue_set_single_post($message = 'Good Evening!!') {
     $status['success'] = 0;
     $status['code'] = (isset($reply->errors[0]->code)) ? $reply->errors[0]->code : '';
     $status['message'] = (isset($reply->errors[0]->message)) ? $reply->errors[0]->message: 'tweet failed.';
+    tweets_queue_debug_info($status['message']);
     return $status;
   }
   if (is_object($reply)) {
@@ -82,7 +86,7 @@ function tweets_queue_set_single_post($message = 'Good Evening!!') {
  * Implements hook_cron().
  */
 function tweets_queue_cron() {
-  $config = \Drupal::config('tweets_queue.settings');
+  $config = \Drupal::config('tweets_queue_admin.settings');
   $current_time = time();
   $next_run = intval($config->get(CRON_TWEET_NEXT_RUN));
   if ($current_time >= $next_run) {
@@ -101,7 +105,8 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
       $status = tweets_queue_tweet_cron_message();
       break;
     case FALSE:
-      $status = tweets_queue_tweet_message($message);
+      $twitter_handler = tweets_queue_fetch_client_handler_info();
+      $status = tweets_queue_tweet_message($message, $twitter_handler);
       break;
   }
   switch ($status['success']) {
@@ -123,11 +128,22 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
  */
 function tweets_queue_tweet_cron_message() {
   $status = array('success' => 0);
-  $text_size = 140;
-  $nids = tweets_queue_get_tweets_cron_list();
+  $handler_info = tweets_queue_fetch_all_client_handler_info();
+  if ($handler_info['total'] <= 0) {
+    return;
+  }
   $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
+  foreach ($handler_info['handler'] as $uid => $client_twitter_handler) {
+    tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $tweet_max_attempt);
+  }
+}
+
+function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $tweet_max_attempt = 3) {
+  $text_size = 140;
+  $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
+  $nids = tweets_queue_get_tweets_cron_list($client_twitter_handler, $tweet_max_attempt);
   $total = count($nids);
-  tweets_queue_debug_info("Process started for $total items");
+  tweets_queue_debug_info("Process started for $total items for uid: $uid");
   if ($tweet_max_attempt > $total) {
     $tweet_max_attempt = $total;
   }
@@ -140,20 +156,24 @@ function tweets_queue_tweet_cron_message() {
     if ($tweet_size > $text_size) {
       tweets_queue_debug_info(t(':message for :nid',
         array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
-      tweets_queue_update_priority($nid);
+      tweets_queue_update_priority($nid, $tweet_size);
       continue;
     }
-    if (!tweets_queue_authenticate_url($message)) {
+    if (!tweets_queue_authenticate_url($message, $uid)) {
       tweets_queue_debug_info('Tweet from same article already exists.');
       tweets_queue_debug_info(t(':message for :nid',
         array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
-      // tweets_queue_update_priority($nid);
+      tweets_queue_update_priority($nid);
       continue;
     }
     tweets_queue_debug_info("Process Send started.");
-    $status = tweets_queue_tweet_message($message);
+    $status = tweets_queue_tweet_message($message, $client_twitter_handler);
+    if ($status['code'] == TWITTER_HANDLER_INVALID_CODE) {
+      tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_INVALID);
+      return $status;
+    }
     tweets_queue_update_priority($nid);
-    tweets_queue_update_url($message);
+    tweets_queue_update_url($message, $uid);
     if ($status['success']) {
       tweets_queue_schedule_cron(0);
       return $status;
@@ -167,12 +187,32 @@ function tweets_queue_tweet_cron_message() {
 }
 
 /**
+ * Mark specific user handler status.
+ *
+ * @param integer $uid
+ *   User uid.
+ * @param integer $status
+ *   Handler status. 0=not verified, 1=verified and active, 2=invalid.
+ */
+function tweets_queue_mark_handler_status($uid, $status) {
+  if (!$uid) {
+    return;
+  }
+  $tweet_handler_info = array(
+    'status' => $status,
+  );
+  tweets_queue_update_handler_info($tweet_handler_info, $uid);
+  drupal_set_message(t('Twitter handler status @status marked successfully.',
+    array('@status' => $status)));
+}
+
+/**
  * Test whether text contains url and passed execution time line.
  *
  * @param string $message
  * @return integer
  */
-function tweets_queue_authenticate_url($message) {
+function tweets_queue_authenticate_url($message, $uid = '') {
   $tweet_allowed = 1;
   $tweet_disallowed = 0;
   preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
@@ -183,6 +223,9 @@ function tweets_queue_authenticate_url($message) {
   $query = \Drupal::database()->select(TWEETS_URL_TABLE, 'p');
   $query->addField('p', 'last_run');
   $query->condition('p.path', $url);
+  if ($uid) {
+    $query->condition('p.api', $uid);
+  }
   $last_run = $query->execute()->fetchField();
   if ($last_run == 0 or $last_run == '') {
     return $tweet_allowed;
@@ -209,13 +252,13 @@ function tweets_queue_authenticate_url($message) {
  * @return array
  *   Status for the tweet.
  */
-function tweets_queue_tweet_message($message) {
+function tweets_queue_tweet_message($message, $twitter_handler) {
   $status = array('success' => 0);
   if (empty($message)) {
     return $status;
   }
   try {
-    $status = tweets_queue_set_single_post($message);
+    $status = tweets_queue_set_single_post($message, $twitter_handler);
   }
   catch (\Exception $e) {
     \Drupal::logger('tweets_queue')->error($e->getMessage());
@@ -230,10 +273,11 @@ function tweets_queue_tweet_message($message) {
  * @return string
  *   Returns the tweets message.
  */
-function tweets_queue_get_tweets_cron_list() {
+function tweets_queue_get_tweets_cron_list($client_handler, $tweet_max_attempt = 3) {
   $nid = '';
   $message = '';
-  $minimum_lapse_interval = tweets_queue_get_tweet_configuration_data(CRON_TWEET_RETWEET_INTERVAL);
+  $minimum_lapse_interval = tweets_queue_get_client_field_info($client_handler, CRON_TWEET_RETWEET_INTERVAL);
+  $uid = tweets_queue_get_client_field_info($client_handler, 'uid');
   $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
   $query->fields('p', ['nid']);
 
@@ -244,9 +288,9 @@ function tweets_queue_get_tweets_cron_list() {
     $db_or->condition('p.last_run', $minimum_lapse_time , '<=');
     $query->condition($db_or);
   }
-
+  $query->condition('p.uid', $uid , '=');
   $query->orderBy('p.weight', 'ASC');
-  $query->range(0, 10);
+  $query->range(0, $tweet_max_attempt);
   $nids = $query->execute()->fetchAllKeyed();
   return $nids;
 }
@@ -309,8 +353,7 @@ function tweets_queue_load_field_info($entity, $field_name = 'title') {
  *   Returns the tweets api configuration data.
  */
 function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
-  $config = \Drupal::config('tweets_queue.settings');
-  $admin_config = \Drupal::config('tweets_queue_admin.settings');
+  $config = \Drupal::config('tweets_queue_admin.settings');
   $data = '';
   switch ($key) {
     case ACCESS_TOKEN:
@@ -454,15 +497,18 @@ function tweets_queue_schema() {
   $schema[TWEETS_PRIORITY_TABLE] = array(
     'description' => 'The base table for tweet priority.',
     'fields' => array(
-      'nid'       => array('type' => 'int', 'not null' => TRUE),
-      'weight'    => array('type' => 'int', 'not null' => TRUE, 'default' => 1),
-      'created'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-      'last_run'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'nid' => array('type' => 'int', 'not null' => TRUE),
+      'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'size' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'weight' => array('type' => 'int', 'not null' => TRUE, 'default' => 1),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'last_run' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
     ),
     'primary key' => array('nid'),
     'indexes' => array(
-      'tweet_weight' => array('weight'),
-      'tweet_last_run' => array('last_run')
+      'tweets_priority_weight' => array('uid'),
+      'tweets_priority_uid' => array('weight'),
+      'tweets_priority_last_run' => array('last_run')
     )
   );
   $schema[TWEETS_URL_TABLE] = array(
@@ -500,7 +546,7 @@ function tweets_queue_schema() {
  * @param integer $nid
  *   Entity nid.
  */
-function tweets_queue_update_url($message) {
+function tweets_queue_update_url($message, $uid = '') {
   preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
   if ($match[0][0] == '') {
     return;
@@ -509,6 +555,7 @@ function tweets_queue_update_url($message) {
   $query = \Drupal::database()->select(TWEETS_URL_TABLE, 'p');
   $query->addField('p', 'path');
   $query->condition('p.path', $url);
+  $query->condition('p.api', $uid);
   $path = $query->execute()->fetchField();
 
   $last_run = time();
@@ -522,7 +569,7 @@ function tweets_queue_update_url($message) {
      db_insert(TWEETS_URL_TABLE)
         ->fields(array(
           'path' => $url,
-          'api' => '',
+          'api' => $uid,
           'last_run' => time(),
         ))
       ->execute();
@@ -535,7 +582,7 @@ function tweets_queue_update_url($message) {
  * @param integer $nid
  *   Entity nid.
  */
-function tweets_queue_update_priority($nid) {
+function tweets_queue_update_priority($nid, $size = 0) {
   tweets_queue_debug_info(t("Updating weight for :nid", array(':nid' => $nid)));
   $nid = intval($nid);
   $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
@@ -546,7 +593,7 @@ function tweets_queue_update_priority($nid) {
 
   \Drupal::database()->update(TWEETS_PRIORITY_TABLE)
     ->condition('nid', $nid)
-    ->fields(['weight' => $weight, 'last_run' => time()])
+    ->fields(['weight' => $weight, 'last_run' => time(), 'size' => $size])
     ->execute();
   tweets_queue_debug_info(t("Updated weight for :nid to :weight",
     array(':nid' => $nid, ':weight' => $weight)));
@@ -667,4 +714,37 @@ function tweets_queue_get_client_field_info($data, $field_name) {
     $field_value = $data->{$field_name};
   }
   return $field_value;
+}
+
+/**
+ * fetch tweets handler information for specific user.
+ *
+ * @param array $tweet_handler_info
+ *   Array containing tweet handler information.
+ * @param array $uid
+ *   Array containing tweet handler information.
+ *
+ * @return object
+ *   Returns twitter handler specific information.
+ */
+function tweets_queue_fetch_all_client_handler_info() {
+  $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
+  $query->fields('p', ['uid', 'status', 'created','updated', 'consumer_key',
+    'consumer_secret_key', 'access_token', 'access_secret_token', 'cron_tweet_last_run',
+    'cron_tweet_next_run', 'cron_tweet_retweet_interval']);
+  $time = time();
+  $db_or = db_or();
+  $db_or->condition('p.cron_tweet_next_run', '0' , '=');
+  $db_or->condition('p.cron_tweet_next_run', $time , '<=');
+  $query->condition($db_or);
+
+  $data = $query->execute()->fetchAll();
+  $result = array('total' => 0);
+  $total = 0;
+  foreach ($data as $pos => $handler_object) {
+    $total++;
+    $result['handler'][$handler_object->uid] = $handler_object;
+  }
+  $result['total'] = $total;
+  return $result;
 }

@@ -32,8 +32,6 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    tweets_queue_fetch_handler_info();
-    return;
     $config = $this->config('tweets_queue_admin.settings');
 
     if (isset($_REQUEST['set_cron'])) {
@@ -85,7 +83,13 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
       '#description' => t('Specify the cron run maximun interval in minutes.'),
       '#required' => FALSE,
     );
-
+    $form[CRON_TWEET_NEXT_RUN] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Next Cron run time'),
+      '#default_value' => tweets_queue_get_client_field_info($client_info, CRON_TWEET_NEXT_RUN),
+      '#description' => t('Specify the cron run next time.'),
+      '#required' => FALSE,
+    );
     $retweet_interval = intval($config->get(CRON_TWEET_RETWEET_INTERVAL));
     $retweet_interval = ($retweet_interval == 0) ? 300 : $retweet_interval;
     $form[CRON_TWEET_RETWEET_INTERVAL] = array(
