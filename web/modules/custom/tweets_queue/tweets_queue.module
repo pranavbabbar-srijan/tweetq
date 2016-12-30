@@ -335,6 +335,7 @@ function tweets_queue_get_tweets_cron_list($client_handler, $tweet_max_attempt =
     $query->condition($db_or);
   }
   $query->condition('p.uid', $uid , '=');
+  $query->condition('p.size', 140 , '<=');
   $query->orderBy('p.weight', 'ASC');
   $query->range(0, $tweet_max_attempt);
   $nids = $query->execute()->fetchAllKeyed();
@@ -487,11 +488,25 @@ function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$versio
 function tweets_queue_node_insert(\Drupal\Core\Entity\EntityInterface $node) {
   switch ($node->bundle()) {
     case 'tweet':
+      $title = tweets_queue_load_field_info($node, 'title');
+      $body = tweets_queue_load_field_info($node, 'body');
+      $hash_tag = tweets_queue_load_field_info($node, 'field_hash_tag');
+      $message = $title;
+      if (!empty($body)) {
+        $message .= ' ' . $body;
+      }
+      if (!empty($hash_tag)) {
+        $message .= ' ' . $hash_tag;
+      }
+      $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
+
       db_insert(TWEETS_PRIORITY_TABLE)
         ->fields(array(
           'nid' => $node->id(),
+          'uid' => \Drupal::currentUser()->id(),
           'weight' => 1,
           'last_run' => 0,
+          'size' => $tweet_size
         ))
         ->execute();
   }
