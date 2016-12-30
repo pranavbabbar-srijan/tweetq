@@ -37,6 +37,7 @@ const CRON_TWEET_MESSAGES_SKIPPED = 'Tweet message skipped';
 const TWITTER_HANDLER_INVALID = '2';
 const TWITTER_HANDLER_VALID = '1';
 const TWITTER_HANDLER_INVALID_CODE = '32';
+const CRON_TWEET_CHARCATER_LIMIT = 140;
 
 
 /**
@@ -164,10 +165,13 @@ function tweets_queue_tweet_cron_message() {
  *   Returns status containing the tweets.
  */
 function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $tweet_max_attempt = 3) {
-  $text_size = 140;
+  $text_size = CRON_TWEET_CHARCATER_LIMIT;
   $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
   $nids = tweets_queue_get_tweets_cron_list($client_twitter_handler, $tweet_max_attempt);
   $total = count($nids);
+  if ($total == 0) {
+    // return;
+  }
   tweets_queue_debug_info("Process started for $total items for uid: $uid");
   if ($tweet_max_attempt > $total) {
     $tweet_max_attempt = $total;
@@ -335,7 +339,7 @@ function tweets_queue_get_tweets_cron_list($client_handler, $tweet_max_attempt =
     $query->condition($db_or);
   }
   $query->condition('p.uid', $uid , '=');
-  $query->condition('p.size', 140 , '<=');
+  $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<=');
   $query->orderBy('p.weight', 'ASC');
   $query->range(0, $tweet_max_attempt);
   $nids = $query->execute()->fetchAllKeyed();
