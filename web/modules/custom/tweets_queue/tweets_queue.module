@@ -185,14 +185,15 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
     if ($tweet_size > $text_size) {
       tweets_queue_debug_info(t(':message for :nid',
         array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
-      tweets_queue_update_priority($nid, $tweet_size);
+      $priority_info = array('size' => $tweet_size);
+      tweets_queue_update_priority_info($nid, $priority_info);
       continue;
     }
     if (!tweets_queue_authenticate_url($message, $uid)) {
       tweets_queue_debug_info('Tweet from same article already exists.');
       tweets_queue_debug_info(t(':message for :nid',
         array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
-      tweets_queue_update_priority($nid);
+      tweets_queue_update_priority_info($nid);
       continue;
     }
     tweets_queue_debug_info("Process Send started.");
@@ -201,7 +202,7 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
       tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_INVALID);
       return $status;
     }
-    tweets_queue_update_priority($nid);
+    tweets_queue_update_priority_info($nid);
     tweets_queue_update_url($message, $uid);
     if ($status['success']) {
       tweets_queue_mark_handler_next_run($uid);
@@ -503,16 +504,10 @@ function tweets_queue_node_insert(\Drupal\Core\Entity\EntityInterface $node) {
         $message .= ' ' . $hash_tag;
       }
       $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
-
-      db_insert(TWEETS_PRIORITY_TABLE)
-        ->fields(array(
-          'nid' => $node->id(),
-          'uid' => \Drupal::currentUser()->id(),
-          'weight' => 1,
-          'last_run' => 0,
-          'size' => $tweet_size
-        ))
-        ->execute();
+      $priority_info = array(
+        'size' => $tweet_size,
+      );
+      tweets_queue_update_priority_info($node->id(), $priority_info);
   }
 }
 
@@ -644,24 +639,34 @@ function tweets_queue_update_url($message, $uid = '') {
 }
 
 /**
- * Update the weight for the current tweet.
+ * Update the priority table for the tweet.
  *
  * @param integer $nid
  *   Entity nid.
+ * @param array $tweet_priority_info
+ *   Array containing update information.
  */
-function tweets_queue_update_priority($nid, $size = 0) {
-  tweets_queue_debug_info(t("Updating weight for :nid", array(':nid' => $nid)));
-  $nid = intval($nid);
-  $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
-  $query->addField('p', 'weight');
-  $query->condition('p.nid', $nid);
-  $weight = $query->execute()->fetchField();
-  $weight = $weight + 1;
-
-  \Drupal::database()->update(TWEETS_PRIORITY_TABLE)
-    ->condition('nid', $nid)
-    ->fields(['weight' => $weight, 'last_run' => time(), 'size' => $size])
-    ->execute();
+function tweets_queue_update_priority_info($nid, $tweet_priority_info = array()) {
+  if (empty($nid)) {
+    return;
+  }
+  $created_tweet_priority_info = array();
+  if (is_array($tweet_priority_info)) {
+    $created_tweet_priority_info = $tweet_priority_info;
+  }
+  else {
+    $tweet_priority_info = array();
+  }
+  $created_tweet_priority_info['created'] = time();
+  $created_tweet_priority_info['uid'] = \Drupal::currentUser()->id();
+  $created_tweet_priority_info['weight'] = 1;
+  db_merge(TWEETS_PRIORITY_TABLE)
+    ->insertFields($created_tweet_priority_info)
+    ->updateFields($tweet_priority_info)
+  ->key(array('nid' => $nid))
+  ->expression('weight', 'weight + :inc', array(':inc' => 1))
+  ->expression('last_run', time())
+  ->execute();
   tweets_queue_debug_info(t("Updated weight for :nid to :weight",
     array(':nid' => $nid, ':weight' => $weight)));
 }
