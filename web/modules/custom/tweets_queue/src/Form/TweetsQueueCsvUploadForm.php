@@ -22,8 +22,9 @@ class TweetsQueueCsvUploadForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     // Elements that take a simple default value.
-    $config = \Drupal::service('config.factory')->getEditable('tweets_queue.settings');
-    $fids[0] = $config->get(CRON_TWEET_IMPORT_FID);
+    $client_info = tweets_queue_fetch_client_handler_info();
+    $fids[0] = tweets_queue_get_client_field_info($client_info, CRON_TWEET_IMPORT_FID);
+
     $form['managed_file'] = array(
       '#type' => 'managed_file',
       '#title' => 'Import CSV',
@@ -46,7 +47,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
     );
     return $form;
   }
-
 
   /**
    * Function to validate the key if already in use.
@@ -79,15 +79,17 @@ class TweetsQueueCsvUploadForm extends FormBase {
       $file_path = $this->getFileRealPath($fid);
       $file = \Drupal::service('file_system')->realpath($file_path);
 
-      $config->set(CRON_TWEET_IMPORT_FID, $fid)
-        ->save();
-      $config->set(CRON_TWEET_IMPORT_PATH, $file)
-        ->save();
-
-      $this->setCsvFilePath($file, $import_id);
+      $tweet_handler_info = array(
+        CRON_TWEET_IMPORT_FID => $fid,
+      );
+      tweets_queue_update_handler_info($tweet_handler_info);
+      // $this->setCsvFilePath($file, $import_id);
     }
     if (empty($file)) {
-      $file = $config->get(CRON_TWEET_IMPORT_PATH);
+      $client_info = tweets_queue_fetch_client_handler_info();
+      $fids = tweets_queue_get_client_field_info($client_info, CRON_TWEET_IMPORT_FID);
+      $file_path = $this->getFileRealPath($fid);
+      $file = \Drupal::service('file_system')->realpath($file_path);
     }
     if ($file && $import_id) {
       $this->runCsvImport($file, $import_id);

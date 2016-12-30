@@ -69,6 +69,15 @@ class TweetsQueueSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     );
 
+    $form[CRON_TWEET_IMPORT_FID] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('CSV import File id'),
+      '#default_value' => tweets_queue_get_client_field_info($client_info, CRON_TWEET_IMPORT_FID),
+      '#description' => t('Specify the tweet import file path'),
+      '#required' => FALSE,
+      '#disabled' => TRUE,
+    );
+
     $form[CRON_TWEET_LAST_RUN] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Last Cron run time'),

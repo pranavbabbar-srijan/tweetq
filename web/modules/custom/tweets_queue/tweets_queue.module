@@ -170,7 +170,7 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
   $nids = tweets_queue_get_tweets_cron_list($client_twitter_handler, $tweet_max_attempt);
   $total = count($nids);
   if ($total == 0) {
-    // return;
+    return;
   }
   tweets_queue_debug_info("Process started for $total items for uid: $uid");
   if ($tweet_max_attempt > $total) {
@@ -545,6 +545,7 @@ function tweets_queue_schema() {
         'not null' => TRUE, 'default' => ''),
       ACCESS_SECRET_TOKEN => array('type' => 'varchar', 'length' => 100,
         'not null' => TRUE, 'default' => ''),
+      CRON_TWEET_IMPORT_FID => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'updated' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       CRON_TWEET_LAST_RUN => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
@@ -757,7 +758,7 @@ function tweets_queue_fetch_client_handler_info($uid = '') {
   $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
   $query->fields('p', ['uid', 'status', 'created','updated', 'consumer_key',
     'consumer_secret_key', 'access_token', 'access_secret_token', 'cron_tweet_last_run',
-    'cron_tweet_next_run', 'cron_tweet_retweet_interval']);
+    'cron_tweet_next_run', 'cron_tweet_retweet_interval', 'cron_tweet_import_fid']);
   $query->condition('p.uid', $uid , '=');
   $data = $query->execute()->fetchObject();
   return $data;
