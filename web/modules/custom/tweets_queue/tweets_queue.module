@@ -823,3 +823,25 @@ function tweets_queue_fetch_all_client_handler_info() {
   $result['total'] = $total;
   return $result;
 }
+
+/**
+ * Mark all the priority items which are not yet have size defined.
+ *
+ */
+function tweets_queue_update_tweet_priority_mark_item_size() {
+  $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
+  $query->fields('p', ['nid', 'size', 'uid']);
+  $query->condition('p.size', '0' , '=');
+  $data = $query->execute()->fetchAll();
+  $result = array('total' => 0);
+  $total = 0;
+  foreach ($data as $pos => $tweet_object) {
+    $message  = tweets_queue_load_tweet_message($tweet_object->nid);
+    $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
+    $priority_info = array('size' => $tweet_size);
+      tweets_queue_update_priority_info($tweet_object->nid, $priority_info);
+    $total++;
+  }
+  drupal_set_message(t('Total @total items updated with their tweet size.',
+    array('@total' => $total)));
+}
