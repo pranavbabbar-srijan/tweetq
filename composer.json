@@ -28,7 +28,8 @@
         "drupal/migrate_tools": "3.0-beta1",
         "drupal/entity": "1.0-alpha3",
         "drupal/config_update": "1.1",
-        "drupal/features": "3.0-rc1"
+        "drupal/features": "3.0-rc1",
+        "drupal/social_login": "1.2"
     },
     "require-dev": {
         "behat/mink": "~1.7",
