@@ -110,7 +110,7 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
       $twitter_handler = tweets_queue_fetch_client_handler_info();
       $status = tweets_queue_tweet_message($message, $twitter_handler);
       if ($status['code'] == TWITTER_HANDLER_INVALID_CODE) {
-        drupal_set_message(t($status['message']));
+        drupal_set_message(t($status['message']), 'error');
         if ($twitter_handler->status != TWITTER_HANDLER_INVALID) {
           tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_INVALID);
         }
@@ -253,8 +253,9 @@ function tweets_queue_mark_handler_status($uid, $status) {
   );
   tweets_queue_update_handler_info($tweet_handler_info, $uid);
   $state = array(TWITTER_HANDLER_VALID => 'active', TWITTER_HANDLER_INVALID => 'inactive');
+  $message_status = array(TWITTER_HANDLER_VALID => 'status', TWITTER_HANDLER_INVALID => 'error');
   drupal_set_message(t('Twitter handler status @status marked successfully.',
-    array('@status' => $state[$status])));
+    array('@status' => $state[$status])), $message_status[$status]);
 }
 
 /**

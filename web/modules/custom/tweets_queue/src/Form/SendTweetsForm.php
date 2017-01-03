@@ -25,17 +25,17 @@ class SendTweetsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['message'] = array(
       '#type' => 'textfield',
-      '#title' => t('Tweeter message'),
+      '#title' => t('Tweet your message'),
       '#required' => TRUE,
     );
 
     $form['markup'] = array(
-      '#markup' => $this->t('Tweets will be picked up from the queue and it will be tweeted. '),
+      '#markup' => $this->t('Authenticate tweeter credentials working. '),
     );
 
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Test tweet Now'),
+      '#value' => t('Authenticate Now'),
     );
 
     return $form;
