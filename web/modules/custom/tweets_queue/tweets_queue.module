@@ -199,7 +199,7 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
       tweets_queue_debug_info(t(':message for :nid',
         array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
       $priority_info = array('size' => $tweet_size);
-      tweets_queue_update_priority_info($nid, $priority_info);
+      tweets_queue_update_priority_info($nid, $priority_info, 1);
       continue;
     }
     tweets_queue_debug_info("Process Send started.");
