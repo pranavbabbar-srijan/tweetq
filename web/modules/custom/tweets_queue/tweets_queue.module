@@ -178,13 +178,14 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
   if ($tweet_max_attempt > $total) {
     $tweet_max_attempt = $total;
   }
-  drupal_set_message(t("process for $tweet_max_attempt times."));
+  drupal_set_message(t("Process for $tweet_max_attempt times."));
   tweets_queue_debug_info("Process started for $total items for uid: $uid");
   for ($attempt=0; $attempt < $tweet_max_attempt; $attempt++) {
     $nid = array_rand($tweet_data['nids'], 1);
     unset($tweet_data['nids'][$nid]);
     $message  = $tweet_data['data'][$nid]->message;
     $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
+    $weight = $tweet_data['data'][$nid]->weight + 1;
     tweets_queue_debug_info("Process progress for $nid:$message::size:$tweet_size");
     if ($tweet_size > $text_size) {
       tweets_queue_debug_info(t(':message for :nid',
@@ -198,8 +199,8 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
       tweets_queue_debug_info('Tweet from same article already exists.');
       tweets_queue_debug_info(t(':message for :nid',
         array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
-      $priority_info = array('size' => $tweet_size);
-      tweets_queue_update_priority_info($nid, $priority_info, 1);
+      $priority_info = array('size' => $tweet_size, 'weight' => $weight);
+      tweets_queue_update_priority_info($nid, $priority_info);
       continue;
     }
     tweets_queue_debug_info("Process Send started.");
