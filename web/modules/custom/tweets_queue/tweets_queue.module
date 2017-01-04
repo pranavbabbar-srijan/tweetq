@@ -202,7 +202,7 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
       tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_INVALID);
       return $status;
     }
-    tweets_queue_update_priority_info($nid);
+    tweets_queue_update_priority_info($nid, array(), 1);
     tweets_queue_update_url($message, $uid);
     if ($status['success']) {
       tweets_queue_mark_handler_next_run($uid);
@@ -506,9 +506,37 @@ function tweets_queue_node_insert(\Drupal\Core\Entity\EntityInterface $node) {
 }
 
 /**
+ * Implements hook_entity_update().
+ */
+function tweets_queue_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+  switch ($entity->bundle()) {
+    case 'tweet':
+      $size = tweets_queue_load_field_info($entity, 'field_size');
+      $current_size = tweets_queue_calculate_tweet_size($entity);
+      if ($size != $current_size) {
+        $update_node = \Drupal\node\Entity\Node::load($entity->id());
+        $update_node->set("field_size", $current_size);
+        $update_node->save();
+        $priority_info = array(
+          'size' => $current_size,
+        );
+        tweets_queue_update_priority_info($entity->id(), $priority_info);
+      }
+      if ($current_size > CRON_TWEET_CHARCATER_LIMIT) {
+        drupal_set_message(t('This item can not be tweeted due to the tweet size limit @size_limit .',
+          array('@size_limit' => CRON_TWEET_CHARCATER_LIMIT)), 'warning');
+        drupal_set_message(t('Current size of the tweet item is @size',
+          array('@size' => $current_size)), 'status');
+        drupal_set_message(t('Please make sure to have tweet message size less than or equal
+         to 140 characters for tweeting'), 'status');
+      }
+  }
+}
+
+/**
  * Calculate tweet size.
  *
- * @param object $node [description]
+ * @param object $node
  *   Tweet node object.
  *
  * @return integer
@@ -665,7 +693,7 @@ function tweets_queue_update_url($message, $uid = '') {
  * @param array $tweet_priority_info
  *   Array containing update information.
  */
-function tweets_queue_update_priority_info($nid, $tweet_priority_info = array()) {
+function tweets_queue_update_priority_info($nid, $tweet_priority_info = array(), $cron = 0) {
   if (empty($nid)) {
     return;
   }
@@ -679,15 +707,24 @@ function tweets_queue_update_priority_info($nid, $tweet_priority_info = array())
   $created_tweet_priority_info['created'] = time();
   $created_tweet_priority_info['uid'] = \Drupal::currentUser()->id();
   $created_tweet_priority_info['weight'] = 1;
-  db_merge(TWEETS_PRIORITY_TABLE)
-    ->insertFields($created_tweet_priority_info)
-    ->updateFields($tweet_priority_info)
-  ->key(array('nid' => $nid))
-  ->expression('weight', 'weight + :inc', array(':inc' => 1))
-  ->expression('last_run', time())
-  ->execute();
-  tweets_queue_debug_info(t("Updated weight for :nid to :weight",
-    array(':nid' => $nid, ':weight' => $weight)));
+  if ($cron) {
+    db_merge(TWEETS_PRIORITY_TABLE)
+      ->insertFields($created_tweet_priority_info)
+      ->updateFields($tweet_priority_info)
+      ->key(array('nid' => $nid))
+      ->expression('weight', 'weight + :inc', array(':inc' => 1))
+      ->expression('last_run', time())
+      ->execute();
+    tweets_queue_debug_info(t("Updated weight for :nid to :weight",
+      array(':nid' => $nid, ':weight' => $weight)));
+  }
+  else {
+    db_merge(TWEETS_PRIORITY_TABLE)
+      ->insertFields($created_tweet_priority_info)
+      ->updateFields($tweet_priority_info)
+      ->key(array('nid' => $nid))
+      ->execute();
+  }
 }
 
 /**
