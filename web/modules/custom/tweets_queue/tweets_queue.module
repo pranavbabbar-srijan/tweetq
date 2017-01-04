@@ -494,22 +494,40 @@ function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$versio
 function tweets_queue_node_insert(\Drupal\Core\Entity\EntityInterface $node) {
   switch ($node->bundle()) {
     case 'tweet':
-      $title = tweets_queue_load_field_info($node, 'title');
-      $body = tweets_queue_load_field_info($node, 'body');
-      $hash_tag = tweets_queue_load_field_info($node, 'field_hash_tag');
-      $message = $title;
-      if (!empty($body)) {
-        $message .= ' ' . $body;
-      }
-      if (!empty($hash_tag)) {
-        $message .= ' ' . $hash_tag;
-      }
-      $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
+      $tweet_size = tweets_queue_calculate_tweet_size($node);
       $priority_info = array(
         'size' => $tweet_size,
       );
+      $update_node = \Drupal\node\Entity\Node::load($node->id());
+      $update_node->set("field_size", $tweet_size);
+      $update_node->save();
       tweets_queue_update_priority_info($node->id(), $priority_info);
   }
+}
+
+/**
+ * Calculate tweet size.
+ *
+ * @param object $node [description]
+ *   Tweet node object.
+ *
+ * @return integer
+ *   Return size of the tweet message.
+ */
+function tweets_queue_calculate_tweet_size(\Drupal\Core\Entity\EntityInterface $node) {
+  $tweet_size = 0;
+  $title = tweets_queue_load_field_info($node, 'title');
+  $body = tweets_queue_load_field_info($node, 'body');
+  $hash_tag = tweets_queue_load_field_info($node, 'field_hash_tag');
+  $message = $title;
+  if (!empty($body)) {
+    $message .= ' ' . $body;
+  }
+  if (!empty($hash_tag)) {
+    $message .= ' ' . $hash_tag;
+  }
+  $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
+  return $tweet_size;
 }
 
 /**
