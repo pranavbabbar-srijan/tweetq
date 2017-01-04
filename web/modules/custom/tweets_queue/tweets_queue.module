@@ -167,8 +167,10 @@ function tweets_queue_tweet_cron_message() {
 function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $tweet_max_attempt = 3) {
   $text_size = CRON_TWEET_CHARCATER_LIMIT;
   $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
-  $nids = tweets_queue_get_tweets_cron_list($client_twitter_handler, $tweet_max_attempt);
-  $total = count($nids);
+  $tweet_data = tweets_queue_get_tweets_cron_list($client_twitter_handler, $tweet_max_attempt);
+
+  $total = count($tweet_data['nids']);
+  drupal_set_message("$total items");
   if ($total == 0) {
     return;
   }
@@ -176,10 +178,11 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
   if ($tweet_max_attempt > $total) {
     $tweet_max_attempt = $total;
   }
+
   for ($attempt=0; $attempt < $tweet_max_attempt; $attempt++) {
-    $nid = array_rand($nids, 1);
-    unset($nids[$nid]);
-    $message  = tweets_queue_load_tweet_message($nid);
+    $nid = array_rand($tweet_data['nids'], 1);
+    unset($tweet_data['nids'][$nid]);
+    $message  = $tweet_data['data'][$nid]->message;
     $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
     tweets_queue_debug_info("Process progress for $nid:$message::size:$tweet_size");
     if ($tweet_size > $text_size) {
@@ -189,6 +192,7 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
       tweets_queue_update_priority_info($nid, $priority_info);
       continue;
     }
+    tweets_queue_debug_info("Process progress for $nid:$message::size:$tweet_size");
     if (!tweets_queue_authenticate_url($message, $uid)) {
       tweets_queue_debug_info('Tweet from same article already exists.');
       tweets_queue_debug_info(t(':message for :nid',
@@ -326,6 +330,35 @@ function tweets_queue_tweet_message($message, $twitter_handler) {
  *   Returns the tweets message.
  */
 function tweets_queue_get_tweets_cron_list($client_handler, $tweet_max_attempt = 3) {
+  $nid = '';
+  $message = '';
+  $minimum_lapse_interval = tweets_queue_get_client_field_info($client_handler, CRON_TWEET_RETWEET_INTERVAL);
+  $uid = tweets_queue_get_client_field_info($client_handler, 'uid');
+  $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
+  $query->fields('p', ['nid', 'uid', 'size', 'message', 'weight', 'created', 'last_run']);
+
+  if ($minimum_lapse_interval > 0) {
+    $minimum_lapse_time = time() - ($minimum_lapse_interval * 60);
+    $db_or = db_or();
+    $db_or->condition('p.last_run', '0' , '=');
+    $db_or->condition('p.last_run', $minimum_lapse_time , '<=');
+    $query->condition($db_or);
+  }
+  $query->condition('p.uid', $uid , '=');
+  $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<=');
+  $query->orderBy('p.weight', 'ASC');
+  $query->range(0, $tweet_max_attempt);
+  $data = $query->execute()->fetchAll();
+  $output = array('nids' => array(), 'data' => array(), 'total' => 0);
+  foreach ($data as $pos => $tweet_data) {
+    $output['nids'][$tweet_data->nid] = $tweet_data->nid;
+    $output['data'][$tweet_data->nid] = $tweet_data;
+
+  }
+  return $output;
+}
+
+function tweets_queue_get_tweets_cron_listOld($client_handler, $tweet_max_attempt = 3) {
   $nid = '';
   $message = '';
   $minimum_lapse_interval = tweets_queue_get_client_field_info($client_handler, CRON_TWEET_RETWEET_INTERVAL);
@@ -497,6 +530,7 @@ function tweets_queue_node_insert(\Drupal\Core\Entity\EntityInterface $node) {
       $tweet_size = tweets_queue_calculate_tweet_size($node);
       $priority_info = array(
         'size' => $tweet_size,
+        'message' => tweets_queue_calculate_tweet_size($node, 'message'),
       );
       $update_node = \Drupal\node\Entity\Node::load($node->id());
       $update_node->set("field_size", $tweet_size);
@@ -519,6 +553,7 @@ function tweets_queue_entity_update(Drupal\Core\Entity\EntityInterface $entity) 
         $update_node->save();
         $priority_info = array(
           'size' => $current_size,
+          'message' => tweets_queue_calculate_tweet_size($entity, 'message'),
         );
         tweets_queue_update_priority_info($entity->id(), $priority_info);
       }
@@ -542,7 +577,7 @@ function tweets_queue_entity_update(Drupal\Core\Entity\EntityInterface $entity) 
  * @return integer
  *   Return size of the tweet message.
  */
-function tweets_queue_calculate_tweet_size(\Drupal\Core\Entity\EntityInterface $node) {
+function tweets_queue_calculate_tweet_size(\Drupal\Core\Entity\EntityInterface $node, $case = 'size') {
   $tweet_size = 0;
   $title = tweets_queue_load_field_info($node, 'title');
   $body = tweets_queue_load_field_info($node, 'body');
@@ -554,8 +589,14 @@ function tweets_queue_calculate_tweet_size(\Drupal\Core\Entity\EntityInterface $
   if (!empty($hash_tag)) {
     $message .= ' ' . $hash_tag;
   }
+  $message = \Drupal\Component\Utility\Xss::filter($message);
   $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
-  return $tweet_size;
+  if ($case == 'size') {
+    return $tweet_size;
+  }
+  else {
+    return $message;
+  }
 }
 
 /**
@@ -609,6 +650,7 @@ function tweets_queue_schema() {
       'nid' => array('type' => 'int', 'not null' => TRUE),
       'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'size' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 954, 'default' => ''),
       'weight' => array('type' => 'int', 'not null' => TRUE, 'default' => 1),
       'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'last_run' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
@@ -892,10 +934,14 @@ function tweets_queue_update_tweet_priority_mark_item_size() {
   $result = array('total' => 0);
   $total = 0;
   foreach ($data as $pos => $tweet_object) {
-    $message  = tweets_queue_load_tweet_message($tweet_object->nid);
-    $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
-    $priority_info = array('size' => $tweet_size);
-      tweets_queue_update_priority_info($tweet_object->nid, $priority_info);
+    $entity  = Node::load($tweet_object->nid);
+    $message  = tweets_queue_calculate_tweet_size($entity, 'message');
+    $tweet_size = tweets_queue_calculate_tweet_size($entity);
+    $priority_info = array(
+      'size' => $tweet_size,
+      'message' => $message,
+    );
+    tweets_queue_update_priority_info($tweet_object->nid, $priority_info);
     $total++;
   }
   drupal_set_message(t('Total @total items updated with their tweet size.',
