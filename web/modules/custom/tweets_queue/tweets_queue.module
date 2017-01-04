@@ -170,7 +170,6 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
   $tweet_data = tweets_queue_get_tweets_cron_list($client_twitter_handler, $tweet_max_attempt);
 
   $total = count($tweet_data['nids']);
-  drupal_set_message("$total items");
   if ($total == 0) {
     return;
   }
