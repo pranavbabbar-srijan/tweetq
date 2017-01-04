@@ -174,11 +174,12 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
   if ($total == 0) {
     return;
   }
-  tweets_queue_debug_info("Process started for $total items for uid: $uid");
+  
   if ($tweet_max_attempt > $total) {
     $tweet_max_attempt = $total;
   }
-
+  drupal_set_message(t("process for $tweet_max_attempt times."));
+  tweets_queue_debug_info("Process started for $total items for uid: $uid");
   for ($attempt=0; $attempt < $tweet_max_attempt; $attempt++) {
     $nid = array_rand($tweet_data['nids'], 1);
     unset($tweet_data['nids'][$nid]);
@@ -197,7 +198,8 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
       tweets_queue_debug_info('Tweet from same article already exists.');
       tweets_queue_debug_info(t(':message for :nid',
         array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
-      tweets_queue_update_priority_info($nid);
+      $priority_info = array('size' => $tweet_size);
+      tweets_queue_update_priority_info($nid, $priority_info);
       continue;
     }
     tweets_queue_debug_info("Process Send started.");
