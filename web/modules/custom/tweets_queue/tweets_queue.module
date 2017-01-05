@@ -535,6 +535,29 @@ function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$versio
 }
 
 /**
+ * Implements hook_entity_insert().
+ */
+function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $node) {
+  switch ($node->bundle()) {
+    case 'tweet':
+      $title = $node->get('title')->getValue();
+      $hashtag = $node->get('field_hash_tag')->getValue();
+      $node->title->value = tweets_queue_get_urls_present($title[0]['value']);
+      $node->field_hash_tag->value = tweets_queue_get_urls_present($hashtag[0]['value']);
+      $tweet_size = tweets_queue_calculate_tweet_size($node);
+      $node->field_size->value = $tweet_size;
+      // Update priority table with size.
+      if ($node->id()) {
+        $priority_info = array(
+          'size' => $tweet_size,
+          'message' => tweets_queue_calculate_tweet_size($node, 'message'),
+        );
+        tweets_queue_update_priority_info($node->id(), $priority_info);
+      }
+  }
+}
+
+/**
  * Implements hook_node_presave().
  */
 function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
@@ -922,7 +945,6 @@ function tweets_queue_fetch_all_client_handler_info() {
 
 /**
  * Mark all the priority items which are not yet have size defined.
- *
  */
 function tweets_queue_update_tweet_priority_mark_item_size() {
   $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
