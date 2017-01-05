@@ -479,16 +479,6 @@ function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
   return $data;
 }
 
-function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
-  switch ($node->bundle()) {
-    case 'tweet':
-      $title = $node->get('title')->getValue();
-      $hashtag = $node->get('field_hash_tag')->getValue();
-      $node->title->value = tweets_queue_get_urls_present($title[0]['value']);
-      $node->field_hash_tag->value = tweets_queue_get_urls_present($hashtag[0]['value']);
-  }
-}
-
 function tweets_queue_get_urls_present($message) {
   preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
   if ($match[0][0] == '') {
@@ -523,49 +513,31 @@ function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$versio
   }
 }
 
-/**
- * Implements hook_node_insert().
- */
-function tweets_queue_node_insert(\Drupal\Core\Entity\EntityInterface $node) {
+function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
   switch ($node->bundle()) {
     case 'tweet':
+      $title = $node->get('title')->getValue();
+      $hashtag = $node->get('field_hash_tag')->getValue();
+      $node->title->value = tweets_queue_get_urls_present($title[0]['value']);
+      $node->field_hash_tag->value = tweets_queue_get_urls_present($hashtag[0]['value']);
       $tweet_size = tweets_queue_calculate_tweet_size($node);
-      $priority_info = array(
-        'size' => $tweet_size,
-        'message' => tweets_queue_calculate_tweet_size($node, 'message'),
-      );
-      $update_node = \Drupal\node\Entity\Node::load($node->id());
-      $update_node->set("field_size", $tweet_size);
-      $update_node->save();
-      tweets_queue_update_priority_info($node->id(), $priority_info);
-  }
-}
-
-/**
- * Implements hook_entity_update().
- */
-function tweets_queue_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
-  switch ($entity->bundle()) {
-    case 'tweet':
-      $size = tweets_queue_load_field_info($entity, 'field_size');
-      $current_size = tweets_queue_calculate_tweet_size($entity);
-      if ($size != $current_size) {
-        $update_node = \Drupal\node\Entity\Node::load($entity->id());
-        $update_node->set("field_size", $current_size);
-        $update_node->save();
+      $node->field_size->value = $tweet_size;
+      // Update priority table with size.
+      if ($node->id()) {
         $priority_info = array(
-          'size' => $current_size,
-          'message' => tweets_queue_calculate_tweet_size($entity, 'message'),
+          'size' => $tweet_size,
+          'message' => tweets_queue_calculate_tweet_size($node, 'message'),
         );
-        tweets_queue_update_priority_info($entity->id(), $priority_info);
+        tweets_queue_update_priority_info($node->id(), $priority_info);
       }
-      if ($current_size > CRON_TWEET_CHARCATER_LIMIT) {
-        drupal_set_message(t('This item can not be tweeted due to the tweet size limit @size_limit .',
+
+      if ($tweet_size > CRON_TWEET_CHARCATER_LIMIT) {
+        drupal_set_message(t('This item can not be tweeted due to the tweeter tweet size limit of @size_limit .',
           array('@size_limit' => CRON_TWEET_CHARCATER_LIMIT)), 'warning');
-        drupal_set_message(t('Current size of the tweet item is @size',
-          array('@size' => $current_size)), 'status');
+        drupal_set_message(t('Current size of the tweet item is @size characters.',
+          array('@size' => $tweet_size)), 'status');
         drupal_set_message(t('Please make sure to have tweet message size less than or equal
-         to 140 characters for tweeting'), 'status');
+         to 140 characters.'), 'status');
       }
   }
 }
