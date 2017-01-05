@@ -967,3 +967,19 @@ function tweets_queue_update_tweet_priority_mark_item_size() {
   drupal_set_message(t('Total @total items updated with their tweet size.',
     array('@total' => $total)));
 }
+
+/**
+ * Update nodes having size zero in the priority table.
+ */
+function tweets_queue_update_tweet_items_marked_size_zero() {
+  $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
+  $query->fields('p', ['nid', 'size', 'uid']);
+  $query->condition('p.size', '0' , '=');
+  $data = $query->execute()->fetchAll();
+  $result = array('total' => 0);
+  $total = 0;
+  foreach ($data as $pos => $tweet_object) {
+    $entity  = Node::load($tweet_object->nid);
+    $entity->save();
+  }
+}
