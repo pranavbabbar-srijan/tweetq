@@ -479,12 +479,24 @@ function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
   return $data;
 }
 
+/**
+ * Process url and convert to biturl.
+ *
+ * @param string $message
+ *   Contains original message.
+ *
+ * @return string
+ *   Return the processed message.
+ */
 function tweets_queue_get_urls_present($message) {
   preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
   if ($match[0][0] == '') {
     return $message;
   }
   foreach ($match[0] as $url) {
+    if (stristr($url, "http://bit.ly")) {
+      continue;
+    }
     $bit_url = tweets_queue_make_bitly_url($url, 'dsfser', 'R_5aafdd2f8d67f78150e52ffbd0613519', 'json');
     if ($bit_url) {
       $message = str_ireplace($url, $bit_url, $message);
@@ -493,7 +505,16 @@ function tweets_queue_get_urls_present($message) {
   return $message;
 }
 
-
+/**
+ * Generate biturl for the passed url.
+ *
+ * @param  [type] $url     [description]
+ * @param  [type] $login   [description]
+ * @param  [type] $appkey  [description]
+ * @param  string $format  [description]
+ * @param  string $version [description]
+ * @return [type]          [description]
+ */
 function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$version = '2.0.1') {
   //create the URL
   $bitly = 'http://api.bit.ly/shorten?version=' . $version . '&longUrl=' . urlencode($url)
@@ -513,6 +534,9 @@ function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$versio
   }
 }
 
+/**
+ * Implements hook_node_presave().
+ */
 function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
   switch ($node->bundle()) {
     case 'tweet':
