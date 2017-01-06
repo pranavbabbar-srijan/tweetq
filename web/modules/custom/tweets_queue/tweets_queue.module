@@ -44,6 +44,21 @@ const CRON_TWEET_CHARCATER_LIMIT = 140;
  * Implements hook_form_alter().
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'node_tweet_edit_forms':
+      $form['display_box'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Tweet size notification'),
+        '#default_value' => 0,
+        '#description' => t('Specifies tweet message charcaters limit.'),
+        '#required' => FALSE,
+        '#weight' => -10,
+      );
+      break;
+
+    default:
+      break;
+  }
 }
 
 /**
@@ -400,9 +415,9 @@ function tweets_queue_load_tweet_message($nid = '') {
   $entity  = Node::load($nid);
   if (is_object($entity)) {
     $title = tweets_queue_load_field_info($entity, 'title');
-    $body = tweets_queue_load_field_info($entity, 'body');
+    // $body = tweets_queue_load_field_info($entity, 'body');
     $hash_tag = tweets_queue_load_field_info($entity, 'field_hash_tag');
-    $message = $title . ' ' . $body . ' ' . $hash_tag;
+    $message = $title . ' ' . $hash_tag;
   }
   return $message;
 }
@@ -601,12 +616,9 @@ function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
 function tweets_queue_calculate_tweet_size(\Drupal\Core\Entity\EntityInterface $node, $case = 'size') {
   $tweet_size = 0;
   $title = tweets_queue_load_field_info($node, 'title');
-  $body = tweets_queue_load_field_info($node, 'body');
+  // $body = tweets_queue_load_field_info($node, 'body');
   $hash_tag = tweets_queue_load_field_info($node, 'field_hash_tag');
   $message = $title;
-  if (!empty($body)) {
-    $message .= ' ' . $body;
-  }
   if (!empty($hash_tag)) {
     $message .= ' ' . $hash_tag;
   }
