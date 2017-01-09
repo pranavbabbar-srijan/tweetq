@@ -228,7 +228,6 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
   $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
   $perform_same_article_check = tweets_queue_get_tweet_configuration_data(CRON_SAME_ARTICLE_POST_CHECK);
   $tweet_data = tweets_queue_get_tweets_cron_list($client_twitter_handler, $tweet_max_attempt);
-
   $total = count($tweet_data['nids']);
   if ($total == 0) {
     return;
@@ -415,7 +414,7 @@ function tweets_queue_get_tweets_cron_list($client_handler, $tweet_max_attempt =
   $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
   $query->fields('p', ['nid', 'uid', 'size', 'message', 'weight', 'created', 'last_run']);
 
-  $query->join(TWEETS_TWEETER_DATA_TABLE, 't', 'p.nid = t.nid');
+  $query->leftjoin(TWEETS_TWEETER_DATA_TABLE, 't', 'p.nid = t.nid');
   $query->fields('t', ['tweet_id']);
 
   if ($minimum_lapse_interval > 0) {
@@ -437,29 +436,6 @@ function tweets_queue_get_tweets_cron_list($client_handler, $tweet_max_attempt =
 
   }
   return $output;
-}
-
-function tweets_queue_get_tweets_cron_listOld($client_handler, $tweet_max_attempt = 3) {
-  $nid = '';
-  $message = '';
-  $minimum_lapse_interval = tweets_queue_get_client_field_info($client_handler, CRON_TWEET_RETWEET_INTERVAL);
-  $uid = tweets_queue_get_client_field_info($client_handler, 'uid');
-  $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
-  $query->fields('p', ['nid']);
-
-  if ($minimum_lapse_interval > 0) {
-    $minimum_lapse_time = time() - ($minimum_lapse_interval * 60);
-    $db_or = db_or();
-    $db_or->condition('p.last_run', '0' , '=');
-    $db_or->condition('p.last_run', $minimum_lapse_time , '<=');
-    $query->condition($db_or);
-  }
-  $query->condition('p.uid', $uid , '=');
-  $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<=');
-  $query->orderBy('p.weight', 'ASC');
-  $query->range(0, $tweet_max_attempt);
-  $nids = $query->execute()->fetchAllKeyed();
-  return $nids;
 }
 
 /**
@@ -1110,4 +1086,32 @@ function tweets_queue_update_tweet_items_marked_size_zero() {
     $entity  = Node::load($tweet_object->nid);
     $entity->save();
   }
+}
+
+/**
+ * Get current user's tweets.
+ */
+function tweets_queue_get_users_tweet_list($uid) {
+  $uid = ($uid == '') ? \Drupal::currentUser()->id() : $uid;
+  $twitter_handler = tweets_queue_fetch_client_handler_info(1);
+  echo '<pre>', print_r($twitter_handler);
+  require_once   './libraries/codebird-php/codebird.php';
+  $status = array('success' => 0, 'message' => 'unsuccessful');
+  $consumer_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_KEY);
+  $consumer_secret_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_SECRET_KEY);
+  $access_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_TOKEN);
+  $access_secret_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_SECRET_TOKEN);
+
+  \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
+  $cb = \Codebird\Codebird::getInstance();
+  $cb->setToken($access_token, $access_secret_token);
+
+      // $params = array(
+      //   'screen_name' => 'srijan',
+      //   'include_rts' =>  true,
+      //   'count' => 5,
+      // );
+      $reply = $cb->statuses_retweetsOfMe($params);
+     
+  echo '<pre>', print_r($reply);
 }
