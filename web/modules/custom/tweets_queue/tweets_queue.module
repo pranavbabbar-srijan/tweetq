@@ -25,6 +25,7 @@ const IMPORT_CONFIGURATION = 'import_configuration';
 const TWEET_QUEUE_CSV_FILE_UPLOAD = 'tweet_queue_csv_file_upload';
 const TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY = 'public://tweets_queue/';
 const TWEETS_PRIORITY_TABLE = 'tweets_priority';
+const TWEETS_TWEETER_DATA_TABLE = 'tweets_tweeter_data';
 const TWEETS_URL_TABLE = 'tweets_url';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
@@ -70,7 +71,50 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
  * @return string
  *   Returns the tweets message.
  */
-function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle) {
+function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle, $tweet_id = '') {
+  require_once   './libraries/codebird-php/codebird.php';
+  $status = array('success' => 0, 'message' => 'unsuccessful');
+  $consumer_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_KEY);
+  $consumer_secret_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_SECRET_KEY);
+  $access_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_TOKEN);
+  $access_secret_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_SECRET_TOKEN);
+
+  \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
+  $cb = \Codebird\Codebird::getInstance();
+  $cb->setToken($access_token, $access_secret_token);
+  $retweet = FALSE;
+  if ($tweet_id != '') {
+    $retweet = TRUE;
+  }
+  switch ($retweet) {
+    case TRUE:
+      $params = array(
+        'id' => $tweet_id
+      );
+      $reply = $cb->statuses_retweet_ID($params);
+      break;
+    default:
+      $params = array(
+        'status' => $message
+      );
+      $reply = $cb->statuses_update($params);
+      break;
+  }
+  if (is_object($reply) && isset($reply->errors)) {
+    $status['success'] = 0;
+    $status['data'] = $reply;
+    $status['code'] = (isset($reply->errors[0]->code)) ? $reply->errors[0]->code : '';
+    $status['message'] = (isset($reply->errors[0]->message)) ? $reply->errors[0]->message: 'tweet failed.';
+    tweets_queue_debug_info($status['message']);
+    return $status;
+  }
+  if (is_object($reply)) {
+    $status = array('success' => 1, 'message' => 'successful', 'data' => $reply);
+  }
+  return $status;
+}
+
+function tweets_queue_set_single_postold($message = 'Good Evening!!', $twitter_handle) {
   require_once   './libraries/codebird-php/codebird.php';
   $status = array('success' => 0, 'message' => 'unsuccessful');
   $consumer_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_KEY);
@@ -182,6 +226,7 @@ function tweets_queue_tweet_cron_message() {
 function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $tweet_max_attempt = 3) {
   $text_size = CRON_TWEET_CHARCATER_LIMIT;
   $tweet_max_attempt = tweets_queue_get_tweet_configuration_data(CRON_TWEET_ATTEMP);
+  $perform_same_article_check = tweets_queue_get_tweet_configuration_data(CRON_SAME_ARTICLE_POST_CHECK);
   $tweet_data = tweets_queue_get_tweets_cron_list($client_twitter_handler, $tweet_max_attempt);
 
   $total = count($tweet_data['nids']);
@@ -193,11 +238,15 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
     $tweet_max_attempt = $total;
   }
   drupal_set_message(t("Process for $tweet_max_attempt times."));
+  if (!$perform_same_article_check) {
+    tweets_queue_debug_info('Same article check will be ignored.');
+  }
   tweets_queue_debug_info("Process started for $total items for uid: $uid");
   for ($attempt=0; $attempt < $tweet_max_attempt; $attempt++) {
     $nid = array_rand($tweet_data['nids'], 1);
     unset($tweet_data['nids'][$nid]);
     $message  = $tweet_data['data'][$nid]->message;
+    $tweet_id  = $tweet_data['data'][$nid]->tweet_id;
     $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
     $weight = $tweet_data['data'][$nid]->weight + 1;
     tweets_queue_debug_info("Process progress for $nid:$message::size:$tweet_size");
@@ -205,25 +254,36 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
       tweets_queue_debug_info(t(':message for :nid',
         array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
       $priority_info = array('size' => $tweet_size);
-      tweets_queue_update_priority_info($nid, $priority_info);
+      tweets_queue_update_priority_info($nid, $priority_info, 2);
       continue;
     }
     tweets_queue_debug_info("Process progress for $nid:$message::size:$tweet_size");
-    if (!tweets_queue_authenticate_url($message, $uid)) {
-      tweets_queue_debug_info('Tweet from same article already exists.');
-      tweets_queue_debug_info(t(':message for :nid',
-        array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
-      $priority_info = array('size' => $tweet_size, 'weight' => $weight);
-      tweets_queue_update_priority_info($nid, $priority_info);
-      continue;
+
+    if ($perform_same_article_check && $tweet_id == '') {
+      if (!tweets_queue_authenticate_url($message, $uid)) {
+        tweets_queue_debug_info('Tweet from same article already exists.');
+        tweets_queue_debug_info(t(':message for :nid',
+          array(':message' => CRON_TWEET_MESSAGES_SKIPPED, ':nid' => $nid)));
+        $priority_info = array('size' => $tweet_size, 'weight' => $weight);
+        tweets_queue_update_priority_info($nid, $priority_info, 2);
+        continue;
+      }
     }
+
     tweets_queue_debug_info("Process Send started.");
-    $status = tweets_queue_tweet_message($message, $client_twitter_handler);
+    $status = tweets_queue_tweet_message($message, $client_twitter_handler, $tweet_id);
     if ($status['code'] == TWITTER_HANDLER_INVALID_CODE) {
       tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_INVALID);
       return $status;
     }
     tweets_queue_update_priority_info($nid, array(), 1);
+    $tweet_id = $status['data']->id;
+    $tweet_param = array(
+      'tweet_id' => $tweet_id,
+      'data' => serialize($status['data'])
+    );
+
+    tweets_queue_update_tweeter_tweet_info($nid, $tweet_param);
     tweets_queue_update_url($message, $uid);
     if ($status['success']) {
       tweets_queue_mark_handler_next_run($uid);
@@ -231,7 +291,6 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
     }
   }
   if ($attempt >= $tweet_max_attempt-1) {
-    // tweets_queue_schedule_cron(1);
     drupal_set_message(t('Maximun tweet attempt reached.'));
   }
   return $status;
@@ -321,17 +380,19 @@ function tweets_queue_authenticate_url($message, $uid = '') {
  *
  * @param string $message
  *   Message to be tweeted.
+ * @param string $tweet_id
+ *   Tweeter tweet id.
  *
  * @return array
  *   Status for the tweet.
  */
-function tweets_queue_tweet_message($message, $twitter_handler) {
+function tweets_queue_tweet_message($message, $twitter_handler, $tweet_id = '') {
   $status = array('success' => 0);
-  if (empty($message)) {
+  if (empty($message) && empty($tweet_id)) {
     return $status;
   }
   try {
-    $status = tweets_queue_set_single_post($message, $twitter_handler);
+    $status = tweets_queue_set_single_post($message, $twitter_handler, $tweet_id);
   }
   catch (\Exception $e) {
     \Drupal::logger('tweets_queue')->error($e->getMessage());
@@ -353,6 +414,9 @@ function tweets_queue_get_tweets_cron_list($client_handler, $tweet_max_attempt =
   $uid = tweets_queue_get_client_field_info($client_handler, 'uid');
   $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
   $query->fields('p', ['nid', 'uid', 'size', 'message', 'weight', 'created', 'last_run']);
+
+  $query->join(TWEETS_TWEETER_DATA_TABLE, 't', 'p.nid = t.nid');
+  $query->fields('t', ['tweet_id']);
 
   if ($minimum_lapse_interval > 0) {
     $minimum_lapse_time = time() - ($minimum_lapse_interval * 60);
@@ -486,6 +550,10 @@ function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
     case CRON_TWEET_MAX_INTERVAL:
       $data = intval($config->get(CRON_TWEET_MAX_INTERVAL));
       $data = ($data == 0) ? 0 : $data;
+      break;
+    case CRON_SAME_ARTICLE_POST_CHECK:
+      // $data = $config->get(CRON_SAME_ARTICLE_POST_CHECK);
+      $data = 0;
       break;
     default:
       $data = $config->get($key);
@@ -695,6 +763,18 @@ function tweets_queue_schema() {
       'tweets_priority_last_run' => array('last_run')
     )
   );
+  $schema[TWEETS_TWEETER_DATA_TABLE] = array(
+    'description' => 'The base table for tweets tweeter data table.',
+    'fields' => array(
+      'nid' => array('type' => 'int', 'not null' => TRUE),
+      'tweet_id' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 24, 'default' => ''),
+      'data' => array('description' => 'The value.', 'type' => 'blob', 'not null' => TRUE, 'size' => 'big',),
+    ),
+    'primary key' => array('nid'),
+    'indexes' => array(
+      'tweets_tweeter_data_tweet_id' => array('tweet_id'),
+    )
+  );
   $schema[TWEETS_URL_TABLE] = array(
     'description' => 'My description',
     'fields' => array(
@@ -761,6 +841,30 @@ function tweets_queue_update_url($message, $uid = '') {
 }
 
 /**
+ * Update the tweeter tweet table for the tweet.
+ *
+ * @param integer $nid
+ *   Entity nid.
+ * @param array $tweeter_info
+ *   Array containing update information.
+ */
+function tweets_queue_update_tweeter_tweet_info($nid, $tweeter_info) {
+  if (empty($nid)) {
+    return;
+  }
+  if (!is_array($tweeter_info)) {
+    $tweeter_info = array();
+  }
+  db_merge(TWEETS_TWEETER_DATA_TABLE)
+    ->insertFields($tweeter_info)
+    ->updateFields($tweeter_info)
+    ->key(array('nid' => $nid))
+    ->execute();
+  tweets_queue_debug_info(t("Updated tweerter tweet data :nid to :tweet_id",
+    array(':nid' => $nid, ':tweet_id' => $tweet_id)));
+}
+
+/**
  * Update the priority table for the tweet.
  *
  * @param integer $nid
@@ -782,23 +886,35 @@ function tweets_queue_update_priority_info($nid, $tweet_priority_info = array(),
   $created_tweet_priority_info['created'] = time();
   $created_tweet_priority_info['uid'] = \Drupal::currentUser()->id();
   $created_tweet_priority_info['weight'] = 1;
-  if ($cron) {
-    db_merge(TWEETS_PRIORITY_TABLE)
-      ->insertFields($created_tweet_priority_info)
-      ->updateFields($tweet_priority_info)
-      ->key(array('nid' => $nid))
-      ->expression('weight', 'weight + :inc', array(':inc' => 1))
-      ->expression('last_run', time())
-      ->execute();
-    tweets_queue_debug_info(t("Updated weight for :nid to :weight",
-      array(':nid' => $nid, ':weight' => $weight)));
-  }
-  else {
-    db_merge(TWEETS_PRIORITY_TABLE)
-      ->insertFields($created_tweet_priority_info)
-      ->updateFields($tweet_priority_info)
-      ->key(array('nid' => $nid))
-      ->execute();
+  switch ($cron) {
+    case '0':
+      db_merge(TWEETS_PRIORITY_TABLE)
+        ->insertFields($created_tweet_priority_info)
+        ->updateFields($tweet_priority_info)
+        ->key(array('nid' => $nid))
+        ->execute();
+      break;
+    case '1':
+      db_merge(TWEETS_PRIORITY_TABLE)
+        ->insertFields($created_tweet_priority_info)
+        ->updateFields($tweet_priority_info)
+        ->key(array('nid' => $nid))
+        ->expression('weight', 'weight + :inc', array(':inc' => 1))
+        ->expression('last_run', time())
+        ->execute();
+      tweets_queue_debug_info(t("Updated weight for :nid to :weight",
+        array(':nid' => $nid, ':weight' => $weight)));
+      break;
+    case '2': //increase weight
+      db_merge(TWEETS_PRIORITY_TABLE)
+        ->insertFields($created_tweet_priority_info)
+        ->updateFields($tweet_priority_info)
+        ->key(array('nid' => $nid))
+        ->expression('weight', 'weight + :inc', array(':inc' => 1))
+        ->execute();
+      tweets_queue_debug_info(t("Updated weight for :nid to :weight",
+        array(':nid' => $nid, ':weight' => $weight)));
+      break;
   }
 }
 
