@@ -46,20 +46,51 @@ const CRON_TWEET_CHARCATER_LIMIT = 140;
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
-    case 'node_tweet_edit_forms':
-      $form['display_box'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Tweet size notification'),
-        '#default_value' => 0,
-        '#description' => t('Specifies tweet message charcaters limit.'),
-        '#required' => FALSE,
-        '#weight' => -10,
-      );
+    case 'node_tweet_edit_form':
+      $node = \Drupal::routeMatch()->getParameter('node');
+      $nid = $node->nid->value;
+      $tweet_id = tweets_queue_fetch_tweeter_tweet_info($nid);
+      if ($tweet_id) {
+        $form['display'] = array(
+          '#markup' => t("<b>This item can not be tweeted. You need to clone first.</b>"),
+          '#weight' => -11,
+        ); 
+        $form['clone_submit'] = array(
+          '#type' => 'submit',
+          '#value' => t('Clone the tweet'),
+          '#submit' => array('tweets_queue_tweet_node_form_submit'),
+          '#weight' => -10,
+        );
+        $form['clone_cancel'] = array(
+          '#type' => 'submit',
+          '#value' => t('Cancel'),
+          '#submit' => array('tweets_queue_tweet_node_form_cancel'),
+          '#weight' => -9,
+        );
+        $form['actions']['submit']['#submit'][]  = 'tweets_queue_form_submit';
+      }
       break;
 
     default:
       break;
   }
+}
+
+function tweets_queue_tweet_node_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $node = $form_state->getFormObject()->getEntity();
+  $nid = $node->nid->value;
+  $cloned_node = $node->createDuplicate();
+  $cloned_node->save();
+  drupal_set_message(t('Node created with @nid successfully.', array('@nid' => $cloned_node->nid->value)));
+  //Archive old one.
+  $node->field_archived->value = 1;
+  $node->save();
+  drupal_set_message(t('Node with @nid archived successfully.', array('@nid' => $nid)));
+
+}
+
+function tweets_queue_tweet_node_form_cancel($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  drupal_set_message(t('Node clone or edit cancelled'));
 }
 
 /**
@@ -841,6 +872,27 @@ function tweets_queue_update_tweeter_tweet_info($nid, $tweeter_info) {
 }
 
 /**
+ * fetch tweeter tweet information associated with a node.
+ *
+ * @param array $nid
+ *   Entity id.
+ *
+ * @return string
+ *   Returns twitter tweet id.
+ */
+function tweets_queue_fetch_tweeter_tweet_info($nid) {
+  $tweet_id = '';
+  if (empty($nid)) {
+    return $tweet_id;
+  }
+  $query = \Drupal::database()->select(TWEETS_TWEETER_DATA_TABLE, 'p');
+  $query->fields('p', ['tweet_id']);
+  $query->condition('p.nid', $nid , '=');
+  $tweet_id = $query->execute()->fetchField();
+  return $tweet_id;
+}
+
+/**
  * Update the priority table for the tweet.
  *
  * @param integer $nid
@@ -1094,7 +1146,6 @@ function tweets_queue_update_tweet_items_marked_size_zero() {
 function tweets_queue_get_users_tweet_list($uid) {
   $uid = ($uid == '') ? \Drupal::currentUser()->id() : $uid;
   $twitter_handler = tweets_queue_fetch_client_handler_info(1);
-  echo '<pre>', print_r($twitter_handler);
   require_once   './libraries/codebird-php/codebird.php';
   $status = array('success' => 0, 'message' => 'unsuccessful');
   $consumer_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_KEY);
@@ -1106,12 +1157,12 @@ function tweets_queue_get_users_tweet_list($uid) {
   $cb = \Codebird\Codebird::getInstance();
   $cb->setToken($access_token, $access_secret_token);
 
-      // $params = array(
-      //   'screen_name' => 'srijan',
-      //   'include_rts' =>  true,
-      //   'count' => 5,
-      // );
-      $reply = $cb->statuses_retweetsOfMe($params);
-     
-  echo '<pre>', print_r($reply);
+      $params = array(
+        'screen_name' => 'srijan',
+        'include_rts' =>  true,
+        'count' => 5,
+        'max_id',
+      );
+      // $reply = $cb->statuses_userTimeline($params);
+      $reply = $cb->friends_list();
 }
