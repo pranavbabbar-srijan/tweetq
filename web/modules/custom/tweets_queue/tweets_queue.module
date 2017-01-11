@@ -52,7 +52,7 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
       $tweet_id = tweets_queue_fetch_tweeter_tweet_info($nid);
       if ($tweet_id) {
         $form['display'] = array(
-          '#markup' => t("<b>This item can not be tweeted. You need to clone first.</b>"),
+          '#markup' => t("<b>This item is already tweeted. So this can not be edited. You need to clone first.</b>"),
           '#weight' => -11,
         ); 
         $form['clone_submit'] = array(
@@ -1165,4 +1165,33 @@ function tweets_queue_get_users_tweet_list($uid) {
       );
       // $reply = $cb->statuses_userTimeline($params);
       $reply = $cb->friends_list();
+}
+
+/**
+ * fetch tweeter tweet information associated with a node.
+ *
+ * @param array $nid
+ *   Entity id.
+ *
+ * @return string
+ *   Returns twitter information.
+ */
+function tweets_queue_fetch_tweeter_tweet_info_all($nid = 455) {
+  if (empty($nid)) {
+    return $tweet_id;
+  }
+  $query = \Drupal::database()->select(TWEETS_TWEETER_DATA_TABLE, 'p');
+  $query->fields('p', ['tweet_id', 'data']);
+  $query->condition('p.nid', $nid , '=');
+  $data = $query->execute()->fetchAll();
+  $created_at = $retweet_count = $retweeted = '';
+  $output = '';
+  foreach ($data as $pos => $tweet_data) {
+    $complete_info = unserialize($tweet_data->data);
+    $created_at = $complete_info->created_at;
+    $retweet_count = $complete_info->retweet_count;
+    $retweeted = (!empty($complete_info->retweeted)) ? 'Y' : 'N';
+    $output = $created_at . ' | ' . $retweeted . ' | ' . $retweet_count;
+  }
+  return $output;
 }
