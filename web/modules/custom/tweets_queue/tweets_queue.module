@@ -85,8 +85,9 @@ function tweets_queue_tweet_node_form_submit($form, \Drupal\Core\Form\FormStateI
   //Archive old one.
   $node->field_archived->value = 1;
   $node->save();
+  $priority_info = array('archived' => 1);
+  tweets_queue_update_priority_info($nid, $priority_info);
   drupal_set_message(t('Node with @nid archived successfully.', array('@nid' => $nid)));
-
 }
 
 function tweets_queue_tweet_node_form_cancel($form, \Drupal\Core\Form\FormStateInterface $form_state) {
@@ -443,7 +444,7 @@ function tweets_queue_get_tweets_cron_list($client_handler, $tweet_max_attempt =
   $minimum_lapse_interval = tweets_queue_get_client_field_info($client_handler, CRON_TWEET_RETWEET_INTERVAL);
   $uid = tweets_queue_get_client_field_info($client_handler, 'uid');
   $query = \Drupal::database()->select(TWEETS_PRIORITY_TABLE, 'p');
-  $query->fields('p', ['nid', 'uid', 'size', 'message', 'weight', 'created', 'last_run']);
+  $query->fields('p', ['nid', 'uid', 'size', 'message', 'weight', 'created', 'last_run', 'status', 'archived']);
 
   $query->leftjoin(TWEETS_TWEETER_DATA_TABLE, 't', 'p.nid = t.nid');
   $query->fields('t', ['tweet_id']);
@@ -456,6 +457,8 @@ function tweets_queue_get_tweets_cron_list($client_handler, $tweet_max_attempt =
     $query->condition($db_or);
   }
   $query->condition('p.uid', $uid , '=');
+  $query->condition('p.status', 1 , '=');
+  $query->condition('p.archived', 0 , '=');
   $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<=');
   $query->orderBy('p.weight', 'ASC');
   $query->range(0, $tweet_max_attempt);
@@ -655,6 +658,8 @@ function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
     case 'tweet':
       $title = $node->get('title')->getValue();
       $hashtag = $node->get('field_hash_tag')->getValue();
+      $status = $node->get('status')->getValue();
+      $archived = $node->get('field_archived')->getValue();
       $node->title->value = tweets_queue_get_urls_present($title[0]['value']);
       $node->field_hash_tag->value = tweets_queue_get_urls_present($hashtag[0]['value']);
       $tweet_size = tweets_queue_calculate_tweet_size($node);
@@ -664,6 +669,8 @@ function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
         $priority_info = array(
           'size' => $tweet_size,
           'message' => tweets_queue_calculate_tweet_size($node, 'message'),
+          'status' => $status[0]['value'],
+          'archived' => $archived[0]['value']
         );
         tweets_queue_update_priority_info($node->id(), $priority_info);
       }
@@ -762,12 +769,16 @@ function tweets_queue_schema() {
       'weight' => array('type' => 'int', 'not null' => TRUE, 'default' => 1),
       'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'last_run' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'archived' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
     ),
     'primary key' => array('nid'),
     'indexes' => array(
       'tweets_priority_weight' => array('uid'),
       'tweets_priority_uid' => array('weight'),
-      'tweets_priority_last_run' => array('last_run')
+      'tweets_priority_last_run' => array('last_run'),
+      'tweets_priority_archived' => array('archived'),
+      'tweets_priority_status' => array('status')
     )
   );
   $schema[TWEETS_TWEETER_DATA_TABLE] = array(
