@@ -49,7 +49,7 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
     case 'node_tweet_edit_form':
       $node = \Drupal::routeMatch()->getParameter('node');
       $nid = $node->nid->value;
-      $tweet_id = tweets_queue_fetch_tweeter_tweet_info($nid);
+      $tweet_id = tweets_queue_fetch_tweeter_tweet_info_all($nid);
       if ($tweet_id) {
         $form['display'] = array(
           '#markup' => t("<b>This item is already tweeted. So this can not be edited. You need to clone first.</b>"),
@@ -872,27 +872,6 @@ function tweets_queue_update_tweeter_tweet_info($nid, $tweeter_info) {
 }
 
 /**
- * fetch tweeter tweet information associated with a node.
- *
- * @param array $nid
- *   Entity id.
- *
- * @return string
- *   Returns twitter tweet id.
- */
-function tweets_queue_fetch_tweeter_tweet_info($nid) {
-  $tweet_id = '';
-  if (empty($nid)) {
-    return $tweet_id;
-  }
-  $query = \Drupal::database()->select(TWEETS_TWEETER_DATA_TABLE, 'p');
-  $query->fields('p', ['tweet_id']);
-  $query->condition('p.nid', $nid , '=');
-  $tweet_id = $query->execute()->fetchField();
-  return $tweet_id;
-}
-
-/**
  * Update the priority table for the tweet.
  *
  * @param integer $nid
@@ -1176,22 +1155,48 @@ function tweets_queue_get_users_tweet_list($uid) {
  * @return string
  *   Returns twitter information.
  */
-function tweets_queue_fetch_tweeter_tweet_info_all($nid = 455) {
+function tweets_queue_fetch_tweeter_tweet_info_all($nid, $field_name = 'tweet_id') {
   if (empty($nid)) {
-    return $tweet_id;
+    return '';
   }
+  $output = tweets_queue_fetch_tweeter_data($nid, $field_name);
+  if ($output['success']) {
+    return (isset($output[$field_name])) ? $output[$field_name] : '';
+  }
+}
+
+/**
+ * Read all tweeter related information for a specific tweet node.
+ *
+ * @param integer $nid
+ *   Node nid.
+ * @param string $field_name
+ *   Field name in the tweeter result.
+ *
+ * @return array
+ *   Returns array containg all result.
+ */
+function tweets_queue_fetch_tweeter_data($nid, $field_name = 'tweet_id') {
+  $output = &drupal_static(__FUNCTION__ . $nid);
+  if (isset($output)) {
+    return $output;
+  }
+  $output = array('nid' => $nid, 'success' => 0);
   $query = \Drupal::database()->select(TWEETS_TWEETER_DATA_TABLE, 'p');
   $query->fields('p', ['tweet_id', 'data']);
   $query->condition('p.nid', $nid , '=');
   $data = $query->execute()->fetchAll();
   $created_at = $retweet_count = $retweeted = '';
-  $output = '';
   foreach ($data as $pos => $tweet_data) {
+    $output['success'] = 1;
     $complete_info = unserialize($tweet_data->data);
+    $output['data'] = $complete_info;
     $created_at = $complete_info->created_at;
     $retweet_count = $complete_info->retweet_count;
-    $retweeted = (!empty($complete_info->retweeted)) ? 'Y' : 'N';
-    $output = $created_at . ' | ' . $retweeted . ' | ' . $retweet_count;
+    $output['created_at'] = $created_at;
+    $output['tweet_id'] = $complete_info->id;
+    $output['retweet_count'] = $retweet_count;
+    $output['retweeted'] = (!empty($complete_info->retweeted)) ? 'Y' : 'N';;
   }
   return $output;
 }
