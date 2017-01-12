@@ -30,7 +30,7 @@ class SendTweetsForm extends FormBase {
     );
 
     $form['markup'] = array(
-      '#markup' => $this->t('Authenticate tweeter credentials working. '),
+      '#markup' => $this->t('Authenticate twitter credentials working. '),
     );
 
     $form['submit'] = array(

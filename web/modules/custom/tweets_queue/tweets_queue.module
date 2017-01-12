@@ -685,7 +685,7 @@ function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
       }
 
       if ($tweet_size > CRON_TWEET_CHARCATER_LIMIT) {
-        drupal_set_message(t('This item can not be tweeted due to the tweeter tweet size limit of @size_limit .',
+        drupal_set_message(t('This item can not be tweeted due to the twitter tweet size limit of @size_limit .',
           array('@size_limit' => CRON_TWEET_CHARCATER_LIMIT)), 'warning');
         drupal_set_message(t('Current size of the tweet item is @size characters.',
           array('@size' => $tweet_size)), 'status');
@@ -791,7 +791,7 @@ function tweets_queue_schema() {
     )
   );
   $schema[TWEETS_TWEETER_DATA_TABLE] = array(
-    'description' => 'The base table for tweets tweeter data table.',
+    'description' => 'The base table for tweets twitter data table.',
     'fields' => array(
       'nid' => array('type' => 'int', 'not null' => TRUE),
       'tweet_id' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 24, 'default' => ''),
@@ -868,7 +868,7 @@ function tweets_queue_update_url($message, $uid = '') {
 }
 
 /**
- * Update the tweeter tweet table for the tweet.
+ * Update the twitter tweet table for the tweet.
  *
  * @param integer $nid
  *   Entity nid.
@@ -1167,7 +1167,7 @@ function tweets_queue_get_users_tweet_list($uid) {
 }
 
 /**
- * fetch tweeter tweet information associated with a node.
+ * fetch twitter tweet information associated with a node.
  *
  * @param array $nid
  *   Entity id.
@@ -1186,12 +1186,12 @@ function tweets_queue_fetch_tweeter_tweet_info_all($nid, $field_name = 'tweet_id
 }
 
 /**
- * Read all tweeter related information for a specific tweet node.
+ * Read all twitter related information for a specific tweet node.
  *
  * @param integer $nid
  *   Node nid.
  * @param string $field_name
- *   Field name in the tweeter result.
+ *   Field name in the twitter result.
  *
  * @return array
  *   Returns array containg all result.
