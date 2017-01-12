@@ -4,7 +4,7 @@ tweets_queue_admin.settings:
   path: '/admin/config/services/tweets_queue/admin_settings'
   defaults:
     _form: '\Drupal\tweets_queue\Form\TweetsQueueAdminSettingsForm'
-    _title: 'Tweeter Api admin configuration'
+    _title: 'Twitter Api admin configuration'
   requirements:
     _role: 'administrator'
 
@@ -12,7 +12,7 @@ tweets_queue.settings:
   path: '/admin/config/services/tweets_queue/client_settings'
   defaults:
     _form: '\Drupal\tweets_queue\Form\TweetsQueueSettingsForm'
-    _title: 'Tweeter Api client configuration'
+    _title: 'Twitter Api client configuration'
   requirements:
     _role: 'twitter_client+administrator'
 
