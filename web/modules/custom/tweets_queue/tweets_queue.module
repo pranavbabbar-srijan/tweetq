@@ -39,6 +39,7 @@ const TWITTER_HANDLER_INVALID = '2';
 const TWITTER_HANDLER_VALID = '1';
 const TWITTER_HANDLER_INVALID_CODE = '32';
 const CRON_TWEET_CHARCATER_LIMIT = 140;
+const TWITTER_CLIENT_ROLE = 'twitter_client';
 
 
 /**
@@ -630,26 +631,30 @@ function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$versio
 /**
  * Implements hook_entity_insert().
  */
-function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $node) {
-  switch ($node->bundle()) {
+function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  switch ($entity->bundle()) {
+    case 'user':
+      $entity->addRole(TWITTER_CLIENT_ROLE);
+      $entity->save();
+      break;
     case 'tweet':
-      $title = $node->get('title')->getValue();
-      $hashtag = $node->get('field_hash_tag')->getValue();
-      $node->title->value = tweets_queue_get_urls_present($title[0]['value']);
-      $node->field_hash_tag->value = tweets_queue_get_urls_present($hashtag[0]['value']);
-      $tweet_size = tweets_queue_calculate_tweet_size($node);
-      $node->field_size->value = $tweet_size;
-      $status = $node->get('status')->getValue();
-      $archived = $node->get('field_archived')->getValue();
+      $title = $entity->get('title')->getValue();
+      $hashtag = $entity->get('field_hash_tag')->getValue();
+      $entity->title->value = tweets_queue_get_urls_present($title[0]['value']);
+      $entity->field_hash_tag->value = tweets_queue_get_urls_present($hashtag[0]['value']);
+      $tweet_size = tweets_queue_calculate_tweet_size($entity);
+      $entity->field_size->value = $tweet_size;
+      $status = $entity->get('status')->getValue();
+      $archived = $entity->get('field_archived')->getValue();
       // Update priority table with size.
-      if ($node->id()) {
+      if ($entity->id()) {
         $priority_info = array(
           'size' => $tweet_size,
-          'message' => tweets_queue_calculate_tweet_size($node, 'message'),
+          'message' => tweets_queue_calculate_tweet_size($entity, 'message'),
           'status' => $status[0]['value'],
           'archived' => $archived[0]['value'],
         );
-        tweets_queue_update_priority_info($node->id(), $priority_info);
+        tweets_queue_update_priority_info($entity->id(), $priority_info);
       }
   }
 }
