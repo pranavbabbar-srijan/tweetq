@@ -38,6 +38,7 @@ const CRON_TWEET_MESSAGES_SKIPPED = 'Tweet message skipped';
 const TWITTER_HANDLER_INVALID = '2';
 const TWITTER_HANDLER_VALID = '1';
 const TWITTER_HANDLER_INVALID_CODE = '32';
+const TWITTER_HANDLER_BAD_AUTHENTICATION_CODE = '215';
 const CRON_TWEET_CHARCATER_LIMIT = 140;
 const TWITTER_CLIENT_ROLE = 'twitter_client';
 
@@ -147,34 +148,6 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   return $status;
 }
 
-function tweets_queue_set_single_postold($message = 'Good Evening!!', $twitter_handle) {
-  require_once   './libraries/codebird-php/codebird.php';
-  $status = array('success' => 0, 'message' => 'unsuccessful');
-  $consumer_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_KEY);
-  $consumer_secret_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_SECRET_KEY);
-  $access_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_TOKEN);
-  $access_secret_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_SECRET_TOKEN);
-
-  \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
-  $cb = \Codebird\Codebird::getInstance();
-  $cb->setToken($access_token, $access_secret_token);
-  $params = array(
-    'status' => $message
-  );
-  $reply = $cb->statuses_update($params);
-  if (is_object($reply) && isset($reply->errors)) {
-    $status['success'] = 0;
-    $status['code'] = (isset($reply->errors[0]->code)) ? $reply->errors[0]->code : '';
-    $status['message'] = (isset($reply->errors[0]->message)) ? $reply->errors[0]->message: 'tweet failed.';
-    tweets_queue_debug_info($status['message']);
-    return $status;
-  }
-  if (is_object($reply)) {
-    $status = array('success' => 1, 'message' => 'successful');
-  }
-  return $status;
-}
-
 /**
  * Implements hook_cron().
  */
@@ -201,7 +174,7 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
       $uid = \Drupal::currentUser()->id();
       $twitter_handler = tweets_queue_fetch_client_handler_info();
       $status = tweets_queue_tweet_message($message, $twitter_handler);
-      if ($status['code'] == TWITTER_HANDLER_INVALID_CODE) {
+      if ($status['code'] == TWITTER_HANDLER_INVALID_CODE || $status['code'] == TWITTER_HANDLER_BAD_AUTHENTICATION_CODE) {
         drupal_set_message(t($status['message']), 'error');
         if ($twitter_handler->status != TWITTER_HANDLER_INVALID) {
           tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_INVALID);
@@ -943,21 +916,6 @@ function tweets_queue_update_priority_info($nid, $tweet_priority_info = array(),
         array(':nid' => $nid, ':weight' => $weight)));
       break;
   }
-}
-
-/**
- * Schedule the cron run.
- *
- * @param integer $increase_cron_run_limit
- *   Whether add extra time for cron run due to duplicate tweets.
- */
-function tweets_queue_schedule_cron_old($increase_cron_run_limit = 0) {
-  global $base_url;
-  $extend_cron_limit = ($increase_cron_run_limit) ? '&extend=1' : '';
-  $path = $base_url . '/admin/structure/tweets_queue/settings?set_cron=1' . $extend_cron_limit;
-  $response = new RedirectResponse($path, 302);
-  $response->send();
-  return;
 }
 
 /**
