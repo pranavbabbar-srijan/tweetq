@@ -48,6 +48,8 @@ const TWITTER_CLIENT_ROLE = 'twitter_client';
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
+    case 'user_login_form':
+      break;
     case 'node_tweet_edit_form':
       $node = \Drupal::routeMatch()->getParameter('node');
       $nid = $node->nid->value;
@@ -1177,4 +1179,13 @@ function tweets_queue_fetch_tweeter_data($nid, $field_name = 'tweet_id') {
     $output['retweeted'] = (!empty($complete_info->retweeted)) ? 'Y' : 'N';;
   }
   return $output;
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function tweets_queue_user_login($account) {
+  global $base_url;
+  $response = new RedirectResponse($base_url . '/dashboard');
+  $response->send();
 }
