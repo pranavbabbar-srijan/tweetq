@@ -639,11 +639,15 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $node) {
       $node->field_hash_tag->value = tweets_queue_get_urls_present($hashtag[0]['value']);
       $tweet_size = tweets_queue_calculate_tweet_size($node);
       $node->field_size->value = $tweet_size;
+      $status = $node->get('status')->getValue();
+      $archived = $node->get('field_archived')->getValue();
       // Update priority table with size.
       if ($node->id()) {
         $priority_info = array(
           'size' => $tweet_size,
           'message' => tweets_queue_calculate_tweet_size($node, 'message'),
+          'status' => $status[0]['value'],
+          'archived' => $archived[0]['value'],
         );
         tweets_queue_update_priority_info($node->id(), $priority_info);
       }
