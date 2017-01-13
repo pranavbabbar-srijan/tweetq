@@ -704,9 +704,23 @@ function tweets_queue_calculate_tweet_size(\Drupal\Core\Entity\EntityInterface $
 function tweets_queue_node_delete(\Drupal\Core\Entity\EntityInterface $node) {
   switch ($node->bundle()) {
     case 'tweet':
-    \Drupal::database()->delete(TWEETS_PRIORITY_TABLE)
+      \Drupal::database()->delete(TWEETS_PRIORITY_TABLE)
         ->condition('nid', $node->id())
         ->execute();
+      break;
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function tweets_queue_entity_delete(\Drupal\Core\Entity\EntityInterface $entity) {
+  switch ($entity->getEntityTypeId()) {
+    case 'user':
+      \Drupal::database()->delete(TWEETS_HANDLER_TABLE)
+        ->condition('uid', $entity->id())
+        ->execute();
+      drupal_set_message(t('Successfully deleted twitter api configuration data.'));
   }
 }
 
