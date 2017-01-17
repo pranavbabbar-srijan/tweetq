@@ -654,7 +654,7 @@ function tweets_queue_node_presave(\Drupal\Core\Entity\EntityInterface $node){
           'size' => $tweet_size,
           'message' => tweets_queue_calculate_tweet_size($node, 'message'),
           'status' => $status[0]['value'],
-          'archived' => $archived[0]['value']
+          'archived' => intval($archived[0]['value'])
         );
         tweets_queue_update_priority_info($node->id(), $priority_info);
       }
@@ -1109,6 +1109,8 @@ function tweets_queue_update_tweet_items_marked_size_zero() {
   $total = 0;
   foreach ($data as $pos => $tweet_object) {
     $entity  = Node::load($tweet_object->nid);
+    $archived = intval($entity->get('field_archived')->getValue());
+    $entity->set('field_archived', $archived);
     $entity->save();
   }
 }
