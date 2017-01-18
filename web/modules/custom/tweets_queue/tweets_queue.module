@@ -328,6 +328,7 @@ function tweets_queue_mark_handler_next_run($uid) {
   $cron_interval = $cron_interval * 60;
   $tweet_handler_info = array(
     CRON_TWEET_NEXT_RUN =>  time() + $cron_interval,
+    CRON_TWEET_LAST_RUN =>  time(),
   );
   tweets_queue_update_handler_info($tweet_handler_info, $uid);
 }

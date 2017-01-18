@@ -69,60 +69,6 @@ class TweetsQueueSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     );
 
-    $form[CRON_TWEET_IMPORT_FID] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('CSV import File id'),
-      '#default_value' => tweets_queue_get_client_field_info($client_info, CRON_TWEET_IMPORT_FID),
-      '#description' => t('Specify the tweet import file path'),
-      '#required' => FALSE,
-      '#disabled' => TRUE,
-    );
-
-    $form[CRON_TWEET_LAST_RUN] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Last Cron run time'),
-      '#default_value' => tweets_queue_get_client_field_info($client_info, CRON_TWEET_LAST_RUN),
-      '#description' => t('Specify the cron run last time.'),
-      '#required' => FALSE,
-    );
-    $now = time();
-
-    $next_run = tweets_queue_get_client_field_info($client_info, CRON_TWEET_NEXT_RUN);
-    if ($next_run > $now) {
-      $time_left = ($next_run - $now)/60;
-      $show_time = intval($time_left) . ' Minutes left';
-    }
-    else {
-      $show_time = '0 Minute left';
-    }
-
-    $form[CRON_TWEET_NEXT_RUN] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Next Cron run time'),
-      '#default_value' => $show_time,
-      '#description' => t('Find the next cron run time.'),
-      '#required' => FALSE,
-    );
-    $retweet_interval = tweets_queue_get_client_field_info($client_info, CRON_TWEET_RETWEET_INTERVAL);
-    $retweet_interval = ($retweet_interval == 0) ? 300 : $retweet_interval;
-    $form[CRON_TWEET_RETWEET_INTERVAL] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Elapse time for retweet'),
-      '#default_value' => $retweet_interval,
-      '#description' => t('Specify the time interval for retweet in minutes.'),
-      '#required' => FALSE,
-    );
-    $automated_cron_settings = \Drupal::config('automated_cron.settings');
-    $cron_run_interval = $automated_cron_settings->get('interval');
-    $cron_time = $cron_run_interval/60;
-    $form[CRON_TWEET_CURRENT_INTERVAL] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Current cron run schedule interval'),
-      '#default_value' => $cron_time,
-      '#description' => t('Find the cron run current interval in minutes.'),
-      '#required' => FALSE,
-    );
-
     return parent::buildForm($form, $form_state);
   }
 
