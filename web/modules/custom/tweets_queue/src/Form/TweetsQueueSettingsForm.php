@@ -81,7 +81,6 @@ class TweetsQueueSettingsForm extends ConfigFormBase {
       ACCESS_SECRET_TOKEN => $form_state->getValue(ACCESS_SECRET_TOKEN),
       CONSUMER_KEY => $form_state->getValue(CONSUMER_KEY),
       CONSUMER_SECRET_KEY => $form_state->getValue(CONSUMER_SECRET_KEY),
-      CRON_TWEET_RETWEET_INTERVAL => $form_state->getValue(CRON_TWEET_RETWEET_INTERVAL),
     );
     tweets_queue_update_handler_info($tweet_handler_info);
   }
