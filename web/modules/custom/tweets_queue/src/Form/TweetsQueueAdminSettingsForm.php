@@ -90,6 +90,20 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
       '#description' => t('Specify the cron run next time.'),
       '#required' => FALSE,
     );
+    $form[CRON_SCHEDULER_RUN_INTERVAL] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Scheduler interval'),
+      '#default_value' => $config->get(CRON_SCHEDULER_RUN_INTERVAL),
+      '#description' => t('Specify the scheduler interval in Minutes.'),
+      '#required' => FALSE,
+    );
+    $form[CRON_SCHEDULER_LAST_RUN] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Scheduler last Run'),
+      '#default_value' => $config->get(CRON_SCHEDULER_LAST_RUN),
+      '#description' => t('Specifiesthe scheduler last run.'),
+      '#required' => FALSE,
+    );
     $retweet_interval = intval($config->get(CRON_TWEET_RETWEET_INTERVAL));
     $retweet_interval = ($retweet_interval == 0) ? 300 : $retweet_interval;
     $form[CRON_TWEET_RETWEET_INTERVAL] = array(
@@ -109,41 +123,7 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
       '#description' => t('Find the cron run current interval in minutes.'),
       '#required' => FALSE,
     );
-    $configuration = "id: tweets_queue
-label: Import tweets
-migration_groups:
-  - ACME import
 
-source:
-  plugin: csv
-  path: '/path/to/your/filename.csv'
-  header_row_count: 1
-  keys:
-    - title
-
-process:
-  title: title
-  field_hash_tag: hashtag
-  type:
-    plugin: default_value
-    default_value: tweet
-
-destination:
-  plugin: entity:node";
-
-    if (!empty($config->get(IMPORT_CONFIGURATION))) {
-      $configuration = $config->get(IMPORT_CONFIGURATION);
-    }
-
-    $config_path = 'admin/config/development/configuration/single/import';
-    $form[IMPORT_CONFIGURATION] = array(
-      '#type' => 'textarea',
-      '#rows' => 24,
-      '#title' => $this->t('Sample configuration.<br/>Copy and Paste this sample configuration at <br/>"@path" inside "Paste your configuration here"  and 
-        "migration" as configuration type', array('@path' => $config_path)),
-      '#default_value' => $configuration,
-      '#required' => FALSE,
-    );
     $form[CRON_TWEET_DEBUG_INFO] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Current cron run debugging'),
@@ -165,13 +145,17 @@ destination:
       ->save();
     $config->set(CRON_TWEET_IMPORT_PATH, $form_state->getValue(CRON_TWEET_IMPORT_PATH))
       ->save();
-    $config->set(IMPORT_CONFIGURATION, $form_state->getValue(IMPORT_CONFIGURATION))
-      ->save();
+    // $config->set(IMPORT_CONFIGURATION, $form_state->getValue(IMPORT_CONFIGURATION))
+      // ->save();
     $config->set(CRON_TWEET_MIN_INTERVAL, $form_state->getValue(CRON_TWEET_MIN_INTERVAL))
       ->save();
     $config->set(CRON_TWEET_MAX_INTERVAL, $form_state->getValue(CRON_TWEET_MAX_INTERVAL))
       ->save();
     $config->set(CRON_TWEET_NEXT_RUN, $form_state->getValue(CRON_TWEET_NEXT_RUN))
+      ->save();
+    $config->set(CRON_SCHEDULER_RUN_INTERVAL, $form_state->getValue(CRON_SCHEDULER_RUN_INTERVAL))
+      ->save();
+    $config->set(CRON_SCHEDULER_LAST_RUN, $form_state->getValue(CRON_SCHEDULER_LAST_RUN))
       ->save();
     $config->set(CRON_TWEET_RETWEET_INTERVAL, $form_state->getValue(CRON_TWEET_RETWEET_INTERVAL))
       ->save();

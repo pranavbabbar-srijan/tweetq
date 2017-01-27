@@ -72,18 +72,16 @@ class TweetsQueueCsvUploadForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = \Drupal::service('config.factory')->getEditable('tweets_queue_admin.settings');
-    $import_id = $config->get(CRON_TWEET_IMPORT_ID);
     $fid = reset($form_state->getValue('managed_file'));
     $file = '';
     if ($fid) {
       $file_path = $this->getFileRealPath($fid);
       $file = \Drupal::service('file_system')->realpath($file_path);
-
       $tweet_handler_info = array(
         CRON_TWEET_IMPORT_FID => $fid,
       );
+      // Save file information in the handler.
       tweets_queue_update_handler_info($tweet_handler_info);
-      // $this->setCsvFilePath($file, $import_id);
     }
     if (empty($file)) {
       $client_info = tweets_queue_fetch_client_handler_info();
@@ -91,9 +89,56 @@ class TweetsQueueCsvUploadForm extends FormBase {
       $file_path = $this->getFileRealPath($fid);
       $file = \Drupal::service('file_system')->realpath($file_path);
     }
-    if ($file && $import_id) {
-      $this->runCsvImport($file, $import_id);
+    if ($file) {
+      $this->importCsvData($file);  
     }
+    return;
+    //@TODO: depreciate below lines.
+    $import_id = $config->get(CRON_TWEET_IMPORT_ID);
+    if ($file && $import_id) {
+      // $this->runCsvImport($file, $import_id);
+    }
+  }
+
+  public function importCsvData($file) {
+    $uid = \Drupal::currentUser()->id();
+    $file = fopen($file, 'r');
+    $row = 0;
+    $import_message = array('total' => 0, 'duplicate' => 0, 'imported' => 0);
+    while (($line = fgetcsv($file)) !== FALSE) {
+      if ($row == 0) {
+        $row++;
+        continue;
+      }
+      $import_message['total'] = $import_message['total'] + 1;
+      $message = (isset($line[0])) ? $line[0] : '';
+      $hash_tag = (isset($line[1])) ? $line[1] : '';
+      $message = tweets_queue_get_urls_present($message);
+      $hash_tag = tweets_queue_get_urls_present($hash_tag);
+      $size = tweets_queue_calculate_tweet_message_size($message, $hash_tag, 'size');
+      $twitter_message_info = array(
+        'message' => $message,
+        'hashtag' => $hash_tag,
+        'uid' => $uid,
+        'size' => $size,
+      );
+      $nid = tweets_queue_check_user_message_presence($message, $hash_tag);
+      if ($nid) {
+        $import_message['duplicate'] = $import_message['duplicate'] + 1;
+        continue;
+      }
+      $import_message['imported'] = $import_message['imported'] + 1;
+      tweets_queue_insert_message_queue_record($twitter_message_info);
+    } 
+    fclose($file);
+    drupal_set_message(t('Migration completed successfully.'));
+    drupal_set_message(t('Total : @total Imported: @imported Duplicate: @duplicate ',
+      array(
+        '@total' => $import_message['total'],
+        '@imported' => $import_message['imported'],
+        '@duplicate' => $import_message['duplicate'])
+      )
+    );
   }
 
   public function runCsvImport($file, $import_id = 'tweets_queueing') {
