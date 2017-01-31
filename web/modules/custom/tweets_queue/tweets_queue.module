@@ -1522,7 +1522,7 @@ function tweets_queue_calculate_tweet_message_size($message, $hash_tag, $case = 
   if (!empty($hash_tag)) {
     $message .= ' ' . $hash_tag;
   }
-  $message = \Drupal\Component\Utility\Xss::filter($message);
+  // $message = \Drupal\Component\Utility\Xss::filter($message);
   $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
   if ($case == 'size') {
     return $tweet_size;
