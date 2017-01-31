@@ -188,14 +188,18 @@ function tweets_queue_cron() {
  */
 function tweets_queue_tweet_scheduled_messages() {
   $messages_list = tweets_queue_tweet_scheduled_messages_list();
+  tweets_queue_debug_info(t('Total node placed in queue is @total', array('@total' => count($messages_list['nids']))));
   if (count($messages_list['nids']) > 0) {
     $handler_list = tweets_queue_tweet_scheduled_messages_user_list(array_values($messages_list['uids']));
+    tweets_queue_debug_info($handler_list);
+    tweets_queue_debug_info(t('Process send begins'));
     tweets_queue_send_scheduled_messages($messages_list, $handler_list);
   }
 }
 
 function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
   foreach ($messages_list['nids'] as $pos => $message_data) {
+    tweets_queue_debug_info(t('started with nid @nid and user @uid', array('@nid' => $message_data->nid, '@uid' => $message_data->uid)));
     $client_twitter_handler = $handler_list['handler'][$message_data->uid];
     drupal_set_message(t('Process message @message', array('@message' => $message_data->message)));
     $message = tweets_queue_calculate_tweet_message_size($message_data->message, $message_data->hashtag, 'message');
@@ -234,6 +238,7 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
       tweets_queue_mark_handler_status($message_data->uid, TWITTER_HANDLER_INVALID);
       continue;
     }
+    tweets_queue_debug_info(t('Finished tweet send with nid @nid and user @uid', array('@nid' => $message_data->nid, '@uid' => $message_data->uid)));
   }
 }
 
@@ -309,6 +314,7 @@ function tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info)
   $nid = db_insert(TWITTER_TWEETS_HISTORY_TABLE)
     ->fields($twitter_history_info)
     ->execute();
+  tweets_queue_debug_info(t('Updated history table for nid @nid', array('@nid' => $nid)));
 }
 
 function tweets_queue_tweet_scheduled_messages_user_list($uids = array()) {
@@ -1482,12 +1488,12 @@ function tweets_queue_user_login($account) {
  * @return integer
  *   Returns created nid.
  */
-function tweets_queue_insert_message_queue_record($twitter_message_info) {
+function tweets_queue_insert_message_queue_record($twitter_message_info, $status = 1) {
   if (!is_array($twitter_message_info)) {
     $twitter_message_info = array();
   }
   $twitter_message_info['created'] = time();
-  $twitter_message_info['status'] = 1;
+  $twitter_message_info['status'] = $status;
   $twitter_message_info['last_run'] = 0;
   $twitter_message_info['archived'] = 0;
   $twitter_message_info['weight'] = 1;
@@ -1592,8 +1598,8 @@ function tweets_queue_fetch_all_unscheduled_users_list() {
 
 function tweets_queue_compile_tweets_scheduling() {
   $current_time = time();
-  $last_run = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_LAST_RUN));
-  if ($last_run > $current_time) {
+  $next_run = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_LAST_RUN));
+  if ($next_run > $current_time) {
     drupal_set_message(t('Already tweets scheduling scheduled. coming out.'));
     return;
   }
@@ -1607,4 +1613,22 @@ function tweets_queue_compile_tweets_scheduling() {
   $config = \Drupal::service('config.factory')->getEditable('tweets_queue_admin.settings');
   $config->set(CRON_SCHEDULER_LAST_RUN, $next_scheduled_run)
       ->save();
+}
+
+/**
+ * Fetch all user's list.
+ */
+function tweets_queue_fetch_all_users_tweet_list($valid_tweets = 1) {
+  $uid = \Drupal::currentUser()->id();
+  $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
+  $query->fields('p', ['nid', 'uid', 'message', 'hashtag','image_fid', 'status', 'created',
+    'changed', 'last_run', 'archived', 'size', 'weight', 'tweet_id']);
+  // Only bring active handlers.
+  $query->condition('p.size', 140 , '<');
+  $data = $query->execute()->fetchAll();
+  $user_list = array();
+  foreach ($data as $pos => $user_info) {
+    $user_list[$user_info->uid] = $user_info;
+  }
+  return $user_list;
 }
