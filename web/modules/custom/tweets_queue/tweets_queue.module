@@ -1557,8 +1557,10 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
   $query->condition('p.uid', $uid , '=');
   $query->condition('p.status', 1 , '=');
   $query->condition('p.archived', 0 , '=');
+  $query->condition('p.message', '' , '!=');
   $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<');
   $query->orderBy('p.weight', 'ASC');
+  $query->orderBy('p.created', 'ASC');
   $query->range(0, 1);
   $nid = $query->execute()->fetchField();
   drupal_set_message(' ' . $nid . ' set for uid' . $uid);
