@@ -1,0 +1,110 @@
+/* ================================= CSS3 Rounded Corners ================================= */
+//Shorthand Syntax => border-radius: 1-4 length|% / 1-4 length|%|initial|inherit;
+//$radius - Any value in px or % unit.
+
+@mixin border-radius($radius) {
+  @include css3-prefix(border-radius, $radius);
+}
+
+/* ================================= CSS3 border-image ================================= */
+//Shorthand Syntax => border-image: source slice width outset repeat|initial|inherit;
+//$border-image -  url(border.png) 30% round;
+
+@mixin border-image($border-image) {
+  @include css3-prefix(border-image, $border-image);
+}
+
+/* ================================= CSS3 Gradients &  Gradient Transparency ========================= */
+//Shorthand Syntax => background: linear-gradient(angle, color-stop1, color-stop2);
+
+//$gradientType - linear/radial;
+//$direction - left, right, left top, right top;
+//$startColor - color;
+//$endColor - color;
+
+@mixin gradient($gradientType, $direction, $startColor, $endColor) {    
+  background: -webkit-#{$gradientType}-gradient($direction, $startColor, $endColor);
+  background: -khtml-#{$gradientType}-gradient($direction, $startColor, $endColor);
+  background: -moz-#{$gradientType}-gradient($direction, $startColor, $endColor);
+  background: -ms-#{$gradientType}-gradient($direction, $startColor, $endColor);
+  background: -o-#{$gradientType}-gradient($direction, $startColor, $endColor);
+  background: #{$gradientType}-gradient($direction, $startColor, $endColor);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}'); 
+}
+
+/* ================================= CSS3 Shadow ================================= */
+//Shorthand Syntax => box-shadow: $x-axis $y-axis $blue $color;
+
+//$shadowProperty - box-shadow/ text-shadow;
+//$value - 1px 2px 3px #000;
+
+@mixin shadow($shadowProperty, $value) {
+  @include css3-prefix($shadowProperty, $value);
+}
+
+/* ================================= CSS3 Bacground Opacity ================================= */
+//$color - backgound-color;
+//$opacity - value from 0.0 - 1.0;
+
+@mixin background-opacity($color, $opacity) {
+  $ieopacity: $opacity * 100;
+  background-color: rgba($color, $opacity);
+  filter:         alpha(opacity=$ieopacity);
+  -ms-filter:     "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + $ieopacity + ")";
+}
+
+/* ================================= CSS3 Opacity ================================= */
+//$opacity - value from 0.0 - 1.0 
+
+@mixin opacity($opacity) {
+  $ieopacity: $opacity * 100;
+  opacity: $opacity;
+  filter:         alpha(opacity=$ieopacity);
+  -ms-filter:     "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + $ieopacity + ")";
+}
+
+/* ================================= CSS3 Transition Property ================================= */
+//Shorthand Syntax =>  transition: property duration timing-function delay|initial|inherit;
+
+//$value - all 5s linear;
+
+@mixin transition($value) {
+  @include css3-prefix(transition, $value);
+}
+
+/* ================================= CSS3 Multiple Columns ================================= */
+//Shorthand Syntax => columns: auto|column-width column-count|initial|inherit;
+//Shorthand Syntax => column-rule: column-rule-width column-rule-style column-rule-color|initial|inherit;
+//Shorthand Syntax => column-gap: length|normal|initial|inherit;
+
+@mixin multiple-columns($columns, $column-rule, $column-gap) {
+  @include css3-prefix(columns, $columns);
+  @include css3-prefix(column-rule, $column-rule);
+  @include css3-prefix(column-gap, $column-gap);  
+}
+
+/* ================================= CSS3 Fonts Family ================================= */
+//$folderName - folder name that contain fonts
+//$fontName - font name 
+
+@mixin font-family($folderName, $fontName) {
+
+  @font-face {
+  font-family: '#{$fontName}';
+  src: url('../font/#{$folderName}/#{$fontName}.eot');
+  src: url('../font/#{$folderName}/#{$fontName}?#iefix') format('embedded-opentype'),
+       url('../font/#{$folderName}/#{$fontName}.woff') format('woff'),
+       url('../font/#{$folderName}/#{$fontName}.ttf') format('truetype'),
+       url('../font/#{$folderName}/#{$fontName}.svg#$fontName') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  }   
+}
+
+
+/* ================================= CSS3 box-sizing ================================= */
+
+@mixin box-sizing() {
+  @include css3-prefix(box-sizing, border-box);
+}
+

@@ -1,0 +1,67 @@
+/* Welcome to Srijan theme.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "reset";
+@import "css3-animation";
+@import "css3-mixins";
+@import "grid-1.0";
+@import "variables";
+
+// Header
+.site-branding__logo {
+	display: block;
+}
+.region-header {
+	float: left;
+}
+#header {
+	margin-top: 1.4em;
+	padding-bottom: 1.05em;
+	border-bottom: 1px solid rgba(255, 255, 255, .4);
+	.layout-container {
+		@include container(1249px);
+	}
+}
+
+
+// Content section
+body {
+	background: url(../images/bg.jpg) 0 0 no-repeat;
+	background-size: cover;
+	font-family: 'Roboto', sans-serif;
+}
+
+#page-wrapper {
+	width: 100%;
+}
+#page {}
+
+.right-nav {
+	float: right;
+	font-size: 1.32vw;
+	ul {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		margin-top: .5em;
+		li {
+			&:first-child {
+				margin-right: 1em;
+			}
+			a {
+				text-decoration: none;
+				color: white;
+			}
+			&:last-child {
+				a {
+					@include border-radius(6px);
+					background: $signup;
+					padding: 10px 20px;
+					border: 1px solid;
+				}
+			}
+		}
+	}
+}
