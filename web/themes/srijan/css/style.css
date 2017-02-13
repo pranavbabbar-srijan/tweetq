@@ -120,8 +120,22 @@ button {
 /* ================================= Offset-Span ================================= */
 /* ================================= Clearfix ================================= */
 /* ================================= Media Query Breakpoint ================================= */
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description {
+  display: none; }
+
+.site-branding {
+  display: flex;
+  flex-flow: row wrap; }
+  .site-branding a {
+    font-size: 2.2vw;
+    color: white;
+    font-weight: bold;
+    text-decoration: none; }
+
 .site-branding__logo {
-  display: block; }
+  display: block;
+  width: 50px;
+  padding-right: .3em; }
 
 .region-header {
   float: left; }
@@ -149,6 +163,70 @@ body {
 
 #page-wrapper {
   width: 100%; }
+
+.social_login {
+  text-align: center;
+  margin: 0 0 3em 0 !important; }
+  .social_login label {
+    font-size: 2.2vw;
+    font-weight: 300;
+    color: #212121 !important; }
+  .social_login > div {
+    display: none !important; }
+
+.region-content {
+  max-width: 1249px;
+  /* for fixed layout */
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.user-login-form {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1em 2em;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  width: 55%;
+  float: right;
+  margin-top: 10vh; }
+  .user-login-form input[type=text], .user-login-form input[type=password] {
+    border: 0;
+    background: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    display: block;
+    width: 100%; }
+  .user-login-form label {
+    color: #919191;
+    margin-bottom: .5em;
+    display: block; }
+  .user-login-form .form-item-name, .user-login-form .form-item-pass {
+    margin-bottom: 2.5em; }
+  .user-login-form input[type=submit] {
+    border: none;
+    background: #96c85a;
+    width: 100%;
+    padding: .5em;
+    font-size: 1.8vw;
+    color: white;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px; }
+
+#block-srijan-content {
+  float: right; }
 
 .right-nav {
   float: right;
