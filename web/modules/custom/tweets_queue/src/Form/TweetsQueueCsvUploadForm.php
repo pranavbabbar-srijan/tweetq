@@ -92,12 +92,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
     if ($file) {
       $this->importCsvData($file);  
     }
-    return;
-    //@TODO: depreciate below lines.
-    $import_id = $config->get(CRON_TWEET_IMPORT_ID);
-    if ($file && $import_id) {
-      // $this->runCsvImport($file, $import_id);
-    }
   }
 
   public function importCsvData($file) {
@@ -141,68 +135,4 @@ class TweetsQueueCsvUploadForm extends FormBase {
     );
   }
 
-  public function runCsvImport($file, $import_id = 'tweets_queueing') {
-    module_load_include('inc', 'migrate_tools', 'migrate_tools.drush');
-    module_load_include('inc', 'tweets_queue', 'library/context');
-    module_load_include('inc', 'tweets_queue', 'library/drush');
-    module_load_include('inc', 'tweets_queue', 'library/output');
-    module_load_include('inc', 'tweets_queue', 'library/drupal');
-
-    if ($file && $import_id && function_exists('drush_get_option')) {
-      drupal_set_message("Migration successfully completed.");
-      $this->setFilePathConfiguration($table = 'config', $import_id, $file);
-      drush_migrate_tools_migrate_import($import_id);
-    }
-  }
-
-  public function setCsvFilePath($file, $name = 'tweets_queueing') {
-    $fid = '';
-    if ($cache = \Drupal::cache()->get($cid)) {
-      $fid = $cache->data;
-    }
-    $table = 'config';
-    return $fid;
-  }
-
-  public function updateFilePathConfiguration($table = 'config', $data, $class_name) {
-    // Update the entry in the DB to ensure that result caching works.
-    \Drupal::database()->update($table)
-      ->condition('name', $class_name)
-      ->fields(['data' => $data])
-      ->execute();
-  }
-
-  public function getMigrationClassName($class) {
-    $class_name = '';
-    if (empty($class)) {
-      return $class_name;
-    }
-    $class_name = 'migrate_plus.migration.' . $class;
-    return $class_name;
-  }
-
-  public function setFilePathConfiguration($table = 'config', $class = 'tweets_queueing', $file) {
-    $class_name = $this->getMigrationClassName($class);
-
-    $query = \Drupal::database()->select($table, 'n');
-    $query->fields('n', ['data']);
-    $query->condition('n.name', $class_name);
-    $data = unserialize($query->execute()->fetchField());
-
-    if(isset($data['source']['path']) && $file) {
-      $data['source']['path'] = $file;
-      $data = serialize($data);
-      $this->updateFilePathConfiguration($table, $data, $class_name);
-      $this->updateFilePathConfiguration('config_snapshot', $data, $class_name);
-      $this->deleteFilePathConfiguration('cache_config', 'cid', $class_name);
-      $this->deleteFilePathConfiguration('cache_discovery', 'cid', 'migration_plugins');
-    }
-  }
-
-  public function deleteFilePathConfiguration($table, $field_name = 'cid', $field_value) {
-    // Delete the entry in the DB to ensure that result caching works.
-    \Drupal::database()->delete($table)
-        ->condition($field_name, $field_value)
-        ->execute();
-  }
 }

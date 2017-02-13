@@ -34,9 +34,7 @@ class TweetsQueueSettingsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('tweets_queue.settings');
     $client_info = tweets_queue_fetch_client_handler_info();
-    if (isset($_REQUEST['set_cron'])) {
-      $this->scheduleNextCron($config->get(CRON_TWEET_MIN_INTERVAL), $config->get(CRON_TWEET_MAX_INTERVAL));
-    }
+
     $form[CONSUMER_KEY] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Consumer key'),

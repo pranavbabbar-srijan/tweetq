@@ -32,11 +32,24 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('tweets_queue_admin.settings');
+    $config = $this->config('tweets_queue_admin.settings'); 
 
-    if (isset($_REQUEST['set_cron'])) {
-      $this->scheduleNextCron($config->get(CRON_TWEET_MIN_INTERVAL), $config->get(CRON_TWEET_MAX_INTERVAL));
-    }
+    $form[CONSUMER_KEY] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Consumer key'),
+      '#default_value' => $config->get(CONSUMER_KEY),
+      '#description' => t('Consumer Key is used to authenticate requests to the Twitter Platform.'),
+      '#required' => TRUE,
+    );
+
+    $form[CONSUMER_SECRET_KEY] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Consumer secret key'),
+      '#default_value' => $config->get(CONSUMER_SECRET_KEY),
+      '#description' => t('Consumer secret Key is used to authenticate requests to the Twitter Platform.'),
+      '#required' => TRUE,
+    );
+
     $form[CRON_TWEET_ATTEMP] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Tweet attempt: cron run'),
@@ -139,14 +152,16 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = \Drupal::service('config.factory')->getEditable('tweets_queue_admin.settings');
+    $config->set(CONSUMER_KEY, $form_state->getValue(CONSUMER_KEY))
+      ->save();
+    $config->set(CONSUMER_SECRET_KEY, $form_state->getValue(CONSUMER_SECRET_KEY))
+      ->save();
     $config->set(CRON_TWEET_ATTEMP, $form_state->getValue(CRON_TWEET_ATTEMP))
       ->save();
     $config->set(CRON_TWEET_IMPORT_ID, $form_state->getValue(CRON_TWEET_IMPORT_ID))
       ->save();
     $config->set(CRON_TWEET_IMPORT_PATH, $form_state->getValue(CRON_TWEET_IMPORT_PATH))
       ->save();
-    // $config->set(IMPORT_CONFIGURATION, $form_state->getValue(IMPORT_CONFIGURATION))
-      // ->save();
     $config->set(CRON_TWEET_MIN_INTERVAL, $form_state->getValue(CRON_TWEET_MIN_INTERVAL))
       ->save();
     $config->set(CRON_TWEET_MAX_INTERVAL, $form_state->getValue(CRON_TWEET_MAX_INTERVAL))
@@ -166,11 +181,4 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
 
   }
 
-  public function scheduleNextCron($min_interval = 30, $max_interval = 60, $extra = 0) {
-    $cron_interval = rand($min_interval, $max_interval);
-    $cron_interval = $cron_interval * 60;
-    \Drupal::configFactory()->getEditable('automated_cron.settings')
-    ->set('interval', $cron_interval)
-    ->save();
-  }
 }

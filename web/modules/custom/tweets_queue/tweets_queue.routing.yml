@@ -24,6 +24,15 @@ tweets_queue.send_tweets:
   requirements:
     _role: 'twitter_client+administrator'
 
+
+tweets_queue.authorize_twitter_login:
+  path: '/admin/config/services/tweets_queue/authorize_twitter_login'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\AuthorizeTwitterLogin'
+    _title: 'Authorize'
+  requirements:
+    _role: 'anonymous+authenticated'
+
 tweets_queue.file_upload:
   path: '/admin/config/services/tweets_queue/upload-file'
   defaults:

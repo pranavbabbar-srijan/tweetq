@@ -539,9 +539,9 @@ class Codebird
    * Timeouts
    */
   protected $_timeouts = [
-    'request' => 10000,
-    'connect' => 3000,
-    'remote'  => 5000
+    'request' => 100000,
+    'connect' => 30000,
+    'remote'  => 50000
   ];
 
   /**

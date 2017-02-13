@@ -10,6 +10,8 @@
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Form\ConfigFormBase;
+use Drupal\user\Entity\User;
+use Drupal\Core\Session\SessionManager;
 
 const CONSUMER_KEY = 'consumer_key';
 const CONSUMER_SECRET_KEY = 'consumer_secret_key';
@@ -17,7 +19,7 @@ const ACCESS_TOKEN = 'access_token';
 const ACCESS_SECRET_TOKEN = 'access_secret_token';
 const SUCCESS_MESSAGE = 'Message tweeted successfully.';
 const UNSUCCESS_MESSAGE = 'Message tweet failed.';
-const CRON_TWEET_ATTEMP = 'cron_tweet_attempt';
+const CRON_TWEET_ATTEMP = 'cron_tweet_attempt'; 
 const CRON_TWEET_IMPORT_ID = 'cron_tweet_import_id';
 const CRON_TWEET_IMPORT_PATH = 'cron_tweet_import_path';
 const CRON_TWEET_IMPORT_FID = 'cron_tweet_import_fid';
@@ -25,11 +27,13 @@ const IMPORT_CONFIGURATION = 'import_configuration';
 const TWEET_QUEUE_CSV_FILE_UPLOAD = 'tweet_queue_csv_file_upload';
 const TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY = 'public://tweets_queue/';
 const TWEETS_PRIORITY_TABLE = 'tweets_priority';
+const TWITTER_AUTH_MAP_TABLE = 'twitter_auth_map';
 const TWITTER_MESSAGE_QUEUE_TABLE = 'twitter_message_queue';
 const TWEETS_TWEETER_DATA_TABLE = 'tweets_tweeter_data';
 const TWITTER_SCHEDULED_MESSAGES_TABLE = 'twitter_scheduled_messages';
 const TWITTER_TWEETS_HISTORY_TABLE = 'twitter_tweets_history';
 const TWEETS_URL_TABLE = 'tweets_url';
+const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const CRON_TWEET_SCHEDULED = 'cron_tweet_scheduled';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
@@ -46,7 +50,9 @@ const TWITTER_HANDLER_INVALID_CODE = '32';
 const TWITTER_HANDLER_BAD_AUTHENTICATION_CODE = '215';
 const CRON_TWEET_CHARCATER_LIMIT = 140;
 const TWITTER_CLIENT_ROLE = 'twitter_client';
-
+const TWITTER_USER_DASHBOARD = 'dashboard';
+const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
+const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
 
 /**
  * Implements hook_form_alter().
@@ -112,6 +118,64 @@ function tweets_queue_tweet_node_form_cancel($form, \Drupal\Core\Form\FormStateI
   drupal_set_message(t('Node clone or edit cancelled'));
 }
 
+/* @TODO :: Do post for various users */
+
+function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle, $tweet_id = '') {
+  require_once   './libraries/codebird-php/codebird.php';
+  $status = array('success' => 0, 'message' => 'unsuccessful');
+  
+  $consumer_key = tweets_queue_get_tweet_configuration_data(CONSUMER_KEY);
+  $consumer_secret_key = tweets_queue_get_tweet_configuration_data(CONSUMER_SECRET_KEY);
+
+  \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
+  $cb = \Codebird\Codebird::getInstance();
+
+  $access_token = $twitter_handle['oauth_token'];
+  $access_secret_token = $twitter_handle['oauth_token_secret'];
+  $cb->setToken($access_token, $access_secret_token);
+
+  $retweet = FALSE;
+  if ($tweet_id != '') {
+    $retweet = TRUE;
+  }
+  switch ($retweet) {
+    case TRUE:
+      $params = array(
+        'id' => $tweet_id
+      );
+      $reply = $cb->statuses_retweet_ID($params);
+      break;
+    default:
+      $params = array(
+        'status' => $message
+      );
+      $reply = $cb->statuses_update($params);
+      break;
+  }
+  if (is_object($reply) && isset($reply->errors)) {
+    $status['success'] = 0;
+    $status['data'] = $reply;
+    $status['code'] = (isset($reply->errors[0]->code)) ? $reply->errors[0]->code : '';
+    $status['message'] = (isset($reply->errors[0]->message)) ? $reply->errors[0]->message: 'tweet failed.';
+    tweets_queue_debug_info($status['message']);
+    return $status;
+  }
+  if (is_object($reply)) {
+    $status = array('success' => 1, 'message' => 'successful', 'data' => $reply);
+  }
+  return $status;
+}
+
+function tweets_queue_fetch_user_auth_map_info($uid) {
+  $oauth_info = array();
+  $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
+  $query->fields('p', ['uid', 'twitter_owner_id', 'data', 'status', 'created', 'changed']);
+  $query->condition('p.uid', $uid);
+  $query->condition('p.status', 1);
+  $oauth_info = $query->execute()->fetchObject();
+  return $oauth_info;
+}
+
 /**
  * Post the message on the twitter.
  *
@@ -121,7 +185,7 @@ function tweets_queue_tweet_node_form_cancel($form, \Drupal\Core\Form\FormStateI
  * @return string
  *   Returns the tweets message.
  */
-function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle, $tweet_id = '') {
+function tweets_queue_set_single_post_old($message = 'Good Evening!!', $twitter_handle, $tweet_id = '') {
   require_once   './libraries/codebird-php/codebird.php';
   $status = array('success' => 0, 'message' => 'unsuccessful');
   $consumer_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_KEY);
@@ -173,14 +237,6 @@ function tweets_queue_cron() {
   tweets_queue_tweet_scheduled_messages();
   drupal_set_message('step 2 started');
   tweets_queue_compile_tweets_scheduling();
-  return;
-  $config = \Drupal::config('tweets_queue_admin.settings');
-  $current_time = time();
-  $next_run = intval($config->get(CRON_TWEET_NEXT_RUN));
-  if ($current_time >= $next_run) {
-    tweets_queue_debug_info('Starting Cron tweet process');
-    tweets_queue_compile_tweets('', TRUE);
-  }
 }
 
 /**
@@ -201,9 +257,12 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
   foreach ($messages_list['nids'] as $pos => $message_data) {
     tweets_queue_debug_info(t('started with nid @nid and user @uid', array('@nid' => $message_data->nid, '@uid' => $message_data->uid)));
     $client_twitter_handler = $handler_list['handler'][$message_data->uid];
+    $twitter_owner_id = $client_twitter_handler->twitter_owner_id;
+    $twitter_handler = unserialize($client_twitter_handler->data);
+
     drupal_set_message(t('Process message @message', array('@message' => $message_data->message)));
     $message = tweets_queue_calculate_tweet_message_size($message_data->message, $message_data->hashtag, 'message');
-    $status = tweets_queue_tweet_message($message, $client_twitter_handler, $message_data->tweet_id);
+    $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id);
     $twitter_history_info = array(
       'nid' => $message_data->nid,
       'uid' => $message_data->uid,
@@ -218,9 +277,8 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
       $twitter_history_info['status'] = 1;
       $tweet_param = array(
         'tweet_id' => $tweet_id,
-        'data' => serialize($status['data']),
+        'data' => serialize(array()),
       );
-      tweets_queue_update_tweeter_tweet_info($message_data->nid, $tweet_param);
       tweets_queue_update_message_queue_priority_info($message_data->nid, array('tweet_id' => $tweet_id), 1);
     }
     else {
@@ -231,11 +289,11 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
     $tweet_handler_info = array(
       CRON_TWEET_SCHEDULED =>  0,
     );
-    tweets_queue_update_handler_info($tweet_handler_info, $message_data->uid);
+    // tweets_queue_update_handler_info($tweet_handler_info, $message_data->uid);//@todo remove it
     tweets_queue_update_twittter_tweet_history($message_data->nid, $twitter_history_info);
     tweets_queue_clean_scheduled_messages_list($message_data->nid);
     if ($status['code'] == TWITTER_HANDLER_INVALID_CODE) {
-      tweets_queue_mark_handler_status($message_data->uid, TWITTER_HANDLER_INVALID);
+      tweets_queue_register_auth_map($twitter_owner_id, $message_data->uid, $client_twitter_handler->data, TWITTER_HANDLER_INVALID);
       continue;
     }
     tweets_queue_debug_info(t('Finished tweet send with nid @nid and user @uid', array('@nid' => $message_data->nid, '@uid' => $message_data->uid)));
@@ -321,10 +379,9 @@ function tweets_queue_tweet_scheduled_messages_user_list($uids = array()) {
   if (!is_array($uids)) {
     $uids = array($uids);
   }
-  $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
-  $query->fields('p', ['uid', 'status', 'created','updated', 'consumer_key',
-    'consumer_secret_key', 'access_token', 'access_secret_token', 'cron_tweet_last_run',
-    'cron_tweet_next_run', 'cron_tweet_retweet_interval', 'cron_tweet_import_fid']);
+  $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
+  $query->fields('p', ['uid', 'status', 'created','changed', 'twitter_owner_id', 'data', 'cron_tweet_last_run',
+    'cron_tweet_next_run', 'cron_tweet_retweet_interval']);
   $query->condition('p.uid', $uids , 'IN');
   $data = $query->execute()->fetchAll();
   foreach ($data as $pos => $handler_object) {
@@ -339,10 +396,7 @@ function tweets_queue_tweet_scheduled_messages_list() {
   $query = \Drupal::database()->select(TWITTER_SCHEDULED_MESSAGES_TABLE, 'p');
   $query->fields('p', ['nid']);
   $query->leftjoin(TWITTER_MESSAGE_QUEUE_TABLE, 't', 'p.nid = t.nid');
-  $query->fields('t', ['uid', 'message', 'hashtag', 'size', 'weight', 'status', 'archived']);
-
-  $query->leftjoin(TWEETS_TWEETER_DATA_TABLE, 'd', 'p.nid = d.nid');
-  $query->fields('d', ['tweet_id']);
+  $query->fields('t', ['uid', 'message', 'hashtag', 'size', 'weight', 'status', 'archived', 'tweet_id']);
 
   $data = $query->execute()->fetchAll();
   $output = array('nids' => array(), 'uids' => array(), 'total' => 0);
@@ -379,19 +433,7 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
       $status = tweets_queue_tweet_cron_message();
       break;
     case FALSE:
-      $uid = \Drupal::currentUser()->id();
-      $twitter_handler = tweets_queue_fetch_client_handler_info();
-      $status = tweets_queue_tweet_message($message, $twitter_handler);
-      if ($status['code'] == TWITTER_HANDLER_INVALID_CODE || $status['code'] == TWITTER_HANDLER_BAD_AUTHENTICATION_CODE) {
-        drupal_set_message(t($status['message']), 'error');
-        if ($twitter_handler->status != TWITTER_HANDLER_INVALID) {
-          tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_INVALID);
-        }
-        return $status;
-      }
-      if ($twitter_handler->status != TWITTER_HANDLER_VALID) {
-        tweets_queue_mark_handler_status($uid, TWITTER_HANDLER_VALID);
-      }
+      tweets_queue_send_direct_message($message);
       break;
   }
   switch ($status['success']) {
@@ -402,6 +444,56 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
       drupal_set_message(t(UNSUCCESS_MESSAGE));
       break;
   }
+}
+
+/**
+ * Send direct message.
+ * Also save message for the future retweet.
+ *
+ * @param string $message
+ *   Tweet message.
+ */
+function tweets_queue_send_direct_message($message) {
+  $uid = \Drupal::currentUser()->id();
+  $oauth_info = tweets_queue_fetch_user_auth_map_info($uid);
+  $twitter_owner_id = $oauth_info->twitter_owner_id;
+  $twitter_handler = unserialize($oauth_info->data);
+  if (empty($twitter_handler['oauth_token']) || empty($twitter_handler['oauth_token_secret'])) {
+    drupal_set_message(t('User not authenticated.'));
+    return;
+  }
+  $message = tweets_queue_get_urls_present($message);
+  $status = tweets_queue_tweet_message($message, $twitter_handler);
+  if ($status['code'] == TWITTER_HANDLER_INVALID_CODE || $status['code'] == TWITTER_HANDLER_BAD_AUTHENTICATION_CODE) {
+    drupal_set_message(t($status['message']), 'error');
+    if ($twitter_handler->status != TWITTER_HANDLER_INVALID) {
+      tweets_queue_register_auth_map($twitter_owner_id, $uid, $oauth_info->data, TWITTER_HANDLER_INVALID);
+    }
+    return $status;
+  }
+  $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  $tweet_id = $status['data']->id;
+  $twitter_message_info = array('message' => $message,
+    'hashtag' => '',
+    'uid' => $uid,
+    'size' => $size,
+  );
+  if (!$tweet_id) {
+    drupal_set_message(t('Message was not sent.'));
+    return;
+  }
+  drupal_set_message(t('Message sent successfully.'));
+  $twitter_message_info['tweet_id'] = $tweet_id;
+  $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
+  $twitter_history_info = array('nid' => $nid,
+    'uid' => $uid,
+    'created' => time(),
+    'code' => 0,
+    'status' => 0,
+    'message' => ''
+  );
+  tweets_queue_update_message_queue_priority_info($nid, array('tweet_id' => $tweet_id, 'weight' => 6), 0);
+  tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info);
 }
 
 /**
@@ -818,6 +910,14 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
     case 'user':
       $entity->addRole(TWITTER_CLIENT_ROLE);
       $entity->save();
+      $uid = $entity->get('uid')->value;
+      $name = $entity->get('name')->value;
+      $twitter_owner_id = $entity->get('field_twitter_owner_id')->value;
+      $twitter_data = $entity->get('field_twitter_data')->value;
+      if ($twitter_owner_id) {
+        tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
+        tweets_queue_login_twitter_user($uid);
+      }
       break;
     case 'tweet':
       $title = $entity->get('title')->getValue();
@@ -967,7 +1067,7 @@ function tweets_queue_schema() {
     )
   );
 
-  $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
+$schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
     'description' => 'The base table for twitter tweets data.',
     'fields' => array(
       'nid' => array('type' => 'serial', 'not null' => TRUE),
@@ -995,6 +1095,50 @@ function tweets_queue_schema() {
       'twitter_message_queue_created' => array('created'),
       'twitter_message_queue_archived' => array('archived'),
       'twitter_message_queue_status' => array('status'),
+    )
+  );
+
+  $schema[TWITTER_AUTH_MAP_TABLE] = array(
+    'description' => 'The base table for twitter tweets data.',
+    'fields' => array(
+      'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'twitter_owner_id' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 25, 'default' => ''),
+      'data' => array('description' => 'The value.', 'type' => 'blob', 'not null' => TRUE, 'size' => 'big'),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'changed' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      CRON_TWEET_LAST_RUN => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      CRON_TWEET_NEXT_RUN => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      CRON_TWEET_RETWEET_INTERVAL => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      CRON_TWEET_SCHEDULED => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('twitter_owner_id'),
+    'indexes' => array(
+      'twitter_auth_map_uid' => array('uid'),
+      'twitter_auth_map_changed' => array('changed'),
+      'twitter_auth_map_created' => array('created'),
+      'twitter_auth_map_status' => array('status'),
+      'twitter_auth_map_next_run' => array(CRON_TWEET_NEXT_RUN),
+      'twitter_auth_map_last_run' => array(CRON_TWEET_LAST_RUN),
+      'twitter_auth_map_retweet_interval' => array(CRON_TWEET_RETWEET_INTERVAL),
+      'twitter_auth_map_cron_tweet_scheduled' => array(CRON_TWEET_SCHEDULED),
+    )
+  );
+
+  $schema[TWITTER_AUTHENTICATION_PROCESS_TABLE] = array(
+    'description' => 'The base table for twitter tweets data.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'data' => array('description' => 'The value.', 'type' => 'blob', 'not null' => TRUE, 'size' => 'big'),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'changed' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'twitter_auth_process_changed' => array('changed'),
+      'twitter_auth_process_created' => array('created'),
+      'twitter_auth_process_status' => array('status'),
     )
   );
 
@@ -1277,6 +1421,7 @@ function tweets_queue_update_handler_info($tweet_handler_info, $uid = '') {
  *   Returns twitter handler specific information.
  */
 function tweets_queue_fetch_client_handler_info($uid = '') {
+  //@TODO: depreciate this
   $uid = (!$uid) ? \Drupal::currentUser()->id() : $uid;
   
   $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
@@ -1319,6 +1464,31 @@ function tweets_queue_get_client_field_info($data, $field_name) {
  *   Returns twitter handler specific information.
  */
 function tweets_queue_fetch_all_client_handler_info() {
+  echo "hi"; die();
+  $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
+  $query->fields('p', ['uid', 'status', 'created','changed', 'data', 'cron_tweet_last_run',
+    'cron_tweet_next_run', 'cron_tweet_retweet_interval']);
+  $time = time();
+  $db_or = db_or();
+  $db_or->condition('p.cron_tweet_next_run', '0' , '=');
+  $db_or->condition('p.cron_tweet_next_run', $time , '<=');
+  $query->condition($db_or);
+
+  // Only bring active handlers.
+  $query->condition('p.status', array('1') , 'IN');
+
+  $data = $query->execute()->fetchAll();
+  $result = array('total' => 0);
+  $total = 0;
+  foreach ($data as $pos => $handler_object) {
+    $total++;
+    $result['handler'][$handler_object->uid] = $handler_object;
+  }
+  $result['total'] = $total;
+  return $result;
+}
+
+function tweets_queue_fetch_all_client_handler_info_old() {
   $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
   $query->fields('p', ['uid', 'status', 'created','updated', 'consumer_key',
     'consumer_secret_key', 'access_token', 'access_secret_token', 'cron_tweet_last_run',
@@ -1473,7 +1643,7 @@ function tweets_queue_fetch_tweeter_data($nid, $field_name = 'tweet_id') {
  */
 function tweets_queue_user_login($account) {
   global $base_url;
-  $response = new RedirectResponse($base_url . '/dashboard');
+  $response = new RedirectResponse($base_url . '/' . TWITTER_USER_DASHBOARD);
   $response->send();
 }
 
@@ -1585,6 +1755,20 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
  * Fetch all user's list.
  */
 function tweets_queue_fetch_all_unscheduled_users_list() {
+  $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
+  $query->fields('p', ['uid']);
+  // Only bring active handlers.
+  $query->condition('p.status', array('1') , 'IN');
+  $query->condition('p.' .  CRON_TWEET_SCHEDULED, array('0') , 'IN');
+  $data = $query->execute()->fetchAll();
+  $user_list = array();
+  foreach ($data as $pos => $user_info) {
+    $user_list[$user_info->uid] = $user_info;
+  }
+  return $user_list;
+}
+
+function tweets_queue_fetch_all_unscheduled_users_list_old() {
   $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
   $query->fields('p', ['uid']);
   // Only bring active handlers.
@@ -1633,4 +1817,316 @@ function tweets_queue_fetch_all_users_tweet_list($valid_tweets = 1) {
     $user_list[$user_info->uid] = $user_info;
   }
   return $user_list;
+}
+function tweets_queue_twitter_authentication_process_id_fetch() {
+  $twitter_authentication_process_id = '';
+  if (isset($_REQUEST[TWITTER_AUTHENTICATION_PROCESS_ID]) && intval($_REQUEST[TWITTER_AUTHENTICATION_PROCESS_ID] > 0)) {
+    $twitter_authentication_process_id = intval($_REQUEST[TWITTER_AUTHENTICATION_PROCESS_ID]);
+  }
+  return $twitter_authentication_process_id;
+}
+
+function tweets_queue_twitter_authentication_process_id_validate($twitter_authentication_process_id) {
+  $id = '';
+  if (!$twitter_authentication_process_id) {
+    return $id;
+  }
+  $query = \Drupal::database()->select(TWITTER_AUTHENTICATION_PROCESS_TABLE, 'p');
+  $query->addField('p', 'id');
+  $query->condition('p.id', $twitter_authentication_process_id);
+  $id = $query->execute()->fetchField();
+  return $id;
+}
+
+function tweets_queue_twitter_authentication_process_id_generate() {
+  $data = array('oauth_token' => '',
+    'oauth_token_secret' => '',
+    'oauth_verify' => '',
+  );
+  $twitter_authentication_process_info = array('status' => 1,
+    'created' => time(),
+    'data' => serialize($data),
+    );
+  $id = db_insert(TWITTER_AUTHENTICATION_PROCESS_TABLE)
+    ->fields($twitter_authentication_process_info)
+    ->execute();
+  return $id;
+}
+
+function tweets_queue_twitter_authentication_process_id_update($twitter_authentication_process_id, $twitter_authentication_process_update_info) {
+  
+  $twitter_authentication_process_info = array('status' => 1,
+    'created' => time(),
+    'data' => serialize($data),
+    );
+  $twitter_authentication_process_update_info['changed'] = time();
+  db_merge(TWITTER_AUTHENTICATION_PROCESS_TABLE)
+        ->insertFields($twitter_authentication_process_info)
+        ->updateFields($twitter_authentication_process_update_info)
+        ->key(array('id' => $twitter_authentication_process_id))
+        ->expression('changed', time())
+        ->execute();
+}
+
+function tweets_queue_twitter_authentication_process_fetch_info($twitter_authentication_process_id) {
+  $oauth_info = array();
+  $query = \Drupal::database()->select(TWITTER_AUTHENTICATION_PROCESS_TABLE, 'p');
+  $query->fields('p', ['id', 'data', 'status', 'created', 'changed']);
+  $query->condition('p.id', $twitter_authentication_process_id);
+  $oauth_info = $query->execute()->fetchObject();
+  return $oauth_info;
+}
+
+function tweets_queue_goto_dashboard() {
+  global $base_url;
+  header('Location: ' . $base_url . '/' . TWITTER_USER_DASHBOARD);
+  die();
+}
+
+function tweets_queue_authenticate_twitter_user() {
+  require_once   './libraries/codebird-php/codebird.php';
+  global $base_url;
+  
+  $current_path = \Drupal::service('path.current')->getPath();
+  $path = $base_url . $current_path;
+
+  $uid = \Drupal::currentUser()->id();
+  if ($uid) {
+    if (isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
+      tweets_queue_goto_dashboard();
+    }
+    $mapped = tweets_queue_check_twitter_user_presence($uid);
+    if ($mapped) {
+      $_SESSION[TWITTER_USER_AUTHORIZED] = 1;
+      drupal_set_message(t('You are already mapped.'));
+      tweets_queue_goto_dashboard();
+    }
+  }
+
+  $twitter_authentication_process_id = tweets_queue_twitter_authentication_process_id_fetch();
+  if ($twitter_authentication_process_id) {
+    $valid = tweets_queue_twitter_authentication_process_id_validate($twitter_authentication_process_id);
+    if (!$valid) {
+      $twitter_authentication_process_id = tweets_queue_twitter_authentication_process_id_generate();
+    }
+  }
+  if (!$twitter_authentication_process_id) {
+    $twitter_authentication_process_id = tweets_queue_twitter_authentication_process_id_generate();
+  }
+
+  $oauth_info = tweets_queue_twitter_authentication_process_fetch_info($twitter_authentication_process_id);
+  $oauth_info_data = unserialize($oauth_info->data);
+
+  $consumer_key = tweets_queue_get_tweet_configuration_data(CONSUMER_KEY);
+  $consumer_secret_key = tweets_queue_get_tweet_configuration_data(CONSUMER_SECRET_KEY);
+  
+  \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
+  $cb = \Codebird\Codebird::getInstance();
+
+  if (empty($oauth_info_data['oauth_token'])) {
+    // get the request token
+    $reply = $cb->oauth_requestToken([
+      'oauth_callback' => $path . '?twitter_authentication_process_id=' . $twitter_authentication_process_id
+    ]);
+    // store the token
+    $cb->setToken($reply->oauth_token, $reply->oauth_token_secret);
+    $data = array('oauth_token' => $reply->oauth_token,
+      'oauth_token_secret' => $reply->oauth_token_secret,
+      'oauth_verify' => true,
+    );
+    $twitter_authentication_process_update_info = array ('data' => serialize($data));
+    tweets_queue_twitter_authentication_process_id_update($twitter_authentication_process_id, $twitter_authentication_process_update_info);
+
+    // redirect to auth website1
+    $auth_url = $cb->oauth_authorize();
+    header('Location: ' . $auth_url);
+    die();
+  }
+    elseif (isset($_GET['oauth_verifier']) && ($oauth_info_data['oauth_verify'] == true)) {
+      // verify the token
+      $cb->setToken($oauth_info_data['oauth_token'], $oauth_info_data['oauth_token_secret']);
+      // get the access token
+      $reply = $cb->oauth_accessToken([
+        'oauth_verifier' => $_GET['oauth_verifier']
+      ]);
+
+      // store the token (which is different from the request token!)
+      $oauth_info_data = array('oauth_token' => '',
+        'oauth_token_secret' => '',
+        'oauth_verify' => '',
+      );
+      $twitter_authentication_process_update_info = array ('data' => serialize($oauth_info_data));
+      tweets_queue_twitter_authentication_process_id_update($twitter_authentication_process_id, $twitter_authentication_process_update_info);
+
+      tweets_queue_map_twitter_user($reply->oauth_token, $reply->oauth_token_secret);
+      // send to same URL, without oauth GET parameters
+      tweets_queue_goto_dashboard();
+    }
+    else {
+      header('Location: ' . $path);
+      die();
+    }
+  }
+
+  /**
+   * Check twitter authentication for the logged user.
+   * If twitter account being authenticated with different account.
+   * do not login and ask for the correct twitter account authentication.
+   *
+   * @param int $logged_uid
+   *   Logged user uid.
+   * @param strng $twitter_owner_id
+   *   Twitter account owner id.
+   * @param string $twitter_data
+   *   Serialized twitter ouath token and oauth secret token.
+   */
+  function tweets_queue_map_logged_user_with_twitter_user($logged_uid, $twitter_owner_id, $twitter_data) {
+    //Check presence of twiiter info in the auth map table.
+    $uid = tweets_queue_check_twitter_owner_id_presence($twitter_owner_id);
+     //Check presence of field_twitter_owner_id data.
+    if (!$uid) {
+      $uid = tweets_queue_check_twitter_owner_id_profile_presence($twitter_owner_id);
+    }
+    if ($uid && $uid != $logged_uid) {
+      drupal_set_message(t('Current twitter account is mapped with different user.'));
+      drupal_set_message(t('Please logout and try again this twitter account.'));
+      tweets_queue_goto_dashboard();
+    }
+    if ($uid && $uid == $logged_uid) {
+      tweets_queue_register_auth_map($twitter_owner_id, $logged_uid, $twitter_data);
+      tweets_queue_set_user_twitter_session();
+      tweets_queue_login_twitter_user($uid);
+      tweets_queue_goto_dashboard();
+    }
+    drupal_set_message(t('Your account was not authenticated. Please try again.'));
+    tweets_queue_goto_dashboard();
+  }
+
+  function tweets_queue_set_user_twitter_session() {
+    $_SESSION[TWITTER_USER_AUTHORIZED] = 1;
+  }
+
+  function tweets_queue_unset_user_twitter_session() {
+    unset($_SESSION[TWITTER_USER_AUTHORIZED]);
+  }
+
+  function tweets_queue_map_twitter_user($oauth_token, $oauth_token_secret) {
+    global $base_url;
+    $logged_uid = \Drupal::currentUser()->id();
+    $twitter_owner_id = tweets_queue_get_twitter_owner_id($oauth_token);
+    $twitter_data = serialize(array('oauth_token' => $oauth_token, 'oauth_token_secret' => $oauth_token_secret));
+    //Authenticate logged user with twitter account.
+    if ($logged_uid) {
+      tweets_queue_map_logged_user_with_twitter_user($logged_uid, $twitter_owner_id, $twitter_data);
+      return;
+    }
+    $uid = tweets_queue_check_twitter_owner_id_presence($twitter_owner_id);
+    
+    if ($uid) {
+      tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
+      tweets_queue_login_twitter_user($uid);
+    }
+    //Check presence of field_twitter_owner_id data.
+    if (!$uid) {
+      $uid = tweets_queue_check_twitter_owner_id_profile_presence($twitter_owner_id);
+      if ($uid) {
+        tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
+        tweets_queue_login_twitter_user($uid);
+      }
+    }
+    //Register if there is no entry present.
+    if (!$uid) {
+      $uid = tweets_queue_register_twitter_user($twitter_owner_id, $twitter_data);
+    }
+    tweets_queue_goto_dashboard();
+  }
+
+  function tweets_queue_register_twitter_user($twitter_owner_id, $twitter_data) {
+    $user = \Drupal\user\Entity\User::create();
+    //Mandatory settings
+    $user->setPassword(user_password());
+    $user->enforceIsNew();
+    $user->setEmail(time() . 'test@test.com');
+    $user->setUsername($twitter_owner_id);
+    $user->set("field_twitter_owner_id", $twitter_owner_id);
+    
+    $user->set("field_twitter_data", $twitter_data);
+    //Optional settings
+    $user->activate();
+    
+    $res = $user->save();
+  }
+
+  function tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data, $status = 1) {
+    if (empty($twitter_data)) {
+      $twitter_data = serialize(array());
+    }
+    $twitter_auth_map_create = array(
+      'uid' => $uid,
+      'status' => $status,
+      'created' => time(),
+      'data' => $twitter_data,
+    );
+    $twitter_auth_map_update = array(
+      'uid' => $uid,
+      'status' => $status,
+      'created' => time(),
+      'data' => $twitter_data,
+    );
+
+    db_merge(TWITTER_AUTH_MAP_TABLE)
+      ->insertFields($twitter_auth_map_create)
+      ->updateFields($twitter_auth_map_update)
+      ->key(array('twitter_owner_id' => $twitter_owner_id))
+      ->expression('changed', time())
+      ->execute();
+  }
+
+  function tweets_queue_login_via_twitter_owner_id($twitter_owner_id) {
+    $uid = tweets_queue_check_twitter_owner_id_presence($twitter_owner_id);
+    if ($uid) {
+      tweets_queue_login_twitter_user($uid);
+    }
+  }
+
+  function tweets_queue_login_twitter_user($uid) {
+    if ($uid) {
+      $user = \Drupal\user\Entity\User::load($uid);
+      user_login_finalize($user);
+    }
+  }
+
+  function tweets_queue_get_twitter_owner_id($oauth_token) {
+    $twitter_owner_id = "";
+    $oauth_token_arr = explode("-", $oauth_token);
+    if ($oauth_token_arr[0] != '' && $oauth_token_arr[1] != '') {
+      $twitter_owner_id = $oauth_token_arr[0];
+    }
+    return $twitter_owner_id;
+  }
+
+function tweets_queue_check_twitter_owner_id_profile_presence($twitter_owner_id) {
+  $uid = '';
+  $query = \Drupal::database()->select('user__field_twitter_owner_id', 'p');
+  $query->addField('p', 'entity_id');
+  $query->condition('p.field_twitter_owner_id_value', $twitter_owner_id);
+  $uid = $query->execute()->fetchField();
+  return $uid;
+}
+
+function tweets_queue_check_twitter_owner_id_presence($twitter_owner_id) {
+  $uid = '';
+  $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
+  $query->addField('p', 'uid');
+  $query->condition('p.twitter_owner_id', $twitter_owner_id);
+  $uid = $query->execute()->fetchField();
+  return $uid;
+}
+
+function tweets_queue_check_twitter_user_presence($uid) {
+  $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
+  $query->addField('p', 'uid');
+  $query->condition('p.uid', $uid);
+  $uid = $query->execute()->fetchField();
+  return $uid;
 }
