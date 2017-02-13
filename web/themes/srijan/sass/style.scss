@@ -1,0 +1,149 @@
+/* Welcome to Srijan theme.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "reset";
+@import "css3-animation";
+@import "css3-mixins";
+@import "grid-1.0";
+@import "variables";
+
+// Header
+
+.site-branding {
+	display: flex;
+	flex-flow: row wrap;
+	a {
+		font-size: 2.2vw;
+		color: white;
+		font-weight: bold;
+		text-decoration: none;
+	}
+}
+
+.site-branding__logo {
+	display: block;
+	width: 50px;
+	padding-right: .3em;
+}
+.region-header {
+	float: left;
+}
+#header {
+	margin-top: 1.4em;
+	padding-bottom: 1.05em;
+	border-bottom: 1px solid rgba(255, 255, 255, .4);
+	.layout-container {
+		@include container(1249px);
+	}
+}
+
+
+// Content section
+body {
+	background: url(../images/bg.jpg) 0 0 no-repeat;
+	background-size: cover;
+	font-family: 'Roboto', sans-serif;
+}
+
+#page-wrapper {
+	width: 100%;
+}
+#page {}
+
+#block-srijan-local-tasks {
+	@extend %none;
+}
+
+.social_login {
+	text-align: center;
+	margin: 0 0 3em 0 !important;
+	label {
+		font-size: 2.2vw;
+		font-weight: 300;
+		color: $dark !important;
+	}
+	> div {
+		display: none !important;
+	}
+}
+
+.region-content {
+	@include container(1249px);
+}
+
+.path-frontpage {
+	.page-title {
+		@extend %none;
+	}
+}
+
+.user-login-form {
+	background: rgba(255,255,255,.8);
+	padding: 1em 2em;
+	@include border-radius(6px);
+	width: 55%;
+	float: right;
+	margin-top: 10vh;
+	input[type=text], input[type=password] {
+		border: 0;
+		background: none;
+		outline: none;
+		border-bottom: 1px solid rgba(0,0,0,.3);
+		display: block;
+		width: 100%;
+	}
+	.description {
+		@extend %none;
+	}
+	label {
+		color: $gray;
+		margin-bottom: .5em;
+		display: block;
+	}
+	.form-item-name, .form-item-pass {
+		margin-bottom: 2.5em;
+	}
+	input[type=submit] {
+		border: none;
+		background: $login-btn;
+		width: 100%;
+	    padding: .5em;
+	    font-size: 1.8vw;
+	    color: white;
+	    @include border-radius(4px);
+	}
+}
+
+#block-srijan-content {
+	float: right;
+}
+
+.right-nav {
+	float: right;
+	font-size: 1.32vw;
+	ul {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		margin-top: .5em;
+		li {
+			&:first-child {
+				margin-right: 1em;
+			}
+			a {
+				text-decoration: none;
+				color: white;
+			}
+			&:last-child {
+				a {
+					@include border-radius(6px);
+					background: $signup;
+					padding: 10px 20px;
+					border: 1px solid;
+				}
+			}
+		}
+	}
+}

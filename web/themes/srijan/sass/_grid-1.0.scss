@@ -1,0 +1,156 @@
+
+/* ================================= Default Setting ================================= */
+$layout: (
+  display: flexbox,           // option:- flexbox, block
+  columns: 12,                // any value
+  gutter: 1/2,                // change if you need more breathing space between grid
+  gutter-position: outside,   // option:- inside, outside
+  layout: responsive,               // option:- responsive, fixed
+);
+
+
+$col: map-get($layout, columns);
+$gutter: map-get($layout, gutter);
+$gutterPosition: map-get($layout, gutter-position);
+$displayType: map-get($layout, display);
+$layout: map-get($layout, layout);
+$width: 100;
+
+/* vendor prefix mixin */
+@mixin css3-prefix($property, $value)  {
+  -webkit-#{$property}: #{$value};
+   -khtml-#{$property}: #{$value};
+     -moz-#{$property}: #{$value};
+      -ms-#{$property}: #{$value};
+       -o-#{$property}: #{$value};
+          #{$property}: #{$value};
+}
+
+
+/* ================================= Container ================================= */
+@mixin container($max-width){
+  max-width: $max-width;
+
+  /* for fixed layout */
+  @if $layout == fixed {
+    width: $max-width;
+  } 
+
+  margin-left: auto;
+  margin-right: auto;   
+
+  @include css3-prefix(box-sizing, border-box);
+
+  @if $displayType == block {
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+}
+
+/* ================================= Container-Fluid ================================= */
+@mixin container-fluid(){
+  max-width: $width * 1%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include css3-prefix(box-sizing, border-box);
+  
+  @if $displayType == block {
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }  
+}
+
+/* ================================= Flexbox Container ================================= */
+@mixin row() {
+  @if $displayType == flexbox {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;    
+    display: -ms-flexbox;
+
+    @include css3-prefix(flex-wrap, wrap);
+
+    @if $displayType == block {
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    } 
+  }
+  
+  @include css3-prefix(box-sizing, border-box); 
+}
+
+/* ================================= Columns ================================= */
+@mixin column($column){  
+  $gutterMar: margin;
+  $gutterPad: padding; 
+  /*--- gutter outside and inside of column width calculate ---*/
+  @if $gutterPosition == outside {
+    width: ($width / $col * $column) - (2 * $gutter) * 1%; 
+    #{$gutterMar}-left: $gutter * 1%;
+    #{$gutterMar}-right: $gutter * 1%;
+  } @else if $gutterPosition == inside {
+    width: ($width / $col * $column) * 1%; 
+    #{$gutterPad}-left: $gutter * 1%;
+    #{$gutterPad}-right: $gutter * 1%;
+  } @else {
+    #{$gutterMar}-left: $gutter * 1%;
+    #{$gutterMar}-right: $gutter * 1%;
+  }
+
+  @if $displayType == block {
+    float: left;
+  } 
+  
+  @include css3-prefix(box-sizing, border-box);
+}
+
+/* ======================= Row Padding (If block does not content more then one collumn)===================== */
+@mixin pad(){
+  padding-left: $gutter * 1%;
+  padding-right: $gutter * 1%;
+}
+
+/* ================================= Offset-Span ================================= */
+@mixin offset($column){
+  $offset: ($width / $col * $column) + $gutter * 1%;
+  margin-left: $offset !important;  
+}
+
+/* ================================= Clearfix ================================= */
+@mixin clearfix(){
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+/* ================================= Media Query Breakpoint ================================= */
+@mixin min-screen($minWidth){
+  @media (min-width: $minWidth){
+    @content;
+  }
+}
+
+@mixin max-screen($maxWidth){
+  @media (max-width: $maxWidth){
+    @content;
+  }
+}
+
+@mixin min-max-screen($minWidth, $maxWidth){
+  @media (min-width: $minWidth) and (max-width: $maxWidth) {
+    @content;
+  }
+}
+

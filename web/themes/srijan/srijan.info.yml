@@ -1,0 +1,19 @@
+name: Srijan
+type: theme
+base theme: classy
+description: 'A theme based on Flexbox modal layout without any un-usable code.'
+package: Core
+version: VERSION
+core: 8.x
+
+libraries:
+  - srijan/stylesheets
+
+regions:
+  header: Header
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: 'Footer'

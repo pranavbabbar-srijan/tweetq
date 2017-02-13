@@ -1,0 +1,253 @@
+/* Welcome to Srijan theme.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* ================================= Reset style ================================= */
+body,
+dd, ol, dl, ul, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0; }
+
+h1 {
+  font-size: 3.5em; }
+
+h2 {
+  font-size: 3em; }
+
+h3 {
+  font-size: 2.5em; }
+
+h4 {
+  font-size: 2em; }
+
+h5 {
+  font-size: 1.7em; }
+
+h6 {
+  font-size: 1.7em; }
+
+ol, ul {
+  list-style: none; }
+
+pre, textarea {
+  overflow: auto;
+  font: inherit; }
+
+b, strong {
+  font-weight: bold; }
+
+i, em {
+  font-style: italic; }
+
+a:visited,
+a:hover {
+  outline: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+th, td, caption {
+  padding: 5px; }
+
+q, blockquote {
+  quotes: none; }
+
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none; }
+
+a img {
+  border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
+
+/* style for form elements */
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+input[type="submit"],
+input[type="reset"],
+input[type="cancel"],
+input[type="image"],
+button {
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* ================================= Animation Bouncing Effect ================================= */
+/* ================================= Swing Effect ================================= */
+/* ================================= Dancing Effect ================================= */
+/* ================================= Bounce In Effect ================================= */
+/* ================================= Bounce In Left Effect ================================= */
+/* ================================= Bounce In Right Effect ================================= */
+/* ================================= Bounce In Up Effect ================================= */
+/* ================================= Bounce In Down Effect ================================= */
+/* ================================= CSS3 Rounded Corners ================================= */
+/* ================================= CSS3 border-image ================================= */
+/* ================================= CSS3 Gradients &  Gradient Transparency ========================= */
+/* ================================= CSS3 Shadow ================================= */
+/* ================================= CSS3 Bacground Opacity ================================= */
+/* ================================= CSS3 Opacity ================================= */
+/* ================================= CSS3 Transition Property ================================= */
+/* ================================= CSS3 Multiple Columns ================================= */
+/* ================================= CSS3 Fonts Family ================================= */
+/* ================================= CSS3 box-sizing ================================= */
+/* ================================= Default Setting ================================= */
+/* vendor prefix mixin */
+/* ================================= Container ================================= */
+/* ================================= Container-Fluid ================================= */
+/* ================================= Flexbox Container ================================= */
+/* ================================= Columns ================================= */
+/* ======================= Row Padding (If block does not content more then one collumn)===================== */
+/* ================================= Offset-Span ================================= */
+/* ================================= Clearfix ================================= */
+/* ================================= Media Query Breakpoint ================================= */
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description {
+  display: none; }
+
+.site-branding {
+  display: flex;
+  flex-flow: row wrap; }
+  .site-branding a {
+    font-size: 2.2vw;
+    color: white;
+    font-weight: bold;
+    text-decoration: none; }
+
+.site-branding__logo {
+  display: block;
+  width: 50px;
+  padding-right: .3em; }
+
+.region-header {
+  float: left; }
+
+#header {
+  margin-top: 1.4em;
+  padding-bottom: 1.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4); }
+  #header .layout-container {
+    max-width: 1249px;
+    /* for fixed layout */
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-box-sizing: border-box;
+    -khtml-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box; }
+
+body {
+  background: url(../images/bg.jpg) 0 0 no-repeat;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif; }
+
+#page-wrapper {
+  width: 100%; }
+
+.social_login {
+  text-align: center;
+  margin: 0 0 3em 0 !important; }
+  .social_login label {
+    font-size: 2.2vw;
+    font-weight: 300;
+    color: #212121 !important; }
+  .social_login > div {
+    display: none !important; }
+
+.region-content {
+  max-width: 1249px;
+  /* for fixed layout */
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.user-login-form {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1em 2em;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  width: 55%;
+  float: right;
+  margin-top: 10vh; }
+  .user-login-form input[type=text], .user-login-form input[type=password] {
+    border: 0;
+    background: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    display: block;
+    width: 100%; }
+  .user-login-form label {
+    color: #919191;
+    margin-bottom: .5em;
+    display: block; }
+  .user-login-form .form-item-name, .user-login-form .form-item-pass {
+    margin-bottom: 2.5em; }
+  .user-login-form input[type=submit] {
+    border: none;
+    background: #96c85a;
+    width: 100%;
+    padding: .5em;
+    font-size: 1.8vw;
+    color: white;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px; }
+
+#block-srijan-content {
+  float: right; }
+
+.right-nav {
+  float: right;
+  font-size: 1.32vw; }
+  .right-nav ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    margin-top: .5em; }
+    .right-nav ul li:first-child {
+      margin-right: 1em; }
+    .right-nav ul li a {
+      text-decoration: none;
+      color: white; }
+    .right-nav ul li:last-child a {
+      -webkit-border-radius: 6px;
+      -khtml-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
+      border-radius: 6px;
+      background: #f98575;
+      padding: 10px 20px;
+      border: 1px solid; }
