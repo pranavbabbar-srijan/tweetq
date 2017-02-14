@@ -27,9 +27,9 @@
           <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">{{ site_name }}</a>
         </div>
       {% endif %}
-      {% if site_slogan %}
-        <div class="site-branding__slogan">{{ site_slogan }}</div>
-      {% endif %}
     </div>
+    {% if site_slogan %}
+      <div class="site-branding__slogan">{{ site_slogan }}</div>
+    {% endif %}
   {% endif %}
 {% endblock %}
