@@ -30,6 +30,7 @@
 .site-branding__slogan {
     position: absolute;
     top: 3em;
+    left: 1.2em;
     font-size: 3.5vw;
     font-weight: 300;
     color: white;
@@ -51,9 +52,11 @@
 
 // Content section
 body {
-	background: url(../images/bg.jpg) 0 0 no-repeat;
-	background-size: cover;
 	font-family: 'Roboto', sans-serif;
+	&.path-frontpage {
+		background: url(../images/bg.jpg) 0 0 no-repeat;
+		background-size: cover;
+	}
 }
 
 #page-wrapper {
@@ -205,6 +208,7 @@ body {
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
 	float: left;
 	margin-top: 36vh;
+	margin-left: 2em;
 	.count {
 		font-size: 3.2em;
 		font-weight: 700;
@@ -217,6 +221,17 @@ body {
 		font-size: 1.6em;
 		font-weight: 300;
 		color: white;
+		line-height: 2em;
+		&:after {
+			content: "";
+			display: block;
+			height: 4px;
+		    width: 30px;
+		    background: white;
+		    margin: 0 auto;
+		    border-radius: 2px;
+		    margin-top: 6px;
+		}
 	}
 }
 .block-total-twitter-tweets-block {
