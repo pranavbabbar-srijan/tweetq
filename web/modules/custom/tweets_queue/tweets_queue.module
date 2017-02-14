@@ -2187,6 +2187,16 @@ function tweets_queue_check_twitter_user_presence($uid) {
   return $uid;
 }
 
+/**
+ * Insert and update operations on statistics data.
+ *
+ * @param string $name
+ *   Name of the statistics variable.
+ * @param array $statistics_info
+ *   Contains data for the various statistics fields.
+ * @param integer $status
+ *   Status for the statistics data.
+ */
 function tweets_queue_update_twitter_statistics($name, $statistics_info, $status = 1) {
   if (empty($name)) {
     return;
@@ -2264,8 +2274,21 @@ function tweets_queue_fetch_twitter_statistics_info($name = 'tweets_count') {
   return $total;
 }
 
+/**
+ * shorten the number and suffix with proper divisors.
+ *
+ * @param integer $number
+ *   Actual number to be processed.
+ * @param integer $precision
+ *   Precision to be allowed.
+ * @param $divisors
+ *   Divisor value.
+ *
+ * @return string
+ *   Returns processed number.
+ */
 function tweets_queue_number_shorten($number, $precision = 3, $divisors = null) {
-  // Setup default $divisors if not provided
+  // Setup default $divisors if not provided.
   if (!isset($divisors)) {
       $divisors = array(
           pow(1000, 0) => '', // 1000^0 == 1
