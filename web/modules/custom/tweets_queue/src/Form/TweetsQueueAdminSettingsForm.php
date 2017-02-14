@@ -50,6 +50,21 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     );
 
+    $form[TWITTER_TOTAL_USERS] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Total twitter users'),
+      '#default_value' => $config->get(TWITTER_TOTAL_USERS),
+      '#description' => t('Specify total users starting point.'),
+      '#required' => TRUE,
+    );
+    $form[TWITTER_TOTAL_TWEETS] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Total twitter tweets'),
+      '#default_value' => $config->get(TWITTER_TOTAL_TWEETS),
+      '#description' => t('Specify total tweets starting point.'),
+      '#required' => TRUE,
+    );
+
     $form[CRON_TWEET_ATTEMP] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Tweet attempt: cron run'),
@@ -156,6 +171,16 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
       ->save();
     $config->set(CONSUMER_SECRET_KEY, $form_state->getValue(CONSUMER_SECRET_KEY))
       ->save();
+
+    $total_user = $form_state->getValue(TWITTER_TOTAL_USERS);
+    $total_tweets = $form_state->getValue(TWITTER_TOTAL_TWEETS);
+    $config->set(TWITTER_TOTAL_USERS, $total_user)
+      ->save();
+    $config->set(TWITTER_TOTAL_TWEETS, $total_tweets)
+      ->save();
+    tweets_queue_update_twitter_statistics(TWITTER_TOTAL_USERS, array('value' => $total_user));
+    tweets_queue_update_twitter_statistics(TWITTER_TOTAL_TWEETS, array('value' => $total_tweets));
+
     $config->set(CRON_TWEET_ATTEMP, $form_state->getValue(CRON_TWEET_ATTEMP))
       ->save();
     $config->set(CRON_TWEET_IMPORT_ID, $form_state->getValue(CRON_TWEET_IMPORT_ID))
