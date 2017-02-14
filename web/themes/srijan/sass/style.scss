@@ -36,6 +36,7 @@
     color: white;
     width: 36%;
     line-height: 1.3em;
+    display: none;
 }
 .region-header {
 	float: left;
@@ -75,6 +76,9 @@ body {
 .path-frontpage {
 	.page-title {
 		@extend %none;
+	}
+	.site-branding__slogan {
+		display: block;
 	}
 }
 
