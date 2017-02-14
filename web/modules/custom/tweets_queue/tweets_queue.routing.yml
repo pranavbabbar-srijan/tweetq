@@ -26,7 +26,7 @@ tweets_queue.send_tweets:
 
 
 tweets_queue.authorize_twitter_login:
-  path: '/admin/config/services/tweets_queue/authorize_twitter_login'
+  path: '/authorize_twitter_login'
   defaults:
     _form: '\Drupal\tweets_queue\Form\AuthorizeTwitterLogin'
     _title: 'Authorize'

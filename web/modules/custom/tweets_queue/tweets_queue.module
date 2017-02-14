@@ -53,13 +53,18 @@ const TWITTER_CLIENT_ROLE = 'twitter_client';
 const TWITTER_USER_DASHBOARD = 'dashboard';
 const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
 const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
+const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
+const TWITTER_SIGN_IN_TEXT = 'Sign in with Twitter';
+const TWITTER_SIGN_IN_PATH = 'authorize_twitter_login';
 
 /**
  * Implements hook_form_alter().
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form_id;
   switch ($form_id) {
     case 'user_login_form':
+        tweets_queue_user_login_form_changes($form);
       break;
     case 'node_tweet_edit_form':
       $node = \Drupal::routeMatch()->getParameter('node');
@@ -92,6 +97,33 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
     default:
       break;
   }
+}
+
+/**
+ * User login form text and link changes.
+ */
+function tweets_queue_user_login_form_changes(&$form) {
+  global $base_url;
+  $form['login_header'] = array(
+    '#markup' => t("<h2>Sign in to Barbet</h2>"),
+    '#weight' => -9,
+  );
+  $forgot_password_path = $base_url . '/user/password';
+  $url = "<a href='" . $forgot_password_path ."'>" . USER_FORGOT_PASSWORD_LABEL . "</a>";
+  $form['forgot_password'] = array(
+    '#markup' => t($url),
+    '#weight' => 10,
+  );
+  $form['name']['#title'] = 'Email';
+  $form['actions']['submit']['#value'] = 'Sign in';
+
+  $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
+  $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
+  $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .'</div></div>';
+  $form['or_separator'] = array(
+    '#markup' => t($final_text),
+    '#weight' => 12,
+  );
 }
 
 function tweets_queue_tweet_node_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
@@ -1464,7 +1496,6 @@ function tweets_queue_get_client_field_info($data, $field_name) {
  *   Returns twitter handler specific information.
  */
 function tweets_queue_fetch_all_client_handler_info() {
-  echo "hi"; die();
   $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
   $query->fields('p', ['uid', 'status', 'created','changed', 'data', 'cron_tweet_last_run',
     'cron_tweet_next_run', 'cron_tweet_retweet_interval']);
