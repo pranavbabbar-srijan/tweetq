@@ -124,7 +124,8 @@ function tweets_queue_user_login_form_changes(&$form) {
 
   $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
   $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
-  $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .'</div></div>';
+  $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .
+    "</div><span class='recommended'>recommended</span></div>";
   $form['or_separator'] = array(
     '#markup' => t($final_text),
     '#weight' => 12,
@@ -2233,4 +2234,58 @@ function tweets_queue_update_twitter_tweets_counter_statistics($name) {
     ->expression('value', 'value + :inc', array(':inc' => 1))
     ->expression('changed', time())
     ->execute();
+}
+
+/**
+ * Fetch twitter statistics information.
+ *
+ * @param string $name
+ *   Name of the statistics variable.
+ *
+ * @return string
+ *   Returns statistics value.
+ */
+function tweets_queue_fetch_twitter_statistics_info($name = 'tweets_count') {
+  $statistics_info = array();
+  $query = \Drupal::database()->select(TWITTER_STATISTICS_TABLE, 'p');
+  switch($name) {
+    case 'tweets_count':
+      $query->condition('p.name', array(TWITTER_TOTAL_TWEETS, TWITTER_TWEETS_COUNTER), 'IN');
+      $query->addExpression("sum(value)", "total");
+      break;
+    case 'users_count':
+      $query->condition('p.name', array(TWITTER_TOTAL_USERS, TWITTER_USERS_COUNTER), 'IN');
+      $query->addExpression("sum(value)", "total");
+      break;
+    default:
+      $query->addField('p', 'value');
+  }
+  $total = $query->execute()->fetchField();
+  return $total;
+}
+
+function tweets_queue_number_shorten($number, $precision = 3, $divisors = null) {
+  // Setup default $divisors if not provided
+  if (!isset($divisors)) {
+      $divisors = array(
+          pow(1000, 0) => '', // 1000^0 == 1
+          pow(1000, 1) => 'K', // Thousand
+          pow(1000, 2) => 'M', // Million
+          pow(1000, 3) => 'B', // Billion
+          pow(1000, 4) => 'T', // Trillion
+          pow(1000, 5) => 'Qa', // Quadrillion
+          pow(1000, 6) => 'Qi', // Quintillion
+      );
+  }
+  // Loop through each $divisor and find the
+  // lowest amount that matches
+  foreach ($divisors as $divisor => $shorthand) {
+      if (abs($number) < ($divisor * 1000)) {
+          // We found a match!
+          break;
+      }
+  }
+  // We found our match, or there were no matches.
+  // Either way, use the last defined value for $divisor.
+  return number_format($number / $divisor, $precision) . $shorthand;
 }
