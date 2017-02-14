@@ -28,6 +28,7 @@ const TWEET_QUEUE_CSV_FILE_UPLOAD = 'tweet_queue_csv_file_upload';
 const TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY = 'public://tweets_queue/';
 const TWEETS_PRIORITY_TABLE = 'tweets_priority';
 const TWITTER_AUTH_MAP_TABLE = 'twitter_auth_map';
+const TWITTER_STATISTICS_TABLE = 'twitter_statistics';
 const TWITTER_MESSAGE_QUEUE_TABLE = 'twitter_message_queue';
 const TWEETS_TWEETER_DATA_TABLE = 'tweets_tweeter_data';
 const TWITTER_SCHEDULED_MESSAGES_TABLE = 'twitter_scheduled_messages';
@@ -56,6 +57,10 @@ const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
 const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
 const TWITTER_SIGN_IN_TEXT = 'Sign in with Twitter';
 const TWITTER_SIGN_IN_PATH = 'authorize_twitter_login';
+const TWITTER_TOTAL_USERS = 'twitter_total_users';
+const TWITTER_TOTAL_TWEETS = 'twitter_total_tweets';
+const TWITTER_USERS_COUNTER = 'twitter_users_counter';
+const TWITTER_TWEETS_COUNTER = 'twitter_tweets_counter';
 
 /**
  * Implements hook_form_alter().
@@ -304,6 +309,7 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
       'message' => ''
     );
     if ($status['success']) {
+      tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
       $tweet_id = $status['data']->id;
       $twitter_history_info['retweeted'] = ($message_data->tweet_id) ? 1 : 0;
       $twitter_history_info['status'] = 1;
@@ -321,7 +327,6 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
     $tweet_handler_info = array(
       CRON_TWEET_SCHEDULED =>  0,
     );
-    // tweets_queue_update_handler_info($tweet_handler_info, $message_data->uid);//@todo remove it
     tweets_queue_update_twittter_tweet_history($message_data->nid, $twitter_history_info);
     tweets_queue_clean_scheduled_messages_list($message_data->nid);
     if ($status['code'] == TWITTER_HANDLER_INVALID_CODE) {
@@ -514,6 +519,7 @@ function tweets_queue_send_direct_message($message) {
     drupal_set_message(t('Message was not sent.'));
     return;
   }
+  tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
   drupal_set_message(t('Message sent successfully.'));
   $twitter_message_info['tweet_id'] = $tweet_id;
   $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
@@ -1096,6 +1102,24 @@ function tweets_queue_schema() {
       'tweets_handler_last_run' => array(CRON_TWEET_LAST_RUN),
       'tweets_handler_retweet_interval' => array(CRON_TWEET_RETWEET_INTERVAL),
       'tweets_handler_cron_tweet_scheduled' => array(CRON_TWEET_SCHEDULED),
+    )
+  );
+
+  $schema[TWITTER_STATISTICS_TABLE] = array(
+    'description' => 'The base table for twitter statistics information.',
+    'fields' => array(
+      'name' => array('type' => 'varchar', 'length' => 50,
+        'not null' => TRUE, 'default' => ''),
+      'value' => array('type' => 'varchar', 'length' => 100,
+        'not null' => TRUE, 'default' => ''),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'data' => array('description' => 'The value.', 'type' => 'blob', 'not null' => FALSE, 'size' => 'big'),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'changed' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('name'),
+    'indexes' => array(
+      'twitter_statistics_status' => array('status'),
     )
   );
 
@@ -2160,4 +2184,53 @@ function tweets_queue_check_twitter_user_presence($uid) {
   $query->condition('p.uid', $uid);
   $uid = $query->execute()->fetchField();
   return $uid;
+}
+
+function tweets_queue_update_twitter_statistics($name, $statistics_info, $status = 1) {
+  if (empty($name)) {
+    return;
+  }
+  
+  if (is_array($statistics_info)) {
+    $twitter_statistics_create = $statistics_info;
+    $twitter_statistics_update = $statistics_info;
+  }
+  else {
+    $twitter_statistics_create = array();
+  }
+
+  $twitter_statistics_create['created'] = time();
+  $twitter_statistics_create['status'] = $status;
+  $twitter_statistics_update['status'] = $status;
+
+  db_merge(TWITTER_STATISTICS_TABLE)
+    ->insertFields($twitter_statistics_create)
+    ->updateFields($twitter_statistics_update)
+    ->key(array('name' => $name))
+    ->expression('changed', time())
+    ->execute();
+}
+
+/**
+ * Utilize this to increment counter increment feature for statistics generation.
+ *
+ * @param string $name
+ *   Name of the counter variable.
+ */
+function tweets_queue_update_twitter_tweets_counter_statistics($name) {
+  if (empty($name)) {
+    return;
+  }
+
+  $twitter_statistics_create['created'] = time();
+  $twitter_statistics_create['value'] = 1;
+  $twitter_statistics_update['changed'] = time();
+
+  db_merge(TWITTER_STATISTICS_TABLE)
+    ->insertFields($twitter_statistics_create)
+    ->updateFields($twitter_statistics_update)
+    ->key(array('name' => $name))
+    ->expression('value', 'value + :inc', array(':inc' => 1))
+    ->expression('changed', time())
+    ->execute();
 }
