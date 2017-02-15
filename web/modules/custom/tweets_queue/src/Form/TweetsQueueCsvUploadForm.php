@@ -98,7 +98,8 @@ class TweetsQueueCsvUploadForm extends FormBase {
     $uid = \Drupal::currentUser()->id();
     $file = fopen($file, 'r');
     $row = 0;
-    $import_message = array('total' => 0, 'duplicate' => 0, 'imported' => 0);
+    $import_message = array('total' => 0, 'duplicate' => 0,
+      'imported' => 0 , 'valid' => 0, 'invalid' => 0);
     while (($line = fgetcsv($file)) !== FALSE) {
       if ($row == 0) {
         $row++;
@@ -121,16 +122,26 @@ class TweetsQueueCsvUploadForm extends FormBase {
         $import_message['duplicate'] = $import_message['duplicate'] + 1;
         continue;
       }
+      if ($size < CRON_TWEET_CHARCATER_LIMIT) {
+        $import_message['valid'] = $import_message['valid'] + 1;
+      }
+      else {
+        $import_message['invalid'] = $import_message['invalid'] + 1;
+      }
       $import_message['imported'] = $import_message['imported'] + 1;
       tweets_queue_insert_message_queue_record($twitter_message_info);
     } 
     fclose($file);
     drupal_set_message(t('Migration completed successfully.'));
-    drupal_set_message(t('Total : @total Imported: @imported Duplicate: @duplicate ',
+    drupal_set_message(t('Total : @total Imported: @imported Valid: @valid
+      Invalid : @invalid Duplicate: @duplicate ',
       array(
         '@total' => $import_message['total'],
         '@imported' => $import_message['imported'],
-        '@duplicate' => $import_message['duplicate'])
+        '@duplicate' => $import_message['duplicate'],
+        '@valid' => $import_message['valid'],
+        '@invalid' => $import_message['invalid']
+        )
       )
     );
   }

@@ -2369,10 +2369,27 @@ function tweets_queue_show_twitter_signin_message(&$form, $weight = 12) {
 }
 
 function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $uid = \Drupal::currentUser()->id();
   $data = $form_state->getValues();
   $message = $data['message'];
-  // tweets_queue_compile_tweets($message);
-  // @TODO: save node for later tweet.
-  drupal_set_message(t('Your tweet message @message Saved for later tweet.',
+  $message = tweets_queue_get_urls_present($message);
+  $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  $hash_tag= '';
+  $twitter_message_info = array('message' => $message,
+    'hashtag' => '',
+    'uid' => $uid,
+    'size' => $size,
+  );
+  $nid = tweets_queue_check_user_message_presence($message, $hash_tag);
+  if ($nid) {
+    drupal_set_message(t('Your tweet message "@message" already exists.',
     array('@message' => $message)));
+    return;
+  }
+
+  $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
+  if ($nid) {
+    drupal_set_message(t('Your tweet message "@message" Saved for later tweet.',
+    array('@message' => $message)));
+  }
 }
