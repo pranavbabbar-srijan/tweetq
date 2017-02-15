@@ -23,19 +23,22 @@ class SendTweetsForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    tweets_queue_check_logged_user_mapping(FALSE);
     $form['message'] = array(
       '#type' => 'textfield',
-      '#title' => t('Tweet your message'),
+      '#title' => t('Create a Tweet'),
       '#required' => TRUE,
     );
 
-    $form['markup'] = array(
-      '#markup' => $this->t('Authenticate twitter credentials working. '),
+    tweets_queue_show_twitter_signin_message($form);
+    $form['save'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save for Later'),
+      '#submit' => array('tweets_queue_create_save_tweet_form_submit'),
     );
-
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Authenticate Now'),
+      '#value' => t('Tweet Now'),
     );
 
     return $form;

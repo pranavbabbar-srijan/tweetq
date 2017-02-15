@@ -68,6 +68,9 @@ const TWITTER_TWEETS_COUNTER = 'twitter_tweets_counter';
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   $form_id;
   switch ($form_id) {
+    case 'send_tweets_form ':
+      break;
+
     case 'user_login_form':
         tweets_queue_user_login_form_changes($form);
       break;
@@ -1948,16 +1951,9 @@ function tweets_queue_authenticate_twitter_user() {
 
   $uid = \Drupal::currentUser()->id();
   if ($uid) {
-    if (isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
-      tweets_queue_goto_dashboard();
-    }
-    $mapped = tweets_queue_check_twitter_user_presence($uid);
-    if ($mapped) {
-      $_SESSION[TWITTER_USER_AUTHORIZED] = 1;
-      drupal_set_message(t('You are already mapped.'));
-      tweets_queue_goto_dashboard();
-    }
+    tweets_queue_check_logged_user_mapping();
   }
+
 
   $twitter_authentication_process_id = tweets_queue_twitter_authentication_process_id_fetch();
   if ($twitter_authentication_process_id) {
@@ -2052,6 +2048,11 @@ function tweets_queue_authenticate_twitter_user() {
       tweets_queue_register_auth_map($twitter_owner_id, $logged_uid, $twitter_data);
       tweets_queue_set_user_twitter_session();
       tweets_queue_login_twitter_user($uid);
+      tweets_queue_goto_dashboard();
+    }
+    if (!$uid) {
+      tweets_queue_register_auth_map($twitter_owner_id, $logged_uid, $twitter_data);
+      tweets_queue_set_user_twitter_session();
       tweets_queue_goto_dashboard();
     }
     drupal_set_message(t('Your account was not authenticated. Please try again.'));
@@ -2311,4 +2312,67 @@ function tweets_queue_number_shorten($number, $precision = 3, $divisors = null) 
   // We found our match, or there were no matches.
   // Either way, use the last defined value for $divisor.
   return number_format($number / $divisor, $precision) . $shorthand;
+}
+
+function tweets_queue_check_logged_user_mapping($redirect = TRUE) {
+  $uid = \Drupal::currentUser()->id();
+  $mapped = FALSE;
+  if ($uid) {
+    if (isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
+      $mapped = TRUE;
+    }
+    $mapped = tweets_queue_check_twitter_user_presence($uid);
+    if ($mapped) {
+      $_SESSION[TWITTER_USER_AUTHORIZED] = 1;
+    }
+    if ($mapped && $redirect) {
+      tweets_queue_goto_dashboard();
+    }
+  }
+}
+
+function tweets_queue_show_twitter_authentiation_message() {
+  $uid = \Drupal::currentUser()->id();
+  $mapped = FALSE;
+  if ($uid) {
+    if (isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
+      $mapped = TRUE;
+    }
+    $mapped = tweets_queue_check_twitter_user_presence($uid);
+    if ($mapped) {
+      $_SESSION[TWITTER_USER_AUTHORIZED] = 1;
+    }
+    if (!isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
+      drupal_set_message(t('You have not completed the twitter authentication.'));
+      drupal_set_message(t('You need to complete the authentication process.'));
+    }
+  }
+}
+
+/**
+ * Add twitter sign-in element to the form.
+ *
+ * @param  &$form
+ * @param integer $weight [description]
+ * @return [type]          [description]
+ */
+function tweets_queue_show_twitter_signin_message(&$form, $weight = 12) {
+  global $base_url;
+  if (!isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
+    $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
+    $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
+    $form['or_separator'] = array(
+      '#markup' => t($url),
+      '#weight' => $weight,
+    );
+  }
+}
+
+function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $data = $form_state->getValues();
+  $message = $data['message'];
+  // tweets_queue_compile_tweets($message);
+  // @TODO: save node for later tweet.
+  drupal_set_message(t('Your tweet message @message Saved for later tweet.',
+    array('@message' => $message)));
 }
