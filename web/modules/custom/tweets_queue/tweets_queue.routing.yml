@@ -17,7 +17,7 @@ tweets_queue.settings:
     _role: 'twitter_client+administrator'
 
 tweets_queue.send_tweets:
-  path: '/create-tweets'
+  path: '/dashboard'
   defaults:
     _form: '\Drupal\tweets_queue\Form\SendTweetsForm'
     _title: 'Create a Tweet'

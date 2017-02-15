@@ -62,7 +62,7 @@ const TWITTER_TOTAL_TWEETS = 'twitter_total_tweets';
 const TWITTER_USERS_COUNTER = 'twitter_users_counter';
 const TWITTER_TWEETS_COUNTER = 'twitter_tweets_counter';
 
-const TWITTER_CREATE_TWEET_PATH = 'create-tweets';
+const TWITTER_CREATE_TWEET_PATH = 'dashboard';
 const TWITTER_IMPORT_TWEET_PATH = 'import-tweets';
 const TWITTER_VALID_TWEET_PATH = 'valid-tweets';
 const TWITTER_INVALID_TWEET_PATH = 'invalid-tweets';
