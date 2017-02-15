@@ -125,7 +125,8 @@ button {
 
 .site-branding {
   display: flex;
-  flex-flow: row wrap; }
+  flex-flow: row wrap;
+  float: left; }
   .site-branding a {
     font-size: 2.2vw;
     color: #96c85a;
@@ -133,6 +134,9 @@ button {
     text-decoration: none; }
   .site-branding svg {
     fill: #96c85a; }
+
+.block-users-dashboard-header-block {
+  float: right; }
 
 .site-branding__logo {
   display: block;
@@ -168,6 +172,8 @@ button {
     -ms-box-sizing: border-box;
     -o-box-sizing: border-box;
     box-sizing: border-box; }
+  #header .region-header {
+    float: none; }
 
 body {
   font-family: 'Roboto', sans-serif; }
@@ -194,6 +200,9 @@ body {
 
 .path-frontpage .site-branding__slogan {
   display: block; }
+
+.path-frontpage #block-srijan-content {
+  float: right; }
 
 .user-login-form {
   background: rgba(255, 255, 255, 0.8);
@@ -289,9 +298,6 @@ body {
         display: inline-block;
         vertical-align: text-top; }
 
-#block-srijan-content {
-  float: right; }
-
 .right-nav {
   float: right;
   font-size: 1.32vw; }
@@ -379,21 +385,26 @@ body {
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  float: left;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";
-  /*IE 8*/
-  -moz-box-shadow: 1px 0px 8px #bbb;
-  /*FF 3.5+*/
-  -webkit-box-shadow: 1px 0px 8px #bbb;
-  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-  box-shadow: 1px 0px 8px #bbb;
-  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb);
-  /*IE 5.5-7*/ }
-  .user-logged-in .main-content .block-page-title-block h1 {
-    font-size: 1.2em;
-    font-weight: normal;
-    color: #919191; }
+  float: left; }
+  .user-logged-in .main-content .block-page-title-block {
+    background: #FCFCFC;
+    padding: 1em;
+    margin-left: 1em;
+    margin-top: 1em;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+    /*IE 8*/
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    /*FF 3.5+*/
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+    box-shadow: 0px 0px 3px #bbb;
+    /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+    /*IE 5.5-7*/ }
+    .user-logged-in .main-content .block-page-title-block h1 {
+      font-size: 1.2em;
+      font-weight: normal;
+      color: #919191; }
 
 .block-users-left-side-bar-block .profile {
   background: -moz-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
@@ -451,3 +462,48 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: .6em;
   margin-bottom: 0.6em !important; }
+
+.block-users-tweets-statistics-block {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";
+  /*IE 8*/
+  -moz-box-shadow: 1px 0px 8px #bbb;
+  /*FF 3.5+*/
+  -webkit-box-shadow: 1px 0px 8px #bbb;
+  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+  box-shadow: 1px 0px 8px #bbb;
+  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb);
+  /*IE 5.5-7*/
+  margin-top: 1em;
+  margin-left: 1em; }
+  .block-users-tweets-statistics-block .content > div {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between; }
+    .block-users-tweets-statistics-block .content > div a {
+      text-decoration: none;
+      color: #212121;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      width: 20%;
+      padding: 1em; }
+      .block-users-tweets-statistics-block .content > div a .text {
+        display: block; }
+      .block-users-tweets-statistics-block .content > div a .value {
+        display: block;
+        color: #919191;
+        font-size: 2em; }
+
+#block-srijan-content {
+  padding: 1em;
+  margin-left: 1em;
+  margin-top: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+  /*IE 8*/
+  -moz-box-shadow: 0px 0px 3px #bbb;
+  /*FF 3.5+*/
+  -webkit-box-shadow: 0px 0px 3px #bbb;
+  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+  box-shadow: 0px 0px 3px #bbb;
+  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+  /*IE 5.5-7*/ }
