@@ -13,15 +13,15 @@ tweets_queue.settings:
   weight: -15
 
 tweets_queue.send_tweets:
-  title: 'Send tweets'
-  description: 'Send tweets directly.'
+  title: 'Create a tweet'
+  description: 'Create a tweet or send.'
   parent: system.admin_config_services
   route_name: tweets_queue.send_tweets
   weight: -14
 
 tweets_queue.file_upload:
   title: 'CSV tweet import'
-  description: 'Import tweets through csv.'
+  description: 'Import tweets.'
   parent: system.admin_config_services
   route_name: tweets_queue.file_upload
   weight: -13

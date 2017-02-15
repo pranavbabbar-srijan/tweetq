@@ -17,10 +17,10 @@ tweets_queue.settings:
     _role: 'twitter_client+administrator'
 
 tweets_queue.send_tweets:
-  path: '/admin/config/services/tweets_queue/send_tweets'
+  path: '/create-tweets'
   defaults:
     _form: '\Drupal\tweets_queue\Form\SendTweetsForm'
-    _title: 'Send Tweets'
+    _title: 'Create a Tweet'
   requirements:
     _role: 'twitter_client+administrator'
 
@@ -29,15 +29,15 @@ tweets_queue.authorize_twitter_login:
   path: '/authorize_twitter_login'
   defaults:
     _form: '\Drupal\tweets_queue\Form\AuthorizeTwitterLogin'
-    _title: 'Authorize'
+    _title: 'Twitter Authorization'
   requirements:
     _role: 'anonymous+authenticated'
 
 tweets_queue.file_upload:
-  path: '/admin/config/services/tweets_queue/upload-file'
+  path: '/import-tweets'
   defaults:
     _form: '\Drupal\tweets_queue\Form\TweetsQueueCsvUploadForm'
-    _title: 'Form test'
+    _title: 'Import Tweets'
   requirements:
     _role: 'twitter_client+administrator'
 

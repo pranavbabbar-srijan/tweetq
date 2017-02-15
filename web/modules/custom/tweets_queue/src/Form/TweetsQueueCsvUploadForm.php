@@ -27,9 +27,10 @@ class TweetsQueueCsvUploadForm extends FormBase {
 
     $form['managed_file'] = array(
       '#type' => 'managed_file',
-      '#title' => 'Import CSV',
-      '#default_value' => $fids,
+      '#title' => TWITTER_IMPORT_TWEET_LABEL,
+      '#default_value' => $fids, 
       '#disabled' => FALSE,
+      '#description' => TWITTER_CSV_UPLOAD_NOTE_LABEL,
       '#upload_location' => TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY,
       '#progress_message' => $this->t('Please wait...'),
       '#upload_validators' => [
@@ -37,13 +38,13 @@ class TweetsQueueCsvUploadForm extends FormBase {
           'csv',
         ],
         'file_validate_size' => [
-          '10485760'
+          TWITTER_CSV_UPLOAD_MAX_FILE_SIZE
         ]
       ],
     );
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Run Import'),
+      '#value' => t(TWITTER_IMPORT_TWEET_LABEL),
     );
     return $form;
   }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\tweets_queue\Form\tweetsQueueSettingsForm
+ * Contains \Drupal\tweets_queue\Form\SendTweetsForm
  */
 namespace Drupal\tweets_queue\Form;
 
@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Send tweets queue settings for this site.
+ * Create tweet and send on twitter.
  */
 class SendTweetsForm extends FormBase {
   /** 
