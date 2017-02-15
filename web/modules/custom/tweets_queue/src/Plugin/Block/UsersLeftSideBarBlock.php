@@ -21,9 +21,11 @@ class UsersLeftSideBarBlock extends BlockBase {
    */
   public function build() {
     global $base_url;
+
+    $picture = '';
     $name = "lorem ipsum";
     $twitter_handle = "@loremipsum";
-    $profile_img = "<img src=''></img>";
+    $profile_img = "<img src='" . $picture . "'></img>";
     $twitter_profile_output = "<div class='profile'>
       <span class='img'>" . $profile_img . "</span>
       <span class='name'>" . $name . "</span>

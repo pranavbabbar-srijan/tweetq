@@ -34,7 +34,7 @@ tweets_queue.authorize_twitter_login:
     _role: 'anonymous+authenticated'
 
 tweets_queue.file_upload:
-  path: '/import-tweets'
+  path: '/dashboard/import-tweets'
   defaults:
     _form: '\Drupal\tweets_queue\Form\TweetsQueueCsvUploadForm'
     _title: 'Import Tweets'

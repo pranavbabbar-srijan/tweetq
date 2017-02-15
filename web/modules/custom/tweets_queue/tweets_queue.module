@@ -63,16 +63,18 @@ const TWITTER_USERS_COUNTER = 'twitter_users_counter';
 const TWITTER_TWEETS_COUNTER = 'twitter_tweets_counter';
 
 const TWITTER_CREATE_TWEET_PATH = 'dashboard';
-const TWITTER_IMPORT_TWEET_PATH = 'import-tweets';
-const TWITTER_VALID_TWEET_PATH = 'valid-tweets';
-const TWITTER_INVALID_TWEET_PATH = 'invalid-tweets';
-const TWITTER_ARCHIVED_TWEET_PATH = 'archived-tweets';
+const TWITTER_IMPORT_TWEET_PATH = 'dashboard/import-tweets';
+const TWITTER_VALID_TWEET_PATH = 'dashboard/valid-tweets';
+const TWITTER_INVALID_TWEET_PATH = 'dashboard/invalid-tweets';
+const TWITTER_ARCHIVED_TWEET_PATH = 'dashboard/archived-tweets';
+const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 
 const TWITTER_CREATE_TWEET_LABEL = 'Create a Tweet';
 const TWITTER_IMPORT_TWEET_LABEL = 'Import Tweets';
 const TWITTER_VALID_TWEET_LABEL = 'Valid Tweets';
 const TWITTER_INVALID_TWEET_LABEL = 'Invalid Tweets';
 const TWITTER_ARCHIVED_TWEET_LABEL = 'Archived Tweets';
+const TWITTER_TOTAL_TWEET_LABEL = 'Total Tweets';
 const TWITTER_SETTINGS_LABEL = 'Settings';
 const TWITTER_CSV_UPLOAD_NOTE_LABEL = 'Note: Only CSV file, Max size 1MB';
 const TWITTER_CSV_UPLOAD_MAX_FILE_SIZE = '10485760';
