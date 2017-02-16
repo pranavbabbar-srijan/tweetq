@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Welcome to Srijan theme.
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
@@ -123,10 +124,39 @@ button {
 #block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description {
   display: none; }
 
+.block-users-tweets-statistics-block .content > div a > div {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.eot?5zpq8v");
+  src: url("../fonts/icomoon.eot?5zpq8v#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?5zpq8v") format("truetype"), url("../fonts/icomoon.woff?5zpq8v") format("woff"), url("../fonts/icomoon.svg?5zpq8v#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
 .site-branding {
   display: flex;
   flex-flow: row wrap;
   float: left; }
+  @media screen and (max-width: 20em) {
+    .site-branding {
+      width: 60%;
+      float: none;
+      margin: 0 auto; }
+      .site-branding div a {
+        font-size: 12vw; }
+      .site-branding svg {
+        width: 10em; } }
   .site-branding a {
     font-size: 2.2vw;
     color: #96c85a;
@@ -142,6 +172,9 @@ button {
   display: block;
   width: 50px;
   padding-right: .3em; }
+  @media screen and (max-width: 20em) {
+    .site-branding__logo {
+      width: auto; } }
 
 .site-branding__slogan {
   position: absolute;
@@ -153,6 +186,9 @@ button {
   width: 36%;
   line-height: 1.3em;
   display: none; }
+  @media screen and (max-width: 20em) {
+    .site-branding__slogan {
+      font-size: 9vw; } }
 
 .region-header {
   float: left; }
@@ -179,9 +215,15 @@ body {
   font-family: 'Roboto', sans-serif; }
   body.path-frontpage {
     background: url(../images/bg.jpg) 0 0 no-repeat;
-    background-size: cover; }
+    background-size: cover;
+    height: 100%; }
+    @media screen and (max-width: 20em) {
+      body.path-frontpage {
+        background-position: 20% 0; } }
     body.path-frontpage .site-branding a {
       color: white; }
+    body.path-frontpage .site-branding svg {
+      fill: #ffffff; }
 
 #page-wrapper {
   width: 100%; }
@@ -406,6 +448,21 @@ body {
       font-weight: normal;
       color: #919191; }
 
+.user-logged-in #block-srijan-content {
+  padding: 1em;
+  margin-left: 1em;
+  margin-top: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+  /*IE 8*/
+  -moz-box-shadow: 0px 0px 3px #bbb;
+  /*FF 3.5+*/
+  -webkit-box-shadow: 0px 0px 3px #bbb;
+  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+  box-shadow: 0px 0px 3px #bbb;
+  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+  /*IE 5.5-7*/ }
+
 .block-users-left-side-bar-block .profile {
   background: -moz-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
   /* FF3.6+ */
@@ -487,23 +544,39 @@ body {
       width: 20%;
       padding: 1em; }
       .block-users-tweets-statistics-block .content > div a .text {
-        display: block; }
+        display: block;
+        font-family: 'Roboto', sans-serif; }
       .block-users-tweets-statistics-block .content > div a .value {
         display: block;
         color: #919191;
-        font-size: 2em; }
-
-#block-srijan-content {
-  padding: 1em;
-  margin-left: 1em;
-  margin-top: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
-  /*IE 8*/
-  -moz-box-shadow: 0px 0px 3px #bbb;
-  /*FF 3.5+*/
-  -webkit-box-shadow: 0px 0px 3px #bbb;
-  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-  box-shadow: 0px 0px 3px #bbb;
-  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
-  /*IE 5.5-7*/ }
+        font-size: 2em;
+        font-weight: 300;
+        font-family: 'Roboto', sans-serif; }
+      .block-users-tweets-statistics-block .content > div a > div {
+        position: relative; }
+      .block-users-tweets-statistics-block .content > div a .total_tweets:before {
+        content: "";
+        font-size: 3em;
+        color: #2aa9e0;
+        position: absolute;
+        right: 0; }
+      .block-users-tweets-statistics-block .content > div a .valid_tweets:before {
+        content: "";
+        font-size: 2.5em;
+        color: #96c85a;
+        position: absolute;
+        right: 0;
+        top: .1em; }
+      .block-users-tweets-statistics-block .content > div a .invalid_tweets:before {
+        content: "";
+        font-size: 2.2em;
+        color: #f56a6a;
+        position: absolute;
+        right: 0;
+        top: .2em; }
+      .block-users-tweets-statistics-block .content > div a .archived_tweets:before {
+        content: "";
+        font-size: 3em;
+        color: #ffae00;
+        position: absolute;
+        right: 0; }
