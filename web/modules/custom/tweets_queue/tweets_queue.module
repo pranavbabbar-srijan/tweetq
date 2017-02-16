@@ -87,6 +87,7 @@ const TWITTER_STATISTCIS_OAUTH_TOKEN = 'ot';
 const TWITTER_STATISTCIS_OAUTH_TOKEN_SECRET = 'otc';
 const TWITTER_STATISTCIS_SCREEN = 'scr';
 const TWITTER_STATISTCIS_AUTH_EXPIRES = 'exp';
+const TWITTER_HANDLER_PROFILE = 'thp';
 
 
 /**
@@ -199,7 +200,7 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   $cb = \Codebird\Codebird::getInstance();
 
   $access_token = $twitter_handle[TWITTER_OAUTH_TOKEN];
-  $access_secret_token = $twitter_handle['TWITTER_OAUTH_TOKEN_SECRET'];
+  $access_secret_token = $twitter_handle[TWITTER_OAUTH_TOKEN_SECRET];
   $cb->setToken($access_token, $access_secret_token);
 
   $retweet = FALSE;
@@ -2040,10 +2041,17 @@ function tweets_queue_authenticate_twitter_user() {
       );
       $twitter_authentication_process_update_info = array ('data' => serialize($oauth_info_data));
       if ($reply->httpstatus == 200) {
-        tweets_queue_update_twitter_mark_user_login_statistics($reply);
+        $twitter_profile_info = tweets_queue_get_twitter_user_profile_information($reply->oauth_token, $reply->oauth_token_secret);
+
+        if ($twitter_profile_info->httpstatus != 200) {
+          tweets_queue_goto_page();
+        }
+
+        tweets_queue_update_twitter_mark_user_login_statistics($twitter_profile_info->id, $twitter_profile_info->screen_name, $twitter_profile_info, TWITTER_HANDLER_PROFILE);
+
         // store the token (which is different from the request token!)
+        tweets_queue_map_twitter_user($twitter_profile_info->id, $reply->oauth_token, $reply->oauth_token_secret, $twitter_profile_info);
         tweets_queue_twitter_authentication_process_id_update($twitter_authentication_process_id, $twitter_authentication_process_update_info);
-        tweets_queue_map_twitter_user($reply->oauth_token, $reply->oauth_token_secret);
         tweets_queue_goto_dashboard();
       }
     }
@@ -2061,35 +2069,6 @@ function tweets_queue_authenticate_twitter_user() {
     }
     header('Location: ' . $default_path);
     die();
-  }
-
-  /**
-   * Store twitter authentication information on each login through twitter.
-   *
-   * @param object $twitter_authenticated_data
-   *   Information sent by twitter api.
-   */
-  function tweets_queue_update_twitter_mark_user_login_statistics($twitter_authenticated_data) {
-    $oauth_token = $twitter_authenticated_data->{TWITTER_OAUTH_TOKEN};
-    $oauth_token_secret = $twitter_authenticated_data->{TWITTER_OAUTH_TOKEN_SECRET};
-    $screen_name = $twitter_authenticated_data->screen_name;
-    $twitter_owner_id = $twitter_authenticated_data->user_id;
-    $expires = $twitter_authenticated_data->x_auth_expires;
-    $statistics_key = tweets_queue_populate_statistics_key($twitter_owner_id, 'twitter_owner_id');
-
-    $data = array(
-      TWITTER_STATISTCIS_OAUTH_TOKEN => $oauth_token,
-      TWITTER_STATISTCIS_OAUTH_TOKEN_SECRET => $oauth_token_secret,
-      TWITTER_STATISTCIS_SCREEN => $screen_name,
-      TWITTER_STATISTCIS_AUTH_EXPIRES => $expires,
-    );
-
-    tweets_queue_update_twitter_statistics($statistics_key,
-      array(
-        'value' => $screen_name,
-        'data' => serialize($data),
-      )
-    );
   }
 
   /**
@@ -2113,6 +2092,7 @@ function tweets_queue_authenticate_twitter_user() {
         $final_id = 'user-' . $id;
         break;
       default:
+        $final_id = $type . '-' . $id;
         break;
     }
     return $final_id;
@@ -2165,16 +2145,17 @@ function tweets_queue_authenticate_twitter_user() {
     unset($_SESSION[TWITTER_USER_AUTHORIZED]);
   }
 
-  function tweets_queue_map_twitter_user($oauth_token, $oauth_token_secret) {
+  function tweets_queue_map_twitter_user($twitter_owner_id, $oauth_token, $oauth_token_secret, $twitter_profile_info) {
     global $base_url;
     $logged_uid = \Drupal::currentUser()->id();
-    $twitter_owner_id = tweets_queue_get_twitter_owner_id($oauth_token);
+    // $twitter_owner_id = tweets_queue_get_twitter_owner_id($oauth_token);
     $twitter_data = serialize(array(TWITTER_OAUTH_TOKEN => $oauth_token, TWITTER_OAUTH_TOKEN_SECRET => $oauth_token_secret));
     //Authenticate logged user with twitter account.
     if ($logged_uid) {
       tweets_queue_map_logged_user_with_twitter_user($logged_uid, $twitter_owner_id, $twitter_data);
       return;
     }
+
     $uid = tweets_queue_check_twitter_owner_id_presence($twitter_owner_id);
     
     if ($uid) {
@@ -2191,20 +2172,28 @@ function tweets_queue_authenticate_twitter_user() {
     }
     //Register if there is no entry present.
     if (!$uid) {
-      $uid = tweets_queue_register_twitter_user($twitter_owner_id, $twitter_data);
+      $uid = tweets_queue_register_twitter_user($twitter_data, $twitter_profile_info);
     }
     tweets_queue_goto_dashboard();
   }
 
-  function tweets_queue_register_twitter_user($twitter_owner_id, $twitter_data) {
+  
+  function tweets_queue_register_twitter_user($twitter_data, $twitter_profile_info) {
     $user = \Drupal\user\Entity\User::create();
+
+    $twitter_owner_id = $twitter_profile_info->id;
+    $email = (!empty($twitter_profile_info->email)) ? $twitter_profile_info->email : time() . '_dummy@test.com';
+    $full_name = $twitter_profile_info->name;
+    $username = $twitter_profile_info->screen_name . '_twitter_user';
+    $screen_name = $twitter_profile_info->screen_name;
+    
     //Mandatory settings
     $user->setPassword(user_password());
     $user->enforceIsNew();
-    $user->setEmail(time() . 'test@test.com');
-    $user->setUsername($twitter_owner_id);
+    $user->setEmail($email);
+    $user->setUsername($username);
     $user->set("field_twitter_owner_id", $twitter_owner_id);
-    
+    $user->set("field_full_name", $full_name);
     $user->set("field_twitter_data", $twitter_data);
     //Optional settings
     $user->activate();
@@ -2490,4 +2479,47 @@ function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\For
     drupal_set_message(t('Your tweet message "@message" Saved for later tweet.',
     array('@message' => $message)));
   }
+}
+
+/**
+ * Get twitter handle profile information.
+ *
+ * @param string $access_token
+ *   Access token of the twitter user.
+ * @param string $access_secret_token
+ *   Access secret token of the twitter user.
+ *
+ * @return object
+ *   Returns twitter user profile information.
+ */
+function tweets_queue_get_twitter_user_profile_information($access_token, $access_secret_token) {
+  require_once   './libraries/codebird-php/codebird.php';
+  $consumer_key = tweets_queue_get_tweet_configuration_data(CONSUMER_KEY);
+  $consumer_secret_key = tweets_queue_get_tweet_configuration_data(CONSUMER_SECRET_KEY);
+  \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
+  $cb = \Codebird\Codebird::getInstance();
+
+  $cb->setToken($access_token, $access_secret_token);
+  $params = array(
+          'include_email' => true,
+          'skip_status' => true,
+        );
+  $reply = $cb->account_verifyCredentials($params);
+  return $reply;
+}
+
+/**
+ * Store twitter authentication information on each login through twitter.
+ *
+ * @param object $twitter_authenticated_data
+ *   Information sent by twitter api.
+ */
+function tweets_queue_update_twitter_mark_user_login_statistics($twitter_owner_id, $screen_name, $twitter_authenticated_data, $type = 'twitter_owner_id') {
+  $statistics_key = tweets_queue_populate_statistics_key($twitter_owner_id, $type);
+  tweets_queue_update_twitter_statistics($statistics_key,
+    array(
+      'value' => $screen_name,
+      'data' => serialize($twitter_authenticated_data),
+    )
+  );
 }
