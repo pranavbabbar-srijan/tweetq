@@ -121,7 +121,7 @@ button {
 /* ================================= Offset-Span ================================= */
 /* ================================= Clearfix ================================= */
 /* ================================= Media Query Breakpoint ================================= */
-#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description {
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .send-tweets-form label {
   display: none; }
 
 .block-users-tweets-statistics-block .content > div a > div {
@@ -224,6 +224,8 @@ body {
       color: white; }
     body.path-frontpage .site-branding svg {
       fill: #ffffff; }
+  body.user-logged-in {
+    background: #F1F1F1; }
 
 #page-wrapper {
   width: 100%; }
@@ -461,64 +463,84 @@ body {
   box-shadow: 0px 0px 3px #bbb;
   /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
-  /*IE 5.5-7*/ }
+  /*IE 5.5-7*/
+  background: white; }
 
-.block-users-left-side-bar-block .profile {
-  background: -moz-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, 308deg, color-stop(20%, #51ae47), color-stop(100%, #04d19d));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
-  /* IE10+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#51ae47', endColorstr='#04d19d', GradientType='1');
-  /* for IE */
-  background: linear-gradient(142deg, #51ae47 20%, #04d19d 100%);
-  /* W3C */
-  color: white;
-  padding: 1em 2em;
-  height: 100%;
-  overflow: hidden;
-  margin-bottom: 2em; }
-  .block-users-left-side-bar-block .profile .img {
-    float: left;
-    height: 90px;
-    width: 90px;
-    border: 1px solid white;
-    -webkit-border-radius: 50%;
-    -khtml-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    border-radius: 50%;
-    background: #919191;
-    margin-right: .8em; }
-  .block-users-left-side-bar-block .profile .name {
-    font-weight: bold;
-    font-size: 1.5em;
-    margin-top: .5em;
-    display: block; }
-  .block-users-left-side-bar-block .profile .twitter_handle {
-    font-style: italic; }
-  .block-users-left-side-bar-block .profile ~ div {
-    font-size: 1.2em;
-    line-height: 2.5em;
-    margin: 0 1.5em; }
-    .block-users-left-side-bar-block .profile ~ div a {
-      color: #919191;
-      text-decoration: none; }
-      .block-users-left-side-bar-block .profile ~ div a:hover {
-        color: #212121; }
-    .block-users-left-side-bar-block .profile ~ div:last-child {
-      padding-bottom: 2em; }
+.user-logged-in #header {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+  /*IE 8*/
+  -moz-box-shadow: 0px 0px 3px #bbb;
+  /*FF 3.5+*/
+  -webkit-box-shadow: 0px 0px 3px #bbb;
+  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+  box-shadow: 0px 0px 3px #bbb;
+  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+  /*IE 5.5-7*/
+  margin-top: 0;
+  padding-top: 1.4em;
+  background: white; }
 
-.block-users-left-side-bar-block .import_tweets {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: .6em;
-  margin-bottom: 0.6em !important; }
+.block-users-left-side-bar-block {
+  background: white; }
+  .block-users-left-side-bar-block .profile {
+    background: -moz-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, 308deg, color-stop(20%, #51ae47), color-stop(100%, #04d19d));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
+    /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#51ae47', endColorstr='#04d19d', GradientType='1');
+    /* for IE */
+    background: linear-gradient(142deg, #51ae47 20%, #04d19d 100%);
+    /* W3C */
+    color: white;
+    padding: 1em 2em;
+    height: 100%;
+    overflow: hidden;
+    margin-bottom: 2em; }
+    .block-users-left-side-bar-block .profile .img {
+      float: left;
+      height: 90px;
+      width: 90px;
+      border: 1px solid white;
+      -webkit-border-radius: 50%;
+      -khtml-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      border-radius: 50%;
+      background: #919191;
+      margin-right: .8em;
+      overflow: hidden; }
+      .block-users-left-side-bar-block .profile .img img {
+        width: 100%; }
+    .block-users-left-side-bar-block .profile .name {
+      font-weight: bold;
+      font-size: 1.5em;
+      margin-top: .5em;
+      display: block; }
+    .block-users-left-side-bar-block .profile .twitter_handle {
+      font-style: italic; }
+    .block-users-left-side-bar-block .profile ~ div {
+      font-size: 1.2em;
+      line-height: 2.5em;
+      margin: 0 1.5em; }
+      .block-users-left-side-bar-block .profile ~ div a {
+        color: #919191;
+        text-decoration: none; }
+        .block-users-left-side-bar-block .profile ~ div a:hover {
+          color: #212121; }
+      .block-users-left-side-bar-block .profile ~ div:last-child {
+        padding-bottom: 2em; }
+  .block-users-left-side-bar-block .import_tweets {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: .6em;
+    margin-bottom: 0.6em !important; }
 
 .block-users-tweets-statistics-block {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";
@@ -531,8 +553,9 @@ body {
   /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb);
   /*IE 5.5-7*/
-  margin-top: 1em;
-  margin-left: 1em; }
+  margin-top: 1.4em;
+  margin-left: 1em;
+  background: white; }
   .block-users-tweets-statistics-block .content > div {
     display: flex;
     flex-flow: row wrap;
@@ -580,3 +603,36 @@ body {
         color: #ffae00;
         position: absolute;
         right: 0; }
+
+.notifications {
+  height: 0;
+  overflow: hidden; }
+  .notifications:before {
+    content: 'notify';
+    position: absolute; }
+
+.send-tweets-form {
+  overflow: hidden; }
+  .send-tweets-form #edit-save, .send-tweets-form #edit-submit {
+    border: none;
+    padding: .5em 1em .5em 1em;
+    font-size: 1.5vw;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: block;
+    text-align: center; }
+  .send-tweets-form #edit-submit {
+    background: #2aa9e0;
+    color: white;
+    float: right; }
+  .send-tweets-form #edit-save {
+    background: white;
+    color: #2aa9e0;
+    border: 2px solid #2aa9e0;
+    float: right;
+    padding: .4em 1em; }
