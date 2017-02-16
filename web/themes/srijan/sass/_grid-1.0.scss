@@ -136,12 +136,14 @@ $width: 100;
 }
 
 /* ================================= Media Query Breakpoint ================================= */
+
+$minWidth : 20em;
 @mixin min-screen($minWidth){
   @media (min-width: $minWidth){
     @content;
   }
 }
-
+$maxWidth : 48em;
 @mixin max-screen($maxWidth){
   @media (max-width: $maxWidth){
     @content;
