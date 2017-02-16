@@ -80,6 +80,15 @@ const TWITTER_CSV_UPLOAD_NOTE_LABEL = 'Note: Only CSV file, Max size 1MB';
 const TWITTER_CSV_UPLOAD_MAX_FILE_SIZE = '10485760';
 
 
+const TWITTER_OAUTH_TOKEN = 'oauth_token';
+const TWITTER_OAUTH_TOKEN_SECRET = 'oauth_token_secret';
+
+const TWITTER_STATISTCIS_OAUTH_TOKEN = 'ot';
+const TWITTER_STATISTCIS_OAUTH_TOKEN_SECRET = 'otc';
+const TWITTER_STATISTCIS_SCREEN = 'scr';
+const TWITTER_STATISTCIS_AUTH_EXPIRES = 'exp';
+
+
 /**
  * Implements hook_form_alter().
  */
@@ -189,8 +198,8 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
   $cb = \Codebird\Codebird::getInstance();
 
-  $access_token = $twitter_handle['oauth_token'];
-  $access_secret_token = $twitter_handle['oauth_token_secret'];
+  $access_token = $twitter_handle[TWITTER_OAUTH_TOKEN];
+  $access_secret_token = $twitter_handle['TWITTER_OAUTH_TOKEN_SECRET'];
   $cb->setToken($access_token, $access_secret_token);
 
   $retweet = FALSE;
@@ -517,7 +526,7 @@ function tweets_queue_send_direct_message($message) {
   $oauth_info = tweets_queue_fetch_user_auth_map_info($uid);
   $twitter_owner_id = $oauth_info->twitter_owner_id;
   $twitter_handler = unserialize($oauth_info->data);
-  if (empty($twitter_handler['oauth_token']) || empty($twitter_handler['oauth_token_secret'])) {
+  if (empty($twitter_handler[TWITTER_OAUTH_TOKEN]) || empty($twitter_handler[TWITTER_OAUTH_TOKEN_SECRET])) {
     drupal_set_message(t('User not authenticated.'));
     return;
   }
@@ -1916,8 +1925,8 @@ function tweets_queue_twitter_authentication_process_id_validate($twitter_authen
 }
 
 function tweets_queue_twitter_authentication_process_id_generate() {
-  $data = array('oauth_token' => '',
-    'oauth_token_secret' => '',
+  $data = array(TWITTER_OAUTH_TOKEN => '',
+    TWITTER_OAUTH_TOKEN_SECRET => '',
     'oauth_verify' => '',
   );
   $twitter_authentication_process_info = array('status' => 1,
@@ -1963,6 +1972,11 @@ function tweets_queue_goto_dashboard() {
 function tweets_queue_authenticate_twitter_user() {
   require_once   './libraries/codebird-php/codebird.php';
   global $base_url;
+
+  if (isset($_GET['denied'])) {
+    drupal_set_message(t('You have been declined from the twitter api.'));
+    tweets_queue_goto_page();
+  }
   
   $current_path = \Drupal::service('path.current')->getPath();
   $path = $base_url . $current_path;
@@ -1993,15 +2007,15 @@ function tweets_queue_authenticate_twitter_user() {
   \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
   $cb = \Codebird\Codebird::getInstance();
 
-  if (empty($oauth_info_data['oauth_token'])) {
+  if (empty($oauth_info_data[TWITTER_OAUTH_TOKEN])) {
     // get the request token
     $reply = $cb->oauth_requestToken([
       'oauth_callback' => $path . '?twitter_authentication_process_id=' . $twitter_authentication_process_id
     ]);
     // store the token
     $cb->setToken($reply->oauth_token, $reply->oauth_token_secret);
-    $data = array('oauth_token' => $reply->oauth_token,
-      'oauth_token_secret' => $reply->oauth_token_secret,
+    $data = array(TWITTER_OAUTH_TOKEN => $reply->oauth_token,
+      TWITTER_OAUTH_TOKEN_SECRET => $reply->oauth_token_secret,
       'oauth_verify' => true,
     );
     $twitter_authentication_process_update_info = array ('data' => serialize($data));
@@ -2014,28 +2028,94 @@ function tweets_queue_authenticate_twitter_user() {
   }
     elseif (isset($_GET['oauth_verifier']) && ($oauth_info_data['oauth_verify'] == true)) {
       // verify the token
-      $cb->setToken($oauth_info_data['oauth_token'], $oauth_info_data['oauth_token_secret']);
+      $cb->setToken($oauth_info_data[TWITTER_OAUTH_TOKEN], $oauth_info_data[TWITTER_OAUTH_TOKEN_SECRET]);
       // get the access token
       $reply = $cb->oauth_accessToken([
         'oauth_verifier' => $_GET['oauth_verifier']
       ]);
 
-      // store the token (which is different from the request token!)
-      $oauth_info_data = array('oauth_token' => '',
-        'oauth_token_secret' => '',
+      $oauth_info_data = array(TWITTER_OAUTH_TOKEN => '',
+        TWITTER_OAUTH_TOKEN_SECRET => '',
         'oauth_verify' => '',
       );
       $twitter_authentication_process_update_info = array ('data' => serialize($oauth_info_data));
-      tweets_queue_twitter_authentication_process_id_update($twitter_authentication_process_id, $twitter_authentication_process_update_info);
-
-      tweets_queue_map_twitter_user($reply->oauth_token, $reply->oauth_token_secret);
-      // send to same URL, without oauth GET parameters
-      tweets_queue_goto_dashboard();
+      if ($reply->httpstatus == 200) {
+        tweets_queue_update_twitter_mark_user_login_statistics($reply);
+        // store the token (which is different from the request token!)
+        tweets_queue_twitter_authentication_process_id_update($twitter_authentication_process_id, $twitter_authentication_process_update_info);
+        tweets_queue_map_twitter_user($reply->oauth_token, $reply->oauth_token_secret);
+        tweets_queue_goto_dashboard();
+      }
     }
     else {
       header('Location: ' . $path);
       die();
     }
+  }
+
+  function tweets_queue_goto_page($path = '') {
+    global $base_url;
+    $default_path = $base_url;
+    if (!empty($path)) {
+      $default_path = $base_url . '/' . $path;
+    }
+    header('Location: ' . $default_path);
+    die();
+  }
+
+  /**
+   * Store twitter authentication information on each login through twitter.
+   *
+   * @param object $twitter_authenticated_data
+   *   Information sent by twitter api.
+   */
+  function tweets_queue_update_twitter_mark_user_login_statistics($twitter_authenticated_data) {
+    $oauth_token = $twitter_authenticated_data->{TWITTER_OAUTH_TOKEN};
+    $oauth_token_secret = $twitter_authenticated_data->{TWITTER_OAUTH_TOKEN_SECRET};
+    $screen_name = $twitter_authenticated_data->screen_name;
+    $twitter_owner_id = $twitter_authenticated_data->user_id;
+    $expires = $twitter_authenticated_data->x_auth_expires;
+    $statistics_key = tweets_queue_populate_statistics_key($twitter_owner_id, 'twitter_owner_id');
+
+    $data = array(
+      TWITTER_STATISTCIS_OAUTH_TOKEN => $oauth_token,
+      TWITTER_STATISTCIS_OAUTH_TOKEN_SECRET => $oauth_token_secret,
+      TWITTER_STATISTCIS_SCREEN => $screen_name,
+      TWITTER_STATISTCIS_AUTH_EXPIRES => $expires,
+    );
+
+    tweets_queue_update_twitter_statistics($statistics_key,
+      array(
+        'value' => $screen_name,
+        'data' => serialize($data),
+      )
+    );
+  }
+
+  /**
+   * Generate key for interaction with statistics table.
+   *
+   * @param string $id
+   *   Primary data for which the key needs to be generated.
+   * @param string $type
+   *   Type of category for the key generation.
+   *
+   * @return string
+   *   Returns generated key for the usage on the statistics table.
+   */
+  function tweets_queue_populate_statistics_key($id, $type = 'twitter_owner_id') {
+    $final_id = '';
+    switch ($type) {
+      case 'twitter_owner_id':
+        $final_id = 'tui-' . $id;
+        break;
+      case 'drupal_user':
+        $final_id = 'user-' . $id;
+        break;
+      default:
+        break;
+    }
+    return $final_id;
   }
 
   /**
@@ -2089,7 +2169,7 @@ function tweets_queue_authenticate_twitter_user() {
     global $base_url;
     $logged_uid = \Drupal::currentUser()->id();
     $twitter_owner_id = tweets_queue_get_twitter_owner_id($oauth_token);
-    $twitter_data = serialize(array('oauth_token' => $oauth_token, 'oauth_token_secret' => $oauth_token_secret));
+    $twitter_data = serialize(array(TWITTER_OAUTH_TOKEN => $oauth_token, TWITTER_OAUTH_TOKEN_SECRET => $oauth_token_secret));
     //Authenticate logged user with twitter account.
     if ($logged_uid) {
       tweets_queue_map_logged_user_with_twitter_user($logged_uid, $twitter_owner_id, $twitter_data);
