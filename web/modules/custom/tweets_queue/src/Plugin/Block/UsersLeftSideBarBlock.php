@@ -21,10 +21,12 @@ class UsersLeftSideBarBlock extends BlockBase {
    */
   public function build() {
     global $base_url;
-
+    $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
+    $user_twitter_profile_info = unserialize($twitter_profile_info);
     $picture = '';
-    $name = "lorem ipsum";
-    $twitter_handle = "@loremipsum";
+    $name = $user_twitter_profile_info->name;
+    $twitter_handle = '@' . $user_twitter_profile_info->screen_name;
+    $picture = $user_twitter_profile_info->profile_image_url;
     $profile_img = "<img src='" . $picture . "'></img>";
     $twitter_profile_output = "<div class='profile'>
       <span class='img'>" . $profile_img . "</span>
