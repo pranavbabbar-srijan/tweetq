@@ -426,7 +426,7 @@ body {
 				color: $dark;
 				border-right: 1px solid rgba(0,0,0,.1);
 				width: 20%;
-				padding: 1em;
+				padding: 1.4em;
 				.text {
 					display: block;
 					font-family: 'Roboto', sans-serif;
@@ -511,6 +511,7 @@ body {
 		background: $twitter;
 		color: white;
 		float: right;
+		margin-right: 0;
 	}
 	#edit-save {
 		background: white;
@@ -518,5 +519,10 @@ body {
 		border: 2px solid $twitter;
 		float: right;
 		padding: .4em 1em;
+	}
+	.form-textarea {
+		border-color: rgba(0,0,0,0.1);
+		@include border-radius(5px);
+		padding: 1em;
 	}
 }

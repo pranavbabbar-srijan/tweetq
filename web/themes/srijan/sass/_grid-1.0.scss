@@ -137,7 +137,7 @@ $width: 100;
 
 /* ================================= Media Query Breakpoint ================================= */
 
-$minWidth : 20em;
+$minWidth : 23.4375em;
 @mixin min-screen($minWidth){
   @media (min-width: $minWidth){
     @content;
