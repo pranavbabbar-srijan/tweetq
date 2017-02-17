@@ -25,9 +25,12 @@ class SendTweetsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     tweets_queue_check_logged_user_mapping(FALSE);
     $form['message'] = array(
-      '#type' => 'textfield',
+      '#type' => 'textarea',
       '#title' => t('Create a Tweet'),
       '#required' => TRUE,
+      '#attributes' => array (
+        'placeholder' => t("What's happening ?")
+      ),
     );
 
     $form['save'] = array(
