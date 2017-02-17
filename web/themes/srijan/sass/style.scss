@@ -51,6 +51,29 @@
 
 .block-users-dashboard-header-block {
 	float: right;
+	.profile {
+		float: right;
+		display: flex;
+		flex-flow: row wrap;
+		border-left: 1px solid $gray;
+		margin-top: -.8em;
+	    padding-top: 0.8em;
+	    margin-bottom: -0.35em;
+	    padding-bottom: .8em;
+	    padding-left: .6em;
+		.img {
+			width: 40px;
+			height: 40px;
+			@include border-radius(50%);
+			background: $gray;
+			display: block;
+		}
+		.name {
+			margin-top: 8px;
+    		margin-left: 10px;
+    		color: $gray;
+		}
+	}
 }
 .site-branding__logo {
 	display: block;
@@ -343,7 +366,8 @@ body {
 		box-shadow: 0px 0px 3px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
 		margin-top: 0;
-		padding-top: 1.4em;	
+		padding-top: .8em;
+		padding-bottom: .3em;	
 		background: white;
 	}
 }
@@ -524,5 +548,50 @@ body {
 		border-color: rgba(0,0,0,0.1);
 		@include border-radius(5px);
 		padding: 1em;
+	}
+}
+
+.-form-tweets-queue-csv-upload {
+	label {
+		@extend %none;
+	}
+	.js-form-managed-file {
+		border: 1px solid rgba(0,0,0,.1);
+		border-radius: 6px 0px 0px 6px;
+		position: relative;
+		&:before {
+		    content: "choose file";
+		    position: absolute;
+		    top: 10px;
+		    left: 20px;
+		    text-transform: capitalize;
+		    color: rgba(0,0,0,0.2);
+		}
+	}
+	.js-form-file {
+		width: 98%;
+		padding: .5em;
+		opacity: 0;
+	}
+	#edit-managed-file-upload .button {
+		position: absolute;
+	    right: -3px;
+	    top: -1px;
+	    background: $twitter;
+		color: white;
+		margin-right: 0;
+		border: none;
+	    padding: .7em 1em;
+	    font-size: 1em;
+	    @include border-radius( 0 4px 4px 0);
+	    text-decoration: none;
+	    display: block;
+		text-align: center;
+	}
+	.description {
+		font-size: .8em;
+		font-style: italic;
+		margin-top: 1em;
+		color: $gray;
 	}
 }
