@@ -46,7 +46,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
     </div>";
 
     $output = "<div class='notifications'>" . $message_history_count_output . 
-      $message_history_data . $twitter_profile_output . "</div>";
+      $message_history_data . "</div>" . $twitter_profile_output;
 
     return array(
       '#type' => 'markup',
