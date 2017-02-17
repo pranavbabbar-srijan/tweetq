@@ -30,7 +30,6 @@ class SendTweetsForm extends FormBase {
       '#required' => TRUE,
     );
 
-    tweets_queue_show_twitter_signin_message($form);
     $form['save'] = array(
       '#type' => 'submit',
       '#value' => t('Save for Later'),

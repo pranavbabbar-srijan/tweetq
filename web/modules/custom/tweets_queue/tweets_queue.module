@@ -90,6 +90,8 @@ const TWITTER_STATISTCIS_OAUTH_TOKEN_SECRET = 'otc';
 const TWITTER_STATISTCIS_SCREEN = 'scr';
 const TWITTER_STATISTCIS_AUTH_EXPIRES = 'exp';
 const TWITTER_HANDLER_PROFILE = 'thp';
+const TWITTER_CONNECT_HEADER = 'Connect with Twitter to Continue';
+const TWITTER_CONNECT_TEXT = 'Connect with Twitter';
 
 
 /**
@@ -2453,15 +2455,14 @@ function tweets_queue_show_twitter_authentiation_message() {
  * @param integer $weight [description]
  * @return [type]          [description]
  */
-function tweets_queue_show_twitter_signin_message(&$form, $weight = 12) {
+function tweets_queue_show_twitter_signin_block(&$form, $weight = 12) {
   global $base_url;
   if (!isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
     $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
-    $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
-    $form['or_separator'] = array(
-      '#markup' => t($url),
-      '#weight' => $weight,
-    );
+    $header_output =  "<span class='signin-twitter-text'>" . TWITTER_CONNECT_HEADER . "<span>";
+    $connect_output = "<span class='twitter-connect'><a href='" . $twitter_login_path ."'>" . TWITTER_CONNECT_TEXT . "</a></span>";
+    $output = "<div class='twitter-connect'>" . $header_output . $connect_output ."</div>";
+    return $output;
   }
 }
 
