@@ -25,7 +25,9 @@ class UsersLeftSideBarBlock extends BlockBase {
     $user_twitter_profile_info = unserialize($twitter_profile_info);
     $picture = '';
     $name = $user_twitter_profile_info->name;
-    $twitter_handle = '@' . $user_twitter_profile_info->screen_name;
+    $twitter_handle = $user_twitter_profile_info->screen_name;
+    $twitter_handle = (!empty($twitter_handle)) ? '@' . $twitter_handle : '';
+
     $picture = $user_twitter_profile_info->profile_image_url;
     $profile_img = "<img src='" . $picture . "'></img>";
     $twitter_profile_output = "<div class='profile'>
