@@ -73,6 +73,15 @@
     		margin-left: 10px;
     		color: $gray;
 		}
+		+ a {
+			display: block;
+			height: 10px;
+			width: 10px;
+			background: red;
+			float: right;
+			margin-right: 1em;
+			&.active {}
+		}
 	}
 }
 .site-branding__logo {
@@ -512,9 +521,9 @@ body {
 .notifications {
 	height: 0;
 	overflow: hidden;
-	&:before {
-		content: 'notify';
-		position: absolute;
+	float: right;
+	&.active {
+		height: auto;
 	}
 }
 .send-tweets-form {
