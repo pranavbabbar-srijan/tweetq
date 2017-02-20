@@ -8,6 +8,7 @@ core: 8.x
 
 libraries:
   - srijan/stylesheets
+  - srijan/customjs
 
 regions:
   header: Header

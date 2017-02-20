@@ -14,8 +14,6 @@ stylesheets:
 
 # js
 
-fontawesome:
+customjs:
   js:
-    base:
-      'https://use.fontawesome.com/29fb3837e2.js': { external: true }
-
+    js/custom.js:
