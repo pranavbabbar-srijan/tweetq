@@ -1909,6 +1909,7 @@ function tweets_queue_fetch_all_users_tweet_list($valid_tweets = 1) {
   }
   return $user_list;
 }
+
 function tweets_queue_twitter_authentication_process_id_fetch() {
   $twitter_authentication_process_id = '';
   if (isset($_REQUEST[TWITTER_AUTHENTICATION_PROCESS_ID]) && intval($_REQUEST[TWITTER_AUTHENTICATION_PROCESS_ID] > 0)) {
@@ -2533,4 +2534,19 @@ function tweets_queue_update_twitter_mark_user_login_statistics($twitter_owner_i
       'data' => serialize($twitter_authenticated_data),
     )
   );
+}
+
+function tweets_queue_cleanup_deleted_users() {
+  $orphaned_auth_map_entries = twweets_queue_fetch_orphaned_autm_map_entries();
+  echo '<pre>', print_r($orphaned_auth_map_entries);
+}
+
+function twweets_queue_fetch_orphaned_autm_map_entries() {
+  $oauth_map_info = array();
+  $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
+  $query->fields('p', ['uid', TWITTER_OWNER_ID, 'data', 'status', 'created', 'changed']);
+  $query->leftJoin('users', 'u', 'p.uid = u.uid');
+  $query->isNull('u.uuid');
+  $oauth_map_info = $query->execute()->fetchObject();
+  return $oauth_map_info;
 }
