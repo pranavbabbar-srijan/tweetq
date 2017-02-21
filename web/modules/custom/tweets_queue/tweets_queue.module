@@ -93,6 +93,8 @@ const TWITTER_HANDLER_PROFILE = 'thp';
 const TWITTER_CONNECT_HEADER = 'Connect with Twitter to Continue';
 const TWITTER_CONNECT_TEXT = 'Connect with Twitter';
 
+const TWITTER_TWEET_FORM_ROUTE_NAME = 'tweets_queue_tweet_form.settings';
+
 
 /**
  * Implements hook_form_alter().

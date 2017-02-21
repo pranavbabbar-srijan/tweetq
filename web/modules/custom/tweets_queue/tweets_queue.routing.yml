@@ -42,9 +42,9 @@ tweets_queue.file_upload:
     _role: 'twitter_client+administrator'
 
 tweets_queue_tweet_form.settings:
-  path: '/admin/config/services/tweets_queue/tweet_form'
+  path: '/dashboard/tweet_form'
   defaults:
     _form: '\Drupal\tweets_queue\Form\TweetsQueueTweetForm'
-    _title: 'Twitter tweet Form'
+    _title: 'Edit Tweet'
   requirements:
     _role: 'twitter_client+administrator'

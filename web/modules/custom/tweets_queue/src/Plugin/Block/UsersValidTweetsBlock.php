@@ -5,6 +5,7 @@
  */
 namespace Drupal\tweets_queue\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Url;
 
 /**
  * Provides a 'twitter' block.
@@ -66,11 +67,22 @@ class UsersValidTweetsBlock extends BlockBase {
   }
 
   private function compileData($row) {
+    global $base_url;
+    $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME, ['nid' => $row->nid,
+      'action' => 'edit']);
+    $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME, ['nid' => $row->nid,
+      'action' => 'delete']);
+    $edit_url_link = \Drupal::l(t('Edit'), $edit_url);
+
+    $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
+
     $data = array();
     $data['message'] = $row->message;
     $data['size'] = $row->size;
     $data['created'] = $row->created;
     $data['changed'] = $row->changed;
+    $data['edit_link'] = $edit_url_link ;
+    $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
   }
 }
