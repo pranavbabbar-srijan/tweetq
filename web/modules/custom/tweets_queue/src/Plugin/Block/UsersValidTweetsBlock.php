@@ -67,7 +67,6 @@ class UsersValidTweetsBlock extends BlockBase {
   }
 
   private function compileData($row) {
-    global $base_url;
     $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME, ['nid' => $row->nid,
       'action' => 'edit']);
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME, ['nid' => $row->nid,
@@ -79,8 +78,8 @@ class UsersValidTweetsBlock extends BlockBase {
     $data = array();
     $data['message'] = $row->message;
     $data['size'] = $row->size;
-    $data['created'] = $row->created;
-    $data['changed'] = $row->changed;
+    $data['created'] = date(TWITTER_DATE_FORMAT, $row->created);
+    $data['changed'] = date(TWITTER_DATE_FORMAT, $row->changed);
     $data['edit_link'] = $edit_url_link ;
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
