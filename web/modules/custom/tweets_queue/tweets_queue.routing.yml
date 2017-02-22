@@ -50,7 +50,7 @@ tweets_queue_tweet_form.settings:
     _role: 'twitter_client+administrator'
 
 tweets_queue_tweeted_listing.settings:
-  path: '/dashboard/tweeted-listing'
+  path: '/dashboard/valid-tweets/tweeted-listing'
   defaults:
     _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::content'
     _title: 'Tweeted Tweets'
