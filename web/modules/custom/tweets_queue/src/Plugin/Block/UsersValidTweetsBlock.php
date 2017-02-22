@@ -29,6 +29,8 @@ class UsersValidTweetsBlock extends BlockBase {
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
     $query->condition('p.size', 140, '<=');
+    $query->condition('p.archived', 1, '!=');
+    $query->condition('p.tweet_id', '', '=');
     $query->condition('p.uid', $uid);
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
