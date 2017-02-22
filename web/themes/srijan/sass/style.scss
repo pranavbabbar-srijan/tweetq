@@ -357,7 +357,7 @@ body {
 			}
 		}
 	}
-	#block-srijan-content {
+	.block-users-valid-tweets-block {
 		padding: 1em;
 		margin-left: 1em;
 		margin-top: 0;
@@ -367,6 +367,37 @@ body {
 		box-shadow: 0px 0px 3px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
 		background: white;
+		.item-list {
+			.header {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: flex-start;
+				li {
+					width: 12.5%;
+					margin-left: 0;
+					&:first-child {
+						width: 50%;
+					}
+				}
+			}
+			+ .item-list {
+				> ul > li {
+					margin: 0;
+				}
+				ul ul {
+					display: flex;
+					flex-flow: row wrap;
+					justify-content: flex-start;
+					li {
+						width: 12.5%;
+						margin-left: 0;
+						&:first-child {
+							width: 50%;
+						}
+					}
+				}
+			}
+		}
 	}
 	#header {
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/

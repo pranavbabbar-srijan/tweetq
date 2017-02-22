@@ -482,7 +482,7 @@ body {
       font-weight: normal;
       color: #919191; }
 
-.user-logged-in #block-srijan-content {
+.user-logged-in .block-users-valid-tweets-block {
   padding: 1em;
   margin-left: 1em;
   margin-top: 0;
@@ -497,6 +497,26 @@ body {
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
   /*IE 5.5-7*/
   background: white; }
+  .user-logged-in .block-users-valid-tweets-block .item-list .header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start; }
+    .user-logged-in .block-users-valid-tweets-block .item-list .header li {
+      width: 12.5%;
+      margin-left: 0; }
+      .user-logged-in .block-users-valid-tweets-block .item-list .header li:first-child {
+        width: 50%; }
+  .user-logged-in .block-users-valid-tweets-block .item-list + .item-list > ul > li {
+    margin: 0; }
+  .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start; }
+    .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li {
+      width: 12.5%;
+      margin-left: 0; }
+      .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:first-child {
+        width: 50%; }
 
 .user-logged-in #header {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
