@@ -7,7 +7,7 @@ use Drupal\Core\Controller\ControllerBase;
 /**
  * An example controller.
  */
-class TweetsQueueNewTweetsController extends ControllerBase {
+class TweetsQueueTweetController extends ControllerBase {
 
   /**
    * {@inheritdoc}
