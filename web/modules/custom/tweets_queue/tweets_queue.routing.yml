@@ -88,3 +88,11 @@ tweets_queue_archived_tweets.settings:
     _title: 'Archived Tweets'
   requirements:
     _role: 'twitter_client+administrator'
+
+tweets_queue_all_tweets.settings:
+  path: '/dashboard/all-tweets'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::content'
+    _title: 'All Tweets'
+  requirements:
+    _role: 'twitter_client+administrator'

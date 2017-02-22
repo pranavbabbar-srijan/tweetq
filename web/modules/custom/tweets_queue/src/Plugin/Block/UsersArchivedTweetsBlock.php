@@ -5,6 +5,7 @@
  */
 namespace Drupal\tweets_queue\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Url;
 
 /**
  * Provides a 'twitter' block.
@@ -28,7 +29,6 @@ class UsersArchivedTweetsBlock extends BlockBase {
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
-    // Only bring active handlers.
     $query->condition('p.archived', 1, '=');
     $query->condition('p.tweet_id', '', '!=');
     $query->condition('p.uid', $uid);
@@ -49,10 +49,9 @@ class UsersArchivedTweetsBlock extends BlockBase {
         '#markup' => ''
       );
 
-      $build['valid_tweets'] = array(
-        '#theme' => 'table',
-        '#header' => $header,
-        '#rows' => $rows
+      $build['archived_tweets'] = array(
+        '#theme' => 'item_list',
+        '#items' => $rows
       );
       $build['pager'] = array(
        '#type' => 'pager'
@@ -68,11 +67,19 @@ class UsersArchivedTweetsBlock extends BlockBase {
   }
 
   private function compileData($row) {
+    $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
+      ['nid' => $row->nid, 'action' => 'delete'],
+      ['attributes' => ['class' => 'delete']]
+    );
+    $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();
     $data['message'] = $row->message;
     $data['size'] = $row->size;
-    $data['created'] = $row->created;
-    $data['changed'] = $row->changed;
+    $data['created'] = date(TWITTER_DATE_FORMAT, $row->created);
+    $data['tweet_data'] = date(TWITTER_DATE_FORMAT, $row->created);//@TODO
+    $data['changed'] = date(TWITTER_DATE_FORMAT, $row->changed);
+    $data['retweeted'] = t('24 times');
+    $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
   }
 }

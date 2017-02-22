@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\tweets_queue\Plugin\Block\UsersInValidTweetsBlock.
+ * Contains \Drupal\tweets_queue\Plugin\Block\UsersAllTweetsBlock.
  */
 namespace Drupal\tweets_queue\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
@@ -11,12 +11,12 @@ use Drupal\Core\Url;
  * Provides a 'twitter' block.
  *
  * @Block(
- *   id = "users_in_valid_tweets_block",
- *   admin_label = @Translation("Users invalid tweets block"),
- *   category = @Translation("Twitter users invalid tweets block")
+ *   id = "users_all_tweets_block",
+ *   admin_label = @Translation("Users all tweets block"),
+ *   category = @Translation("Twitter users all tweets block")
  * )
  */
-class UsersInValidTweetsBlock extends BlockBase {
+class UsersAllTweetsBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
@@ -24,11 +24,11 @@ class UsersInValidTweetsBlock extends BlockBase {
     global $base_url;
     $uid = \Drupal::currentUser()->id();
     
-    $header = array(t('Message'), t('Size'), t('Created'), t('Last Updated'), t('Edit'));
+    $header = array(t('Message'), t('Size'), t('Created'), t('Tweet Date'),
+      t('Last Updated'), t('Retweeted'), t('Delete'));
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
-    $query->condition('p.size', 140, '>');
     $query->condition('p.uid', $uid);
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
@@ -47,12 +47,6 @@ class UsersInValidTweetsBlock extends BlockBase {
         '#markup' => ''
       );
 
-      $build['header'] = array(
-        '#theme' => 'item_list',
-        '#items' => $header,
-        '#attributes' => array('class' => array('header')),
-      );
-
       $build['archived_tweets'] = array(
         '#theme' => 'item_list',
         '#items' => $rows
@@ -65,29 +59,24 @@ class UsersInValidTweetsBlock extends BlockBase {
     if (!$total) {
       return array(
         '#type' => 'markup',
-        '#markup' => t('No invalid tweets found.'),
+        '#markup' => t('No tweets found.'),
       );
     }
   }
 
   private function compileData($row) {
-    $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
-      ['nid' => $row->nid, 'action' => 'edit'],
-      ['attributes' => ['class' => 'edit']]
-    );
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'delete'],
       ['attributes' => ['class' => 'delete']]
     );
-    $edit_url_link = \Drupal::l(t('Edit'), $edit_url);
-
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();
     $data['message'] = $row->message;
     $data['size'] = $row->size;
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->created);
+    $data['tweet_data'] = date(TWITTER_DATE_FORMAT, $row->created);//@TODO
     $data['changed'] = date(TWITTER_DATE_FORMAT, $row->changed);
-    $data['edit_link'] = $edit_url_link ;
+    $data['retweeted'] = t('24 times');
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
   }
