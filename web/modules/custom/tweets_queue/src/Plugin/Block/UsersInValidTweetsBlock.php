@@ -48,10 +48,15 @@ class UsersInValidTweetsBlock extends BlockBase {
         '#markup' => ''
       );
 
+      $build['header'] = array(
+        '#theme' => 'item_list',
+        '#items' => $header,
+        '#attributes' => array('class' => array('header')),
+      );
+
       $build['valid_tweets'] = array(
-        '#theme' => 'table',
-        '#header' => $header,
-        '#rows' => $rows
+        '#theme' => 'item_list',
+        '#items' => $rows
       );
       $build['pager'] = array(
        '#type' => 'pager'
@@ -67,10 +72,14 @@ class UsersInValidTweetsBlock extends BlockBase {
   }
 
   private function compileData($row) {
-    $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME, ['nid' => $row->nid,
-      'action' => 'edit']);
-    $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME, ['nid' => $row->nid,
-      'action' => 'delete']);
+    $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
+      ['nid' => $row->nid, 'action' => 'edit'],
+      ['attributes' => ['class' => 'edit']]
+    );
+    $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
+      ['nid' => $row->nid, 'action' => 'delete'],
+      ['attributes' => ['class' => 'delete']]
+    );
     $edit_url_link = \Drupal::l(t('Edit'), $edit_url);
 
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);

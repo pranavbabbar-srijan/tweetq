@@ -28,8 +28,7 @@ class UsersValidTweetsBlock extends BlockBase {
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
-    // Only bring active handlers.
-    $query->condition('p.size', 140, '<');
+    $query->condition('p.size', 140, '<=');
     $query->condition('p.uid', $uid);
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
@@ -47,12 +46,6 @@ class UsersValidTweetsBlock extends BlockBase {
       $build = array(
         '#markup' => ''
       );
-
-      // $build['valid_tweets'] = array(
-      //   '#theme' => 'table',
-      //   '#header' => $header,
-      //   '#rows' => $rows
-      // );
 
       $build['header'] = array(
         '#theme' => 'item_list',
