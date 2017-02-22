@@ -67,12 +67,16 @@ class UsersValidTweetsBlock extends BlockBase {
   }
 
   private function compileData($row) {
-    $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME, ['nid' => $row->nid,
-      'action' => 'edit']);
-    $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME, ['nid' => $row->nid,
-      'action' => 'delete']);
-    $edit_url_link = \Drupal::l(t('Edit'), $edit_url);
+    $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
+      ['nid' => $row->nid, 'action' => 'edit'],
+      ['attributes' => ['class' => 'edit']]
+    );
+    $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
+      ['nid' => $row->nid, 'action' => 'delete'],
+      ['attributes' => ['class' => 'delete']]
+    );
 
+    $edit_url_link = \Drupal::l(t("Edit"), $edit_url);
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
 
     $data = array();
