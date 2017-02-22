@@ -47,7 +47,13 @@ class UsersAllTweetsBlock extends BlockBase {
         '#markup' => ''
       );
 
-      $build['archived_tweets'] = array(
+      $build['header'] = array(
+        '#theme' => 'item_list',
+        '#items' => $header,
+        '#attributes' => array('class' => array('header')),
+      );
+
+      $build['all_tweets'] = array(
         '#theme' => 'item_list',
         '#items' => $rows
       );
