@@ -44,11 +44,9 @@ class UsersTweetedTweetsBlock extends BlockBase {
       $rows[] = $this->compileData($row);
     }
 
+    $build = array();
+    tweets_queue_show_valid_tweets_header($build);
     if ($total) {
-      $build = array(
-        '#markup' => ''
-      );
-
       $build['header'] = array(
         '#theme' => 'item_list',
         '#items' => $header,
@@ -65,10 +63,11 @@ class UsersTweetedTweetsBlock extends BlockBase {
       return $build;
     }
     if (!$total) {
-      return array(
+      $build['no_found'] = array(
         '#type' => 'markup',
         '#markup' => t('No tweets found.'),
       );
+      return $build;
     }
   }
 

@@ -44,32 +44,11 @@ class UsersValidTweetsBlock extends BlockBase {
       $rows[] = $this->compileData($row);
     }
 
+    $build = array();
+    tweets_queue_show_valid_tweets_header($build);
+
     if ($total) {
-
-      $valid_new_tweets = tweets_queue_get_users_total_tweets_count(USERS_VALID_NEW_TWEET);
-      $valid_tweeted_tweets = tweets_queue_get_users_total_tweets_count(USERS_VALID_TWEETED_TWEET);
-
-      $new_tweet_url = Url::fromRoute(TWITTER_NEW_TWEET_ROUTE_NAME, [],
-        ['attributes' => ['class' => 'new_tweets']]
-      );
-      $new_tweet_url_link = \Drupal::l(t('New Tweets(@new_tweet)',
-        array('@new_tweet' => $valid_new_tweets)), $new_tweet_url);
-
-      $tweeted_tweet_url = Url::fromRoute(TWITTER_TWEETED_TWEET_ROUTE_NAME, [],
-        ['attributes' => ['class' => 'tweeted_tweets']]
-      );
-      $tweeted_url_link = \Drupal::l(t('Tweeted(@total_tweeted)',
-        array('@total_tweeted' => $valid_tweeted_tweets)), $tweeted_tweet_url);
-
-      $build['new_tweets'] = array(
-        '#markup' => $new_tweet_url_link
-      );
-
-      $build['tweets_tweets'] = array(
-        '#markup' => $tweeted_url_link
-      );
-
-      $build['header'] = array(
+       $build['header'] = array(
         '#theme' => 'item_list',
         '#items' => $header,
         '#attributes' => array('class' => array('header')),
@@ -86,10 +65,11 @@ class UsersValidTweetsBlock extends BlockBase {
       return $build;
     }
     if (!$total) {
-      return array(
+      $build['no_found'] = array(
         '#type' => 'markup',
         '#markup' => t('No tweets found.'),
       );
+      return $build;
     }
   }
 
