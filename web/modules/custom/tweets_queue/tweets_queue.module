@@ -99,6 +99,16 @@ const TWITTER_DATE_FORMAT = 'm/d/Y';
 const TWITTER_TWEET_FORM_ROUTE_NAME = 'tweets_queue_tweet_form.settings';
 const TWITTER_TWEETED_TWEET_ROUTE_NAME = 'tweets_queue_tweeted_listing.settings';
 const TWITTER_NEW_TWEET_ROUTE_NAME = 'tweets_queue_new_tweet_listing.settings';
+const TWITTER_VALID_TWEETS_ROUTE_NAME = 'tweets_queue_valid_tweets.settings';
+const TWITTER_INVALID_TWEETS_ROUTE_NAME = 'tweets_queue_invalid_tweets.settings';
+const TWITTER_ARCHIVED_TWEETS_ROUTE_NAME = 'tweets_queue_archived_tweets.settings';
+const TWITTER_ALL_TWEETS_ROUTE_NAME = 'tweets_queue_all_tweets.settings';
+
+const USERS_VALID_TWEET = 'users_valid_tweet';
+const USERS_INVALID_TWEET = 'users_invalid_tweet';
+const USERS_ARCHIVED_TWEET = 'users_archived_tweet';
+const USERS_VALID_NEW_TWEET = 'users_valid_new_tweet';
+const USERS_VALID_TWEETED_TWEET = 'users_valid_tweeted_tweet';
 
 
 /**
@@ -2556,4 +2566,37 @@ function twweets_queue_fetch_orphaned_autm_map_entries() {
   $query->isNull('u.uuid');
   $oauth_map_info = $query->execute()->fetchObject();
   return $oauth_map_info;
+}
+
+function tweets_queue_get_users_total_tweets_count($section = USERS_VALID_TWEET) {
+  $count = 0;
+  $uid = \Drupal::currentUser()->id();
+  $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
+  $query->addExpression("count(nid)", "total");
+  $query->condition('p.uid', $uid);
+  switch ($section) {
+    case USERS_VALID_TWEET:
+      $query->condition('p.size', '140', '<=');
+      $query->condition('p.archived', '1', '!=');
+      break;
+    case USERS_INVALID_TWEET:
+      $query->condition('p.size', '140', '>');
+      break;
+    case USERS_ARCHIVED_TWEET:
+      $query->condition('p.archived', '1', '=');
+      break;
+    case USERS_VALID_TWEETED_TWEET:
+      $query->condition('p.archived', '1', '!=');
+      $query->condition('p.tweet_id', '', '!=');
+      break;
+    case USERS_VALID_NEW_TWEET:
+      $query->condition('p.archived', '1', '!=');
+      $query->condition('p.tweet_id', '', '=');
+      $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT, '<=');
+      break;
+    default:
+      break;
+  }
+  $total = $query->execute()->fetchField();
+  return $total;
 }
