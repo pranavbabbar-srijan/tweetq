@@ -43,8 +43,23 @@ class UsersValidTweetsBlock extends BlockBase {
     }
 
     if ($total) {
-      $build = array(
-        '#markup' => ''
+
+      $new_tweet_url = Url::fromRoute(TWITTER_NEW_TWEET_ROUTE_NAME, [],
+        ['attributes' => ['class' => 'new_tweets']]
+      );
+      $new_tweet_url_link = \Drupal::l(t("New Tweets(1)"), $new_tweet_url);
+
+      $tweeted_tweet_url = Url::fromRoute(TWITTER_TWEETED_TWEET_ROUTE_NAME, [],
+        ['attributes' => ['class' => 'tweeted_tweets']]
+      );
+      $tweeted_url_link = \Drupal::l(t("Tweeted(14)"), $tweeted_tweet_url);
+
+      $build['new_tweets'] = array(
+        '#markup' => $new_tweet_url_link
+      );
+
+      $build['tweets_tweets'] = array(
+        '#markup' => $tweeted_url_link
       );
 
       $build['header'] = array(

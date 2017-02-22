@@ -97,6 +97,8 @@ const TWITTER_DATE_FORMAT = 'm/d/Y';
 
 
 const TWITTER_TWEET_FORM_ROUTE_NAME = 'tweets_queue_tweet_form.settings';
+const TWITTER_TWEETED_TWEET_ROUTE_NAME = 'tweets_queue_tweeted_listing.settings';
+const TWITTER_NEW_TWEET_ROUTE_NAME = 'tweets_queue_new_tweet_listing.settings';
 
 
 /**
