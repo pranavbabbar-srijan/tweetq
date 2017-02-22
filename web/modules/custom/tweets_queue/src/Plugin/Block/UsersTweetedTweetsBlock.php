@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\tweets_queue\Plugin\Block\UsersArchivedTweetsBlock.
+ * Contains \Drupal\tweets_queue\Plugin\Block\UsersTweetedTweetsBlock.
  */
 namespace Drupal\tweets_queue\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
@@ -11,12 +11,12 @@ use Drupal\Core\Url;
  * Provides a 'twitter' block.
  *
  * @Block(
- *   id = "users_archived_tweets_block",
- *   admin_label = @Translation("Users archived tweets block"),
- *   category = @Translation("Twitter users archived tweets block")
+ *   id = "users_tweeted_tweets_block",
+ *   admin_label = @Translation("Users tweeted tweets block"),
+ *   category = @Translation("Twitter users tweeted tweets block")
  * )
  */
-class UsersArchivedTweetsBlock extends BlockBase {
+class UsersTweetedTweetsBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
@@ -29,7 +29,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
-    $query->condition('p.archived', 1, '=');
+    $query->condition('p.archived', 1, '!=');
     $query->condition('p.tweet_id', '', '!=');
     $query->condition('p.uid', $uid);
 
@@ -55,7 +55,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
         '#attributes' => array('class' => array('header')),
       );
 
-      $build['archived_tweets'] = array(
+      $build['tweeted_tweets'] = array(
         '#theme' => 'item_list',
         '#items' => $rows
       );
@@ -73,10 +73,15 @@ class UsersArchivedTweetsBlock extends BlockBase {
   }
 
   private function compileData($row) {
+    $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
+      ['nid' => $row->nid, 'action' => 'edit'],
+      ['attributes' => ['class' => 'edit']]
+    );
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'delete'],
       ['attributes' => ['class' => 'delete']]
     );
+    $edit_url_link = \Drupal::l(t("Edit"), $edit_url);
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();
     $data['message'] = $row->message;
@@ -85,6 +90,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
     $data['tweet_data'] = date(TWITTER_DATE_FORMAT, $row->created);//@TODO
     $data['changed'] = date(TWITTER_DATE_FORMAT, $row->changed);
     $data['retweeted'] = t('24 times');
+    $data['edit_link'] = $edit_url_link ;
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
   }
