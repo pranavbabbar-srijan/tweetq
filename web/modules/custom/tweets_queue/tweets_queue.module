@@ -2160,11 +2160,13 @@ function tweets_queue_authenticate_twitter_user() {
   }
 
   function tweets_queue_set_user_twitter_session() {
-    $_SESSION[TWITTER_USER_AUTHORIZED] = 1;
+    $uid = \Drupal::currentUser()->id();
+    $_SESSION[$uid][TWITTER_USER_AUTHORIZED] = 1;
   }
 
   function tweets_queue_unset_user_twitter_session() {
-    unset($_SESSION[TWITTER_USER_AUTHORIZED]);
+    $uid = \Drupal::currentUser()->id();
+    unset($_SESSION[$uid][TWITTER_USER_AUTHORIZED]);
   }
 
   function tweets_queue_map_twitter_user($twitter_owner_id, $oauth_token, $oauth_token_secret, $twitter_profile_info) {
@@ -2366,6 +2368,7 @@ function tweets_queue_update_twitter_tweets_counter_statistics($name) {
  *   Returns statistics value.
  */
 function tweets_queue_fetch_twitter_statistics_info($name = 'tweets_count') {
+  $uid = \Drupal::currentUser()->id();
   $statistics_info = array();
   $query = \Drupal::database()->select(TWITTER_STATISTICS_TABLE, 'p');
   switch($name) {
@@ -2378,7 +2381,7 @@ function tweets_queue_fetch_twitter_statistics_info($name = 'tweets_count') {
       $query->addExpression("sum(value)", "total");
       break;
     case TWITTER_HANDLER_PROFILE:
-      $twitter_owner_id = $_SESSION[TWITTER_OWNER_ID];
+      $twitter_owner_id = $_SESSION[$uid][TWITTER_OWNER_ID];
       $query->addField('p', 'data');
       $profile_key = tweets_queue_populate_statistics_key($twitter_owner_id, TWITTER_HANDLER_PROFILE);
       $query->condition('p.name', $profile_key, '=');
@@ -2433,13 +2436,13 @@ function tweets_queue_check_logged_user_mapping($redirect = TRUE) {
   $uid = \Drupal::currentUser()->id();
   $mapped = FALSE;
   if ($uid) {
-    if (isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
+    if (isset($_SESSION[$uid][TWITTER_USER_AUTHORIZED])) {
       $mapped = TRUE;
     }
     $twitter_owner_id = tweets_queue_check_twitter_user_presence($uid);
     if ($twitter_owner_id) {
-      $_SESSION[TWITTER_USER_AUTHORIZED] = 1;
-      $_SESSION[TWITTER_OWNER_ID] = $twitter_owner_id;
+      $_SESSION[$uid][TWITTER_USER_AUTHORIZED] = 1;
+      $_SESSION[$uid][TWITTER_OWNER_ID] = $twitter_owner_id;
     }
     if ($mapped && $redirect) {
       tweets_queue_goto_dashboard();
@@ -2451,15 +2454,15 @@ function tweets_queue_show_twitter_authentiation_message() {
   $uid = \Drupal::currentUser()->id();
   $mapped = FALSE;
   if ($uid) {
-    if (isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
+    if (isset($_SESSION[$uid][TWITTER_USER_AUTHORIZED])) {
       $mapped = TRUE;
     }
     $twitter_owner_id = tweets_queue_check_twitter_user_presence($uid);
     if ($twitter_owner_id) {
-      $_SESSION[TWITTER_USER_AUTHORIZED] = 1;
-      $_SESSION[TWITTER_OWNER_ID] = $twitter_owner_id;
+      $_SESSION[$uid][TWITTER_USER_AUTHORIZED] = 1;
+      $_SESSION[$uid][TWITTER_OWNER_ID] = $twitter_owner_id;
     }
-    if (!isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
+    if (!isset($_SESSION[$uid][TWITTER_USER_AUTHORIZED])) {
       drupal_set_message(t('You have not completed the twitter authentication.'));
       drupal_set_message(t('You need to complete the authentication process.'));
     }
@@ -2475,7 +2478,8 @@ function tweets_queue_show_twitter_authentiation_message() {
  */
 function tweets_queue_show_twitter_signin_block(&$form, $weight = 12) {
   global $base_url;
-  if (!isset($_SESSION[TWITTER_USER_AUTHORIZED])) {
+  $uid = \Drupal::currentUser()->id();
+  if (!isset($_SESSION[$uid][TWITTER_USER_AUTHORIZED])) {
     $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
     $header_output =  "<span class='signin-twitter-text'>" . TWITTER_CONNECT_HEADER . "<span>";
     $connect_output = "<span class='twitter-connect'><a href='" . $twitter_login_path ."'>" . TWITTER_CONNECT_TEXT . "</a></span>";
