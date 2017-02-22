@@ -48,11 +48,23 @@ class UsersValidTweetsBlock extends BlockBase {
         '#markup' => ''
       );
 
-      $build['valid_tweets'] = array(
-        '#theme' => 'table',
-        '#header' => $header,
-        '#rows' => $rows
+      // $build['valid_tweets'] = array(
+      //   '#theme' => 'table',
+      //   '#header' => $header,
+      //   '#rows' => $rows
+      // );
+
+      $build['header'] = array(
+        '#theme' => 'item_list',
+        '#items' => $header,
+        '#attributes' => array('class' => array('header')),
       );
+
+      $build['valid_tweets'] = array(
+        '#theme' => 'item_list',
+        '#items' => $rows
+      );
+
       $build['pager'] = array(
        '#type' => 'pager'
       );
