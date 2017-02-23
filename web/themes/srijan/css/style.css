@@ -240,8 +240,6 @@ button {
     -ms-box-sizing: border-box;
     -o-box-sizing: border-box;
     box-sizing: border-box; }
-  #header .region-header {
-    float: none; }
 
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
@@ -361,7 +359,7 @@ body {
     .twitter-btn div a {
       border: none;
       background: #2aa9e0;
-      width: 86%;
+      width: 94%;
       padding: .5em 1em .5em 1em;
       font-size: 1.5vw;
       color: white;
@@ -609,6 +607,8 @@ body {
   padding-top: .8em;
   padding-bottom: .3em;
   background: white; }
+  .user-logged-in #header .region-header {
+    float: none; }
 
 .block-users-left-side-bar-block {
   background: white; }

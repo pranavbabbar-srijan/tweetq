@@ -116,9 +116,6 @@
 	.layout-container {
 		@include container(1249px);
 	}
-	.region-header {
-		float: none;
-	} 
 }
 
 
@@ -254,7 +251,7 @@ body {
     	a {
     		border: none;
 			background: $twitter;
-			width: 86%;
+			width: 94%;
 		    padding: .5em 1em .5em 1em;
 		    font-size: 1.5vw;
 		    color: white;
@@ -512,6 +509,9 @@ body {
 		padding-top: .8em;
 		padding-bottom: .3em;	
 		background: white;
+		.region-header {
+			float: none;
+		} 
 	}
 }
 .block-users-left-side-bar-block {
