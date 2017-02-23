@@ -28,10 +28,11 @@ class UsersArchivedTweetsBlock extends BlockBase {
       t('Last Updated'), t('Retweeted'), t('Delete'));
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
-    $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
+    $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed', 'tweeted', 'first_run', 'last_run']);
     $query->condition('p.archived', 1, '=');
     $query->condition('p.tweet_id', '', '!=');
     $query->condition('p.uid', $uid);
+    $query->orderBy('p.nid', 'DESC');
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
     $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(10);
@@ -82,9 +83,9 @@ class UsersArchivedTweetsBlock extends BlockBase {
     $data['message'] = $row->message;
     $data['size'] = $row->size;
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->created);
-    $data['tweet_data'] = date(TWITTER_DATE_FORMAT, $row->created);//@TODO
+    $data['tweet_data'] = date(TWITTER_DATE_FORMAT, $row->first_run);
     $data['changed'] = date(TWITTER_DATE_FORMAT, $row->changed);
-    $data['retweeted'] = t('24 times');
+    $data['retweeted'] = t('@times times', array('@times' => $row->tweeted));
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
   }

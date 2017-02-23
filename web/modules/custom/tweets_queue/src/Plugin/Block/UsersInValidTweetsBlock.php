@@ -30,6 +30,7 @@ class UsersInValidTweetsBlock extends BlockBase {
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
     $query->condition('p.size', 140, '>');
     $query->condition('p.uid', $uid);
+    $query->orderBy('p.nid', 'DESC');
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
     $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(10);
