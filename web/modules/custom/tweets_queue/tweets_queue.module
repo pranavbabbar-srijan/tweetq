@@ -1031,6 +1031,7 @@ function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$versio
 function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
   switch ($entity->bundle()) {
     case 'user':
+      tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_USERS_COUNTER);
       $entity->addRole(TWITTER_CLIENT_ROLE);
       $entity->save();
       $uid = $entity->get('uid')->value;
