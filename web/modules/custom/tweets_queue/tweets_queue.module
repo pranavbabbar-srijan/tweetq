@@ -363,6 +363,7 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
       'message' => ''
     );
     if ($status['success']) {
+
       tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
       $tweet_id = $status['data']->id;
       $twitter_history_info['retweeted'] = ($message_data->tweet_id) ? 1 : 0;
@@ -371,7 +372,18 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
         'tweet_id' => $tweet_id,
         'data' => serialize(array()),
       );
-      tweets_queue_update_message_queue_priority_info($message_data->nid, array('tweet_id' => $tweet_id), 1);
+      $tweet_info = array(
+        'tweet_id' => $tweet_id,
+        'last_run' => time(),
+      );
+      if (empty($message_data->tweet_id)) {
+        $tweet_info['first_run'] = time();
+        $tweet_info['tweeted'] = 1;
+        tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 1);
+      }
+      else {
+        tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 3);
+      }
     }
     else {
       $twitter_history_info['code'] = $status['code'];
@@ -441,6 +453,16 @@ function tweets_queue_update_message_queue_priority_info($nid, $tweet_priority_i
         ->execute();
       tweets_queue_debug_info(t("Updated weight for :nid to :weight",
         array(':nid' => $nid, ':weight' => $weight)));
+      break;
+    case '3': //Update tweeted on tweeting
+      db_merge(TWITTER_MESSAGE_QUEUE_TABLE)
+        ->insertFields($created_tweet_priority_info)
+        ->updateFields($tweet_priority_info)
+        ->key(array('nid' => $nid))
+        ->expression('weight', 'weight + :inc', array(':inc' => 1))
+        ->expression('tweeted', 'tweeted + :inc', array(':inc' => 1))
+        ->expression('last_run', time())
+        ->execute();
       break;
   }
 }
@@ -582,9 +604,18 @@ function tweets_queue_send_direct_message($message) {
     'created' => time(),
     'code' => 0,
     'status' => 0,
-    'message' => ''
+    'message' => '',
   );
-  tweets_queue_update_message_queue_priority_info($nid, array('tweet_id' => $tweet_id, 'weight' => 6), 0);
+  tweets_queue_update_message_queue_priority_info($nid,
+    array(
+      'tweet_id' => $tweet_id,
+      'weight' => 6,
+      'tweeted' => 1,
+      'first_run' => time(),
+      'last_run' => time(),
+    ),
+    0
+  );
   tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info);
 }
 
@@ -1189,10 +1220,12 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
       'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'changed' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'last_run' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'first_run' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'archived' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'size' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'weight' => array('type' => 'int', 'not null' => TRUE, 'default' => 1),
       'tweet_id' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 24, 'default' => ''),
+      'tweeted' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
     ),
     'primary key' => array('nid'),
     'indexes' => array(
