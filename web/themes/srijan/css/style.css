@@ -124,7 +124,7 @@ button {
 #block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .send-tweets-form label, .-form-tweets-queue-csv-upload label {
   display: none; }
 
-.block-users-tweets-statistics-block .content > div a > div {
+.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .block-users-tweets-statistics-block .content > div a > div {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -243,8 +243,16 @@ button {
   #header .region-header {
     float: none; }
 
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
 body {
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
   body.path-frontpage {
     background: url(../images/bg.jpg) 0 0 no-repeat;
     background-size: cover;
@@ -497,26 +505,58 @@ body {
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
   /*IE 5.5-7*/
   background: white; }
-  .user-logged-in .block-users-valid-tweets-block .item-list .header {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start; }
-    .user-logged-in .block-users-valid-tweets-block .item-list .header li {
-      width: 12.5%;
-      margin-left: 0; }
-      .user-logged-in .block-users-valid-tweets-block .item-list .header li:first-child {
-        width: 50%; }
-  .user-logged-in .block-users-valid-tweets-block .item-list + .item-list > ul > li {
-    margin: 0; }
-  .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start; }
-    .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li {
-      width: 12.5%;
-      margin-left: 0; }
-      .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:first-child {
-        width: 50%; }
+  .user-logged-in .block-users-valid-tweets-block .item-list {
+    font-size: .9em; }
+    .user-logged-in .block-users-valid-tweets-block .item-list .header {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      padding-bottom: .5em;
+      margin-bottom: 1.5em;
+      font-weight: bold; }
+      .user-logged-in .block-users-valid-tweets-block .item-list .header li {
+        width: 12.5%;
+        margin-left: 0; }
+        .user-logged-in .block-users-valid-tweets-block .item-list .header li:first-child {
+          width: 50%; }
+    .user-logged-in .block-users-valid-tweets-block .item-list + .item-list > ul > li {
+      margin: 0;
+      color: #919191; }
+    .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start; }
+      .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li {
+        width: 12.5%;
+        margin-left: 0; }
+        .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:first-child {
+          width: 50%;
+          padding-right: 3em; }
+        .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
+          width: 6.25%; }
+        .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6) {
+          width: 6.25%; }
+        .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li a {
+          color: #2aa9e0;
+          text-decoration: none; }
+        .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete {
+          font-size: 0;
+          position: relative; }
+        .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit:before {
+          content: "";
+          font-size: 22px;
+          color: #919191; }
+        .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit:hover:before {
+          color: #2aa9e0; }
+        .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete:before {
+          content: "";
+          font-size: 22px;
+          color: #919191; }
+        .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete:hover:before {
+          color: red; }
+  .user-logged-in .block-users-valid-tweets-block .pager {
+    margin-top: 1em; }
 
 .user-logged-in #header {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";

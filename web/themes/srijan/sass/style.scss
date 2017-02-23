@@ -123,8 +123,16 @@
 
 
 // Content section
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
 body {
 	font-family: 'Roboto', sans-serif;
+	-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 	&.path-frontpage {
 		background: url(../images/bg.jpg) 0 0 no-repeat;
 		background-size: cover;
@@ -367,11 +375,18 @@ body {
 		box-shadow: 0px 0px 3px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
 		background: white;
+		.new_tweets {}
+		.tweeted_tweets {}
 		.item-list {
+			font-size: .9em;
 			.header {
 				display: flex;
 				flex-flow: row wrap;
 				justify-content: flex-start;
+				border-bottom: 1px solid rgba(0,0,0,.2);
+				padding-bottom: .5em;
+    			margin-bottom: 1.5em;
+    			font-weight: bold;
 				li {
 					width: 12.5%;
 					margin-left: 0;
@@ -383,6 +398,7 @@ body {
 			+ .item-list {
 				> ul > li {
 					margin: 0;
+					color: $gray;
 				}
 				ul ul {
 					display: flex;
@@ -393,10 +409,53 @@ body {
 						margin-left: 0;
 						&:first-child {
 							width: 50%;
+							padding-right: 3em;
+						}
+						&:nth-child(5) {
+							width: 6.25%
+						}
+						&:nth-child(6) {
+							width: 6.25%
+						}
+						a {
+							color: $twitter;
+							text-decoration: none;
+						}
+						.edit, .delete {
+							font-size: 0;
+							@extend %icomoon;
+							position: relative;
+						}
+						.edit {
+							&:before {
+								content: $icon-edit;
+								font-size: 22px;
+								color: $gray;
+							}
+							&:hover {
+								&:before {
+									color: $twitter;
+								}
+							}
+						}
+						.delete {
+							&:before {
+								content: $icon-rubbish-bin;
+								font-size: 22px;
+								color: $gray;
+							}
+							&:hover {
+								&:before {
+									color: red;
+								}
+							}
 						}
 					}
 				}
 			}
+		}
+		.pager {
+			margin-top: 1em;
 		}
 	}
 	#header {
