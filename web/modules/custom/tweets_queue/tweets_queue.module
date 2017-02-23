@@ -116,12 +116,12 @@ const USERS_VALID_TWEETED_TWEET = 'users_valid_tweeted_tweet';
  * Implements hook_form_alter().
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  $form_id;
   switch ($form_id) {
     case 'send_tweets_form ':
       break;
 
     case 'user_login_form':
+        tweets_queue_cleanup_deleted_users();
         tweets_queue_user_login_form_changes($form);
       break;
     case 'node_tweet_edit_form':
@@ -1031,6 +1031,7 @@ function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$versio
 function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
   switch ($entity->bundle()) {
     case 'user':
+      tweets_queue_cleanup_deleted_users();
       tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_USERS_COUNTER);
       $entity->addRole(TWITTER_CLIENT_ROLE);
       $entity->save();
@@ -2592,18 +2593,48 @@ function tweets_queue_update_twitter_mark_user_login_statistics($twitter_owner_i
   );
 }
 
+/**
+ * Delete entries from auth map table for deleted users.
+ */
 function tweets_queue_cleanup_deleted_users() {
   $orphaned_auth_map_entries = twweets_queue_fetch_orphaned_autm_map_entries();
-  echo '<pre>', print_r($orphaned_auth_map_entries);
+  $uids = array();
+  if (count($orphaned_auth_map_entries) > 0) {
+    foreach ($orphaned_auth_map_entries as $pos => $orphaned_auth_map_entry) {
+      $uids[] = $orphaned_auth_map_entry->uid;
+    }
+    tweets_queue_clean_orphaned_authmap_list($uids);
+  }
 }
 
+/**
+ * Cleanup orphaned maps.
+ *
+ * @param array $uids
+ *   Array containing users uids to be cleaned up.
+ */
+function tweets_queue_clean_orphaned_authmap_list($uids) {
+  if (!is_array($uids)) {
+    $uids = array($uids);
+  }
+  \Drupal::database()->delete(TWITTER_AUTH_MAP_TABLE)
+    ->condition('uid', $uids, 'IN')
+    ->execute();
+}
+
+/**
+ * Get list of orphaned entries.
+ *
+ * @return array
+ *   Returns array containg the orphaned entries.
+ */
 function twweets_queue_fetch_orphaned_autm_map_entries() {
   $oauth_map_info = array();
   $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
   $query->fields('p', ['uid', TWITTER_OWNER_ID, 'data', 'status', 'created', 'changed']);
   $query->leftJoin('users', 'u', 'p.uid = u.uid');
   $query->isNull('u.uuid');
-  $oauth_map_info = $query->execute()->fetchObject();
+  $oauth_map_info = $query->execute()->fetchAll();
   return $oauth_map_info;
 }
 

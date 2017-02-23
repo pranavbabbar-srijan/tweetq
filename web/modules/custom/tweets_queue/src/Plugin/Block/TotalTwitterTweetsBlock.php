@@ -23,6 +23,8 @@ class TotalTwitterTweetsBlock extends BlockBase {
   	$total = tweets_queue_fetch_twitter_statistics_info('tweets_count');
   	$total_data = tweets_queue_number_shorten($total, 1);
   	$output = "<div><div class='count'>" . $total_data . '</div>';
+    // $title_total = t('Total Tweets @total', array('@total' => $total));
+    // $output .= "<div class='label' title='" . $title_total . "'>" . t('Tweets') . '</div></div>';
   	$output .= "<div class='label'>" . t('Tweets') . '</div></div>';
   	return array(
       '#type' => 'markup',

@@ -23,6 +23,7 @@ class AuthorizeTwitterLogin extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    tweets_queue_cleanup_deleted_users();
     tweets_queue_authenticate_twitter_user();
   }
 
