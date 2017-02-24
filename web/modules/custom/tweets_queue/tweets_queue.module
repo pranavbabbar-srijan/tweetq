@@ -14,6 +14,9 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Session\SessionManager;
 use Drupal\Core\Url;
 
+use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
+
 const CONSUMER_KEY = 'consumer_key';
 const CONSUMER_SECRET_KEY = 'consumer_secret_key';
 const ACCESS_TOKEN = 'access_token';
@@ -2704,4 +2707,44 @@ function tweets_queue_fetch_tweet_item($nid) {
   $query->condition('p.uid', $uid);
   $tweet_info = $query->execute()->fetchObject();
   return $tweet_info;
+}
+
+/**
+ * Clone already tweeted tweet and mark the original tweet as archived.
+ *
+ */
+function tweets_queue_clone_and_save_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $uid = \Drupal::currentUser()->id();
+  $input = $form_state->getUserInput();
+  $nid = $input['nid'];
+  if (!$nid) {
+    return;
+  }
+  $tweet_info = tweets_queue_fetch_tweet_item($nid);
+  if ($tweet_info->uid != $uid) {
+    drupal_set_message(t('Access violation.'));
+    return;
+  }
+
+  $message = $input['message'];
+  $message = tweets_queue_get_urls_present($message);
+  $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  $twitter_message_info = array(
+    'message' => $message,
+    'uid' => $uid,
+    'size' => $size,
+  );
+  tweets_queue_insert_message_queue_record($twitter_message_info);
+  tweets_queue_update_message_queue_priority_info($nid,
+    array(
+      'archived' => 1,
+      'changed' => time(),
+    ),
+    0
+  );
+  drupal_set_message(t('Tweet have been cloned successfully.'));
+}
+
+function tweets_queue_cancel_edit_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  drupal_set_message('Cancel');
 }
