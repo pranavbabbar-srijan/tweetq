@@ -7,6 +7,7 @@ namespace Drupal\tweets_queue\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * Builds a form to test disabled elements.
@@ -24,6 +25,7 @@ class TweetsQueueTweetForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $nid = $_REQUEST['nid'];
+
     $tweet_info = tweets_queue_fetch_tweet_item($nid);
     $tweet_id = $tweet_info->tweet_id;
     $archived = $tweet_info->archived;
@@ -49,7 +51,7 @@ class TweetsQueueTweetForm extends FormBase {
     if (!empty($tweet_id) && !$archived) {
       $form['clone'] = array(
         '#type' => 'submit',
-        '#value' => t('Clone and Save'),
+        '#value' => t('Save'),
         '#submit' => array('tweets_queue_clone_and_save_submit'),
         '#weight' => 9,
       );
@@ -102,6 +104,7 @@ class TweetsQueueTweetForm extends FormBase {
       0
     );
     drupal_set_message(t('Tweet have been saved successfully.'));
+    tweets_queue_redirect_on_tweet_save($size);
   }
 
 }

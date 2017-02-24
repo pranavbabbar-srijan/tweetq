@@ -2696,6 +2696,15 @@ function tweets_queue_show_valid_tweets_header(&$build) {
   );
 }
 
+/**
+ * Fetch the tweet information.
+ *
+ * @param integer $nid
+ *   Nid of the node.
+ *
+ * @return object
+ *   Returns object containing tweet information.
+ */
 function tweets_queue_fetch_tweet_item($nid) {
   $tweet_info = array();
   $uid = \Drupal::currentUser()->id();
@@ -2742,9 +2751,36 @@ function tweets_queue_clone_and_save_submit($form, \Drupal\Core\Form\FormStateIn
     ),
     0
   );
-  drupal_set_message(t('Tweet have been cloned successfully.'));
+  drupal_set_message(t('Tweet have been saved successfully.'));
+  tweets_queue_redirect_on_tweet_save($size);
 }
 
+/**
+ * Redirect to the right page on the cancellation of the operation.
+ */
 function tweets_queue_cancel_edit_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
-  drupal_set_message('Cancel');
+  $input = $form_state->getUserInput();
+  $nid = $input['nid'];
+  $tweet_info = tweets_queue_fetch_tweet_item($nid);
+  $message = $tweet_info->message;
+  $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  tweets_queue_redirect_on_tweet_save($size);
+}
+
+/**
+ * Redirect to the right path based on the size of the message.
+ *
+ * @param integer $size
+ *   Size of the message.
+ * @return [type]       [description]
+ */
+function tweets_queue_redirect_on_tweet_save($size) {
+  global $base_url;
+  if ($size > 140) {
+    header('Location: ' . $base_url . '/' . TWITTER_INVALID_TWEET_PATH);
+  }
+  if ($size <= 140) {
+    header('Location: ' . $base_url . '/' . TWITTER_VALID_TWEET_PATH);
+  }
+  die();
 }

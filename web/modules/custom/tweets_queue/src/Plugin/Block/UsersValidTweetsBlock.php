@@ -32,7 +32,7 @@ class UsersValidTweetsBlock extends BlockBase {
     $query->condition('p.archived', 1, '!=');
     $query->condition('p.tweet_id', '', '=');
     $query->condition('p.uid', $uid);
-    $query->orderBy('p.nid', 'DESC');
+    $query->orderBy('p.changed', 'DESC');
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
     $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(10);
