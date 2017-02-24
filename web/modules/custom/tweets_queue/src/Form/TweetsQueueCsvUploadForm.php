@@ -111,6 +111,10 @@ class TweetsQueueCsvUploadForm extends FormBase {
       $hash_tag = (isset($line[1])) ? $line[1] : '';
       $message = tweets_queue_get_urls_present($message);
       $hash_tag = tweets_queue_get_urls_present($hash_tag);
+      if (!empty($hash_tag)) {
+        $message = $message . ' ' . $hash_tag;
+        $hash_tag = '';
+      }
       $size = tweets_queue_calculate_tweet_message_size($message, $hash_tag, 'size');
       $twitter_message_info = array(
         'message' => $message,

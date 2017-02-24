@@ -2691,5 +2691,17 @@ function tweets_queue_show_valid_tweets_header(&$build) {
   $build['new_tweets'] = array(
     '#markup' => $output
   );
+}
 
+function tweets_queue_fetch_tweet_item($nid) {
+  $tweet_info = array();
+  $uid = \Drupal::currentUser()->id();
+  $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
+  $query->fields('p', ['nid', 'uid', 'message', 'hashtag', 'image_fid',
+    'status', 'created', 'changed', 'last_run', 'first_run', 'archived', 'size',
+    'weight', 'tweet_id', 'tweeted']);
+  $query->condition('p.nid', $nid);
+  $query->condition('p.uid', $uid);
+  $tweet_info = $query->execute()->fetchObject();
+  return $tweet_info;
 }
