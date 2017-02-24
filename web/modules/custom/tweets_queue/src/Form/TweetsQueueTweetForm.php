@@ -23,42 +23,31 @@ class TweetsQueueTweetForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    // Elements that take a simple default value.
-    $client_info = tweets_queue_fetch_client_handler_info();
-    $fids[0] = tweets_queue_get_client_field_info($client_info, CRON_TWEET_IMPORT_FID);
+    $nid = $_REQUEST['nid'];
+    $tweet_info = tweets_queue_fetch_tweet_item($nid);
+    $message = $tweet_info->message;
+    // echo '<pre>', print_r($tweet_info); die();
+
+    $form['nid'] = array(
+      '#type' => 'hidden',
+      '#title' => t('Node nid'),
+      '#required' => TRUE,
+      '#value' => $nid,
+    );
 
     $form['message'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('Tweet Message'),
-      '#default_value' => '',
-      '#description' => t('Twitter tweet message'),
+      '#title' => t('Edit Tweet'),
       '#required' => TRUE,
+      '#value' => $message,
     );
-    $form['hashtag'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Hashtag'),
-      '#default_value' => '',
-      '#description' => t('Twitter hashtag'),
-      '#required' => FALSE,
-    );
-    $form['status'] = array(
-      '#type' => 'checkbox',
-      '#title' => $this->t('Published Status'),
-      '#default_value' => '',
-      '#description' => t('Published status'),
-      '#required' => FALSE,
-    );
-    $form['archived'] = array(
-      '#type' => 'checkbox',
-      '#title' => $this->t('Archived'),
-      '#default_value' => '',
-      '#description' => t('Archived status'),
-      '#required' => FALSE,
-    );
+
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Save'),
+      '#value' => t('Save Tweet'),
+      '#weight' => 9,
     );
+
     return $form;
   }
 
@@ -66,29 +55,23 @@ class TweetsQueueTweetForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $input = $form_state->getUserInput();
     $uid = \Drupal::currentUser()->id();
-    $nid = intval($form_state->getValue('nid'));
-    $message = $form_state->getValue('message');
-    $hashtag = $form_state->getValue('hashtag');
-    $status = $form_state->getValue('status');
-    $archived = $form_state->getValue('archived');
-    drupal_set_message(t('Your message @message', array('@message' => $message)));
-    drupal_set_message(t('Your message @hashtag', array('@hashtag' => $hashtag)));
-    drupal_set_message(t('Your message status @status', array('@status' => $status)));
-    drupal_set_message(t('Your message archived @archived', array('@archived' => $archived)));
+    $nid = $input['nid'];
+    $message = $input['message'];
     if (!$nid) {
-      $size = tweets_queue_calculate_tweet_message_size($message, $hashtag, 'size');
-      $twitter_message_info = array(
-        'message' => $message,
-        'hashtag' => $hashtag,
-        'uid' => $uid,
-        'size' => $size,
-      );
-      tweets_queue_insert_message_queue_record($twitter_message_info, $status);
+      return;
     }
-  }
-
-  public function importCsvData($file) { 
+    $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+    tweets_queue_update_message_queue_priority_info($nid,
+      array(
+        'message' => $message,
+        'size' => $size,
+        'changed' => time(),
+      ),
+      0
+    );
+    drupal_set_message(t('Tweet have been saved successfully.'));
   }
 
 }
