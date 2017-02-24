@@ -39,6 +39,14 @@ class SendTweetsForm extends FormBase {
       '#submit' => array('tweets_queue_create_save_tweet_form_submit'),
       '#weight' => 10,
     );
+
+    $form['display_box'] = array(
+      '#type' => 'textfield',
+      '#size' => 3,
+      '#maxlength' => 3,
+      '#value' => $left,
+      '#required' => FALSE,
+    );
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Tweet Now'),
