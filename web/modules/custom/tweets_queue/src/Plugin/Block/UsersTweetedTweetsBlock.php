@@ -31,6 +31,7 @@ class UsersTweetedTweetsBlock extends BlockBase {
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed', 'tweeted', 'first_run', 'last_run']);
     $query->condition('p.archived', 1, '!=');
     $query->condition('p.tweet_id', '', '!=');
+    $query->condition('p.status', TWITTER_PUBLISHED_TWEET, '=');
     $query->condition('p.uid', $uid);
     $query->orderBy('p.last_run', 'DESC');
 

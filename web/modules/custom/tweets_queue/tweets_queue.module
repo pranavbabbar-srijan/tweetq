@@ -51,7 +51,7 @@ const CRON_TWEET_MESSAGES_SKIPPED = 'Tweet message skipped';
 const CRON_SCHEDULER_RUN_INTERVAL = 'cron_scheduler_run_interval';
 const TWITTER_HANDLER_INVALID = '2';
 const TWITTER_HANDLER_VALID = '1';
-const TWITTER_VALID_TWEET = '1';
+const TWITTER_PUBLISHED_TWEET = '1';
 const TWITTER_DELETED_TWEET = '2';
 const TWITTER_HANDLER_INVALID_CODE = '32';
 const TWITTER_HANDLER_BAD_AUTHENTICATION_CODE = '215';
@@ -2769,12 +2769,17 @@ function tweets_queue_clone_and_save_submit($form, \Drupal\Core\Form\FormStateIn
  */
 function tweets_queue_cancel_edit_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $input = $form_state->getUserInput();
-  $nid = $input['nid'];
+  $nid = $input['nid']; 
   $tweet_info = tweets_queue_fetch_tweet_item($nid);
   $message = $tweet_info->message;
   $tweet_id = $tweet_info->tweet_id;
+  $tweeted = 0;
+  if ($tweet_id) {
+    $tweeted = 1;
+  }
+  $archived = $tweet_info->archived;
   $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
-  tweets_queue_redirect_on_tweet_save($size);
+  tweets_queue_redirect_on_tweet_save($size, $tweeted, $archived);
 }
 
 /**
@@ -2786,17 +2791,47 @@ function tweets_queue_cancel_edit_submit($form, \Drupal\Core\Form\FormStateInter
  */
 function tweets_queue_redirect_on_tweet_save($size, $tweeted = 0, $archived = 0) {
   global $base_url;
-  if ($tweeted) {
-    header('Location: ' . $base_url . '/' . TWITTER_TWEETED_TWEET_PATH);
-  }
+
   if ($archived) {
     header('Location: ' . $base_url . '/' . TWITTER_ARCHIVED_TWEET_PATH);
+     die();
+  }
+  if ($tweeted && !$archived) {
+    header('Location: ' . $base_url . '/' . TWITTER_TWEETED_TWEET_PATH);
+    die();
   }
   if ($size > 140) {
     header('Location: ' . $base_url . '/' . TWITTER_INVALID_TWEET_PATH);
+    die();
   }
   if ($size <= 140) {
     header('Location: ' . $base_url . '/' . TWITTER_VALID_TWEET_PATH);
+    die();
   }
-  die();
+}
+
+/**
+ * Delete the tweet and redirect on the right page.
+ */
+function tweets_queue_delete_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $input = $form_state->getUserInput();
+  $nid = $input['nid'];
+  $tweet_info = tweets_queue_fetch_tweet_item($nid);
+  $message = $tweet_info->message;
+  $tweet_id = $tweet_info->tweet_id;
+  $tweeted = 0;
+  if ($tweet_id) {
+    $tweeted = 1;
+  }
+  $archived = $tweet_info->archived;
+  $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  tweets_queue_update_message_queue_priority_info($nid,
+    array(
+      'status' => TWITTER_DELETED_TWEET,
+      'changed' => time(),
+    ),
+    0
+  );
+  drupal_set_message(t('Tweet Deleted Successfully'));
+  tweets_queue_redirect_on_tweet_save($size, $tweeted, $archived);
 }
