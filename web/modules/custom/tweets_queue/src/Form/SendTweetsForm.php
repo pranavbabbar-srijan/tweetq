@@ -24,6 +24,12 @@ class SendTweetsForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     tweets_queue_check_logged_user_mapping(FALSE);
+    $form['header'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div class="create-header">',
+        '#markup' => t('Create a tweet'),
+        '#suffix' => '</div>',
+      );
     $form['message'] = array(
       '#type' => 'textarea',
       '#title' => t('Create a Tweet'),
