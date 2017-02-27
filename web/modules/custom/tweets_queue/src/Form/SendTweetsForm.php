@@ -25,11 +25,16 @@ class SendTweetsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     tweets_queue_check_logged_user_mapping(FALSE);
     $form['header'] = array(
-        '#type' => 'markup',
-        '#prefix' => '<div class="create-header">',
-        '#markup' => t('Create a tweet'),
-        '#suffix' => '</div>',
-      );
+      '#type' => 'markup',
+      '#prefix' => '<div class="create-header">',
+      '#markup' => t('Create a tweet'),
+      '#suffix' => '</div>',
+    );
+    $form['message-header'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="message-header">',
+      '#markup' => t(''),
+    );
     $form['message'] = array(
       '#type' => 'textarea',
       '#title' => t('Create a Tweet'),
@@ -58,7 +63,11 @@ class SendTweetsForm extends FormBase {
       '#value' => t('Tweet Now'),
       '#weight' => 9,
     );
-
+     $form['message-footer'] = array(
+      '#type' => 'markup',
+      '#markup' => t(''),
+      '#suffix' => '</div>',
+    );
     return $form;
   }
 
