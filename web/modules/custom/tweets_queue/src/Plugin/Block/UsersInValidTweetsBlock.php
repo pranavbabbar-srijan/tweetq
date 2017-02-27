@@ -28,6 +28,7 @@ class UsersInValidTweetsBlock extends BlockBase {
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
+    $query->condition('p.status', TWITTER_PUBLISHED_TWEET, '=');
     $query->condition('p.size', 140, '>');
     $query->condition('p.uid', $uid);
     $query->orderBy('p.changed', 'DESC');

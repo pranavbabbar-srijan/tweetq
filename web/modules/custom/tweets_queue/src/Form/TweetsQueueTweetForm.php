@@ -26,17 +26,13 @@ class TweetsQueueTweetForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $action = (isset($_REQUEST[TWITTER_ACTION_PARAMETER])) ? $_REQUEST[TWITTER_ACTION_PARAMETER] : TWITTER_EDIT_ACTION;
 
-
     if ($action == TWITTER_DELETE_ACTION) {
       $this->deleteForm($form, $form_state);
-      return $form;
     }
 
     if ($action == TWITTER_EDIT_ACTION) {
       $this->editForm($form, $form_state);
-      return $form;
     }
-
 
     return $form;
   }
@@ -140,7 +136,7 @@ class TweetsQueueTweetForm extends FormBase {
       '#type' => 'submit',
       '#submit' => array('tweets_queue_cancel_edit_submit'),
       '#value' => t('Cancel'),
-      '#weight' => 9,
+      '#weight' => 10,
     );
   }
 
