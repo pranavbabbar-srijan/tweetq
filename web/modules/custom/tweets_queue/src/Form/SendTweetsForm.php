@@ -67,6 +67,7 @@ class SendTweetsForm extends FormBase {
       '#type' => 'markup',
       '#markup' => t(''),
       '#suffix' => '</div>',
+      '#weight' => 20,
     );
     return $form;
   }

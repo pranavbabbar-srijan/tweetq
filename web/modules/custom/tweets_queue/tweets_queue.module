@@ -51,6 +51,8 @@ const CRON_TWEET_MESSAGES_SKIPPED = 'Tweet message skipped';
 const CRON_SCHEDULER_RUN_INTERVAL = 'cron_scheduler_run_interval';
 const TWITTER_HANDLER_INVALID = '2';
 const TWITTER_HANDLER_VALID = '1';
+const TWITTER_VALID_TWEET = '1';
+const TWITTER_DELETED_TWEET = '2';
 const TWITTER_HANDLER_INVALID_CODE = '32';
 const TWITTER_HANDLER_BAD_AUTHENTICATION_CODE = '215';
 const CRON_TWEET_CHARCATER_LIMIT = 140;
@@ -71,6 +73,7 @@ const TWITTER_IMPORT_TWEET_PATH = 'dashboard/import-tweets';
 const TWITTER_VALID_TWEET_PATH = 'dashboard/valid-tweets';
 const TWITTER_INVALID_TWEET_PATH = 'dashboard/invalid-tweets';
 const TWITTER_ARCHIVED_TWEET_PATH = 'dashboard/archived-tweets';
+const TWITTER_TWEETED_TWEET_PATH = 'dashboard/valid-tweets/tweeted-listing';
 const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 
 const TWITTER_CREATE_TWEET_LABEL = 'Create a Tweet';
@@ -113,6 +116,10 @@ const USERS_INVALID_TWEET = 'users_invalid_tweet';
 const USERS_ARCHIVED_TWEET = 'users_archived_tweet';
 const USERS_VALID_NEW_TWEET = 'users_valid_new_tweet';
 const USERS_VALID_TWEETED_TWEET = 'users_valid_tweeted_tweet';
+
+const TWITTER_DELETE_ACTION = 'delete';
+const TWITTER_EDIT_ACTION = 'edit';
+const TWITTER_ACTION_PARAMETER = 'action';
 
 
 /**
@@ -2765,6 +2772,7 @@ function tweets_queue_cancel_edit_submit($form, \Drupal\Core\Form\FormStateInter
   $nid = $input['nid'];
   $tweet_info = tweets_queue_fetch_tweet_item($nid);
   $message = $tweet_info->message;
+  $tweet_id = $tweet_info->tweet_id;
   $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
   tweets_queue_redirect_on_tweet_save($size);
 }
@@ -2776,8 +2784,14 @@ function tweets_queue_cancel_edit_submit($form, \Drupal\Core\Form\FormStateInter
  *   Size of the message.
  * @return [type]       [description]
  */
-function tweets_queue_redirect_on_tweet_save($size) {
+function tweets_queue_redirect_on_tweet_save($size, $tweeted = 0, $archived = 0) {
   global $base_url;
+  if ($tweeted) {
+    header('Location: ' . $base_url . '/' . TWITTER_TWEETED_TWEET_PATH);
+  }
+  if ($archived) {
+    header('Location: ' . $base_url . '/' . TWITTER_ARCHIVED_TWEET_PATH);
+  }
   if ($size > 140) {
     header('Location: ' . $base_url . '/' . TWITTER_INVALID_TWEET_PATH);
   }

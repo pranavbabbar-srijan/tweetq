@@ -24,8 +24,29 @@ class TweetsQueueTweetForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $nid = $_REQUEST['nid'];
+    $action = (isset($_REQUEST[TWITTER_ACTION_PARAMETER])) ? $_REQUEST[TWITTER_ACTION_PARAMETER] : TWITTER_EDIT_ACTION;
 
+
+    if ($action == TWITTER_DELETE_ACTION) {
+      $this->deleteForm($form, $form_state);
+      return $form;
+    }
+
+    if ($action == TWITTER_EDIT_ACTION) {
+      $this->editForm($form, $form_state);
+      return $form;
+    }
+
+
+    return $form;
+  }
+
+
+  /**
+   * {@inheritdoc}
+   */
+  public function editForm(array &$form, FormStateInterface $form_state) {
+    $nid = $_REQUEST['nid'];
     $tweet_info = tweets_queue_fetch_tweet_item($nid);
     $tweet_id = $tweet_info->tweet_id;
     $archived = $tweet_info->archived;
@@ -38,7 +59,6 @@ class TweetsQueueTweetForm extends FormBase {
       '#required' => TRUE,
       '#value' => $nid,
     );
-
     $form['message'] = array(
       '#type' => 'textarea',
       '#title' => t('Edit Tweet'),
@@ -79,7 +99,49 @@ class TweetsQueueTweetForm extends FormBase {
       '#value' => $left,
       '#required' => FALSE,
     );
-    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function deleteForm(array &$form, FormStateInterface $form_state) {
+    $nid = $_REQUEST['nid'];
+    $tweet_info = tweets_queue_fetch_tweet_item($nid);
+    $tweet_id = $tweet_info->tweet_id;
+    $archived = $tweet_info->archived;
+    $message = $tweet_info->message;
+    $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+    $left = 140 - $size;
+    $form['nid'] = array(
+      '#type' => 'hidden',
+      '#title' => t('Node nid'),
+      '#required' => TRUE,
+      '#value' => $nid,
+    );
+    $form['header'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="permanent-delete">',
+      '#markup' => t('This will permanently delete your tweet'),
+      '#suffix' => '</div>',
+    );
+    $form['option'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="delete-prompt">',
+      '#markup' => t('What would you like to do ? '),
+      '#suffix' => '</div>'
+    );
+     $form['clone'] = array(
+      '#type' => 'submit',
+      '#value' => t('Delete Anyway'),
+      '#submit' => array('tweets_queue_delete_submit'),
+      '#weight' => 9,
+    );
+    $form['cancel'] = array(
+      '#type' => 'submit',
+      '#submit' => array('tweets_queue_cancel_edit_submit'),
+      '#value' => t('Cancel'),
+      '#weight' => 9,
+    );
   }
 
   /**

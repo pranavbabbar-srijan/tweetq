@@ -31,6 +31,7 @@ class UsersValidTweetsBlock extends BlockBase {
     $query->condition('p.size', 140, '<=');
     $query->condition('p.archived', 1, '!=');
     $query->condition('p.tweet_id', '', '=');
+    $query->condition('p.status', TWITTER_VALID_TWEET, '=');
     $query->condition('p.uid', $uid);
     $query->orderBy('p.changed', 'DESC');
 
