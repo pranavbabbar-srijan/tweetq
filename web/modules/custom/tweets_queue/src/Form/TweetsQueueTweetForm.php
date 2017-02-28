@@ -50,6 +50,12 @@ class TweetsQueueTweetForm extends FormBase {
     $message = $tweet_info->message;
     $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
     $left = 140 - $size;
+    $form['header'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="edit-tweet">',
+      '#markup' => t('Edit Tweet'),
+      '#suffix' => '</div>',
+    );
     $form['nid'] = array(
       '#type' => 'hidden',
       '#title' => t('Node nid'),
