@@ -2656,6 +2656,7 @@ function tweets_queue_get_users_total_tweets_count($section = USERS_VALID_TWEET)
   $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
   $query->addExpression("count(nid)", "total");
   $query->condition('p.uid', $uid);
+  $query->condition('p.status', TWITTER_PUBLISHED_TWEET, '=');
   switch ($section) {
     case USERS_VALID_TWEET:
       $query->condition('p.size', '140', '<=');
