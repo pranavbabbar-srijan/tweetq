@@ -24,6 +24,12 @@ class TweetsQueueCsvUploadForm extends FormBase {
     // Elements that take a simple default value.
     $client_info = tweets_queue_fetch_client_handler_info();
     $fids[0] = tweets_queue_get_client_field_info($client_info, CRON_TWEET_IMPORT_FID);
+    $form['header'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="create-header">',
+      '#markup' => t('Import Tweets'),
+      '#suffix' => '</div>',
+    );
 
     $form['managed_file'] = array(
       '#type' => 'managed_file',
