@@ -8,6 +8,7 @@ namespace Drupal\tweets_queue\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Builds a form to test disabled elements.
@@ -163,6 +164,13 @@ class TweetsQueueTweetForm extends FormBase {
     );
     drupal_set_message(t('Tweet have been saved successfully.'));
     tweets_queue_redirect_on_tweet_save($size);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return 0;
   }
 
 }

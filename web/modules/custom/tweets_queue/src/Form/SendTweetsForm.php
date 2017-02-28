@@ -7,6 +7,7 @@ namespace Drupal\tweets_queue\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Create tweet and send on twitter.
@@ -79,5 +80,12 @@ class SendTweetsForm extends FormBase {
     $data = $form_state->getValues();
     $message = $data['message'];
     tweets_queue_compile_tweets($message);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return 0;
   }
 }
