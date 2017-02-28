@@ -56,7 +56,7 @@ class SendTweetsForm extends FormBase {
       '#type' => 'textfield',
       '#size' => 3,
       '#maxlength' => 3,
-      '#value' => $left,
+      '#value' => 140,
       '#required' => FALSE,
     );
     $form['submit'] = array(
