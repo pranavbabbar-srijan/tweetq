@@ -62,6 +62,11 @@ class TweetsQueueTweetForm extends FormBase {
       '#required' => TRUE,
       '#value' => $nid,
     );
+    $form['message-header'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="message-header">',
+      '#markup' => t(''),
+    );
     $form['message'] = array(
       '#type' => 'textarea',
       '#title' => t('Edit Tweet'),
@@ -101,6 +106,12 @@ class TweetsQueueTweetForm extends FormBase {
       '#maxlength' => 3,
       '#value' => $left,
       '#required' => FALSE,
+    );
+    $form['message-footer'] = array(
+      '#type' => 'markup',
+      '#markup' => t(''),
+      '#suffix' => '</div>',
+      '#weight' => 20,
     );
   }
 
