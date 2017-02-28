@@ -16,4 +16,11 @@ stylesheets:
 
 customjs:
   js:
-    js/custom.js:
+    js/custom.js: {}
+  
+  dependencies:
+  - core/jquery
+  - core/drupal.ajax
+  - core/drupal
+  - core/drupalSettings
+  - core/jquery.once
