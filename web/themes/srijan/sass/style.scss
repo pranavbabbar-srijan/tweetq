@@ -633,7 +633,7 @@ body {
 }
 .toolbar-fixed {
 	#sidebar-first {
-		top: 140px;
+		top: 180px;
 	}
 	.block-users-tweets-statistics-block {
 		top: 180px;
@@ -836,6 +836,16 @@ body {
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
 		.form-item-display-box {
 			float: left;
+			width: 62%;
+			text-align: right;
+			margin-top: 10px;
+			input {
+				border: 0;
+				text-align: right;
+    			pointer-events: none;
+    			color: $gray;
+    			font-weight: bold;
+			}
 		}
 	}
 	#edit-save, #edit-submit {
@@ -859,6 +869,7 @@ body {
 		border: 2px solid $twitter;
 		float: right;
 		padding: .4em 1em;
+		margin-right: 0;
 	}
 	.form-textarea {
 		border-color: rgba(0,0,0,0.1);
