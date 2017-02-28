@@ -381,7 +381,8 @@ body {
 	    right: 20%;
 	}
 	.block-users-valid-tweets-block, .block-users-in-valid-tweets-block,
-	.block-users-archived-tweets-block, .block-users-all-tweets-block {
+	.block-users-archived-tweets-block, .block-users-all-tweets-block,
+	.block-users-tweeted-tweets-block {
 		padding: 1em;
 		margin-left: 10px;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
@@ -521,7 +522,7 @@ body {
 			}
 		}
 	}
-	.block-users-archived-tweets-block, .block-users-all-tweets-block {
+	.block-users-archived-tweets-block, .block-users-all-tweets-block, .block-users-tweeted-tweets-block {
 		.item-list {
 			.header {
 				li {
@@ -558,7 +559,7 @@ body {
 			}
 		}
 	}
-	.block-users-all-tweets-block {
+	.block-users-all-tweets-block, .block-users-tweeted-tweets-block {
 		.item-list {
 			+ .item-list {
 				ul ul {
@@ -621,16 +622,76 @@ body {
 		padding-top: 58px;
 	}
 }
+.path-signup {
+	.layout-container {
+		.region-content {
+			padding-top: 20px;
+			min-height: 600px;
+		}
+		.section {
+			background: $body-bg;
+		}
+	}
+	.block-system-main-block {
+		width: 700px;
+	    margin: 0 auto;
+	    padding: 1.5em 2.5em;
+	    background: white;
+	    @include border-radius(6px);
+	    .message-header {
+	    	display: flex;
+	    	flex-flow: row wrap;
+	    	justify-content: space-between;
+	    	.js-form-item {
+	    		width: 45%;
+	    		margin-right: 10px;
+	    		input[type="text"] {
+					border: 0;
+					background: none;
+					outline: none;
+					border-bottom: 1px solid rgba(0,0,0,.3);
+					display: block;
+					width: 100%;
+	    		}
+	    		&.form-item-organization {
+	    			width: 100%;
+	    		}
+	    		label {
+					color: $gray;
+					margin-bottom: .5em;
+					display: block;
+					font-size: 16px;
+					&:after {
+						@extend %none;
+					}
+				}
+	    	}
+	    	input[type="submit"] {
+	    		margin: 20px auto 0;
+	    		border: none;
+				background: $login-btn;
+				width: 50%;
+			    padding: .5em;
+			    font-size: 18px;
+			    color: white;
+			    @include border-radius(4px);
+	    	}
+	    }
+	}
+	#header {
+		background: white;
+	}
+}
 .toolbar-fixed {
 	#sidebar-first {
-		top: 180px;
+		top: 136px;
 	}
 	.block-users-tweets-statistics-block {
-		top: 180px;
+		top: 136px;
 	}
 	&.user-logged-in {
 		#main-wrapper {
-			padding-top: 115px;
+			padding-top: 52px;
 		}
 		.main-content .block-page-title-block {
 			margin-left: 10px;
