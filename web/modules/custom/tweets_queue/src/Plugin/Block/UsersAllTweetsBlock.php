@@ -29,7 +29,7 @@ class UsersAllTweetsBlock extends BlockBase {
       t('Last Updated'), t('Retweeted'), t('Delete'));
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
-    $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
+    $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed', 'tweeted', 'first_run', 'last_run']);
     $query->condition('p.uid', $uid);
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
@@ -76,14 +76,20 @@ class UsersAllTweetsBlock extends BlockBase {
       ['nid' => $row->nid, 'action' => 'delete'],
       ['attributes' => ['class' => 'delete']]
     );
+    $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
+      ['nid' => $row->nid, 'action' => 'edit'],
+      ['attributes' => ['class' => 'edit']]
+    );
+    $edit_url_link = \Drupal::l(t("Edit"), $edit_url);
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();
     $data['message'] = $row->message;
     $data['size'] = $row->size;
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->created);
-    $data['tweet_data'] = date(TWITTER_DATE_FORMAT, $row->created);//@TODO
+    $data['tweet_data'] = ($row->first_run) ? date(TWITTER_DATE_FORMAT, $row->first_run) : '';
     $data['changed'] = date(TWITTER_DATE_FORMAT, $row->changed);
-    $data['retweeted'] = t('24 times');
+    $data['retweeted'] = t('@times times', array('@times' => $row->tweeted));
+    $data['edit_link'] = $edit_url_link ;
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
   }
