@@ -31,6 +31,7 @@ class UsersAllTweetsBlock extends BlockBase {
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed', 'tweeted', 'first_run', 'last_run']);
     $query->condition('p.uid', $uid);
+    $query->orderBy('p.changed', 'DESC');
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
     $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(10);
