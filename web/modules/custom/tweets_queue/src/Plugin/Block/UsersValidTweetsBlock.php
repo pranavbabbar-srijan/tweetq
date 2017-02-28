@@ -76,13 +76,6 @@ class UsersValidTweetsBlock extends BlockBase {
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheMaxAge() {
-    return 0;
-  }
-
   private function compileData($row) {
     $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'edit'],
@@ -104,5 +97,12 @@ class UsersValidTweetsBlock extends BlockBase {
     $data['edit_link'] = $edit_url_link ;
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
+  }
+
+ /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return 0;
   }
 }

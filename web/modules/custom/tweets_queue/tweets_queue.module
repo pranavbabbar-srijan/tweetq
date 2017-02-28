@@ -2428,7 +2428,7 @@ function tweets_queue_fetch_twitter_statistics_info($name = 'tweets_count') {
       $query->addExpression("sum(value)", "total");
       break;
     case TWITTER_HANDLER_PROFILE:
-      $twitter_owner_id = $_SESSION[$uid][TWITTER_OWNER_ID];
+      $twitter_owner_id = tweets_queue_check_twitter_user_presence($uid);
       $query->addField('p', 'data');
       $profile_key = tweets_queue_populate_statistics_key($twitter_owner_id, TWITTER_HANDLER_PROFILE);
       $query->condition('p.name', $profile_key, '=');
