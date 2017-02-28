@@ -725,7 +725,7 @@ body {
   padding-top: 58px; }
 
 .toolbar-fixed #sidebar-first {
-  top: 140px; }
+  top: 180px; }
 
 .toolbar-fixed .block-users-tweets-statistics-block {
   top: 180px; }
@@ -913,7 +913,16 @@ body {
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
   /*IE 5.5-7*/ }
   .send-tweets-form .message-header .form-item-display-box {
-    float: left; }
+    float: left;
+    width: 62%;
+    text-align: right;
+    margin-top: 10px; }
+    .send-tweets-form .message-header .form-item-display-box input {
+      border: 0;
+      text-align: right;
+      pointer-events: none;
+      color: #979797;
+      font-weight: bold; }
 
 .send-tweets-form #edit-save, .send-tweets-form #edit-submit {
   border: none;
@@ -940,7 +949,8 @@ body {
   color: #2aa9e0;
   border: 2px solid #2aa9e0;
   float: right;
-  padding: .4em 1em; }
+  padding: .4em 1em;
+  margin-right: 0; }
 
 .send-tweets-form .form-textarea {
   border-color: rgba(0, 0, 0, 0.1);
