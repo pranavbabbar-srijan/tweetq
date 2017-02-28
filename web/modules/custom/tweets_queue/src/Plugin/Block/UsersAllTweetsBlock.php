@@ -6,6 +6,7 @@
 namespace Drupal\tweets_queue\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Url;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Provides a 'twitter' block.
@@ -85,5 +86,12 @@ class UsersAllTweetsBlock extends BlockBase {
     $data['retweeted'] = t('24 times');
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return 0;
   }
 }
