@@ -24,6 +24,13 @@ tweets_queue.send_tweets:
   requirements:
     _role: 'twitter_client+administrator'
 
+tweets_queue.signup_user:
+  path: '/signup'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\SignUpForm'
+    _title: 'Sign Up'
+  requirements:
+    _role: 'anonymous+twitter_client'
 
 tweets_queue.authorize_twitter_login:
   path: '/authorize_twitter_login'

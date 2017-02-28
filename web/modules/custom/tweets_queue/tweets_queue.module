@@ -62,6 +62,7 @@ const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
 const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
 const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
 const TWITTER_SIGN_IN_TEXT = 'Sign in with Twitter';
+const TWITTER_SIGN_UP_TEXT = 'Sign up with Twitter';
 const TWITTER_SIGN_IN_PATH = 'authorize_twitter_login';
 const TWITTER_TOTAL_USERS = 'twitter_total_users';
 const TWITTER_TOTAL_TWEETS = 'twitter_total_tweets';
