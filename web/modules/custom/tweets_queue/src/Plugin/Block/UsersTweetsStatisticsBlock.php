@@ -6,6 +6,7 @@
 namespace Drupal\tweets_queue\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Url;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Provides a 'twitter' block.
@@ -75,5 +76,12 @@ class UsersTweetsStatisticsBlock extends BlockBase {
       '#type' => 'markup',
       '#markup' => $output,
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return 0;
   }
 }
