@@ -844,6 +844,8 @@ body {
     margin-top: 5px; }
   .user-logged-in #header .site-branding__logo {
     width: 55px; }
+  .user-logged-in #header .layout-container {
+    max-width: 1250px; }
 
 .user-logged-in #main-wrapper {
   padding-top: 58px; }
@@ -979,7 +981,7 @@ body {
       float: left;
       height: 90px;
       width: 90px;
-      border: 1px solid white;
+      border: 2px solid white;
       -webkit-border-radius: 50%;
       -khtml-border-radius: 50%;
       -moz-border-radius: 50%;
@@ -1166,6 +1168,9 @@ body {
       padding: 10px 0;
       border-bottom: 1px solid #bfbfbf; }
 
+.tweets-queue-tweet-form .message-header .form-item-message + .form-item-display-box {
+  width: 75%; }
+
 .send-tweets-form, .tweets-queue-tweet-form {
   padding-top: 5px; }
   .send-tweets-form .create-header, .send-tweets-form .edit-tweet, .tweets-queue-tweet-form .create-header, .tweets-queue-tweet-form .edit-tweet {
@@ -1211,7 +1216,7 @@ body {
         pointer-events: none;
         color: #979797;
         font-weight: bold; }
-  .send-tweets-form #edit-save, .send-tweets-form #edit-submit, .tweets-queue-tweet-form #edit-save, .tweets-queue-tweet-form #edit-submit {
+  .send-tweets-form #edit-save, .send-tweets-form #edit-submit, .send-tweets-form #edit-clone, .send-tweets-form #edit-cancel, .tweets-queue-tweet-form #edit-save, .tweets-queue-tweet-form #edit-submit, .tweets-queue-tweet-form #edit-clone, .tweets-queue-tweet-form #edit-cancel {
     border: none;
     padding: .5em 1em .5em 1em;
     font-size: 1.5vw;
@@ -1224,12 +1229,12 @@ body {
     text-decoration: none;
     display: block;
     text-align: center; }
-  .send-tweets-form #edit-submit, .tweets-queue-tweet-form #edit-submit {
+  .send-tweets-form #edit-submit, .send-tweets-form #edit-clone, .tweets-queue-tweet-form #edit-submit, .tweets-queue-tweet-form #edit-clone {
     background: #2aa9e0;
     color: white;
     float: right;
     margin-right: 0; }
-  .send-tweets-form #edit-save, .tweets-queue-tweet-form #edit-save {
+  .send-tweets-form #edit-save, .send-tweets-form #edit-cancel, .tweets-queue-tweet-form #edit-save, .tweets-queue-tweet-form #edit-cancel {
     background: white;
     color: #2aa9e0;
     border: 2px solid #2aa9e0;

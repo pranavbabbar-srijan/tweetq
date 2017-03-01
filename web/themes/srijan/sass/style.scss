@@ -745,6 +745,9 @@ body {
 		.site-branding__logo {
 			width: 55px;
 		}
+		.layout-container {
+			max-width: 1250px;
+		}
 	}
 	#main-wrapper {
 		padding-top: 58px;
@@ -887,7 +890,7 @@ body {
 			float: left;
 			height: 90px;
 			width: 90px;
-			border: 1px solid white;
+			border: 2px solid white;
 			@include border-radius(50%);
 			background: $gray;
 			margin-right: 10px;
@@ -1116,6 +1119,13 @@ body {
 		}
 	}
 }
+.tweets-queue-tweet-form {
+	.message-header {
+		.form-item-message + .form-item-display-box {
+			width: 75%;
+		}
+	}
+}
 .send-tweets-form, .tweets-queue-tweet-form  {
 	// overflow: hidden;
 	padding-top: 5px;
@@ -1159,7 +1169,7 @@ body {
 			}
 		}
 	}
-	#edit-save, #edit-submit {
+	#edit-save, #edit-submit, #edit-clone, #edit-cancel {
 		border: none;
 	    padding: .5em 1em .5em 1em;
 	    font-size: 1.5vw;
@@ -1168,13 +1178,13 @@ body {
 	    display: block;
 		text-align: center;
 	}
-	#edit-submit {
+	#edit-submit, #edit-clone {
 		background: $twitter;
 		color: white;
 		float: right;
 		margin-right: 0;
 	}
-	#edit-save {
+	#edit-save, #edit-cancel {
 		background: white;
 		color: $twitter;
 		border: 2px solid $twitter;
