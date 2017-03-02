@@ -53,32 +53,48 @@ class SignUpForm extends FormBase {
       '#type' => 'textfield',
       '#title' => t('Full Name'),
       '#required' => TRUE,
+      '#attributes' => array (
+        'placeholder' => t("Required")
+      ),
     );
 
     $form['email'] = array(
-      '#type' => 'textfield',
+      '#type' => 'email',
       '#title' => t('Email'),
       '#required' => TRUE,
+      '#attributes' => array (
+        'placeholder' => t("Required")
+      ),
     );
 
-    $form['password'] = array(
-      '#type' => 'textfield',
+    $form['user_password'] = array(
+      '#type' => 'password',
       '#title' => t('Password'),
       '#required' => TRUE,
+      '#attributes' => array (
+        'placeholder' => t("Required")
+      ),
     );
 
     $form['website'] = array(
-      '#type' => 'textfield',
+      '#type' => 'url',
       '#title' => t('Website'),
-      '#required' => TRUE,
+      '#required' => FALSE,
+      '#attributes' => array (
+        'placeholder' => t("Optional")
+      ),
     );
 
     $form['organization'] = array(
       '#type' => 'textfield',
       '#title' => t('Organization Name'),
-      '#required' => TRUE,
+      '#required' => FALSE,
+      '#attributes' => array (
+        'placeholder' => t("Optional")
+      ),
     );
 
+    $form['#validate'][] = 'tweets_queue_user_signup_validate';
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Continue'),
@@ -93,8 +109,25 @@ class SignUpForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $data = $form_state->getValues();
-    $message = $data['message'];
-    tweets_queue_compile_tweets($message);
+    $full_name = $data['full_name'];
+    $username = strtolower(str_ireplace(" ", "", $full_name)) . "_" . time();
+    $email = $data['email'];
+    $password = $data['user_password'];
+    $website = $data['website'];
+    $organization = $data['organization'];
+    $uid = tweets_queue_check_email_presence($email);
+    //Mandatory settings
+    $user = \Drupal\user\Entity\User::create();
+    $user->setPassword($password);
+    $user->enforceIsNew();
+    $user->setEmail($email);
+    $user->setUsername($username);
+    $user->set("field_twitter_owner_id", '');
+    $user->set("field_full_name", $full_name);
+    $user->set("field_twitter_data", serialize(array()));
+    //Optional settings
+    $user->activate();
+    $res = $user->save();
   }
 
   /**
