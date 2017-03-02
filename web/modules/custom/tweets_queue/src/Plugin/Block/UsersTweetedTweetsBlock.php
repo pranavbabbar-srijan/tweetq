@@ -26,7 +26,7 @@ class UsersTweetedTweetsBlock extends BlockBase {
     $uid = \Drupal::currentUser()->id();
     
     $header = array(t('Message'), t('Size'), t('Created'), t('Tweet Date'),
-      t('Last Updated'), t('Retweeted'), t('Delete'));
+      t('Last Updated'), t('Retweeted'), t('Modify'));
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed', 'tweeted', 'first_run', 'last_run']);

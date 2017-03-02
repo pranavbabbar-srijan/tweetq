@@ -25,7 +25,7 @@ class UsersInValidTweetsBlock extends BlockBase {
     global $base_url;
     $uid = \Drupal::currentUser()->id();
     
-    $header = array(t('Message'), t('Size'), t('Created'), t('Last Updated'), t('Edit'));
+    $header = array(t('Message'), t('Size'), t('Created'), t('Last Updated'), t('Modify'));
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
