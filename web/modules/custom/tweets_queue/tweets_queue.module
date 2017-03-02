@@ -279,58 +279,6 @@ function tweets_queue_fetch_user_auth_map_info($uid) {
 }
 
 /**
- * Post the message on the twitter.
- *
- * @param string $message
- *   Message for the tweet.
- *
- * @return string
- *   Returns the tweets message.
- */
-function tweets_queue_set_single_post_old($message = 'Good Evening!!', $twitter_handle, $tweet_id = '') {
-  require_once   './libraries/codebird-php/codebird.php';
-  $status = array('success' => 0, 'message' => 'unsuccessful');
-  $consumer_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_KEY);
-  $consumer_secret_key = tweets_queue_get_client_field_info($twitter_handle, CONSUMER_SECRET_KEY);
-  $access_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_TOKEN);
-  $access_secret_token = tweets_queue_get_client_field_info($twitter_handle, ACCESS_SECRET_TOKEN);
-
-  \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
-  $cb = \Codebird\Codebird::getInstance();
-  $cb->setToken($access_token, $access_secret_token);
-  $retweet = FALSE;
-  if ($tweet_id != '') {
-    $retweet = TRUE;
-  }
-  switch ($retweet) {
-    case TRUE:
-      $params = array(
-        'id' => $tweet_id
-      );
-      $reply = $cb->statuses_retweet_ID($params);
-      break;
-    default:
-      $params = array(
-        'status' => $message
-      );
-      $reply = $cb->statuses_update($params);
-      break;
-  }
-  if (is_object($reply) && isset($reply->errors)) {
-    $status['success'] = 0;
-    $status['data'] = $reply;
-    $status['code'] = (isset($reply->errors[0]->code)) ? $reply->errors[0]->code : '';
-    $status['message'] = (isset($reply->errors[0]->message)) ? $reply->errors[0]->message: 'tweet failed.';
-    tweets_queue_debug_info($status['message']);
-    return $status;
-  }
-  if (is_object($reply)) {
-    $status = array('success' => 1, 'message' => 'successful', 'data' => $reply);
-  }
-  return $status;
-}
-
-/**
  * Implements hook_cron().
  */
 function tweets_queue_cron() {
@@ -1055,6 +1003,9 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
         tweets_queue_login_twitter_user($uid);
       }
+      else {
+        tweets_queue_login_twitter_user($uid);
+      }
       break;
     case 'tweet':
       $title = $entity->get('title')->getValue();
@@ -1644,31 +1595,6 @@ function tweets_queue_fetch_all_client_handler_info() {
   return $result;
 }
 
-function tweets_queue_fetch_all_client_handler_info_old() {
-  $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
-  $query->fields('p', ['uid', 'status', 'created','updated', 'consumer_key',
-    'consumer_secret_key', 'access_token', 'access_secret_token', 'cron_tweet_last_run',
-    'cron_tweet_next_run', 'cron_tweet_retweet_interval']);
-  $time = time();
-  $db_or = db_or();
-  $db_or->condition('p.cron_tweet_next_run', '0' , '=');
-  $db_or->condition('p.cron_tweet_next_run', $time , '<=');
-  $query->condition($db_or);
-
-  // Only bring active handlers.
-  $query->condition('p.status', array('0', '1') , 'IN');
-
-  $data = $query->execute()->fetchAll();
-  $result = array('total' => 0);
-  $total = 0;
-  foreach ($data as $pos => $handler_object) {
-    $total++;
-    $result['handler'][$handler_object->uid] = $handler_object;
-  }
-  $result['total'] = $total;
-  return $result;
-}
-
 /**
  * Mark all the priority items which are not yet have size defined.
  */
@@ -1915,20 +1841,6 @@ function tweets_queue_fetch_all_unscheduled_users_list() {
   $query->fields('p', ['uid']);
   // Only bring active handlers.
   $query->condition('p.status', array('1') , 'IN');
-  $query->condition('p.' .  CRON_TWEET_SCHEDULED, array('0') , 'IN');
-  $data = $query->execute()->fetchAll();
-  $user_list = array();
-  foreach ($data as $pos => $user_info) {
-    $user_list[$user_info->uid] = $user_info;
-  }
-  return $user_list;
-}
-
-function tweets_queue_fetch_all_unscheduled_users_list_old() {
-  $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
-  $query->fields('p', ['uid']);
-  // Only bring active handlers.
-  $query->condition('p.status', array('0', '1') , 'IN');
   $query->condition('p.' .  CRON_TWEET_SCHEDULED, array('0') , 'IN');
   $data = $query->execute()->fetchAll();
   $user_list = array();
@@ -2836,4 +2748,31 @@ function tweets_queue_delete_submit($form, \Drupal\Core\Form\FormStateInterface 
   );
   drupal_set_message(t('Tweet Deleted Successfully'));
   tweets_queue_redirect_on_tweet_save($size, $tweeted, $archived);
+}
+
+/**
+ * Fetch existing users email in the database.
+ *
+ * @param string $email
+ *   Email id of the user.
+ *
+ * @return integer
+ *   Returns user's uid for a specific email.
+ */
+function tweets_queue_check_email_presence($email) {
+  $uid = '';
+  $query = \Drupal::database()->select('users_field_data', 'p');
+  $query->addField('p', 'uid');
+  $query->condition('p.mail', $email);
+  $uid = $query->execute()->fetchField();
+  return $uid;
+}
+
+function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+   $data = $form_state->getValues();
+  $email = $data['email'];
+  $uid = tweets_queue_check_email_presence($email);
+  if ($uid) {
+    $form_state->setErrorByName('email', t('Email already in use.'));
+  }
 }
