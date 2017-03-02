@@ -1004,8 +1004,8 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       $entity->save();
       $uid = $entity->get('uid')->value;
       $name = $entity->get('name')->value;
-      $twitter_owner_id = $entity->get('field_twitter_owner_id')->value;
-      $twitter_data = $entity->get('field_twitter_data')->value;
+      $twitter_owner_id = $entity->get(SIGNUP_FIELD_TWITTER_OWNER_ID)->value;
+      $twitter_data = $entity->get(SIGNUP_FIELD_TWITTER_DATA)->value;
       if ($twitter_owner_id) {
         tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
         tweets_queue_login_twitter_user($uid);
@@ -2183,9 +2183,9 @@ function tweets_queue_authenticate_twitter_user() {
     $user->enforceIsNew();
     $user->setEmail($email);
     $user->setUsername($username);
-    $user->set("field_twitter_owner_id", $twitter_owner_id);
-    $user->set("field_full_name", $full_name);
-    $user->set("field_twitter_data", $twitter_data);
+    $user->set(SIGNUP_FIELD_TWITTER_OWNER_ID, $twitter_owner_id);
+    $user->set(SIGNUP_FIELD_FULL_NAME, $full_name);
+    $user->set(SIGNUP_FIELD_TWITTER_DATA, $twitter_data);
     //Optional settings
     $user->activate();
     
