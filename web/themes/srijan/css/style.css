@@ -1169,7 +1169,7 @@ body {
       border-bottom: 1px solid #bfbfbf; }
 
 .tweets-queue-tweet-form .message-header .form-item-message + .form-item-display-box {
-  width: 75%; }
+  width: 69%; }
 
 .send-tweets-form, .tweets-queue-tweet-form {
   padding-top: 5px; }
@@ -1249,7 +1249,9 @@ body {
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     border-radius: 5px;
-    padding: 1em; }
+    padding: 1em;
+    font-size: 18px;
+    color: #f7f7f7; }
 
 .-form-tweets-queue-csv-upload {
   padding-top: 5px; }
