@@ -51,6 +51,7 @@
 
 .block-users-dashboard-header-block {
 	float: right;
+	position: relative;
 	.profile {
 		float: right;
 		display: flex;
@@ -77,11 +78,21 @@
 		}
 		+ a {
 			display: block;
-			height: 10px;
-			width: 10px;
-			background: red;
+			height: 20px;
+			width: 20px;
 			float: right;
-			margin-right: 1em;
+			margin-right: 22px;
+			margin-top: 8px;
+			text-decoration: none;
+			color: #666;
+			&:before {
+				content: $icon-bell;
+				@extend %icomoon;
+				font-size: 22px;
+			}
+			&:hover {
+				color: rgba(0,0,0,0.3);
+			}
 			&.active {}
 		}
 	}
@@ -96,13 +107,13 @@
 }
 .site-branding__slogan {
     position: absolute;
-    top: 3em;
-    left: 1.2em;
+    top: 2.5em;
+    left: 1.8em;
     font-size: 48px;
     font-weight: 300;
     color: white;
     width: 36%;
-    line-height: 1.3em;
+    line-height: 1.2em;
     display: none;
     @media screen and (max-width: $minWidth){
     	font-size: 28px;
@@ -116,7 +127,7 @@
 	padding-bottom: 1.05em;
 	border-bottom: 1px solid rgba(255, 255, 255, .4);
 	.layout-container {
-		@include container(1249px);
+		@include container(1180px);
 	}
 }
 
@@ -164,7 +175,7 @@ body {
 }
 
 .region-content {
-	@include container(1249px);
+	@include container(1180px);
 }
 
 .path-frontpage {
@@ -181,9 +192,9 @@ body {
 
 .user-login-form {
 	background: rgba(255,255,255,.8);
-	padding: 1em 2em 6em;
+	padding: 2em 2em 8em;
 	@include border-radius(6px);
-	width: 50%;
+	width: 57%;
 	float: right;
 	margin-top: 10vh;
 	position: relative;
@@ -210,6 +221,9 @@ body {
 		margin-bottom: .5em;
 		display: block;
 		font-size: 16px;
+		&:after {
+			@extend %none;
+		}
 	}
 	.form-item-name {
 		margin-bottom: 2.5em;
@@ -232,7 +246,6 @@ body {
 		font-size: 14px;
 	}
 	.recommended {
-		color: $twitter;
 		text-transform: capitalize;
 		font-size: 14px;
 		margin-top: .5em;
@@ -242,7 +255,7 @@ body {
 
 .twitter-btn {
 	position: absolute;
-    bottom: .6em;
+    bottom: 1.5em;
     width: 85%;
     span {
     	width: 100%;
@@ -252,7 +265,7 @@ body {
     	font-size: 14px;
     }
     div {
-    	margin-top: .5em;
+    	margin-top: 1em;
     	a {
     		border: none;
 			background: $twitter;
@@ -307,7 +320,7 @@ body {
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
 	float: left;
 	margin-top: 36vh;
-	margin-left: 2em;
+	margin-left: 2.1em;
 	.count {
 		font-size: 60px;
 		font-weight: 700;
@@ -334,7 +347,7 @@ body {
 	}
 }
 .block-total-twitter-tweets-block {
-	margin-left: 5em;
+	margin-left: 8em;
 }
 #sidebar-first {
 	background: white;
@@ -372,8 +385,85 @@ body {
 			}
 		}
 	}
+	.region-primary-menu {
+		position: absolute;
+	    top: 5px;
+	    right: 20%;
+	}
+	.block-users-all-tweets-block, .block-users-archived-tweets-block, .block-users-tweeted-tweets-block {
+		.item-list {
+			.header {
+				li {
+					&:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+						&:after {
+							content: "\f107";
+							font: normal normal normal 14px/1 FontAwesome;
+							left: 3px;
+						    top: 2px;
+						    position: relative;
+						}
+					}
+				}
+			}
+		}
+	}
+	.block-users-valid-tweets-block {
+		.item-list {
+			.header {
+				li {
+					&:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+						&:after {
+							content: "\f107";
+							font: normal normal normal 14px/1 FontAwesome;
+							left: 3px;
+						    top: 2px;
+						    position: relative;
+						}
+					}
+				}
+			}
+		}
+	}
+	.block-users-in-valid-tweets-block {
+		.item-list {
+			.header {
+				li {
+					&:nth-child(3), &:nth-child(4) {
+						&:after {
+							content: "\f107";
+							font: normal normal normal 14px/1 FontAwesome;
+							left: 3px;
+						    top: 2px;
+						    position: relative;
+						}
+					}
+				}
+			}
+		}
+	}
 	.block-users-valid-tweets-block, .block-users-in-valid-tweets-block,
-	.block-users-archived-tweets-block, .block-users-all-tweets-block {
+	.block-users-archived-tweets-block, .block-users-all-tweets-block,
+	.block-users-tweeted-tweets-block {
+			.item-list {
+				.header {
+					li {
+						&:nth-child(2) {
+							width: 6%;
+						}
+					}
+				}
+				+ .item-list {
+					ul ul {
+					li {
+						width: 6%;
+					}
+				}
+			}
+		}
+	}
+	.block-users-valid-tweets-block, .block-users-in-valid-tweets-block,
+	.block-users-archived-tweets-block, .block-users-all-tweets-block,
+	.block-users-tweeted-tweets-block {
 		padding: 1em;
 		margin-left: 10px;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
@@ -439,6 +529,7 @@ body {
 							padding-right: 3em;
 						}
 						&:nth-child(2) {
+							width: 6%;
 							padding: 0 6px;
 						}
 						&:nth-child(5) {
@@ -488,44 +579,81 @@ body {
 		.pager {
 			margin-top: 2em;
 			li {
+				padding: 0;
+				text-decoration: none;
 				a {
 					text-decoration: none;
 					font-size: .9em;
 					color: $gray;
+					border: 1px solid transparent;
+					padding: .1em .8em;
 				}
 				&.is-active {
 					a {
 						border: 1px solid $twitter;
 						@include border-radius(3px);
 						color: $twitter;
-						padding: .1em .7em;
+					}
+				}
+				&:hover {
+					a {
+						border: 1px solid $gray;
+						@include border-radius(3px);
+						color: $gray;
 					}
 				}
 				&.pager__item--next {
 					font-size: 0;
+					margin-left: 20px;
 					a {
+						border: none;
 						&:before {
-							content: ">";
-							font-size: 16px;
+							content: "\f105";
+							font: normal normal normal 16px/1 FontAwesome;
+						}
+					}
+				}
+				&.pager__item--previous {
+					font-size: 0;
+					margin-right: 20px;
+					a {
+						border: none;
+						&:before {
+							content: "\f104";
+							font: normal normal normal 16px/1 FontAwesome;
+						}
+					}
+				}
+				&.pager__item--first {
+					font-size: 0;
+					margin-right: 20px;
+					a {
+						border: none;
+						&:before {
+							content: "\f100";
+							font: normal normal normal 16px/1 FontAwesome;
+						}
+					}
+				}
+				&.pager__item--last {
+					font-size: 0;
+					margin-left: 20px;
+					a {
+						border: none;
+						&:before {
+							content: "\f101";
+							font: normal normal normal 16px/1 FontAwesome;
 						}
 					}
 				}
 			}
 		}
 	}
-	.block-users-archived-tweets-block, .block-users-all-tweets-block {
+	.block-users-archived-tweets-block, .block-users-all-tweets-block, .block-users-tweeted-tweets-block {
 		.item-list {
-			font-size: 14px;
 			.header {
-				display: flex;
-				flex-flow: row wrap;
-				justify-content: flex-start;
-				border-bottom: 1px solid rgba(0,0,0,.2);
-				padding-bottom: .5em;
-    			margin-bottom: 1.5em;
-    			font-weight: bold;
 				li {
-					width: 10%;
+					width: 10.8%;
 					margin-left: 0;
 					&:first-child {
 						width: 40%;
@@ -536,16 +664,35 @@ body {
 				}
 			}
 			+ .item-list {
-				> ul > li {
-					margin: 0;
-					color: $gray;
-				}
 				ul ul {
-					display: flex;
-					flex-flow: row wrap;
-					justify-content: flex-start;
 					li {
-						width: 10%;
+						width: 10.8%;
+						&:first-child {
+							width: 40%;
+							padding-right: 3em;
+						}
+						&:nth-child(2) {
+							width: 6%;
+							padding: 0 6px;
+						}
+						&:nth-child(5) {
+							width: 10%;
+							padding-left: inherit;
+						}
+						&:nth-child(6) {
+							width: 10%;
+						}
+					}
+				}
+			}
+		}
+	}
+	.block-users-all-tweets-block, .block-users-tweeted-tweets-block {
+		.item-list {
+			+ .item-list {
+				ul ul {
+					li {
+						width: 10.8%;
 						&:first-child {
 							width: 40%;
 							padding-right: 3em;
@@ -557,41 +704,13 @@ body {
 							width: 10%;
 							padding-left: inherit;
 						}
-						&:nth-child(6) {
-							width: 10%;
+						&:nth-child(7) {
+							width: 5%;
+							text-align: right;
+    						padding-right: 10px;
 						}
-						a {
-							color: $twitter;
-							text-decoration: none;
-						}
-						.edit, .delete {
-							font-size: 0;
-							@extend %icomoon;
-							position: relative;
-						}
-						.edit {
-							&:before {
-								content: $icon-edit;
-								font-size: 22px;
-								color: $gray;
-							}
-							&:hover {
-								&:before {
-									color: $twitter;
-								}
-							}
-						}
-						.delete {
-							&:before {
-								content: $icon-rubbish-bin;
-								font-size: 22px;
-								color: $gray;
-							}
-							&:hover {
-								&:before {
-									color: red;
-								}
-							}
+						&:nth-child(8) {
+							width: 5%;
 						}
 					}
 				}
@@ -599,7 +718,7 @@ body {
 		}
 	}
 	.region-content {
-		margin-top: 115px;
+		margin-top: 120px;
 	}
 	#header {
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
@@ -626,21 +745,123 @@ body {
 		.site-branding__logo {
 			width: 55px;
 		}
+		.layout-container {
+			max-width: 1250px;
+		}
 	}
 	#main-wrapper {
 		padding-top: 58px;
 	}
 }
+.path-signup {
+	.layout-container {
+		.region-content {
+			padding-top: 20px;
+			min-height: 600px;
+		}
+		.section {
+			background: $body-bg;
+		}
+	}
+	.block-system-main-block {
+		width: 700px;
+	    margin: 0 auto;
+	    padding: 1.5em 2.5em;
+	    background: white;
+	    @include border-radius(6px);
+	    .message-header {
+	    	display: flex;
+	    	flex-flow: row wrap;
+	    	justify-content: space-between;
+	    	.js-form-item {
+	    		width: 45%;
+	    		margin-right: 10px;
+	    		input[type="text"] {
+					border: 0;
+					background: none;
+					outline: none;
+					border-bottom: 1px solid rgba(0,0,0,.3);
+					display: block;
+					width: 100%;
+	    		}
+	    		&.form-item-organization {
+	    			width: 100%;
+	    		}
+	    		label {
+					color: $gray;
+					margin-bottom: .5em;
+					display: block;
+					font-size: 16px;
+					&:after {
+						@extend %none;
+					}
+				}
+	    	}
+	    	input[type="submit"] {
+	    		margin: 20px auto 0;
+	    		border: none;
+				background: $login-btn;
+				width: 50%;
+			    padding: .5em;
+			    font-size: 18px;
+			    color: white;
+			    @include border-radius(4px);
+	    	}
+	    }
+	}
+	#header {
+		background: white;
+	}
+	.signup-form {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		margin-bottom: 35px;
+		.signup {
+			font-size: 24px;
+    		font-weight: 300;
+    		div {
+    			font-size: 18px;
+    			font-weight: bold;
+    			text-align: right;
+    			a {
+    				text-decoration: none;
+    				color: $twitter;
+    				&:before {
+				    	font: normal normal normal 14px/1 FontAwesome;
+				    	content: "\f099";
+						font-size: 28px;
+					    margin-right: 0.2em;
+					    display: inline-block;
+					    vertical-align: text-top;
+					    margin-top: -4px;
+				    }
+    			}
+    		}
+    		span {
+    			font-size: 12px;
+    			color: #bfbfbf;
+    			text-align: right;
+    			font-weight: normal;
+    			display: block;
+    			margin-top: 5px;
+    			&:before {
+    				content: "*";
+    			}
+    		}
+		}
+	}
+}
 .toolbar-fixed {
 	#sidebar-first {
-		top: 180px;
+		top: 136px;
 	}
 	.block-users-tweets-statistics-block {
-		top: 180px;
+		top: 136px;
 	}
 	&.user-logged-in {
 		#main-wrapper {
-			padding-top: 115px;
+			padding-top: 52px;
 		}
 		.main-content .block-page-title-block {
 			margin-left: 10px;
@@ -669,7 +890,7 @@ body {
 			float: left;
 			height: 90px;
 			width: 90px;
-			border: 1px solid white;
+			border: 2px solid white;
 			@include border-radius(50%);
 			background: $gray;
 			margin-right: 10px;
@@ -736,6 +957,7 @@ body {
 				border-right: 1px solid rgba(0,0,0,.1);
 				width: 25%;
 				padding: 1.1em 1.4em;
+				border-bottom: 3px solid transparent;
 				.text {
 					display: block;
 					font-family: 'Roboto', sans-serif;
@@ -794,27 +1016,126 @@ body {
 				    top: 10px;
 				  }
 				}
+				&.total_tweets {
+					&:hover {
+						border-bottom: 3px solid #2aa9e0;
+					}
+				}
+				&.valid_tweets {
+					&:hover {
+						border-bottom: 3px solid #96c85a;
+					}
+				}
+				&.invalid_tweets {
+					&:hover {
+						border-bottom: 3px solid #f56a6a;
+					}
+				}
+				&.archived_tweets {
+					&:hover {
+						border-bottom: 3px solid #ffae00;
+					}
+				}
 			}
 		}
 	}
 }
 .notifications {
 	height: 0;
-	overflow: hidden;
+	// overflow: hidden;
+	visibility: hidden;
 	float: right;
+	position: absolute;
+	margin-top: 20px;
+	left: -80px;
+    top: 28px;
+    width: 200px;
+    background: white;
+    font-size: 12px;
+    color: $gray;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb)";/*IE 8*/
+	-moz-box-shadow: 0px 0px 35px #bbb;/*FF 3.5+*/
+	-webkit-box-shadow: 0px 0px 35px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+	box-shadow: 0px 0px 35px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb); /*IE 5.5-7*/
 	&.active {
 		height: auto;
+		padding: 1em;
+		visibility: inherit;
+		&:before {
+		    content: "";
+		    width: 20px;
+		    height: 20px;
+		    display: block;
+		    background: white;
+		    transform: rotate3d(0,0,1,44deg);
+		    position: absolute;
+		    top: -10px;
+		    left: 82px;
+		}
+	}
+	> div {
+		display: flex;
+		flex-flow: row wrap;
+	    justify-content: space-between;
+	    margin-bottom: 14px;
+		&:nth-child(1) {
+			position: absolute;
+		    top: -48px;
+		    right: 90px;
+		    background: red;
+		    color: white;
+		    border-radius: 6px;
+		    padding: .2em;
+		    width: 22px;
+		    text-align: center;
+		    display: block;
+		}
+		&:nth-child(2) {
+			display: block;
+			color: $dark;
+		}
+		&:last-child {
+			span.message {
+				border: none;
+			}
+		}
+		span {
+			&.message_history_count {
+				display: block;
+				border-bottom: 1px solid $gray;
+				width: 200px;
+			    position: relative;
+			    left: -12px;
+			    top: -8px;
+			    padding: 5px 10px;
+			}
+			&.message {
+				display: table;
+				color: $dark;
+			    padding: 10px 0;
+			    border-bottom: 1px solid #bfbfbf;
+			}
+		}
 	}
 }
-.send-tweets-form {
+.tweets-queue-tweet-form {
+	.message-header {
+		.form-item-message + .form-item-display-box {
+			width: 75%;
+		}
+	}
+}
+.send-tweets-form, .tweets-queue-tweet-form  {
 	// overflow: hidden;
+	padding-top: 5px;
 	label {
 		@extend %none;
 	}
-	.create-header {
+	.create-header, .edit-tweet {
 		background: #FCFCFC;
 		padding: 1em;
-		margin-left: 1em;
+		margin-left: 10px;
 		margin-top: 1em;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
 		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
@@ -828,7 +1149,7 @@ body {
 		overflow: hidden;
 		background: white;
 		padding: 1em;
-		margin-left: 14px;
+		margin-left: 10px;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
 		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
 		-webkit-box-shadow: 0px 0px 3px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
@@ -848,7 +1169,7 @@ body {
 			}
 		}
 	}
-	#edit-save, #edit-submit {
+	#edit-save, #edit-submit, #edit-clone, #edit-cancel {
 		border: none;
 	    padding: .5em 1em .5em 1em;
 	    font-size: 1.5vw;
@@ -857,13 +1178,13 @@ body {
 	    display: block;
 		text-align: center;
 	}
-	#edit-submit {
+	#edit-submit, #edit-clone {
 		background: $twitter;
 		color: white;
 		float: right;
 		margin-right: 0;
 	}
-	#edit-save {
+	#edit-save, #edit-cancel {
 		background: white;
 		color: $twitter;
 		border: 2px solid $twitter;
@@ -879,8 +1200,33 @@ body {
 }
 
 .-form-tweets-queue-csv-upload {
+	padding-top: 5px;
 	label {
 		@extend %none;
+	}
+	.create-header {
+		background: #FCFCFC;
+		padding: 1em;
+		margin-left: 10px;
+		margin-top: 1em;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
+		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
+		-webkit-box-shadow: 0px 0px 3px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+		box-shadow: 0px 0px 3px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
+		font-size: 14px;
+		color: $gray;
+		+ #ajax-wrapper, [id^="ajax-wrapper--*"] {
+			overflow: hidden;
+			background: white;
+			padding: 1em;
+			margin-left: 10px;
+			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
+			-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
+			-webkit-box-shadow: 0px 0px 3px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+			box-shadow: 0px 0px 3px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+			filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
+		}
 	}
 	.js-form-managed-file {
 		border: 1px solid rgba(0,0,0,.1);
