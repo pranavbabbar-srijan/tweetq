@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\tweets_queue\Form\SignUpForm
+ * Contains \Drupal\tweets_queue\Form\TwitterSignUpForm
  */
 namespace Drupal\tweets_queue\Form;
 
@@ -12,12 +12,12 @@ use Drupal\Core\Cache\Cache;
 /**
  * Sign up form.
  */
-class SignUpForm extends FormBase {
+class TwitterSignUpForm extends FormBase {
   /** 
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'signup_form';
+    return 'twitter_signup_form';
   }
 
   /** 
@@ -25,22 +25,11 @@ class SignUpForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     global $base_url;
-    $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
-    $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_UP_TEXT . "</a>";
-    $final_text = '<div>' . $url .
-    "</div><span class='note'>Auto fetch your details from Twitter</span></div>";
 
-    $form['header_left'] = array(
+    $form['header'] = array(
       '#type' => 'markup',
       '#prefix' => '<div class="signup">',
-      '#markup' => t('Sign Up'),
-      '#suffix' => '</div>',
-    );
-
-    $form['header_right'] = array(
-      '#type' => 'markup',
-      '#prefix' => '<div class="signup">',
-      '#markup' => $final_text,
+      '#markup' => t('Registration'),
       '#suffix' => '</div>',
     );
 
@@ -49,6 +38,7 @@ class SignUpForm extends FormBase {
       '#prefix' => '<div class="message-header">',
       '#markup' => t(''),
     );
+
     $form[SIGNUP_FIELD_FULL_NAME] = array(
       '#type' => 'textfield',
       '#title' => t('Full Name'),

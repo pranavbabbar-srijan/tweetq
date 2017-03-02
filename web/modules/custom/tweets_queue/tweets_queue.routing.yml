@@ -32,6 +32,14 @@ tweets_queue.signup_user:
   requirements:
     _role: 'anonymous+twitter_client'
 
+tweets_queue.twitter_signup_user:
+  path: '/twitter/register'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\TwitterSignUpForm'
+    _title: 'Registration'
+  requirements:
+    _role: 'anonymous+twitter_client'
+
 tweets_queue.authorize_twitter_login:
   path: '/authorize_twitter_login'
   defaults:

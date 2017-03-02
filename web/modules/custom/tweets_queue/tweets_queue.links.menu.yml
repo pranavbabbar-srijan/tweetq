@@ -26,6 +26,13 @@ tweets_queue.signup_user:
   route_name: tweets_queue.signup_user
   weight: -14
 
+tweets_queue.twitter_signup_user:
+  title: 'Registration'
+  description: 'Registration'
+  parent: system.admin_config_services
+  route_name: tweets_queue.twitter_signup_user
+  weight: -14
+
 tweets_queue.file_upload:
   title: 'CSV tweet import'
   description: 'Import tweets.'
