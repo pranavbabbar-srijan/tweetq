@@ -1122,7 +1122,7 @@ body {
 .tweets-queue-tweet-form {
 	.message-header {
 		.form-item-message + .form-item-display-box {
-			width: 75%;
+			width: 69%;
 		}
 	}
 }
@@ -1196,6 +1196,8 @@ body {
 		border-color: rgba(0,0,0,0.1);
 		@include border-radius(5px);
 		padding: 1em;
+		font-size: 18px;
+		color: #f7f7f7;
 	}
 }
 
