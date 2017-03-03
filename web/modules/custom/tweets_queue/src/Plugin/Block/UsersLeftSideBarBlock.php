@@ -23,7 +23,6 @@ class UsersLeftSideBarBlock extends BlockBase {
   public function build() {
     global $base_url;
     $current_path = \Drupal::service('path.current')->getPath();
-    drupal_set_message($current_path);
     $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
     $user_twitter_profile_info = unserialize($twitter_profile_info);
     $picture = '';

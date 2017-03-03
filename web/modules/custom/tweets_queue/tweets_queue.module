@@ -2615,17 +2615,20 @@ function tweets_queue_get_users_total_tweets_count($section = USERS_VALID_TWEET)
 }
 
 function tweets_queue_show_valid_tweets_header(&$build) {
+  $current_path = \Drupal::service('path.current')->getPath();
   $valid_new_tweets = tweets_queue_get_users_total_tweets_count(USERS_VALID_NEW_TWEET);
   $valid_tweeted_tweets = tweets_queue_get_users_total_tweets_count(USERS_VALID_TWEETED_TWEET);
 
+  $class = tweets_queue_match_current_path($current_path, TWITTER_VALID_TWEET_PATH, 0, 0);
   $new_tweet_url = Url::fromRoute(TWITTER_VALID_TWEETS_ROUTE_NAME, [],
-    ['attributes' => ['class' => 'new_tweets']]
+    ['attributes' => ['class' => ['new_tweets', $class]]]
   );
   $new_tweet_url_link = \Drupal::l(t('New Tweets(@new_tweet)',
     array('@new_tweet' => $valid_new_tweets)), $new_tweet_url);
 
+  $class = tweets_queue_match_current_path($current_path, TWITTER_TWEETED_TWEET_PATH, 0, 0);
   $tweeted_tweet_url = Url::fromRoute(TWITTER_TWEETED_TWEET_ROUTE_NAME, [],
-    ['attributes' => ['class' => 'tweeted_tweets']]
+    ['attributes' => ['class' => ['tweeted_tweets', $class]]]
   );
   $tweeted_url_link = \Drupal::l(t('Tweeted(@total_tweeted)',
     array('@total_tweeted' => $valid_tweeted_tweets)), $tweeted_tweet_url);
@@ -2794,10 +2797,15 @@ function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInt
   }
 }
 
-function tweets_queue_match_current_path($current_path, $match_path, $format = 1) {
+function tweets_queue_match_current_path($current_path, $match_path, $format = 1, $deep_match = 1) {
   $class = "in-active";
   if ($current_path == "/" . $match_path) {
     $class = "active";
+  }
+  if ($deep_match && $match_path == TWITTER_VALID_TWEET_PATH) {
+    if ($current_path == "/" . TWITTER_TWEETED_TWEET_PATH) {
+      $class = "active";
+    }
   }
   $outout = $class;
   if ($format) {

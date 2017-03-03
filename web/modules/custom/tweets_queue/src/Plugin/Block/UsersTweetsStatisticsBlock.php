@@ -28,7 +28,7 @@ class UsersTweetsStatisticsBlock extends BlockBase {
     $invalid_tweets = tweets_queue_get_users_total_tweets_count(USERS_INVALID_TWEET);
     $archived_tweets = tweets_queue_get_users_total_tweets_count(USERS_ARCHIVED_TWEET);
 
-    $class = tweets_queue_match_current_path($current_path, TWITTER_CREATE_TWEET_PATH, 0);
+    $class = tweets_queue_match_current_path($current_path, TWITTER_VALID_TWEET_PATH, 0);
     $valid_tweets_output = "<div class='valid_tweets $class'>
         <span class='text'>" . TWITTER_VALID_TWEET_LABEL . "</span>" .
         "<span class='value'>" . $valid_tweets . "</span>
