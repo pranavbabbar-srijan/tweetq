@@ -31,6 +31,11 @@ class TweetsQueueCsvUploadForm extends FormBase {
       '#suffix' => '</div>',
     );
 
+    $form['import_top'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="create-header">',
+      '#markup' => t(''),
+    );
     $form['managed_file'] = array(
       '#type' => 'managed_file',
       '#title' => TWITTER_IMPORT_TWEET_LABEL,
@@ -51,7 +56,10 @@ class TweetsQueueCsvUploadForm extends FormBase {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t(TWITTER_IMPORT_TWEET_LABEL),
-      '#prefix' => '<div class="submit-block">',
+    );
+    $form['import_bottom'] = array(
+      '#type' => 'markup',
+      '#markup' => t(''),
       '#suffix' => '</div>',
     );
     return $form;
