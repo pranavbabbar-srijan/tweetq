@@ -76,6 +76,8 @@ const TWITTER_INVALID_TWEET_PATH = 'dashboard/invalid-tweets';
 const TWITTER_ARCHIVED_TWEET_PATH = 'dashboard/archived-tweets';
 const TWITTER_TWEETED_TWEET_PATH = 'dashboard/valid-tweets/tweeted-listing';
 const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
+const TWITTER_TWITTER_SIGNUP_PATH = 'twitter/register';
+
 
 const TWITTER_CREATE_TWEET_LABEL = 'Create a Tweet';
 const TWITTER_IMPORT_TWEET_LABEL = 'Import Tweets';
@@ -125,6 +127,7 @@ const TWITTER_ACTION_PARAMETER = 'action';
 const SIGNUP_FIELD_ORGANIZATION = 'field_organization';
 const SIGNUP_FIELD_WEBSITE = 'field_website';
 const SIGNUP_FIELD_FULL_NAME = 'field_full_name';
+const SIGNUP_FIELD_PASSWORD = 'user_password';
 const SIGNUP_FIELD_TWITTER_OWNER_ID = 'field_twitter_owner_id';
 const SIGNUP_FIELD_EMAIL = 'email';
 const SIGNUP_FIELD_TWITTER_DATA = 'field_twitter_data';
@@ -1008,7 +1011,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       $twitter_data = $entity->get(SIGNUP_FIELD_TWITTER_DATA)->value;
       if ($twitter_owner_id) {
         tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
-        tweets_queue_login_twitter_user($uid);
+        tweets_queue_login_twitter_user($uid, TWITTER_TWITTER_SIGNUP_PATH);
       }
       else {
         tweets_queue_login_twitter_user($uid);
@@ -1732,7 +1735,11 @@ function tweets_queue_fetch_tweeter_data($nid, $field_name = 'tweet_id') {
  */
 function tweets_queue_user_login($account) {
   global $base_url;
-  $response = new RedirectResponse($base_url . '/' . TWITTER_USER_DASHBOARD);
+  $redirect_path = TWITTER_USER_DASHBOARD;
+  if ($account->redirectPath) {
+    $redirect_path = $account->redirectPath;
+  }
+  $response = new RedirectResponse($base_url . '/' . $redirect_path);
   $response->send();
 }
 
@@ -2224,9 +2231,12 @@ function tweets_queue_authenticate_twitter_user() {
     }
   }
 
-  function tweets_queue_login_twitter_user($uid) {
+  function tweets_queue_login_twitter_user($uid, $redirect_path = '') {
     if ($uid) {
       $user = \Drupal\user\Entity\User::load($uid);
+      if ($redirect_path) {
+        $user->redirectPath = $redirect_path;
+      }
       user_login_finalize($user);
     }
   }

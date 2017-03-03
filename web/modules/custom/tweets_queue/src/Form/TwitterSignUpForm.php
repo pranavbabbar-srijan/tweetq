@@ -25,6 +25,13 @@ class TwitterSignUpForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     global $base_url;
+    $uid = \Drupal::currentUser()->id();
+    $user = \Drupal\user\Entity\User::load($uid);
+    $full_name = $user->get(SIGNUP_FIELD_FULL_NAME)->value;
+    $email = $user->get('mail')->value;
+    $full_name = $user->get(SIGNUP_FIELD_FULL_NAME)->value;
+    $website = $user->get(SIGNUP_FIELD_WEBSITE)->value;
+    $organization = $user->get(SIGNUP_FIELD_ORGANIZATION)->value;
 
     $form['header'] = array(
       '#type' => 'markup',
@@ -42,6 +49,7 @@ class TwitterSignUpForm extends FormBase {
     $form[SIGNUP_FIELD_FULL_NAME] = array(
       '#type' => 'textfield',
       '#title' => t('Full Name'),
+      '#value' => $full_name,
       '#required' => TRUE,
       '#attributes' => array (
         'placeholder' => t("Required")
@@ -52,6 +60,7 @@ class TwitterSignUpForm extends FormBase {
       '#type' => 'email',
       '#title' => t('Email'),
       '#required' => TRUE,
+      '#value' => $email,
       '#attributes' => array (
         'placeholder' => t("Required")
       ),
@@ -70,6 +79,7 @@ class TwitterSignUpForm extends FormBase {
       '#type' => 'url',
       '#title' => t('Website'),
       '#required' => FALSE,
+      '#value' => $website,
       '#attributes' => array (
         'placeholder' => t("Optional")
       ),
@@ -79,12 +89,12 @@ class TwitterSignUpForm extends FormBase {
       '#type' => 'textfield',
       '#title' => t('Organization Name'),
       '#required' => FALSE,
+      '#value' => $organization,
       '#attributes' => array (
         'placeholder' => t("Optional")
       ),
     );
 
-    $form['#validate'][] = 'tweets_queue_user_signup_validate';
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Continue'),
@@ -99,27 +109,23 @@ class TwitterSignUpForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $data = $form_state->getValues();
+    $uid = \Drupal::currentUser()->id();
+    $user = \Drupal\user\Entity\User::load($uid);
+
     $full_name = $data[SIGNUP_FIELD_FULL_NAME];
-    $username = strtolower(str_ireplace(" ", "", $full_name)) . "_" . time();
-    $email = $data[SIGNUP_FIELD_EMAIL];
-    $password = $data['user_password'];
+    $password = $data[SIGNUP_FIELD_PASSWORD];
     $website = $data[SIGNUP_FIELD_WEBSITE];
     $organization = $data[SIGNUP_FIELD_ORGANIZATION];
-    $uid = tweets_queue_check_email_presence($email);
+
     //Mandatory settings
-    $user = \Drupal\user\Entity\User::create();
     $user->setPassword($password);
-    $user->enforceIsNew();
-    $user->setEmail($email);
-    $user->setUsername($username);
-    $user->set(SIGNUP_FIELD_TWITTER_OWNER_ID, '');
+
     $user->set(SIGNUP_FIELD_FULL_NAME, $full_name);
     $user->set(SIGNUP_FIELD_WEBSITE, $website);
     $user->set(SIGNUP_FIELD_ORGANIZATION, $organization);
-    $user->set(SIGNUP_FIELD_TWITTER_DATA, serialize(array()));
     //Optional settings
-    $user->activate();
     $res = $user->save();
+    tweets_queue_goto_dashboard();
   }
 
   /**
