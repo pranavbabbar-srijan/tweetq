@@ -935,7 +935,7 @@ body {
 			a {
 				color: $gray;
 				text-decoration: none;
-				&:hover {
+				&:hover, &.active {
 					color: $dark;
 				}
 			}
@@ -1035,22 +1035,22 @@ body {
 				  }
 				}
 				&.total_tweets {
-					&:hover {
+					&:hover, &.active {
 						border-bottom: 3px solid #2aa9e0;
 					}
 				}
 				&.valid_tweets {
-					&:hover {
+					&:hover, &.active {
 						border-bottom: 3px solid #96c85a;
 					}
 				}
 				&.invalid_tweets {
-					&:hover {
+					&:hover, &.active {
 						border-bottom: 3px solid #f56a6a;
 					}
 				}
 				&.archived_tweets {
-					&:hover {
+					&:hover, &.active {
 						border-bottom: 3px solid #ffae00;
 					}
 				}
@@ -1223,7 +1223,7 @@ body {
 	label {
 		@extend %none;
 	}
-	.create-header {
+	> .create-header {
 		background: #FCFCFC;
 		padding: 1em;
 		margin-left: 10px;
@@ -1235,7 +1235,10 @@ body {
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
 		font-size: 14px;
 		color: $gray;
-		+ #ajax-wrapper, [id^="ajax-wrapper--*"] {
+		 #ajax-wrapper, [id^="ajax-wrapper--*"] {
+		}
+		+ .create-header {
+			margin-top: 0;
 			overflow: hidden;
 			background: white;
 			padding: 1em;

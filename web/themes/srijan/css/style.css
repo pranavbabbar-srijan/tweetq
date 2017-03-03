@@ -1025,7 +1025,7 @@ body {
       .block-users-left-side-bar-block .profile ~ div a {
         color: #979797;
         text-decoration: none; }
-        .block-users-left-side-bar-block .profile ~ div a:hover {
+        .block-users-left-side-bar-block .profile ~ div a:hover, .block-users-left-side-bar-block .profile ~ div a.active {
           color: #212121; }
       .block-users-left-side-bar-block .profile ~ div:last-child {
         padding-bottom: 2em; }
@@ -1104,13 +1104,13 @@ body {
         position: absolute;
         right: 0;
         top: 10px; }
-      .block-users-tweets-statistics-block .content > div a.total_tweets:hover {
+      .block-users-tweets-statistics-block .content > div a.total_tweets:hover, .block-users-tweets-statistics-block .content > div a.total_tweets.active {
         border-bottom: 3px solid #2aa9e0; }
-      .block-users-tweets-statistics-block .content > div a.valid_tweets:hover {
+      .block-users-tweets-statistics-block .content > div a.valid_tweets:hover, .block-users-tweets-statistics-block .content > div a.valid_tweets.active {
         border-bottom: 3px solid #96c85a; }
-      .block-users-tweets-statistics-block .content > div a.invalid_tweets:hover {
+      .block-users-tweets-statistics-block .content > div a.invalid_tweets:hover, .block-users-tweets-statistics-block .content > div a.invalid_tweets.active {
         border-bottom: 3px solid #f56a6a; }
-      .block-users-tweets-statistics-block .content > div a.archived_tweets:hover {
+      .block-users-tweets-statistics-block .content > div a.archived_tweets:hover, .block-users-tweets-statistics-block .content > div a.archived_tweets.active {
         border-bottom: 3px solid #ffae00; }
 
 .notifications {
@@ -1270,7 +1270,7 @@ body {
 
 .-form-tweets-queue-csv-upload {
   padding-top: 5px; }
-  .-form-tweets-queue-csv-upload .create-header {
+  .-form-tweets-queue-csv-upload > .create-header {
     background: #FCFCFC;
     padding: 1em;
     margin-left: 10px;
@@ -1287,7 +1287,8 @@ body {
     /*IE 5.5-7*/
     font-size: 14px;
     color: #979797; }
-    .-form-tweets-queue-csv-upload .create-header + #ajax-wrapper, .-form-tweets-queue-csv-upload .create-header [id^="ajax-wrapper--*"] {
+    .-form-tweets-queue-csv-upload > .create-header + .create-header {
+      margin-top: 0;
       overflow: hidden;
       background: white;
       padding: 1em;
