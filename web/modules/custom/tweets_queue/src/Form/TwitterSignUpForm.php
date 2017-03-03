@@ -62,7 +62,8 @@ class TwitterSignUpForm extends FormBase {
       '#required' => TRUE,
       '#value' => $email,
       '#attributes' => array (
-        'placeholder' => t("Required")
+        'placeholder' => t("Required"),
+        'readonly' => 'readonly',
       ),
     );
 
