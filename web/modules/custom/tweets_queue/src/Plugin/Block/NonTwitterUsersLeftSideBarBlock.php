@@ -22,12 +22,17 @@ class NonTwitterUsersLeftSideBarBlock extends BlockBase {
    */
   public function build() {
     global $base_url;
-    $current_path = \Drupal::service('path.current')->getPath();
+    $user_roles = \Drupal::currentUser()->getRoles();
+    if(in_array(TWITTER_APPROVED_CLIENT_ROLE, $user_roles)) {
+      return array(
+        '#type' => 'markup',
+        '#markup' => '',
+      );
+    }
+
     $picture = '';
     $name = '';
     $twitter_handle = '';
-
-    $picture = '';
     $profile_img = "<img src='" . $picture . "'></img>";
     $twitter_profile_output = "<div class='non-twitter-profile'>
       <span class='img'>" . $profile_img . "</span>
