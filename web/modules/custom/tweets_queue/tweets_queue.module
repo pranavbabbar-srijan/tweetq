@@ -2793,3 +2793,15 @@ function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInt
     $form_state->setErrorByName('email', t('Email already in use.'));
   }
 }
+
+function tweets_queue_match_current_path($current_path, $match_path, $format = 1) {
+  $class = "in-active";
+  if ($current_path == "/" . $match_path) {
+    $class = "active";
+  }
+  $outout = $class;
+  if ($format) {
+    $outout = " class='" . $class . "' ";
+  }
+  return $outout;
+}

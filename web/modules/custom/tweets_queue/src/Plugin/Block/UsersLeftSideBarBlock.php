@@ -22,6 +22,8 @@ class UsersLeftSideBarBlock extends BlockBase {
    */
   public function build() {
     global $base_url;
+    $current_path = \Drupal::service('path.current')->getPath();
+    drupal_set_message($current_path);
     $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
     $user_twitter_profile_info = unserialize($twitter_profile_info);
     $picture = '';
@@ -37,16 +39,23 @@ class UsersLeftSideBarBlock extends BlockBase {
       <span class='twitter_handle'>". $twitter_handle . "</span>
     </div>" ;
 
-    $create_tweet_link = "<a href='" . $base_url .'/' . TWITTER_CREATE_TWEET_PATH . "'>" .
+    $class = tweets_queue_match_current_path($current_path, TWITTER_CREATE_TWEET_PATH);
+    $create_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_CREATE_TWEET_PATH . "'>" .
       TWITTER_CREATE_TWEET_LABEL ."</a>";
-    $import_tweet_link = "<a href='" . $base_url .'/' . TWITTER_IMPORT_TWEET_PATH . "'>" .
+
+    $class = tweets_queue_match_current_path($current_path, TWITTER_IMPORT_TWEET_PATH);
+    $import_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_IMPORT_TWEET_PATH . "'>" .
       TWITTER_IMPORT_TWEET_LABEL ."</a>";
 
-    $valid_tweet_link = "<a href='" . $base_url .'/' . TWITTER_VALID_TWEET_PATH . "'>" .
+    $class = tweets_queue_match_current_path($current_path, TWITTER_VALID_TWEET_PATH);
+    $valid_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_VALID_TWEET_PATH . "'>" .
       TWITTER_VALID_TWEET_LABEL ."</a>";
-    $invalid_tweet_link = "<a href='" . $base_url .'/' . TWITTER_INVALID_TWEET_PATH . "'>" .
+    $class = tweets_queue_match_current_path($current_path, TWITTER_INVALID_TWEET_PATH);
+    $invalid_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_INVALID_TWEET_PATH . "'>" .
       TWITTER_INVALID_TWEET_LABEL ."</a>";
-    $archived_tweet_link = "<a href='" . $base_url .'/' . TWITTER_ARCHIVED_TWEET_PATH . "'>" .
+
+    $class = tweets_queue_match_current_path($current_path, TWITTER_ARCHIVED_TWEET_PATH);
+    $archived_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_ARCHIVED_TWEET_PATH . "'>" .
       TWITTER_ARCHIVED_TWEET_LABEL ."</a>";
 
     $create_tweet_output = "<div class='create_tweets'>
