@@ -24,9 +24,6 @@ class UsersTweetsStatisticsBlock extends BlockBase {
   public function build() {
     global $base_url;
     $current_path = \Drupal::service('path.current')->getPath();
-    if ($_REQUEST['path']) {
-      drupal_set_message($current_path);
-    }
     $valid_tweets = tweets_queue_get_users_total_tweets_count(USERS_VALID_TWEET);
     $invalid_tweets = tweets_queue_get_users_total_tweets_count(USERS_INVALID_TWEET);
     $archived_tweets = tweets_queue_get_users_total_tweets_count(USERS_ARCHIVED_TWEET);
