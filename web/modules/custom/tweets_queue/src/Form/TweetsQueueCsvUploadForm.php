@@ -51,6 +51,8 @@ class TweetsQueueCsvUploadForm extends FormBase {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t(TWITTER_IMPORT_TWEET_LABEL),
+      '#prefix' => '<div class="submit-block">',
+      '#suffix' => '</div>',
     );
     return $form;
   }
