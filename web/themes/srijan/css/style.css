@@ -128,7 +128,7 @@ button {
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .edit,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .edit,
-.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .block-users-tweets-statistics-block .content > div a > div {
+.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .messages--status:before, .block-users-tweets-statistics-block .content > div a > div {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -405,7 +405,7 @@ body {
     justify-content: flex-start;
     margin-top: .5em; }
     .right-nav ul li:first-child {
-      margin-right: 1em; }
+      margin-right: 3em; }
     .right-nav ul li a {
       text-decoration: none;
       color: white; }
@@ -850,6 +850,22 @@ body {
 .user-logged-in #main-wrapper {
   padding-top: 58px; }
 
+.user-logged-in .messages--status {
+  box-shadow: none;
+  margin-left: 10px;
+  margin-top: 8px;
+  text-align: center;
+  background: none white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #96c85a;
+  font-size: 18px; }
+  .user-logged-in .messages--status:before {
+    content: "";
+    font-size: 22px;
+    position: relative;
+    top: 3px;
+    right: 3px; }
+
 .path-signup .layout-container .region-content {
   padding-top: 20px;
   min-height: 600px; }
@@ -875,14 +891,14 @@ body {
     .path-signup .block-system-main-block .message-header .js-form-item {
       width: 45%;
       margin-right: 10px; }
-      .path-signup .block-system-main-block .message-header .js-form-item input[type="text"] {
+      .path-signup .block-system-main-block .message-header .js-form-item input[type="text"], .path-signup .block-system-main-block .message-header .js-form-item input[type="email"], .path-signup .block-system-main-block .message-header .js-form-item input[type="password"], .path-signup .block-system-main-block .message-header .js-form-item input[type="url"] {
         border: 0;
         background: none;
         outline: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         display: block;
         width: 100%; }
-      .path-signup .block-system-main-block .message-header .js-form-item.form-item-organization {
+      .path-signup .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
         width: 100%; }
       .path-signup .block-system-main-block .message-header .js-form-item label {
         color: #979797;
@@ -1250,8 +1266,7 @@ body {
     -o-border-radius: 5px;
     border-radius: 5px;
     padding: 1em;
-    font-size: 18px;
-    color: #f7f7f7; }
+    font-size: 18px; }
 
 .-form-tweets-queue-csv-upload {
   padding-top: 5px; }

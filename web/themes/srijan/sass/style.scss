@@ -299,7 +299,7 @@ body {
 		margin-top: .5em;
 		li {
 			&:first-child {
-				margin-right: 1em;
+				margin-right: 3em;
 			}
 			a {
 				text-decoration: none;
@@ -752,6 +752,24 @@ body {
 	#main-wrapper {
 		padding-top: 58px;
 	}
+	.messages--status {
+		box-shadow: none;
+		margin-left: 10px;
+		margin-top: 8px;
+		text-align: center;
+	    background: none white;
+	    border: 1px solid rgba(0,0,0,0.15);
+	    color: #96c85a;
+	    font-size: 18px;
+	    &:before {
+	    	@extend %icomoon;
+	    	content: $icon-success;
+	    	font-size: 22px;
+		    position: relative;
+		    top: 3px;
+		    right: 3px;
+	    }
+	}
 }
 .path-signup {
 	.layout-container {
@@ -776,7 +794,7 @@ body {
 	    	.js-form-item {
 	    		width: 45%;
 	    		margin-right: 10px;
-	    		input[type="text"] {
+	    		input[type="text"], input[type="email"], input[type="password"], input[type="url"] {
 					border: 0;
 					background: none;
 					outline: none;
@@ -784,7 +802,7 @@ body {
 					display: block;
 					width: 100%;
 	    		}
-	    		&.form-item-organization {
+	    		&.js-form-item-field-organization {
 	    			width: 100%;
 	    		}
 	    		label {
@@ -1197,7 +1215,6 @@ body {
 		@include border-radius(5px);
 		padding: 1em;
 		font-size: 18px;
-		color: #f7f7f7;
 	}
 }
 
