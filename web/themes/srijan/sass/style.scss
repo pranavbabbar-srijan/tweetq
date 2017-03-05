@@ -782,9 +782,9 @@ body {
 		}
 	}
 	.block-system-main-block {
-		width: 700px;
+		width: 755px;
 	    margin: 0 auto;
-	    padding: 1.5em 2.5em;
+	    padding: 1.8em 2.5em;
 	    background: white;
 	    @include border-radius(6px);
 	    .message-header {
@@ -794,6 +794,7 @@ body {
 	    	.js-form-item {
 	    		width: 45%;
 	    		margin-right: 10px;
+	    		margin-bottom: 2em;
 	    		input[type="text"], input[type="email"], input[type="password"], input[type="url"] {
 					border: 0;
 					background: none;
@@ -806,10 +807,11 @@ body {
 	    			width: 100%;
 	    		}
 	    		label {
-					color: $gray;
-					margin-bottom: .5em;
+					color: #949494;
+					margin-bottom: 1em;
 					display: block;
 					font-size: 16px;
+					font-weight: bold;
 					&:after {
 						@extend %none;
 					}
@@ -838,6 +840,9 @@ body {
 		.signup {
 			font-size: 24px;
     		font-weight: 300;
+    		+ .signup {
+    			margin-top: .3em;
+    		}
     		div {
     			font-size: 18px;
     			font-weight: bold;

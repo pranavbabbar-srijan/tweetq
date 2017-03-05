@@ -874,9 +874,9 @@ body {
   background: #F1F1F1; }
 
 .path-signup .block-system-main-block {
-  width: 700px;
+  width: 755px;
   margin: 0 auto;
-  padding: 1.5em 2.5em;
+  padding: 1.8em 2.5em;
   background: white;
   -webkit-border-radius: 6px;
   -khtml-border-radius: 6px;
@@ -890,7 +890,8 @@ body {
     justify-content: space-between; }
     .path-signup .block-system-main-block .message-header .js-form-item {
       width: 45%;
-      margin-right: 10px; }
+      margin-right: 10px;
+      margin-bottom: 2em; }
       .path-signup .block-system-main-block .message-header .js-form-item input[type="text"], .path-signup .block-system-main-block .message-header .js-form-item input[type="email"], .path-signup .block-system-main-block .message-header .js-form-item input[type="password"], .path-signup .block-system-main-block .message-header .js-form-item input[type="url"] {
         border: 0;
         background: none;
@@ -901,10 +902,11 @@ body {
       .path-signup .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
         width: 100%; }
       .path-signup .block-system-main-block .message-header .js-form-item label {
-        color: #979797;
-        margin-bottom: .5em;
+        color: #949494;
+        margin-bottom: 1em;
         display: block;
-        font-size: 16px; }
+        font-size: 16px;
+        font-weight: bold; }
     .path-signup .block-system-main-block .message-header input[type="submit"] {
       margin: 20px auto 0;
       border: none;
@@ -931,6 +933,8 @@ body {
   .path-signup .signup-form .signup {
     font-size: 24px;
     font-weight: 300; }
+    .path-signup .signup-form .signup + .signup {
+      margin-top: .3em; }
     .path-signup .signup-form .signup div {
       font-size: 18px;
       font-weight: bold;
