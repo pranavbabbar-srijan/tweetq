@@ -2422,6 +2422,7 @@ function tweets_queue_check_logged_user_mapping($redirect = TRUE) {
     }
     $twitter_owner_id = tweets_queue_check_twitter_user_presence($uid);
     if ($twitter_owner_id) {
+      tweets_queue_check_add_twitter_approved_role();
       $_SESSION[$uid][TWITTER_USER_AUTHORIZED] = 1;
       $_SESSION[$uid][TWITTER_OWNER_ID] = $twitter_owner_id;
     }
@@ -2429,6 +2430,21 @@ function tweets_queue_check_logged_user_mapping($redirect = TRUE) {
       tweets_queue_goto_dashboard();
     }
   }
+}
+
+/**
+ * Check presence of twitter approved role.
+ * If missing, add it to the logged user.
+ */
+function tweets_queue_check_add_twitter_approved_role() {
+  $user_roles = \Drupal::currentUser()->getRoles();
+  if(in_array(TWITTER_APPROVED_CLIENT_ROLE, $user_roles)) {
+    return;
+  }
+  $uid = \Drupal::currentUser()->id();
+  $entity = \Drupal\user\Entity\User::load($uid);
+  $entity->addRole(TWITTER_APPROVED_CLIENT_ROLE);
+  $entity->save();
 }
 
 function tweets_queue_show_twitter_authentiation_message() {
@@ -2460,7 +2476,11 @@ function tweets_queue_show_twitter_authentiation_message() {
 function tweets_queue_show_twitter_signin_block(&$form, $weight = 12) {
   global $base_url;
   $uid = \Drupal::currentUser()->id();
-  if (!isset($_SESSION[$uid][TWITTER_USER_AUTHORIZED])) {
+  $user_roles = \Drupal::currentUser()->getRoles();
+  if(in_array(TWITTER_APPROVED_CLIENT_ROLE, $user_roles)) {
+    return '';
+  }
+  if ($uid) {
     $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
     $header_output =  "<span class='signin-twitter-text'>" . TWITTER_CONNECT_HEADER . "<span>";
     $connect_output = "<span class='twitter-connect'><a href='" . $twitter_login_path ."'>" . TWITTER_CONNECT_TEXT . "</a></span>";
