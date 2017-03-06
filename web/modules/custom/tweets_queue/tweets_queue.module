@@ -85,6 +85,7 @@ const TWITTER_IMPORT_TWEET_LABEL = 'Import Tweets';
 const TWITTER_VALID_TWEET_LABEL = 'Valid Tweets';
 const TWITTER_INVALID_TWEET_LABEL = 'Invalid Tweets';
 const TWITTER_ARCHIVED_TWEET_LABEL = 'Archived Tweets';
+const TWITTER_NO_TWEET_FOUND_LABEL = 'No Tweets Found';
 const TWITTER_TOTAL_TWEET_LABEL = 'Total Tweets';
 const TWITTER_SETTINGS_LABEL = 'Settings';
 const TWITTER_CSV_UPLOAD_NOTE_LABEL = 'Note: Only CSV file, Max size 1MB';
@@ -2836,4 +2837,23 @@ function tweets_queue_match_current_path($current_path, $match_path, $format = 1
     $outout = " class='" . $class . "' ";
   }
   return $outout;
+}
+
+/**
+ * Show message when tweet is missing.
+ *
+ * @return string
+ *   Returns the display message.
+ */
+function tweets_queue_no_tweets_found_message() {
+  global $base_url;
+  $current_path = \Drupal::service('path.current')->getPath();
+  $create_tweet_link = "<a class ='create-tweet' href='" . $base_url .'/' . TWITTER_CREATE_TWEET_PATH . "'>" .
+    TWITTER_CREATE_TWEET_LABEL ."</a>";
+  $import_tweet_link = "<a class ='import-tweet' href='" . $base_url .'/' . TWITTER_IMPORT_TWEET_PATH . "'>" .
+    TWITTER_IMPORT_TWEET_LABEL ."</a>";
+  $no_tweet_found_text = t(TWITTER_NO_TWEET_FOUND_LABEL);
+  $output = "<div>" . $no_tweet_found_text .
+    $create_tweet_link . $import_tweet_link . "</div>";
+  return $output;
 }

@@ -68,7 +68,7 @@ class UsersInValidTweetsBlock extends BlockBase {
     if (!$total) {
       return array(
         '#type' => 'markup',
-        '#markup' => t('No invalid tweets found.'),
+        '#markup' => tweets_queue_no_tweets_found_message(),
       );
     }
   }

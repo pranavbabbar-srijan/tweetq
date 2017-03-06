@@ -68,7 +68,7 @@ class UsersTweetedTweetsBlock extends BlockBase {
     if (!$total) {
       $build['no_found'] = array(
         '#type' => 'markup',
-        '#markup' => t('No tweets found.'),
+        '#markup' => tweets_queue_no_tweets_found_message(),
       );
       return $build;
     }

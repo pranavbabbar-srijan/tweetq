@@ -70,7 +70,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
     if (!$total) {
       return array(
         '#type' => 'markup',
-        '#markup' => t('No tweets found.'),
+        '#markup' => tweets_queue_no_tweets_found_message(),
       );
     }
   }
