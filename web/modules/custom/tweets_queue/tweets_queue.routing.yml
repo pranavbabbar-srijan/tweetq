@@ -22,7 +22,7 @@ tweets_queue.send_tweets:
     _form: '\Drupal\tweets_queue\Form\SendTweetsForm'
     _title: 'Create a Tweet'
   requirements:
-    _role: 'twitter_approved_client+administrator'
+    _role: 'twitter_client+administrator'
 
 tweets_queue.signup_user:
   path: '/signup'
