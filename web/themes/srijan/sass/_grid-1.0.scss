@@ -149,7 +149,7 @@ $maxWidth : 48em;
     @content;
   }
 }
-
+$xtraLarge : 85.375em;
 @mixin min-max-screen($minWidth, $maxWidth){
   @media (min-width: $minWidth) and (max-width: $maxWidth) {
     @content;

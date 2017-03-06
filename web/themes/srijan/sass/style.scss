@@ -54,21 +54,30 @@
 	position: relative;
 	.profile {
 		float: right;
-		display: flex;
-		flex-flow: row wrap;
-		border-left: 1px solid $gray;
-		margin-top: -0.6em;
-	    padding-top: 0.6em;
-	    margin-bottom: -0.45em;
-	    padding-bottom: .7em;
-	    padding-left: 1em;
-	    margin-right: 1em;
+		> a {
+			text-decoration: none;
+			> div {
+				display: flex;
+				flex-flow: row wrap;
+				border-left: 1px solid $gray;
+				margin-top: -0.6em;
+			    padding-top: 0.6em;
+			    margin-bottom: -0.45em;
+			    padding-bottom: .7em;
+			    padding-left: 1em;
+			    margin-right: 1em;
+			}	
+		} 
 		.img {
 			width: 36px;
 			height: 36px;
 			@include border-radius(50%);
 			background: $gray;
 			display: block;
+			overflow: hidden;
+			img {
+    			width: 100%;
+    		}
 		}
 		.name {
 			margin-top: 8px;
@@ -94,6 +103,11 @@
 				color: rgba(0,0,0,0.3);
 			}
 			&.active {}
+		}
+		.profile-links {
+			position: absolute;
+			display: none;
+			opacity: 0;
 		}
 	}
 }
@@ -128,6 +142,10 @@
 	border-bottom: 1px solid rgba(255, 255, 255, .4);
 	.layout-container {
 		@include container(1180px);
+		position: relative;
+		@media screen and (min-width: $xtraLarge){
+			@include container(1440px);
+		}
 	}
 }
 
@@ -176,6 +194,9 @@ body {
 
 .region-content {
 	@include container(1180px);
+	@media screen and (min-width: $xtraLarge){
+		@include container(1440px);
+	}
 }
 
 .path-frontpage {
@@ -747,6 +768,10 @@ body {
 		}
 		.layout-container {
 			max-width: 1250px;
+			@media screen and (min-width: $xtraLarge){
+				max-width: inherit;
+				margin: 0 30px;
+			}
 		}
 	}
 	#main-wrapper {
@@ -955,6 +980,14 @@ body {
     	margin-bottom: 0.6em !important;
 	}
 }
+.morecontent {
+	span {
+		display: none;
+	}
+	.morelink {
+		color: #f56a6a !important;
+	}
+}
 
 .block-users-tweets-statistics-block {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";/*IE 8*/
@@ -966,7 +999,7 @@ body {
 	margin-left: 10px;
 	background: white;
 	position: fixed;
-    width: 74.3%;
+    width: 74.48%;
     z-index: 1;
     top: 60px;
 	.content {
