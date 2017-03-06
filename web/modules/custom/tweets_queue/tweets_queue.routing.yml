@@ -62,7 +62,7 @@ tweets_queue_tweet_form.settings:
     _form: '\Drupal\tweets_queue\Form\TweetsQueueTweetForm'
     _title: 'Edit Tweet'
   requirements:
-    _role: 'twitter_approved_client+administrator'
+    _role: 'twitter_client+administrator'
 
 tweets_queue_tweeted_listing.settings:
   path: '/dashboard/valid-tweets/tweeted-listing'
