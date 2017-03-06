@@ -14,10 +14,9 @@
 	//     $(this).text($(this).text().substring(0,140) + '...');
 	// });
     var showChar = 140;  // How many characters are shown by default
-    var moretext = "More >";
+    var moretext = "More";
     var lesstext = "Less";
     
-
     $('.block-tweets-queue .item-list + .item-list ul ul li:first-child').each(function() {
         var content = $(this).html();
  
@@ -25,12 +24,9 @@
  
             var c = content.substr(0, showChar);
             var h = content.substr(showChar, content.length - showChar);
- 
             var html = c + '<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
- 
             $(this).html(html);
         }
- 
     });
  
     $(".morelink").click(function(){
