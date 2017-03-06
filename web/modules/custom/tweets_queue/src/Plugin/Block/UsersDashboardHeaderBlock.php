@@ -21,12 +21,28 @@ class UsersDashboardHeaderBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $name = "lorem ipsum";
-    $profile_img = "<img src=''></img>";
+
+    $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
+    $user_twitter_profile_info = unserialize($twitter_profile_info);
+    $picture = '';
+    $name = $user_twitter_profile_info->name;
+
+    $picture = $user_twitter_profile_info->profile_image_url;
+    $profile_img = "<img src='" . $picture . "'></img>";
+
+    $my_profile_link = "<a class ='profile-my-profile' href='" . $base_url .'/' . "'>" .
+      'My Profile' ."</a>";
+    $setting_link = "<a class ='profile-settings' href='" . $base_url .'/' . "'>" .
+      'Settings' ."</a>";
+    $logout_link = "<a class ='profile-logout' href='" . $base_url .'/user/logout' . "'>" .
+      'Logout' ."</a>";
+    $profile_link_output = "<div class='profile-links'> " .
+    $my_profile_link . $setting_link . $logout_link . "</div>" ;
+
     $twitter_profile_output = "<div class='profile'>
-      <span class='img'>" . $profile_img . "</span>
-      <span class='name'>" . $name . "</span>
-    </div>" ;
+      <a href=''>" . "<div><span class='img'>" . $profile_img . "</span>
+      <span class='name'>" . $name . "</span></div> " . $profile_link_output . "</a>
+      </div>" ;
 
     $message_history_count = 2;
     $message_history_count_output = "<div>
