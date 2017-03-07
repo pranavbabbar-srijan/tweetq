@@ -47,13 +47,15 @@ class UsersDashboardHeaderBlock extends BlockBase {
       <span class='name'>" . $name . "</span></div> " . $profile_link_output . "</a>
       </div>" ;
 
+
     $message_history_count_output = "<div>
       <span class='count'>" . $message_history_count . "</span>
     </div>";
-    $message_history_data = " <div>
+    
+    $message_history_data = "<div class='notification-message-list'>";
+    $message_history_data .= " <div>
       <span class='message_history_count'>You have " . $message_history_count_output . " Notifications</span>
     </div>";
-
     foreach ($tweets_history as $data) {
       $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
       $message = $data->message;
@@ -64,7 +66,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
         </div>",
       array('@retweet_label' => $retweet_label, '@message' => $message));
     }
-
+    $message_history_data .= "</div>";
     $output = "<div class='notifications'>" . $message_history_count_output . 
       $message_history_data . "</div>" . $twitter_profile_output;
 
