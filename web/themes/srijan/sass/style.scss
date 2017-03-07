@@ -919,6 +919,13 @@ body {
 		}
 	}
 }
+.block-non-twitter-users-left-side-bar-block {
+	.non-twitter-profile { 
+		span.img {
+			background: #E7E8E9;
+		}
+	}
+}
 .block-users-left-side-bar-block, .block-non-twitter-users-left-side-bar-block {
 	background: white;
 	.profile, .non-twitter-profile {
@@ -962,6 +969,7 @@ body {
 			font-size: 18px;
 			line-height: 3em;
 			margin: 0 1.5em;
+			color: $gray;
 			a {
 				color: $gray;
 				text-decoration: none;
