@@ -49,7 +49,22 @@
 	}
 }
 
-.block-users-dashboard-header-block {
+.block-users-dashboard-header-profile-block {
+	.profile {
+		> div {
+			display: flex;
+			flex-flow: row wrap;
+			border-left: 1px solid $gray;
+			margin-top: -0.6em;
+		    padding-top: 0.6em;
+		    margin-bottom: -0.45em;
+		    padding-bottom: .7em;
+		    padding-left: 1em;
+		    margin-right: 1em;
+		}
+	}
+}
+.block-users-dashboard-header-block, .block-users-dashboard-header-profile-block {
 	float: right;
 	position: relative;
 	.profile {
@@ -505,7 +520,7 @@ body {
 				color: $gray;
 				margin-right: 3em;
 				text-decoration: none;
-				&:hover {
+				&:hover, &.active {
 					color: $twitter;
 				}
 			}
@@ -924,6 +939,9 @@ body {
 		span.img {
 			background: #E7E8E9;
 		}
+		~ div {
+			opacity: .7;
+		}
 	}
 }
 .block-users-left-side-bar-block, .block-non-twitter-users-left-side-bar-block {
@@ -1037,7 +1055,8 @@ body {
 		display: none;
 	}
 	.morelink {
-		color: #f56a6a !important;
+		color: $dark !important;
+		font-weight: bold;
 	}
 }
 
