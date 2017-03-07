@@ -9,10 +9,10 @@
 			$(this).siblings(".notifications").toggleClass("active");
 		});
 	});
-	
+
 	// code to trim text and add more link.
     var showChar = 140;
-    var moretext = "More";
+    var moretext = "...";
     var lesstext = "Less";
     
     $('.block-tweets-queue .item-list + .item-list ul ul li:first-child').each(function() {
@@ -22,7 +22,7 @@
  
             var c = content.substr(0, showChar);
             var h = content.substr(showChar, content.length - showChar);
-            var html = c + '<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+            var html = c + '<span class="morecontent"><span>' + h + '</span><a href="" class="morelink">' + moretext + '</a></span>';
             $(this).html(html);
         }
     });
