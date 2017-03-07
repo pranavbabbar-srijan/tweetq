@@ -9,11 +9,9 @@
 			$(this).siblings(".notifications").toggleClass("active");
 		});
 	});
-	// $(".block-tweets-queue .item-list + .item-list ul ul li:first-child").each (function () {
-	//   if ($(this).text().length > 140)
-	//     $(this).text($(this).text().substring(0,140) + '...');
-	// });
-    var showChar = 140;  // How many characters are shown by default
+	
+	// code to trim text and add more link.
+    var showChar = 140;
     var moretext = "More";
     var lesstext = "Less";
     

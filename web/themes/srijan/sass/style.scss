@@ -122,7 +122,7 @@
 .site-branding__slogan {
     position: absolute;
     top: 2.5em;
-    left: 1.8em;
+    left: .8em;
     font-size: 48px;
     font-weight: 300;
     color: white;
@@ -796,7 +796,7 @@ body {
 	    }
 	}
 }
-.path-signup {
+.path-signup, .path-twitter {
 	.layout-container {
 		.region-content {
 			padding-top: 20px;
@@ -857,7 +857,7 @@ body {
 	#header {
 		background: white;
 	}
-	.signup-form {
+	.signup-form, .twitter-signup-form {
 		display: flex;
 		flex-flow: row wrap;
 		justify-content: space-between;
@@ -919,9 +919,9 @@ body {
 		}
 	}
 }
-.block-users-left-side-bar-block {
+.block-users-left-side-bar-block, .block-non-twitter-users-left-side-bar-block {
 	background: white;
-	.profile {
+	.profile, .non-twitter-profile {
 		background: -moz-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);/* FF3.6+ */
 		background: -webkit-gradient(linear, 308deg, color-stop(20%, #51ae47), color-stop(100%, #04d19d));/* Chrome,Safari4+ */
 		background: -webkit-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);/* Chrome10+,Safari5.1+ */
@@ -978,6 +978,49 @@ body {
 		border-bottom: 1px solid rgba(0,0,0,.1);
 		padding-bottom: .6em;
     	margin-bottom: 0.6em !important;
+	}
+}
+.block-sign-in-with-twitter-block {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";/*IE 8*/
+	-moz-box-shadow: 1px 0px 8px #bbb;/*FF 3.5+*/
+	-webkit-box-shadow: 1px 0px 8px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+	box-shadow: 1px 0px 8px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb); /*IE 5.5-7*/
+	background: white;
+	padding: 2em;
+	div.twitter-connect {
+		padding: 2em;
+		border: 1px dashed rgba(0,0,0,0.2);
+		@include border-radius(3px);
+		background: #fcfcfc;
+		text-align: center;
+	}
+	.signin-twitter-text {
+		font-size: 24px;
+		font-weight: 300;
+		> span {
+			display: block;
+			margin-top: 1em;
+			a {
+	    		border: none;
+				background: $twitter;
+			    padding: .6em 4em;
+			    font-size: 18px;
+			    font-weight: bold;
+			    color: white;
+			    @include border-radius(4px);
+			    text-decoration: none;
+	    		text-align: center;
+			    &:before {
+			    	font: normal normal normal 14px/1 FontAwesome;
+			    	content: "\f099";
+					font-size: 28px;
+				    margin-right: 0.2em;
+				    display: inline-block;
+				    vertical-align: middle;
+			    }
+	    	}
+		}
 	}
 }
 .morecontent {

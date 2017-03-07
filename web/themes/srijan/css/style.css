@@ -121,7 +121,7 @@ button {
 /* ================================= Offset-Span ================================= */
 /* ================================= Clearfix ================================= */
 /* ================================= Media Query Breakpoint ================================= */
-#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label {
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label {
   display: none; }
 
 .block-users-dashboard-header-block .profile + a:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
@@ -235,7 +235,7 @@ button {
 .site-branding__slogan {
   position: absolute;
   top: 2.5em;
-  left: 1.8em;
+  left: .8em;
   font-size: 48px;
   font-weight: 300;
   color: white;
@@ -905,14 +905,14 @@ body {
     top: 3px;
     right: 3px; }
 
-.path-signup .layout-container .region-content {
+.path-signup .layout-container .region-content, .path-twitter .layout-container .region-content {
   padding-top: 20px;
   min-height: 600px; }
 
-.path-signup .layout-container .section {
+.path-signup .layout-container .section, .path-twitter .layout-container .section {
   background: #F1F1F1; }
 
-.path-signup .block-system-main-block {
+.path-signup .block-system-main-block, .path-twitter .block-system-main-block {
   width: 755px;
   margin: 0 auto;
   padding: 1.8em 2.5em;
@@ -923,30 +923,30 @@ body {
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
   border-radius: 6px; }
-  .path-signup .block-system-main-block .message-header {
+  .path-signup .block-system-main-block .message-header, .path-twitter .block-system-main-block .message-header {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between; }
-    .path-signup .block-system-main-block .message-header .js-form-item {
+    .path-signup .block-system-main-block .message-header .js-form-item, .path-twitter .block-system-main-block .message-header .js-form-item {
       width: 45%;
       margin-right: 10px;
       margin-bottom: 2em; }
-      .path-signup .block-system-main-block .message-header .js-form-item input[type="text"], .path-signup .block-system-main-block .message-header .js-form-item input[type="email"], .path-signup .block-system-main-block .message-header .js-form-item input[type="password"], .path-signup .block-system-main-block .message-header .js-form-item input[type="url"] {
+      .path-signup .block-system-main-block .message-header .js-form-item input[type="text"], .path-signup .block-system-main-block .message-header .js-form-item input[type="email"], .path-signup .block-system-main-block .message-header .js-form-item input[type="password"], .path-signup .block-system-main-block .message-header .js-form-item input[type="url"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"] {
         border: 0;
         background: none;
         outline: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         display: block;
         width: 100%; }
-      .path-signup .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
+      .path-signup .block-system-main-block .message-header .js-form-item.js-form-item-field-organization, .path-twitter .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
         width: 100%; }
-      .path-signup .block-system-main-block .message-header .js-form-item label {
+      .path-signup .block-system-main-block .message-header .js-form-item label, .path-twitter .block-system-main-block .message-header .js-form-item label {
         color: #949494;
         margin-bottom: 1em;
         display: block;
         font-size: 16px;
         font-weight: bold; }
-    .path-signup .block-system-main-block .message-header input[type="submit"] {
+    .path-signup .block-system-main-block .message-header input[type="submit"], .path-twitter .block-system-main-block .message-header input[type="submit"] {
       margin: 20px auto 0;
       border: none;
       background: #96c85a;
@@ -961,27 +961,27 @@ body {
       -o-border-radius: 4px;
       border-radius: 4px; }
 
-.path-signup #header {
+.path-signup #header, .path-twitter #header {
   background: white; }
 
-.path-signup .signup-form {
+.path-signup .signup-form, .path-signup .twitter-signup-form, .path-twitter .signup-form, .path-twitter .twitter-signup-form {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   margin-bottom: 35px; }
-  .path-signup .signup-form .signup {
+  .path-signup .signup-form .signup, .path-signup .twitter-signup-form .signup, .path-twitter .signup-form .signup, .path-twitter .twitter-signup-form .signup {
     font-size: 24px;
     font-weight: 300; }
-    .path-signup .signup-form .signup + .signup {
+    .path-signup .signup-form .signup + .signup, .path-signup .twitter-signup-form .signup + .signup, .path-twitter .signup-form .signup + .signup, .path-twitter .twitter-signup-form .signup + .signup {
       margin-top: .3em; }
-    .path-signup .signup-form .signup div {
+    .path-signup .signup-form .signup div, .path-signup .twitter-signup-form .signup div, .path-twitter .signup-form .signup div, .path-twitter .twitter-signup-form .signup div {
       font-size: 18px;
       font-weight: bold;
       text-align: right; }
-      .path-signup .signup-form .signup div a {
+      .path-signup .signup-form .signup div a, .path-signup .twitter-signup-form .signup div a, .path-twitter .signup-form .signup div a, .path-twitter .twitter-signup-form .signup div a {
         text-decoration: none;
         color: #2aa9e0; }
-        .path-signup .signup-form .signup div a:before {
+        .path-signup .signup-form .signup div a:before, .path-signup .twitter-signup-form .signup div a:before, .path-twitter .signup-form .signup div a:before, .path-twitter .twitter-signup-form .signup div a:before {
           font: normal normal normal 14px/1 FontAwesome;
           content: "\f099";
           font-size: 28px;
@@ -989,14 +989,14 @@ body {
           display: inline-block;
           vertical-align: text-top;
           margin-top: -4px; }
-    .path-signup .signup-form .signup span {
+    .path-signup .signup-form .signup span, .path-signup .twitter-signup-form .signup span, .path-twitter .signup-form .signup span, .path-twitter .twitter-signup-form .signup span {
       font-size: 12px;
       color: #bfbfbf;
       text-align: right;
       font-weight: normal;
       display: block;
       margin-top: 5px; }
-      .path-signup .signup-form .signup span:before {
+      .path-signup .signup-form .signup span:before, .path-signup .twitter-signup-form .signup span:before, .path-twitter .signup-form .signup span:before, .path-twitter .twitter-signup-form .signup span:before {
         content: "*"; }
 
 .toolbar-fixed #sidebar-first {
@@ -1014,9 +1014,9 @@ body {
 .toolbar-fixed.user-logged-in .block-users-archived-tweets-block, .toolbar-fixed.user-logged-in .block-users-valid-tweets-block, .toolbar-fixed.user-logged-in .block-users-in-valid-tweets-block {
   margin-left: 10px; }
 
-.block-users-left-side-bar-block {
+.block-users-left-side-bar-block, .block-non-twitter-users-left-side-bar-block {
   background: white; }
-  .block-users-left-side-bar-block .profile {
+  .block-users-left-side-bar-block .profile, .block-users-left-side-bar-block .non-twitter-profile, .block-non-twitter-users-left-side-bar-block .profile, .block-non-twitter-users-left-side-bar-block .non-twitter-profile {
     background: -moz-linear-gradient(308deg, #51ae47 20%, #04d19d 100%);
     /* FF3.6+ */
     background: -webkit-gradient(linear, 308deg, color-stop(20%, #51ae47), color-stop(100%, #04d19d));
@@ -1036,7 +1036,7 @@ body {
     height: 100%;
     overflow: hidden;
     margin-bottom: 1.7em; }
-    .block-users-left-side-bar-block .profile .img {
+    .block-users-left-side-bar-block .profile .img, .block-users-left-side-bar-block .non-twitter-profile .img, .block-non-twitter-users-left-side-bar-block .profile .img, .block-non-twitter-users-left-side-bar-block .non-twitter-profile .img {
       float: left;
       height: 90px;
       width: 90px;
@@ -1050,32 +1050,85 @@ body {
       background: #979797;
       margin-right: 10px;
       overflow: hidden; }
-      .block-users-left-side-bar-block .profile .img img {
+      .block-users-left-side-bar-block .profile .img img, .block-users-left-side-bar-block .non-twitter-profile .img img, .block-non-twitter-users-left-side-bar-block .profile .img img, .block-non-twitter-users-left-side-bar-block .non-twitter-profile .img img {
         width: 100%; }
-    .block-users-left-side-bar-block .profile .name {
+    .block-users-left-side-bar-block .profile .name, .block-users-left-side-bar-block .non-twitter-profile .name, .block-non-twitter-users-left-side-bar-block .profile .name, .block-non-twitter-users-left-side-bar-block .non-twitter-profile .name {
       font-weight: bold;
       font-size: 20px;
       margin-top: 22px;
       display: block;
       margin-bottom: 4px; }
-    .block-users-left-side-bar-block .profile .twitter_handle {
+    .block-users-left-side-bar-block .profile .twitter_handle, .block-users-left-side-bar-block .non-twitter-profile .twitter_handle, .block-non-twitter-users-left-side-bar-block .profile .twitter_handle, .block-non-twitter-users-left-side-bar-block .non-twitter-profile .twitter_handle {
       font-style: italic;
       font-size: 14px; }
-    .block-users-left-side-bar-block .profile ~ div {
+    .block-users-left-side-bar-block .profile ~ div, .block-users-left-side-bar-block .non-twitter-profile ~ div, .block-non-twitter-users-left-side-bar-block .profile ~ div, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div {
       font-size: 18px;
       line-height: 3em;
       margin: 0 1.5em; }
-      .block-users-left-side-bar-block .profile ~ div a {
+      .block-users-left-side-bar-block .profile ~ div a, .block-users-left-side-bar-block .non-twitter-profile ~ div a, .block-non-twitter-users-left-side-bar-block .profile ~ div a, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a {
         color: #979797;
         text-decoration: none; }
-        .block-users-left-side-bar-block .profile ~ div a:hover, .block-users-left-side-bar-block .profile ~ div a.active {
+        .block-users-left-side-bar-block .profile ~ div a:hover, .block-users-left-side-bar-block .profile ~ div a.active, .block-users-left-side-bar-block .non-twitter-profile ~ div a:hover, .block-users-left-side-bar-block .non-twitter-profile ~ div a.active, .block-non-twitter-users-left-side-bar-block .profile ~ div a:hover, .block-non-twitter-users-left-side-bar-block .profile ~ div a.active, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a:hover, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a.active {
           color: #212121; }
-      .block-users-left-side-bar-block .profile ~ div:last-child {
+      .block-users-left-side-bar-block .profile ~ div:last-child, .block-users-left-side-bar-block .non-twitter-profile ~ div:last-child, .block-non-twitter-users-left-side-bar-block .profile ~ div:last-child, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div:last-child {
         padding-bottom: 2em; }
-  .block-users-left-side-bar-block .import_tweets {
+  .block-users-left-side-bar-block .import_tweets, .block-non-twitter-users-left-side-bar-block .import_tweets {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-bottom: .6em;
     margin-bottom: 0.6em !important; }
+
+.block-sign-in-with-twitter-block {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";
+  /*IE 8*/
+  -moz-box-shadow: 1px 0px 8px #bbb;
+  /*FF 3.5+*/
+  -webkit-box-shadow: 1px 0px 8px #bbb;
+  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+  box-shadow: 1px 0px 8px #bbb;
+  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb);
+  /*IE 5.5-7*/
+  background: white;
+  padding: 2em; }
+  .block-sign-in-with-twitter-block div.twitter-connect {
+    padding: 2em;
+    border: 1px dashed rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    background: #fcfcfc;
+    text-align: center; }
+  .block-sign-in-with-twitter-block .signin-twitter-text {
+    font-size: 24px;
+    font-weight: 300; }
+    .block-sign-in-with-twitter-block .signin-twitter-text > span {
+      display: block;
+      margin-top: 1em; }
+      .block-sign-in-with-twitter-block .signin-twitter-text > span a {
+        border: none;
+        background: #2aa9e0;
+        padding: .6em 4em;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        -webkit-border-radius: 4px;
+        -khtml-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        text-decoration: none;
+        text-align: center; }
+        .block-sign-in-with-twitter-block .signin-twitter-text > span a:before {
+          font: normal normal normal 14px/1 FontAwesome;
+          content: "\f099";
+          font-size: 28px;
+          margin-right: 0.2em;
+          display: inline-block;
+          vertical-align: middle; }
 
 .morecontent span {
   display: none; }
