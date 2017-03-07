@@ -2870,7 +2870,7 @@ function tweets_queue_fetch_user_tweets_history() {
   $query->fields('h', ['created', 'retweeted']);
   $query->leftjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
   $query->fields('p', ['uid', 'message', 'status', 'tweet_id']);
-
+  $query->orderBy('h.created', 'DESC');
   $query->condition('p.uid', $uid);
   $result = $query->execute()->fetchAll();
   $output = array();
@@ -2880,3 +2880,40 @@ function tweets_queue_fetch_user_tweets_history() {
   }
   return $output;
 }
+
+/**
+ * Format tweet time at notification section.
+ *
+ * @param integer $time
+ *   Time of the tweet post.
+ *
+ * @return string
+ *   Returns formatted time.
+ */
+function tweets_queue_format_tweet_time($tweet_time) {
+  $current_time = time();
+  $time_difference = $current_time - $tweet_time;
+
+  switch($time_difference) {
+    case $time_difference < 60:
+      $suffix = "sec";
+      $show_time = $time_difference;
+      break;
+    case $time_difference < 3600:
+      $suffix = "min";
+      $time_difference = intval($time_difference/60);
+      break;
+    case $time_difference < 86400:
+      $suffix = "hours";
+      $time_difference = intval($time_difference/3660);
+      break;
+    case $time_difference > 86400:
+      $suffix = "days";
+      $time_difference = intval($time_difference/86400);
+      break;
+  }
+  $output = t('@time @suffix ago', array('@time' => $time_difference,
+    '@suffix' => $suffix));
+  return $output;
+}
+

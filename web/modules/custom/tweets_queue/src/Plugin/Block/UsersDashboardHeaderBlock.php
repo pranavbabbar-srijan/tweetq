@@ -59,12 +59,19 @@ class UsersDashboardHeaderBlock extends BlockBase {
     foreach ($tweets_history as $data) {
       $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
       $message = $data->message;
+      $created = $data->created;
+      $tweeted_at = tweets_queue_format_tweet_time($created);
       $message_history_data .= t("<div>
         <span class='state'>@retweet_label</span>
-        <span class='time'>20 min ago</span>
+        <span class='time'>@tweeted_at</span>
         <span class='message'>@message</span>
         </div>",
-      array('@retweet_label' => $retweet_label, '@message' => $message));
+      array(
+        '@retweet_label' => $retweet_label,
+        '@tweeted_at' => $tweeted_at,
+        '@message' => $message
+        )
+      );
     }
     $message_history_data .= "</div>";
     $output = "<div class='notifications'>" . $message_history_count_output . 
