@@ -524,7 +524,6 @@ body {
 					color: $twitter;
 				}
 			}
-			// .tweeted_tweets {}
 		}
 		.item-list {
 			font-size: 14px;
@@ -1057,6 +1056,9 @@ body {
 	.morelink {
 		color: $dark !important;
 		font-weight: bold;
+		&.less {
+			margin-left: 6px;
+		}
 	}
 }
 

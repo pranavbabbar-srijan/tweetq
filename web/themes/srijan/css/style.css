@@ -1159,6 +1159,8 @@ body {
 .morecontent .morelink {
   color: #212121 !important;
   font-weight: bold; }
+  .morecontent .morelink.less {
+    margin-left: 6px; }
 
 .block-users-tweets-statistics-block {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";
