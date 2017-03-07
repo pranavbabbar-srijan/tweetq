@@ -2904,12 +2904,12 @@ function tweets_queue_format_tweet_time($tweet_time) {
       $time_difference = intval($time_difference/60);
       break;
     case $time_difference < 86400:
-      $suffix = "hours";
       $time_difference = intval($time_difference/3660);
+      $suffix = ($time_difference > 1) ? 'hours' : 'hour';
       break;
     case $time_difference > 86400:
-      $suffix = "days";
       $time_difference = intval($time_difference/86400);
+      $suffix = ($time_difference > 1) ? 'days' : 'day';
       break;
   }
   $output = t('@time @suffix ago', array('@time' => $time_difference,
