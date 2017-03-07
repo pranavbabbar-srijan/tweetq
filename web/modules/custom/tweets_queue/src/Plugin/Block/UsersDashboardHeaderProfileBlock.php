@@ -12,8 +12,8 @@ use Drupal\Core\Cache\Cache;
  *
  * @Block(
  *   id = "users_dashboard_header_profile_block",
- *   admin_label = @Translation("Users Dashboard header profile block"),
- *   category = @Translation("Twitter users dashboard header profile block")
+ *   admin_label = @Translation("Users Dashboard header non twitter  profile block"),
+ *   category = @Translation("Twitter users dashboard non twitter header profile block")
  * )
  */
 class UsersDashboardHeaderProfileBlock extends BlockBase {
@@ -21,6 +21,12 @@ class UsersDashboardHeaderProfileBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    if(in_array(TWITTER_APPROVED_CLIENT_ROLE, $user_roles)) {
+      return array(
+        '#type' => 'markup',
+        '#markup' => '',
+      );
+    }
     $name = '';
     $uid = ($uid == '') ? \Drupal::currentUser()->id() : $uid;
     $user = \Drupal\user\Entity\User::load($uid);

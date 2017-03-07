@@ -12,8 +12,8 @@ use Drupal\Core\Cache\Cache;
  *
  * @Block(
  *   id = "users_dashboard_header_block",
- *   admin_label = @Translation("Users Dashboard non twitter header block"),
- *   category = @Translation("Twitter users dashboard non twitter header block")
+ *   admin_label = @Translation("Users Dashboard header block"),
+ *   category = @Translation("Twitter users dashboard header block")
  * )
  */
 class UsersDashboardHeaderBlock extends BlockBase {
@@ -21,13 +21,6 @@ class UsersDashboardHeaderBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $user_roles = \Drupal::currentUser()->getRoles();
-    if(in_array(TWITTER_APPROVED_CLIENT_ROLE, $user_roles)) {
-      return array(
-        '#type' => 'markup',
-        '#markup' => '',
-      );
-    }
 
     $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
     $user_twitter_profile_info = unserialize($twitter_profile_info);
