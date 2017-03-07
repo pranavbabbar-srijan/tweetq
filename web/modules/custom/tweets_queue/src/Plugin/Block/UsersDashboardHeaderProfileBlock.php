@@ -21,12 +21,14 @@ class UsersDashboardHeaderProfileBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    $user_roles = \Drupal::currentUser()->getRoles();
     if(in_array(TWITTER_APPROVED_CLIENT_ROLE, $user_roles)) {
       return array(
         '#type' => 'markup',
         '#markup' => '',
       );
     }
+
     $name = '';
     $uid = ($uid == '') ? \Drupal::currentUser()->id() : $uid;
     $user = \Drupal\user\Entity\User::load($uid);
