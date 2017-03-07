@@ -31,8 +31,11 @@ class NonTwitterUsersLeftSideBarBlock extends BlockBase {
     }
 
     $picture = '';
-    $name = '';
     $twitter_handle = '';
+    $name = '';
+    $uid = ($uid == '') ? \Drupal::currentUser()->id() : $uid;
+    $user = \Drupal\user\Entity\User::load($uid);
+    $name = $user->get(SIGNUP_FIELD_FULL_NAME)->value;
     $profile_img = "<img src='" . $picture . "'></img>";
     $twitter_profile_output = "<div class='non-twitter-profile'>
       <span class='img'>" . $profile_img . "</span>
