@@ -2857,3 +2857,26 @@ function tweets_queue_no_tweets_found_message() {
     $create_tweet_link . $import_tweet_link . "</div>";
   return $output;
 }
+
+/**
+ * Fetch current user tweets history.
+ *
+ * @return array
+ *   Returns array containing list of all current tweets
+ */
+function tweets_queue_fetch_user_tweets_history() {
+  $uid = \Drupal::currentUser()->id();
+  $query = \Drupal::database()->select(TWITTER_TWEETS_HISTORY_TABLE, 'h');
+  $query->fields('h', ['created', 'retweeted']);
+  $query->leftjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
+  $query->fields('p', ['uid', 'message', 'status', 'tweet_id']);
+
+  $query->condition('p.uid', $uid);
+  $result = $query->execute()->fetchAll();
+  $output = array();
+  foreach ($result as $pos => $data) {
+    $total++;
+    $output[] = $data;
+  }
+  return $output;
+}

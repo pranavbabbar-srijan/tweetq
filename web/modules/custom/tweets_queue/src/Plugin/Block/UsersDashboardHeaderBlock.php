@@ -21,6 +21,9 @@ class UsersDashboardHeaderBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    $tweets_history = tweets_queue_fetch_user_tweets_history();
+    $message_history_count = count($tweets_history);
+    // echo '<pre>', print_r($data); die();
 
     $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
     $user_twitter_profile_info = unserialize($twitter_profile_info);
@@ -44,23 +47,23 @@ class UsersDashboardHeaderBlock extends BlockBase {
       <span class='name'>" . $name . "</span></div> " . $profile_link_output . "</a>
       </div>" ;
 
-    $message_history_count = 2;
     $message_history_count_output = "<div>
       <span class='count'>" . $message_history_count . "</span>
     </div>";
     $message_history_data = " <div>
-      <span class='message_history_count'>You have 2 Notifications</span>
-    </div>
-    <div>
-      <span class='state'>Retweeted</span>
-      <span class='time'>20 min ago</span>
-      <span class='message'>lorem ipsum lorem ipsum lorem ipsum #srijan @srijan</span>
-    </div>
-    <div>
-      <span class='state'>New Tweet</span>
-      <span class='time'>18 min ago</span>
-      <span class='message'>lorem ipsum lorem ipsum lorem ipsum #srijan @srijanfoundation</span>
+      <span class='message_history_count'>You have " . $message_history_count_output . " Notifications</span>
     </div>";
+
+    foreach ($tweets_history as $data) {
+      $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
+      $message = $data->message;
+      $message_history_data .= t("<div>
+        <span class='state'>@retweet_label</span>
+        <span class='time'>20 min ago</span>
+        <span class='message'>@message</span>
+        </div>",
+      array('@retweet_label' => $retweet_label, '@message' => $message));
+    }
 
     $output = "<div class='notifications'>" . $message_history_count_output . 
       $message_history_data . "</div>" . $twitter_profile_output;
