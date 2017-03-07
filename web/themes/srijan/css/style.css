@@ -1014,6 +1014,9 @@ body {
 .toolbar-fixed.user-logged-in .block-users-archived-tweets-block, .toolbar-fixed.user-logged-in .block-users-valid-tweets-block, .toolbar-fixed.user-logged-in .block-users-in-valid-tweets-block {
   margin-left: 10px; }
 
+.block-non-twitter-users-left-side-bar-block .non-twitter-profile span.img {
+  background: #E7E8E9; }
+
 .block-users-left-side-bar-block, .block-non-twitter-users-left-side-bar-block {
   background: white; }
   .block-users-left-side-bar-block .profile, .block-users-left-side-bar-block .non-twitter-profile, .block-non-twitter-users-left-side-bar-block .profile, .block-non-twitter-users-left-side-bar-block .non-twitter-profile {
@@ -1064,7 +1067,8 @@ body {
     .block-users-left-side-bar-block .profile ~ div, .block-users-left-side-bar-block .non-twitter-profile ~ div, .block-non-twitter-users-left-side-bar-block .profile ~ div, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div {
       font-size: 18px;
       line-height: 3em;
-      margin: 0 1.5em; }
+      margin: 0 1.5em;
+      color: #979797; }
       .block-users-left-side-bar-block .profile ~ div a, .block-users-left-side-bar-block .non-twitter-profile ~ div a, .block-non-twitter-users-left-side-bar-block .profile ~ div a, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a {
         color: #979797;
         text-decoration: none; }
@@ -1089,7 +1093,8 @@ body {
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb);
   /*IE 5.5-7*/
   background: white;
-  padding: 2em; }
+  padding: 2em;
+  margin-top: -105px; }
   .block-sign-in-with-twitter-block div.twitter-connect {
     padding: 2em;
     border: 1px dashed rgba(0, 0, 0, 0.2);
