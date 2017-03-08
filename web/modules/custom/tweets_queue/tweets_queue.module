@@ -2814,11 +2814,26 @@ function tweets_queue_check_email_presence($email) {
 }
 
 function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInterface $form_state) {
-   $data = $form_state->getValues();
-  $email = $data['email'];
+  $data = $form_state->getValues();
+  $full_name = trim($data[SIGNUP_FIELD_FULL_NAME]);
+  $email = $data[SIGNUP_FIELD_EMAIL];
+  $password = $data[SIGNUP_FIELD_PASSWORD];
+  if (strlen($full_name) > 0 && !ereg('^[a-z A-Z\'\-]+$', $full_name)) {
+    $form_state->setErrorByName(SIGNUP_FIELD_FULL_NAME,
+      t('Only Letters are allowed.'));
+  }
+  // Email validation.
+  if (!\Drupal::service('email.validator')->isValid($email)) {
+    $form_state->setErrorByName(SIGNUP_FIELD_EMAIL, t('Only valid email is allowed.'));
+  }
   $uid = tweets_queue_check_email_presence($email);
   if ($uid) {
     $form_state->setErrorByName('email', t('Email already in use.'));
+  }
+  // Password validation.
+  if (strlen($password) < 6 || strlen($password) > 12) {
+    $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
+      t('Password length should be minimum of 6 and maximum of 12 characters.'));
   }
 }
 

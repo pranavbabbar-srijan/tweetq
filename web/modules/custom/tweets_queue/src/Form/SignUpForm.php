@@ -67,7 +67,7 @@ class SignUpForm extends FormBase {
       ),
     );
 
-    $form['user_password'] = array(
+    $form[SIGNUP_FIELD_PASSWORD] = array(
       '#type' => 'password',
       '#title' => t('Password'),
       '#required' => TRUE,
@@ -112,7 +112,7 @@ class SignUpForm extends FormBase {
     $full_name = $data[SIGNUP_FIELD_FULL_NAME];
     $username = strtolower(str_ireplace(" ", "", $full_name)) . "_" . time();
     $email = $data[SIGNUP_FIELD_EMAIL];
-    $password = $data['user_password'];
+    $password = $data[SIGNUP_FIELD_PASSWORD];
     $website = $data[SIGNUP_FIELD_WEBSITE];
     $organization = $data[SIGNUP_FIELD_ORGANIZATION];
     $uid = tweets_queue_check_email_presence($email);
