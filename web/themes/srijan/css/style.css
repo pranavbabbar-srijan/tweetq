@@ -124,7 +124,7 @@ button {
 #block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label {
   display: none; }
 
-.block-users-dashboard-header-block .profile + a:before, .block-users-dashboard-header-profile-block .profile + a:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
+.block-users-dashboard-header-block .profile + a:before, .block-users-dashboard-header-profile-block .profile + a:before, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .edit,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .edit,
@@ -244,9 +244,9 @@ button {
       position: absolute;
       opacity: 0;
       transition: .3s ease-in-out opacity;
-      padding: 1.6em;
+      padding: 1em;
       background: white;
-      width: 100%;
+      width: 85%;
       margin-top: 6px;
       -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb)";
       /*IE 8*/
@@ -268,10 +268,28 @@ button {
           border-bottom: 16px solid white;
           display: block;
           position: absolute;
-          top: -10px;
-          left: 50%; }
+          top: -12px;
+          left: 40%; }
       .block-users-dashboard-header-block .profile .profile-links a, .block-users-dashboard-header-profile-block .profile .profile-links a {
-        display: block; }
+        display: block;
+        text-decoration: none; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout {
+          color: #212121;
+          margin-bottom: 10px;
+          padding: .5em; }
+          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-logout.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout.active {
+            background: #fcfcfc; }
+          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
+            content: "";
+            font-size: 22px;
+            margin-right: 15px;
+            vertical-align: sub; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before {
+          content: ""; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
+          content: ""; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
+          content: ""; }
 
 .site-branding__logo {
   display: block;
