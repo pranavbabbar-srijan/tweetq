@@ -79,6 +79,7 @@ const TWITTER_TWEETED_TWEET_PATH = 'dashboard/valid-tweets/tweeted-listing';
 const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 const TWITTER_TWITTER_SIGNUP_PATH = 'twitter/register';
 
+const TWITTER_FIELD_NID = 'nid';
 const TWITTER_FIELD_FIRST_RUN = 'first_run';
 const TWITTER_FIELD_LAST_RUN = 'last_run';
 const TWITTER_FIELD_CREATED = 'created';
