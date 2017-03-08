@@ -43,10 +43,6 @@
 	    	event.preventDefault();
 			$(this).toggleClass("active");
 			$(this).siblings(".profile-links").toggleClass("active");
-			$("body .skip-link").before("<div class='overlay'></div>");
-		});
-		$('#block-usersdashboardheaderblock .profile a.active').click(function() {
-		 	$(".skip-link").before(".fade").remove();
 		});
 
 		var left = "140";

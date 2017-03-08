@@ -135,9 +135,9 @@
 			position: absolute;
 			opacity: 0;
 			transition: .3s ease-in-out opacity;
-			padding: 1.6em;
+			padding: 1em;
 			background: white;
-			width: 100%;
+			width: 85%;
 			margin-top: 6px;
 			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb)";/*IE 8*/
 			-moz-box-shadow: 0px 0px 35px #bbb;/*FF 3.5+*/
@@ -154,16 +154,48 @@
 					border-bottom: 16px solid white;
 				    display: block;
 				    position: absolute;
-				    top: -10px;
-				    left: 50%;
+				    top: -12px;
+				    left: 40%;
 				}
 			}
 			a {
 				display: block;
+				text-decoration: none;
+				&.profile-my-profile, &.profile-settings, &.profile-logout {
+					color: $dark;
+					margin-bottom: 10px;
+					padding: .5em;
+					&:hover, &.active {
+						background: #fcfcfc;
+					}
+					&:before {
+						content: "";
+						@extend %icomoon;
+						font-size: 22px;
+						margin-right: 15px;
+						vertical-align: sub;
+					}
+				}
+				&.profile-my-profile {
+					&:before {
+						content: $icon-user;
+					}
+				} 
+				&.profile-settings {
+					&:before {
+						content: $icon-settings;
+					}
+				}
+				&.profile-logout {
+					&:before {
+						content: $icon-logout;
+					}
+				}
 			}
 		}
 	}
 }
+
 .site-branding__logo {
 	display: block;
 	width: 50px;
@@ -469,12 +501,14 @@ body {
 			.header {
 				li {
 					&:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6) {
-						&:after {
-							content: "\f107";
-							font: normal normal normal 14px/1 FontAwesome;
-							left: 3px;
-						    top: 2px;
-						    position: relative;
+						a {
+							&:after {
+								content: "\f107";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 2px;
+							    position: relative;
+							}
 						}
 					}
 				}
@@ -485,13 +519,15 @@ body {
 		.item-list {
 			.header {
 				li {
-					&:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6) {
-						&:after {
-							content: "\f107";
-							font: normal normal normal 14px/1 FontAwesome;
-							left: 3px;
-						    top: 2px;
-						    position: relative;
+					&:nth-child(3), &:nth-child(4) {
+						a {
+							&:after {
+								content: "\f107";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 2px;
+							    position: relative;
+							}
 						}
 					}
 				}
@@ -503,12 +539,14 @@ body {
 			.header {
 				li {
 					&:nth-child(3), &:nth-child(4) {
-						&:after {
-							content: "\f107";
-							font: normal normal normal 14px/1 FontAwesome;
-							left: 3px;
-						    top: 2px;
-						    position: relative;
+						a {
+							&:after {
+								content: "\f107";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 2px;
+							    position: relative;
+							}
 						}
 					}
 				}
@@ -574,6 +612,19 @@ body {
     			margin-bottom: 1.5em;
     			font-weight: bold;
 				li {
+					a {
+						color: $dark;
+						text-decoration: none;
+						&.active {
+							&:after {
+								content: "\f106";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 0;
+							    position: relative;
+							}
+						}
+					}
 					width: 12.5%;
 					margin-left: 0;
 					&:first-child {
