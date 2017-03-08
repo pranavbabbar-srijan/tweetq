@@ -121,7 +121,7 @@ button {
 /* ================================= Offset-Span ================================= */
 /* ================================= Clearfix ================================= */
 /* ================================= Media Query Breakpoint ================================= */
-#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label {
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description {
   display: none; }
 
 .block-users-dashboard-header-block .profile + a:before, .block-users-dashboard-header-profile-block .profile + a:before, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
@@ -1496,7 +1496,8 @@ body {
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
     /*IE 5.5-7*/
     font-size: 14px;
-    color: #979797; }
+    color: #979797;
+    position: relative; }
     .-form-tweets-queue-csv-upload > .create-header + .create-header {
       margin-top: 0;
       overflow: hidden;
@@ -1513,10 +1514,14 @@ body {
       /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
       filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
       /*IE 5.5-7*/ }
+      .-form-tweets-queue-csv-upload > .create-header + .create-header > div {
+        width: 90%;
+        height: 40px; }
   .-form-tweets-queue-csv-upload .js-form-managed-file {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px 0px 0px 6px;
-    position: relative; }
+    position: relative;
+    height: 40px; }
     .-form-tweets-queue-csv-upload .js-form-managed-file:before {
       content: "choose file";
       position: absolute;
@@ -1525,18 +1530,43 @@ body {
       text-transform: capitalize;
       color: rgba(0, 0, 0, 0.2); }
   .-form-tweets-queue-csv-upload .js-form-file {
-    width: 98%;
+    width: 100%;
     padding: .5em;
     opacity: 0; }
-  .-form-tweets-queue-csv-upload #edit-managed-file-upload .button {
+  .-form-tweets-queue-csv-upload .file--mime-text-csv {
+    margin-left: 10px;
+    margin-top: 11px;
+    background-color: white;
+    display: inline-block;
+    position: relative;
+    padding-right: 8px; }
+    .-form-tweets-queue-csv-upload .file--mime-text-csv + .form-submit {
+      background: none;
+      color: #2aa9e0;
+      margin-right: 0;
+      border: 1px solid;
+      padding: .45em .8em;
+      font-size: 1em;
+      -webkit-border-radius: 3px;
+      -khtml-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+      border-radius: 3px;
+      text-decoration: none;
+      text-align: center; }
+    .-form-tweets-queue-csv-upload .file--mime-text-csv a {
+      color: #212121;
+      text-decoration: none; }
+  .-form-tweets-queue-csv-upload #edit-submit {
     position: absolute;
-    right: -3px;
-    top: -1px;
+    right: 14px;
+    top: 28px;
     background: #2aa9e0;
     color: white;
     margin-right: 0;
     border: none;
-    padding: .7em 1em;
+    padding: .85em 1em;
     font-size: 1em;
     -webkit-border-radius: 0 4px 4px 0;
     -khtml-border-radius: 0 4px 4px 0;
