@@ -2837,7 +2837,8 @@ function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInt
   $full_name = trim($data[SIGNUP_FIELD_FULL_NAME]);
   $email = $data[SIGNUP_FIELD_EMAIL];
   $password = $data[SIGNUP_FIELD_PASSWORD];
-  if (strlen($full_name) > 0 && !ereg('^[a-z A-Z\'\-]+$', $full_name)) {
+  // Name validation.
+  if (strlen($full_name) > 0 && !preg_match("/^[a-zA-Z ]*$/", $full_name)) {
     $form_state->setErrorByName(SIGNUP_FIELD_FULL_NAME,
       t('Only Letters are allowed.'));
   }
