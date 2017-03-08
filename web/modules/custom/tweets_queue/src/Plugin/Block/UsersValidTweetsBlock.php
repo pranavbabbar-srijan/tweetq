@@ -94,7 +94,7 @@ class UsersValidTweetsBlock extends BlockBase {
     );
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'delete'],
-      ['attributes' => ['class' => 'delete']]
+      ['attributes' => ['class' => 'delete colorbox cboxElement']]
     );
 
     $edit_url_link = \Drupal::l(t("Edit"), $edit_url);

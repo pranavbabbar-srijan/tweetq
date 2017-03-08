@@ -44,18 +44,20 @@
 			$(this).toggleClass("active");
 			$(this).siblings(".profile-links").toggleClass("active");
 		});
+
+		var titleBox = document.getElementById('edit-message');
+		var tData;
+		var tweetMaxLimit = 140;
+		console.log(titleBox);
+		titleBox.onkeyup = function(){
+		  tData = parseInt(titleBox.value.length);
+		  left = tweetMaxLimit - tData;
+		  extra = tData - tweetMaxLimit;
+		  document.getElementById('edit-display-box').value = left;
+		}
 	});
 
 })(jQuery);
 
 
-var titleBox = document.getElementById('edit-message');
-var tData;
-var tweetMaxLimit = 140;
-titleBox.onkeyup = function(){
-  tData = parseInt(titleBox.value.length);
-  left = tweetMaxLimit - tData;
-  extra = tData - tweetMaxLimit;
-  document.getElementById('edit-display-box').value = left;
-}
 

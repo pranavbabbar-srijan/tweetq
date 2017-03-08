@@ -91,7 +91,7 @@ class UsersAllTweetsBlock extends BlockBase {
   private function compileData($row) {
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'delete'],
-      ['attributes' => ['class' => 'delete']]
+      ['attributes' => ['class' => 'delete colorbox cboxElement']]
     );
     $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'edit'],
