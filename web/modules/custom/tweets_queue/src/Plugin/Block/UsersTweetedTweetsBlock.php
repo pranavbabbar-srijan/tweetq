@@ -25,16 +25,32 @@ class UsersTweetedTweetsBlock extends BlockBase {
     global $base_url;
     $uid = \Drupal::currentUser()->id();
     
-    $header = array(t('Message'), t('Size'), t('Created'), t('Tweet Date'),
-      t('Last Updated'), t('Retweeted'), t('Modify'));
-    
+    $current_filter = (isset($_GET['filter'])) ? $_GET['filter'] : TWITTER_FIELD_LAST_RUN;
+    $current_filter_order = (isset($_GET['order'])) ? $_GET['order'] : 'DESC';
+    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : 'DESC';
+
+    $created_sort_link = tweets_queue_generate_filter(TWITTER_TWEETED_TWEET_ROUTE_NAME,
+      TWITTER_FIELD_CREATED, $current_filter, $new_filter_order);
+    $tweet_date_sort_link = tweets_queue_generate_filter(TWITTER_TWEETED_TWEET_ROUTE_NAME,
+      TWITTER_FIELD_FIRST_RUN, $current_filter, $new_filter_order);
+
+    $changed_sort_link = tweets_queue_generate_filter(TWITTER_TWEETED_TWEET_ROUTE_NAME,
+      TWITTER_FIELD_CHANGED, $current_filter, $new_filter_order);
+
+    $tweeted_sort_link = tweets_queue_generate_filter(TWITTER_TWEETED_TWEET_ROUTE_NAME,
+      TWITTER_FIELD_TWEETED, $current_filter, $new_filter_order);
+
+    $header = array(t(TWITTER_FIELD_MESSAGE_LABEL), t(TWITTER_FIELD_SIZE_LABEL), $created_sort_link, $tweet_date_sort_link,
+      $changed_sort_link, $tweeted_sort_link, t(TWITTER_FIELD_EDIT_LABEL));
+
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
-    $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed', 'tweeted', 'first_run', 'last_run']);
+    $query->fields('p', ['nid', TWITTER_FIELD_MESSAGE, TWITTER_FIELD_SIZE,
+      TWITTER_FIELD_CREATED ,TWITTER_FIELD_CHANGED, TWITTER_FIELD_TWEETED, TWITTER_FIELD_FIRST_RUN, TWITTER_FIELD_LAST_RUN]);
     $query->condition('p.archived', 1, '!=');
     $query->condition('p.tweet_id', '', '!=');
     $query->condition('p.status', TWITTER_PUBLISHED_TWEET, '=');
     $query->condition('p.uid', $uid);
-    $query->orderBy('p.last_run', 'DESC');
+    $query->orderBy('p.' . $current_filter, $current_filter_order);
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
     $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(10);

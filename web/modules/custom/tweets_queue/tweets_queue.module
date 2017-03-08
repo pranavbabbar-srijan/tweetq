@@ -79,6 +79,22 @@ const TWITTER_TWEETED_TWEET_PATH = 'dashboard/valid-tweets/tweeted-listing';
 const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 const TWITTER_TWITTER_SIGNUP_PATH = 'twitter/register';
 
+const TWITTER_FIELD_FIRST_RUN = 'first_run';
+const TWITTER_FIELD_LAST_RUN = 'last_run';
+const TWITTER_FIELD_CREATED = 'created';
+const TWITTER_FIELD_CHANGED = 'changed';
+const TWITTER_FIELD_TWEETED = 'tweeted';
+const TWITTER_FIELD_MESSAGE = 'message';
+const TWITTER_FIELD_SIZE = 'size';
+
+const TWITTER_FIELD_FIRST_RUN_LABEL = 'Tweet Date';
+const TWITTER_FIELD_CREATED_LABEL = 'Created';
+const TWITTER_FIELD_CHANGED_LABEL = 'Last Updated';
+const TWITTER_FIELD_TWEETED_LABEL = 'Retweeted';
+const TWITTER_FIELD_MESSAGE_LABEL = 'Message';
+const TWITTER_FIELD_SIZE_LABEL = 'Size';
+
+const TWITTER_FIELD_EDIT_LABEL = 'Modify';
 
 const TWITTER_CREATE_TWEET_LABEL = 'Create a Tweet';
 const TWITTER_IMPORT_TWEET_LABEL = 'Import Tweets';
@@ -2854,6 +2870,56 @@ function tweets_queue_match_current_path($current_path, $match_path, $format = 1
   return $outout;
 }
 
+
+function tweets_queue_match_current_filter($current_filter, $match_filter) {
+  $class = "in-active";
+  if ($current_filter == $match_filter) {
+    $class = "active";
+  }
+  return $class;
+}
+
+/**
+ * Generate filter for various tweet listings.
+ *
+ * @param string $route
+ *   Name of the valid route name.
+ * @param string $filter_name
+ *   Name of the filter.
+ * @param string $current_filter
+ *   Name of the current filter.
+ * @param string $new_filter_order
+ *   New filter order.
+ *
+ * @return link
+ *   Returns link for the current filter.
+ */
+function tweets_queue_generate_filter($route, $filter_name, $current_filter, $new_filter_order) {
+  $filter_label = '';
+  switch ($filter_name) {
+    case TWITTER_FIELD_CREATED:
+      $filter_label = TWITTER_FIELD_CREATED_LABEL;
+      break;
+    case TWITTER_FIELD_FIRST_RUN:
+      $filter_label = TWITTER_FIELD_FIRST_RUN_LABEL;
+      break;
+    case TWITTER_FIELD_CHANGED:
+      $filter_label = TWITTER_FIELD_CHANGED_LABEL;
+      break;
+    case TWITTER_FIELD_TWEETED:
+      $filter_label = TWITTER_FIELD_TWEETED_LABEL;
+      break;
+  }
+  $class = tweets_queue_match_current_filter($current_filter, $filter_name);
+  $sort_url = Url::fromRoute($route,
+    ['filter' => $filter_name, 'order' => $new_filter_order],
+    ['attributes' => ['class' => [$class]]]
+  );
+  $sort_link = \Drupal::l(t($filter_label,
+    array()), $sort_url);
+  return $sort_link;
+}
+
 /**
  * Show message when tweet is missing.
  *
@@ -2931,4 +2997,3 @@ function tweets_queue_format_tweet_time($tweet_time) {
     '@suffix' => $suffix));
   return $output;
 }
-
