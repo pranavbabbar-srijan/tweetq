@@ -2,7 +2,7 @@
 
 (function ($) {
 	$(document).ready(function(){
-		$(".-form-tweets-queue-csv-upload .button").insertAfter("#edit-managed-file-upload #edit-managed-file-upload");
+		// $(".-form-tweets-queue-csv-upload .button").insertAfter("#edit-managed-file-upload #edit-managed-file-upload");
 		$("#block-usersdashboardheaderblock .content").append("<a href='#;'></a>");
 		$("#block-usersdashboardheaderblock .profile + a").click(function() {
 			$(this).toggleClass("active");
