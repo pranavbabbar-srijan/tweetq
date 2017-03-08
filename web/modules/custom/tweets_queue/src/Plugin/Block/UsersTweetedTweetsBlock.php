@@ -53,7 +53,7 @@ class UsersTweetedTweetsBlock extends BlockBase {
     $query->orderBy('p.' . $current_filter, $current_filter_order);
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
-    $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(10);
+    $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(TWITTER_TWEETS_LISTING_ROW_LIMIT);
     $result = $pager->execute();
 
     $data = array();

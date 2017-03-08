@@ -25,19 +25,29 @@ class UsersValidTweetsBlock extends BlockBase {
     global $base_url;
     $uid = \Drupal::currentUser()->id();
     
-    $header = array(t('Message'), t('Size'), t('Created'), t('Last Updated'), t('Modify'));
+    $current_filter = (isset($_GET['filter'])) ? $_GET['filter'] : TWITTER_FIELD_CHANGED;
+    $current_filter_order = (isset($_GET['order'])) ? $_GET['order'] : 'DESC';
+    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : 'DESC';
+
+    $created_sort_link = tweets_queue_generate_filter(TWITTER_VALID_TWEETS_ROUTE_NAME,
+      TWITTER_FIELD_CREATED, $current_filter, $new_filter_order);
+
+    $changed_sort_link = tweets_queue_generate_filter(TWITTER_VALID_TWEETS_ROUTE_NAME,
+      TWITTER_FIELD_CHANGED, $current_filter, $new_filter_order);
+
+    $header = array(t(TWITTER_FIELD_MESSAGE_LABEL), t(TWITTER_FIELD_SIZE_LABEL), $created_sort_link, $changed_sort_link, t(TWITTER_FIELD_EDIT_LABEL));
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
-    $query->fields('p', ['nid', 'message', 'size', 'created' ,'changed']);
+    $query->fields('p', ['nid', TWITTER_FIELD_MESSAGE, TWITTER_FIELD_SIZE, TWITTER_FIELD_CREATED ,TWITTER_FIELD_CHANGED]);
     $query->condition('p.size', 140, '<=');
     $query->condition('p.archived', 1, '!=');
     $query->condition('p.tweet_id', '', '=');
     $query->condition('p.status', TWITTER_PUBLISHED_TWEET, '=');
     $query->condition('p.uid', $uid);
-    $query->orderBy('p.changed', 'DESC');
+    $query->orderBy('p.' . $current_filter, $current_filter_order);
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
-    $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(10);
+    $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(TWITTER_TWEETS_LISTING_ROW_LIMIT);
     $result = $pager->execute();
 
     $data = array();

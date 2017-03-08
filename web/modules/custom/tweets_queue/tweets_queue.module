@@ -87,6 +87,8 @@ const TWITTER_FIELD_TWEETED = 'tweeted';
 const TWITTER_FIELD_MESSAGE = 'message';
 const TWITTER_FIELD_SIZE = 'size';
 
+const TWITTER_TWEETS_LISTING_ROW_LIMIT = '10';
+
 const TWITTER_FIELD_FIRST_RUN_LABEL = 'Tweet Date';
 const TWITTER_FIELD_CREATED_LABEL = 'Created';
 const TWITTER_FIELD_CHANGED_LABEL = 'Last Updated';
@@ -2913,7 +2915,7 @@ function tweets_queue_generate_filter($route, $filter_name, $current_filter, $ne
   $class = tweets_queue_match_current_filter($current_filter, $filter_name);
   $sort_url = Url::fromRoute($route,
     ['filter' => $filter_name, 'order' => $new_filter_order],
-    ['attributes' => ['class' => [$class]]]
+    ['attributes' => ['class' => [$class, $new_filter_order]]]
   );
   $sort_link = \Drupal::l(t($filter_label,
     array()), $sort_url);
