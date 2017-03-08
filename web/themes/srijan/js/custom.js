@@ -1,6 +1,6 @@
 //custom js.
 
-(function($) {
+(function ($) {
 	$(document).ready(function(){
 		$(".-form-tweets-queue-csv-upload .button").insertAfter("#edit-managed-file-upload #edit-managed-file-upload");
 		$("#block-usersdashboardheaderblock .content").append("<a href='#;'></a>");
@@ -48,18 +48,13 @@
 		$('#block-usersdashboardheaderblock .profile a.active').click(function() {
 		 	$(".skip-link").before(".fade").remove();
 		});
+
+		var left = "140";
+		var textSize = 0;
+		$("#edit-message").keyup(function() {
+		    textSize = $(this).val().length;
+		    document.getElementById('edit-display-box').value = left - textSize;
+		});
 	});
 
 })(jQuery);
-
-
-var titleBox = document.getElementById('edit-message');
-var tData;
-var tweetMaxLimit = 140;
-titleBox.onkeyup = function(){
-  tData = parseInt(titleBox.value.length);
-  left = tweetMaxLimit - tData;
-  extra = tData - tweetMaxLimit;
-  document.getElementById('edit-display-box').value = left;
-}
-
