@@ -501,12 +501,14 @@ body {
 			.header {
 				li {
 					&:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6) {
-						&:after {
-							content: "\f107";
-							font: normal normal normal 14px/1 FontAwesome;
-							left: 3px;
-						    top: 2px;
-						    position: relative;
+						a {
+							&:after {
+								content: "\f107";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 2px;
+							    position: relative;
+							}
 						}
 					}
 				}
@@ -517,13 +519,15 @@ body {
 		.item-list {
 			.header {
 				li {
-					&:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6) {
-						&:after {
-							content: "\f107";
-							font: normal normal normal 14px/1 FontAwesome;
-							left: 3px;
-						    top: 2px;
-						    position: relative;
+					&:nth-child(3), &:nth-child(4) {
+						a {
+							&:after {
+								content: "\f107";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 2px;
+							    position: relative;
+							}
 						}
 					}
 				}
@@ -535,12 +539,14 @@ body {
 			.header {
 				li {
 					&:nth-child(3), &:nth-child(4) {
-						&:after {
-							content: "\f107";
-							font: normal normal normal 14px/1 FontAwesome;
-							left: 3px;
-						    top: 2px;
-						    position: relative;
+						a {
+							&:after {
+								content: "\f107";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 2px;
+							    position: relative;
+							}
 						}
 					}
 				}
@@ -606,6 +612,19 @@ body {
     			margin-bottom: 1.5em;
     			font-weight: bold;
 				li {
+					a {
+						color: $dark;
+						text-decoration: none;
+						&.active {
+							&:after {
+								content: "\f106";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 0;
+							    position: relative;
+							}
+						}
+					}
 					width: 12.5%;
 					margin-left: 0;
 					&:first-child {
