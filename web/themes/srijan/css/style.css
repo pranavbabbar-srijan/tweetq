@@ -991,6 +991,8 @@ body {
     margin-left: -30px; }
   .user-logged-in .messages--status + .block + .block-sign-in-with-twitter-block {
     margin-top: 15px; }
+  .user-logged-in .messages--status .messages__list {
+    display: inline-block; }
 
 .path-signup .layout-container .region-content, .path-twitter .layout-container .region-content {
   padding-top: 20px;
