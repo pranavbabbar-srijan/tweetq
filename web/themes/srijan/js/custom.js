@@ -6,7 +6,7 @@
 		$("#block-usersdashboardheaderblock .content").append("<a href='#;'></a>");
 		$("#block-usersdashboardheaderblock .profile + a").click(function() {
 			$(this).toggleClass("active");
-			$(this).siblings(".notifications").toggleClass("active");
+			$(this).siblings(".notifications").children(".notification-message-list").toggleClass("active");
 		});
 	});
 
