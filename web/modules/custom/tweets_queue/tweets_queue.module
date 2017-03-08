@@ -58,6 +58,7 @@ const TWITTER_HANDLER_BAD_AUTHENTICATION_CODE = '215';
 const CRON_TWEET_CHARCATER_LIMIT = 140;
 const TWITTER_CLIENT_ROLE = 'twitter_client';
 const TWITTER_APPROVED_CLIENT_ROLE = 'twitter_approved_client';
+const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
 const TWITTER_USER_DASHBOARD = 'dashboard';
 const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
 const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
@@ -1037,6 +1038,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       }
       else {
         $entity->addRole(TWITTER_CLIENT_ROLE);
+        $entity->addRole(TWITTER_NON_APPROVED_CLIENT_ROLE);
         $entity->save();
         tweets_queue_login_twitter_user($uid);
       }
@@ -2464,6 +2466,7 @@ function tweets_queue_check_add_twitter_approved_role() {
   $uid = \Drupal::currentUser()->id();
   $entity = \Drupal\user\Entity\User::load($uid);
   $entity->addRole(TWITTER_APPROVED_CLIENT_ROLE);
+  $entity->removeRole(TWITTER_NON_APPROVED_CLIENT_ROLE);
   $entity->save();
 }
 
@@ -2837,7 +2840,8 @@ function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInt
   $full_name = trim($data[SIGNUP_FIELD_FULL_NAME]);
   $email = $data[SIGNUP_FIELD_EMAIL];
   $password = $data[SIGNUP_FIELD_PASSWORD];
-  if (strlen($full_name) > 0 && !ereg('^[a-z A-Z\'\-]+$', $full_name)) {
+  // Name validation.
+  if (strlen($full_name) > 0 && !preg_match("/^[a-zA-Z ]*$/", $full_name)) {
     $form_state->setErrorByName(SIGNUP_FIELD_FULL_NAME,
       t('Only Letters are allowed.'));
   }
