@@ -44,7 +44,7 @@ class UsersTweetedTweetsBlock extends BlockBase {
       $changed_sort_link, $tweeted_sort_link, t(TWITTER_FIELD_EDIT_LABEL));
 
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
-    $query->fields('p', ['nid', TWITTER_FIELD_MESSAGE, TWITTER_FIELD_SIZE,
+    $query->fields('p', [TWITTER_FIELD_NID, TWITTER_FIELD_MESSAGE, TWITTER_FIELD_SIZE,
       TWITTER_FIELD_CREATED ,TWITTER_FIELD_CHANGED, TWITTER_FIELD_TWEETED, TWITTER_FIELD_FIRST_RUN, TWITTER_FIELD_LAST_RUN]);
     $query->condition('p.archived', 1, '!=');
     $query->condition('p.tweet_id', '', '!=');
@@ -109,12 +109,13 @@ class UsersTweetedTweetsBlock extends BlockBase {
     $edit_url_link = \Drupal::l(t("Edit"), $edit_url);
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();
-    $data['message'] = $row->message;
-    $data['size'] = $row->size;
-    $data['created'] = date(TWITTER_DATE_FORMAT, $row->created);
-    $data['tweet_data'] = date(TWITTER_DATE_FORMAT, $row->first_run);
-    $data['changed'] = date(TWITTER_DATE_FORMAT, $row->changed);
-    $data['retweeted'] = t('@times times', array('@times' => $row->tweeted));
+    $data['message'] = $row->{TWITTER_FIELD_MESSAGE};
+    $data['size'] = $row->{TWITTER_FIELD_SIZE};
+    $data['created'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CREATED});
+    $data['tweet_data'] = date(TWITTER_DATE_FORMAT, ($row->{TWITTER_FIELD_FIRST_RUN}
+     ? $row->{TWITTER_FIELD_FIRST_RUN} : $row->{TWITTER_FIELD_CREATED}));
+    $data['changed'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED});
+    $data['retweeted'] = t('@times times', array('@times' => $row->{TWITTER_FIELD_TWEETED}));
     $data['edit_link'] = $edit_url_link ;
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
