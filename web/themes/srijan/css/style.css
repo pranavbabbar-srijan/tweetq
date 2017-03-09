@@ -994,6 +994,36 @@ body {
   .user-logged-in .messages--status .messages__list {
     display: inline-block; }
 
+.no-tweet-found {
+  font-size: 48px;
+  text-align: center;
+  padding: 1em;
+  color: #979797;
+  font-weight: 300; }
+  .no-tweet-found .no-tweet-label {
+    margin-bottom: 20px; }
+  .no-tweet-found a {
+    background: #2aa9e0;
+    color: white;
+    margin-right: 0;
+    border: 0;
+    padding: .65em 1em;
+    font-size: 18px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold; }
+    .no-tweet-found a.import-tweet {
+      background: none;
+      color: #2aa9e0;
+      margin-left: 20px;
+      border: 1px solid; }
+
 .path-signup .layout-container .region-content, .path-twitter .layout-container .region-content {
   padding-top: 20px;
   min-height: 600px; }

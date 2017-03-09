@@ -2940,7 +2940,8 @@ function tweets_queue_no_tweets_found_message() {
     TWITTER_CREATE_TWEET_LABEL ."</a>";
   $import_tweet_link = "<a class ='import-tweet' href='" . $base_url .'/' . TWITTER_IMPORT_TWEET_PATH . "'>" .
     TWITTER_IMPORT_TWEET_LABEL ."</a>";
-  $no_tweet_found_text = t(TWITTER_NO_TWEET_FOUND_LABEL);
+  $no_tweet_found_text = "<div class ='no-tweet-label'>" . TWITTER_NO_TWEET_FOUND_LABEL ."</div>";
+  // $no_tweet_found_text = t(TWITTER_NO_TWEET_FOUND_LABEL);
   $output = "<div class='no-tweet-found'>" . $no_tweet_found_text .
     $create_tweet_link . $import_tweet_link . "</div>";
   return $output;

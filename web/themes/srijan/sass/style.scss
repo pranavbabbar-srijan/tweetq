@@ -908,6 +908,37 @@ body {
 	    }
 	}
 }
+
+// No tweet page.
+.no-tweet-found {
+	font-size: 48px;
+	text-align: center;
+	padding: 1em;
+	color: $gray;
+	font-weight: 300;
+	.no-tweet-label {
+		margin-bottom: 20px;
+	}
+	a {
+		background: $twitter;
+		color: white;
+		margin-right: 0;
+		border: 0;
+	    padding: .65em 1em;
+	    font-size: 18px;
+	    @include border-radius( 3px);
+	    text-decoration: none;
+		text-align: center;
+		font-weight: bold;
+		&.import-tweet {
+			background: none;
+			color: $twitter;
+			margin-left: 20px;
+			border: 1px solid;
+		}
+	}
+}
+
 .path-signup, .path-twitter {
 	.layout-container {
 		.region-content {
