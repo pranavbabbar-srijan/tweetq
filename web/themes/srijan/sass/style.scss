@@ -1222,11 +1222,11 @@ body {
 }
 
 .block-users-tweets-statistics-block {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";/*IE 8*/
-	-moz-box-shadow: 1px 0px 8px #bbb;/*FF 3.5+*/
-	-webkit-box-shadow: 1px 0px 8px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-	box-shadow: 1px 0px 8px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb); /*IE 5.5-7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=20, Color=#bbb)";/*IE 8*/
+	-moz-box-shadow: 0 0 2px #bbb;/*FF 3.5+*/
+	-webkit-box-shadow: 0 0 2px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+	box-shadow: 0 0 2px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=20, Color=#bbb); /*IE 5.5-7*/
 	margin-top: 1em;
 	margin-left: 10px;
 	background: white;
@@ -1606,5 +1606,52 @@ body {
 		font-style: italic;
 		margin-top: 1em;
 		color: $gray;
+	}
+}
+
+// colorbox theming.
+#cboxOverlay {
+	opacity: .65 !important;
+}
+#cboxClose {
+	@extend %none;
+}
+#cboxLoadedContent {
+	padding: 1em 2em;
+	margin-bottom: 0;
+	header, #sidebar-first, #block-userstweetsstatisticsblock {
+		@extend %none;
+	}
+	.region-content {
+		margin-top: 0;
+	}
+	#main-wrapper {
+		padding-top: 0;
+	}
+	.main-content {
+		width: 100%;
+		text-align: center;
+	}
+	.permanent-delete {
+		color: #f56a6a;
+		margin-bottom: 40px;
+		font-size: 18px;
+	}
+	.delete-prompt {
+		color: $gray;
+		margin-bottom: 20px;
+	}
+	#edit-clone, #edit-cancel {
+		float: left;
+		font-size: 16px;
+	}
+	#edit-clone {
+		background: #f56a6a;
+		padding: .6em;
+		margin-left: 40px;
+	}
+	#edit-cancel {
+		color: $dark;
+		border: none;
 	}
 }
