@@ -744,7 +744,27 @@ body {
           .user-logged-in .block-users-valid-tweets-block .item-list .header li a.active:after, .user-logged-in .block-users-in-valid-tweets-block .item-list .header li a.active:after,
           .user-logged-in .block-users-archived-tweets-block .item-list .header li a.active:after, .user-logged-in .block-users-all-tweets-block .item-list .header li a.active:after,
           .user-logged-in .block-users-tweeted-tweets-block .item-list .header li a.active:after {
+            content: "\f107";
+            font: normal normal normal 14px/1 FontAwesome;
+            left: 3px;
+            top: 0;
+            position: relative; }
+          .user-logged-in .block-users-valid-tweets-block .item-list .header li a.active.ASC:after, .user-logged-in .block-users-valid-tweets-block .item-list .header li a.ASC:after, .user-logged-in .block-users-in-valid-tweets-block .item-list .header li a.active.ASC:after, .user-logged-in .block-users-in-valid-tweets-block .item-list .header li a.ASC:after,
+          .user-logged-in .block-users-archived-tweets-block .item-list .header li a.active.ASC:after,
+          .user-logged-in .block-users-archived-tweets-block .item-list .header li a.ASC:after, .user-logged-in .block-users-all-tweets-block .item-list .header li a.active.ASC:after, .user-logged-in .block-users-all-tweets-block .item-list .header li a.ASC:after,
+          .user-logged-in .block-users-tweeted-tweets-block .item-list .header li a.active.ASC:after,
+          .user-logged-in .block-users-tweeted-tweets-block .item-list .header li a.ASC:after {
             content: "\f106";
+            font: normal normal normal 14px/1 FontAwesome;
+            left: 3px;
+            top: 0;
+            position: relative; }
+          .user-logged-in .block-users-valid-tweets-block .item-list .header li a.active.DESC:after, .user-logged-in .block-users-valid-tweets-block .item-list .header li a.DESC:after, .user-logged-in .block-users-in-valid-tweets-block .item-list .header li a.active.DESC:after, .user-logged-in .block-users-in-valid-tweets-block .item-list .header li a.DESC:after,
+          .user-logged-in .block-users-archived-tweets-block .item-list .header li a.active.DESC:after,
+          .user-logged-in .block-users-archived-tweets-block .item-list .header li a.DESC:after, .user-logged-in .block-users-all-tweets-block .item-list .header li a.active.DESC:after, .user-logged-in .block-users-all-tweets-block .item-list .header li a.DESC:after,
+          .user-logged-in .block-users-tweeted-tweets-block .item-list .header li a.active.DESC:after,
+          .user-logged-in .block-users-tweeted-tweets-block .item-list .header li a.DESC:after {
+            content: "\f107";
             font: normal normal normal 14px/1 FontAwesome;
             left: 3px;
             top: 0;

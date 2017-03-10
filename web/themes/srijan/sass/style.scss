@@ -646,7 +646,25 @@ body {
 						text-decoration: none;
 						&.active {
 							&:after {
+								content: "\f107";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 0;
+							    position: relative;
+							}
+						}
+						&.active.ASC, &.ASC {
+							&:after {
 								content: "\f106";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 0;
+							    position: relative;
+							}
+						}
+						&.active.DESC, &.DESC {
+							&:after {
+								content: "\f107";
 								font: normal normal normal 14px/1 FontAwesome;
 								left: 3px;
 							    top: 0;
