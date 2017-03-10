@@ -1645,6 +1645,10 @@ body {
     font-style: italic;
     margin-top: 1em;
     color: #979797; }
+  .-form-tweets-queue-csv-upload .ajax-progress-throbber {
+    position: relative;
+    top: -30px;
+    left: 90px; }
 
 #cboxOverlay {
   opacity: .65 !important; }

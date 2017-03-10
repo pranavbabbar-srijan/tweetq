@@ -39,7 +39,7 @@
 	    });
 
 	    // profile dropdown.
-	    $("#block-usersdashboardheaderblock .profile a").click(function() {
+	    $("#block-usersdashboardheaderblock .profile > a").click(function() {
 	    	event.preventDefault();
 			$(this).toggleClass("active");
 			$(this).siblings(".profile-links").toggleClass("active");

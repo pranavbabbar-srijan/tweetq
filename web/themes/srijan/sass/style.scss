@@ -1607,14 +1607,19 @@ body {
 		margin-top: 1em;
 		color: $gray;
 	}
+	.ajax-progress-throbber {
+		position: relative;
+		top: -30px;
+		left: 90px;
+	}
 }
 
 // colorbox theming.
 #cboxOverlay {
 	opacity: .65 !important;
 }
-#cboxClose {
-	@extend %none;
+#cboxClose {	
+@extend %none;
 }
 #cboxLoadedContent {
 	padding: 1em 2em;
