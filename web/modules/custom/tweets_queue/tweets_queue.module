@@ -2918,6 +2918,10 @@ function tweets_queue_generate_filter($route, $filter_name, $current_filter, $ne
       break;
   }
   $class = tweets_queue_match_current_filter($current_filter, $filter_name);
+  if ($class != 'active') {
+    $new_filter_order = 'ASC';
+  }
+
   $sort_url = Url::fromRoute($route,
     ['filter' => $filter_name, 'order' => $new_filter_order],
     ['attributes' => ['class' => [$class, $new_filter_order]]]
