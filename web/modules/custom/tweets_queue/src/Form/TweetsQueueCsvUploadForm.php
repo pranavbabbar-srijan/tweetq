@@ -52,6 +52,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
           TWITTER_CSV_UPLOAD_MAX_FILE_SIZE
         ]
       ],
+      '#required' => TRUE,
     );
     $form['submit'] = array(
       '#type' => 'submit',

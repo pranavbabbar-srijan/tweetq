@@ -282,6 +282,35 @@ body {
 	@media screen and (min-width: $xtraLarge){
 		@include container(1440px);
 	}
+	// Error message.
+	.messages--error {
+		margin-top: 10px;
+		border: 0;
+		margin-left: 10px;
+		text-align: center;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
+		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
+		-webkit-box-shadow: 0px 0px 3px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+		box-shadow: 0px 0px 3px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
+		background-image: none;
+		position: relative;
+		display: none;
+		div[role=alert] {
+			&:before {
+				@extend %icomoon;
+				content: $icon-error;
+				position: absolute;
+			    top: 16px;
+			    margin-left: -20px;
+			}
+		}
+	}
+}
+.block-system-main-block {
+	+ .messages--error {
+		display: block;
+	}
 }
 
 .path-frontpage {
@@ -617,7 +646,25 @@ body {
 						text-decoration: none;
 						&.active {
 							&:after {
+								content: "\f107";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 0;
+							    position: relative;
+							}
+						}
+						&.active.ASC, &.ASC {
+							&:after {
 								content: "\f106";
+								font: normal normal normal 14px/1 FontAwesome;
+								left: 3px;
+							    top: 0;
+							    position: relative;
+							}
+						}
+						&.active.DESC, &.DESC {
+							&:after {
+								content: "\f107";
 								font: normal normal normal 14px/1 FontAwesome;
 								left: 3px;
 							    top: 0;
@@ -908,6 +955,38 @@ body {
 	    }
 	}
 }
+
+
+// No tweet page.
+.no-tweet-found {
+	font-size: 48px;
+	text-align: center;
+	padding: 1em;
+	color: $gray;
+	font-weight: 300;
+	.no-tweet-label {
+		margin-bottom: 20px;
+	}
+	a {
+		background: $twitter;
+		color: white;
+		margin-right: 0;
+		border: 0;
+	    padding: .65em 1em;
+	    font-size: 18px;
+	    @include border-radius( 3px);
+	    text-decoration: none;
+		text-align: center;
+		font-weight: bold;
+		&.import-tweet {
+			background: none;
+			color: $twitter;
+			margin-left: 20px;
+			border: 1px solid;
+		}
+	}
+}
+
 .path-signup, .path-twitter {
 	.layout-container {
 		.region-content {
@@ -1161,11 +1240,11 @@ body {
 }
 
 .block-users-tweets-statistics-block {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";/*IE 8*/
-	-moz-box-shadow: 1px 0px 8px #bbb;/*FF 3.5+*/
-	-webkit-box-shadow: 1px 0px 8px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-	box-shadow: 1px 0px 8px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb); /*IE 5.5-7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=20, Color=#bbb)";/*IE 8*/
+	-moz-box-shadow: 0 0 2px #bbb;/*FF 3.5+*/
+	-webkit-box-shadow: 0 0 2px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+	box-shadow: 0 0 2px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=20, Color=#bbb); /*IE 5.5-7*/
 	margin-top: 1em;
 	margin-left: 10px;
 	background: white;
@@ -1490,6 +1569,12 @@ body {
 		+ .description {
 			@extend %none;
 		}
+		.messages--error {
+			margin-top: -10px;
+		    margin-left: -2px;
+		    width: 97%;
+		    display: block;
+		}
 	}
 	.js-form-file {
 		width: 100%;
@@ -1539,5 +1624,57 @@ body {
 		font-style: italic;
 		margin-top: 1em;
 		color: $gray;
+	}
+	.ajax-progress-throbber {
+		position: relative;
+		top: -30px;
+		left: 90px;
+	}
+}
+
+// colorbox theming.
+#cboxOverlay {
+	opacity: .65 !important;
+}
+#cboxClose {	
+@extend %none;
+}
+#cboxLoadedContent {
+	padding: 1em 2em;
+	margin-bottom: 0;
+	header, #sidebar-first, #block-userstweetsstatisticsblock {
+		@extend %none;
+	}
+	.region-content {
+		margin-top: 0;
+	}
+	#main-wrapper {
+		padding-top: 0;
+	}
+	.main-content {
+		width: 100%;
+		text-align: center;
+	}
+	.permanent-delete {
+		color: #f56a6a;
+		margin-bottom: 40px;
+		font-size: 18px;
+	}
+	.delete-prompt {
+		color: $gray;
+		margin-bottom: 20px;
+	}
+	#edit-clone, #edit-cancel {
+		float: left;
+		font-size: 16px;
+	}
+	#edit-clone {
+		background: #f56a6a;
+		padding: .6em;
+		margin-left: 40px;
+	}
+	#edit-cancel {
+		color: $dark;
+		border: none;
 	}
 }
