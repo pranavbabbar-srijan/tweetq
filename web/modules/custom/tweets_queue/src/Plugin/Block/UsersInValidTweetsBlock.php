@@ -27,7 +27,7 @@ class UsersInValidTweetsBlock extends BlockBase {
     
     $current_filter = (isset($_GET['filter'])) ? $_GET['filter'] : TWITTER_FIELD_CHANGED;
     $current_filter_order = (isset($_GET['order'])) ? $_GET['order'] : 'DESC';
-    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : 'DESC';
+    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : 'ASC';
 
     $created_sort_link = tweets_queue_generate_filter(TWITTER_INVALID_TWEETS_ROUTE_NAME,
       TWITTER_FIELD_CREATED, $current_filter, $new_filter_order);
