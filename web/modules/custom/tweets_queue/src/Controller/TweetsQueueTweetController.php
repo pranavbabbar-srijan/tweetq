@@ -33,7 +33,6 @@ class TweetsQueueTweetController extends ControllerBase {
         'data' => serialize(array()),
       )
     );
-    die('');
   }
 
   /**
