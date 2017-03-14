@@ -111,3 +111,11 @@ tweets_queue_all_tweets.settings:
     _title: 'All Tweets'
   requirements:
     _role: 'twitter_client+administrator'
+
+tweets_queue_user_history.process:
+  path: '/dashboard/user-history'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::userHistory'
+    _title: 'User History'
+  requirements:
+    _role: 'twitter_approved_client+administrator'

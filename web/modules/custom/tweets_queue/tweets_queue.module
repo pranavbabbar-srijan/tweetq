@@ -122,6 +122,7 @@ const TWITTER_STATISTCIS_OAUTH_TOKEN_SECRET = 'otc';
 const TWITTER_STATISTCIS_SCREEN = 'scr';
 const TWITTER_STATISTCIS_AUTH_EXPIRES = 'exp';
 const TWITTER_HANDLER_PROFILE = 'thp';
+const TWITTER_USER_HISTORY_MARK = 'uhm';
 const TWITTER_CONNECT_HEADER = 'Connect with Twitter to Continue';
 const TWITTER_CONNECT_TEXT = 'Connect with Twitter';
 
@@ -2372,6 +2373,7 @@ function tweets_queue_update_twitter_tweets_counter_statistics($name) {
  */
 function tweets_queue_fetch_twitter_statistics_info($name = 'tweets_count') {
   $uid = \Drupal::currentUser()->id();
+  // die($uid);
   $statistics_info = array();
   $query = \Drupal::database()->select(TWITTER_STATISTICS_TABLE, 'p');
   switch($name) {
@@ -2388,6 +2390,11 @@ function tweets_queue_fetch_twitter_statistics_info($name = 'tweets_count') {
       $query->addField('p', 'data');
       $profile_key = tweets_queue_populate_statistics_key($twitter_owner_id, TWITTER_HANDLER_PROFILE);
       $query->condition('p.name', $profile_key, '=');
+      break;
+    case TWITTER_USER_HISTORY_MARK:
+      $user_history_key = tweets_queue_populate_statistics_key($uid, TWITTER_USER_HISTORY_MARK);
+      $query->addField('p', 'value');
+      $query->condition('p.name', $user_history_key, '=');
       break;
     default:
       $query->addField('p', 'value');
@@ -2959,12 +2966,17 @@ function tweets_queue_no_tweets_found_message() {
  */
 function tweets_queue_fetch_user_tweets_history() {
   $uid = \Drupal::currentUser()->id();
+  $last_history_read = tweets_queue_fetch_twitter_statistics_info(TWITTER_USER_HISTORY_MARK);
+  if (empty($last_history_read)) {
+    $last_history_read = 0;
+  }
   $query = \Drupal::database()->select(TWITTER_TWEETS_HISTORY_TABLE, 'h');
   $query->fields('h', ['created', 'retweeted']);
   $query->leftjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
   $query->fields('p', ['uid', 'message', 'status', 'tweet_id']);
   $query->orderBy('h.created', 'DESC');
   $query->condition('p.uid', $uid);
+  $query->condition('h.created', $last_history_read , '>');
   $result = $query->execute()->fetchAll();
   $output = array();
   foreach ($result as $pos => $data) {

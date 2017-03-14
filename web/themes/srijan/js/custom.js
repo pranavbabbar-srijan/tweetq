@@ -3,7 +3,7 @@
 (function ($) {
 	$(document).ready(function(){
 		$(".-form-tweets-queue-csv-upload .description").insertAfter(".-form-tweets-queue-csv-upload #edit-submit");
-		$("#block-usersdashboardheaderblock .content").append("<a href='#;'></a>");
+		$("#block-usersdashboardheaderblock .content").append("<a id='notification-display' href='#;'></a>");
 		$("#block-usersdashboardheaderblock .profile + a").click(function() {
 			$(this).toggleClass("active");
 			$(this).siblings(".notifications").children(".notification-message-list").toggleClass("active");
@@ -51,6 +51,15 @@
 		    textSize = $(this).val().length;
 		    document.getElementById('edit-display-box').value = left - textSize;
 		});
+
+		$("#notification-display").click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/dashboard/user-history',
+                success: function(data) {
+                }
+            });
+   		});
 	});
 
 })(jQuery);
