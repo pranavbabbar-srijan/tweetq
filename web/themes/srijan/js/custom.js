@@ -38,6 +38,11 @@
 	        return false;
 	    });
 
+	    $(".create-header #ajax-wrapper").click(function() {
+	    	var blankMessage = '';
+	    	$(".messages--error").remove();
+		});
+
 	    // profile dropdown.
 	    $("#block-usersdashboardheaderblock .profile > a").click(function() {
 	    	event.preventDefault();
