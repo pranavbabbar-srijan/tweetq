@@ -63,6 +63,8 @@ const TWITTER_USER_DASHBOARD = 'dashboard';
 const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
 const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
 const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
+const USER_FORGOT_PASSWORD_SECTION_HEDAER = 'Enter your Registered Email ID';
+const USER_FORGOT_PASSWORD_SECTION_HEDAER_SUBLABEL = 'we will send the new password to your registered email';
 const TWITTER_SIGN_IN_TEXT = 'Sign in with Twitter';
 const TWITTER_SIGN_UP_TEXT = 'Sign up with Twitter';
 const TWITTER_SIGN_IN_PATH = 'authorize_twitter_login';
@@ -206,6 +208,8 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
  */
 function tweets_queue_user_login_form_changes(&$form) {
   global $base_url;
+  // tweets_queue_forgot_password($form);
+
   $form['login_header'] = array(
     '#markup' => t("<h2>Sign in to Barbet</h2>"),
     '#weight' => -9,
@@ -226,6 +230,49 @@ function tweets_queue_user_login_form_changes(&$form) {
   $form['or_separator'] = array(
     '#markup' => t($final_text),
     '#weight' => 12,
+  );
+}
+
+function tweets_queue_forgot_password(&$form) {
+  $form['forgot_password_header'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div id="forgot-password-section">',
+      '#markup' => t(USER_FORGOT_PASSWORD_SECTION_HEDAER),
+      '#weight' => -22,
+  );
+  $form['sub_header'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="signup">',
+      '#markup' => t(USER_FORGOT_PASSWORD_SECTION_HEDAER_SUBLABEL),
+      '#suffix' => '</div>',
+      '#weight' => -21,
+    );
+   $form[SIGNUP_FIELD_EMAIL] = array(
+      '#type' => 'email',
+      '#title' => t('Email'),
+      '#required' => FALSE,
+      '#value' => $email,
+      '#weight' => -20,
+      '#attributes' => array (
+        'placeholder' => t("Enter your email"),
+      ),
+    );
+
+  $form['forgot_submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit'),
+      '#weight' => -19,
+    );
+  $form['forgot_cancel'] = array(
+      '#type' => 'submit',
+      '#value' => t('Cancel'),
+      '#weight' => -18,
+    );
+    $form['forgot_password_footer'] = array(
+      '#type' => 'markup',
+      '#suffix' => '</div>',
+      '#markup' => t(''),
+      '#weight' => -15,
   );
 }
 
