@@ -78,7 +78,6 @@ class UsersValidTweetsBlock extends BlockBase {
       return $build;
     }
     if (!$total) {
-      drupal_set_message('hi');
       $build['no_found'] = array(
         '#type' => 'markup',
         '#markup' => tweets_queue_no_tweets_found_message(),
