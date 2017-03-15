@@ -89,7 +89,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $config = \Drupal::service('config.factory')->getEditable('tweets_queue_admin.settings');
     $fid = reset($form_state->getValue('managed_file'));
     $file = '';
     if ($fid) {
