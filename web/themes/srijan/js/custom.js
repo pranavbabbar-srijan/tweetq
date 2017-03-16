@@ -38,6 +38,18 @@
 	        return false;
 	    });
 
+	    $("#forgot-password-section").hide();
+	    $("#forgot-password").click(function() {
+	    	$("#forgot-password-section").show();
+	    	$("#user-login-prefix").hide();
+	    	$("#edit-actions").hide();
+		});
+	    $("#forgot-password-cancel").click(function() {
+	    	$("#forgot-password-section").hide();
+	    	$("#user-login-prefix").show();
+	    	$("#edit-actions").show();
+		});
+
 	    $(".create-header #ajax-wrapper").click(function() {
 	    	var blankMessage = '';
 	    	$(".messages--error").remove();
