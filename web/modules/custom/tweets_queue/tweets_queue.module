@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file 
+ * @file
  *   To handle the custom functionality which includes -
  *   - Hooks alteration
  *   - Web services
@@ -23,7 +23,7 @@ const ACCESS_TOKEN = 'access_token';
 const ACCESS_SECRET_TOKEN = 'access_secret_token';
 const SUCCESS_MESSAGE = 'Message tweeted successfully.';
 const UNSUCCESS_MESSAGE = 'Message tweet failed.';
-const CRON_TWEET_ATTEMP = 'cron_tweet_attempt'; 
+const CRON_TWEET_ATTEMP = 'cron_tweet_attempt';
 const CRON_TWEET_IMPORT_ID = 'cron_tweet_import_id';
 const CRON_TWEET_IMPORT_PATH = 'cron_tweet_import_path';
 const CRON_TWEET_IMPORT_FID = 'cron_tweet_import_fid';
@@ -93,9 +93,9 @@ const TWITTER_FIELD_SIZE = 'size';
 
 const TWITTER_TWEETS_LISTING_ROW_LIMIT = '10';
 
-const TWITTER_FIELD_FIRST_RUN_LABEL = 'Tweet Date';
-const TWITTER_FIELD_CREATED_LABEL = 'Created';
-const TWITTER_FIELD_CHANGED_LABEL = 'Last Updated';
+const TWITTER_FIELD_FIRST_RUN_LABEL = 'Tweeted On';
+const TWITTER_FIELD_CREATED_LABEL = 'Created On';
+const TWITTER_FIELD_CHANGED_LABEL = 'Updated On';
 const TWITTER_FIELD_TWEETED_LABEL = 'Retweeted';
 const TWITTER_FIELD_MESSAGE_LABEL = 'Message';
 const TWITTER_FIELD_SIZE_LABEL = 'Size';
@@ -128,7 +128,7 @@ const TWITTER_USER_HISTORY_MARK = 'uhm';
 const TWITTER_CONNECT_HEADER = 'Connect with Twitter to Continue';
 const TWITTER_CONNECT_TEXT = 'Connect with Twitter';
 
-const TWITTER_DATE_FORMAT = 'm/d/Y';
+const TWITTER_DATE_FORMAT = 'd/m/Y';
 
 
 const TWITTER_TWEET_FORM_ROUTE_NAME = 'tweets_queue_tweet_form.settings';
@@ -178,7 +178,7 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
         $form['display'] = array(
           '#markup' => t("<b>This item is already tweeted. So this can not be edited. You need to clone first.</b>"),
           '#weight' => 9,
-        ); 
+        );
         $form['clone_submit'] = array(
           '#type' => 'submit',
           '#value' => t('Clone the tweet and continue edit'),
@@ -335,7 +335,7 @@ function tweets_queue_tweet_node_form_cancel($form, \Drupal\Core\Form\FormStateI
 function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle, $tweet_id = '') {
   require_once   './libraries/codebird-php/codebird.php';
   $status = array('success' => 0, 'message' => 'unsuccessful');
-  
+
   $consumer_key = tweets_queue_get_tweet_configuration_data(CONSUMER_KEY);
   $consumer_secret_key = tweets_queue_get_tweet_configuration_data(CONSUMER_SECRET_KEY);
 
@@ -665,7 +665,7 @@ function tweets_queue_send_direct_message($message) {
     return;
   }
   tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
-  drupal_set_message(t('Message sent successfully.'));
+  drupal_set_message(t('Tweet shared and stored in valid tweets successfully.'));
   $twitter_message_info['tweet_id'] = $tweet_id;
   $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
   $twitter_history_info = array('nid' => $nid,
@@ -731,7 +731,7 @@ function tweets_queue_compile_client_tweets($client_twitter_handler, $uid, $twee
   if ($total == 0) {
     return;
   }
-  
+
   if ($tweet_max_attempt > $total) {
     $tweet_max_attempt = $total;
   }
@@ -1645,7 +1645,7 @@ function tweets_queue_update_handler_info($tweet_handler_info, $uid = '') {
 function tweets_queue_fetch_client_handler_info($uid = '') {
   //@TODO: depreciate this
   $uid = (!$uid) ? \Drupal::currentUser()->id() : $uid;
-  
+
   $query = \Drupal::database()->select(TWEETS_HANDLER_TABLE, 'p');
   $query->fields('p', ['uid', 'status', 'created','updated', 'consumer_key',
     'consumer_secret_key', 'access_token', 'access_secret_token', 'cron_tweet_last_run',
@@ -2041,7 +2041,7 @@ function tweets_queue_twitter_authentication_process_id_generate() {
 }
 
 function tweets_queue_twitter_authentication_process_id_update($twitter_authentication_process_id, $twitter_authentication_process_update_info) {
-  
+
   $twitter_authentication_process_info = array('status' => 1,
     'created' => time(),
     'data' => serialize($data),
@@ -2078,7 +2078,7 @@ function tweets_queue_authenticate_twitter_user() {
     drupal_set_message(t('You have been declined from the twitter api.'));
     tweets_queue_goto_page();
   }
-  
+
   $current_path = \Drupal::service('path.current')->getPath();
   $path = $base_url . $current_path;
 
@@ -2104,7 +2104,7 @@ function tweets_queue_authenticate_twitter_user() {
 
   $consumer_key = tweets_queue_get_tweet_configuration_data(CONSUMER_KEY);
   $consumer_secret_key = tweets_queue_get_tweet_configuration_data(CONSUMER_SECRET_KEY);
-  
+
   \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
   $cb = \Codebird\Codebird::getInstance();
 
@@ -2259,7 +2259,7 @@ function tweets_queue_authenticate_twitter_user() {
     }
 
     $uid = tweets_queue_check_twitter_owner_id_presence($twitter_owner_id);
-    
+
     if ($uid) {
       tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
       tweets_queue_login_twitter_user($uid);
@@ -2279,7 +2279,7 @@ function tweets_queue_authenticate_twitter_user() {
     tweets_queue_goto_dashboard();
   }
 
-  
+
   function tweets_queue_register_twitter_user($twitter_data, $twitter_profile_info) {
     $user = \Drupal\user\Entity\User::create();
 
@@ -2288,7 +2288,7 @@ function tweets_queue_authenticate_twitter_user() {
     $full_name = $twitter_profile_info->name;
     $username = $twitter_profile_info->screen_name . '_twitter_user';
     $screen_name = $twitter_profile_info->screen_name;
-    
+
     //Mandatory settings
     $user->setPassword(user_password());
     $user->enforceIsNew();
@@ -2299,7 +2299,7 @@ function tweets_queue_authenticate_twitter_user() {
     $user->set(SIGNUP_FIELD_TWITTER_DATA, $twitter_data);
     //Optional settings
     $user->activate();
-    
+
     $res = $user->save();
   }
 
@@ -2394,7 +2394,7 @@ function tweets_queue_update_twitter_statistics($name, $statistics_info, $status
   if (empty($name)) {
     return;
   }
-  
+
   if (is_array($statistics_info)) {
     $twitter_statistics_create = $statistics_info;
     $twitter_statistics_update = $statistics_info;
@@ -2834,7 +2834,7 @@ function tweets_queue_clone_and_save_submit($form, \Drupal\Core\Form\FormStateIn
  */
 function tweets_queue_cancel_edit_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $input = $form_state->getUserInput();
-  $nid = $input['nid']; 
+  $nid = $input['nid'];
   $tweet_info = tweets_queue_fetch_tweet_item($nid);
   $message = $tweet_info->message;
   $tweet_id = $tweet_info->tweet_id;
