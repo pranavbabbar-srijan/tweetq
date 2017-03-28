@@ -13,14 +13,14 @@ use Drupal\Core\Cache\Cache;
  * Create tweet and send on twitter.
  */
 class SendTweetsForm extends FormBase {
-  /** 
+  /**
    * {@inheritdoc}
    */
   public function getFormId() {
     return 'send_tweets_form';
   }
 
-  /** 
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
@@ -44,8 +44,8 @@ class SendTweetsForm extends FormBase {
       '#type' => 'textarea',
       '#title' => t('Create a Tweet'),
       '#required' => TRUE,
-      '#attributes' => array (
-        'placeholder' => t("What's happening ?")
+      '#attributes' => array(
+        'placeholder' => t("What's happening ?"),
       ),
     );
 
@@ -74,10 +74,12 @@ class SendTweetsForm extends FormBase {
       '#suffix' => '</div>',
       '#weight' => 20,
     );
+    $form['#attached']['library'][] = 'srijan/customjs';
+    $form['#attached']['drupalSettings']['tweets_queue']['limit_chars'] = 140;
     return $form;
   }
 
-  /** 
+  /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
