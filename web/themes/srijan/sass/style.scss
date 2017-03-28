@@ -81,8 +81,8 @@
 			    padding-bottom: .7em;
 			    padding-left: 1em;
 			    margin-right: 1em;
-			}	
-		} 
+			}
+		}
 		.img {
 			width: 36px;
 			height: 36px;
@@ -121,7 +121,7 @@
 				&:after {
 				    content: "";
 				    border-left: 16px solid transparent;
-					border-right: 16px solid transparent;  
+					border-right: 16px solid transparent;
 					border-bottom: 16px solid white;
 				    display: block;
 				    position: absolute;
@@ -150,7 +150,7 @@
 				&:before {
 					content: "";
 				    border-left: 16px solid transparent;
-					border-right: 16px solid transparent;  
+					border-right: 16px solid transparent;
 					border-bottom: 16px solid white;
 				    display: block;
 				    position: absolute;
@@ -180,7 +180,7 @@
 					&:before {
 						content: $icon-user;
 					}
-				} 
+				}
 				&.profile-settings {
 					&:before {
 						content: $icon-settings;
@@ -899,14 +899,14 @@ body {
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
 		margin-top: 0;
 		padding-top: .6em;
-		padding-bottom: .3em;	
+		padding-bottom: .3em;
 		background: white;
 		position: fixed;
     	width: 100%;
     	z-index: 99;
 		.region-header {
 			float: none;
-		} 
+		}
 		.site-branding a {
 			font-size: 24px;
 		}
@@ -1132,7 +1132,7 @@ body {
 	}
 }
 .block-non-twitter-users-left-side-bar-block {
-	.non-twitter-profile { 
+	.non-twitter-profile {
 		span.img {
 			background: #E7E8E9;
 		}
@@ -1410,7 +1410,7 @@ body {
 		}
 		&::-webkit-scrollbar-track {
 		    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-		} 
+		}
 		&::-webkit-scrollbar-thumb {
 		  background-color: darkgrey;
 		  outline: 1px solid slategrey;
@@ -1582,7 +1582,7 @@ body {
 		position: relative;
 		height: 40px;
 		&:before {
-		    content: "choose file";
+		    content: "Click here to choose file";
 		    position: absolute;
 		    top: 10px;
 		    left: 20px;
@@ -1659,7 +1659,7 @@ body {
 #cboxOverlay {
 	opacity: .65 !important;
 }
-#cboxClose {	
+#cboxClose {
 @extend %none;
 }
 #cboxLoadedContent {

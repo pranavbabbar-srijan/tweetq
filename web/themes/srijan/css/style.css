@@ -1620,7 +1620,7 @@ body {
     position: relative;
     height: 40px; }
     .-form-tweets-queue-csv-upload .js-form-managed-file:before {
-      content: "choose file";
+      content: "Click here to choose file";
       position: absolute;
       top: 10px;
       left: 20px;
