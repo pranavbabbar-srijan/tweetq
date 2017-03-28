@@ -39,7 +39,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
     $form['managed_file'] = array(
       '#type' => 'managed_file',
       '#title' => TWITTER_IMPORT_TWEET_LABEL,
-      '#default_value' => $fids, 
+      '#default_value' => $fids,
       '#disabled' => FALSE,
       '#description' => TWITTER_CSV_UPLOAD_NOTE_LABEL,
       '#upload_location' => TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY,
@@ -68,7 +68,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
 
   /**
    * Function to validate the key if already in use.
-   * 
+   *
    * @params
    *  $title - The key value.
    *  $nid - If the node is getting edited.
@@ -107,7 +107,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
       $file = \Drupal::service('file_system')->realpath($file_path);
     }
     if ($file) {
-      $this->importCsvData($file);  
+      $this->importCsvData($file);
     }
   }
 
@@ -151,11 +151,10 @@ class TweetsQueueCsvUploadForm extends FormBase {
       }
       $import_message['imported'] = $import_message['imported'] + 1;
       tweets_queue_insert_message_queue_record($twitter_message_info);
-    } 
+    }
     fclose($file);
-    drupal_set_message(t('Migration completed successfully.'));
-    drupal_set_message(t('Total : @total Imported: @imported Valid: @valid
-      Invalid : @invalid Duplicate: @duplicate ',
+    drupal_set_message(t("@total Import completed successfully.<br></br>Total : @total Imported: @imported Valid: @valid
+      Invalid : @invalid Duplicate: @duplicate ",
       array(
         '@total' => $import_message['total'],
         '@imported' => $import_message['imported'],

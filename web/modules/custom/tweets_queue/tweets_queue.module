@@ -1628,7 +1628,6 @@ function tweets_queue_update_handler_info($tweet_handler_info, $uid = '') {
     ->updateFields($tweet_handler_info)
   ->key(array('uid' => $uid))
   ->execute();
-  drupal_set_message(t('Twitter handler configuration saved successfully.'));
 }
 
 /**
