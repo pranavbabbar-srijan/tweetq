@@ -13,14 +13,14 @@ use Drupal\Core\Cache\Cache;
  * Sign up form.
  */
 class SignUpForm extends FormBase {
-  /** 
+  /**
    * {@inheritdoc}
    */
   public function getFormId() {
     return 'signup_form';
   }
 
-  /** 
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
@@ -54,7 +54,8 @@ class SignUpForm extends FormBase {
       '#title' => t('Full Name'),
       '#required' => TRUE,
       '#attributes' => array (
-        'placeholder' => t("Required")
+        'placeholder' => t("Required"),
+        'autocomplete' => 'off'
       ),
     );
 
@@ -63,7 +64,8 @@ class SignUpForm extends FormBase {
       '#title' => t('Email'),
       '#required' => TRUE,
       '#attributes' => array (
-        'placeholder' => t("Required")
+        'placeholder' => t("Required"),
+        'autocomplete' => 'off'
       ),
     );
 
@@ -104,7 +106,7 @@ class SignUpForm extends FormBase {
     return $form;
   }
 
-  /** 
+  /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
