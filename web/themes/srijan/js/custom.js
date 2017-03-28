@@ -3,8 +3,8 @@
 (function ($) {
  // code to disable button on the basis of length.
 	$(document).ready(function(){
+		var limit_chars = 140;
 
-    var limit_chars = drupalSettings.tweets_queue.limit_chars;
     $("#send-tweets-form #edit-message").on('keyup', function(e) {
     	var tweet_msg = $('#send-tweets-form #edit-message').val();
     	var tweet_msg_length = tweet_msg.length;

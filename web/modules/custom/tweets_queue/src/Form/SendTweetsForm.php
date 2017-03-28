@@ -74,8 +74,6 @@ class SendTweetsForm extends FormBase {
       '#suffix' => '</div>',
       '#weight' => 20,
     );
-    $form['#attached']['library'][] = 'srijan/customjs';
-    $form['#attached']['drupalSettings']['tweets_queue']['limit_chars'] = 140;
     return $form;
   }
 
