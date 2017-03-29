@@ -1603,6 +1603,7 @@ body {
       overflow: hidden;
       background: white;
       padding: 1em;
+      min-height: 133px;
       margin-left: 10px;
       -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
       /*IE 8*/
