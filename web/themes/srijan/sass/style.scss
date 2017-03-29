@@ -1539,6 +1539,10 @@ body {
 		padding: 1em;
 		font-size: 18px;
 	}
+	#edit-submit:disabled {
+		background: $gray;
+		opacity: .35;
+	}
 }
 
 .-form-tweets-queue-csv-upload {
@@ -1598,11 +1602,16 @@ body {
 		    width: 97%;
 		    display: block;
 		}
+		#ajax-wrapper {
+			height: 40px;
+			overflow: hidden;
+		}
 	}
 	.js-form-file {
 		width: 100%;
 		padding: .5em;
 		opacity: 0;
+		height: 40px;
 	}
 	.file--mime-text-csv {
 	    margin-left: 10px;
