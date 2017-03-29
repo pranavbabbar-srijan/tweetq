@@ -39,7 +39,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
     $form['managed_file'] = array(
       '#type' => 'managed_file',
       '#title' => TWITTER_IMPORT_TWEET_LABEL,
-      '#default_value' => $fids,
       '#disabled' => FALSE,
       '#description' => TWITTER_CSV_UPLOAD_NOTE_LABEL,
       '#upload_location' => TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY,
