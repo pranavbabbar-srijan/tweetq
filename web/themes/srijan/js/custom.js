@@ -17,6 +17,7 @@
     });
 		$(".-form-tweets-queue-csv-upload .description").insertAfter(".-form-tweets-queue-csv-upload #edit-submit");
 		$("#block-usersdashboardheaderblock .content").append("<a id='notification-display' href='#;'></a>");
+		$("#block-usersdashboardnontwitterheaderblock .content").append("<a id='notification-display' href='#;'></a>");
 		$("#block-usersdashboardheaderblock .profile + a").click(function() {
 			$(this).toggleClass("active");
 			$(this).siblings(".notifications").children(".notification-message-list").toggleClass("active");
@@ -71,6 +72,12 @@
 
 	    // profile dropdown.
 	    $("#block-usersdashboardheaderblock .profile > a").click(function() {
+	    	event.preventDefault();
+				$(this).toggleClass("active");
+
+				$(this).siblings(".profile-links").toggleClass("active");
+			});
+	    $("#block-usersdashboardnontwitterheaderblock .profile > a").click(function() {
 	    	event.preventDefault();
 			$(this).toggleClass("active");
 			$(this).siblings(".profile-links").toggleClass("active");

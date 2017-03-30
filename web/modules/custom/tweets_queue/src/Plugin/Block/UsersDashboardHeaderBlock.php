@@ -27,11 +27,23 @@ class UsersDashboardHeaderBlock extends BlockBase {
 
     $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
     $user_twitter_profile_info = unserialize($twitter_profile_info);
-    $picture = '';
-    $name = $user_twitter_profile_info->name;
+    if (empty($twitter_profile_info)) {
+      $uid = ($uid == '') ? \Drupal::currentUser()->id() : $uid;
+      $user = \Drupal\user\Entity\User::load($uid);
+      $name = $user->get(SIGNUP_FIELD_FULL_NAME)->value;
+      $picture = '';
+      $picture = $user_twitter_profile_info->profile_image_url;
+      $profile_img = "<img src='http://abs.twimg.com/sticky/default_profile_images/default_profile_0_normal.png'></img>";
+    }
+    else {
+      $picture = '';
+  -   $name = $user_twitter_profile_info->name;
+      $picture = '';
+      $picture = $user_twitter_profile_info->profile_image_url;
+      $profile_img = "<img src='" . $picture . "'></img>";
+    }
 
-    $picture = $user_twitter_profile_info->profile_image_url;
-    $profile_img = "<img src='" . $picture . "'></img>";
+
 
     $my_profile_link = "<a class ='profile-my-profile' href='" . $base_url .'/' . "'>" .
       'My Profile' ."</a>";
@@ -51,7 +63,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
     $message_history_count_output = "<div>
       <span class='count'>" . $message_history_count . "</span>
     </div>";
-    
+
     $message_history_data = "<div class='notification-message-list'>";
     $message_history_data .= " <div>
       <span class='message_history_count'>You have " . $message_history_count_output . " Notifications</span>
@@ -74,7 +86,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
       );
     }
     $message_history_data .= "</div>";
-    $output = "<div class='notifications'>" . $message_history_count_output . 
+    $output = "<div class='notifications'>" . $message_history_count_output .
       $message_history_data . "</div>" . $twitter_profile_output;
 
     return array(
