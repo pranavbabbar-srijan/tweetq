@@ -1723,3 +1723,11 @@ body {
   #cboxLoadedContent #edit-cancel {
     color: #212121;
     border: none; }
+
+.signinwithtwitterblock.user-logged-in .main-content {
+  overflow: inherit; }
+  .signinwithtwitterblock.user-logged-in .main-content .block-sign-in-with-twitter-block {
+    margin-top: -102px; }
+
+.send-tweets-form, .-form-tweets-queue-csv-upload {
+  padding-top: 8px; }

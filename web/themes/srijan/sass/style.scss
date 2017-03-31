@@ -1719,3 +1719,14 @@ body {
 		border: none;
 	}
 }
+
+.signinwithtwitterblock.user-logged-in .main-content {
+	overflow: inherit;
+	.block-sign-in-with-twitter-block {
+		margin-top: -102px;
+	}
+}
+
+.send-tweets-form, .-form-tweets-queue-csv-upload {
+	padding-top: 8px;
+}

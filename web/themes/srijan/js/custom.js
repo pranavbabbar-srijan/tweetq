@@ -40,6 +40,10 @@
 	        }
 	    });
 
+	    if($('#block-signinwithtwitterblock').length > 0){
+	    	$('body').addClass('signinwithtwitterblock');
+		}
+
 	    $(".morelink").click(function(){
 	        if($(this).hasClass("less")) {
 	            $(this).removeClass("less");
