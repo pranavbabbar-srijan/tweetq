@@ -2615,8 +2615,11 @@ function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\For
   }
 
   $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
-  if ($nid) {
+  if ($nid && $size <= 140) {
     drupal_set_message(t('Tweet has been moved to valid tweets and saved for later.'));
+  }
+  else {
+    drupal_set_message(t('Tweet has been moved to invalid tweets and saved for later.'));
   }
   //tweets_queue_redirect_on_tweet_save($size);
 }
