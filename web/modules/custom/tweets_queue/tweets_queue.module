@@ -227,8 +227,8 @@ function tweets_queue_user_login_form_changes(&$form) {
     '#markup' => t($url),
     '#weight' => 10,
   );
-  $form['name']['#title'] = 'Email';
-  $form['actions']['submit']['#value'] = 'Sign in';
+  // $form['name']['#title'] = 'Email';
+  // $form['actions']['submit']['#value'] = 'Sign in';
   $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
   $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
   $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .
@@ -2619,7 +2619,8 @@ function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\For
     drupal_set_message(t('Tweet has been moved to valid tweets and saved for later.'));
   }
   else {
-    drupal_set_message(t('Tweet has been moved to invalid tweets and saved for later.'));
+    drupal_set_message(t('Tweet has been moved to valid tweets and saved for later.'));
+
   }
   //tweets_queue_redirect_on_tweet_save($size);
 }
