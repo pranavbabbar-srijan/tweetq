@@ -227,7 +227,7 @@ function tweets_queue_user_login_form_changes(&$form) {
     '#markup' => t($url),
     '#weight' => 10,
   );
-  // $form['name']['#title'] = 'Email';
+  //$form['name']['#title'] = 'Email';
   // $form['actions']['submit']['#value'] = 'Sign in';
   $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
   $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
@@ -679,7 +679,7 @@ function tweets_queue_send_direct_message($message) {
     array(
       'tweet_id' => $tweet_id,
       'weight' => 6,
-      'tweeted' => 1,
+      'tweeted' => 0,
       'first_run' => time(),
       'last_run' => time(),
     ),
