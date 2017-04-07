@@ -51,26 +51,14 @@ class UsersLeftSideBarBlock extends BlockBase {
       TWITTER_IMPORT_TWEET_LABEL ."</a>";
 
     $class = tweets_queue_match_current_path($current_path, TWITTER_VALID_TWEET_PATH);
-    $valid_tweets_output = "<div class='valid_tweets $class'>
-        <span class='text'>" . TWITTER_VALID_TWEET_LABEL . " " . "New" . " " . "</span>" .
-        "<span class='value'>" . $valid_tweets . "</span>
-      </div>" ;
     $valid_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_VALID_TWEET_PATH . "'>" .
       TWITTER_VALID_TWEET_LABEL ."</a>";
 
     $class = tweets_queue_match_current_path($current_path, TWITTER_INVALID_TWEET_PATH);
-    $invalid_tweets_output = "<div class='valid_tweets $class'>
-        <span class='text'>" . TWITTER_INVALID_TWEET_LABEL . " " . "New" . " " . "</span>" .
-        "<span class='value'>" . $invalid_tweets . "</span>
-      </div>" ;
     $invalid_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_INVALID_TWEET_PATH . "'>" .
       TWITTER_INVALID_TWEET_LABEL ."</a>";
 
     $class = tweets_queue_match_current_path($current_path, TWITTER_ARCHIVED_TWEET_PATH);
-     $archived_tweets_output = "<div class='archived_tweets $class'>
-        <span class='text'>" . TWITTER_ARCHIVED_TWEET_LABEL . " " . "New" . " " . "</span>" .
-        "<span class='value'>" . $archived_tweets . "</span>
-      </div>" ;
     $archived_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_ARCHIVED_TWEET_PATH . "'>" .
       TWITTER_ARCHIVED_TWEET_LABEL ."</a>";
 
@@ -79,12 +67,12 @@ class UsersLeftSideBarBlock extends BlockBase {
     $import_tweets_output = "<div class='import_tweets'>
       <span class='text'>" . $import_tweet_link . "</span></div>" ;
 
-    // $valid_tweets_output = "<div class='valid_tweets'>
-    //   <span class='text'>" . $valid_tweet_link . "</span></div>" ;
-    // $invalid_tweets_output = "<div class='invalid_tweets'>
-    //   <span class='text'>" . $invalid_tweet_link . "</span></div>" ;
-    // $archived_tweets_output = "<div class='archived_tweets'>
-    //   <span class='text'>" . $archived_tweet_link . "</span></div>" ;
+    $valid_tweets_output = "<div class='valid_tweets'>
+      <span class='text'>" . $valid_tweet_link . "</span></div>" ;
+    $invalid_tweets_output = "<div class='invalid_tweets'>
+      <span class='text'>" . $invalid_tweet_link . "</span></div>" ;
+    $archived_tweets_output = "<div class='archived_tweets'>
+      <span class='text'>" . $archived_tweet_link . "</span></div>" ;
     $settings_output = "<div class='settings'>
       <span class='text'>" . TWITTER_SETTINGS_LABEL . "</span></div>" ;
 
