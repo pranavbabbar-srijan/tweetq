@@ -227,8 +227,8 @@ function tweets_queue_user_login_form_changes(&$form) {
     '#markup' => t($url),
     '#weight' => 10,
   );
-  $form['name']['#title'] = 'Email';
-  $form['actions']['submit']['#value'] = 'Sign in';
+  // $form['name']['#title'] = 'Email';
+  // $form['actions']['submit']['#value'] = 'Sign in';
   $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
   $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
   $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .
@@ -679,7 +679,7 @@ function tweets_queue_send_direct_message($message) {
     array(
       'tweet_id' => $tweet_id,
       'weight' => 6,
-      'tweeted' => 1,
+      'tweeted' => 0,
       'first_run' => time(),
       'last_run' => time(),
     ),
@@ -2615,11 +2615,14 @@ function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\For
   }
 
   $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
-  if ($nid) {
-    drupal_set_message(t('Your tweet message "@message" Saved for later tweet.',
-    array('@message' => $message)));
+  if ($nid && $size <= 140) {
+    drupal_set_message(t('Tweet has been moved to valid tweets and saved for later.'));
   }
-  tweets_queue_redirect_on_tweet_save($size);
+  else {
+    drupal_set_message(t('Tweet has been moved to valid tweets and saved for later.'));
+
+  }
+  //tweets_queue_redirect_on_tweet_save($size);
 }
 
 /**
