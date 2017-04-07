@@ -2619,7 +2619,7 @@ function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\For
     drupal_set_message(t('Tweet has been moved to valid tweets and saved for later.'));
   }
   else {
-    drupal_set_message(t('Tweet has been moved to valid tweets and saved for later.'));
+    drupal_set_message(t('Tweet has been moved to invalid tweets and saved for later.'));
 
   }
   //tweets_queue_redirect_on_tweet_save($size);
