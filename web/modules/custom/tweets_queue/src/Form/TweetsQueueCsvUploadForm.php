@@ -163,6 +163,9 @@ class TweetsQueueCsvUploadForm extends FormBase {
         )
       )
     );
+    $_SESSION["valid_import"] = $import_message['valid'];
+    $_SESSION["invalid_import"] = $import_message['invalid']; 
+    $_SESSION["new"] = "New";
   }
 
 }
