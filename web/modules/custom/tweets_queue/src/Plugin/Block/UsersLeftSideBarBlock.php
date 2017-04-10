@@ -20,9 +20,10 @@ class UsersLeftSideBarBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
+ 
   public function build() {
     global $base_url;
-    $_SESSION["new"] = "New";
+    
     $current_path = \Drupal::service('path.current')->getPath();
     $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
     $user_twitter_profile_info = unserialize($twitter_profile_info);
@@ -86,6 +87,7 @@ class UsersLeftSideBarBlock extends BlockBase {
       $invalid_tweets_output . $archived_tweets_output . "</div>";
       unset($_SESSION["valid_import"]);
       unset($_SESSION["invalid_import"]);
+      unset($_SESSION["new"]);
 
     return array(
       '#type' => 'markup',
