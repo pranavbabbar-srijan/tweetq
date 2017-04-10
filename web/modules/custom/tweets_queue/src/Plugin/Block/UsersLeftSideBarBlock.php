@@ -22,6 +22,7 @@ class UsersLeftSideBarBlock extends BlockBase {
    */
   public function build() {
     global $base_url;
+    $_SESSION["new"] = "New";
     $current_path = \Drupal::service('path.current')->getPath();
     $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
     $user_twitter_profile_info = unserialize($twitter_profile_info);
@@ -68,9 +69,13 @@ class UsersLeftSideBarBlock extends BlockBase {
       <span class='text'>" . $import_tweet_link . "</span></div>" ;
 
     $valid_tweets_output = "<div class='valid_tweets'>
-      <span class='text'>" . $valid_tweet_link . "</span></div>" ;
+      <span class='text'>" . $valid_tweet_link . "</span>
+      <span class='value'>" . $_SESSION["new"] . " " . $_SESSION["valid_import"] . "</span></div>" ;
+
     $invalid_tweets_output = "<div class='invalid_tweets'>
-      <span class='text'>" . $invalid_tweet_link . "</span></div>" ;
+      <span class='text'>" . $invalid_tweet_link . "</span>
+      <span class='value'>" . $_SESSION["new"] . " "  . $_SESSION["invalid_import"] . "</span></div>" ;
+
     $archived_tweets_output = "<div class='archived_tweets'>
       <span class='text'>" . $archived_tweet_link . "</span></div>" ;
     $settings_output = "<div class='settings'>
@@ -79,11 +84,15 @@ class UsersLeftSideBarBlock extends BlockBase {
     $output = "<div>" . $twitter_profile_output .
       $create_tweet_output . $import_tweets_output . $valid_tweets_output . 
       $invalid_tweets_output . $archived_tweets_output . "</div>";
+      unset($_SESSION["valid_import"]);
+      unset($_SESSION["invalid_import"]);
 
     return array(
       '#type' => 'markup',
       '#markup' => $output,
     );
+
+  
   }
 
   /**
