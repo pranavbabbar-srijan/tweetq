@@ -29,9 +29,6 @@ class UsersLeftSideBarBlock extends BlockBase {
     $name = $user_twitter_profile_info->name;
     $twitter_handle = $user_twitter_profile_info->screen_name;
     $twitter_handle = (!empty($twitter_handle)) ? '@' . $twitter_handle : '';
-    $valid_tweets = tweets_queue_get_users_total_tweets_count(USERS_VALID_TWEET);
-    $invalid_tweets = tweets_queue_get_users_total_tweets_count(USERS_INVALID_TWEET);
-    $archived_tweets = tweets_queue_get_users_total_tweets_count(USERS_ARCHIVED_TWEET);
 
     $picture = $user_twitter_profile_info->profile_image_url;
     $profile_img = "<img src='" . $picture . "'></img>";
@@ -45,7 +42,6 @@ class UsersLeftSideBarBlock extends BlockBase {
     $create_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_CREATE_TWEET_PATH . "'>" .
       TWITTER_CREATE_TWEET_LABEL ."</a>";
 
-
     $class = tweets_queue_match_current_path($current_path, TWITTER_IMPORT_TWEET_PATH);
     $import_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_IMPORT_TWEET_PATH . "'>" .
       TWITTER_IMPORT_TWEET_LABEL ."</a>";
@@ -53,7 +49,6 @@ class UsersLeftSideBarBlock extends BlockBase {
     $class = tweets_queue_match_current_path($current_path, TWITTER_VALID_TWEET_PATH);
     $valid_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_VALID_TWEET_PATH . "'>" .
       TWITTER_VALID_TWEET_LABEL ."</a>";
-
     $class = tweets_queue_match_current_path($current_path, TWITTER_INVALID_TWEET_PATH);
     $invalid_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_INVALID_TWEET_PATH . "'>" .
       TWITTER_INVALID_TWEET_LABEL ."</a>";
@@ -77,7 +72,7 @@ class UsersLeftSideBarBlock extends BlockBase {
       <span class='text'>" . TWITTER_SETTINGS_LABEL . "</span></div>" ;
 
     $output = "<div>" . $twitter_profile_output .
-      $create_tweet_output . $import_tweets_output . $valid_tweets_output . 
+      $create_tweet_output . $import_tweets_output . $valid_tweets_output .
       $invalid_tweets_output . $archived_tweets_output . "</div>";
 
     return array(
