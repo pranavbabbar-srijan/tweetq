@@ -682,6 +682,7 @@ body {
   .user-logged-in .block-users-archived-tweets-block, .user-logged-in .block-users-all-tweets-block,
   .user-logged-in .block-users-tweeted-tweets-block {
     padding: 1em;
+    top: 79px;
     margin-left: 10px;
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
     /*IE 8*/
@@ -798,7 +799,8 @@ body {
         .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li {
           width: 12.5%;
           margin-left: 0;
-          margin-bottom: 20px; }
+          margin-bottom: 20px;
+          word-wrap: break-word; }
           .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:first-child, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:first-child,
           .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:first-child, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:first-child,
           .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:first-child {
@@ -951,7 +953,7 @@ body {
     .user-logged-in .block-users-archived-tweets-block .item-list .header li:first-child, .user-logged-in .block-users-all-tweets-block .item-list .header li:first-child, .user-logged-in .block-users-tweeted-tweets-block .item-list .header li:first-child {
       width: 40%; }
     .user-logged-in .block-users-archived-tweets-block .item-list .header li:last-child, .user-logged-in .block-users-all-tweets-block .item-list .header li:last-child, .user-logged-in .block-users-tweeted-tweets-block .item-list .header li:last-child {
-      padding-left: 2.5em; }
+      padding-left: 2em; }
   .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li, .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li {
     width: 10.8%; }
     .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:first-child, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:first-child, .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:first-child {
@@ -964,23 +966,26 @@ body {
       width: 10%;
       padding-left: inherit; }
     .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(6), .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(6), .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(6) {
-      width: 10%; }
+      width: 10%;
+      padding-left: 9px; }
   .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li, .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li {
     width: 10.8%; }
     .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:first-child, .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:first-child {
       width: 40%;
       padding-right: 3em; }
     .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(2), .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(2) {
-      padding: 0 6px; }
+      padding: 0 1px; }
     .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(5), .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
       width: 10%;
       padding-left: inherit; }
     .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(7), .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(7) {
       width: 5%;
       text-align: right;
-      padding-right: 10px; }
+      padding-right: 0;
+      padding-left: 44px; }
     .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(8), .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(8) {
-      width: 5%; }
+      width: 5%;
+      padding-left: 30px; }
   .user-logged-in #header {
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
     /*IE 8*/
@@ -1190,7 +1195,8 @@ body {
   margin-left: 10px; }
 
 .toolbar-fixed.user-logged-in .block-users-archived-tweets-block, .toolbar-fixed.user-logged-in .block-users-valid-tweets-block, .toolbar-fixed.user-logged-in .block-users-in-valid-tweets-block {
-  margin-left: 10px; }
+  margin-left: 10px;
+  top: 79px; }
 
 .block-non-twitter-users-left-side-bar-block .non-twitter-profile span.img {
   background: #E7E8E9; }
