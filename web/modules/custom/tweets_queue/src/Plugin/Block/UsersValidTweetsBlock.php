@@ -103,7 +103,8 @@ class UsersValidTweetsBlock extends BlockBase {
     $data['message'] = $row->message;
     $data['size'] = $row->size;
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->created);
-    $changed = ($row->{TWITTER_FIELD_CHANGED}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED}) : '';
+
+    $changed = ($row->{TWITTER_FIELD_CHANGED}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED}) : '-';
     $data['changed'] = $changed;
     //$data['changed'] = date(TWITTER_DATE_FORMAT, $row->changed);
     $data['edit_link'] = $edit_url_link ;
