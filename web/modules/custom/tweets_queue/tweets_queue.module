@@ -1866,7 +1866,7 @@ function tweets_queue_insert_message_queue_record($twitter_message_info, $status
   $twitter_message_info['last_run'] = 0;
   $twitter_message_info['archived'] = 0;
   $twitter_message_info['weight'] = 1;
-  $twitter_message_info['changed'] = $twitter_message_info['created'];
+  $twitter_message_info['changed'] = 0;
   $nid = db_insert(TWITTER_MESSAGE_QUEUE_TABLE)
     ->fields($twitter_message_info)
     ->execute();
