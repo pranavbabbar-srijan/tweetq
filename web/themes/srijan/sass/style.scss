@@ -329,7 +329,7 @@ body {
 	background: rgba(255,255,255,.8);
 	padding: 2em 2em 8em;
 	@include border-radius(6px);
-	width: 57%;
+	width: 360px;
 	float: right;
 	margin-top: 10vh;
 	position: relative;
@@ -363,7 +363,7 @@ body {
 	.form-item-name {
 		margin-bottom: 2.5em;
 	}
-	input[type=submit] {
+	input[type=submit], #forgot-password-submit, #forgot-password-cancel {
 		border: none;
 		background: $login-btn;
 		width: 100%;
@@ -385,6 +385,51 @@ body {
 		font-size: 14px;
 		margin-top: .5em;
 		display: block;
+	}
+	#forgot-password {
+		text-align: center;
+		cursor: pointer;
+		color: $twitter;
+		font-size: 14px;
+		display: block;
+	}
+}
+
+#forgot-password-section {
+	font-size: 22px;
+	text-align: center;
+	font-weight: 300;
+	margin-bottom: -4.5em;
+	.signup {
+		margin-top: 10px;
+		font-size: 16px;
+		color: $gray;
+		font-weight: normal;
+		margin-bottom: 6em;
+	}
+	.form-item-email {
+		label {
+			text-align: left;
+			font-weight: bold;
+		}
+		input {
+			border: 0;
+			background: none;
+			outline: none;
+			border-bottom: 1px solid rgba(0,0,0,.3);
+			display: block;
+			width: 100%;
+		}
+	}
+	#forgot-password-submit {
+		font-weight: normal;
+		cursor: pointer;
+		margin-top: 50px;
+	}
+	#forgot-password-cancel {
+		font-weight: normal;
+		background: #f56a6a;
+		cursor: pointer;
 	}
 }
 
