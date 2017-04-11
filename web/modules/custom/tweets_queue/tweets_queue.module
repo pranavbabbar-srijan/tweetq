@@ -17,6 +17,10 @@ use Drupal\Core\Url;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
+
 const CONSUMER_KEY = 'consumer_key';
 const CONSUMER_SECRET_KEY = 'consumer_secret_key';
 const ACCESS_TOKEN = 'access_token';
@@ -1105,8 +1109,14 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_USERS_COUNTER);
       $uid = $entity->get('uid')->value;
       $name = $entity->get('name')->value;
+
+      $full_name = $entity->get(SIGNUP_FIELD_FULL_NAME)->value;
+      $mail = $entity->get('mail')->value;
+      tweets_queue_signup_send_mail($mail, $full_name);
+
       $twitter_owner_id = $entity->get(SIGNUP_FIELD_TWITTER_OWNER_ID)->value;
       $twitter_data = $entity->get(SIGNUP_FIELD_TWITTER_DATA)->value;
+
       if ($twitter_owner_id) {
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_APPROVED_CLIENT_ROLE);
@@ -1141,6 +1151,57 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         tweets_queue_update_priority_info($entity->id(), $priority_info);
       }
   }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function tweets_queue_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+  switch ($key) {
+    case 'user_signup_mail':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = Html::escape($params['message']);
+      break;
+  }
+}
+
+/**
+ * Send mail on registration.
+ *
+ * @param string $mail
+ *   Valid email address.
+ * @param strng $name
+ *   Full name of the user.
+ */
+function tweets_queue_signup_send_mail($mail, $name) {
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'user_signup_mail'; // Replace with Your key
+  $to = $mail;
+  $message = t("Dear @full_name\n,
+Welcome to Barbet!\n
+You have successfully signed up with Barbet App. Kindly login to the app and connect with your twitter Details to start using Barbet.", array('@full_name' => $name));
+  $params['message'] = $message;
+  $params['title'] = 'barbet registration';
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    $message = t('There was a problem sending your email notification to @email.', array('@email' => $to));
+    drupal_set_message($message, 'error');
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  else {
+    $message = t('An email notification has been sent to @email ', array('@email' => $to));
+    drupal_set_message($message);
+  }
+  \Drupal::logger('mail-log')->notice($message);
 }
 
 /**
