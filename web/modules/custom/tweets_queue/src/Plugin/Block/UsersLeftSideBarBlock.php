@@ -66,11 +66,11 @@ class UsersLeftSideBarBlock extends BlockBase {
 
     $valid_tweets_output = "<div class='valid_tweets'>
       <span class='text'>" . $valid_tweet_link . "</span>
-      <span class='value'>" . $_SESSION["new"] . " " . $_SESSION["valid_import"] . "</span></div>" ;
+      <span class='value'>" . $_SESSION["new"] . "<b>" . $_SESSION["valid_import"] . "</b></span></div>" ;
 
     $invalid_tweets_output = "<div class='invalid_tweets'>
       <span class='text'>" . $invalid_tweet_link . "</span>
-      <span class='value'>" . $_SESSION["new"] . " "  . $_SESSION["invalid_import"] . "</span></div>" ;
+      <span class='value'>" . $_SESSION["new"] . "<b>"  . $_SESSION["invalid_import"] . "</b></span></div>" ;
 
     $archived_tweets_output = "<div class='archived_tweets'>
       <span class='text'>" . $archived_tweet_link . "</span></div>" ;

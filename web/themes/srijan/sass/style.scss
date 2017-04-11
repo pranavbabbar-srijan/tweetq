@@ -711,14 +711,15 @@ body {
 						}
 						&:nth-child(2) {
 							width: 6%;
-							padding: 0 6px;
+							padding: 0 1px;
 						}
 						&:nth-child(5) {
 							width: 6.25%;
-							padding-left: 2em;
+							padding-left: 2.5em;
 						}
 						&:nth-child(6) {
 							width: 6.25%;
+							padding-left: 8px;
 						}
 						a {
 							color: $twitter;
@@ -830,6 +831,13 @@ body {
 			}
 		}
 	}
+	.block-users-archived-tweets-block {
+		.item-list {
+			+ .item-list ul ul li:last-child {
+				padding-left: 50px;
+			}
+		}
+	}
 	.block-users-archived-tweets-block, .block-users-all-tweets-block, .block-users-tweeted-tweets-block {
 		.item-list {
 			.header {
@@ -854,7 +862,7 @@ body {
 						}
 						&:nth-child(2) {
 							width: 6%;
-							padding: 0 6px;
+							padding: 0 1px;
 						}
 						&:nth-child(5) {
 							width: 10%;
@@ -1204,6 +1212,35 @@ body {
 				text-decoration: none;
 				&:hover, &.active {
 					color: $dark;
+				}
+			}
+			span.value {
+				font-size: 13px;
+			    float: right;
+			    font-style: italic;
+			    b {
+			    	margin-left: 10px;
+				    border: 1px solid;
+				    padding: 1px 10px;
+				    font-style: normal;
+				    border-radius: 10px;
+				    &:empty {
+				    	@extend %none;
+				    }
+			    }
+			}
+			&.valid_tweets {
+				.value {
+					b {
+						color: $login-btn;
+					}
+				}
+			}
+			&.invalid_tweets {
+				.value {
+					b {
+						color: #f56a6a;
+					}
 				}
 			}
 			&:last-child {
@@ -1735,4 +1772,6 @@ body {
 
 .send-tweets-form, .-form-tweets-queue-csv-upload {
 	padding-top: 8px;
+	margin-top: 80px;
+    width: 99.9%;
 }

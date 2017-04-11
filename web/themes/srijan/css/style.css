@@ -121,7 +121,7 @@ button {
 /* ================================= Offset-Span ================================= */
 /* ================================= Clearfix ================================= */
 /* ================================= Media Query Breakpoint ================================= */
-#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .block-users-left-side-bar-block .profile ~ div span.value b:empty, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
   display: none; }
 
 .block-users-dashboard-header-block .profile + a:before, .block-users-dashboard-header-profile-block .profile + a:before, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .region-content .messages--error div[role=alert]:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
@@ -810,16 +810,17 @@ body {
           .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(2), .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(2),
           .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(2) {
             width: 6%;
-            padding: 0 6px; }
+            padding: 0 1px; }
           .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(5), .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(5),
           .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5), .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(5),
           .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
             width: 6.25%;
-            padding-left: 2em; }
+            padding-left: 2.5em; }
           .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6), .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6),
           .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(6), .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(6),
           .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(6) {
-            width: 6.25%; }
+            width: 6.25%;
+            padding-left: 8px; }
           .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li a, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li a,
           .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li a, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li a,
           .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li a {
@@ -947,6 +948,8 @@ body {
             .user-logged-in .block-users-tweeted-tweets-block .pager li.pager__item--last a:before {
               content: "\f101";
               font: normal normal normal 16px/1 FontAwesome; }
+  .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:last-child {
+    padding-left: 50px; }
   .user-logged-in .block-users-archived-tweets-block .item-list .header li, .user-logged-in .block-users-all-tweets-block .item-list .header li, .user-logged-in .block-users-tweeted-tweets-block .item-list .header li {
     width: 10.8%;
     margin-left: 0; }
@@ -961,7 +964,7 @@ body {
       padding-right: 3em; }
     .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(2), .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(2), .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(2) {
       width: 6%;
-      padding: 0 6px; }
+      padding: 0 1px; }
     .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5), .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(5), .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
       width: 10%;
       padding-left: inherit; }
@@ -1261,6 +1264,20 @@ body {
         text-decoration: none; }
         .block-users-left-side-bar-block .profile ~ div a:hover, .block-users-left-side-bar-block .profile ~ div a.active, .block-users-left-side-bar-block .non-twitter-profile ~ div a:hover, .block-users-left-side-bar-block .non-twitter-profile ~ div a.active, .block-non-twitter-users-left-side-bar-block .profile ~ div a:hover, .block-non-twitter-users-left-side-bar-block .profile ~ div a.active, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a:hover, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a.active {
           color: #212121; }
+      .block-users-left-side-bar-block .profile ~ div span.value, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value {
+        font-size: 13px;
+        float: right;
+        font-style: italic; }
+        .block-users-left-side-bar-block .profile ~ div span.value b, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b {
+          margin-left: 10px;
+          border: 1px solid;
+          padding: 1px 10px;
+          font-style: normal;
+          border-radius: 10px; }
+      .block-users-left-side-bar-block .profile ~ div.valid_tweets .value b, .block-users-left-side-bar-block .non-twitter-profile ~ div.valid_tweets .value b, .block-non-twitter-users-left-side-bar-block .profile ~ div.valid_tweets .value b, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.valid_tweets .value b {
+        color: #96c85a; }
+      .block-users-left-side-bar-block .profile ~ div.invalid_tweets .value b, .block-users-left-side-bar-block .non-twitter-profile ~ div.invalid_tweets .value b, .block-non-twitter-users-left-side-bar-block .profile ~ div.invalid_tweets .value b, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.invalid_tweets .value b {
+        color: #f56a6a; }
       .block-users-left-side-bar-block .profile ~ div:last-child, .block-users-left-side-bar-block .non-twitter-profile ~ div:last-child, .block-non-twitter-users-left-side-bar-block .profile ~ div:last-child, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div:last-child {
         padding-bottom: 2em; }
   .block-users-left-side-bar-block .import_tweets, .block-non-twitter-users-left-side-bar-block .import_tweets {
@@ -1736,4 +1753,6 @@ body {
     margin-top: -102px; }
 
 .send-tweets-form, .-form-tweets-queue-csv-upload {
-  padding-top: 8px; }
+  padding-top: 8px;
+  margin-top: 80px;
+  width: 99.9%; }
