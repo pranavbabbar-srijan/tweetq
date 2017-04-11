@@ -711,14 +711,15 @@ body {
 						}
 						&:nth-child(2) {
 							width: 6%;
-							padding: 0 6px;
+							padding: 0 1px;
 						}
 						&:nth-child(5) {
 							width: 6.25%;
-							padding-left: 2em;
+							padding-left: 2.5em;
 						}
 						&:nth-child(6) {
 							width: 6.25%;
+							padding-left: 8px;
 						}
 						a {
 							color: $twitter;
@@ -830,6 +831,13 @@ body {
 			}
 		}
 	}
+	.block-users-archived-tweets-block {
+		.item-list {
+			+ .item-list ul ul li:last-child {
+				padding-left: 50px;
+			}
+		}
+	}
 	.block-users-archived-tweets-block, .block-users-all-tweets-block, .block-users-tweeted-tweets-block {
 		.item-list {
 			.header {
@@ -854,7 +862,7 @@ body {
 						}
 						&:nth-child(2) {
 							width: 6%;
-							padding: 0 6px;
+							padding: 0 1px;
 						}
 						&:nth-child(5) {
 							width: 10%;
