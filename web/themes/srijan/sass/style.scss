@@ -302,7 +302,8 @@ body {
 				content: $icon-error;
 				position: absolute;
 			    top: 16px;
-			    margin-left: -20px;
+			    margin-left: -25px;
+			    font-size: 20px;
 			}
 		}
 	}
@@ -310,6 +311,9 @@ body {
 .block-system-main-block {
 	+ .messages--error {
 		display: block;
+		width: 74vw;
+		background: white;
+		color: #f56a6a;
 	}
 }
 
@@ -1677,7 +1681,7 @@ body {
 		position: relative;
 		+ .create-header {
 			margin-top: 0;
-			overflow: hidden;
+			// overflow: hidden;
 			background: white;
 			padding: 1em;
 			min-height: 133px;
@@ -1710,10 +1714,14 @@ body {
 			@extend %none;
 		}
 		.messages--error {
-			margin-top: -10px;
-		    margin-left: -2px;
-		    width: 97%;
 		    display: block;
+		    margin-top: 115px;
+		    background: white;
+		    left: -1.9vw;
+		    width: 74vw;
+		    position: absolute;
+		    color: #f56a6a;
+		    font-size: 18px;
 		}
 		#ajax-wrapper {
 			height: 40px;
@@ -1778,6 +1786,11 @@ body {
 }
 
 // colorbox theming.
+#colorbox, #cboxWrapper {
+	width: 100% !important;
+	max-width: 600px;
+	height: 100% !important;
+}
 #cboxOverlay {
 	opacity: .65 !important;
 }

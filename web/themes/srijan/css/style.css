@@ -418,10 +418,14 @@ body {
       content: "";
       position: absolute;
       top: 16px;
-      margin-left: -20px; }
+      margin-left: -25px;
+      font-size: 20px; }
 
 .block-system-main-block + .messages--error {
-  display: block; }
+  display: block;
+  width: 74vw;
+  background: white;
+  color: #f56a6a; }
 
 .path-frontpage .site-branding__slogan {
   display: block; }
@@ -1666,7 +1670,6 @@ body {
     position: relative; }
     .-form-tweets-queue-csv-upload > .create-header + .create-header {
       margin-top: 0;
-      overflow: hidden;
       background: white;
       padding: 1em;
       min-height: 133px;
@@ -1697,10 +1700,14 @@ body {
       text-transform: capitalize;
       color: rgba(0, 0, 0, 0.2); }
     .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error {
-      margin-top: -10px;
-      margin-left: -2px;
-      width: 97%;
-      display: block; }
+      display: block;
+      margin-top: 115px;
+      background: white;
+      left: -1.9vw;
+      width: 74vw;
+      position: absolute;
+      color: #f56a6a;
+      font-size: 18px; }
     .-form-tweets-queue-csv-upload .js-form-managed-file #ajax-wrapper {
       height: 40px;
       overflow: hidden; }
@@ -1762,6 +1769,11 @@ body {
     position: relative;
     top: -30px;
     left: 90px; }
+
+#colorbox, #cboxWrapper {
+  width: 100% !important;
+  max-width: 600px;
+  height: 100% !important; }
 
 #cboxOverlay {
   opacity: .65 !important; }
