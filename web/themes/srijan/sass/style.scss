@@ -1544,6 +1544,7 @@ body {
 				    border-bottom: 1px solid #bfbfbf;
 				    font-size: 12px;
 				    word-break: break-word;
+				    width: 100%;
 				}
 				&.message_history_count {
 					display: block;
@@ -1572,7 +1573,7 @@ body {
 }
 .send-tweets-form, .tweets-queue-tweet-form  {
 	// overflow: hidden;
-	margin-top: 80px;
+	// margin-top: 80px;
 	padding-top: 5px;
 	label {
 		@extend %none;
@@ -1825,6 +1826,6 @@ body {
 
 .send-tweets-form, .-form-tweets-queue-csv-upload {
 	padding-top: 8px;
-	margin-top: 80px;
+	// margin-top: 80px;
     width: 99.9%;
 }
