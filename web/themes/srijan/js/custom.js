@@ -40,10 +40,29 @@
 	        }
 	    });
 
+	    var showChar = 95;
+	    var moretext = "...";
+	    var lesstext = "Less";
+
+	    $('.notifications .notification-message-list > div span.message').each(function() {
+	        var content = $(this).html();
+
+	        if(content.length > showChar) {
+
+	            var c = content.substr(0, showChar);
+	            var h = content.substr(showChar, content.length - showChar);
+	            var html = c + '<span class="morecontent"><span>' + h + '</span></span><span class="ellipsis">' + moretext + '</span>';
+	            $(this).html(html);
+	        }
+	    });
+
 	    if($('#block-signinwithtwitterblock').length > 0){
 	    	$('body').addClass('signinwithtwitterblock');
 		}
-		$('.no-tweet-found').parents().find('#block-usersalltweetsblock').addClass('no-tweet-found');
+
+		if ($('div').hasClass('no-tweet-found')) {
+		    $('body').addClass('no-tweet');
+		}
 	    
 	    $(".morelink").click(function(){
 	        if($(this).hasClass("less")) {
@@ -140,10 +159,6 @@
 		    left: x + 'px'
 		  }).addClass("rippleEffect");
 		});
-		if ($('.notifications .notification-message-list > div span.message').html().length > 92);
-		var text = $('.notifications .notification-message-list > div span.message').text();
-		text = text.substr(0,92) + '...';
-		$('.notifications .notification-message-list > div span.message').text(text);
 	});
 
 })(jQuery);
