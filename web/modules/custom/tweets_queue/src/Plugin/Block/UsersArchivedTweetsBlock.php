@@ -25,9 +25,9 @@ class UsersArchivedTweetsBlock extends BlockBase {
     global $base_url;
     $uid = \Drupal::currentUser()->id();
 
-    $current_filter = (isset($_GET['filter'])) ? $_GET['filter'] : TWITTER_FIELD_CHANGED;
-    $current_filter_order = (isset($_GET['order'])) ? $_GET['order'] : 'DESC';
-    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : 'DESC';
+    $current_filter = (isset($_GET['filter'])) ? $_GET['filter'] : TWITTER_DEFAULT_SORT_FIELD;
+    $current_filter_order = (isset($_GET['order'])) ? $_GET['order'] : TWITTER_DEFAULT_SORT_ORDER;
+    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : TWITTER_DEFAULT_NEW_SORT_ORDER;
 
     $created_sort_link = tweets_queue_generate_filter(TWITTER_ARCHIVED_TWEETS_ROUTE_NAME,
       TWITTER_FIELD_CREATED, $current_filter, $new_filter_order);
