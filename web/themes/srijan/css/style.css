@@ -459,6 +459,8 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     display: block;
     width: 100%; }
+    .user-login-form input[type=text].error, .user-login-form input[type=password].error {
+      border-color: #e74c3c; }
   .user-login-form label {
     color: #979797;
     margin-bottom: .5em;
@@ -497,6 +499,9 @@ body {
     color: #2aa9e0;
     font-size: 14px;
     display: block; }
+
+.path-frontpage .region-content .messages--error {
+  display: block; }
 
 #forgot-password-section {
   font-size: 22px;
