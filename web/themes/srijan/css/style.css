@@ -1537,7 +1537,8 @@ body {
           padding: 10px 0;
           border-bottom: 1px solid #bfbfbf;
           font-size: 12px;
-          word-break: break-word; }
+          word-break: break-word;
+          width: 100%; }
         .notifications .notification-message-list > div span.message_history_count {
           display: block;
           border-bottom: 1px solid #979797;
@@ -1555,7 +1556,6 @@ body {
   width: 69%; }
 
 .send-tweets-form, .tweets-queue-tweet-form {
-  margin-top: 80px;
   padding-top: 5px; }
   .send-tweets-form .create-header, .send-tweets-form .edit-tweet, .tweets-queue-tweet-form .create-header, .tweets-queue-tweet-form .edit-tweet {
     background: #FCFCFC;
@@ -1796,5 +1796,4 @@ body {
 
 .send-tweets-form, .-form-tweets-queue-csv-upload {
   padding-top: 8px;
-  margin-top: 80px;
   width: 99.9%; }
