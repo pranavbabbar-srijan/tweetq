@@ -1097,6 +1097,11 @@ body {
     transform: scale(2);
     opacity: 0; } }
 
+.no-tweet .block-users-valid-tweets-block, .no-tweet .block-users-in-valid-tweets-block,
+.no-tweet .block-users-archived-tweets-block, .no-tweet .block-users-all-tweets-block,
+.no-tweet .block-users-tweeted-tweets-block {
+  margin-top: 20px; }
+
 .no-tweet-found {
   font-size: 48px;
   text-align: center;

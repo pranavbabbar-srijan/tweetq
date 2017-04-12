@@ -1045,6 +1045,13 @@ body {
 
 
 // No tweet page.
+.no-tweet {
+	.block-users-valid-tweets-block, .block-users-in-valid-tweets-block,
+	.block-users-archived-tweets-block, .block-users-all-tweets-block,
+	.block-users-tweeted-tweets-block {
+		margin-top: 20px;
+	}
+}
 .no-tweet-found {
 	font-size: 48px;
 	text-align: center;
