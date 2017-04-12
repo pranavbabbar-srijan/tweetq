@@ -139,6 +139,10 @@
 		    left: x + 'px'
 		  }).addClass("rippleEffect");
 		});
+		if ($('.notifications .notification-message-list > div span.message').html().length > 92);
+		var text = $('.notifications .notification-message-list > div span.message').text();
+		text = text.substr(0,92) + '...';
+		$('.notifications .notification-message-list > div span.message').text(text);
 	});
 
 })(jQuery);
