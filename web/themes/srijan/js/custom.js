@@ -43,7 +43,8 @@
 	    if($('#block-signinwithtwitterblock').length > 0){
 	    	$('body').addClass('signinwithtwitterblock');
 		}
-
+		$('.no-tweet-found').parents().find('#block-usersalltweetsblock').addClass('no-tweet-found');
+	    
 	    $(".morelink").click(function(){
 	        if($(this).hasClass("less")) {
 	            $(this).removeClass("less");
