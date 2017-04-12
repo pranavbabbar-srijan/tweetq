@@ -351,6 +351,9 @@ body {
 		border-bottom: 1px solid rgba(0,0,0,.3);
 		display: block;
 		width: 100%;
+		&.error {
+			border-color: #e74c3c;
+		}
 	}
 	.description {
 		@extend %none;
@@ -397,6 +400,10 @@ body {
 		font-size: 14px;
 		display: block;
 	}
+}
+
+.path-frontpage .region-content .messages--error {
+	display: block;
 }
 
 #forgot-password-section {
