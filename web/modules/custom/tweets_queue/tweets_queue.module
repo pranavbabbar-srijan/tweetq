@@ -668,8 +668,10 @@ function tweets_queue_send_direct_message($message) {
     'uid' => $uid,
     'size' => $size,
   );
+  
   if (!$tweet_id) {
-    drupal_set_message(t('Message was not sent.'));
+    drupal_set_message(t('Your tweet message "@message" already exists.',
+    array('@message' => $message)));
     return;
   }
   tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
