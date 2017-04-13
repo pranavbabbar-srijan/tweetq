@@ -69,7 +69,7 @@ class UsersValidTweetsBlock extends BlockBase {
 
       $build['valid_tweets'] = array(
         '#theme' => 'item_list',
-        '#items' => $rows
+        '#items' => $rows,
       );
 
       $build['pager'] = array(
@@ -100,7 +100,7 @@ class UsersValidTweetsBlock extends BlockBase {
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
 
     $data = array();
-    $data['message'] = $row->message;
+    $data['message'] = tweets_queue_perform_hashtag_highlight($row->message);
     $data['size'] = $row->size;
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->created);
 

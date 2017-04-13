@@ -103,7 +103,7 @@ class UsersInValidTweetsBlock extends BlockBase {
 
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();
-    $data['message'] = $row->{TWITTER_FIELD_MESSAGE};
+    $data['message'] = tweets_queue_perform_hashtag_highlight($row->{TWITTER_FIELD_MESSAGE});
     $data['size'] = $row->{TWITTER_FIELD_SIZE};
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CREATED});
 
