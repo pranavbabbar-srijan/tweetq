@@ -121,7 +121,7 @@ button {
 /* ================================= Offset-Span ================================= */
 /* ================================= Clearfix ================================= */
 /* ================================= Media Query Breakpoint ================================= */
-#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .block-users-left-side-bar-block .profile ~ div span.value b:empty, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-frontpage .messages--error a, .path-frontpage .messages--error div[role="alert"]:before, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .block-users-left-side-bar-block .profile ~ div span.value b:empty, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
   display: none; }
 
 .block-users-dashboard-header-block .profile + a:before, .block-users-dashboard-header-profile-block .profile + a:before, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .region-content .messages--error div[role=alert]:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
@@ -418,10 +418,14 @@ body {
       content: "";
       position: absolute;
       top: 16px;
-      margin-left: -20px; }
+      margin-left: -25px;
+      font-size: 20px; }
 
 .block-system-main-block + .messages--error {
-  display: block; }
+  display: block;
+  width: 74vw;
+  background: white;
+  color: #f56a6a; }
 
 .path-frontpage .site-branding__slogan {
   display: block; }
@@ -438,7 +442,7 @@ body {
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
   border-radius: 6px;
-  width: 57%;
+  width: 360px;
   float: right;
   margin-top: 10vh;
   position: relative; }
@@ -448,13 +452,15 @@ body {
     color: #212121;
     text-align: center;
     margin: 0 0 1.5em 0; }
-  .user-login-form input[type=text], .user-login-form input[type=password] {
+  .user-login-form input[type=text], .user-login-form input[type=password], .user-login-form input[type=email] {
     border: 0;
     background: none;
     outline: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     display: block;
     width: 100%; }
+    .user-login-form input[type=text].error, .user-login-form input[type=password].error, .user-login-form input[type=email].error {
+      border-color: #e74c3c; }
   .user-login-form label {
     color: #979797;
     margin-bottom: .5em;
@@ -462,7 +468,7 @@ body {
     font-size: 16px; }
   .user-login-form .form-item-name {
     margin-bottom: 2.5em; }
-  .user-login-form input[type=submit] {
+  .user-login-form input[type=submit], .user-login-form #forgot-password-submit, .user-login-form #forgot-password-cancel {
     border: none;
     background: #96c85a;
     width: 100%;
@@ -487,6 +493,53 @@ body {
     font-size: 14px;
     margin-top: .5em;
     display: block; }
+  .user-login-form #forgot-password {
+    text-align: center;
+    cursor: pointer;
+    color: #2aa9e0;
+    font-size: 14px;
+    display: block; }
+
+.path-frontpage .messages--error {
+  display: block;
+  background: none;
+  margin: 0;
+  box-shadow: none;
+  padding-left: 24px;
+  padding-right: 0;
+  padding-top: 5px;
+  color: #e74c3c;
+  font-size: 14px; }
+
+#forgot-password-section {
+  font-size: 22px;
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: -4.5em; }
+  #forgot-password-section .signup {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #979797;
+    font-weight: normal;
+    margin-bottom: 6em; }
+  #forgot-password-section .form-item-email label {
+    text-align: left;
+    font-weight: bold; }
+  #forgot-password-section .form-item-email input {
+    border: 0;
+    background: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    display: block;
+    width: 100%; }
+  #forgot-password-section #forgot-password-submit {
+    font-weight: normal;
+    cursor: pointer;
+    margin-top: 50px; }
+  #forgot-password-section #forgot-password-cancel {
+    font-weight: normal;
+    background: #f56a6a;
+    cursor: pointer; }
 
 .twitter-btn {
   position: absolute;
@@ -806,6 +859,11 @@ body {
           .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:first-child {
             width: 50%;
             padding-right: 3em; }
+            .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:first-child b, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:first-child b,
+            .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:first-child b, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:first-child b,
+            .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:first-child b {
+              color: #2aa9e0;
+              font-weight: normal; }
           .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(2), .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(2),
           .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(2), .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(2),
           .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(2) {
@@ -1060,6 +1118,11 @@ body {
   100% {
     transform: scale(2);
     opacity: 0; } }
+
+.no-tweet .block-users-valid-tweets-block, .no-tweet .block-users-in-valid-tweets-block,
+.no-tweet .block-users-archived-tweets-block, .no-tweet .block-users-all-tweets-block,
+.no-tweet .block-users-tweeted-tweets-block {
+  margin-top: 20px; }
 
 .no-tweet-found {
   font-size: 48px;
@@ -1450,9 +1513,9 @@ body {
     float: right;
     position: absolute;
     margin-top: 20px;
-    left: -80px;
+    left: -100px;
     top: 28px;
-    width: 200px;
+    width: 230px;
     background: white;
     font-size: 12px;
     color: #979797;
@@ -1470,12 +1533,12 @@ body {
     .notifications .notification-message-list::-webkit-scrollbar {
       width: 6px; }
     .notifications .notification-message-list::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6); }
     .notifications .notification-message-list::-webkit-scrollbar-thumb {
       background-color: darkgrey;
       outline: 1px solid slategrey; }
     .notifications .notification-message-list.active {
-      height: 500px;
+      height: 360px;
       padding: 1em;
       visibility: inherit; }
     .notifications .notification-message-list > div {
@@ -1488,19 +1551,25 @@ body {
         color: #212121;
         position: fixed; }
       .notifications .notification-message-list > div:nth-child(2) {
-        margin-top: 20px; }
+        margin-top: 27px; }
       .notifications .notification-message-list > div span {
         font-size: 10px; }
+        .notifications .notification-message-list > div span.state {
+          color: #212121; }
+        .notifications .notification-message-list > div span.time {
+          font-style: italic; }
         .notifications .notification-message-list > div span.message {
           display: table;
           color: #212121;
           padding: 10px 0;
           border-bottom: 1px solid #bfbfbf;
-          font-size: 12px; }
+          font-size: 12px;
+          word-break: break-word;
+          width: 100%; }
         .notifications .notification-message-list > div span.message_history_count {
           display: block;
           border-bottom: 1px solid #979797;
-          width: 194px;
+          width: 224px;
           position: relative;
           left: -12px;
           top: -12px;
@@ -1619,7 +1688,6 @@ body {
     position: relative; }
     .-form-tweets-queue-csv-upload > .create-header + .create-header {
       margin-top: 0;
-      overflow: hidden;
       background: white;
       padding: 1em;
       min-height: 133px;
@@ -1650,10 +1718,14 @@ body {
       text-transform: capitalize;
       color: rgba(0, 0, 0, 0.2); }
     .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error {
-      margin-top: -10px;
-      margin-left: -2px;
-      width: 97%;
-      display: block; }
+      display: block;
+      margin-top: 115px;
+      background: white;
+      left: -1.9vw;
+      width: 74vw;
+      position: absolute;
+      color: #f56a6a;
+      font-size: 18px; }
     .-form-tweets-queue-csv-upload .js-form-managed-file #ajax-wrapper {
       height: 40px;
       overflow: hidden; }
@@ -1670,7 +1742,7 @@ body {
     position: relative;
     padding-right: 8px; }
     .-form-tweets-queue-csv-upload .file--mime-text-csv + .form-submit {
-      background: none;
+      background: white;
       color: #2aa9e0;
       margin-right: 0;
       border: 1px solid;
@@ -1683,7 +1755,11 @@ body {
       -o-border-radius: 3px;
       border-radius: 3px;
       text-decoration: none;
-      text-align: center; }
+      text-align: center;
+      z-index: 1;
+      position: relative;
+      margin-left: -2px;
+      width: 100px; }
     .-form-tweets-queue-csv-upload .file--mime-text-csv a {
       color: #212121;
       text-decoration: none; }
@@ -1714,7 +1790,18 @@ body {
   .-form-tweets-queue-csv-upload .ajax-progress-throbber {
     position: relative;
     top: -30px;
-    left: 90px; }
+    left: 175px; }
+    .-form-tweets-queue-csv-upload .ajax-progress-throbber .throbber {
+      padding: 1px 6px 1px; }
+
+#colorbox, #cboxWrapper, #cboxContent, #cboxLoadedContent {
+  width: 100% !important;
+  max-width: 350px;
+  height: 210px !important; }
+
+#colorbox {
+  top: 24% !important;
+  left: 36% !important; }
 
 #cboxOverlay {
   opacity: .65 !important; }
@@ -1723,7 +1810,8 @@ body {
   padding: 1em 2em;
   margin-bottom: 0; }
   #cboxLoadedContent .region-content {
-    margin-top: 0; }
+    margin-top: 0;
+    max-width: 300px; }
   #cboxLoadedContent #main-wrapper {
     padding-top: 0; }
   #cboxLoadedContent .main-content {
@@ -1754,5 +1842,4 @@ body {
 
 .send-tweets-form, .-form-tweets-queue-csv-upload {
   padding-top: 8px;
-  margin-top: 80px;
   width: 99.9%; }

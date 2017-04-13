@@ -25,9 +25,9 @@ class UsersValidTweetsBlock extends BlockBase {
     global $base_url;
     $uid = \Drupal::currentUser()->id();
     
-    $current_filter = (isset($_GET['filter'])) ? $_GET['filter'] : TWITTER_FIELD_CHANGED;
-    $current_filter_order = (isset($_GET['order'])) ? $_GET['order'] : 'DESC';
-    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : 'DESC';
+    $current_filter = (isset($_GET['filter'])) ? $_GET['filter'] : TWITTER_DEFAULT_SORT_FIELD;
+    $current_filter_order = (isset($_GET['order'])) ? $_GET['order'] : TWITTER_DEFAULT_SORT_ORDER;
+    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : TWITTER_DEFAULT_NEW_SORT_ORDER;
 
     $created_sort_link = tweets_queue_generate_filter(TWITTER_VALID_TWEETS_ROUTE_NAME,
       TWITTER_FIELD_CREATED, $current_filter, $new_filter_order);
@@ -69,7 +69,7 @@ class UsersValidTweetsBlock extends BlockBase {
 
       $build['valid_tweets'] = array(
         '#theme' => 'item_list',
-        '#items' => $rows
+        '#items' => $rows,
       );
 
       $build['pager'] = array(
@@ -100,10 +100,11 @@ class UsersValidTweetsBlock extends BlockBase {
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
 
     $data = array();
-    $data['message'] = $row->message;
+    $data['message'] = tweets_queue_perform_hashtag_highlight($row->message);
     $data['size'] = $row->size;
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->created);
-    $changed = ($row->{TWITTER_FIELD_CHANGED}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED}) : '';
+
+    $changed = ($row->{TWITTER_FIELD_CHANGED}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED}) : '-';
     $data['changed'] = $changed;
     //$data['changed'] = date(TWITTER_DATE_FORMAT, $row->changed);
     $data['edit_link'] = $edit_url_link ;
