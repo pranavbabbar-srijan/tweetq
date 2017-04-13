@@ -10,7 +10,7 @@ stylesheets:
       css/print.css: { weight: -10 }
       'https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.1.0/jquery-confirm.min.css': { type: external }
       'https://fonts.googleapis.com/css?family=Roboto:300,400,700' : { type: external }
-      'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' : { type: external }
+      'https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' : { type: external }
 
 # js
 
