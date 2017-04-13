@@ -173,8 +173,10 @@
 		    height: buttonHeight,
 		    top: y + 'px',
 		    left: x + 'px'
-		  }).addClass("rippleEffect");
+			}).addClass("rippleEffect");
 		});
+		  $(".path-frontpage .region-content .messages--error").insertBefore("#user-login-prefix #forgot-password");
+
 	});
 
 })(jQuery);
