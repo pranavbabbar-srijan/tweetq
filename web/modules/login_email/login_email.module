@@ -12,22 +12,24 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function login_email_form_user_login_form_alter(&$form, FormStateInterface $form_state) {
   $form['name']['#title'] = t('Email');
+  $form['name']['#type'] = 'email';
   $form['name']['#description'] = t('Enter your email');
   $form['name']['#element_validate'][] = 'login_email_user_login_validate';
 }
 
+
 /**
  * Form element validation handler for the user login form.
  *
- * Allows users to authenticate by username OR email.
+ * Allows users to authenticate by email.
  */
 function login_email_user_login_validate($form, FormStateInterface $form_state) {
   $name_input = $form_state->getValue('name');
 
   // Try loading by username.
-  if ($user = user_load_by_name($name_input)) {
-    return TRUE;
-  }
+  //if ($user = user_load_by_name($name_input)) {
+  //  return TRUE;
+  //}
 
   // Try loading by email.
   if ($user = user_load_by_mail($name_input)) {

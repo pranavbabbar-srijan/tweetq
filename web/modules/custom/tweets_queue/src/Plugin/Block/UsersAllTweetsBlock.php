@@ -25,9 +25,10 @@ class UsersAllTweetsBlock extends BlockBase {
     global $base_url;
     $uid = \Drupal::currentUser()->id();
     
-    $current_filter = (isset($_GET['filter'])) ? $_GET['filter'] : TWITTER_FIELD_LAST_RUN;
-    $current_filter_order = (isset($_GET['order'])) ? $_GET['order'] : 'DESC';
-    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : 'DESC';
+    $current_filter = (isset($_GET['filter'])) ? $_GET['filter'] : TWITTER_DEFAULT_SORT_FIELD;
+
+    $current_filter_order = (isset($_GET['order'])) ? $_GET['order'] : TWITTER_DEFAULT_SORT_ORDER;
+    $new_filter_order = (isset($_GET['order'])) ? ($_GET['order'] == 'DESC' ? 'ASC' : 'DESC') : TWITTER_DEFAULT_NEW_SORT_ORDER;
 
     $created_sort_link = tweets_queue_generate_filter(TWITTER_ALL_TWEETS_ROUTE_NAME,
       TWITTER_FIELD_CREATED, $current_filter, $new_filter_order);
@@ -100,12 +101,20 @@ class UsersAllTweetsBlock extends BlockBase {
     $edit_url_link = \Drupal::l(t("Edit"), $edit_url);
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();
-    $data['message'] = $row->{TWITTER_FIELD_MESSAGE};
+    $data['message'] = tweets_queue_perform_hashtag_highlight($row->{TWITTER_FIELD_MESSAGE});
     $data['size'] = $row->{TWITTER_FIELD_SIZE};
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CREATED});
-    $data['tweet_data'] = date(TWITTER_DATE_FORMAT, ($row->{TWITTER_FIELD_FIRST_RUN}
-      ? $row->{TWITTER_FIELD_FIRST_RUN} : $row->{TWITTER_FIELD_CREATED}));
-    $data['changed'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED});
+
+
+    $tweet_date = ($row->{TWITTER_FIELD_FIRST_RUN}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_FIRST_RUN}) : '-';
+    $data['tweet_data'] = $tweet_date;
+    // $data['tweet_data'] = date(TWITTER_DATE_FORMAT, ($row->{TWITTER_FIELD_FIRST_RUN}
+    //   ? $row->{TWITTER_FIELD_FIRST_RUN} : $row->{TWITTER_FIELD_CREATED}));
+
+
+    $changed = ($row->{TWITTER_FIELD_CHANGED}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED}) : '-';
+    $data['changed'] = $changed;
+    // $data['changed'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED});
     $data['retweeted'] = t('@times times', array('@times' => $row->tweeted));
     $data['edit_link'] = $edit_url_link ;
     $data['delete_link'] = $delete_url_link ;

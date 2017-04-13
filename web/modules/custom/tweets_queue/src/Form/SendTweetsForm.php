@@ -26,9 +26,16 @@ class SendTweetsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     tweets_queue_check_logged_user_mapping(FALSE);
     $user_roles = \Drupal::currentUser()->getRoles();
+
+    $uid = \Drupal::currentUser()->id();
+
+    // For the first time entry is made in the session for the user about twitter credentials.
     if(!in_array(TWITTER_APPROVED_CLIENT_ROLE, $user_roles)) {
-      return;
+      if (!($_SESSION[$uid][TWITTER_USER_AUTHORIZED] == 1 && !empty($_SESSION[$uid][TWITTER_OWNER_ID]))) {
+        return;
+      }
     }
+
     $form['header'] = array(
       '#type' => 'markup',
       '#prefix' => '<div class="create-header">',

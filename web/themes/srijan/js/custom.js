@@ -20,7 +20,7 @@
 		$("#block-usersdashboardnontwitterheaderblock .content").append("<a id='notification-display' href='#;'></a>");
 		$("#block-usersdashboardheaderblock .profile + a").click(function() {
 			$(this).toggleClass("active");
-			$(this).siblings(".notifications").children(".notification-message-list").toggleClass("active");
+			// $(this).siblings(".notifications").children(".notification-message-list").toggleClass("active");
 		});
 
 		// code to trim text and add more link.
@@ -40,9 +40,45 @@
 	        }
 	    });
 
+	    var showChar = 95;
+	    var moretext = "...";
+	    var lesstext = "Less";
+
+	    $('.notifications .notification-message-list > div span.message').each(function() {
+	        var content = $(this).html();
+
+	        if(content.length > showChar) {
+
+	            var c = content.substr(0, showChar);
+	            var h = content.substr(showChar, content.length - showChar);
+	            var html = c + '<span class="morecontent"><span>' + h + '</span></span><span class="ellipsis">' + moretext + '</span>';
+	            $(this).html(html);
+	        }
+	    });
+
 	    if($('#block-signinwithtwitterblock').length > 0){
 	    	$('body').addClass('signinwithtwitterblock');
 		}
+
+		if ($('div').hasClass('no-tweet-found')) {
+		    $('body').addClass('no-tweet');
+		}
+	    
+		// $("body").click(function(e) {
+		// 	e.stopPropagation();
+		// 	$(".notification-message-list").toggleClass("active");
+	 //    });
+
+	     $("#block-usersdashboardheaderblock .profile + a").click(function(e) {
+	        $(".notification-message-list").toggleClass("active");
+	        e.stopPropagation();
+	    });
+
+	    $(document).click(function(e) {
+	        if (!$(e.target).is('.notification-message-list, #notification-display')) {
+	            $(".notification-message-list, #notification-display").removeClass("active");
+	        }
+	    });
 
 	    $(".morelink").click(function(){
 	        if($(this).hasClass("less")) {
@@ -137,8 +173,10 @@
 		    height: buttonHeight,
 		    top: y + 'px',
 		    left: x + 'px'
-		  }).addClass("rippleEffect");
+			}).addClass("rippleEffect");
 		});
+		  $(".path-frontpage .region-content .messages--error").insertBefore("#user-login-prefix #forgot-password");
+
 	});
 
 })(jQuery);

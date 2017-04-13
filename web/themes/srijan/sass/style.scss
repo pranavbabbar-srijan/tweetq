@@ -302,7 +302,8 @@ body {
 				content: $icon-error;
 				position: absolute;
 			    top: 16px;
-			    margin-left: -20px;
+			    margin-left: -25px;
+			    font-size: 20px;
 			}
 		}
 	}
@@ -310,6 +311,9 @@ body {
 .block-system-main-block {
 	+ .messages--error {
 		display: block;
+		width: 74vw;
+		background: white;
+		color: #f56a6a;
 	}
 }
 
@@ -329,7 +333,7 @@ body {
 	background: rgba(255,255,255,.8);
 	padding: 2em 2em 8em;
 	@include border-radius(6px);
-	width: 57%;
+	width: 360px;
 	float: right;
 	margin-top: 10vh;
 	position: relative;
@@ -340,13 +344,16 @@ body {
 		text-align: center;
 		margin: 0 0 1.5em 0;
 	}
-	input[type=text], input[type=password] {
+	input[type=text], input[type=password], input[type=email] {
 		border: 0;
 		background: none;
 		outline: none;
 		border-bottom: 1px solid rgba(0,0,0,.3);
 		display: block;
 		width: 100%;
+		&.error {
+			border-color: #e74c3c;
+		}
 	}
 	.description {
 		@extend %none;
@@ -363,7 +370,7 @@ body {
 	.form-item-name {
 		margin-bottom: 2.5em;
 	}
-	input[type=submit] {
+	input[type=submit], #forgot-password-submit, #forgot-password-cancel {
 		border: none;
 		background: $login-btn;
 		width: 100%;
@@ -385,6 +392,71 @@ body {
 		font-size: 14px;
 		margin-top: .5em;
 		display: block;
+	}
+	#forgot-password {
+		text-align: center;
+		cursor: pointer;
+		color: $twitter;
+		font-size: 14px;
+		display: block;
+	}
+}
+
+.path-frontpage .messages--error {
+	display: block;
+    background: none;
+    margin: 0;
+    box-shadow: none;
+    padding-left: 24px;
+    padding-right: 0;
+    padding-top: 5px;
+    color: #e74c3c;
+    font-size: 14px;
+    a {
+    	@extend %none;
+    }
+    div[role="alert"] {
+    	&:before {
+    		@extend %none;
+    	}
+    }
+}
+
+#forgot-password-section {
+	font-size: 22px;
+	text-align: center;
+	font-weight: 300;
+	margin-bottom: -4.5em;
+	.signup {
+		margin-top: 10px;
+		font-size: 16px;
+		color: $gray;
+		font-weight: normal;
+		margin-bottom: 6em;
+	}
+	.form-item-email {
+		label {
+			text-align: left;
+			font-weight: bold;
+		}
+		input {
+			border: 0;
+			background: none;
+			outline: none;
+			border-bottom: 1px solid rgba(0,0,0,.3);
+			display: block;
+			width: 100%;
+		}
+	}
+	#forgot-password-submit {
+		font-weight: normal;
+		cursor: pointer;
+		margin-top: 50px;
+	}
+	#forgot-password-cancel {
+		font-weight: normal;
+		background: #f56a6a;
+		cursor: pointer;
 	}
 }
 
@@ -614,6 +686,7 @@ body {
 	.block-users-archived-tweets-block, .block-users-all-tweets-block,
 	.block-users-tweeted-tweets-block {
 		padding: 1em;
+		top: 79px;
 		margin-left: 10px;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
 		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
@@ -703,20 +776,26 @@ body {
 						width: 12.5%;
 						margin-left: 0;
 						margin-bottom: 20px;
+						word-wrap: break-word;
 						&:first-child {
 							width: 50%;
 							padding-right: 3em;
+							b {
+								color: $twitter;
+								font-weight: normal;
+							}
 						}
 						&:nth-child(2) {
 							width: 6%;
-							padding: 0 6px;
+							padding: 0 1px;
 						}
 						&:nth-child(5) {
 							width: 6.25%;
-							padding-left: 2em;
+							padding-left: 2.5em;
 						}
 						&:nth-child(6) {
 							width: 6.25%;
+							padding-left: 8px;
 						}
 						a {
 							color: $twitter;
@@ -828,6 +907,13 @@ body {
 			}
 		}
 	}
+	.block-users-archived-tweets-block {
+		.item-list {
+			+ .item-list ul ul li:last-child {
+				padding-left: 50px;
+			}
+		}
+	}
 	.block-users-archived-tweets-block, .block-users-all-tweets-block, .block-users-tweeted-tweets-block {
 		.item-list {
 			.header {
@@ -838,7 +924,7 @@ body {
 						width: 40%;
 					}
 					&:last-child {
-						padding-left: 2.5em;
+						padding-left: 2em;
 					}
 				}
 			}
@@ -852,7 +938,7 @@ body {
 						}
 						&:nth-child(2) {
 							width: 6%;
-							padding: 0 6px;
+							padding: 0 1px;
 						}
 						&:nth-child(5) {
 							width: 10%;
@@ -860,6 +946,7 @@ body {
 						}
 						&:nth-child(6) {
 							width: 10%;
+							padding-left: 9px;
 						}
 					}
 				}
@@ -877,7 +964,7 @@ body {
 							padding-right: 3em;
 						}
 						&:nth-child(2) {
-							padding: 0 6px;
+							padding: 0 1px;
 						}
 						&:nth-child(5) {
 							width: 10%;
@@ -886,10 +973,12 @@ body {
 						&:nth-child(7) {
 							width: 5%;
 							text-align: right;
-    						padding-right: 10px;
+    						padding-right: 0;
+    						padding-left: 44px;
 						}
 						&:nth-child(8) {
 							width: 5%;
+							padding-left: 30px;
 						}
 					}
 				}
@@ -987,6 +1076,13 @@ body {
 
 
 // No tweet page.
+.no-tweet {
+	.block-users-valid-tweets-block, .block-users-in-valid-tweets-block,
+	.block-users-archived-tweets-block, .block-users-all-tweets-block,
+	.block-users-tweeted-tweets-block {
+		margin-top: 20px;
+	}
+}
 .no-tweet-found {
 	font-size: 48px;
 	text-align: center;
@@ -1136,6 +1232,7 @@ body {
 		}
 		.block-users-archived-tweets-block, .block-users-valid-tweets-block, .block-users-in-valid-tweets-block {
 			margin-left: 10px;
+			top: 79px;
 		}
 	}
 }
@@ -1198,6 +1295,35 @@ body {
 				text-decoration: none;
 				&:hover, &.active {
 					color: $dark;
+				}
+			}
+			span.value {
+				font-size: 13px;
+			    float: right;
+			    font-style: italic;
+			    b {
+			    	margin-left: 10px;
+				    border: 1px solid;
+				    padding: 1px 10px;
+				    font-style: normal;
+				    border-radius: 10px;
+				    &:empty {
+				    	@extend %none;
+				    }
+			    }
+			}
+			&.valid_tweets {
+				.value {
+					b {
+						color: $login-btn;
+					}
+				}
+			}
+			&.invalid_tweets {
+				.value {
+					b {
+						color: #f56a6a;
+					}
 				}
 			}
 			&:last-child {
@@ -1401,9 +1527,9 @@ body {
 		float: right;
 		position: absolute;
 		margin-top: 20px;
-		left: -80px;
+		left: -100px;
 	    top: 28px;
-	    width: 200px;
+	    width: 230px;
 	    background: white;
 	    font-size: 12px;
 	    color: $gray;
@@ -1417,14 +1543,14 @@ body {
 		    width: 6px;
 		}
 		&::-webkit-scrollbar-track {
-		    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
 		}
 		&::-webkit-scrollbar-thumb {
 		  background-color: darkgrey;
 		  outline: 1px solid slategrey;
 		}
 		&.active {
-			height: 500px;
+			height: 360px;
 			padding: 1em;
 			visibility: inherit;
 		}
@@ -1439,21 +1565,29 @@ body {
 				position: fixed;
 		    }
 		    &:nth-child(2) {
-		    	margin-top: 20px;
+		    	margin-top: 27px;
 		    }
 		    span {
 		    	font-size: 10px;
+		    	&.state {
+		    		color: $dark;
+		    	}
+		    	&.time {
+		    		font-style: italic;
+		    	}
 		    	&.message {
 					display: table;
 					color: $dark;
 				    padding: 10px 0;
 				    border-bottom: 1px solid #bfbfbf;
 				    font-size: 12px;
+				    word-break: break-word;
+				    width: 100%;
 				}
 				&.message_history_count {
 					display: block;
 					border-bottom: 1px solid $gray;
-					width: 194px;
+					width: 224px;
 				    position: relative;
 				    left: -12px;
 				    top: -12px;
@@ -1477,6 +1611,7 @@ body {
 }
 .send-tweets-form, .tweets-queue-tweet-form  {
 	// overflow: hidden;
+	// margin-top: 80px;
 	padding-top: 5px;
 	label {
 		@extend %none;
@@ -1573,7 +1708,7 @@ body {
 		position: relative;
 		+ .create-header {
 			margin-top: 0;
-			overflow: hidden;
+			// overflow: hidden;
 			background: white;
 			padding: 1em;
 			min-height: 133px;
@@ -1606,10 +1741,14 @@ body {
 			@extend %none;
 		}
 		.messages--error {
-			margin-top: -10px;
-		    margin-left: -2px;
-		    width: 97%;
 		    display: block;
+		    margin-top: 115px;
+		    background: white;
+		    left: -1.9vw;
+		    width: 74vw;
+		    position: absolute;
+		    color: #f56a6a;
+		    font-size: 18px;
 		}
 		#ajax-wrapper {
 			height: 40px;
@@ -1630,7 +1769,7 @@ body {
 	    position: relative;
 	    padding-right: 8px;
 		+ .form-submit {
-			background: none;
+			background: white;
 			color: $twitter;
 			margin-right: 0;
 			border: 1px solid;
@@ -1639,6 +1778,10 @@ body {
 		    @include border-radius( 3px);
 		    text-decoration: none;
 			text-align: center;
+			z-index: 1;
+		    position: relative;
+		    margin-left: -2px;
+		    width: 100px;
 		}
 		a {
 			color: $dark;
@@ -1669,11 +1812,24 @@ body {
 	.ajax-progress-throbber {
 		position: relative;
 		top: -30px;
-		left: 90px;
+		left: 175px;
+		.throbber {
+			padding: 1px 6px 1px;
+		}
 	}
 }
 
 // colorbox theming.
+#colorbox, #cboxWrapper, #cboxContent, #cboxLoadedContent {
+	width: 100% !important;
+	max-width: 350px;
+	height: 210px !important;
+}
+#colorbox {
+    top: 24% !important;
+    left: 36% !important;
+    // height: 210px !important;
+}
 #cboxOverlay {
 	opacity: .65 !important;
 }
@@ -1688,6 +1844,7 @@ body {
 	}
 	.region-content {
 		margin-top: 0;
+		max-width: 300px;
 	}
 	#main-wrapper {
 		padding-top: 0;
@@ -1729,4 +1886,6 @@ body {
 
 .send-tweets-form, .-form-tweets-queue-csv-upload {
 	padding-top: 8px;
+	// margin-top: 80px;
+    width: 99.9%;
 }
