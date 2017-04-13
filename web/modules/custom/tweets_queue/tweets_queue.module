@@ -3165,3 +3165,20 @@ function tweets_queue_format_tweet_time($tweet_time) {
     '@suffix' => $suffix));
   return $output;
 }
+
+/**
+ * Process hashtag and enclose with tag.
+ *
+ * @param string $message
+ *   Tweet message.
+ *
+ * @return string
+ *   Returns processed message.
+ */
+function tweets_queue_perform_hashtag_highlight($message) {
+  preg_match_all("/(#\w+)/", $message, $matches);
+  foreach ($matches[0] as $pos => $data) {
+    $message = str_ireplace($data, '<b>' . $data . '</b>', $message);
+  }
+  return t($message);
+}
