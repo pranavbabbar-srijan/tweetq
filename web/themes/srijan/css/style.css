@@ -452,14 +452,14 @@ body {
     color: #212121;
     text-align: center;
     margin: 0 0 1.5em 0; }
-  .user-login-form input[type=text], .user-login-form input[type=password] {
+  .user-login-form input[type=text], .user-login-form input[type=password], .user-login-form input[type=email] {
     border: 0;
     background: none;
     outline: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     display: block;
     width: 100%; }
-    .user-login-form input[type=text].error, .user-login-form input[type=password].error {
+    .user-login-form input[type=text].error, .user-login-form input[type=password].error, .user-login-form input[type=email].error {
       border-color: #e74c3c; }
   .user-login-form label {
     color: #979797;
