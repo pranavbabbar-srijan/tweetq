@@ -20,7 +20,7 @@
 		$("#block-usersdashboardnontwitterheaderblock .content").append("<a id='notification-display' href='#;'></a>");
 		$("#block-usersdashboardheaderblock .profile + a").click(function() {
 			$(this).toggleClass("active");
-			$(this).siblings(".notifications").children(".notification-message-list").toggleClass("active");
+			// $(this).siblings(".notifications").children(".notification-message-list").toggleClass("active");
 		});
 
 		// code to trim text and add more link.
@@ -64,6 +64,22 @@
 		    $('body').addClass('no-tweet');
 		}
 	    
+		// $("body").click(function(e) {
+		// 	e.stopPropagation();
+		// 	$(".notification-message-list").toggleClass("active");
+	 //    });
+
+	     $("#block-usersdashboardheaderblock .profile + a").click(function(e) {
+	        $(".notification-message-list").toggleClass("active");
+	        e.stopPropagation();
+	    });
+
+	    $(document).click(function(e) {
+	        if (!$(e.target).is('.notification-message-list, #notification-display')) {
+	            $(".notification-message-list, #notification-display").removeClass("active");
+	        }
+	    });
+
 	    $(".morelink").click(function(){
 	        if($(this).hasClass("less")) {
 	            $(this).removeClass("less");
