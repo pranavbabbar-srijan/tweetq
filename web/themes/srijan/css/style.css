@@ -862,7 +862,8 @@ body {
             .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:first-child b, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:first-child b,
             .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:first-child b, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:first-child b,
             .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:first-child b {
-              color: #2aa9e0; }
+              color: #2aa9e0;
+              font-weight: normal; }
           .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(2), .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(2),
           .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(2), .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(2),
           .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(2) {
