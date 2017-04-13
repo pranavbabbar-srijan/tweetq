@@ -402,8 +402,22 @@ body {
 	}
 }
 
-.path-frontpage .region-content .messages--error {
+.path-frontpage .messages--error {
 	display: block;
+    background: none;
+    margin: 0;
+    box-shadow: none;
+    padding-left: 24px;
+    padding-right: 0;
+    padding-top: 5px;
+    a {
+    	@extend %none;
+    }
+    .alert {
+    	&:before {
+    		top: 10px;
+    	}
+    }
 }
 
 #forgot-password-section {
@@ -764,6 +778,9 @@ body {
 						&:first-child {
 							width: 50%;
 							padding-right: 3em;
+							b {
+								color: $twitter;
+							}
 						}
 						&:nth-child(2) {
 							width: 6%;
@@ -1749,7 +1766,7 @@ body {
 	    position: relative;
 	    padding-right: 8px;
 		+ .form-submit {
-			background: none;
+			background: white;
 			color: $twitter;
 			margin-right: 0;
 			border: 1px solid;
@@ -1758,6 +1775,10 @@ body {
 		    @include border-radius( 3px);
 		    text-decoration: none;
 			text-align: center;
+			z-index: 1;
+		    position: relative;
+		    margin-left: -2px;
+		    width: 100px;
 		}
 		a {
 			color: $dark;
@@ -1788,15 +1809,23 @@ body {
 	.ajax-progress-throbber {
 		position: relative;
 		top: -30px;
-		left: 90px;
+		left: 175px;
+		.throbber {
+			padding: 1px 6px 1px;
+		}
 	}
 }
 
 // colorbox theming.
-#colorbox, #cboxWrapper {
+#colorbox, #cboxWrapper, #cboxContent, #cboxLoadedContent {
 	width: 100% !important;
-	max-width: 600px;
-	height: 100% !important;
+	max-width: 350px;
+	height: 210px !important;
+}
+#colorbox {
+    top: 24% !important;
+    left: 36% !important;
+    // height: 210px !important;
 }
 #cboxOverlay {
 	opacity: .65 !important;
@@ -1812,6 +1841,7 @@ body {
 	}
 	.region-content {
 		margin-top: 0;
+		max-width: 300px;
 	}
 	#main-wrapper {
 		padding-top: 0;
