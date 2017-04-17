@@ -1,0 +1,38 @@
+# Libraries added here.
+
+# css
+stylesheets:
+  version: VERSION
+  css:
+    component:
+      css/style.css: { weight: -10 }
+      css/ie.css: { weight: -10 }
+      css/print.css: { weight: -10 }
+      'https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.1.0/jquery-confirm.min.css': { type: external }
+      'https://fonts.googleapis.com/css?family=Roboto:300,400,700' : { type: external }
+      'https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' : { type: external }
+
+# js
+
+customjs:
+  js:
+    js/custom.js: {}
+    # js/jquery.colorbox.js: {}
+    # js/jquery.colorbox-min.js: {}
+    # js/colorbox.js: {}
+  
+  dependencies:
+  - core/jquery
+  - core/drupal.ajax
+  - core/drupal
+  - core/drupalSettings
+  - core/jquery.once
+
+colorbox:
+  version: VERSION
+  js:
+    js/colorbox.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - colorbox/colorbox
