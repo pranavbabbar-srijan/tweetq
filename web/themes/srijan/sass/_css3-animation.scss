@@ -1,0 +1,707 @@
+/* ================================= Animation Bouncing Effect ================================= */
+@mixin bounce() {  
+  @include css3-prefix(animation, bounce 1s);
+  @include css3-prefix(transform-origin, center bottom);  
+
+  @-webkit-keyframes bounce {
+    20%, 53%, 80%, to {
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+      @include css3-prefix(transform, translate3d(0,0,0));
+    }
+
+    40%, 43% {
+      @include css3-prefix(animation-timing-function, cubic-bezier(.7, .05, .8, .06));
+      @include css3-prefix(transform, translate3d(0, -30px, 0));
+    }
+
+    70% {
+      @include css3-prefix(animation-timing-function, cubic-bezier(.7, .05, .8, .06));
+      @include css3-prefix(transform, translate3d(0, -15px, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(0, -4px, 0));
+    }
+  }
+
+  @-moz-keyframes bounce {
+    20%, 53%, 80%, to {
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+      @include css3-prefix(transform, translate3d(0,0,0));
+    }
+
+    40%, 43% {
+      @include css3-prefix(animation-timing-function, cubic-bezier(.7, .05, .8, .06));
+      @include css3-prefix(transform, translate3d(0, -30px, 0));
+    }
+
+    70% {
+      @include css3-prefix(animation-timing-function, cubic-bezier(.7, .05, .8, .06));
+      @include css3-prefix(transform, translate3d(0, -15px, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(0, -4px, 0));
+    }
+  }
+
+  @keyframes bounce {
+    20%, 53%, 80%, to {
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+      @include css3-prefix(transform, translate3d(0,0,0));
+    }
+
+    40%, 43% {
+      @include css3-prefix(animation-timing-function, cubic-bezier(.7, .05, .8, .06));
+      @include css3-prefix(transform, translate3d(0, -30px, 0));
+    }
+
+    70% {
+      @include css3-prefix(animation-timing-function, cubic-bezier(.7, .05, .8, .06));
+      @include css3-prefix(transform, translate3d(0, -15px, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(0, -4px, 0));
+    }
+  }
+}
+
+/* ================================= Swing Effect ================================= */
+@mixin swing() {
+  @include css3-prefix(animation, swing 1s);
+  @include css3-prefix(transform-origin, top center);
+
+  @-webkit-keyframes swing {
+    20% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, 15deg));
+    }
+
+    40% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, -10deg));
+    }
+
+    60% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, 5deg));
+    }
+
+    80% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, -5deg));
+    }
+
+    to {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, 0deg));
+    }
+  }
+  @-moz-keyframes swing {
+    20% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, 15deg));
+    }
+
+    40% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, -10deg));
+    }
+
+    60% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, 5deg));
+    }
+
+    80% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, -5deg));
+    }
+
+    to {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, 0deg));
+    }
+  }
+  @keyframes swing {
+    20% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, 15deg));
+    }
+
+    40% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, -10deg));
+    }
+
+    60% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, 5deg));
+    }
+
+    80% {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, -5deg));
+    }
+
+    to {
+      @include css3-prefix(transform, rotate3d(0, 0, 1, 0deg));
+    }
+  }
+}
+
+/* ================================= Dancing Effect ================================= */
+@mixin dancing() {
+  @include css3-prefix(animation, dancing 1s);
+  @include css3-prefix(transform-origin, center);
+
+  @-webkit-keyframes dancing {
+    10%, to {
+      @include css3-prefix(transform, none);
+    }
+
+    20% {
+      @include css3-prefix(transform, skewX(-15deg) skewY(-15deg));
+    }
+
+    30% {
+      @include css3-prefix(transform, skewX(7deg) skewY(7deg));
+    }
+
+    40% {
+      @include css3-prefix(transform, skewX(-5deg) skewY(-5deg));
+    }
+
+    50% {
+      @include css3-prefix(transform, skewX(1deg) skewY(1deg));
+    }
+
+    60% {
+      @include css3-prefix(transform, skewX(-.1deg) skewY(.1deg));
+    }
+
+    70% {
+      @include css3-prefix(transform, skewX(.5deg) skewY(.5deg));
+    }
+
+    80% {
+      @include css3-prefix(transform, skewX(0deg) skewY(0deg));
+    }
+  }
+
+  @-moz-keyframes dancing {
+    10%, to {
+      @include css3-prefix(transform, none);
+    }
+
+    20% {
+      @include css3-prefix(transform, skewX(-15deg) skewY(-15deg));
+    }
+
+    30% {
+      @include css3-prefix(transform, skewX(7deg) skewY(7deg));
+    }
+
+    40% {
+      @include css3-prefix(transform, skewX(-5deg) skewY(-5deg));
+    }
+
+    50% {
+      @include css3-prefix(transform, skewX(1deg) skewY(1deg));
+    }
+
+    60% {
+      @include css3-prefix(transform, skewX(-.1deg) skewY(.1deg));
+    }
+
+    70% {
+      @include css3-prefix(transform, skewX(.5deg) skewY(.5deg));
+    }
+
+    80% {
+      @include css3-prefix(transform, skewX(0deg) skewY(0deg));
+    }
+  }
+
+  @keyframes dancing {
+    10%, to {
+      @include css3-prefix(transform, none);
+    }
+
+    20% {
+      @include css3-prefix(transform, skewX(-15deg) skewY(-15deg));
+    }
+
+    30% {
+      @include css3-prefix(transform, skewX(7deg) skewY(7deg));
+    }
+
+    40% {
+      @include css3-prefix(transform, skewX(-5deg) skewY(-5deg));
+    }
+
+    50% {
+      @include css3-prefix(transform, skewX(1deg) skewY(1deg));
+    }
+
+    60% {
+      @include css3-prefix(transform, skewX(-.1deg) skewY(.1deg));
+    }
+
+    70% {
+      @include css3-prefix(transform, skewX(.5deg) skewY(.5deg));
+    }
+
+    80% {
+      @include css3-prefix(transform, skewX(0deg) skewY(0deg));
+    }
+  }
+}
+
+/* ================================= Bounce In Effect ================================= */
+@mixin bounceIn() {
+  @include css3-prefix(animation, bounceIn 1s);
+
+  @-webkit-keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.215, 0.610, 0.355, 1.000));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, scale3d(.3, .3, .3));
+    }
+
+    40% {
+      @include css3-prefix(transform, scale3d(1.1, 1.1, 1.1));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, scale3d(1.03, 1.03, 1.03));
+    }
+
+    80% {      
+      @include css3-prefix(transform, scale3d(.97, .97, .97));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, scale3d(1, 1, 1));
+    }
+  }
+
+  @-moz-keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.215, 0.610, 0.355, 1.000));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, scale3d(.3, .3, .3));
+    }
+
+    40% {
+      @include css3-prefix(transform, scale3d(1.1, 1.1, 1.1));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, scale3d(1.03, 1.03, 1.03));
+    }
+
+    80% {      
+      @include css3-prefix(transform, scale3d(.97, .97, .97));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, scale3d(1, 1, 1));
+    }
+  }
+
+  @keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.215, 0.610, 0.355, 1.000));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, scale3d(.3, .3, .3));
+    }
+
+    40% {
+      @include css3-prefix(transform, scale3d(1.1, 1.1, 1.1));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, scale3d(1.03, 1.03, 1.03));
+    }
+
+    80% {      
+      @include css3-prefix(transform, scale3d(.97, .97, .97));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, scale3d(1, 1, 1));
+    }
+  }
+
+}
+
+/* ================================= Bounce In Left Effect ================================= */
+@mixin bounceInLeft() {
+  @include css3-prefix(animation, bounceInLeft 1s);
+
+  @-webkit-keyframes bounceInLeft {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(-3000px, 0, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(25px, 0, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(-20px, 0, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(5px, 0, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0px, 0, 0));
+    }
+  }
+
+  @-moz-keyframes bounceInLeft {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(-3000px, 0, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(25px, 0, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(-20px, 0, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(5px, 0, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0px, 0, 0));
+    }
+  }
+
+  @keyframes bounceInLeft {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(-3000px, 0, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(25px, 0, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(-20px, 0, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(5px, 0, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0px, 0, 0));
+    }
+  }
+}
+
+/* ================================= Bounce In Right Effect ================================= */
+@mixin bounceInRight() {
+  @include css3-prefix(animation, bounceInRight 1s);
+
+  @-webkit-keyframes bounceInRight {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(3000px, 0, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(25px, 0, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(-20px, 0, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(5px, 0, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0px, 0, 0));
+    }
+  }
+
+  @-moz-keyframes bounceInRight {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(3000px, 0, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(25px, 0, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(-20px, 0, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(5px, 0, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0px, 0, 0));
+    }
+  }
+
+  @keyframes bounceInRight {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(3000px, 0, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(25px, 0, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(-20px, 0, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(5px, 0, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0px, 0, 0));
+    }
+  }
+}
+
+/* ================================= Bounce In Up Effect ================================= */
+@mixin bounceInUp() {
+  @include css3-prefix(animation, bounceInUp 1s);
+
+  @-webkit-keyframes bounceInUp {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(0, -800px, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 25px, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(0, -15px, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(0, 5px, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 0, 0));
+    }
+  }
+
+  @-moz-keyframes bounceInUp {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(0, -800px, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 25px, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(0, -15px, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(0, 5px, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 0, 0));
+    }
+  }
+
+  @keyframes bounceInUp {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(0, -800px, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 25px, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(0, -15px, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(0, 5px, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 0, 0));
+    }
+  }
+}
+
+/* ================================= Bounce In Down Effect ================================= */
+@mixin bounceInDown() {
+  @include css3-prefix(animation, bounceInDown 1s);
+
+  @-webkit-keyframes bounceInDown {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(0, 800px, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 25px, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(0, -15px, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(0, 5px, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 0, 0));
+    }
+  }
+
+  @-moz-keyframes bounceInDown {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(0, 800px, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 25px, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(0, -15px, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(0, 5px, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 0, 0));
+    }
+  }
+
+  @keyframes bounceInDown {
+    from, 60%, 70%, 95%, to { 
+      @include css3-prefix(animation-timing-function, cubic-bezier(0.2, 0.6, 0.3, 1));
+    }
+
+    0% {
+      @include opacity(0);
+      @include css3-prefix(transform, translate3d(0, 800px, 0));
+    }
+
+    60% {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 25px, 0));
+    }
+
+    80% {
+      @include css3-prefix(transform, translate3d(0, -15px, 0));
+    }
+
+    90% {
+      @include css3-prefix(transform, translate3d(0, 5px, 0));
+    }
+
+    to {
+      @include opacity(1);
+      @include css3-prefix(transform, translate3d(0, 0, 0));
+    }
+  }
+}

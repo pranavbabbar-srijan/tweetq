@@ -1,0 +1,52 @@
+// Variables
+
+$signup		:    #f98575;
+$gray		:	 #979797;
+$dark		:	 #212121;
+$login-btn	:	 #96c85a;
+$twitter	:	 #2aa9e0;
+$body-bg	:	 #F1F1F1;
+
+// Extends
+%none {
+	display: none;
+}
+
+%mp-none {
+	margin: 0;
+	padding: 0;
+}
+
+// icomoon
+%icomoon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+$icomoon-font-path: "../fonts" !default;
+
+$icon-archieve: "\e900";
+$icon-bell: "\e901";
+$icon-check-symbol: "\e902";
+$icon-cross: "\e903";
+$icon-csv-file-format-extension: "\e904";
+$icon-edit: "\e905";
+$icon-error: "\e906";
+$icon-logout: "\e907";
+$icon-photo-camera: "\e908";
+$icon-rubbish-bin: "\e909";
+$icon-settings: "\e90a";
+$icon-success: "\e90b";
+$icon-total-tweets: "\e90c";
+$icon-user: "\e90d";
+$icon-twitter: "\ea96";
