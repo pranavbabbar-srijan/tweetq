@@ -1,0 +1,121 @@
+# Test API endpoints
+
+tweets_queue_admin.settings:
+  path: '/admin/config/services/tweets_queue/admin_settings'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\TweetsQueueAdminSettingsForm'
+    _title: 'Twitter Api admin configuration'
+  requirements:
+    _role: 'administrator'
+
+tweets_queue.settings:
+  path: '/admin/config/services/tweets_queue/client_settings'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\TweetsQueueSettingsForm'
+    _title: 'Twitter Api client configuration'
+  requirements:
+    _role: 'twitter_client+administrator'
+
+tweets_queue.send_tweets:
+  path: '/dashboard'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\SendTweetsForm'
+    _title: 'Create a Tweet'
+  requirements:
+    _role: 'twitter_client+administrator'
+
+tweets_queue.signup_user:
+  path: '/signup'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\SignUpForm'
+    _title: 'Sign Up'
+  requirements:
+    _role: 'anonymous+twitter_client'
+
+tweets_queue.twitter_signup_user:
+  path: '/twitter/register'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\TwitterSignUpForm'
+    _title: 'Registration'
+  requirements:
+    _role: 'anonymous+twitter_client'
+
+tweets_queue.authorize_twitter_login:
+  path: '/authorize_twitter_login'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\AuthorizeTwitterLogin'
+    _title: 'Twitter Authorization'
+  requirements:
+    _role: 'anonymous+authenticated'
+
+tweets_queue.file_upload:
+  path: '/dashboard/import-tweets'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\TweetsQueueCsvUploadForm'
+    _title: 'Import Tweets'
+  requirements:
+    _role: 'twitter_approved_client+administrator'
+
+tweets_queue_tweet_form.settings:
+  path: '/dashboard/tweet_form'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\TweetsQueueTweetForm'
+    _title: 'Edit Tweet'
+  requirements:
+    _role: 'twitter_client+administrator'
+
+tweets_queue_tweeted_listing.settings:
+  path: '/dashboard/valid-tweets/tweeted-listing'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::content'
+    _title: 'Tweeted Tweets'
+  requirements:
+    _role: 'twitter_client+administrator'
+
+tweets_queue_new_tweet_listing.settings:
+  path: '/dashboard/new-tweets'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::content'
+    _title: 'New Tweets'
+  requirements:
+    _role: 'twitter_client+administrator'
+
+tweets_queue_valid_tweets.settings:
+  path: '/dashboard/valid-tweets'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::content'
+    _title: 'Valid Tweets'
+  requirements:
+    _role: 'twitter_client+administrator'
+
+tweets_queue_invalid_tweets.settings:
+  path: '/dashboard/invalid-tweets'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::content'
+    _title: 'Invalid Tweets'
+  requirements:
+    _role: 'twitter_client+administrator'
+
+tweets_queue_archived_tweets.settings:
+  path: '/dashboard/archived-tweets'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::content'
+    _title: 'Archived Tweets'
+  requirements:
+    _role: 'twitter_client+administrator'
+
+tweets_queue_all_tweets.settings:
+  path: '/dashboard/all-tweets'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::content'
+    _title: 'All Tweets'
+  requirements:
+    _role: 'twitter_client+administrator'
+
+tweets_queue_user_history.process:
+  path: '/dashboard/user-history'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::userHistory'
+    _title: 'User History'
+  requirements:
+    _role: 'twitter_approved_client+administrator'

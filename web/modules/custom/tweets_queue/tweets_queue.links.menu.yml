@@ -1,0 +1,41 @@
+tweets_queue_admin.settings:
+  title: 'Twitter Admin configuration'
+  description: 'Add/Modify twitter generic configuration.'
+  parent: system.admin_config_services
+  route_name: tweets_queue_admin.settings
+  weight: -15
+
+tweets_queue.settings:
+  title: 'Twitter Client configuration'
+  description: 'Add/Modify twitter api configuration.'
+  parent: system.admin_config_services
+  route_name: tweets_queue.settings
+  weight: -15
+
+tweets_queue.send_tweets:
+  title: 'Create a tweet'
+  description: 'Create a tweet or send.'
+  parent: system.admin_config_services
+  route_name: tweets_queue.send_tweets
+  weight: -14
+
+tweets_queue.signup_user:
+  title: 'Sign Up'
+  description: 'Sigh up form.'
+  parent: system.admin_config_services
+  route_name: tweets_queue.signup_user
+  weight: -14
+
+tweets_queue.twitter_signup_user:
+  title: 'Registration'
+  description: 'Registration'
+  parent: system.admin_config_services
+  route_name: tweets_queue.twitter_signup_user
+  weight: -14
+
+tweets_queue.file_upload:
+  title: 'CSV tweet import'
+  description: 'Import tweets.'
+  parent: system.admin_config_services
+  route_name: tweets_queue.file_upload
+  weight: -13
