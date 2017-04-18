@@ -86,8 +86,16 @@ class UsersDashboardHeaderBlock extends BlockBase {
       );
     }
     $message_history_data .= "</div>";
-    $output = "<div class='notifications'>" . $message_history_count_output .
-      $message_history_data . "</div>" . $twitter_profile_output;
+
+    if ($message_history_count == 0) {
+      $output = "<div class='notifications'>" .
+       $message_history_data . "</div>" . $twitter_profile_output;
+    }
+
+    else {
+      $output = "<div class='notifications'>" . $message_history_count_output .
+       $message_history_data . "</div>" . $twitter_profile_output;
+    }
 
     return array(
       '#type' => 'markup',
