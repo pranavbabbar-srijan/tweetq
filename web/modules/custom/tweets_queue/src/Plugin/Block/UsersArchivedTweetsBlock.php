@@ -116,7 +116,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
     $data['changed'] = $changed;
     // $data['changed'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED});
 
-    $data['retweeted'] = t('@times times', array('@times' => $row->{TWITTER_FIELD_TWEETED}));
+    $data['retweeted'] = t('@times', array('@times' => $row->{TWITTER_FIELD_TWEETED}));
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
   }
