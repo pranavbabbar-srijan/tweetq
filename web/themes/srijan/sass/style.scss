@@ -1147,6 +1147,7 @@ body {
 					border-bottom: 1px solid rgba(0,0,0,.3);
 					display: block;
 					width: 100%;
+					padding-bottom: 4px;
 	    		}
 	    		&.js-form-item-field-organization {
 	    			width: 100%;
@@ -1244,6 +1245,13 @@ body {
 	.non-twitter-profile {
 		span.img {
 			background: #E7E8E9;
+			display: flex;
+			align-content: center;
+			justify-content: center;
+			img[src="Anonymous user.png"] {
+				width: 80%;
+				opacity: .2;
+			}
 		}
 		~ div {
 			opacity: .7;
