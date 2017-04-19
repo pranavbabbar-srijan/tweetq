@@ -364,7 +364,8 @@ body {
       body.path-frontpage {
         background-position: 20% 0; } }
     body.path-frontpage .site-branding a {
-      color: white; }
+      color: white;
+      pointer-events: none; }
     body.path-frontpage .site-branding svg {
       fill: #ffffff; }
   body.user-logged-in {
@@ -420,6 +421,8 @@ body {
       top: 16px;
       margin-left: -25px;
       font-size: 20px; }
+    .region-content .messages--error div[role=alert] .messages__list {
+      display: inline-block; }
 
 .block-system-main-block + .messages--error {
   display: block;
