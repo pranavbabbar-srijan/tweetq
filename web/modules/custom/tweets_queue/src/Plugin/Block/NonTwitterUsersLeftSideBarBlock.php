@@ -30,7 +30,7 @@ class NonTwitterUsersLeftSideBarBlock extends BlockBase {
       );
     }
 
-    $picture = '';
+    $picture = 'Anonymous user.png';
     $twitter_handle = '';
     $name = '';
     $uid = ($uid == '') ? \Drupal::currentUser()->id() : $uid;
