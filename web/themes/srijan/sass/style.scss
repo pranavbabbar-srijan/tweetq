@@ -1161,7 +1161,20 @@ body {
 					border-bottom: 1px solid rgba(0,0,0,.3);
 					display: block;
 					width: 100%;
-					padding-bottom: 4px;
+					padding-bottom: 7px;
+					font-size: 14px;
+					&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+					  opacity: .5;
+					}
+					&::-moz-placeholder { /* Firefox 19+ */
+					  opacity: .5;
+					}
+					&:-ms-input-placeholder { /* IE 10+ */
+					  opacity: .5;
+					}
+					&:-moz-placeholder { /* Firefox 18- */
+					  opacity: .5;
+					}
 	    		}
 	    		&.js-form-item-field-organization {
 	    			width: 100%;
@@ -1232,6 +1245,11 @@ body {
     				content: "*";
     			}
     		}
+		}
+	}
+	.signup {
+		+ .message-header {
+			margin-top: 35px;
 		}
 	}
 }
@@ -1915,13 +1933,15 @@ body {
 		margin-left: 4em;
 		text-decoration: none;
 		color: $twitter;
-		font-size: 12px;
+		font-size: 13px;
 		font-style: italic;
 		&:before {
 			content: $icon-csv-file-format-extension;
 			@extend %icomoon;
-			font-size: 14px;
+			font-size: 18px;
 			margin-right: 5px;
+			position: relative;
+			top: 2px;
 		}
 	}
 }
