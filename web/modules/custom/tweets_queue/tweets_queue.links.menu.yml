@@ -39,3 +39,10 @@ tweets_queue.file_upload:
   parent: system.admin_config_services
   route_name: tweets_queue.file_upload
   weight: -13
+
+tweets_queue_sample.file_upload:
+  title: 'Sample CSV tweets'
+  description: 'Sample CSV tweets.'
+  parent: system.admin_config_services
+  route_name: tweets_queue_sample.file_upload
+  weight: -12
