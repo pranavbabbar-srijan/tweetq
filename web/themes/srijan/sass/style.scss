@@ -229,11 +229,7 @@
 		@include container(1180px);
 		position: relative;
 		@media screen and (min-width: $xtraLarge){
-			@include container(1320px);
-		}
-		@media screen and (min-width: $smallDesk){
-			@include container(1080px);
-			font-size: 80%;
+			@include container(1440px);
 		}
 	}
 }
@@ -285,11 +281,7 @@ body {
 .region-content {
 	@include container(1180px);
 	@media screen and (min-width: $xtraLarge){
-		@include container(1320px);
-	}
-	@media screen and (min-width: $smallDesk){
-		@include container(1080px);
-		font-size: 80%;
+		@include container(1440px);
 	}
 	// Error message.
 	.messages--error {
@@ -488,7 +480,7 @@ body {
     	a {
     		border: none;
 			background: $twitter;
-			width: 100%;
+			width: 94%;
 		    padding: .5em 1em .5em 1em;
 		    font-size: 18px;
 		    color: white;
@@ -584,12 +576,6 @@ body {
     height: 100%;
 }
 .user-logged-in {
-	&.path-twitter {
-		.main-content {
-			position: inherit;
-			width: 100%;
-		}
-	}
 	.main-content {
 		@include column(9.12);
 		float: right;
