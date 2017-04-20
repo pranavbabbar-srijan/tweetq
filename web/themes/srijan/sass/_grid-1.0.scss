@@ -149,6 +149,12 @@ $maxWidth : 48em;
     @content;
   }
 }
+$smallDesk : 74.2em;
+@mixin max-screen($maxWidth){
+  @media (max-width: $maxWidth){
+    @content;
+  }
+}
 $xtraLarge : 85.375em;
 @mixin min-max-screen($minWidth, $maxWidth){
   @media (min-width: $minWidth) and (max-width: $maxWidth) {
