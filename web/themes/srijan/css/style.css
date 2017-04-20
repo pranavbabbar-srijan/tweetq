@@ -1189,7 +1189,8 @@ body {
         outline: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         display: block;
-        width: 100%; }
+        width: 100%;
+        padding-bottom: 4px; }
       .path-signup .block-system-main-block .message-header .js-form-item.js-form-item-field-organization, .path-twitter .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
         width: 100%; }
       .path-signup .block-system-main-block .message-header .js-form-item label, .path-twitter .block-system-main-block .message-header .js-form-item label {
@@ -1268,7 +1269,13 @@ body {
   top: 79px; }
 
 .block-non-twitter-users-left-side-bar-block .non-twitter-profile span.img {
-  background: #E7E8E9; }
+  background: #E7E8E9;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .block-non-twitter-users-left-side-bar-block .non-twitter-profile span.img img[src="Anonymous user.png"] {
+    width: 80%;
+    opacity: .2; }
 
 .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div {
   opacity: .7; }
