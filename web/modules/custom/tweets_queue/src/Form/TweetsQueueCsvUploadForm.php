@@ -3,6 +3,7 @@
 namespace Drupal\tweets_queue\Form;
 
 use Drupal\Core\Form\FormBase;
+use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -57,11 +58,27 @@ class TweetsQueueCsvUploadForm extends FormBase {
       '#type' => 'submit',
       '#value' => t(TWITTER_IMPORT_TWEET_LABEL),
     );
+
+    $fids[0] = tweets_queue_fetch_twitter_statistics_info(TWITTER_SAMPLE_CSV_FILE);
+    $file_path = tweets_queue_get_file_real_path($fids);
+    if ($file_path) {
+      $file_url = file_create_url($file_path);
+      $url = Url::fromUri($file_url);
+      $external_link = \Drupal::l(t('Download Sample 1'), $url);
+      $form['sample_csv_download'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div class="download-csv">',
+        '#markup' => t(TWITTER_DOWNLOAD_SAMPLE_CSV_LABEL) . $external_link,
+        '#suffix' => '</div>',
+      );
+    }
+
     $form['import_bottom'] = array(
       '#type' => 'markup',
       '#markup' => t(''),
       '#suffix' => '</div>',
     );
+
     return $form;
   }
 

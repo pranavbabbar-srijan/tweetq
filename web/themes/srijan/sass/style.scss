@@ -1910,6 +1910,22 @@ body {
 	}
 }
 
+.download-csv {
+	a {
+		margin-left: 4em;
+		text-decoration: none;
+		color: $twitter;
+		font-size: 12px;
+		font-style: italic;
+		&:before {
+			content: $icon-csv-file-format-extension;
+			@extend %icomoon;
+			font-size: 14px;
+			margin-right: 5px;
+		}
+	}
+}
+
 .send-tweets-form, .-form-tweets-queue-csv-upload {
 	padding-top: 8px;
 	// margin-top: 80px;
