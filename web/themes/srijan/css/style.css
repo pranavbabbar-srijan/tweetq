@@ -1219,7 +1219,20 @@ body {
         border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         display: block;
         width: 100%;
-        padding-bottom: 4px; }
+        padding-bottom: 7px;
+        font-size: 14px; }
+        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]::-webkit-input-placeholder {
+          /* Chrome/Opera/Safari */
+          opacity: .5; }
+        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]::-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]::-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]::-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]::-moz-placeholder {
+          /* Firefox 19+ */
+          opacity: .5; }
+        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]:-ms-input-placeholder {
+          /* IE 10+ */
+          opacity: .5; }
+        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder {
+          /* Firefox 18- */
+          opacity: .5; }
       .path-signup .block-system-main-block .message-header .js-form-item.js-form-item-field-organization, .path-twitter .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
         width: 100%; }
       .path-signup .block-system-main-block .message-header .js-form-item label, .path-twitter .block-system-main-block .message-header .js-form-item label {
@@ -1280,6 +1293,9 @@ body {
       margin-top: 5px; }
       .path-signup .signup-form .signup span:before, .path-signup .twitter-signup-form .signup span:before, .path-twitter .signup-form .signup span:before, .path-twitter .twitter-signup-form .signup span:before {
         content: "*"; }
+
+.path-signup .signup + .message-header, .path-twitter .signup + .message-header {
+  margin-top: 35px; }
 
 .toolbar-fixed #sidebar-first {
   top: 136px; }
@@ -1883,12 +1899,14 @@ body {
   margin-left: 4em;
   text-decoration: none;
   color: #2aa9e0;
-  font-size: 12px;
+  font-size: 13px;
   font-style: italic; }
   .download-csv a:before {
     content: "";
-    font-size: 14px;
-    margin-right: 5px; }
+    font-size: 18px;
+    margin-right: 5px;
+    position: relative;
+    top: 2px; }
 
 .send-tweets-form, .-form-tweets-queue-csv-upload {
   padding-top: 8px;
