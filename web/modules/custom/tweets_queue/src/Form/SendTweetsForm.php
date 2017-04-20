@@ -60,6 +60,9 @@ class SendTweetsForm extends FormBase {
       '#type' => 'submit',
       '#value' => t('Save for Later'),
       '#submit' => array('tweets_queue_create_save_tweet_form_submit'),
+      '#attributes' => array(
+        'title' => t(TWITTER_TWEET_SAVE_LATER_TOOLTIP),
+      ),
       '#weight' => 10,
     );
 
@@ -73,6 +76,9 @@ class SendTweetsForm extends FormBase {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Tweet Now'),
+      '#attributes' => array(
+        'title' => t(TWITTER_TWEET_NOW_TOOLTIP),
+      ),
       '#weight' => 9,
     );
      $form['message-footer'] = array(
