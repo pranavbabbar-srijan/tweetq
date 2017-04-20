@@ -57,6 +57,9 @@ class TweetsQueueCsvUploadForm extends FormBase {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t(TWITTER_IMPORT_TWEET_LABEL),
+      '#attributes' => array(
+        'title' => t(TWITTER_IMPORT_TWEET_TOOLTIP),
+      ),
     );
 
     $fids[0] = tweets_queue_fetch_twitter_statistics_info(TWITTER_SAMPLE_CSV_FILE);
