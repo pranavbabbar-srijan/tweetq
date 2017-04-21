@@ -228,12 +228,12 @@
 	.layout-container {
 		@include container(1180px);
 		position: relative;
-		@media screen and (min-width: $xtraLarge){
-			@include container(1320px);
-		}
 		@media screen and (min-width: $smallDesk){
 			@include container(1080px);
 			font-size: 80%;
+		}
+		@media screen and (min-width: $xtraLarge){
+			@include container(1440px);
 		}
 	}
 }
@@ -284,12 +284,12 @@ body {
 
 .region-content {
 	@include container(1180px);
-	@media screen and (min-width: $xtraLarge){
-		@include container(1320px);
-	}
 	@media screen and (min-width: $smallDesk){
 		@include container(1080px);
 		font-size: 80%;
+	}
+	@media screen and (min-width: $xtraLarge){
+		@include container(1440px);
 	}
 	// Error message.
 	.messages--error {

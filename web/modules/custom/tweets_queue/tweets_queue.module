@@ -113,6 +113,12 @@ const TWITTER_FIELD_EDIT_LABEL = 'Modify';
 const TWITTER_CREATE_TWEET_LABEL = 'Create a Tweet';
 const TWITTER_IMPORT_TWEET_LABEL = 'Import Tweets';
 
+const TWITTER_EDIT_TOOLTIP = 'Click here to edit your Tweet';
+const TWITTER_DELETE_TOOLTIP = 'Click here to delete your Tweet';
+const TWITTER_TWEET_SAVE_LATER_TOOLTIP = 'Click here to save your message for the Barbet to post on Twitter';
+const TWITTER_TWEET_NOW_TOOLTIP = 'Click here to post your message on Twitter';
+const TWITTER_IMPORT_TWEET_TOOLTIP = 'Click here to import tweets from .csv file to Barbet';
+
 const TWITTER_SAMPLE_CSV_IMPORT_TWEET_LABEL = 'Upload Sample Tweets';
 const TWITTER_UPLOAD_SAMPLE_CSV_LABEL = 'Upload CSV';
 const TWITTER_DOWNLOAD_SAMPLE_CSV_LABEL = 'Download Sample CSV File';

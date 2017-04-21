@@ -63,11 +63,6 @@
 		if ($('div').hasClass('no-tweet-found')) {
 		    $('body').addClass('no-tweet');
 		}
-	    
-		// $("body").click(function(e) {
-		// 	e.stopPropagation();
-		// 	$(".notification-message-list").toggleClass("active");
-	 //    });
 
 	     $("#block-usersdashboardheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
@@ -176,6 +171,9 @@
 			}).addClass("rippleEffect");
 		});
 		  $(".path-frontpage .region-content .messages--error").insertBefore("#user-login-prefix #forgot-password");
+
+		  // Fadeout messages.
+		$('.messages').delay(5000).fadeOut(400);
 
 	});
 
