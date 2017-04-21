@@ -1,0 +1,14 @@
+
+name: BeautyTips Manager
+type: module
+description: Adds graphical manager for creating custom beautytips.
+package: User interface
+dependencies:
+  - beautytips
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2016-08-04
+version: '8.x-1.x-dev'
+core: '8.x'
+project: 'beautytips'
+datestamp: 1470329710
