@@ -115,7 +115,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
     $file = fopen($file, 'r');
     $row = 0;
     $import_message = array('total' => 0, 'duplicate' => 0,
-      'imported' => 0 , 'valid' => 0, 'invalid' => 0);
+      'imported' => 0 , 'valid' => 0, 'invalid' => 0, 'skipped' => 0);
     while (($line = fgetcsv($file)) !== FALSE) {
       if ($row == 0) {
         $row++;
@@ -131,6 +131,10 @@ class TweetsQueueCsvUploadForm extends FormBase {
         $hash_tag = '';
       }
       $size = tweets_queue_calculate_tweet_message_size($message, $hash_tag, 'size');
+      if ($size >= 300) {
+        $import_message['skipped'] = $import_message['skipped'] + 1;
+        continue;
+      }
       $twitter_message_info = array(
         'message' => $message,
         'hashtag' => $hash_tag,
@@ -153,19 +157,24 @@ class TweetsQueueCsvUploadForm extends FormBase {
     }
     fclose($file);
     drupal_set_message(t("@total Import completed successfully.<br></br>Total : @total Imported: @imported Valid: @valid
-      Invalid : @invalid Duplicate: @duplicate ",
+      Invalid : @invalid Duplicate: @duplicate Skipped: @skipped",
       array(
         '@total' => $import_message['total'],
         '@imported' => $import_message['imported'],
         '@duplicate' => $import_message['duplicate'],
         '@valid' => $import_message['valid'],
-        '@invalid' => $import_message['invalid']
+        '@invalid' => $import_message['invalid'],
+        '@skipped' => $import_message['skipped']
         )
       )
     );
     $_SESSION["valid_import"] = $import_message['valid'];
     $_SESSION["invalid_import"] = $import_message['invalid']; 
     $_SESSION["new"] = "New";
+    $skipped = ['skipped'];
+    if ($skipped > 0) {
+      drupal_set_message(t("Skipped shows the tweets whose character limit exceeds"));
+    }
   }
 
 }
