@@ -332,18 +332,6 @@ button {
     -o-box-sizing: border-box;
     box-sizing: border-box;
     position: relative; }
-    @media screen and (min-width: 85.5em) {
-      #header .layout-container {
-        max-width: 1320px;
-        /* for fixed layout */
-        margin-left: auto;
-        margin-right: auto;
-        -webkit-box-sizing: border-box;
-        -khtml-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -ms-box-sizing: border-box;
-        -o-box-sizing: border-box;
-        box-sizing: border-box; } }
     @media screen and (min-width: 74.2em) {
       #header .layout-container {
         max-width: 1080px;
@@ -357,6 +345,18 @@ button {
         -o-box-sizing: border-box;
         box-sizing: border-box;
         font-size: 80%; } }
+    @media screen and (min-width: 85.5em) {
+      #header .layout-container {
+        max-width: 1440px;
+        /* for fixed layout */
+        margin-left: auto;
+        margin-right: auto;
+        -webkit-box-sizing: border-box;
+        -khtml-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        -o-box-sizing: border-box;
+        box-sizing: border-box; } }
 
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
@@ -398,18 +398,6 @@ body {
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box; }
-  @media screen and (min-width: 85.5em) {
-    .region-content {
-      max-width: 1320px;
-      /* for fixed layout */
-      margin-left: auto;
-      margin-right: auto;
-      -webkit-box-sizing: border-box;
-      -khtml-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      -ms-box-sizing: border-box;
-      -o-box-sizing: border-box;
-      box-sizing: border-box; } }
   @media screen and (min-width: 74.2em) {
     .region-content {
       max-width: 1080px;
@@ -423,6 +411,18 @@ body {
       -o-box-sizing: border-box;
       box-sizing: border-box;
       font-size: 80%; } }
+  @media screen and (min-width: 85.5em) {
+    .region-content {
+      max-width: 1440px;
+      /* for fixed layout */
+      margin-left: auto;
+      margin-right: auto;
+      -webkit-box-sizing: border-box;
+      -khtml-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      -o-box-sizing: border-box;
+      box-sizing: border-box; } }
   .region-content .messages--error {
     margin-top: 10px;
     border: 0;
