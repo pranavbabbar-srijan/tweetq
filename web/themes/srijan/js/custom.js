@@ -173,7 +173,7 @@
 		  $(".path-frontpage .region-content .messages--error").insertBefore("#user-login-prefix #forgot-password");
 
 		  // Fadeout messages.
-		$('.messages').delay(5000).fadeOut(400);
+		$('.messages, .messages--error').delay(8000).fadeOut(300);
 
 	});
 

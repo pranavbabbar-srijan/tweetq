@@ -224,7 +224,8 @@ button {
       margin-right: 22px;
       margin-top: 8px;
       text-decoration: none;
-      color: #666; }
+      color: #666;
+      position: relative; }
       .block-users-dashboard-header-block .profile + a:before, .block-users-dashboard-header-profile-block .profile + a:before {
         content: "";
         font-size: 22px; }
@@ -237,7 +238,7 @@ button {
         border-bottom: 16px solid white;
         display: block;
         position: absolute;
-        top: 34px;
+        top: 28px;
         left: -5px; }
     .block-users-dashboard-header-block .profile .profile-links, .block-users-dashboard-header-profile-block .profile .profile-links {
       visibility: hidden;
@@ -1561,6 +1562,8 @@ body {
     font-size: 12px;
     text-align: center;
     display: block; }
+    .notifications > div:nth-child(1).active {
+      left: 0; }
   .notifications .notification-message-list {
     height: 0;
     overflow-y: scroll;
@@ -1595,7 +1598,10 @@ body {
     .notifications .notification-message-list.active {
       height: 360px;
       padding: 1em;
-      visibility: inherit; }
+      visibility: inherit;
+      top: 28px;
+      background: white;
+      text-align: left; }
     .notifications .notification-message-list > div {
       display: flex;
       flex-flow: row wrap;
@@ -1776,7 +1782,7 @@ body {
       display: block;
       margin-top: 115px;
       background: white;
-      left: -1.9vw;
+      left: -24px;
       width: 74vw;
       position: absolute;
       color: #f56a6a;
