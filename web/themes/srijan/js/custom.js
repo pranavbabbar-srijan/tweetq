@@ -100,6 +100,9 @@
 	        $(this).prev().toggle();
 	        return false;
 	    });
+	    // Change an error message
+	    $(".messages--error").text('Unrecognized Email and Password');
+
 
 	    $("#forgot-password-section").hide();
 	    $("#forgot-password").click(function() {
