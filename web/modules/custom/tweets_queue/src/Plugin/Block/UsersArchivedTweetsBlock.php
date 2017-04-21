@@ -99,7 +99,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
   private function compileData($row) {
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'delete'],
-      ['attributes' => ['class' => 'delete colorbox cboxElement', 'title' => t(TWITTER_DELETE_TOOLTIP)]]
+      ['attributes' => ['class' => 'delete colorbox cboxElement beautytips', 'title' => t(TWITTER_DELETE_TOOLTIP)]]
     );
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();

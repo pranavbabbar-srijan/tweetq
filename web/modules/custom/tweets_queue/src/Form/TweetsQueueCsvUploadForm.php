@@ -58,6 +58,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
       '#type' => 'submit',
       '#value' => t(TWITTER_IMPORT_TWEET_LABEL),
       '#attributes' => array(
+        'class' => array('beautytips'),
         'title' => t(TWITTER_IMPORT_TWEET_TOOLTIP),
       ),
     );
