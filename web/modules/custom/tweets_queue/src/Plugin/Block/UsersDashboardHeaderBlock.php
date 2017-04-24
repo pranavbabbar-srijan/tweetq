@@ -33,7 +33,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
       $name = $user->get(SIGNUP_FIELD_FULL_NAME)->value;
       $picture = '';
       $picture = $user_twitter_profile_info->profile_image_url;
-      $profile_img = "<img src='http://abs.twimg.com/sticky/default_profile_images/default_profile_0_normal.png'></img>";
+      $profile_img = "<img src='Anonymous user.png'></img>";
     }
     else {
       $picture = '';
