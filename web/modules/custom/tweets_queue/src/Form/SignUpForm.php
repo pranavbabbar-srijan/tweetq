@@ -46,7 +46,7 @@ class SignUpForm extends FormBase {
 
     $form['message-header'] = array(
       '#type' => 'markup',
-      '#prefix' => '<div class="message-header">',
+      '#prefix' => '<div id="signup-form" class="message-header">',
       '#markup' => t(''),
     );
     $form[SIGNUP_FIELD_FULL_NAME] = array(

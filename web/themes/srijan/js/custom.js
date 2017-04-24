@@ -5,27 +5,95 @@
 	$(document).ready(function(){
 		var limit_chars = 140;
 
-    $("#send-tweets-form #edit-message").on('keyup', function(e) {
-    	var tweet_msg = $('#send-tweets-form #edit-message').val();
-    	var tweet_msg_length = tweet_msg.length;
-    	if (tweet_msg_length > limit_chars) {
-    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
-    	}
-    	else {
-    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
-    	}
-    });
+		//Signup form validation.
+		var alphabet_msg = "Only Letters are allowed";
+		var full_name_missing_msg = "Please enter full name";
+		var email_msg = "Please enter a valid email ID";
+		var email_missing_msg = "Please enter your email ID";
+		var password_missing_msg = "Please enter the password";
+		var password_legth_msg = "Enter password between 6 and 12 characters";
+		var password_minimum_length = 6;
+		var password_maximum_length = 12;
 
-    $("#send-tweets-form #edit-message").on('keyup', function(e) {
-    	var tweet_msg = $('#send-tweets-form #edit-message').val();
-    	var tweet_msg_length = tweet_msg.length;
-    	if (tweet_msg_length > 300) {
-    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
-    	}
-    	else {
-    		$("#send-tweets-form #edit-save").removeAttr('disabled');
-    	}
-    });
+		//Full name validtaion.
+	    $("#signup-form #edit-field-full-name").on('keyup', function(e) {
+	    	var name = $('#signup-form #edit-field-full-name').val();
+	    	var alphabet = /^[a-zA-Z ]+$/.test(name);
+	    	$("#fname-validation-error").remove();
+	    	if (name.length > 0) {
+	    		if (!alphabet) {
+	    			$("<span id='fname-validation-error' class='validation-error'>" + alphabet_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    		}
+	    	}
+	    });
+
+	    $("#signup-form #edit-field-full-name").focusout(function() {
+	   		var name = $('#signup-form #edit-field-full-name').val();
+	    	if (name.length == 0) {
+	    		$("#fname-validation-error").remove();
+	    		$("<span id='fname-validation-error' class='validation-error'>" + full_name_missing_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    	}
+	  	});
+
+	    //Email validation.
+	    $("#signup-form #edit-email").focusout(function() {
+	   		var email = $('#signup-form #edit-email').val();
+	   		$("#email-validation-error").remove();
+	    	if (email.length == 0) {
+	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#signup-form #edit-email" );
+	    	}
+	  	});
+
+	    $("#signup-form #edit-email").blur(function() {
+	   		var email = $('#signup-form #edit-email').val();
+	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(email);
+  			if (email.length > 0) {
+	    		if (!valid) {
+	    			$("#email-validation-error").remove();
+	    			$("<span id='email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#signup-form #edit-email" );
+	    		}
+	    	}
+	  	});
+
+	    //Password validation.
+	    $("#signup-form #edit-user-password").focusout(function() {
+	   		var password = $('#signup-form #edit-user-password').val();
+	   		$("#password-validation-error").remove();
+	    	if (password.length == 0) {
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
+	    	}
+	  	});
+
+	    $("#signup-form #edit-user-password").focusout(function() {
+	   		var password = $('#signup-form #edit-user-password').val();
+	    	if (password.length < password_minimum_length || password.length > password_maximum_length) {
+	    		$("#password-validation-error").remove();
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_legth_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
+	    	}
+	  	});
+
+	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
+	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
+	    	var tweet_msg_length = tweet_msg.length;
+	    	if (tweet_msg_length > limit_chars) {
+	    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+	    	}
+	    	else {
+	    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
+	    	}
+	    });
+
+	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
+	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
+	    	var tweet_msg_length = tweet_msg.length;
+	    	if (tweet_msg_length > 300) {
+	    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
+	    	}
+	    	else {
+	    		$("#send-tweets-form #edit-save").removeAttr('disabled');
+	    	}
+	    });
 
 
 		$(".-form-tweets-queue-csv-upload .description").insertAfter(".-form-tweets-queue-csv-upload #edit-submit");
