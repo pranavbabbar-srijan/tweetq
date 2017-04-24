@@ -1737,6 +1737,11 @@ body {
 		background: $gray;
 		opacity: .35;
 	}
+	#edit-save:disabled {
+		color: $gray;
+		border-color: $gray;
+		opacity: .35;
+	}
 }
 
 .-form-tweets-queue-csv-upload {
@@ -1960,7 +1965,6 @@ body {
 }
 
 // tooltip
-// .tooltip-css {
-// 	transition: .7s opacity;
-//     transition-delay: 1s;
-// }
+.tooltip-css {
+	transition: all 1s !important;
+}
