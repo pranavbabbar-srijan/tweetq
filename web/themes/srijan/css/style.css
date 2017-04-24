@@ -448,8 +448,10 @@ body {
       top: 16px;
       margin-left: -25px;
       font-size: 20px; }
-    .region-content .messages--error div[role=alert] .messages__list {
+    .region-content .messages--error div[role=alert] .messages__list, .region-content .messages--error div[role=alert] .error-group {
       display: inline-block; }
+    .region-content .messages--error div[role=alert] .error-group {
+      width: 276px; }
 
 .block-system-main-block + .messages--error {
   display: block;
