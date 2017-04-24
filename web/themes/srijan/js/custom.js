@@ -15,6 +15,19 @@
     		$("#send-tweets-form #edit-submit").removeAttr('disabled');
     	}
     });
+
+    $("#send-tweets-form #edit-message").on('keyup', function(e) {
+    	var tweet_msg = $('#send-tweets-form #edit-message').val();
+    	var tweet_msg_length = tweet_msg.length;
+    	if (tweet_msg_length > 300) {
+    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
+    	}
+    	else {
+    		$("#send-tweets-form #edit-save").removeAttr('disabled');
+    	}
+    });
+
+
 		$(".-form-tweets-queue-csv-upload .description").insertAfter(".-form-tweets-queue-csv-upload #edit-submit");
 		$("#block-usersdashboardheaderblock .content").append("<a id='notification-display' href='#;'></a>");
 		$("#block-usersdashboardnontwitterheaderblock .content").append("<a id='notification-display' href='#;'></a>");
@@ -63,11 +76,10 @@
 		if ($('div').hasClass('no-tweet-found')) {
 		    $('body').addClass('no-tweet');
 		}
-	    
-		// $("body").click(function(e) {
-		// 	e.stopPropagation();
-		// 	$(".notification-message-list").toggleClass("active");
-	 //    });
+
+		if ($('form').hasClass('-form-tweets-queue-csv-upload')) {
+		    $('body').addClass('import-tweet-page');
+		}
 
 	     $("#block-usersdashboardheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
@@ -92,6 +104,8 @@
 	        $(this).prev().toggle();
 	        return false;
 	    });
+	    // Change an error message
+		// $(".messages--error").text('Unrecognized Email and Password');
 
 	    $("#forgot-password-section").hide();
 	    $("#forgot-password").click(function() {
@@ -177,6 +191,11 @@
 		});
 		  $(".path-frontpage .region-content .messages--error").insertBefore("#user-login-prefix #forgot-password");
 
+		  // Fadeout messages.
+		$('.messages, .messages--error').delay(8000).fadeOut(300);
+
 	});
 
 })(jQuery);
+
+

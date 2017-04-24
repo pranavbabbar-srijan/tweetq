@@ -99,7 +99,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
   private function compileData($row) {
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'delete'],
-      ['attributes' => ['class' => 'delete colorbox cboxElement']]
+      ['attributes' => ['class' => 'delete colorbox cboxElement beautytips', 'title' => t(TWITTER_DELETE_TOOLTIP)]]
     );
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();
@@ -116,7 +116,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
     $data['changed'] = $changed;
     // $data['changed'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED});
 
-    $data['retweeted'] = t('@times times', array('@times' => $row->{TWITTER_FIELD_TWEETED}));
+    $data['retweeted'] = t('@times', array('@times' => $row->{TWITTER_FIELD_TWEETED}));
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
   }

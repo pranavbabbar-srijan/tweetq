@@ -33,7 +33,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
       $name = $user->get(SIGNUP_FIELD_FULL_NAME)->value;
       $picture = '';
       $picture = $user_twitter_profile_info->profile_image_url;
-      $profile_img = "<img src='http://abs.twimg.com/sticky/default_profile_images/default_profile_0_normal.png'></img>";
+      $profile_img = "<img src='Anonymous user.png'></img>";
     }
     else {
       $picture = '';
@@ -86,8 +86,16 @@ class UsersDashboardHeaderBlock extends BlockBase {
       );
     }
     $message_history_data .= "</div>";
-    $output = "<div class='notifications'>" . $message_history_count_output .
-      $message_history_data . "</div>" . $twitter_profile_output;
+
+    if ($message_history_count == 0) {
+      $output = "<div class='notifications'>" .
+       $message_history_data . "</div>" . $twitter_profile_output;
+    }
+
+    else {
+      $output = "<div class='notifications'>" . $message_history_count_output .
+       $message_history_data . "</div>" . $twitter_profile_output;
+    }
 
     return array(
       '#type' => 'markup',

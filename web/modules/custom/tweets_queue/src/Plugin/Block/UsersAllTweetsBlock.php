@@ -92,11 +92,11 @@ class UsersAllTweetsBlock extends BlockBase {
   private function compileData($row) {
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'delete'],
-      ['attributes' => ['class' => 'delete colorbox cboxElement']]
+      ['attributes' => ['class' => 'delete colorbox cboxElement beautytips', 'title' => t(TWITTER_DELETE_TOOLTIP)]]
     );
     $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'edit'],
-      ['attributes' => ['class' => 'edit']]
+      ['attributes' => ['class' => 'edit beautytips', 'title' => t(TWITTER_EDIT_TOOLTIP)]]
     );
     $edit_url_link = \Drupal::l(t("Edit"), $edit_url);
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
@@ -115,7 +115,7 @@ class UsersAllTweetsBlock extends BlockBase {
     $changed = ($row->{TWITTER_FIELD_CHANGED}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED}) : '-';
     $data['changed'] = $changed;
     // $data['changed'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED});
-    $data['retweeted'] = t('@times times', array('@times' => $row->tweeted));
+    $data['retweeted'] = t('@times', array('@times' => $row->tweeted));
     $data['edit_link'] = $edit_url_link ;
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);

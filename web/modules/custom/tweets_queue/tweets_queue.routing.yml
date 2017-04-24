@@ -119,3 +119,11 @@ tweets_queue_user_history.process:
     _title: 'User History'
   requirements:
     _role: 'twitter_approved_client+administrator'
+
+tweets_queue_sample.file_upload:
+  path: '/admin/config/services/tweets_queue/sample_csv_file'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\TweetsQueueSampleCsvUploadForm'
+    _title: 'Upload Sample Csv Tweets'
+  requirements:
+    _role: 'administrator'

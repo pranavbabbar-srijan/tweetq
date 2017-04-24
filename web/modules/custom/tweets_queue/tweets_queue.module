@@ -112,6 +112,17 @@ const TWITTER_FIELD_EDIT_LABEL = 'Modify';
 
 const TWITTER_CREATE_TWEET_LABEL = 'Create a Tweet';
 const TWITTER_IMPORT_TWEET_LABEL = 'Import Tweets';
+
+const TWITTER_EDIT_TOOLTIP = 'Click here to edit your Tweet';
+const TWITTER_DELETE_TOOLTIP = 'Click here to delete your Tweet';
+const TWITTER_TWEET_SAVE_LATER_TOOLTIP = 'Click here to save your message for the Barbet to post on Twitter';
+const TWITTER_TWEET_NOW_TOOLTIP = 'Click here to post your message on Twitter';
+const TWITTER_IMPORT_TWEET_TOOLTIP = 'Click here to import tweets from .csv file to Barbet';
+
+const TWITTER_SAMPLE_CSV_IMPORT_TWEET_LABEL = 'Upload Sample Tweets';
+const TWITTER_UPLOAD_SAMPLE_CSV_LABEL = 'Upload CSV';
+const TWITTER_DOWNLOAD_SAMPLE_CSV_LABEL = 'Download Sample CSV File';
+
 const TWITTER_VALID_TWEET_LABEL = 'Valid Tweets';
 const TWITTER_INVALID_TWEET_LABEL = 'Invalid Tweets';
 const TWITTER_ARCHIVED_TWEET_LABEL = 'Archived Tweets';
@@ -133,6 +144,7 @@ const TWITTER_STATISTCIS_SCREEN = 'scr';
 const TWITTER_STATISTCIS_AUTH_EXPIRES = 'exp';
 const TWITTER_HANDLER_PROFILE = 'thp';
 const TWITTER_USER_HISTORY_MARK = 'uhm';
+const TWITTER_SAMPLE_CSV_FILE = 'TSCF';
 const TWITTER_CONNECT_HEADER = 'Connect with Twitter to Continue';
 const TWITTER_CONNECT_TEXT = 'Connect with Twitter';
 
@@ -2541,6 +2553,7 @@ function tweets_queue_fetch_twitter_statistics_info($name = 'tweets_count') {
       break;
     default:
       $query->addField('p', 'value');
+      $query->condition('p.name', $name, '=');
   }
   $total = $query->execute()->fetchField();
   return $total;
@@ -3011,7 +3024,13 @@ function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInt
     $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
       t('Password length should be minimum of 6 and maximum of 12 characters.'));
   }
+
+  if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$password)) {
+    $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
+      t('<div>Please Enter At least one Uppercase Letter: A-Z,</div>  <div>At least one Lowercase Letter: a-z,</div>  <div>At least one Numerical Character: 0-9,</div>  <div>At least one of the following special character "!", "@", "#"</div>'));
+  }
 }
+
 
 function tweets_queue_match_current_path($current_path, $match_path, $format = 1, $deep_match = 1) {
   $class = "in-active";
@@ -3183,4 +3202,25 @@ function tweets_queue_perform_hashtag_highlight($message) {
     $message = str_ireplace($data, '<b>' . $data . '</b>', $message);
   }
   return t($message);
+}
+
+/**
+ * Get file real path.
+ *
+ * @param $fid
+ *   File fid.
+ *
+ * @return string
+ *   Return file uri.
+ */
+function tweets_queue_get_file_real_path($fid) {
+  $uri = '';
+  if (empty($fid)) {
+    return $uri;
+  }
+  $query = \Drupal::database()->select('file_managed', 'f');
+  $query->addField('f', 'uri');
+  $query->condition('f.fid', $fid);
+  $uri = $query->execute()->fetchField();
+  return $uri;
 }

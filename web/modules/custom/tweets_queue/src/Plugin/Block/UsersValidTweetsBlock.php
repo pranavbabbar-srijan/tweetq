@@ -89,11 +89,11 @@ class UsersValidTweetsBlock extends BlockBase {
   private function compileData($row) {
     $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'edit'],
-      ['attributes' => ['class' => 'edit']]
+      ['attributes' => ['class' => 'edit beautytips', 'title' => t(TWITTER_EDIT_TOOLTIP)]]
     );
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'delete'],
-      ['attributes' => ['class' => 'delete colorbox cboxElement']]
+      ['attributes' => ['class' => 'delete colorbox cboxElement beautytips', 'title' => t(TWITTER_DELETE_TOOLTIP)]]
     );
 
     $edit_url_link = \Drupal::l(t("Edit"), $edit_url);
