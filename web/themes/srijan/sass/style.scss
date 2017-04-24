@@ -230,11 +230,11 @@
 		@include container(1180px);
 		position: relative;
 		@media screen and (min-width: $smallDesk){
-			@include container(1080px);
+			@include container(1280px);
 			font-size: 80%;
 		}
 		@media screen and (min-width: $xtraLarge){
-			@include container(1440px);
+			@include container(1300px);
 		}
 	}
 }
@@ -286,11 +286,11 @@ body {
 .region-content {
 	@include container(1180px);
 	@media screen and (min-width: $smallDesk){
-		@include container(1080px);
+		@include container(1280px);
 		font-size: 80%;
 	}
 	@media screen and (min-width: $xtraLarge){
-		@include container(1440px);
+		@include container(1300px);
 	}
 	// Error message.
 	.messages--error {
@@ -1958,3 +1958,9 @@ body {
 	// margin-top: 80px;
     width: 99.9%;
 }
+
+// tooltip
+// .tooltip-css {
+// 	transition: .7s opacity;
+//     transition-delay: 1s;
+// }
