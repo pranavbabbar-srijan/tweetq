@@ -77,6 +77,10 @@
 		    $('body').addClass('no-tweet');
 		}
 
+		if ($('form').hasClass('-form-tweets-queue-csv-upload')) {
+		    $('body').addClass('import-tweet-page');
+		}
+
 	     $("#block-usersdashboardheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
 	        e.stopPropagation();
@@ -101,8 +105,7 @@
 	        return false;
 	    });
 	    // Change an error message
-//	    $(".messages--error").text('Unrecognized Email and Password');
-
+		// $(".messages--error").text('Unrecognized Email and Password');
 
 	    $("#forgot-password-section").hide();
 	    $("#forgot-password").click(function() {

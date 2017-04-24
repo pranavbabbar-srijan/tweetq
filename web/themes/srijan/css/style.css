@@ -1924,3 +1924,7 @@ body {
 
 .tooltip-css {
   transition: all 1s !important; }
+
+.import-tweet-page .tooltip-css {
+  top: 90px !important;
+  left: 71.6% !important; }
