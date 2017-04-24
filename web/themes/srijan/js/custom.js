@@ -101,7 +101,7 @@
 	        return false;
 	    });
 	    // Change an error message
-	    $(".messages--error").text('Unrecognized Email and Password');
+//	    $(".messages--error").text('Unrecognized Email and Password');
 
 
 	    $("#forgot-password-section").hide();
