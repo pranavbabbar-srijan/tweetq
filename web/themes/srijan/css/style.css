@@ -1726,6 +1726,10 @@ body {
   .send-tweets-form #edit-submit:disabled, .tweets-queue-tweet-form #edit-submit:disabled {
     background: #979797;
     opacity: .35; }
+  .send-tweets-form #edit-save:disabled, .tweets-queue-tweet-form #edit-save:disabled {
+    color: #979797;
+    border-color: #979797;
+    opacity: .35; }
 
 .-form-tweets-queue-csv-upload {
   padding-top: 5px; }
@@ -1917,3 +1921,6 @@ body {
 .send-tweets-form, .-form-tweets-queue-csv-upload {
   padding-top: 8px;
   width: 99.9%; }
+
+.tooltip-css {
+  transition: all 1s !important; }

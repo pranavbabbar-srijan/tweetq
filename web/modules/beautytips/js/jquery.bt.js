@@ -369,7 +369,7 @@ jQuery.bt = {version: '0.9.5-rc1'};
         $text.css(opts.cssStyles);
         // create the wrapping box which contains text and canvas
         // put the content in it, style it, and append it to the same offset parent as the target
-        var $box = $('<div class="bt-wrapper"></div>').append($text).addClass(opts.cssClass).css({position: 'absolute', width: opts.width, zIndex: opts.wrapperzIndex, visibility:'hidden'}).appendTo(offsetParent);
+        var $box = $('<div class="bt-wrapper"></div>').fadeIn(100).append($text).addClass(opts.cssClass).css({position: 'absolute', width: opts.width, zIndex: opts.wrapperzIndex, visibility:'hidden'}).appendTo(offsetParent);
 
         // use bgiframe to get around z-index problems in IE6
         // http://plugins.jquery.com/project/bgiframe
