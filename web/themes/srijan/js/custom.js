@@ -191,14 +191,8 @@
 		  // Fadeout messages.
 		$('.messages, .messages--error').delay(8000).fadeOut(300);
 
-		// $('.tooltip-css').delay(8000).fadeOut(300);
-
-		$('.beautytips').hover(function(){
-
-			$('.tooltip-css').delay(1000).fadeIn('slow');
-
-		});
-
 	});
 
 })(jQuery);
+
+
