@@ -12,7 +12,8 @@
 		var email_missing_msg = "Please enter your email ID";
 		var existing_email_msg = "Email ID already exist";
 		var password_missing_msg = "Please enter the password";
-		var password_legth_msg = "Enter password between 6 and 12 characters";
+		var password_character_msg = 'Enter password between 6 and 12 characters<br>Please Enter At least one Uppercase Letter: A-Z, At least one Lowercase Letter: a-z, At least one Numerical Character: 0-9, At least one of the following special character "!", "@", "#"';
+		var password_length_msg = "Enter password between 6 and 12 characters";
 		var password_minimum_length = 6;
 		var password_maximum_length = 12;
 
@@ -56,7 +57,7 @@
 	    		}
 	    		if (valid) {
 	    			$("#email-validation-error").remove();
-	    			$.post('/tweetQ11Apr/_www/dashboard/validateEmail', {'email' : email}, function(data) {
+	    			$.post('/dashboard/validateEmail', {'email' : email}, function(data) {
 	    				if  (data == "exist") {
 							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#signup-form #edit-email" );	    					
 	    				}
@@ -69,17 +70,20 @@
 	    //Password validation.
 	    $("#signup-form #edit-user-password").focusout(function() {
 	   		var password = $('#signup-form #edit-user-password').val();
-	   		$("#password-validation-error").remove();
-	    	if (password.length == 0) {
-	    		$("<span id='password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
-	    	}
+	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  			var valid = regex.test(password);
+  			$("#password-validation-error").remove();
+  			if (!valid) {
+  				$("#password-validation-error").remove();
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
+  			}
 	  	});
 
 	    $("#signup-form #edit-user-password").focusout(function() {
 	   		var password = $('#signup-form #edit-user-password').val();
-	    	if (password.length < password_minimum_length || password.length > password_maximum_length) {
+	    	if (password.length == 0) {
 	    		$("#password-validation-error").remove();
-	    		$("<span id='password-validation-error' class='validation-error'>" + password_legth_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
 	    	}
 	  	});
 
