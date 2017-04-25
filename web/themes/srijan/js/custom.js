@@ -86,9 +86,15 @@
 	        e.stopPropagation();
 	    });
 
+	     $("#block-usersdashboardheaderblock .profile > a").click(function(e) {
+	     	event.preventDefault();
+	        $(".profile-links").toggleClass("active");
+	        e.stopPropagation();
+	    });
+
 	    $(document).click(function(e) {
-	        if (!$(e.target).is('.notification-message-list, #notification-display')) {
-	            $(".notification-message-list, #notification-display").removeClass("active");
+	        if (!$(e.target).is('.notification-message-list, #notification-display, .profile-links')) {
+	            $(".notification-message-list, #notification-display, .profile-links").removeClass("active");
 	        }
 	    });
 
@@ -124,19 +130,6 @@
 	    	$(".messages--error").remove();
 		});
 
-	    // profile dropdown.
-	    $("#block-usersdashboardheaderblock .profile > a").click(function() {
-	    	event.preventDefault();
-				$(this).toggleClass("active");
-
-				$(this).siblings(".profile-links").toggleClass("active");
-			});
-	    $("#block-usersdashboardnontwitterheaderblock .profile > a").click(function() {
-	    	event.preventDefault();
-			$(this).toggleClass("active");
-			$(this).siblings(".profile-links").toggleClass("active");
-		});
-
 		var left = "140";
 		var textSize = 0;
 		$("#edit-message").keyup(function() {
@@ -154,7 +147,7 @@
    		});
 
 		// ripple effect
-		  $(".block-users-tweets-statistics-block .content > div a").click(function (e) {
+		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit").click(function (e) {
 
 		  // Remove any old one
 		  $(".ripple").remove();
@@ -193,6 +186,19 @@
 
 		  // Fadeout messages.
 		$('.messages, .messages--error').delay(8000).fadeOut(300);
+
+		// Message position changes.
+		$(".messages").appendTo(".item-list + .item-list").insertBefore(".item-list + .item-list > ul");
+
+		// text overlimit color change.
+		// $('.send-tweets-form #edit-message').on({
+		//     focus: function() {
+		        
+		//         if (this.value.length >= 20) $('#edit-message').focus(){
+		//         	$(this).addClass("red");
+		//         };
+		//     }
+		// })
 
 	});
 
