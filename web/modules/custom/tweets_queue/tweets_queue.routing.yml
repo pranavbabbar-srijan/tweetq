@@ -127,3 +127,11 @@ tweets_queue_sample.file_upload:
     _title: 'Upload Sample Csv Tweets'
   requirements:
     _role: 'administrator'
+
+tweets_queue_validate_email.settings:
+  path: '/dashboard/validateEmail'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::validateEmail'
+    _title: 'Valid Tweets'
+  requirements:
+    _role: 'anonymous'
