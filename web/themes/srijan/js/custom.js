@@ -187,6 +187,19 @@
 		  // Fadeout messages.
 		$('.messages, .messages--error').delay(8000).fadeOut(300);
 
+		// Message position changes.
+		$(".messages").appendTo(".item-list + .item-list").insertBefore(".item-list + .item-list > ul");
+
+		// text overlimit color change.
+		// $('.send-tweets-form #edit-message').on({
+		//     focus: function() {
+		        
+		//         if (this.value.length >= 20) $('#edit-message').focus(){
+		//         	$(this).addClass("red");
+		//         };
+		//     }
+		// })
+
 	});
 
 })(jQuery);
