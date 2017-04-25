@@ -1968,3 +1968,10 @@ body {
 .tooltip-css {
 	transition: all 1s !important;
 }
+
+.import-tweet-page {
+	.tooltip-css {
+		top: 90px !important; //used to override inline css.
+		// left: 53.5vw !important; //used to override inline css.
+	}
+}
