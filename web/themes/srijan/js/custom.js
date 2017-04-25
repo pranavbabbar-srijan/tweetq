@@ -10,6 +10,7 @@
 		var full_name_missing_msg = "Please enter full name";
 		var email_msg = "Please enter a valid email ID";
 		var email_missing_msg = "Please enter your email ID";
+		var existing_email_msg = "Email ID already exist";
 		var password_missing_msg = "Please enter the password";
 		var password_legth_msg = "Enter password between 6 and 12 characters";
 		var password_minimum_length = 6;
@@ -52,6 +53,15 @@
 	    		if (!valid) {
 	    			$("#email-validation-error").remove();
 	    			$("<span id='email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#signup-form #edit-email" );
+	    		}
+	    		if (valid) {
+	    			$("#email-validation-error").remove();
+	    			$.post('/tweetQ11Apr/_www/dashboard/validateEmail', {'email' : email}, function(data) {
+	    				if  (data == "exist") {
+							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#signup-form #edit-email" );	    					
+	    				}
+				    });
+	    			
 	    		}
 	    	}
 	  	});

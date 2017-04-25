@@ -13,6 +13,22 @@ class TweetsQueueTweetController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
+  public function validateEmail() {
+    $email = $_REQUEST['email'];
+    $uid = tweets_queue_check_email_presence($email);
+    switch ($uid) {
+      case '':
+        die("");
+        break;
+      default:
+        die("exist");
+        break;
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function content() {
     $build = array(
       '#type' => 'markup',
