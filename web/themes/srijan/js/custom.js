@@ -19,7 +19,7 @@
 		var website_invalid_msg = 'please enter valid website';
 		var signup_error = '';
 		var email_validation_path = '/dashboard/validateEmail';
-		var email_validation_path = '/Barbet/_www/dashboard/validateEmail';
+		// var email_validation_path = '/tweetQ11Apr/_www/dashboard/validateEmail';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -132,27 +132,7 @@
 	    		$("#send-tweets-form #edit-save").removeAttr('disabled');
 	    	}
 	    });
-	   $("#signup-form #edit-field-full-name").on('focusin', function(e) {
-	    var name_error = $('#signup-form #fname-validation-error').text();
-	    	if (name_error == 'Only Letters are allowed') { 
-	    		$("#signup-form #edit-submit").attr('disabled', true);
 
-	    	}	
-	    	else {
-	    		$("#signup-form #edit-submit").removeAttr('disabled');
-	    	}
-	    });
-
-	   $("#signup-form #edit-email").on('focusin', function(e) {
-	    var email_error = $('#signup-form #email-validation-error').text();
-	    	if (email_error == 'Please enter a valid email ID') { 
-	    		$("#signup-form #edit-submit").attr('disabled', true);
-
-	    	}	
-	    	else {
-	    		$("#signup-form #edit-submit").removeAttr('disabled');
-	    	}
-	    });
 
 		$(".-form-tweets-queue-csv-upload .description").insertAfter(".-form-tweets-queue-csv-upload #edit-submit");
 		$("#block-usersdashboardheaderblock .content").append("<a id='notification-display' href='#;'></a>");
