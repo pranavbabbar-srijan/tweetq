@@ -19,7 +19,7 @@
 		var website_invalid_msg = 'please enter valid website';
 		var signup_error = '';
 		var email_validation_path = '/dashboard/validateEmail';
-		// var email_validation_path = '/tweetQ11Apr/_www/dashboard/validateEmail';
+		var email_validation_path = '/Barbet/_www/dashboard/validateEmail';
 
 		$( "#foo" ).trigger( "click" );
 
