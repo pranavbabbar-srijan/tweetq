@@ -663,6 +663,7 @@ function tweets_queue_send_direct_message($message) {
     return;
   }
   $message = tweets_queue_get_urls_present($message);
+
   $status = tweets_queue_tweet_message($message, $twitter_handler);
   if ($status['code'] == TWITTER_HANDLER_INVALID_CODE || $status['code'] == TWITTER_HANDLER_BAD_AUTHENTICATION_CODE) {
     drupal_set_message(t($status['message']), 'error');
@@ -1072,6 +1073,7 @@ function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
 function tweets_queue_get_urls_present($message) {
   preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
   if ($match[0][0] == '') {
+    $message  = tweets_queue_get_urls_present_extra($message);
     return $message;
   }
   foreach ($match[0] as $url) {
@@ -1079,6 +1081,31 @@ function tweets_queue_get_urls_present($message) {
       continue;
     }
     $bit_url = tweets_queue_make_bitly_url($url, 'dsfser', 'R_5aafdd2f8d67f78150e52ffbd0613519', 'json');
+    if ($bit_url) {
+      $message = str_ireplace($url, $bit_url, $message);
+    }
+  }
+  $message  = tweets_queue_get_urls_present_extra($message);
+  return $message;
+}
+
+/**
+ * Process url and convert to biturl.
+ *
+ * @param string $message
+ *   Contains original message.
+ *
+ * @return string
+ *   Return the processed message.
+ */
+function tweets_queue_get_urls_present_extra($message) {
+  preg_match_all('#\www.[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
+  if ($match[0][0] == '') {
+    return $message;
+  }
+  foreach ($match[0] as $url) {
+    $new_url = "http://" . $url;
+    $bit_url = tweets_queue_make_bitly_url($new_url, 'dsfser', 'R_5aafdd2f8d67f78150e52ffbd0613519', 'json');
     if ($bit_url) {
       $message = str_ireplace($url, $bit_url, $message);
     }
@@ -2015,7 +2042,9 @@ function tweets_queue_calculate_tweet_message_size($message, $hash_tag, $case = 
   }
   // $message = \Drupal\Component\Utility\Xss::filter($message);
   $tweet_size = \Drupal\Component\Utility\Unicode::strlen($message);
+  $extra_length = substr_count($message, 'http://bit.ly');
   if ($case == 'size') {
+    $tweet_size = $tweet_size + ($extra_length * 2);
     return $tweet_size;
   }
   else {
