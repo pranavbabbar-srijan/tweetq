@@ -1239,8 +1239,6 @@ body {
         .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder {
           /* Firefox 18- */
           opacity: .5; }
-      .path-signup .block-system-main-block .message-header .js-form-item.js-form-item-field-organization, .path-twitter .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
-        width: 100%; }
       .path-signup .block-system-main-block .message-header .js-form-item label, .path-twitter .block-system-main-block .message-header .js-form-item label {
         color: #949494;
         margin-bottom: 1em;
