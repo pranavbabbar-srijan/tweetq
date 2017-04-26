@@ -412,7 +412,8 @@ function tweets_queue_fetch_user_auth_map_info($uid) {
  * Implements hook_cron().
  */
 function tweets_queue_cron() {
-  //@TODO: schedule users based on the last run
+  //Delete orphaned entries.
+  tweets_queue_delete_orphaned_scheduled_messages_list();
   drupal_set_message('step 1 started');
   tweets_queue_tweet_scheduled_messages();
   drupal_set_message('step 2 started');
@@ -3223,4 +3224,31 @@ function tweets_queue_get_file_real_path($fid) {
   $query->condition('f.fid', $fid);
   $uri = $query->execute()->fetchField();
   return $uri;
+}
+
+function tweets_queue_delete_orphaned_scheduled_messages_list() {
+  $list = tweets_queue_get_orphaned_scheduled_messages_list();
+  if (count($list) > 0) {
+    tweets_queue_clean_scheduled_messages_list($list);
+  }
+}
+
+/**
+ * Get list of orphaned entries.
+ *
+ * @return array
+ *   Returns array containg the orphaned entries.
+ */
+function tweets_queue_get_orphaned_scheduled_messages_list() {
+  $list = array();
+  $query = \Drupal::database()->select(TWITTER_SCHEDULED_MESSAGES_TABLE, 's');
+  $query->fields('s', ['nid']);
+  $query->leftJoin(TWITTER_MESSAGE_QUEUE_TABLE, 'm', 's.nid = m.nid');
+  $query->leftJoin('users', 'u', 'm.uid = u.uid');
+  $query->isNull('u.uid');
+  $result = $query->execute()->fetchAll();
+  foreach ($result as $pos => $data) {
+    $list[] = $data->nid;
+  }
+  return $list;
 }
