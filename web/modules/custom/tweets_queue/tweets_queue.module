@@ -178,9 +178,6 @@ const SIGNUP_FIELD_TWITTER_OWNER_ID = 'field_twitter_owner_id';
 const SIGNUP_FIELD_EMAIL = 'email';
 const SIGNUP_FIELD_TWITTER_DATA = 'field_twitter_data';
 
-$config = \Drupal::config('tweets_queue.settings');
-$variable_one = $config->get('variable_one');
-
  /**
  * Implements hook_form_alter().
  */
@@ -1145,6 +1142,10 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         tweets_queue_login_twitter_user($uid, TWITTER_TWITTER_SIGNUP_PATH);
       }
       else {
+        $config = \Drupal::config('tweets_queue.settings');
+        $variable_one = $config->get('variable_one');
+        echo $variable_one;
+        die;
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_NON_APPROVED_CLIENT_ROLE);
         $entity->save();
