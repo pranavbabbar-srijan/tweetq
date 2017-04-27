@@ -1242,7 +1242,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name, $variable_one) {
   $key = 'user_verify_signup_mail'; // Replace with Your key
   $to = $mail;
   $message = t("Dear @full_name\n, Users verification\n
-click on @here to verify your account.", array('@full_name' => $name, '@here' => $variable_one));
+click on here to verify your account.", array('@full_name' => $variable_one);
   $params['message'] = $message;
   $params['title'] = 'Barbet Registration Verification';
   $params['link'] = $variable_one;
