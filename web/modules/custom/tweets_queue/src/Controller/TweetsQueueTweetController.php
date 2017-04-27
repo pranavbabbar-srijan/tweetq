@@ -53,16 +53,16 @@ class TweetsQueueTweetController extends ControllerBase {
     $query->condition('uhk.field_user_hash_key_value', $hash , '=');
     $user_id = $query->execute()->fetchField();
     if ($user_id) {
-    $query = \Drupal::database()->update('users_field_data')
-    ->fields(['status' => 1])
-    ->condition('uid', $user_id)
-    ->execute();
-    $redirect_path = $base_url;
-    if ($account->redirectPath) {
-    $redirect_path = $account->redirectPath;
+      $query = \Drupal::database()->update('users_field_data')
+      ->fields(['status' => 1])
+      ->condition('uid', $user_id)
+      ->execute();
+      $redirect_path = $base_url;
+      if ($account->redirectPath) {
+        $redirect_path = $account->redirectPath;
+      }
+      $response = new RedirectResponse($redirect_path);
+      $response->send();
     }
-    $response = new RedirectResponse($redirect_path);
-    $response->send();
-  }
 }
 }
