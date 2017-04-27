@@ -1236,14 +1236,16 @@ You have successfully signed up with Barbet App. Kindly login to the app and con
 */
 
 function tweets_queue_verify_signup_send_mail($mail, $name, $variable_one) {
+  global $base_url;
   $mailManager = \Drupal::service('plugin.manager.mail');
   $module = 'tweets_queue';
   $key = 'user_verify_signup_mail'; // Replace with Your key
   $to = $mail;
-  echo $variable_one;
+  $variable_url = $base_url . '/' . $variable_one;
+  echo $variable_url;
   die;
   $message = t("Dear @full_name\n, Users verification\n
-click on here to verify your account.", array('@full_name' => $variable_one));
+click on here to verify your account.", array('@full_name' => $variable_url));
   $params['message'] = $message;
   $params['title'] = 'Barbet Registration Verification';
  
