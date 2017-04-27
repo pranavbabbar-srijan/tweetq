@@ -1148,7 +1148,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_NON_APPROVED_CLIENT_ROLE);
         $entity->save();
-        tweets_queue_verify_signup_send_mail($mail, $hash_key);
+        tweets_queue_verify_signup_send_mail($mail, $full_name, $hash_key);
         //tweets_queue_login_twitter_user($uid);
       }
       break;
@@ -1244,7 +1244,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
 click on link given below to verify your account.", array('@full_name' => $name));
   $params['message'] = $message;
   $params['title'] = 'barbet registration verification';
-  $params['link'] = $variable_one;
+  $params['link'] = 'hello';
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
 
