@@ -1191,7 +1191,7 @@ function tweets_queue_mail($key, &$message, $params) {
     case 'user_verify_signup_mail':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
-      $message['body'][] = Html::escape($params['message']['link']);
+      $message['body'][] = Html::escape($params['message']);
       break;
   }
 }
@@ -1260,6 +1260,9 @@ click on link given below to verify your account.", array('@full_name' => $name)
     $message = t('An email notification has been sent to @email ', array('@email' => $to));
     drupal_set_message($message);
   }
+  echo "<pre>";
+  print_r($variable_one);
+  die;
   \Drupal::logger('mail-log')->notice($message);
 }
 
