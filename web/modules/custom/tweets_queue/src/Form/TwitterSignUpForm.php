@@ -98,7 +98,7 @@ class TwitterSignUpForm extends FormBase {
 
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Continue'),
+      '#value' => t('Submit'),
       '#weight' => 9,
     );
 

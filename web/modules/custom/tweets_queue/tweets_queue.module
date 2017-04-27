@@ -172,13 +172,16 @@ const TWITTER_ACTION_PARAMETER = 'action';
 const SIGNUP_FIELD_ORGANIZATION = 'field_organization';
 const SIGNUP_FIELD_WEBSITE = 'field_website';
 const SIGNUP_FIELD_FULL_NAME = 'field_full_name';
+const SIGNUP_FIELD_HASH_KEY = 'field_user_hash_key';
 const SIGNUP_FIELD_PASSWORD = 'user_password';
 const SIGNUP_FIELD_TWITTER_OWNER_ID = 'field_twitter_owner_id';
 const SIGNUP_FIELD_EMAIL = 'email';
 const SIGNUP_FIELD_TWITTER_DATA = 'field_twitter_data';
 
+$config = \Drupal::config('tweets_queue.settings');
+$variable_one = $config->get('variable_one');
 
-/**
+ /**
  * Implements hook_form_alter().
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
@@ -247,8 +250,6 @@ function tweets_queue_user_login_form_changes(&$form) {
     '#markup' => t($url),
     '#weight' => 10,
   );
-  // $form['name']['#title'] = 'Email';
-  // $form['actions']['submit']['#value'] = 'Sign in';
   $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
   $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
   $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .
@@ -1184,6 +1185,12 @@ function tweets_queue_mail($key, &$message, $params) {
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = Html::escape($params['message']);
       break;
+
+    case 'user_verify_signup_mail':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = Html::escape($params['message']);
+      break;
   }
 }
 
@@ -1205,6 +1212,37 @@ Welcome to Barbet!\n
 You have successfully signed up with Barbet App. Kindly login to the app and connect with your twitter Details to start using Barbet.", array('@full_name' => $name));
   $params['message'] = $message;
   $params['title'] = 'barbet registration';
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    $message = t('There was a problem sending your email notification to @email.', array('@email' => $to));
+    drupal_set_message($message, 'error');
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  else {
+    $message = t('An email notification has been sent to @email ', array('@email' => $to));
+    drupal_set_message($message);
+  }
+  \Drupal::logger('mail-log')->notice($message);
+}
+
+/*
+* Verification mail for sign up users
+*/
+
+function tweets_queue_verify_signup_send_mail($mail, $name) {
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'user_verify_signup_mail'; // Replace with Your key
+  $to = $mail;
+  $message = t("Dear @full_name\n, Users varification\n
+click on link given below to verify your account.", array('@full_name' => $name));
+  $params['message'] = $message;
+  $params['title'] = 'barbet registration verification';
+  $params['link'] = $variable_one;
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
 
@@ -1917,12 +1955,13 @@ function tweets_queue_fetch_tweeter_data($nid, $field_name = 'tweet_id') {
  */
 function tweets_queue_user_login($account) {
   global $base_url;
-  $redirect_path = TWITTER_USER_DASHBOARD;
+//  $redirect_path = TWITTER_USER_DASHBOARD;
   if ($account->redirectPath) {
-    $redirect_path = $account->redirectPath;
+   // $redirect_path = $account->redirectPath;
   }
-  $response = new RedirectResponse($base_url . '/' . $redirect_path);
-  $response->send();
+  drupal_set_message("check your email");
+ // $response = new RedirectResponse($base_url . '/' . $redirect_path);
+  //$response->send();
 }
 
 /**
@@ -2373,6 +2412,7 @@ function tweets_queue_authenticate_twitter_user() {
     $user->setEmail($email);
     $user->setUsername($username);
     $user->set(SIGNUP_FIELD_TWITTER_OWNER_ID, $twitter_owner_id);
+    $user->set(SIGNUP_FIELD_FULL_NAME, $full_name);
     $user->set(SIGNUP_FIELD_FULL_NAME, $full_name);
     $user->set(SIGNUP_FIELD_TWITTER_DATA, $twitter_data);
     //Optional settings
