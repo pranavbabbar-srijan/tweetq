@@ -1132,10 +1132,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       $full_name = $entity->get(SIGNUP_FIELD_FULL_NAME)->value;
       $mail = $entity->get('mail')->value;
       tweets_queue_signup_send_mail($mail, $full_name);
-
       $hash_key = $entity->get(SIGNUP_FIELD_HASH_KEY)->value;
-      tweets_queue_verify_signup_send_mail($mail, $hash_key);
-      
 
       $twitter_owner_id = $entity->get(SIGNUP_FIELD_TWITTER_OWNER_ID)->value;
       $twitter_data = $entity->get(SIGNUP_FIELD_TWITTER_DATA)->value;
@@ -1151,7 +1148,8 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_NON_APPROVED_CLIENT_ROLE);
         $entity->save();
-        tweets_queue_login_twitter_user($uid);
+        tweets_queue_verify_signup_send_mail($mail, $hash_key);
+        //tweets_queue_login_twitter_user($uid);
       }
       break;
     case 'tweet':
@@ -1959,13 +1957,12 @@ function tweets_queue_fetch_tweeter_data($nid, $field_name = 'tweet_id') {
  */
 function tweets_queue_user_login($account) {
   global $base_url;
-//  $redirect_path = TWITTER_USER_DASHBOARD;
+  $redirect_path = TWITTER_USER_DASHBOARD;
   if ($account->redirectPath) {
-   // $redirect_path = $account->redirectPath;
+   $redirect_path = $account->redirectPath;
   }
-  drupal_set_message("check your email");
- // $response = new RedirectResponse($base_url . '/' . $redirect_path);
-  //$response->send();
+  $response = new RedirectResponse($base_url . '/' . $redirect_path);
+  $response->send();
 }
 
 /**
