@@ -1144,8 +1144,6 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       else {
         $config = \Drupal::config('tweets_queue.settings');
         $variable_one = $config->get('variable_one');
-        echo $variable_one;
-        die;
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_NON_APPROVED_CLIENT_ROLE);
         $entity->save();
