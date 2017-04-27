@@ -57,11 +57,11 @@ class TweetsQueueTweetController extends ControllerBase {
     ->fields(['status' => 1])
     ->condition('uid', $user_id)
     ->execute();
-    $redirect_path = TWITTER_USER_DASHBOARD;
+    $redirect_path = $base_url;
     if ($account->redirectPath) {
     $redirect_path = $account->redirectPath;
     }
-    $response = new RedirectResponse($base_url);
+    $response = new RedirectResponse($redirect_path);
     $response->send();
   }
 }
