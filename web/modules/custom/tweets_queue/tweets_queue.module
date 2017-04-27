@@ -1071,6 +1071,7 @@ function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
  *   Return the processed message.
  */
 function tweets_queue_get_urls_present($message) {
+  return $message;//To be depreciated this function.
   preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $message, $match);
   if ($match[0][0] == '') {
     $message  = tweets_queue_get_urls_present_extra($message);
@@ -1441,8 +1442,8 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
     'fields' => array(
       'nid' => array('type' => 'serial', 'not null' => TRUE),
       'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-      'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 354, 'default' => ''),
-      'hashtag' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 354, 'default' => ''),
+      'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 954, 'default' => ''),
+      'hashtag' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 954, 'default' => ''),
       'image_fid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
