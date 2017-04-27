@@ -141,7 +141,6 @@ class SignUpForm extends FormBase {
     $link =  t('@link', array('@link' => $link));
    $config = \Drupal::service('config.factory')->getEditable('tweets_queue.settings');
    $config->set('variable_one', $link)
-  ->set('variable_two', FALSE)
   ->save();
     $user->activate();
     $user->status = 0;

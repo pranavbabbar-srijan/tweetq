@@ -1235,7 +1235,7 @@ You have successfully signed up with Barbet App. Kindly login to the app and con
 * Verification mail for sign up users
 */
 
-function tweets_queue_verify_signup_send_mail($mail, $name) {
+function tweets_queue_verify_signup_send_mail($mail, $name, $variable_one) {
   $mailManager = \Drupal::service('plugin.manager.mail');
   $module = 'tweets_queue';
   $key = 'user_verify_signup_mail'; // Replace with Your key
@@ -1260,9 +1260,6 @@ click on link given below to verify your account.", array('@full_name' => $name)
     $message = t('An email notification has been sent to @email ', array('@email' => $to));
     drupal_set_message($message);
   }
-  echo "<pre>";
-  print_r($variable_one);
-  die;
   \Drupal::logger('mail-log')->notice($message);
 }
 
