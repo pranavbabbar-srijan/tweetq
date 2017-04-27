@@ -1133,6 +1133,10 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       $mail = $entity->get('mail')->value;
       tweets_queue_signup_send_mail($mail, $full_name);
 
+      $hash_key = $entity->get(SIGNUP_FIELD_HASH_KEY)->value;
+      tweets_queue_verify_signup_send_mail($mail, $hash_key);
+      
+
       $twitter_owner_id = $entity->get(SIGNUP_FIELD_TWITTER_OWNER_ID)->value;
       $twitter_data = $entity->get(SIGNUP_FIELD_TWITTER_DATA)->value;
 
