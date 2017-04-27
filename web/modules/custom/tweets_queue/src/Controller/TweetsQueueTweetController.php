@@ -61,7 +61,7 @@ class TweetsQueueTweetController extends ControllerBase {
     if ($account->redirectPath) {
     $redirect_path = $account->redirectPath;
     }
-    $response = new RedirectResponse($base_url . '/' . $redirect_path);
+    $response = new RedirectResponse($base_url);
     $response->send();
   }
 }
