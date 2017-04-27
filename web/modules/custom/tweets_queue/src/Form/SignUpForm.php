@@ -110,6 +110,7 @@ class SignUpForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    global $base_url;
     $data = $form_state->getValues();
     $full_name = $data[SIGNUP_FIELD_FULL_NAME];
     $username = strtolower(str_ireplace(" ", "", $full_name)) . "_" . time();
