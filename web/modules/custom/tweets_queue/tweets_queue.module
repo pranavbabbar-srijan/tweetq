@@ -1242,7 +1242,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name, $variable_one) {
   $key = 'user_verify_signup_mail'; // Replace with Your key
   $to = $mail;
   $variable_url = new SimpleXMLElement($variable_one);
-  $variable_url = $base_url . $variable_url['href'];
+  $variable_url = $base_url . '' . $variable_url['href'];
   $message = t("Dear @full_name\n, Users verification\n
 click on here to verify your account.", array('@full_name' => $variable_url));
   $params['message'] = $message;
