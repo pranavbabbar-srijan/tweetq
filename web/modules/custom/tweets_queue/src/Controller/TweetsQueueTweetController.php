@@ -63,7 +63,7 @@ class TweetsQueueTweetController extends ControllerBase {
     }
     $response = new RedirectResponse($base_url);
     drupal_set_message('Your account has been activated, you can now login');
-    $response->send('Now you can login');
+    $response->send();
   }
 }
 }
