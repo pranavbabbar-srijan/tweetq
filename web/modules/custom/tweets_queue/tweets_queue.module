@@ -1961,12 +1961,13 @@ function tweets_queue_fetch_tweeter_data($nid, $field_name = 'tweet_id') {
  */
 function tweets_queue_user_login($account) {
   global $base_url;
-  $redirect_path = TWITTER_USER_DASHBOARD;
-  if ($account->redirectPath) {
-   $redirect_path = $account->redirectPath;
-  }
-  $response = new RedirectResponse($base_url . '/' . $redirect_path);
-  $response->send();
+  //$redirect_path = TWITTER_USER_DASHBOARD;
+ // if ($account->redirectPath) {
+  // $redirect_path = $account->redirectPath;
+  // }
+  drupal_set_message('hello');
+  //$response = new RedirectResponse($base_url . '/' . $redirect_path);
+ // $response->send();
 }
 
 /**
