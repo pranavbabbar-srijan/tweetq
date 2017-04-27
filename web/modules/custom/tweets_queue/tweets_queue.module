@@ -440,6 +440,7 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
 
     drupal_set_message(t('Process message @message', array('@message' => $message_data->message)));
     $message = tweets_queue_calculate_tweet_message_size($message_data->message, $message_data->hashtag, 'message');
+    $size = tweets_queue_get_message_size($message);
     $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id);
     $twitter_history_info = array(
       'nid' => $message_data->nid,
@@ -672,7 +673,7 @@ function tweets_queue_send_direct_message($message) {
     }
     return $status;
   }
-  $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  $size = tweets_queue_get_message_size($message);
   $tweet_id = $status['data']->id;
   $twitter_message_info = array('message' => $message,
     'hashtag' => '',
@@ -2754,7 +2755,7 @@ function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\For
   $data = $form_state->getValues();
   $message = $data['message'];
   $message = tweets_queue_get_urls_present($message);
-  $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  $size = tweets_queue_get_message_size($message);
   $hash_tag= '';
   $twitter_message_info = array('message' => $message,
     'hashtag' => '',
@@ -2967,7 +2968,7 @@ function tweets_queue_clone_and_save_submit($form, \Drupal\Core\Form\FormStateIn
 
   $message = $input['message'];
   $message = tweets_queue_get_urls_present($message);
-  $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  $size = tweets_queue_get_message_size($message);
   $twitter_message_info = array(
     'message' => $message,
     'uid' => $uid,
@@ -2999,7 +3000,7 @@ function tweets_queue_cancel_edit_submit($form, \Drupal\Core\Form\FormStateInter
     $tweeted = 1;
   }
   $archived = $tweet_info->archived;
-  $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  $size =  tweets_queue_get_message_size($message);
   tweets_queue_redirect_on_tweet_save($size, $tweeted, $archived);
 }
 
@@ -3045,7 +3046,7 @@ function tweets_queue_delete_submit($form, \Drupal\Core\Form\FormStateInterface 
     $tweeted = 1;
   }
   $archived = $tweet_info->archived;
-  $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+  $size = tweets_queue_get_message_size($message);
   tweets_queue_update_message_queue_priority_info($nid,
     array(
       'status' => TWITTER_DELETED_TWEET,

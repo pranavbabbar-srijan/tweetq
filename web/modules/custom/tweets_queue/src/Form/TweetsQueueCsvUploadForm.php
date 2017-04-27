@@ -151,8 +151,10 @@ class TweetsQueueCsvUploadForm extends FormBase {
         $message = $message . ' ' . $hash_tag;
         $hash_tag = '';
       }
-      $size = tweets_queue_calculate_tweet_message_size($message, $hash_tag, 'size');
-      if ($size >= 300) {
+
+      $actual_size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+      $size = tweets_queue_get_message_size($message);
+      if ($actual_size >= 954) {
         $import_message['skipped'] = $import_message['skipped'] + 1;
         continue;
       }
