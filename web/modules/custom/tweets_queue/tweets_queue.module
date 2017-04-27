@@ -1119,6 +1119,7 @@ function tweets_queue_make_bitly_url($url,$login,$appkey,$format = 'xml',$versio
  * Implements hook_entity_insert().
  */
 function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  global $base_url;
   switch ($entity->bundle()) {
     case 'user':
       tweets_queue_cleanup_deleted_users();
@@ -1144,10 +1145,11 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       else {
         $config = \Drupal::config('tweets_queue.settings');
         $variable_one = $config->get('variable_one');
+        $url = $base_url . '/' . $variable_one;
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_NON_APPROVED_CLIENT_ROLE);
         $entity->save();
-        tweets_queue_verify_signup_send_mail($mail, $full_name, $variable_one);
+        tweets_queue_verify_signup_send_mail($mail, $full_name, $url);
         //tweets_queue_login_twitter_user($uid);
       }
       break;
