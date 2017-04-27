@@ -1241,9 +1241,8 @@ function tweets_queue_verify_signup_send_mail($mail, $name, $variable_one) {
   $module = 'tweets_queue';
   $key = 'user_verify_signup_mail'; // Replace with Your key
   $to = $mail;
-  $variable_url = $base_url . '/' . $variable_one;
-  echo $variable_url;
-  die;
+  $variable_url = new SimpleXMLElement($variable_one);
+  $variable_url = $base_url . '/' . $variable_url['href'];
   $message = t("Dear @full_name\n, Users verification\n
 click on here to verify your account.", array('@full_name' => $variable_url));
   $params['message'] = $message;
@@ -3070,10 +3069,10 @@ function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInt
       t('Password length should be minimum of 6 and maximum of 12 characters.'));
   }
 
-  if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$password)) {
-    $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
-      t('<div>Please Enter At least one Uppercase Letter: A-Z,</div>  <div>At least one Lowercase Letter: a-z,</div>  <div>At least one Numerical Character: 0-9,</div>  <div>At least one of the following special character "!", "@", "#"</div>'));
-  }
+  // if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$password)) {
+  //   $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
+  //     t('<div>Please Enter At least one Uppercase Letter: A-Z,</div>  <div>At least one Lowercase Letter: a-z,</div>  <div>At least one Numerical Character: 0-9,</div>  <div>At least one of the following special character "!", "@", "#"</div>'));
+  // }
 }
 
 
