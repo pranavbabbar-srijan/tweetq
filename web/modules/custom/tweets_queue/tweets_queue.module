@@ -1191,7 +1191,7 @@ function tweets_queue_mail($key, &$message, $params) {
     case 'user_verify_signup_mail':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
-      $message['body'][][] = Html::escape($params['message'], $params['link']);
+      $message['body'][] = Html::escape($params['message'], $params['link']);
       break;
   }
 }
