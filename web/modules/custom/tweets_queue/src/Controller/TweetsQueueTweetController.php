@@ -4,27 +4,13 @@ namespace Drupal\tweets_queue\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Cache\Cache;
+use Drupal\user\Entity\User;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * An example controller.
  */
 class TweetsQueueTweetController extends ControllerBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function validateEmail() {
-    $email = $_REQUEST['email'];
-    $uid = tweets_queue_check_email_presence($email);
-    switch ($uid) {
-      case '':
-        die("");
-        break;
-      default:
-        die("exist");
-        break;
-    }
-  }
 
   /**
    * {@inheritdoc}
@@ -58,4 +44,25 @@ class TweetsQueueTweetController extends ControllerBase {
     return 0;
   }
 
+  public function verify($email, $hash) {
+    global $base_url;
+    $query = \Drupal::database()->select('users_field_data', 'ufd');
+    $query->fields('ufd',['uid']);
+    $query->leftJoin('user__field_user_hash_key', 'uhk', 'ufd.uid = uhk.entity_id');
+    $query->condition('ufd.mail', $email , '=');
+    $query->condition('uhk.field_user_hash_key_value', $hash , '=');
+    $user_id = $query->execute()->fetchField();
+    if ($user_id) {
+    $query = \Drupal::database()->update('users_field_data')
+    ->fields(['status' => 1])
+    ->condition('uid', $user_id)
+    ->execute();
+    $redirect_path = TWITTER_USER_DASHBOARD;
+    if ($account->redirectPath) {
+    $redirect_path = $account->redirectPath;
+    }
+    $response = new RedirectResponse($base_url . '/' . $redirect_path);
+    $response->send();
+  }
+}
 }
