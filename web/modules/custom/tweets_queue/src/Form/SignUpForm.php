@@ -8,8 +8,6 @@ namespace Drupal\tweets_queue\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
 
 /**
  * Sign up form.
@@ -101,7 +99,7 @@ class SignUpForm extends FormBase {
     $form['#validate'][] = 'tweets_queue_user_signup_validate';
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Submit'),
+      '#value' => t('Continue'),
       '#weight' => 9,
     );
 
@@ -112,7 +110,6 @@ class SignUpForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    global $base_url;
     $data = $form_state->getValues();
     $full_name = $data[SIGNUP_FIELD_FULL_NAME];
     $username = strtolower(str_ireplace(" ", "", $full_name)) . "_" . time();
@@ -132,18 +129,8 @@ class SignUpForm extends FormBase {
     $user->set(SIGNUP_FIELD_WEBSITE, $website);
     $user->set(SIGNUP_FIELD_ORGANIZATION, $organization);
     $user->set(SIGNUP_FIELD_TWITTER_DATA, serialize(array()));
-    $field_user_hash_key = hash('sha256', $email);
-    $user->set(SIGNUP_FIELD_HASH_KEY, $field_user_hash_key);
     //Optional settings
-    $url = Url::fromRoute('tweets_queue_verify.verify', array('email' => $email, 'hash' => $field_user_hash_key));
-    $link = \Drupal::l(t('click here'), $url); 
-    $link =  t('@link', array('@link' => $link));
-   $config = \Drupal::service('config.factory')->getEditable('tweets_queue.settings');
-   $config->set('variable_one', $link)
-  ->set('variable_two', FALSE)
-  ->save();
     $user->activate();
-    $user->status = 0;
     $res = $user->save();
   }
 

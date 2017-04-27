@@ -127,10 +127,3 @@ tweets_queue_sample.file_upload:
     _title: 'Upload Sample Csv Tweets'
   requirements:
     _role: 'administrator'
-
-tweets_queue_verify.verify:
-  path: '/verify/{email}/{hash}'
-  defaults:
-    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::verify'
-  requirements:
-    _role: 'anonymous+administrator+twitter_approved_client'
