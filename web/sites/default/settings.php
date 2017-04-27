@@ -49,3 +49,14 @@ if (file_exists(__DIR__ . '/settings.platformsh.php')) {
 }
 
 
+$databases['default']['default'] = array (
+  'database' => 'barbet',
+  'username' => 'root',
+  'password' => 'root',
+  'prefix' => '',
+  'host' => 'localhost',
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+$settings['hash_salt'] = 'e6lSEZSZ28E6Lbie664-lt-APnISqzwOExj0VN5pRUoCipO3yw6S_Hf83D5MiX8lrxGP5f2L2g';

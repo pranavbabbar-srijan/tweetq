@@ -62,7 +62,8 @@ class TweetsQueueTweetController extends ControllerBase {
     $redirect_path = $account->redirectPath;
     }
     $response = new RedirectResponse($base_url);
-    $response->send();
+    drupal_set_message('Your account has been activated, you can now login');
+    $response->send('Now you can login');
   }
 }
 }
