@@ -1243,8 +1243,8 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   $message = t("Dear @full_name\n, Users verification\n
 click on link given below to verify your account.", array('@full_name' => $name));
   $params['message'] = $message;
-  $params['link'] = $variable_one;
   $params['title'] = 'Barbet Registration Verification';
+  $params['link'] = $variable_one;
  
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
