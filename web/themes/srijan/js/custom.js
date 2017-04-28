@@ -5,135 +5,27 @@
 	$(document).ready(function(){
 		var limit_chars = 140;
 
-		//Signup form validation.
-		var alphabet_msg = "Only Letters are allowed";
-		var full_name_missing_msg = "Please enter full name";
-		var email_msg = "Please enter a valid email ID";
-		var email_missing_msg = "Please enter your email ID";
-		var existing_email_msg = "Email ID already exist";
-		var password_missing_msg = "Please enter the password";
-		var password_character_msg = 'Enter password between 6 and 12 characters<br>Please Enter At least one Uppercase Letter: A-Z,<br> At least one Lowercase Letter: a-z, <br>At least one Numerical Character: 0-9, <br>At least one of the following special character "!", "@", "#"';
-		var password_length_msg = "Enter password between 6 and 12 characters";
-		var password_minimum_length = 6;
-		var password_maximum_length = 12;
-		var website_invalid_msg = 'please enter valid website';
-		var signup_error = '';
-		var email_validation_path = '/dashboard/validateEmail';
-		// var email_validation_path = '/tweetQ11Apr/_www/dashboard/validateEmail';
+    $("#send-tweets-form #edit-message").on('keyup', function(e) {
+    	var tweet_msg = $('#send-tweets-form #edit-message').val();
+    	var tweet_msg_length = tweet_msg.length;
+    	if (tweet_msg_length > limit_chars) {
+    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+    	}
+    	else {
+    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
+    	}
+    });
 
-		$( "#foo" ).trigger( "click" );
-
-		// $("#signup-form #edit-submit").click(function() {
-	 //    	$("#signup-form #edit-field-full-name").trigger('focusout');
-	 //    	$("#signup-form #edit-email").trigger('focusout');
-	 //    	$("#signup-form #edit-email").trigger('blur');
-	 //    	$("#signup-form #edit-user-password").trigger('focusout');
-	 //    	$("#signup-form #edit-field-website").trigger('focusout');
-	 //    	var error = $("#main-validation-error").html();
-	 //    });
-
-		//Full name validtaion.
-	    $("#signup-form #edit-field-full-name").on('keyup', function(e) {
-	    	var name = $('#signup-form #edit-field-full-name').val();
-	    	var alphabet = /^[a-zA-Z ]+$/.test(name);
-	    	$("#fname-validation-error").remove();
-	    	if (name.length > 0) {
-	    		if (!alphabet) {
-	    			$("<span id='fname-validation-error' class='validation-error'>" + alphabet_msg + "</p>").insertAfter( "#edit-field-full-name" );
-	    		}
-	    	}
-	    });
-
-	    $("#signup-form #edit-field-full-name").focusout(function() {
-	   		var name = $('#signup-form #edit-field-full-name').val();
-	    	if (name.length == 0) {
-	    		$("#fname-validation-error").remove();
-	    		$("<span id='fname-validation-error' class='validation-error'>" + full_name_missing_msg + "</p>").insertAfter( "#edit-field-full-name" );
-	    	}
-	  	});
-
-	    $("#signup-form #edit-email").focusout(function() {
-	   		var email = $('#signup-form #edit-email').val();
-	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  			var valid = regex.test(email);
-
-  			$("#email-validation-error").remove();
-	    	if (email.length == 0) {
-	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#signup-form #edit-email" );
-	    	}
-
-  			if (email.length > 0) {
-	    		if (!valid) {
-	    			$("#email-validation-error").remove();
-	    			$("<span id='email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#signup-form #edit-email" );
-	    		}
-	    		if (valid) {
-	    			$("#email-validation-error").remove();
-	    			$.post(email_validation_path, {'email' : email}, function(data) {
-	    				if  (data == "exist") {
-							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#signup-form #edit-email" );	    					
-	    				}
-				    });
-	    			
-	    		}
-	    	}
-	  	});
-
-	    //Password validation.
-	    $("#signup-form #edit-user-password").focusout(function() {
-	   		var password = $('#signup-form #edit-user-password').val();
-	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			var valid = regex.test(password);
-  			$("#password-validation-error").remove();
-  			if (!valid) {
-  				$("#password-validation-error").remove();
-	    		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
-  			}
-	  	});
-
-	    $("#signup-form #edit-user-password").focusout(function() {
-	   		var password = $('#signup-form #edit-user-password').val();
-	    	if (password.length == 0) {
-	    		$("#password-validation-error").remove();
-	    		$("<span id='password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
-	    	}
-	  	});
-
-	  	//Valid url check
-	    $("#signup-form #edit-field-website").focusout(function() {
-	   		var website = $('#signup-form #edit-field-website').val();
-	   		var valid = /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(website);
-	   		$("#website-validation-error").remove();
-	    	if (website.length > 0) {
-	    		if (!valid) {
-	    			$("<span id='website-validation-error' class='validation-error'>" + website_invalid_msg + "</p>").insertAfter( "#signup-form #edit-field-website" );
-	    		}
-	    	}
-	  	});
-
-		//Twitter tweet message character count as per twitter.
-	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
-	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
-	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
-	    	$("#send-tweets-form #edit-display-box").val(140-tweet_msg_length);
-	    	if (tweet_msg_length > limit_chars) {
-	    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
-	    	}
-	    	else {
-	    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
-	    	}
-	    });
-
-	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
-	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
-	    	var tweet_msg_length = tweet_msg.length;
-	    	if (tweet_msg_length > 900) {
-	    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
-	    	}
-	    	else {
-	    		$("#send-tweets-form #edit-save").removeAttr('disabled');
-	    	}
-	    });
+    $("#send-tweets-form #edit-message").on('keyup', function(e) {
+    	var tweet_msg = $('#send-tweets-form #edit-message').val();
+    	var tweet_msg_length = tweet_msg.length;
+    	if (tweet_msg_length > 300) {
+    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
+    	}
+    	else {
+    		$("#send-tweets-form #edit-save").removeAttr('disabled');
+    	}
+    });
 
 
 		$(".-form-tweets-queue-csv-upload .description").insertAfter(".-form-tweets-queue-csv-upload #edit-submit");
@@ -194,15 +86,9 @@
 	        e.stopPropagation();
 	    });
 
-	     $("#block-usersdashboardheaderblock .profile > a").click(function(e) {
-	     	event.preventDefault();
-	        $(".profile-links").toggleClass("active");
-	        e.stopPropagation();
-	    });
-
 	    $(document).click(function(e) {
-	        if (!$(e.target).is('.notification-message-list, #notification-display, .profile-links')) {
-	            $(".notification-message-list, #notification-display, .profile-links").removeClass("active");
+	        if (!$(e.target).is('.notification-message-list, #notification-display')) {
+	            $(".notification-message-list, #notification-display").removeClass("active");
 	        }
 	    });
 
@@ -238,6 +124,26 @@
 	    	$(".messages--error").remove();
 		});
 
+	    // profile dropdown.
+	    $("#block-usersdashboardheaderblock .profile > a").click(function() {
+	    	event.preventDefault();
+				$(this).toggleClass("active");
+
+				$(this).siblings(".profile-links").toggleClass("active");
+			});
+	    $("#block-usersdashboardnontwitterheaderblock .profile > a").click(function() {
+	    	event.preventDefault();
+			$(this).toggleClass("active");
+			$(this).siblings(".profile-links").toggleClass("active");
+		});
+
+		var left = "140";
+		var textSize = 0;
+		$("#edit-message").keyup(function() {
+		    textSize = $(this).val().length;
+		    document.getElementById('edit-display-box').value = left - textSize;
+		});
+
 		$("#notification-display").click(function(){
             $.ajax({
                 type: 'POST',
@@ -248,7 +154,7 @@
    		});
 
 		// ripple effect
-		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit").click(function (e) {
+		  $(".block-users-tweets-statistics-block .content > div a").click(function (e) {
 
 		  // Remove any old one
 		  $(".ripple").remove();
@@ -287,19 +193,6 @@
 
 		  // Fadeout messages.
 		$('.messages, .messages--error').delay(8000).fadeOut(300);
-
-		// Message position changes.
-		$(".messages").appendTo(".item-list + .item-list").insertBefore(".item-list + .item-list > ul");
-
-		// text overlimit color change.
-		// $('.send-tweets-form #edit-message').on({
-		//     focus: function() {
-		        
-		//         if (this.value.length >= 20) $('#edit-message').focus(){
-		//         	$(this).addClass("red");
-		//         };
-		//     }
-		// })
 
 	});
 

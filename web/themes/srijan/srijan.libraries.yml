@@ -17,7 +17,6 @@ stylesheets:
 customjs:
   js:
     js/custom.js: {}
-    js/twitter.js: {}
     # js/jquery.colorbox.js: {}
     # js/jquery.colorbox-min.js: {}
     # js/colorbox.js: {}
