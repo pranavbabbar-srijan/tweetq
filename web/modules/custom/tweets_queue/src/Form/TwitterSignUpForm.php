@@ -67,15 +67,6 @@ class TwitterSignUpForm extends FormBase {
       ),
     );
 
-    $form['user_password'] = array(
-      '#type' => 'password',
-      '#title' => t('Password'),
-      '#required' => TRUE,
-      '#attributes' => array (
-        'placeholder' => t("Required")
-      ),
-    );
-
     $form[SIGNUP_FIELD_WEBSITE] = array(
       '#type' => 'url',
       '#title' => t('Website'),
@@ -98,7 +89,7 @@ class TwitterSignUpForm extends FormBase {
 
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Submit'),
+      '#value' => t('Continue'),
       '#weight' => 9,
     );
 
