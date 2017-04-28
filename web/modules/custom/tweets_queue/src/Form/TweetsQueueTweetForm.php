@@ -48,7 +48,7 @@ class TweetsQueueTweetForm extends FormBase {
     $tweet_id = $tweet_info->tweet_id;
     $archived = $tweet_info->archived;
     $message = $tweet_info->message;
-    $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+    $size = tweets_queue_get_message_size($message);
     $left = 140 - $size;
     $form['header'] = array(
       '#type' => 'markup',
@@ -124,7 +124,7 @@ class TweetsQueueTweetForm extends FormBase {
     $tweet_id = $tweet_info->tweet_id;
     $archived = $tweet_info->archived;
     $message = $tweet_info->message;
-    $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+    $size = tweets_queue_get_message_size($message);
     $left = 140 - $size;
     $form['nid'] = array(
       '#type' => 'hidden',
@@ -170,7 +170,7 @@ class TweetsQueueTweetForm extends FormBase {
       return;
     }
     $message = tweets_queue_get_urls_present($message);
-    $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+    $size = tweets_queue_get_message_size($message);
     tweets_queue_update_message_queue_priority_info($nid,
       array(
         'message' => $message,

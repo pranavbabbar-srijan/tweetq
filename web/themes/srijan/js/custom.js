@@ -111,9 +111,11 @@
 	    	}
 	  	});
 
+		//Twitter tweet message character count as per twitter.
 	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
-	    	var tweet_msg_length = tweet_msg.length;
+	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
+	    	$("#send-tweets-form #edit-display-box").val(140-tweet_msg_length);
 	    	if (tweet_msg_length > limit_chars) {
 	    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 	    	}
@@ -125,7 +127,7 @@
 	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
 	    	var tweet_msg_length = tweet_msg.length;
-	    	if (tweet_msg_length > 300) {
+	    	if (tweet_msg_length > 900) {
 	    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
 	    	}
 	    	else {
@@ -234,13 +236,6 @@
 	    $(".create-header #ajax-wrapper").click(function() {
 	    	var blankMessage = '';
 	    	$(".messages--error").remove();
-		});
-
-		var left = "140";
-		var textSize = 0;
-		$("#edit-message").keyup(function() {
-		    textSize = $(this).val().length;
-		    document.getElementById('edit-display-box').value = left - textSize;
 		});
 
 		$("#notification-display").click(function(){
