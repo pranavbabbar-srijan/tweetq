@@ -66,7 +66,7 @@ const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
 const TWITTER_USER_DASHBOARD = 'dashboard';
 const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
 const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
-const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
+//const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
 const USER_FORGOT_PASSWORD_SECTION_HEDAER = 'Enter your Registered Email ID';
 const USER_FORGOT_PASSWORD_SECTION_HEDAER_SUBLABEL = 'we will send the new password to your registered email';
 const TWITTER_SIGN_IN_TEXT = 'Sign in with Twitter';
@@ -240,13 +240,13 @@ function tweets_queue_user_login_form_changes(&$form) {
     '#markup' => t("<h2>Sign in to Barbet</h2>"),
     '#weight' => -9,
   );
-  $forgot_password_path = $base_url . '/user/password';
-  $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
+ // $forgot_password_path = $base_url . '/user/password';
+ // $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
   // $url = "<a id='forgot-password' href='" . $forgot_password_path ."'>" . USER_FORGOT_PASSWORD_LABEL . "</a>";
-  $form['forgot_password'] = array(
-    '#markup' => t($url),
-    '#weight' => 10,
-  );
+  // $form['forgot_password'] = array(
+  //   '#markup' => t($url),
+  //   '#weight' => 10,
+  // );
   $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
   $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
   $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .
