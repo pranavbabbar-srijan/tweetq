@@ -121,9 +121,11 @@ button {
 /* ================================= Offset-Span ================================= */
 /* ================================= Clearfix ================================= */
 /* ================================= Media Query Breakpoint ================================= */
-#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-frontpage .messages--error a, .path-frontpage .messages--error div[role="alert"]:before, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .block-users-left-side-bar-block .profile ~ div span.value b:empty, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-frontpage .messages--error div[role="alert"]:before, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .block-users-left-side-bar-block .profile ~ div span.value b:empty, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
   display: none; }
-
+.path-frontpage .messages--error a {
+  display: block;
+}
 .block-users-dashboard-header-block .profile + a:before, .block-users-dashboard-header-profile-block .profile + a:before, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .region-content .messages--error div[role=alert]:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .edit,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .delete,
@@ -384,6 +386,8 @@ body {
       fill: #ffffff; }
   body.user-logged-in {
     background: #F1F1F1; }
+    body.user-logged-in .region-content {
+      max-width: 100%; }
 
 #page-wrapper {
   width: 100%; }
@@ -1120,6 +1124,7 @@ body {
     box-shadow: none;
     margin-left: 10px;
     margin-top: 8px;
+    margin-bottom: 20px;
     text-align: center;
     background: none white;
     border: 1px solid rgba(0, 0, 0, 0.15);
@@ -1299,6 +1304,9 @@ body {
 
 .path-signup .signup + .message-header, .path-twitter .signup + .message-header {
   margin-top: 35px; }
+
+.path-twitter .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
+  width: 45%; }
 
 .toolbar-fixed #sidebar-first {
   top: 136px; }
@@ -1714,7 +1722,8 @@ body {
     border: 2px solid #2aa9e0;
     float: right;
     padding: .4em 1em;
-    margin-right: 0; }
+    margin-right: 0;
+    margin-left: 0; }
   .send-tweets-form .form-textarea, .tweets-queue-tweet-form .form-textarea {
     border-color: rgba(0, 0, 0, 0.1);
     -webkit-border-radius: 5px;
@@ -1929,3 +1938,29 @@ body {
 
 .import-tweet-page .tooltip-css {
   top: 90px !important; }
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
+
+#content .ajax-links-api-loading {
+  background: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 9%;
+  left: 20.5%;
+  width: 100%;
+  height: 100%; }
+  #content .ajax-links-api-loading:after {
+    display: inline-block;
+    font: normal normal normal 90px/1 FontAwesome;
+    content: "\f013";
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+    text-align: center;
+    position: absolute;
+    top: 35%;
+    left: 35%; }
