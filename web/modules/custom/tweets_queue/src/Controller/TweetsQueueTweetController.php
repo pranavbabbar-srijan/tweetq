@@ -40,6 +40,20 @@ class TweetsQueueTweetController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
+  public function validateEmail() {
+    $email = $_REQUEST['email'];
+    if (\Drupal::service('email.validator')->isValid($email)) {
+      $uid = tweets_queue_check_email_presence($email);  
+      if ($uid) {
+        die("exist");
+      }
+    }
+    die("");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCacheMaxAge() {
     return 0;
   }
