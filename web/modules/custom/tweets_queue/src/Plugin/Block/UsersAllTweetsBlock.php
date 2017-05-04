@@ -48,6 +48,7 @@ class UsersAllTweetsBlock extends BlockBase {
     $query->fields('p', [TWITTER_FIELD_NID,TWITTER_FIELD_MESSAGE, TWITTER_FIELD_SIZE,
       TWITTER_FIELD_CREATED ,TWITTER_FIELD_CHANGED, TWITTER_FIELD_TWEETED, TWITTER_FIELD_FIRST_RUN, TWITTER_FIELD_LAST_RUN]);
     $query->condition('p.uid', $uid);
+    $query->condition('p.status', TWITTER_PUBLISHED_TWEET, '=');
     $query->orderBy('p.' . $current_filter, $current_filter_order);
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
