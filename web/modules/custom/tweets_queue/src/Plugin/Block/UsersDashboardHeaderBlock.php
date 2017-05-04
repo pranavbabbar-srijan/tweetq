@@ -22,8 +22,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
    */
   public function build() {
     $tweets_history = tweets_queue_fetch_user_tweets_history();
-    $message_history_count = count($tweets_history);
-    // echo '<pre>', print_r($data); die();
+    $message_history_count = tweets_queue_fetch_user_tweets_history_count();
 
     $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
     $user_twitter_profile_info = unserialize($twitter_profile_info);
@@ -37,13 +36,11 @@ class UsersDashboardHeaderBlock extends BlockBase {
     }
     else {
       $picture = '';
-  -   $name = $user_twitter_profile_info->name;
+      $name = $user_twitter_profile_info->name;
       $picture = '';
       $picture = $user_twitter_profile_info->profile_image_url;
       $profile_img = "<img src='" . $picture . "'></img>";
     }
-
-
 
     $my_profile_link = "<a class ='profile-my-profile' href='" . $base_url .'/' . "'>" .
       'My Profile' ."</a>";
@@ -58,7 +55,6 @@ class UsersDashboardHeaderBlock extends BlockBase {
       <a href=''>" . "<div><span class='img'>" . $profile_img . "</span>
       <span class='name'>" . $name . "</span></div> " . $profile_link_output . "</a>
       </div>" ;
-
 
     $message_history_count_output = "<div>
       <span class='count'>" . $message_history_count . "</span>

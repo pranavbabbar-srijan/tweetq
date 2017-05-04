@@ -11,7 +11,7 @@ use Drupal\Core\Url;
 use Drupal\Core\Cache\Cache;
 
 /**
- * Builds a form to test disabled elements.
+ * Builds a form to edit tweet message.
  */
 class TweetsQueueTweetForm extends FormBase {
   /**
@@ -48,7 +48,7 @@ class TweetsQueueTweetForm extends FormBase {
     $tweet_id = $tweet_info->tweet_id;
     $archived = $tweet_info->archived;
     $message = $tweet_info->message;
-    $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+    $size = tweets_queue_get_message_size($message);
     $left = 140 - $size;
     $form['header'] = array(
       '#type' => 'markup',
@@ -107,6 +107,12 @@ class TweetsQueueTweetForm extends FormBase {
       '#value' => $left,
       '#required' => FALSE,
     );
+
+    $form[TWITTER_REDIRECT_PATH] = array(
+      '#type' => 'hidden',
+      '#value' => $_REQUEST[TWITTER_REDIRECT_PATH],
+      '#required' => FALSE,
+    );
     $form['message-footer'] = array(
       '#type' => 'markup',
       '#markup' => t(''),
@@ -124,7 +130,7 @@ class TweetsQueueTweetForm extends FormBase {
     $tweet_id = $tweet_info->tweet_id;
     $archived = $tweet_info->archived;
     $message = $tweet_info->message;
-    $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+    $size = tweets_queue_get_message_size($message);
     $left = 140 - $size;
     $form['nid'] = array(
       '#type' => 'hidden',
@@ -150,6 +156,11 @@ class TweetsQueueTweetForm extends FormBase {
       '#submit' => array('tweets_queue_delete_submit'),
       '#weight' => 9,
     );
+    $form[TWITTER_REDIRECT_PATH] = array(
+      '#type' => 'hidden',
+      '#value' => $_REQUEST[TWITTER_REDIRECT_PATH],
+      '#required' => FALSE,
+    );
     $form['cancel'] = array(
       '#type' => 'submit',
       '#submit' => array('tweets_queue_cancel_edit_submit'),
@@ -162,6 +173,7 @@ class TweetsQueueTweetForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    global $base_url;
     $input = $form_state->getUserInput();
     $uid = \Drupal::currentUser()->id();
     $nid = $input['nid'];
@@ -170,7 +182,7 @@ class TweetsQueueTweetForm extends FormBase {
       return;
     }
     $message = tweets_queue_get_urls_present($message);
-    $size = $size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
+    $size = tweets_queue_get_message_size($message);
     tweets_queue_update_message_queue_priority_info($nid,
       array(
         'message' => $message,
@@ -180,6 +192,10 @@ class TweetsQueueTweetForm extends FormBase {
       0
     );
     drupal_set_message(t('Tweet have been saved successfully.'));
+    if (isset($input[TWITTER_REDIRECT_PATH]) && !empty($input[TWITTER_REDIRECT_PATH])) {
+      header('Location: ' . $base_url . '/' . $input[TWITTER_REDIRECT_PATH]);
+      die();
+    }
     tweets_queue_redirect_on_tweet_save($size);
   }
 

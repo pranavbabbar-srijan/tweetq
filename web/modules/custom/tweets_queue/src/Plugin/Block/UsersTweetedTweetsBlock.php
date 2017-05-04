@@ -99,11 +99,11 @@ class UsersTweetedTweetsBlock extends BlockBase {
 
   private function compileData($row) {
     $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
-      ['nid' => $row->nid, 'action' => 'edit'],
+      ['nid' => $row->nid, 'action' => 'edit', TWITTER_REDIRECT_PATH => TWITTER_TWEETED_TWEET_PATH],
       ['attributes' => ['class' => 'edit beautytips', 'title' => t(TWITTER_EDIT_TOOLTIP)]]
     );
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
-      ['nid' => $row->nid, 'action' => 'delete'],
+      ['nid' => $row->nid, 'action' => 'delete', TWITTER_REDIRECT_PATH => TWITTER_TWEETED_TWEET_PATH],
       ['attributes' => ['class' => 'delete colorbox cboxElement beautytips', 'title' => t(TWITTER_DELETE_TOOLTIP)]]
     );
     $edit_url_link = \Drupal::l(t("Edit"), $edit_url);
