@@ -34,7 +34,7 @@ class SignUpForm extends FormBase {
 
     $form['header_left'] = array(
       '#type' => 'markup',
-      '#prefix' => '<div id= "signup-form" class="signup">',
+      '#prefix' => '<div class="signup">',
       '#markup' => t('Sign Up'),
       '#suffix' => '</div>',
     );
@@ -48,7 +48,7 @@ class SignUpForm extends FormBase {
 
     $form['message-header'] = array(
       '#type' => 'markup',
-      '#prefix' => '<div class="message-header">',
+      '#prefix' => '<div  id= "signup-form" class="message-header">',
       '#markup' => t(''),
     );
     $form[SIGNUP_FIELD_FULL_NAME] = array(
@@ -105,6 +105,11 @@ class SignUpForm extends FormBase {
       '#weight' => 9,
     );
 
+    $form['message-footer'] = array(
+      '#type' => 'markup',
+      '#suffix' => '</div>',
+      '#markup' => t(''),
+    );
     return $form;
   }
 
