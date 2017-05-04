@@ -134,3 +134,11 @@ tweets_queue_verify.verify:
     _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::verify'
   requirements:
     _role: 'anonymous+administrator+twitter_approved_client'
+
+
+tweets_queue_verify_email.email_verification:
+  path: '/dashboard/validateEmail'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::validateEmail'
+  requirements:
+    _role: 'anonymous+authenticated'
