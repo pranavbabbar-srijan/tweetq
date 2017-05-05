@@ -54,6 +54,23 @@ class TweetsQueueTweetController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
+  public function validateUserLogin() {
+    $email = $_REQUEST['email'];
+    $password = $_REQUEST['password'];
+    if ($user = user_load_by_mail($email)) {
+      // Set the username for further validation.
+      $name = $user->getAccountName();
+      $uid = \Drupal::service('user.auth')->authenticate($name, $password);
+      if ($uid) {
+          die("exist");
+      }
+    }
+    die("no");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCacheMaxAge() {
     return 0;
   }
