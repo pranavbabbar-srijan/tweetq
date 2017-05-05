@@ -25,10 +25,10 @@
 		var website_invalid_msg = 'please enter valid website';
 		var signup_error = '';
 		var email_validation_path = '/dashboard/validateEmail';
-		var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
+		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 
 		var user_login_validation_path = '/dashboard/validateUserLogin';
-		var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
+		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
 
 		$( "#foo" ).trigger( "click" );
 
