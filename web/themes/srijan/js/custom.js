@@ -11,6 +11,12 @@
 		var email_msg = "Please enter a valid email ID";
 		var email_missing_msg = "Please enter your email ID";
 		var existing_email_msg = "Email ID already exist";
+
+		var login_email_missing_msg = "Please enter the email address";
+		var login_email_msg = "Please enter a valid email address";
+		var login_non_existing_email_msg = "You are yet to sign-up with us";
+		var login_valid_password_msg = "Please enter a valid password";
+
 		var password_missing_msg = "Please enter the password";
 		var password_character_msg = 'Enter password between 6 and 12 characters<br>Please Enter At least one Uppercase Letter: A-Z,<br> At least one Lowercase Letter: a-z, <br>At least one Numerical Character: 0-9, <br>At least one of the following special character "!", "@", "#"';
 		var password_length_msg = "Enter password between 6 and 12 characters";
@@ -19,7 +25,10 @@
 		var website_invalid_msg = 'please enter valid website';
 		var signup_error = '';
 		var email_validation_path = '/dashboard/validateEmail';
-		// var email_validation_path = '/tweetQ11Apr/_www/dashboard/validateEmail';
+		var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
+
+		var user_login_validation_path = '/dashboard/validateUserLogin';
+		var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -180,6 +189,91 @@
 	    		$("#send-tweets-form #edit-save").removeAttr('disabled');
 	    	}
 	    });
+
+	    // Login form email validation.
+	    $("#user-login-form #edit-name").focusout(function() {
+	   		var email = $('#user-login-form #edit-name').val();
+	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(email);
+
+  			$("#email-validation-error").remove();
+	    	if (email.length == 0) {
+	    		$("<span id='email-validation-error' class='validation-error'>" + login_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
+	    	}
+
+  			if (email.length > 0) {
+	    		if (!valid) {
+	    			$("#email-validation-error").remove();
+	    			$("<span id='email-validation-error' class='validation-error'>" + login_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
+	    		}
+	    		if (valid) {
+	    			$("#email-validation-error").remove();
+	    			$.post(email_validation_path, {'email' : email}, function(data) {
+	    				if  (data != "exist") {
+							$("<span id='email-validation-error' class='validation-error'>" + login_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );	    					
+	    				}
+				    });
+	    			
+	    		}
+	    	}
+	  	});
+
+		$("#user-login-form #edit-pass").focusout(function() {
+	   		var password = $('#user-login-form #edit-pass').val();
+	   		var email = $('#user-login-form #edit-name').val();
+	    	if (password.length == 0) {
+	    		$("#password-validation-error").remove();
+	    		$("<span id='password-validation-error' class='validation-error'>" + login_password_missing_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
+	    		return;
+	    	}
+	    	var email_failed = $("#user-login-form #email-validation-error").hasClass('validation-error');
+	    	if (email_failed) {
+				return;
+			}
+	    	$("#user-login-validation-error").remove();
+	    	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
+				if  (data != "exist") {
+					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertBefore("#user-login-form #edit-submit" );
+					$("#user-login-form #edit-submit").attr('disabled', 'true');
+				}
+				else {
+					$("#user-login-form #edit-submit").removeAttr('disabled');
+				}
+		    });
+	  	});
+
+		$('#user-login-form').submit(function() {
+			var email = $('#user-login-form #edit-name').val();
+			var password = $('#user-login-form #edit-pass').val();
+			//Check for error
+	    	var email_failed = $("#user-login-form #email-validation-error").hasClass('validation-error');
+			if (email_failed) {
+				return false;
+			}
+
+			//Password check.
+  			$("#password-validation-error").remove();
+  			if (password.length == 0) {
+	    		$("#password-validation-error").remove();
+	    		$("<span id='password-validation-error' class='validation-error'>" + login_password_missing_msg + "</p>").insertAfter( "#user-login-form #edit-pass" );
+	    		return false;
+	    	}
+	    	
+	    	if (email.length == 0) {
+	    		$("<span id='email-validation-error' class='validation-error'>" + login_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
+	    		return false;
+	    	}
+
+			$("#user-login-validation-error").remove();
+	    	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
+				if  (data != "exist") {
+					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertBefore("#user-login-form #edit-submit" );
+					return false;
+				}
+		    });
+
+			return true;
+		});
 
 		//Edit tweet message character count as per twitter.
 	    $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
