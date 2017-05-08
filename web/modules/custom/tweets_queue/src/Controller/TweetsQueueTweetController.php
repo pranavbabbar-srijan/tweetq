@@ -63,8 +63,13 @@ class TweetsQueueTweetController extends ControllerBase {
     if (!$uid) {
       die(t("This Email ID is not registered with us. Kindly enter your registered Email ID"));
     }
-
+    $uid = tweets_queue_check_email_presence($email, 1);
+    if (!$uid) {
+      die(t('Your accout is either de-active or blocked. Please check your mail.'));
+    }
+    $hash_key = hash('sha256', $email);
     //Perform send mail operation and other stuff.
+    tweets_queue_forgot_password_send_mail($mail, $hash_key);
     die("done");
   }
 

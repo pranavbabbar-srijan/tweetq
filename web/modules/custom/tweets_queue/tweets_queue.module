@@ -160,6 +160,7 @@ const TWITTER_VALID_TWEETS_ROUTE_NAME = 'tweets_queue_valid_tweets.settings';
 const TWITTER_INVALID_TWEETS_ROUTE_NAME = 'tweets_queue_invalid_tweets.settings';
 const TWITTER_ARCHIVED_TWEETS_ROUTE_NAME = 'tweets_queue_archived_tweets.settings';
 const TWITTER_ALL_TWEETS_ROUTE_NAME = 'tweets_queue_all_tweets.settings';
+const TWITTER_VERIFY_PASSWORD_TOKEN_ROUTE_NAME = 'tweets_queue_update_password.update';
 
 const USERS_VALID_TWEET = 'users_valid_tweet';
 const USERS_INVALID_TWEET = 'users_invalid_tweet';
@@ -1206,8 +1207,12 @@ function tweets_queue_mail($key, &$message, $params) {
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = Html::escape($params['message']);
       break;
-
     case 'user_verify_signup_mail':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = Html::escape($params['message']);
+      break;
+    case 'forgot_password_email':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = Html::escape($params['message']);
@@ -3072,11 +3077,14 @@ function tweets_queue_delete_submit($form, \Drupal\Core\Form\FormStateInterface 
  * @return integer
  *   Returns user's uid for a specific email.
  */
-function tweets_queue_check_email_presence($email) {
+function tweets_queue_check_email_presence($email, $active = 0) {
   $uid = '';
   $query = \Drupal::database()->select('users_field_data', 'p');
   $query->addField('p', 'uid');
   $query->condition('p.mail', $email);
+  if ($active) {
+    $query->condition('p.status', 1);
+  }
   $uid = $query->execute()->fetchField();
   return $uid;
 }
@@ -3423,4 +3431,37 @@ function tweets_queue_get_parameter_data($name, $calling_function = '') {
     $data = $_REQUEST[$name];
   }
   return $data;
+}
+
+/**
+ * Send mail for forgot password.
+ *
+ * @param string $mail
+ *   Valid email address.
+ */
+function tweets_queue_forgot_password_send_mail($mail, $hash_key) {
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'forgot_password_email'; // Replace with Your key
+  $to = $mail;
+  $url = Url::fromRoute(TWITTER_VERIFY_PASSWORD_TOKEN_ROUTE_NAME,
+    ['hash_key' => $hash_key],
+    ['attributes' => ['class' => ['forgot_password']]]
+  );
+  $link = \Drupal::l(t("Reset the Password"), $url);
+  $message = t("<b>RESET YOUR PASSWORD</b>\n
+    If you have submitted the request to reset your password, then kindly click on the below link. If you didn't make this request, ignore this email.\n
+    Link: @link", array('@link' => $link));
+  tweets_queue_debug_info($message);
+  $params['message'] = $message;
+  $params['title'] = 'Password Reset Request';
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  \Drupal::logger('mail-log')->notice($message);
 }
