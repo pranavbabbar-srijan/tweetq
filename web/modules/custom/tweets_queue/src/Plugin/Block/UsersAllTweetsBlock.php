@@ -48,6 +48,7 @@ class UsersAllTweetsBlock extends BlockBase {
     $query->fields('p', [TWITTER_FIELD_NID,TWITTER_FIELD_MESSAGE, TWITTER_FIELD_SIZE,
       TWITTER_FIELD_CREATED ,TWITTER_FIELD_CHANGED, TWITTER_FIELD_TWEETED, TWITTER_FIELD_FIRST_RUN, TWITTER_FIELD_LAST_RUN]);
     $query->condition('p.uid', $uid);
+    $query->condition('p.status', TWITTER_PUBLISHED_TWEET, '=');
     $query->orderBy('p.' . $current_filter, $current_filter_order);
 
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')->orderByHeader($header);
@@ -91,11 +92,11 @@ class UsersAllTweetsBlock extends BlockBase {
 
   private function compileData($row) {
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
-      ['nid' => $row->nid, 'action' => 'delete'],
+      ['nid' => $row->nid, 'action' => 'delete', TWITTER_REDIRECT_PATH => TWITTER_TOTAL_TWEET_PATH],
       ['attributes' => ['class' => 'delete colorbox cboxElement beautytips', 'title' => t(TWITTER_DELETE_TOOLTIP)]]
     );
     $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
-      ['nid' => $row->nid, 'action' => 'edit'],
+      ['nid' => $row->nid, 'action' => 'edit', TWITTER_REDIRECT_PATH => TWITTER_TOTAL_TWEET_PATH],
       ['attributes' => ['class' => 'edit beautytips', 'title' => t(TWITTER_EDIT_TOOLTIP)]]
     );
     $edit_url_link = \Drupal::l(t("Edit"), $edit_url);
@@ -105,17 +106,14 @@ class UsersAllTweetsBlock extends BlockBase {
     $data['size'] = $row->{TWITTER_FIELD_SIZE};
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CREATED});
 
-
     $tweet_date = ($row->{TWITTER_FIELD_FIRST_RUN}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_FIRST_RUN}) : '-';
     $data['tweet_data'] = $tweet_date;
-    // $data['tweet_data'] = date(TWITTER_DATE_FORMAT, ($row->{TWITTER_FIELD_FIRST_RUN}
-    //   ? $row->{TWITTER_FIELD_FIRST_RUN} : $row->{TWITTER_FIELD_CREATED}));
-
 
     $changed = ($row->{TWITTER_FIELD_CHANGED}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED}) : '-';
     $data['changed'] = $changed;
     // $data['changed'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED});
-    $data['retweeted'] = t('@times', array('@times' => $row->tweeted));
+    $retweeted = ($row->{TWITTER_FIELD_TWEETED}) ? $row->{TWITTER_FIELD_TWEETED} - 1 : 0;
+    $data['retweeted'] = t('@times', array('@times' => $retweeted));
     $data['edit_link'] = $edit_url_link ;
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
