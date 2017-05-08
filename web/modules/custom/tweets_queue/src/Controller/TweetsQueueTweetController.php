@@ -54,6 +54,20 @@ class TweetsQueueTweetController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
+  public function sendToken() {
+    $email = $_REQUEST['email'];
+    if (\Drupal::service('email.validator')->isValid($email)) {
+      $uid = tweets_queue_check_email_presence($email);
+      if ($uid) {
+        die("done");
+      }
+    }
+    die("");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateUserLogin() {
     $email = $_REQUEST['email'];
     $password = $_REQUEST['password'];
