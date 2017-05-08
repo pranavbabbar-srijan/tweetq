@@ -29,13 +29,13 @@
 		var password_maximum_length = 12;
 		var website_invalid_msg = 'please enter valid website';
 		var signup_error = '';
+
 		var email_validation_path = '/dashboard/validateEmail';
-		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
-
 		var user_login_validation_path = '/dashboard/validateUserLogin';
-		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
-
 		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
+
+		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
+		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
 		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
 
 		$( "#foo" ).trigger( "click" );
@@ -311,6 +311,8 @@
 	  	});
 
 		$("#user-login-form #forgot-password-submit").click(function() {
+			$("#forgot-email-validation-error").remove();
+			$("#forgot-password-mail-sent").remove();
 			var email = $('#user-login-form #edit-email').val();
 			var email_failed = $("#user-login-form #forgot-email-validation-error").hasClass('validation-error');
 			if (email_failed) {
