@@ -148,3 +148,10 @@ tweets_queue_validate_user_login.login_verification:
     _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::validateUserLogin'
   requirements:
     _role: 'anonymous+authenticated'
+
+tweets_queue_forgot_password_send_token.send_token:
+  path: '/dashboard/forgotPasswordSendToken'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::sendToken'
+  requirements:
+    _role: 'anonymous'

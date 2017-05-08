@@ -41,7 +41,7 @@ class TweetsQueueTweetController extends ControllerBase {
    * {@inheritdoc}
    */
   public function validateEmail() {
-    $email = $_REQUEST['email'];
+    $email = tweets_queue_get_parameter_data('email');
     if (\Drupal::service('email.validator')->isValid($email)) {
       $uid = tweets_queue_check_email_presence($email);  
       if ($uid) {
@@ -54,9 +54,26 @@ class TweetsQueueTweetController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
+  public function sendToken() {
+    $email = tweets_queue_get_parameter_data('email');
+    if (!\Drupal::service('email.validator')->isValid($email)) {
+      die(t("Please enter a valid email ID"));
+    }
+    $uid = tweets_queue_check_email_presence($email);
+    if (!$uid) {
+      die(t("This Email ID is not registered with us. Kindly enter your registered Email ID"));
+    }
+
+    //Perform send mail operation and other stuff.
+    die("done");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateUserLogin() {
-    $email = $_REQUEST['email'];
-    $password = $_REQUEST['password'];
+    $email = tweets_queue_get_parameter_data('email');
+    $password = tweets_queue_get_parameter_data('password');
     if ($user = user_load_by_mail($email)) {
       // Set the username for further validation.
       $name = $user->getAccountName();

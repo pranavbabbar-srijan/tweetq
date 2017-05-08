@@ -17,6 +17,11 @@
 		var login_non_existing_email_msg = "You are yet to sign-up with us";
 		var login_valid_password_msg = "Please enter a valid password";
 
+		var forgot_email_missing_msg = "Please enter the email address";
+		var forgot_email_msg = "Please enter a valid email ID";
+		var forgot_non_existing_email_msg = "This Email ID is not registered with us. Kindly enter your registered Email ID";
+		var forgot_password_sent_email_msg = "An email to change the password has been sent to your Email ID";
+
 		var password_missing_msg = "Please enter the password";
 		var password_character_msg = 'Enter password between 6 and 12 characters<br>Please Enter At least one Uppercase Letter: A-Z,<br> At least one Lowercase Letter: a-z, <br>At least one Numerical Character: 0-9, <br>At least one of the following special character "!", "@", "#"';
 		var password_length_msg = "Enter password between 6 and 12 characters";
@@ -24,11 +29,14 @@
 		var password_maximum_length = 12;
 		var website_invalid_msg = 'please enter valid website';
 		var signup_error = '';
-		var email_validation_path = '/dashboard/validateEmail';
-		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 
+		var email_validation_path = '/dashboard/validateEmail';
 		var user_login_validation_path = '/dashboard/validateUserLogin';
+		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
+
+		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
+		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -273,6 +281,75 @@
 		    });
 
 			return true;
+		});
+
+		// Forgot password/send password form.
+	  	$("#user-login-form #edit-email").focusout(function() {
+	   		var email = $('#user-login-form #edit-email').val();
+	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(email);
+
+  			$("#forgot-email-validation-error").remove();
+	    	if (email.length == 0) {
+	    		$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    	}
+
+  			if (email.length > 0) {
+	    		if (!valid) {
+	    			$("#forgot-email-validation-error").remove();
+	    			$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    		}
+	    		if (valid) {
+	    			$("#forgot-email-validation-error").remove();
+	    			$.post(email_validation_path, {'email' : email}, function(data) {
+	    				if  (data != "exist") {
+							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );	    					
+	    				}
+				    });
+	    		}
+	    	}
+	  	});
+
+		$("#user-login-form #forgot-password-submit").click(function() {
+			$("#forgot-email-validation-error").remove();
+			$("#forgot-password-mail-sent").remove();
+			var email = $('#user-login-form #edit-email').val();
+			var email_failed = $("#user-login-form #forgot-email-validation-error").hasClass('validation-error');
+			if (email_failed) {
+				return;
+			}
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(email);
+  			$("#forgot-email-validation-error").remove();
+			if (email.length == 0) {
+	    		$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    		return;
+	    	}
+	    	if (email.length > 0) {
+	    		if (!valid) {
+	    			$("#forgot-email-validation-error").remove();
+	    			$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    		}
+	    		if (valid) {
+	    			$("#forgot-email-validation-error").remove();
+	    			$.post(email_validation_path, {'email' : email}, function(data) {
+	    				if  (data != "exist") {
+							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_password_sent_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+							return;
+	    				}
+				    });
+	    		}
+	    	}
+
+	    	$.post(forgot_password_send_token_path, {'email' : email}, function(data) {
+	    		$("#forgot-email-validation-error").remove();
+				if  (data == "done") {
+					$("<span id='forgot-password-mail-sent' class='mail-sent'>" + forgot_password_sent_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+					return;
+				}
+				$("<span id='forgot-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-login-form #edit-email" );
+		    });
+
 		});
 
 		//Edit tweet message character count as per twitter.
