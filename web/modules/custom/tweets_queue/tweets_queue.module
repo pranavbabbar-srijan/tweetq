@@ -66,7 +66,7 @@ const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
 const TWITTER_USER_DASHBOARD = 'dashboard';
 const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
 const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
-//const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
+const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
 const USER_FORGOT_PASSWORD_SECTION_HEDAER = 'Enter your Registered Email ID';
 const USER_FORGOT_PASSWORD_SECTION_HEDAER_SUBLABEL = 'we will send the new password to your registered email';
 const TWITTER_SIGN_IN_TEXT = 'Sign in with Twitter';
@@ -242,13 +242,13 @@ function tweets_queue_user_login_form_changes(&$form) {
     '#markup' => t("<h2>Sign in to Barbet</h2>"),
     '#weight' => -9,
   );
- // $forgot_password_path = $base_url . '/user/password';
- // $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
+ $forgot_password_path = $base_url . '/user/password';
+ $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
   // $url = "<a id='forgot-password' href='" . $forgot_password_path ."'>" . USER_FORGOT_PASSWORD_LABEL . "</a>";
-  // $form['forgot_password'] = array(
-  //   '#markup' => t($url),
-  //   '#weight' => 10,
-  // );
+  $form['forgot_password'] = array(
+    '#markup' => t($url),
+    '#weight' => 10,
+  );
   $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
   $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
   $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .
@@ -290,12 +290,6 @@ function tweets_queue_forgot_password(&$form) {
       ),
     );
 
-  // $form['forgot_submit'] = array(
-  //     '#type' => 'submit',
-  //     '#value' => t('Submit'),
-  //     '#weight' => -19,
-  //   );
-
   $form['forgot_submit'] = array(
     '#type' => 'markup',
     '#prefix' => '<div id="forgot-password-submit">',
@@ -303,12 +297,6 @@ function tweets_queue_forgot_password(&$form) {
     '#suffix' => '</div>',
     '#weight' => -19,
   );
-
-  // $form['forgot_cancel'] = array(
-  //     '#type' => 'submit',
-  //     '#value' => t('Cancel'),
-  //     '#weight' => -18,
-  //   );
 
   $form['forgot_cancel'] = array(
     '#type' => 'markup',
@@ -3389,4 +3377,50 @@ function tweets_queue_get_message_size($tweet, $got_image = FALSE) {
     $tweet_length += $twitter_pic_length;
   }
   return $tweet_length;
+}
+
+/**
+ * Get token based on the email.
+ *
+ * @param string $email
+ *   A valid email for token generation.
+ *
+ * @return string
+ *   Returns a token.
+ */
+function tweets_queue_get_token($email) {
+  return $email;
+}
+
+/**
+ * Validate a token.
+ *
+ * @param string $token
+ *   A token for the validation.
+ *
+ * @return string
+ *   Returns true if the token is valid otherwise false.
+ */
+function tweets_queue_validate_token($token) {
+  $valid = 1;
+  return $valid;
+}
+
+/**
+ * Read the passed parameter.
+ *
+ * @param string $name
+ *   Name of the parameter to fetch.
+ * @param string $calling_function
+ *   Name of the caller function for some manipulation (optional).
+ *
+ * @return string
+ *   Returns the expected parameter data.
+ */
+function tweets_queue_get_parameter_data($name, $calling_function = '') {
+  $data = '';
+  if (isset($_REQUEST[$name])) {
+    $data = $_REQUEST[$name];
+  }
+  return $data;
 }

@@ -432,7 +432,7 @@ body {
     color: #e74c3c;
     font-size: 14px;
     a {
-    	//@extend %none;
+    	@extend %none;
     }
     div[role="alert"] {
     	&:before {
