@@ -3405,3 +3405,22 @@ function tweets_queue_validate_token($token) {
   $valid = 1;
   return $valid;
 }
+
+/**
+ * Read the passed parameter.
+ *
+ * @param string $name
+ *   Name of the parameter to fetch.
+ * @param string $calling_function
+ *   Name of the caller function for some manipulation (optional).
+ *
+ * @return string
+ *   Returns the expected parameter data.
+ */
+function tweets_queue_get_parameter_data($name, $calling_function = '') {
+  $data = '';
+  if (isset($_REQUEST[$name])) {
+    $data = $_REQUEST[$name];
+  }
+  return $data;
+}

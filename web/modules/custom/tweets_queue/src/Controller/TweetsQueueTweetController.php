@@ -56,13 +56,16 @@ class TweetsQueueTweetController extends ControllerBase {
    */
   public function sendToken() {
     $email = $_REQUEST['email'];
-    if (\Drupal::service('email.validator')->isValid($email)) {
-      $uid = tweets_queue_check_email_presence($email);
-      if ($uid) {
-        die("done");
-      }
+    if (!\Drupal::service('email.validator')->isValid($email)) {
+      die(t("Please enter a valid email ID"));
     }
-    die("");
+    $uid = tweets_queue_check_email_presence($email);
+    if (!$uid) {
+      die(t("This Email ID is not registered with us. Kindly enter your registered Email ID"));
+    }
+
+    //Perform send mail operation and other stuff.
+    die("done");
   }
 
   /**
