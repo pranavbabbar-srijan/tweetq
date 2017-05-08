@@ -448,7 +448,7 @@
 		    left: x + 'px'
 			}).addClass("rippleEffect");
 		});
-		  $(".path-frontpage .region-content .messages--error").insertBefore("#user-login-prefix #forgot-password");
+		  $(".path-frontpage .region-content .messages--error").insertAfter("#user-login-prefix .form-type-password");
 
 		  // Fadeout messages.
 		$('.messages, .messages--error').delay(8000).fadeOut(300);
