@@ -1216,7 +1216,7 @@ function tweets_queue_mail($key, &$message, $params) {
     case 'forgot_password_email':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
-      $message['body'][] = Html::escape($params['message']);
+      $message['body'][] = $params['message'];
       break;
   }
 }
@@ -3516,7 +3516,6 @@ function tweets_queue_validate_password_hash_key($id, $hash_key, $hash_key1) {
     drupal_set_message(t("You are not allowed to access this page."));
     return false;
   }
-
   if ($hash_key_info->hash_key != $hash_key) {
     drupal_set_message(t("You are not allowed to access this page."));
     return false;
@@ -3526,7 +3525,6 @@ function tweets_queue_validate_password_hash_key($id, $hash_key, $hash_key1) {
     drupal_set_message(t("You are not allowed to access this page."));
     return false;
   }
-
   $now = time();
   $elapsed_time = $now - $hash_key_info->created;
   $elapsed_time_duration = 1 * 60;
@@ -3553,4 +3551,21 @@ function tweets_queue_fetch_password_hash_key_info($id) {
   $query->condition('p.id', $id);
   $hash_key_info = $query->execute()->fetchObject();
   return $hash_key_info;
+}
+
+/**
+ * Change user password.
+ *
+ * @param integer $uid
+ *   User uid.
+ * @param string $password
+ *   Password to be applied.
+ */
+function tweets_queue_change_password($uid, $password) {
+  if (!$uid) {
+    return;
+  }
+  $entity = \Drupal\user\Entity\User::load($uid);
+  $entity->setPassword($password);
+  $entity->save();
 }
