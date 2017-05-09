@@ -350,7 +350,7 @@ body {
 
 .user-login-form {
 	background: rgba(255,255,255,.8);
-	padding: 2em 2em 8em;
+	padding: 2em 2em 10em;
 	@include border-radius(6px);
 	width: 360px;
 	float: right;
@@ -419,6 +419,12 @@ body {
 		font-size: 14px;
 		display: block;
 	}
+	.validation-error {
+		color: #ff5a43;
+		font-size: 14px;
+		margin-top: 8px;
+		display: block;
+	}
 }
 
 .path-frontpage .messages--error {
@@ -481,7 +487,7 @@ body {
 
 .twitter-btn {
 	position: absolute;
-    bottom: 1.5em;
+    bottom: 2em;
     width: 85%;
     span {
     	width: 100%;
