@@ -32,16 +32,37 @@ class UpdatePassword extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $id = tweets_queue_get_parameter_data('id');
+    $hash_key = tweets_queue_get_parameter_data('hash_key');
+    $hash_key1 = tweets_queue_get_parameter_data('hash_key1');
+    $valid = tweets_queue_validate_password_hash_key($id, $hash_key, $hash_key1);
+    if (!$valid) {
+      return;
+    }
     $form['password'] = array(
      '#type' => 'password',
-     '#title' => $this->t('New password'),
+     '#title' => $this->t('New Password'),
      '#maxlength' => 64,
+     '#attributes' => array (
+        'placeholder' => t("Required"),
+        'autocomplete' => 'off'
+      ),
+     '#size' => 64,
+   );
+    $form['reset_password'] = array(
+     '#type' => 'password',
+     '#title' => $this->t('Confirm Password'),
+     '#maxlength' => 64,
+     '#attributes' => array (
+        'placeholder' => t("Required"),
+        'autocomplete' => 'off'
+      ),
      '#size' => 64,
    );
    $form['actions']['#type'] = 'actions';
    $form['actions']['submit'] = array(
      '#type' => 'submit',
-     '#value' => $this->t('Submit'),
+     '#value' => $this->t('Reset'),
      '#button_type' => 'primary',
    );
    return $form;
@@ -72,6 +93,13 @@ class UpdatePassword extends FormBase {
     // after that redirect user to login page.
     echo $password;
     die;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return 0;
   }
 
 }

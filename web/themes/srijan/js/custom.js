@@ -34,9 +34,9 @@
 		var user_login_validation_path = '/dashboard/validateUserLogin';
 		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
 
-		var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
-		var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
-		var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
+		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
+		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
+		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
 
 		$( "#foo" ).trigger( "click" );
 
