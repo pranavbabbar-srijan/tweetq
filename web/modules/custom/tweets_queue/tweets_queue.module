@@ -44,6 +44,7 @@ const TWITTER_TWEETS_HISTORY_TABLE = 'twitter_tweets_history';
 const TWEETS_URL_TABLE = 'tweets_url';
 const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
+const TWITTER_PASSWORD_HASH_KEY_TABLE = 'twitter_password_hash_key';
 const CRON_TWEET_SCHEDULED = 'cron_tweet_scheduled';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
 const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
@@ -1233,7 +1234,7 @@ function tweets_queue_signup_send_mail($mail, $name) {
   $module = 'tweets_queue';
   $key = 'user_signup_mail'; // Replace with Your key
   $to = $mail;
-  $message = t("Dear @full_name\n,
+  $message = t("Dear @full_name,\n
 Welcome to Barbet!\n
 You have successfully signed up with Barbet App. Kindly login to the app and connect with your twitter Details to start using Barbet.", array('@full_name' => $name));
   $params['message'] = $message;
@@ -1383,6 +1384,18 @@ function tweets_queue_entity_delete(\Drupal\Core\Entity\EntityInterface $entity)
  * Implements hook_schema().
  */
 function tweets_queue_schema() {
+   $schema[TWITTER_PASSWORD_HASH_KEY_TABLE] = array(
+    'description' => 'The base table for password change.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'email' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'hash_key' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 100, 'default' => ''),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+  );
+
   $schema[TWEETS_HANDLER_TABLE] = array(
     'description' => 'The base table for tweet handler specific information.',
     'fields' => array(
@@ -3439,17 +3452,15 @@ function tweets_queue_get_parameter_data($name, $calling_function = '') {
  * @param string $mail
  *   Valid email address.
  */
-function tweets_queue_forgot_password_send_mail($mail, $hash_key) {
+function tweets_queue_forgot_password_send_mail($mail, $hash_key, $uid) {
+  global $base_url;
   $mailManager = \Drupal::service('plugin.manager.mail');
   $module = 'tweets_queue';
   $key = 'forgot_password_email'; // Replace with Your key
   $to = $mail;
-  $url = Url::fromRoute(TWITTER_VERIFY_PASSWORD_TOKEN_ROUTE_NAME,
-    ['hash_key' => $hash_key],
-    ['attributes' => ['class' => ['forgot_password']]]
-  );
-  $link = \Drupal::l(t("Reset the Password"), $url);
-  $message = t("<b>RESET YOUR PASSWORD</b>\n
+
+  $link = $base_url . '/update-password' . "?hash_key=" . $hash_key . '&id=' . $uid;
+  $message = t("RESET YOUR PASSWORD\n
     If you have submitted the request to reset your password, then kindly click on the below link. If you didn't make this request, ignore this email.\n
     Link: @link", array('@link' => $link));
   tweets_queue_debug_info($message);
@@ -3457,11 +3468,32 @@ function tweets_queue_forgot_password_send_mail($mail, $hash_key) {
   $params['title'] = 'Password Reset Request';
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
-
   $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
   if ($result['result'] != true) {
     \Drupal::logger('mail-log')->error($message);
     return;
   }
   \Drupal::logger('mail-log')->notice($message);
+}
+
+/**
+ * Store generated hash key for specific email and user uid.
+ *
+ * @param array $password_message_info
+ *   Array containing user information.
+ *
+ * @return integer
+ *   Returns unique id for the newly created record.
+ */
+function tweets_queue_insert_password_hash_key_record($password_message_info) {
+  if (!is_array($password_message_info)) {
+    $password_message_info = array();
+  }
+  $password_message_info['created'] = time();
+  $id = db_insert(TWITTER_PASSWORD_HASH_KEY_TABLE)
+    ->fields($password_message_info)
+    ->execute();
+  if ($id) {
+    return $id;
+  }
 }
