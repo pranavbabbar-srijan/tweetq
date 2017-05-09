@@ -39,60 +39,109 @@ class UpdatePassword extends FormBase {
     if (!$valid) {
       return;
     }
+    $form['message_header'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="password-header">',
+      '#markup' => t('Reset Password'),
+      '#suffix' => '</div>',
+    );
     $form['password'] = array(
-     '#type' => 'password',
-     '#title' => $this->t('New Password'),
-     '#maxlength' => 64,
-     '#attributes' => array (
+      '#type' => 'password',
+      '#title' => $this->t('New Password'),
+      '#maxlength' => 64,
+      '#attributes' => array (
         'placeholder' => t("Required"),
         'autocomplete' => 'off'
       ),
-     '#size' => 64,
-   );
+      '#required' => TRUE,
+      '#size' => 64,
+    );
     $form['reset_password'] = array(
-     '#type' => 'password',
-     '#title' => $this->t('Confirm Password'),
-     '#maxlength' => 64,
-     '#attributes' => array (
+      '#type' => 'password',
+      '#title' => $this->t('Confirm Password'),
+      '#maxlength' => 64,
+      '#attributes' => array (
         'placeholder' => t("Required"),
         'autocomplete' => 'off'
       ),
-     '#size' => 64,
-   );
-   $form['actions']['#type'] = 'actions';
-   $form['actions']['submit'] = array(
-     '#type' => 'submit',
-     '#value' => $this->t('Reset'),
-     '#button_type' => 'primary',
-   );
-   return $form;
+      '#required' => TRUE,
+      '#size' => 64,
+    );
+    $form['id'] = array(
+      '#type' => 'hidden',
+      '#value' => $id,
+      '#title' => $this->t('ID'),
+    );
+    $form['hash_key'] = array(
+      '#type' => 'hidden',
+      '#value' => $hash_key,
+      '#title' => $this->t('ID'),
+    );
+    $form['hash_key1'] = array(
+      '#type' => 'hidden',
+      '#value' => $hash_key1,
+      '#title' => $this->t('ID'),
+    );
+    $form['actions']['#type'] = 'actions';
+    $form['actions']['submit'] = array(
+      '#type' => 'submit',
+      '#value' => $this->t('Reset'),
+      '#button_type' => 'primary',
+    );
+    return $form;
   }
 
   /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $current_path = \Drupal::service('path.current')->getPath();
-    $path_args = array_filter(explode('/', $current_path));
-    $email = $path_args[2];
-    $hash = $path_args[3];
-    // Using this email and hash key check whether this exists in DB or not.
-    // If exists then form will be submitted other throw one error message.
-    // Invalid email or hash key as per query results.
+    // Password validation.
+    $data = $form_state->getValues();
+    $password = $data['password'];
+    $reset_password = $data['reset_password'];
+    if (strlen($password) < 6 || strlen($password) > 12) {
+      $form_state->setErrorByName('password',
+        t('Password length should be minimum of 6 and maximum of 12 characters.'));
+    }
+
+    if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/',$password)) {
+      $form_state->setErrorByName('password',
+        t('<div>Please Enter At least one Uppercase Letter: A-Z,</div>  <div>At least one Lowercase Letter: a-z,</div>  <div>At least one Numerical Character: 0-9,</div>  <div>At least one of the following special character "!", "@", "#"</div>'));
+    }
+
+    if ($password != $reset_password) {
+      $form_state->setErrorByName('password', t('New Password and Confirm Password must be same'));
+    }
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $current_path = \Drupal::service('path.current')->getPath();
-    $path_args = array_filter(explode('/', $current_path));
-    $email = $path_args[2];
-    $password = md5($form['password']['#value']);
-    // After successful submission update the password for the respective email address.
-    // after that redirect user to login page.
-    echo $password;
-    die;
+    global $base_url;
+    $data = $form_state->getValues();
+    $password = $data['password'];
+    $reset_password = $data['reset_password'];
+    $id = $data['id'];
+    $hash_key = $data['hash_key'];
+    $hash_key1 = $data['hash_key1'];
+    $valid = tweets_queue_validate_password_hash_key($id, $hash_key, $hash_key1);
+    if (!$valid) {
+      return;
+    }
+
+    if ($password != $reset_password) {
+      drupal_set_message(t('New Password and Confirm Password must be same'));
+      return;
+    }
+    $hash_key_info = tweets_queue_fetch_password_hash_key_info($id);
+    if (is_object($hash_key_info)) {
+      $uid = $hash_key_info->uid;
+      tweets_queue_change_password($uid, $password);
+      drupal_set_message(t("Password successfuly changed."));
+      header('Location: ' . $base_url);
+      die();
+    }
   }
 
   /**
