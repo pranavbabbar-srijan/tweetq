@@ -469,7 +469,7 @@ body {
 
 .user-login-form {
   background: rgba(255, 255, 255, 0.8);
-  padding: 2em 2em 8em;
+  padding: 2em 2em 10em;
   -webkit-border-radius: 6px;
   -khtml-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -533,6 +533,11 @@ body {
     color: #2aa9e0;
     font-size: 14px;
     display: block; }
+  .user-login-form .validation-error {
+    color: #ff5a43;
+    font-size: 14px;
+    margin-top: 8px;
+    display: block; }
 
 .path-frontpage .messages--error {
   display: block;
@@ -577,7 +582,7 @@ body {
 
 .twitter-btn {
   position: absolute;
-  bottom: 1.5em;
+  bottom: 2em;
   width: 85%; }
   .twitter-btn span {
     width: 100%;
