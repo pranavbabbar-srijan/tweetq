@@ -155,3 +155,10 @@ tweets_queue_forgot_password_send_token.send_token:
     _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::sendToken'
   requirements:
     _role: 'anonymous'
+
+tweets_queue_update_password.update:
+  path: '/update-password'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\UpdatePassword'
+  requirements:
+    _access: 'TRUE'
