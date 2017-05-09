@@ -22,6 +22,8 @@
 		var forgot_non_existing_email_msg = "This Email ID is not registered with us. Kindly enter your registered Email ID";
 		var forgot_password_sent_email_msg = "An email to change the password has been sent to your Email ID";
 
+		var update_password_no_match_msg = "New password and confirm password must be same";
+
 		var password_missing_msg = "Please enter the password";
 		var password_character_msg = 'Enter password between 6 and 12 characters<br>Please Enter At least one Uppercase Letter: A-Z,<br> At least one Lowercase Letter: a-z, <br>At least one Numerical Character: 0-9, <br>At least one of the following special character "!", "@", "#"';
 		var password_length_msg = "Enter password between 6 and 12 characters";
@@ -351,6 +353,42 @@
 		    });
 
 		});
+
+
+		//Password change validation.
+	    $("#update-password #edit-password").focusout(function() {
+	   		var password = $('#update-password #edit-password').val();
+	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  			var valid = regex.test(password);
+  			var passed = true;
+  			$("#password-validation-error").remove();
+  			if (password.length == 0) {
+	    		$("#password-validation-error").remove();
+	    		$("#update-password #edit-actions #edit-submit").attr('disabled', 'true');
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#update-password #edit-password" );
+	    		return;
+	    	}
+
+  			if (!valid) {
+  				$("#password-validation-error").remove();
+  				$("#update-password #edit-actions #edit-submit").attr('disabled', 'true');
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#update-password #edit-password" );
+	    		return;
+  			}
+  			$("#update-password #edit-actions #edit-submit").removeAttr('disabled');
+	  	});
+
+		$("#update-password #edit-reset-password").focusout(function() {
+	   		var password = $('#update-password #edit-password').val();
+	   		var reset_password = $('#update-password #edit-reset-password').val();
+	   		$("#reset-password-validation-error").remove();
+  			if (password != reset_password) {
+  				$("#update-password #edit-actions #edit-submit").attr('disabled', 'true');
+	    		$("<span id='reset-password-validation-error' class='validation-error'>" + update_password_no_match_msg + "</p>").insertAfter( "#update-password #edit-reset-password" );
+	    		return;
+  			}
+  			$("#update-password #edit-actions #edit-submit").removeAttr('disabled');
+	  	});
 
 		//Edit tweet message character count as per twitter.
 	    $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
