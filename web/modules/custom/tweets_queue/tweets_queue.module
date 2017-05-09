@@ -1226,7 +1226,7 @@ function tweets_queue_mail($key, &$message, $params) {
  *
  * @param string $mail
  *   Valid email address.
- * @param strng $name
+ * @param string $name
  *   Full name of the user.
  */
 function tweets_queue_signup_send_mail($mail, $name) {
@@ -2365,7 +2365,7 @@ function tweets_queue_authenticate_twitter_user() {
    *
    * @param int $logged_uid
    *   Logged user uid.
-   * @param strng $twitter_owner_id
+   * @param string $twitter_owner_id
    *   Twitter account owner id.
    * @param string $twitter_data
    *   Serialized twitter ouath token and oauth secret token.
@@ -3452,14 +3452,14 @@ function tweets_queue_get_parameter_data($name, $calling_function = '') {
  * @param string $mail
  *   Valid email address.
  */
-function tweets_queue_forgot_password_send_mail($mail, $hash_key, $uid) {
+function tweets_queue_forgot_password_send_mail($mail, $hash_key, $id, $hash_key1) {
   global $base_url;
   $mailManager = \Drupal::service('plugin.manager.mail');
   $module = 'tweets_queue';
   $key = 'forgot_password_email'; // Replace with Your key
   $to = $mail;
 
-  $link = $base_url . '/update-password' . "?hash_key=" . $hash_key . '&id=' . $uid;
+  $link = $base_url . '/update-password' . "?hash_key=" . $hash_key . '&id=' . $id . '&hash_key1=' . $hash_key1;
   $message = t("RESET YOUR PASSWORD\n
     If you have submitted the request to reset your password, then kindly click on the below link. If you didn't make this request, ignore this email.\n
     Link: @link", array('@link' => $link));
@@ -3489,11 +3489,68 @@ function tweets_queue_insert_password_hash_key_record($password_message_info) {
   if (!is_array($password_message_info)) {
     $password_message_info = array();
   }
-  $password_message_info['created'] = time();
   $id = db_insert(TWITTER_PASSWORD_HASH_KEY_TABLE)
     ->fields($password_message_info)
     ->execute();
   if ($id) {
     return $id;
   }
+}
+
+/**
+ * Validate  password hash key.
+ *
+ * @param integer $id
+ *   ID of the password hash key record.
+ * @param string $hash_key
+ *   Hash key generated based on the email.
+ * @param string $hash_key1
+ *   Hash key generated based on the created time.
+ *
+ * @return boolean
+ *   Returns true when all the condition is met true otherwise false.
+ */
+function tweets_queue_validate_password_hash_key($id, $hash_key, $hash_key1) {
+  $hash_key_info = tweets_queue_fetch_password_hash_key_info($id);
+  if (!is_object($hash_key_info)) {
+    drupal_set_message(t("You are not allowed to access this page."));
+    return false;
+  }
+
+  if ($hash_key_info->hash_key != $hash_key) {
+    drupal_set_message(t("You are not allowed to access this page."));
+    return false;
+  }
+  $created_hash_key =  hash('sha256', $hash_key_info->created);
+  if ($hash_key1 != $created_hash_key) {
+    drupal_set_message(t("You are not allowed to access this page."));
+    return false;
+  }
+
+  $now = time();
+  $elapsed_time = $now - $hash_key_info->created;
+  $elapsed_time_duration = 1 * 60;
+  if ($elapsed_time >  $elapsed_time_duration) {
+    drupal_set_message(t("Your password change time got expired."));;
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Fetch password hash key information.
+ *
+ * @param integer $id
+ *   Id of the password hash key.
+ *
+ * @return object
+ *   Returns object containing the complete password hash key info.
+ */
+function tweets_queue_fetch_password_hash_key_info($id) {
+  $hash_key_info = array();
+  $query = \Drupal::database()->select(TWITTER_PASSWORD_HASH_KEY_TABLE, 'p');
+  $query->fields('p', ['id', 'uid', 'email', 'hash_key', 'created']);
+  $query->condition('p.id', $id);
+  $hash_key_info = $query->execute()->fetchObject();
+  return $hash_key_info;
 }
