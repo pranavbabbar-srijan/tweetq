@@ -39,6 +39,12 @@ class UpdatePassword extends FormBase {
     if (!$valid) {
       return;
     }
+    $form['message_header'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="password-header">',
+      '#markup' => t('Reset Password'),
+      '#suffix' => '</div>',
+    );
     $form['password'] = array(
       '#type' => 'password',
       '#title' => $this->t('New Password'),
@@ -89,6 +95,23 @@ class UpdatePassword extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Password validation.
+    $data = $form_state->getValues();
+    $password = $data['password'];
+    $reset_password = $data['reset_password'];
+    if (strlen($password) < 6 || strlen($password) > 12) {
+      $form_state->setErrorByName('password',
+        t('Password length should be minimum of 6 and maximum of 12 characters.'));
+    }
+
+    if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/',$password)) {
+      $form_state->setErrorByName('password',
+        t('<div>Please Enter At least one Uppercase Letter: A-Z,</div>  <div>At least one Lowercase Letter: a-z,</div>  <div>At least one Numerical Character: 0-9,</div>  <div>At least one of the following special character "!", "@", "#"</div>'));
+    }
+
+    if ($password != $reset_password) {
+      $form_state->setErrorByName('password', t('New Password and Confirm Password must be same'));
+    }
   }
 
   /**
