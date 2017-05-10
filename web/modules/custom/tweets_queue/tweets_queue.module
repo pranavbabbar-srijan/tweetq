@@ -42,6 +42,7 @@ const TWEETS_TWEETER_DATA_TABLE = 'tweets_tweeter_data';
 const TWITTER_SCHEDULED_MESSAGES_TABLE = 'twitter_scheduled_messages';
 const TWITTER_TWEETS_HISTORY_TABLE = 'twitter_tweets_history';
 const TWEETS_URL_TABLE = 'tweets_url';
+const TWITTER_CRON_HISTORY_TABLE = 'twitter_cron_history';
 const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const TWITTER_PASSWORD_HASH_KEY_TABLE = 'twitter_password_hash_key';
@@ -1544,6 +1545,14 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
       'twitter_scheduled_messages_next_run' => array('next_run'),
     )
   );
+  $schema[TWITTER_CRON_HISTORY_TABLE] = array(
+    'description' => 'The base table for cron history data.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+  );
 
   $schema[TWITTER_TWEETS_HISTORY_TABLE] = array(
     'description' => 'The base table for twitter tweets history data.',
@@ -1555,11 +1564,13 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
       'code' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'retweeted' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'cron_id' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
     ),
     'indexes' => array(
       'twitter_tweets_history_nid' => array('nid'),
       'twitter_tweets_history_uid' => array('uid'),
       'twitter_tweets_history_created' => array('created'),
+      'twitter_tweets_history_cron_id' => array('cron_id'),
     )
   );
 
