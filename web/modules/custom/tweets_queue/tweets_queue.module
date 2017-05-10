@@ -251,8 +251,7 @@ function tweets_queue_user_login_form_changes(&$form) {
   );
  $forgot_password_path = $base_url . '/user/password';
  $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
-  // $url = "<a id='forgot-password' href='" . $forgot_password_path ."'>" . USER_FORGOT_PASSWORD_LABEL . "</a>";
-  $form['forgot_password'] = array(
+ $form['forgot_password'] = array(
     '#markup' => t($url),
     '#weight' => 10,
   );
