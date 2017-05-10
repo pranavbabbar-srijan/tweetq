@@ -124,7 +124,7 @@ class UsersTweetedTweetsBlock extends BlockBase {
     $data['changed'] = $changed;
     // $data['changed'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED});
     $retweeted = ($row->{TWITTER_FIELD_TWEETED}) ? $row->{TWITTER_FIELD_TWEETED} - 1 : 0;
-    $data['retweeted'] = t('@times times', array('@times' => $retweeted));
+    $data['retweeted'] = t('@times', array('@times' => $retweeted));
     $data['edit_link'] = $edit_url_link ;
     $data['delete_link'] = $delete_url_link ;
     return array('data' => $data);
