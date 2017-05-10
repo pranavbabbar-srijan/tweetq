@@ -393,6 +393,15 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   return $status;
 }
 
+/**
+ * Fetch user's twitter auth map info.
+ *
+ * @param integer $uid
+ *   User's uid.
+ *
+ * @return object
+ *   Returns user's auth map information.
+ */
 function tweets_queue_fetch_user_auth_map_info($uid) {
   $oauth_info = array();
   $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
@@ -422,11 +431,11 @@ function tweets_queue_tweet_scheduled_messages($cron_id = 0) {
     $handler_list = tweets_queue_tweet_scheduled_messages_user_list(array_values($messages_list['uids']));
     tweets_queue_debug_info($handler_list);
     tweets_queue_debug_info(t('Process send begins'));
-    tweets_queue_send_scheduled_messages($messages_list, $handler_list);
+    tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cron_id);
   }
 }
 
-function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
+function tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cron_id = 0) {
   foreach ($messages_list['nids'] as $pos => $message_data) {
     tweets_queue_debug_info(t('started with nid @nid and user @uid', array('@nid' => $message_data->nid, '@uid' => $message_data->uid)));
     $client_twitter_handler = $handler_list['handler'][$message_data->uid];
@@ -443,10 +452,10 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
       'created' => time(),
       'code' => 0,
       'status' => 0,
-      'message' => ''
+      'message' => '',
+      'cron_id' => $cron_id,
     );
     if ($status['success']) {
-
       tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
       $tweet_id = $status['data']->id;
       $twitter_history_info['retweeted'] = ($message_data->tweet_id) ? 1 : 0;
@@ -675,7 +684,7 @@ function tweets_queue_send_direct_message($message) {
     'uid' => $uid,
     'size' => $size,
   );
-  
+
   if (!$tweet_id) {
     drupal_set_message(t('Your tweet message "@message" already exists.',
     array('@message' => $message)));
@@ -689,7 +698,7 @@ function tweets_queue_send_direct_message($message) {
     'uid' => $uid,
     'created' => time(),
     'code' => 0,
-    'status' => 0,
+    'status' => 1,
     'message' => '',
   );
   tweets_queue_update_message_queue_priority_info($nid,
@@ -703,7 +712,6 @@ function tweets_queue_send_direct_message($message) {
     0
   );
   tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info);
-  //tweets_queue_redirect_on_tweet_save($size);
 }
 
 /**
