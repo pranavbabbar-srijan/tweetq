@@ -407,17 +407,15 @@ function tweets_queue_fetch_user_auth_map_info($uid) {
  * Implements hook_cron().
  */
 function tweets_queue_cron() {
-  //@TODO: schedule users based on the last run
-  drupal_set_message('step 1 started');
-  tweets_queue_tweet_scheduled_messages();
-  drupal_set_message('step 2 started');
+  $cron_id = tweets_queue_insert_cron_entry();
+  tweets_queue_tweet_scheduled_messages($cron_id);
   tweets_queue_compile_tweets_scheduling();
 }
 
 /**
  * Pick all the scheduled list and start sending it.
  */
-function tweets_queue_tweet_scheduled_messages() {
+function tweets_queue_tweet_scheduled_messages($cron_id = 0) {
   $messages_list = tweets_queue_tweet_scheduled_messages_list();
   tweets_queue_debug_info(t('Total node placed in queue is @total', array('@total' => count($messages_list['nids']))));
   if (count($messages_list['nids']) > 0) {
@@ -435,7 +433,7 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
     $twitter_owner_id = $client_twitter_handler->twitter_owner_id;
     $twitter_handler = unserialize($client_twitter_handler->data);
 
-    drupal_set_message(t('Process message @message', array('@message' => $message_data->message)));
+    tweets_queue_debug_info(t('Process message @message', array('@message' => $message_data->message)));
     $message = tweets_queue_calculate_tweet_message_size($message_data->message, $message_data->hashtag, 'message');
     $size = tweets_queue_get_message_size($message);
     $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id);
@@ -2114,9 +2112,8 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
   $query->orderBy('p.created', 'ASC');
   $query->range(0, 1);
   $nid = $query->execute()->fetchField();
-  drupal_set_message(' ' . $nid . ' set for uid' . $uid);
+  tweets_queue_debug_info(' ' . $nid . ' set for uid' . $uid);
   if ($nid) {
-    drupal_set_message('entered' . $nid);
     db_insert(TWITTER_SCHEDULED_MESSAGES_TABLE)
         ->fields(
           array(
@@ -2153,7 +2150,7 @@ function tweets_queue_compile_tweets_scheduling() {
   $current_time = time();
   $next_run = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_LAST_RUN));
   if ($next_run > $current_time) {
-    drupal_set_message(t('Already tweets scheduling scheduled. coming out.'));
+    tweets_queue_debug_info(t('Already tweets scheduling scheduled. coming out.'));
     return;
   }
   $run_interval = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_RUN_INTERVAL));
@@ -2162,7 +2159,8 @@ function tweets_queue_compile_tweets_scheduling() {
   foreach ($user_list as $uid => $data) {
     tweets_queue_populate_scheduled_messages_list($uid);
   }
-  drupal_set_message(t('Tweets scheduler scheduled.'));
+  tweets_queue_debug_info(t('Tweets scheduler scheduled.'));
+
   $config = \Drupal::service('config.factory')->getEditable('tweets_queue_admin.settings');
   $config->set(CRON_SCHEDULER_LAST_RUN, $next_scheduled_run)
       ->save();
@@ -3592,4 +3590,18 @@ function tweets_queue_change_password($uid, $password) {
   $entity = \Drupal\user\Entity\User::load($uid);
   $entity->setPassword($password);
   $entity->save();
+}
+
+/**
+ * Insert record in cron table.
+ *
+ * @return
+ *   Returns cron table inserted id.
+ */
+function tweets_queue_insert_cron_entry() {
+  $cron_info = array('created' => time());
+  $id = db_insert(TWITTER_CRON_HISTORY_TABLE)
+    ->fields($cron_info)
+    ->execute();
+  return $id;
 }
