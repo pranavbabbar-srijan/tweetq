@@ -162,3 +162,11 @@ tweets_queue_update_password.update:
     _form: '\Drupal\tweets_queue\Form\UpdatePassword'
   requirements:
     _access: 'TRUE'
+
+tweets_queue_current_tweet_history.settings:
+  path: 'tweets-history'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::content'
+    _title: 'Tweets history'
+  requirements:
+    _role: 'administrator'
