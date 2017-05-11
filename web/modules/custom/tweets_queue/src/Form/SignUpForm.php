@@ -54,7 +54,7 @@ class SignUpForm extends FormBase {
     $form[SIGNUP_FIELD_FULL_NAME] = array(
       '#type' => 'textfield',
       '#title' => t('Full Name'),
-      '#required' => TRUE,
+      // '#required' => TRUE,
       '#attributes' => array (
         'placeholder' => t("Required"),
         'autocomplete' => 'off'
@@ -62,9 +62,9 @@ class SignUpForm extends FormBase {
     );
 
     $form[SIGNUP_FIELD_EMAIL] = array(
-      '#type' => 'email',
+      '#type' => 'textfield',
       '#title' => t('Email'),
-      '#required' => TRUE,
+      // '#required' => TRUE,
       '#attributes' => array (
         'placeholder' => t("Required"),
         'autocomplete' => 'off'
@@ -74,7 +74,7 @@ class SignUpForm extends FormBase {
     $form[SIGNUP_FIELD_PASSWORD] = array(
       '#type' => 'password',
       '#title' => t('Password'),
-      '#required' => TRUE,
+      // '#required' => TRUE,
       '#attributes' => array (
         'placeholder' => t("Required")
       ),
