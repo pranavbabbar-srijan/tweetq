@@ -714,6 +714,8 @@
 
 		// Message position changes.
 		$(".messages").appendTo(".item-list + .item-list").insertBefore(".item-list + .item-list > ul");
+		$(".messages").appendTo(".message-header").insertBefore(".form-type-textarea");
+		$(".messages").insertAfter(".import-tweet-page .block-system-main-block");
 
 		// text overlimit color change.
 		// $('.send-tweets-form #edit-message').on({
