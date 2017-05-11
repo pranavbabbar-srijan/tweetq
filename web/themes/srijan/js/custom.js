@@ -68,6 +68,14 @@
 				return false;
 			}
 
+			//Email check
+			var email = $('#signup-form #edit-email').val();
+			$("#email-validation-error").remove();
+	    	if (email.length == 0) {
+	    		passed = false;
+	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#signup-form #edit-email" );
+	    	}
+
 	    	//Password check.
 	    	var password = $('#signup-form #edit-user-password').val();
 	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
@@ -268,7 +276,7 @@
 	    	$("#user-login-validation-error").remove();
 	    	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
 				if  (data != "exist") {
-					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertBefore("#user-login-form #edit-submit" );
+					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
 					$("#user-login-form #edit-submit").attr('disabled', 'true');
 				}
 				else {
@@ -305,7 +313,7 @@
 			$("#user-login-validation-error").remove();
 	    	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
 				if  (data != "exist") {
-					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertBefore("#user-login-form #edit-submit" );
+					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
 					return false;
 				}
 		    });
