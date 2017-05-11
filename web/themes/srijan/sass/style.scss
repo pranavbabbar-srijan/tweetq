@@ -255,6 +255,7 @@ body {
 	&.path-frontpage {
 		background: url(../images/bg.jpg) 0 0 no-repeat;
 		background-size: cover;
+		background-position: 100%;
 		height: 100%;
 		@media screen and (max-width: $minWidth){
 			background-position: 20% 0;
@@ -421,11 +422,15 @@ body {
 	}
 }
 
-.validation-error {
+.validation-error, .mail-sent {
 	color: #ff5a43;
 	font-size: 14px;
 	margin-top: 8px;
 	display: block;
+}
+
+.mail-sent {
+	color: #96c85a;
 }
 
 .path-frontpage .messages--error {
@@ -448,6 +453,42 @@ body {
     }
 }
 
+// update password
+body.path-update-password {
+	.block-system-main-block {
+		width: 380px;
+		input[type="submit"] {
+			width: 80%;
+			margin-top: 50px;
+		}
+	}
+	.update-password {
+		label {
+			color: #949494;
+			margin-bottom: 1em;
+			display: block;
+			font-size: 16px;
+			font-weight: bold;
+			&:after {
+				@extend %none;
+			}
+		}
+		.form-text {
+			border: 0;
+		    background: none;
+		    outline: none;
+		    border-bottom: 1px solid rgba(0,0,0,0.3);
+		    display: block;
+		    width: 100%;
+		    padding-bottom: 7px;
+		    font-size: 14px;
+		}
+		.js-form-item {
+			margin-bottom: 40px;
+		}
+	} 
+}
+
 #forgot-password-section {
 	font-size: 22px;
 	text-align: center;
@@ -466,12 +507,7 @@ body {
 			font-weight: bold;
 		}
 		input {
-			border: 0;
-			background: none;
-			outline: none;
-			border-bottom: 1px solid rgba(0,0,0,.3);
-			display: block;
-			width: 100%;
+			font-size: 12.8px;
 		}
 	}
 	#forgot-password-submit {
@@ -1145,7 +1181,7 @@ body {
 	}
 }
 
-.path-signup, .path-twitter {
+.path-signup, .path-twitter, .path-update-password {
 	.layout-container {
 		.region-content {
 			padding-top: 20px;
@@ -1154,6 +1190,11 @@ body {
 		.section {
 			background: $body-bg;
 		}
+	}
+	.password-header {
+		font-size: 24px;
+		font-weight: 300;
+		margin-bottom: 40px;
 	}
 	.block-system-main-block {
 		width: 755px;
