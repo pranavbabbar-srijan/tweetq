@@ -583,13 +583,15 @@ body.path-update-password .update-password .js-form-item {
 
 body.path-update-password .messages--status {
   width: 380px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  display: block !important; }
   body.path-update-password .messages--status ~ .block-system-main-block {
     display: none; }
 
 .path-signup .messages--status {
   width: 380px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  display: block !important; }
   .path-signup .messages--status ~ .block-system-main-block {
     display: none; }
 
