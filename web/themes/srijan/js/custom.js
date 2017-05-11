@@ -431,6 +431,7 @@
   			var valid = regex.test(email);
 
   			$("#forgot-email-validation-error").remove();
+  			$("#forgot-password-mail-sent").remove();
 	    	if (email.length == 0) {
 	    		$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
 	    	}
@@ -462,6 +463,8 @@
 			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   			var valid = regex.test(email);
   			$("#forgot-email-validation-error").remove();
+  			$("#forgot-password-mail-sent").remove();
+
 			if (email.length == 0) {
 	    		$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
 	    		return;
@@ -484,7 +487,9 @@
 
 	    	$.post(forgot_password_send_token_path, {'email' : email}, function(data) {
 	    		$("#forgot-email-validation-error").remove();
+	    		$("#forgot-password-mail-sent").remove();
 				if  (data == "done") {
+					$('#user-login-form #edit-email').val('')
 					$("<span id='forgot-password-mail-sent' class='mail-sent'>" + forgot_password_sent_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
 					return;
 				}
