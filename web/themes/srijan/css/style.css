@@ -581,6 +581,18 @@ body.path-update-password .update-password .form-text {
 body.path-update-password .update-password .js-form-item {
   margin-bottom: 40px; }
 
+body.path-update-password .messages--status {
+  width: 380px;
+  margin: 0 auto; }
+  body.path-update-password .messages--status ~ .block-system-main-block {
+    display: none; }
+
+.path-signup .messages--status {
+  width: 380px;
+  margin: 0 auto; }
+  .path-signup .messages--status ~ .block-system-main-block {
+    display: none; }
+
 #forgot-password-section {
   font-size: 22px;
   text-align: center;
