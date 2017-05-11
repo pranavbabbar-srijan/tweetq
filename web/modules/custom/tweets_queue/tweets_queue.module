@@ -196,8 +196,11 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
       break;
 
     case 'user_login_form':
-        tweets_queue_cleanup_deleted_users();
-        tweets_queue_user_login_form_changes($form);
+      $form['name']['#type'] = 'textfield';
+      $form['name']['#required'] = 0;
+      $form['pass']['#required'] = 0;
+      tweets_queue_cleanup_deleted_users();
+      tweets_queue_user_login_form_changes($form);
       break;
     case 'node_tweet_edit_form':
       $node = \Drupal::routeMatch()->getParameter('node');
