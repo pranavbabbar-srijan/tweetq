@@ -486,7 +486,24 @@ body.path-update-password {
 		.js-form-item {
 			margin-bottom: 40px;
 		}
+	}
+	.messages--status {
+		width: 380px;
+		margin: 0 auto;
+		~ .block-system-main-block {
+			display: none;
+		}
 	} 
+}
+
+.path-signup {
+	.messages--status {
+		width: 380px;
+		margin: 0 auto;
+		~ .block-system-main-block {
+			display: none;
+		}
+	}
 }
 
 #forgot-password-section {
