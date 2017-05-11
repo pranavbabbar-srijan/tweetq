@@ -50,7 +50,6 @@ class TwitterSignUpForm extends FormBase {
       '#type' => 'textfield',
       '#title' => t('Full Name'),
       '#value' => $full_name,
-      '#required' => TRUE,
       '#attributes' => array (
         'placeholder' => t("Required")
       ),
@@ -77,7 +76,7 @@ class TwitterSignUpForm extends FormBase {
     // );
 
     $form[SIGNUP_FIELD_WEBSITE] = array(
-      '#type' => 'url',
+      '#type' => 'textfield',
       '#title' => t('Website'),
       '#required' => FALSE,
       '#value' => $website,

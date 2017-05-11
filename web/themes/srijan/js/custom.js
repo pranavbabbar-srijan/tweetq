@@ -42,6 +42,98 @@
 
 		$( "#foo" ).trigger( "click" );
 
+		//Twitter signup form
+		//Full name validtaion.
+	    $("#twitter-signup-form #edit-field-full-name").on('keyup', function(e) {
+	    	var name = $('#twitter-signup-form #edit-field-full-name').val();
+	    	var alphabet = /^[a-zA-Z ]+$/.test(name);
+	    	$("#fname-validation-error").remove();
+	    	if (name.length > 0) {
+	    		if (!alphabet) {
+	    			$("<span id='fname-validation-error' class='validation-error'>" + alphabet_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    		}
+	    	}
+	    });
+
+	    $("#twitter-signup-form #edit-field-full-name").focusout(function() {
+	   		var name = $('#twitter-signup-form #edit-field-full-name').val();
+	    	if (name.length == 0) {
+	    		$("#fname-validation-error").remove();
+	    		$("<span id='fname-validation-error' class='validation-error'>" + full_name_missing_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    	}
+	  	});
+
+	    $("#witter-signup-form #edit-email").focusout(function() {
+	   		var email = $('#witter-signup-form #edit-email').val();
+	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(email);
+
+  			$("#email-validation-error").remove();
+	    	if (email.length == 0) {
+	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#witter-signup-form #edit-email" );
+	    	}
+
+  			if (email.length > 0) {
+	    		if (!valid) {
+	    			$("#email-validation-error").remove();
+	    			$("<span id='email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#witter-signup-form #edit-email" );
+	    		}
+	    		if (valid) {
+	    			$("#email-validation-error").remove();
+	    			$.post(email_validation_path, {'email' : email}, function(data) {
+	    				if  (data == "exist") {
+							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#witter-signup-form #edit-email" );	    					
+	    				}
+				    });
+	    			
+	    		}
+	    	}
+	  	});
+
+	  	//Valid url check
+	    $("#twitter-signup-form #edit-field-website").focusout(function() {
+	   		var website = $('#twitter-signup-form #edit-field-website').val();
+	   		var valid = /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(website);
+	   		$("#website-validation-error").remove();
+	    	if (website.length > 0) {
+	    		if (!valid) {
+	    			$("<span id='website-validation-error' class='validation-error'>" + website_invalid_msg + "</p>").insertAfter( "#twitter-signup-form #edit-field-website" );
+	    		}
+	    	}
+	  	});
+
+	    //Twitter signup form submit.
+		$('#twitter-signup-form').submit(function() {
+			var passed = false;
+			var name = $('#twitter-signup-form #edit-field-full-name').val();
+	 		var alphabet = /^[a-zA-Z ]+$/.test(name);
+			
+			//Full Name check.
+			$("#fname-validation-error").remove();
+			if (name.length > 0) {
+	    		if (!alphabet) {
+	    			passed = false;
+	    			$("<span id='fname-validation-error' class='validation-error'>" + alphabet_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    		}
+	    	}
+	    	if (name.length == 0) {
+	    		$("#fname-validation-error").remove();
+	    		passed = false;
+	    		$("<span id='fname-validation-error' class='validation-error'>" + full_name_missing_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    	}
+
+	    	//Email check
+			var email = $('#twitter-signup-form #edit-email').val();
+			$("#email-validation-error").remove();
+	    	if (email.length == 0) {
+	    		passed = false;
+	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#twitter-signup-form #edit-email" );
+	    	}
+	    	return passed;
+		});
+
+
+		//Signup form submit.
 		$('#signup-form').submit (function() {
 			var passed = true;
 
