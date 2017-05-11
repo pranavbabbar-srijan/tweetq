@@ -3154,7 +3154,7 @@ function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInt
 
   if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/',$password)) {
     $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
-      t('<div>Please Enter At least one Uppercase Letter: A-Z,</div>  <div>At least one Lowercase Letter: a-z,</div>  <div>At least one Numerical Character: 0-9,</div>  <div>At least one of the following special character "!", "@", "#"</div>'));
+      t('<div>At least one Uppercase Letter: A-Z,</div>  <div>At least one Lowercase Letter: a-z,</div>  <div>At least one Numerical Character: 0-9,</div>  <div>At least one of the following special character "!", "@", "#"</div>'));
   }
 }
 
