@@ -25,7 +25,7 @@
 		var update_password_no_match_msg = "New password and confirm password must be same";
 
 		var password_missing_msg = "Please enter the password";
-		var password_character_msg = 'Enter password between 6 and 12 characters<br>Please Enter At least one Uppercase Letter: A-Z,<br> At least one Lowercase Letter: a-z, <br>At least one Numerical Character: 0-9, <br>At least one of the following special character "!", "@", "#"';
+		var password_character_msg = 'Enter password between 6 and 12 characters<br>At least one Uppercase Letter: A-Z,<br> At least one Lowercase Letter: a-z, <br>At least one Numerical Character: 0-9, <br>At least one of the following special character "!", "@", "#"';
 		var password_length_msg = "Enter password between 6 and 12 characters";
 		var password_minimum_length = 6;
 		var password_maximum_length = 12;
@@ -276,6 +276,9 @@
 				}
 		    });
 	  	});
+
+		$('#user-login-form #edit-submit').attr('disabled', 'true');
+		$('#user-login-form #edit-name').blur();
 
 		$('#user-login-form').submit(function() {
 			var email = $('#user-login-form #edit-name').val();
