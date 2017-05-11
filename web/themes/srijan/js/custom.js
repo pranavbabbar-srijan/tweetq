@@ -277,6 +277,9 @@
 		    });
 	  	});
 
+		$('#user-login-form #edit-submit').attr('disabled', 'true');
+		$('#user-login-form #edit-name').blur();
+
 		$('#user-login-form').submit(function() {
 			var email = $('#user-login-form #edit-name').val();
 			var password = $('#user-login-form #edit-pass').val();
