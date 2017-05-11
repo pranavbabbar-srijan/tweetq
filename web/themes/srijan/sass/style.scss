@@ -490,6 +490,7 @@ body.path-update-password {
 	.messages--status {
 		width: 380px;
 		margin: 0 auto;
+		display: block !important;
 		~ .block-system-main-block {
 			display: none;
 		}
@@ -500,6 +501,7 @@ body.path-update-password {
 	.messages--status {
 		width: 380px;
 		margin: 0 auto;
+		display: block !important;
 		~ .block-system-main-block {
 			display: none;
 		}
