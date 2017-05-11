@@ -42,6 +42,7 @@ const TWEETS_TWEETER_DATA_TABLE = 'tweets_tweeter_data';
 const TWITTER_SCHEDULED_MESSAGES_TABLE = 'twitter_scheduled_messages';
 const TWITTER_TWEETS_HISTORY_TABLE = 'twitter_tweets_history';
 const TWEETS_URL_TABLE = 'tweets_url';
+const TWITTER_CRON_HISTORY_TABLE = 'twitter_cron_history';
 const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const TWITTER_PASSWORD_HASH_KEY_TABLE = 'twitter_password_hash_key';
@@ -88,13 +89,17 @@ const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 const TWITTER_TWITTER_SIGNUP_PATH = 'twitter/register';
 
 const TWITTER_FIELD_NID = 'nid';
+const TWITTER_FIELD_UID = 'uid';
+const TWITTER_FIELD_STATUS = 'status';
 const TWITTER_FIELD_FIRST_RUN = 'first_run';
 const TWITTER_FIELD_LAST_RUN = 'last_run';
 const TWITTER_FIELD_CREATED = 'created';
 const TWITTER_FIELD_CHANGED = 'changed';
 const TWITTER_FIELD_TWEETED = 'tweeted';
+const TWITTER_FIELD_RETWEETED = 'retweeted';
 const TWITTER_FIELD_MESSAGE = 'message';
 const TWITTER_FIELD_SIZE = 'size';
+const TWITTER_FIELD_CODE = 'code';
 
 const TWITTER_DEFAULT_SORT_FIELD = 'created';
 const TWITTER_DEFAULT_SORT_ORDER = 'DESC';
@@ -246,8 +251,7 @@ function tweets_queue_user_login_form_changes(&$form) {
   );
  $forgot_password_path = $base_url . '/user/password';
  $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
-  // $url = "<a id='forgot-password' href='" . $forgot_password_path ."'>" . USER_FORGOT_PASSWORD_LABEL . "</a>";
-  $form['forgot_password'] = array(
+ $form['forgot_password'] = array(
     '#markup' => t($url),
     '#weight' => 10,
   );
@@ -388,6 +392,15 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   return $status;
 }
 
+/**
+ * Fetch user's twitter auth map info.
+ *
+ * @param integer $uid
+ *   User's uid.
+ *
+ * @return object
+ *   Returns user's auth map information.
+ */
 function tweets_queue_fetch_user_auth_map_info($uid) {
   $oauth_info = array();
   $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
@@ -402,35 +415,33 @@ function tweets_queue_fetch_user_auth_map_info($uid) {
  * Implements hook_cron().
  */
 function tweets_queue_cron() {
-  //@TODO: schedule users based on the last run
-  drupal_set_message('step 1 started');
-  tweets_queue_tweet_scheduled_messages();
-  drupal_set_message('step 2 started');
+  $cron_id = tweets_queue_insert_cron_entry();
+  tweets_queue_tweet_scheduled_messages($cron_id);
   tweets_queue_compile_tweets_scheduling();
 }
 
 /**
  * Pick all the scheduled list and start sending it.
  */
-function tweets_queue_tweet_scheduled_messages() {
+function tweets_queue_tweet_scheduled_messages($cron_id = 0) {
   $messages_list = tweets_queue_tweet_scheduled_messages_list();
   tweets_queue_debug_info(t('Total node placed in queue is @total', array('@total' => count($messages_list['nids']))));
   if (count($messages_list['nids']) > 0) {
     $handler_list = tweets_queue_tweet_scheduled_messages_user_list(array_values($messages_list['uids']));
     tweets_queue_debug_info($handler_list);
     tweets_queue_debug_info(t('Process send begins'));
-    tweets_queue_send_scheduled_messages($messages_list, $handler_list);
+    tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cron_id);
   }
 }
 
-function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
+function tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cron_id = 0) {
   foreach ($messages_list['nids'] as $pos => $message_data) {
     tweets_queue_debug_info(t('started with nid @nid and user @uid', array('@nid' => $message_data->nid, '@uid' => $message_data->uid)));
     $client_twitter_handler = $handler_list['handler'][$message_data->uid];
     $twitter_owner_id = $client_twitter_handler->twitter_owner_id;
     $twitter_handler = unserialize($client_twitter_handler->data);
 
-    drupal_set_message(t('Process message @message', array('@message' => $message_data->message)));
+    tweets_queue_debug_info(t('Process message @message', array('@message' => $message_data->message)));
     $message = tweets_queue_calculate_tweet_message_size($message_data->message, $message_data->hashtag, 'message');
     $size = tweets_queue_get_message_size($message);
     $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id);
@@ -440,10 +451,10 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
       'created' => time(),
       'code' => 0,
       'status' => 0,
-      'message' => ''
+      'message' => '',
+      'cron_id' => $cron_id,
     );
     if ($status['success']) {
-
       tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
       $tweet_id = $status['data']->id;
       $twitter_history_info['retweeted'] = ($message_data->tweet_id) ? 1 : 0;
@@ -672,7 +683,7 @@ function tweets_queue_send_direct_message($message) {
     'uid' => $uid,
     'size' => $size,
   );
-  
+
   if (!$tweet_id) {
     drupal_set_message(t('Your tweet message "@message" already exists.',
     array('@message' => $message)));
@@ -686,7 +697,7 @@ function tweets_queue_send_direct_message($message) {
     'uid' => $uid,
     'created' => time(),
     'code' => 0,
-    'status' => 0,
+    'status' => 1,
     'message' => '',
   );
   tweets_queue_update_message_queue_priority_info($nid,
@@ -700,7 +711,6 @@ function tweets_queue_send_direct_message($message) {
     0
   );
   tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info);
-  //tweets_queue_redirect_on_tweet_save($size);
 }
 
 /**
@@ -1540,6 +1550,14 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
       'twitter_scheduled_messages_next_run' => array('next_run'),
     )
   );
+  $schema[TWITTER_CRON_HISTORY_TABLE] = array(
+    'description' => 'The base table for cron history data.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+  );
 
   $schema[TWITTER_TWEETS_HISTORY_TABLE] = array(
     'description' => 'The base table for twitter tweets history data.',
@@ -1551,11 +1569,13 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
       'code' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'retweeted' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'cron_id' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
     ),
     'indexes' => array(
       'twitter_tweets_history_nid' => array('nid'),
       'twitter_tweets_history_uid' => array('uid'),
       'twitter_tweets_history_created' => array('created'),
+      'twitter_tweets_history_cron_id' => array('cron_id'),
     )
   );
 
@@ -2099,9 +2119,8 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
   $query->orderBy('p.created', 'ASC');
   $query->range(0, 1);
   $nid = $query->execute()->fetchField();
-  drupal_set_message(' ' . $nid . ' set for uid' . $uid);
+  tweets_queue_debug_info(' ' . $nid . ' set for uid' . $uid);
   if ($nid) {
-    drupal_set_message('entered' . $nid);
     db_insert(TWITTER_SCHEDULED_MESSAGES_TABLE)
         ->fields(
           array(
@@ -2138,7 +2157,7 @@ function tweets_queue_compile_tweets_scheduling() {
   $current_time = time();
   $next_run = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_LAST_RUN));
   if ($next_run > $current_time) {
-    drupal_set_message(t('Already tweets scheduling scheduled. coming out.'));
+    tweets_queue_debug_info(t('Already tweets scheduling scheduled. coming out.'));
     return;
   }
   $run_interval = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_RUN_INTERVAL));
@@ -2147,7 +2166,8 @@ function tweets_queue_compile_tweets_scheduling() {
   foreach ($user_list as $uid => $data) {
     tweets_queue_populate_scheduled_messages_list($uid);
   }
-  drupal_set_message(t('Tweets scheduler scheduled.'));
+  tweets_queue_debug_info(t('Tweets scheduler scheduled.'));
+
   $config = \Drupal::service('config.factory')->getEditable('tweets_queue_admin.settings');
   $config->set(CRON_SCHEDULER_LAST_RUN, $next_scheduled_run)
       ->save();
@@ -3324,6 +3344,9 @@ function tweets_queue_format_tweet_time($tweet_time) {
  *   Returns processed message.
  */
 function tweets_queue_perform_hashtag_highlight($message) {
+  if (empty($message)) {
+    return $message;
+  }
   preg_match_all("/(#\w+)/", $message, $matches);
   foreach ($matches[0] as $pos => $data) {
     $message = str_ireplace($data, '<b>' . $data . '</b>', $message);
@@ -3574,4 +3597,18 @@ function tweets_queue_change_password($uid, $password) {
   $entity = \Drupal\user\Entity\User::load($uid);
   $entity->setPassword($password);
   $entity->save();
+}
+
+/**
+ * Insert record in cron table.
+ *
+ * @return
+ *   Returns cron table inserted id.
+ */
+function tweets_queue_insert_cron_entry() {
+  $cron_info = array('created' => time());
+  $id = db_insert(TWITTER_CRON_HISTORY_TABLE)
+    ->fields($cron_info)
+    ->execute();
+  return $id;
 }
