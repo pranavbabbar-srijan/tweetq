@@ -88,6 +88,14 @@ class TweetsQueueTweetController extends ControllerBase {
   public function validateUserLogin() {
     $email = tweets_queue_get_parameter_data('email');
     $password = tweets_queue_get_parameter_data('password');
+    $email = trim($email);
+    if (!\Drupal::service('email.validator')->isValid($email)) {
+      die("invalid_email");
+    }
+    $uid = tweets_queue_check_email_presence($email);
+    if (!$uid) {
+      die("not_registered");
+    }
     if ($user = user_load_by_mail($email)) {
       // Set the username for further validation.
       $name = $user->getAccountName();
