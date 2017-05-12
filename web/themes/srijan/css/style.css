@@ -1616,11 +1616,12 @@ body.path-update-password .messages--status {
     right: 184px;
     background: red;
     color: white;
-    border-radius: 6px;
+    border-radius: 30%;
     padding: .2em;
     font-size: 12px;
     text-align: center;
-    display: block; }
+    display: block;
+    z-index: 1; }
     .notifications > div:nth-child(1).active {
       left: 0; }
   .notifications .notification-message-list {

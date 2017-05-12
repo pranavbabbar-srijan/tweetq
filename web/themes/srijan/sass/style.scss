@@ -1640,11 +1640,12 @@ body.path-update-password {
 		    right: 184px;
 		    background: red;
 		    color: white;
-		    border-radius: 6px;
+		    border-radius: 30%;
 		    padding: .2em;
 		    font-size: 12px;
 		    text-align: center;
 		    display: block;
+		    z-index: 1;
 		    &.active {
 		    	left: 0;
 		    }
