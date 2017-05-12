@@ -128,7 +128,7 @@ button {
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .edit,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .edit,
-.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .messages--status:before, .block-users-tweets-statistics-block .content > div a > div, .download-csv a:before {
+.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .messages--status:before, .user-logged-in .messages--status.listing-msg .messages__list li:first-child:before, .block-users-tweets-statistics-block .content > div a > div, .download-csv a:before {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -1184,6 +1184,14 @@ body.path-update-password .messages--status {
       margin-top: 15px; }
     .user-logged-in .messages--status .messages__list {
       display: inline-block; }
+    .user-logged-in .messages--status.listing-msg:before {
+      display: none; }
+    .user-logged-in .messages--status.listing-msg .messages__list li:first-child:before {
+      content: "";
+      font-size: 22px;
+      position: absolute;
+      top: 15px;
+      margin-left: -30px; }
 
 .ripple {
   width: 0;

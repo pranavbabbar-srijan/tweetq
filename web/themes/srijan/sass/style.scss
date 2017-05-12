@@ -1138,6 +1138,23 @@ body.path-update-password {
 	    .messages__list {
 	    	display: inline-block;
 	    }
+	    &.listing-msg {
+	    	&:before {
+	    		display: none;
+	    	}
+	    	.messages__list {
+	    		li:first-child {
+	    			&:before {
+	    				@extend %icomoon;
+				    	content: $icon-success;
+				    	font-size: 22px;
+					    position: absolute;
+					    top: 15px;
+					    margin-left: -30px;
+	    			}
+	    		}
+	    	}
+	    }
 	}
 }
 
