@@ -320,7 +320,8 @@
 			$("#forgot-email-validation-error").remove();
 		});
 
-	    // Login form email validation.
+	    // User Login form validation.
+	    // User Login form email validation.
 	    $("#user-login-form #edit-pass").focusin(function() {
 	   		var email = $('#user-login-form #edit-name').val();
 	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -366,7 +367,7 @@
 			}
 	    	if (password.length == 0) {
 	    		$("#password-validation-error").remove();
-	    		$("<span id='password-validation-error' class='validation-error'>" + login_password_missing_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
 	    		return;
 	    	}
 	    	var email_failed = $("#user-login-form #email-validation-error").hasClass('validation-error');
@@ -377,48 +378,62 @@
 	    	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
 				if  (data != "exist") {
 					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
-					$("#user-login-form #edit-submit").attr('disabled', 'true');
+					// $("#user-login-form #edit-submit").attr('disabled', 'true');
 				}
 				else {
-					$("#user-login-form #edit-submit").removeAttr('disabled');
+					// $("#user-login-form #edit-submit").removeAttr('disabled');
 				}
 		    });
 	  	});
 
-		$('#user-login-form #edit-submit').attr('disabled', 'true');
+		// $('#user-login-form #edit-submit').attr('disabled', 'true');
 		$('#user-login-form #edit-name').blur();
 
 		$('#user-login-form').submit(function() {
 			var email = $('#user-login-form #edit-name').val();
 			var password = $('#user-login-form #edit-pass').val();
-			//Check for error
-	    	var email_failed = $("#user-login-form #email-validation-error").hasClass('validation-error');
-			if (email_failed) {
+	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(email);
+  			var passed = true;
+  			
+  			var password_failed = $("#user-login-form #user-login-validation-error").hasClass('validation-error');
+			if (password_failed) {
 				return false;
 			}
 
-			//Password check.
-  			$("#password-validation-error").remove();
-  			if (password.length == 0) {
-	    		$("#password-validation-error").remove();
-	    		$("<span id='password-validation-error' class='validation-error'>" + login_password_missing_msg + "</p>").insertAfter( "#user-login-form #edit-pass" );
-	    		return false;
+			$("#password-validation-error").remove();
+  			$("#email-validation-error").remove();
+
+  			if (email.length == 0) {
+	    		$("<span id='email-validation-error' class='validation-error'>" + login_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
+	    		passed =  false;
 	    	}
 	    	
-	    	if (email.length == 0) {
-	    		$("<span id='email-validation-error' class='validation-error'>" + login_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
-	    		return false;
+			if (email.length > 0) {
+	    		if (!valid) {
+	    			$("#email-validation-error").remove();
+	    			$("<span id='email-validation-error' class='validation-error'>" + login_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
+	    			passed =  false;
+	    		}
+	    		if (valid) {
+	    			$("#email-validation-error").remove();
+	    			$.post(email_validation_path, {'email' : email}, function(data) {
+	    				if  (data != "exist") {
+							$("#user-login-validation-error").remove();
+							$("<span id='email-validation-error' class='validation-error'>" + login_non_existing_email_msg +  "</p>").insertAfter( "#user-login-form #edit-name" );
+							passed =  false;
+	    				}
+				    });
+	    			
+	    		}
 	    	}
 
-			$("#user-login-validation-error").remove();
-	    	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
-				if  (data != "exist") {
-					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
-					return false;
-				}
-		    });
+	    	if (password.length == 0) {
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
+	    		passed =  false;
+	    	}
 
-			return true;
+			return passed;
 		});
 
 		// Forgot password/send password form.
