@@ -42,8 +42,10 @@ const TWEETS_TWEETER_DATA_TABLE = 'tweets_tweeter_data';
 const TWITTER_SCHEDULED_MESSAGES_TABLE = 'twitter_scheduled_messages';
 const TWITTER_TWEETS_HISTORY_TABLE = 'twitter_tweets_history';
 const TWEETS_URL_TABLE = 'tweets_url';
+const TWITTER_CRON_HISTORY_TABLE = 'twitter_cron_history';
 const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
+const TWITTER_PASSWORD_HASH_KEY_TABLE = 'twitter_password_hash_key';
 const CRON_TWEET_SCHEDULED = 'cron_tweet_scheduled';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
 const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
@@ -66,7 +68,7 @@ const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
 const TWITTER_USER_DASHBOARD = 'dashboard';
 const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
 const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
-//const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
+const USER_FORGOT_PASSWORD_LABEL = 'Forgot your password ?';
 const USER_FORGOT_PASSWORD_SECTION_HEDAER = 'Enter your Registered Email ID';
 const USER_FORGOT_PASSWORD_SECTION_HEDAER_SUBLABEL = 'we will send the new password to your registered email';
 const TWITTER_SIGN_IN_TEXT = 'Sign in with Twitter';
@@ -87,13 +89,17 @@ const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 const TWITTER_TWITTER_SIGNUP_PATH = 'twitter/register';
 
 const TWITTER_FIELD_NID = 'nid';
+const TWITTER_FIELD_UID = 'uid';
+const TWITTER_FIELD_STATUS = 'status';
 const TWITTER_FIELD_FIRST_RUN = 'first_run';
 const TWITTER_FIELD_LAST_RUN = 'last_run';
 const TWITTER_FIELD_CREATED = 'created';
 const TWITTER_FIELD_CHANGED = 'changed';
 const TWITTER_FIELD_TWEETED = 'tweeted';
+const TWITTER_FIELD_RETWEETED = 'retweeted';
 const TWITTER_FIELD_MESSAGE = 'message';
 const TWITTER_FIELD_SIZE = 'size';
+const TWITTER_FIELD_CODE = 'code';
 
 const TWITTER_DEFAULT_SORT_FIELD = 'created';
 const TWITTER_DEFAULT_SORT_ORDER = 'DESC';
@@ -160,6 +166,7 @@ const TWITTER_VALID_TWEETS_ROUTE_NAME = 'tweets_queue_valid_tweets.settings';
 const TWITTER_INVALID_TWEETS_ROUTE_NAME = 'tweets_queue_invalid_tweets.settings';
 const TWITTER_ARCHIVED_TWEETS_ROUTE_NAME = 'tweets_queue_archived_tweets.settings';
 const TWITTER_ALL_TWEETS_ROUTE_NAME = 'tweets_queue_all_tweets.settings';
+const TWITTER_VERIFY_PASSWORD_TOKEN_ROUTE_NAME = 'tweets_queue_update_password.update';
 
 const USERS_VALID_TWEET = 'users_valid_tweet';
 const USERS_INVALID_TWEET = 'users_invalid_tweet';
@@ -189,8 +196,11 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
       break;
 
     case 'user_login_form':
-        tweets_queue_cleanup_deleted_users();
-        tweets_queue_user_login_form_changes($form);
+      $form['name']['#type'] = 'textfield';
+      $form['name']['#required'] = 0;
+      $form['pass']['#required'] = 0;
+      tweets_queue_cleanup_deleted_users();
+      tweets_queue_user_login_form_changes($form);
       break;
     case 'node_tweet_edit_form':
       $node = \Drupal::routeMatch()->getParameter('node');
@@ -242,13 +252,12 @@ function tweets_queue_user_login_form_changes(&$form) {
     '#markup' => t("<h2>Sign in to Barbet</h2>"),
     '#weight' => -9,
   );
- // $forgot_password_path = $base_url . '/user/password';
- // $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
-  // $url = "<a id='forgot-password' href='" . $forgot_password_path ."'>" . USER_FORGOT_PASSWORD_LABEL . "</a>";
-  // $form['forgot_password'] = array(
-  //   '#markup' => t($url),
-  //   '#weight' => 10,
-  // );
+ $forgot_password_path = $base_url . '/user/password';
+ $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
+ $form['forgot_password'] = array(
+    '#markup' => t($url),
+    '#weight' => 10,
+  );
   $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
   $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
   $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .
@@ -290,12 +299,6 @@ function tweets_queue_forgot_password(&$form) {
       ),
     );
 
-  // $form['forgot_submit'] = array(
-  //     '#type' => 'submit',
-  //     '#value' => t('Submit'),
-  //     '#weight' => -19,
-  //   );
-
   $form['forgot_submit'] = array(
     '#type' => 'markup',
     '#prefix' => '<div id="forgot-password-submit">',
@@ -303,12 +306,6 @@ function tweets_queue_forgot_password(&$form) {
     '#suffix' => '</div>',
     '#weight' => -19,
   );
-
-  // $form['forgot_cancel'] = array(
-  //     '#type' => 'submit',
-  //     '#value' => t('Cancel'),
-  //     '#weight' => -18,
-  //   );
 
   $form['forgot_cancel'] = array(
     '#type' => 'markup',
@@ -398,6 +395,15 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   return $status;
 }
 
+/**
+ * Fetch user's twitter auth map info.
+ *
+ * @param integer $uid
+ *   User's uid.
+ *
+ * @return object
+ *   Returns user's auth map information.
+ */
 function tweets_queue_fetch_user_auth_map_info($uid) {
   $oauth_info = array();
   $query = \Drupal::database()->select(TWITTER_AUTH_MAP_TABLE, 'p');
@@ -412,35 +418,33 @@ function tweets_queue_fetch_user_auth_map_info($uid) {
  * Implements hook_cron().
  */
 function tweets_queue_cron() {
-  //@TODO: schedule users based on the last run
-  drupal_set_message('step 1 started');
-  tweets_queue_tweet_scheduled_messages();
-  drupal_set_message('step 2 started');
+  $cron_id = tweets_queue_insert_cron_entry();
+  tweets_queue_tweet_scheduled_messages($cron_id);
   tweets_queue_compile_tweets_scheduling();
 }
 
 /**
  * Pick all the scheduled list and start sending it.
  */
-function tweets_queue_tweet_scheduled_messages() {
+function tweets_queue_tweet_scheduled_messages($cron_id = 0) {
   $messages_list = tweets_queue_tweet_scheduled_messages_list();
   tweets_queue_debug_info(t('Total node placed in queue is @total', array('@total' => count($messages_list['nids']))));
   if (count($messages_list['nids']) > 0) {
     $handler_list = tweets_queue_tweet_scheduled_messages_user_list(array_values($messages_list['uids']));
     tweets_queue_debug_info($handler_list);
     tweets_queue_debug_info(t('Process send begins'));
-    tweets_queue_send_scheduled_messages($messages_list, $handler_list);
+    tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cron_id);
   }
 }
 
-function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
+function tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cron_id = 0) {
   foreach ($messages_list['nids'] as $pos => $message_data) {
     tweets_queue_debug_info(t('started with nid @nid and user @uid', array('@nid' => $message_data->nid, '@uid' => $message_data->uid)));
     $client_twitter_handler = $handler_list['handler'][$message_data->uid];
     $twitter_owner_id = $client_twitter_handler->twitter_owner_id;
     $twitter_handler = unserialize($client_twitter_handler->data);
 
-    drupal_set_message(t('Process message @message', array('@message' => $message_data->message)));
+    tweets_queue_debug_info(t('Process message @message', array('@message' => $message_data->message)));
     $message = tweets_queue_calculate_tweet_message_size($message_data->message, $message_data->hashtag, 'message');
     $size = tweets_queue_get_message_size($message);
     $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id);
@@ -450,10 +454,10 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list) {
       'created' => time(),
       'code' => 0,
       'status' => 0,
-      'message' => ''
+      'message' => '',
+      'cron_id' => $cron_id,
     );
     if ($status['success']) {
-
       tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
       $tweet_id = $status['data']->id;
       $twitter_history_info['retweeted'] = ($message_data->tweet_id) ? 1 : 0;
@@ -682,7 +686,7 @@ function tweets_queue_send_direct_message($message) {
     'uid' => $uid,
     'size' => $size,
   );
-  
+
   if (!$tweet_id) {
     drupal_set_message(t('Your tweet message "@message" already exists.',
     array('@message' => $message)));
@@ -696,7 +700,7 @@ function tweets_queue_send_direct_message($message) {
     'uid' => $uid,
     'created' => time(),
     'code' => 0,
-    'status' => 0,
+    'status' => 1,
     'message' => '',
   );
   tweets_queue_update_message_queue_priority_info($nid,
@@ -710,7 +714,6 @@ function tweets_queue_send_direct_message($message) {
     0
   );
   tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info);
-  //tweets_queue_redirect_on_tweet_save($size);
 }
 
 /**
@@ -1179,7 +1182,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_NON_APPROVED_CLIENT_ROLE);
         $entity->save();
-        tweets_queue_verify_signup_send_mail($mail, $full_name, $variable_one);
+        tweets_queue_verify_signup_send_mail($mail, $full_name);
         //tweets_queue_login_twitter_user($uid);
       }
       break;
@@ -1218,11 +1221,15 @@ function tweets_queue_mail($key, &$message, $params) {
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = Html::escape($params['message']);
       break;
-
     case 'user_verify_signup_mail':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = Html::escape($params['message']);
+      break;
+    case 'forgot_password_email':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = $params['message'];
       break;
   }
 }
@@ -1232,7 +1239,7 @@ function tweets_queue_mail($key, &$message, $params) {
  *
  * @param string $mail
  *   Valid email address.
- * @param strng $name
+ * @param string $name
  *   Full name of the user.
  */
 function tweets_queue_signup_send_mail($mail, $name) {
@@ -1240,7 +1247,7 @@ function tweets_queue_signup_send_mail($mail, $name) {
   $module = 'tweets_queue';
   $key = 'user_signup_mail'; // Replace with Your key
   $to = $mail;
-  $message = t("Dear @full_name\n,
+  $message = t("Dear @full_name,\n
 Welcome to Barbet!\n
 You have successfully signed up with Barbet App. Kindly login to the app and connect with your twitter Details to start using Barbet.", array('@full_name' => $name));
   $params['message'] = $message;
@@ -1262,20 +1269,26 @@ You have successfully signed up with Barbet App. Kindly login to the app and con
   \Drupal::logger('mail-log')->notice($message);
 }
 
-/*
-* Verification mail for sign up users
-*/
-
-function tweets_queue_verify_signup_send_mail($mail, $name, $variable_one) {
+/**
+ * Verification mail for sign up users.
+ *
+ * @param string $mail
+ *   User email.
+ * @param string $name
+ *   User full name.
+ */
+function tweets_queue_verify_signup_send_mail($mail, $name) {
   global $base_url;
   $mailManager = \Drupal::service('plugin.manager.mail');
   $module = 'tweets_queue';
   $key = 'user_verify_signup_mail'; // Replace with Your key
   $to = $mail;
-  $variable_url = new SimpleXMLElement($variable_one);
-  $variable_url = $base_url . '' . $variable_url['href'];
-  $message = t("Dear @full_name\n, Users verification\n
-click on here to verify your account.", array('@full_name' => $variable_url));
+  
+  $user_hash_key = hash('sha256', $mail);
+  $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
+
+  $message = t("Dear @full_name,\n
+   Users verification Link: @link", array('@full_name' => $name, '@link' => $link));
   $params['message'] = $message;
   $params['title'] = 'Barbet Registration Verification';
  
@@ -1390,6 +1403,18 @@ function tweets_queue_entity_delete(\Drupal\Core\Entity\EntityInterface $entity)
  * Implements hook_schema().
  */
 function tweets_queue_schema() {
+   $schema[TWITTER_PASSWORD_HASH_KEY_TABLE] = array(
+    'description' => 'The base table for password change.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'email' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'hash_key' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 100, 'default' => ''),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+  );
+
   $schema[TWEETS_HANDLER_TABLE] = array(
     'description' => 'The base table for tweet handler specific information.',
     'fields' => array(
@@ -1528,6 +1553,14 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
       'twitter_scheduled_messages_next_run' => array('next_run'),
     )
   );
+  $schema[TWITTER_CRON_HISTORY_TABLE] = array(
+    'description' => 'The base table for cron history data.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+  );
 
   $schema[TWITTER_TWEETS_HISTORY_TABLE] = array(
     'description' => 'The base table for twitter tweets history data.',
@@ -1539,11 +1572,13 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
       'code' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'retweeted' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'cron_id' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
     ),
     'indexes' => array(
       'twitter_tweets_history_nid' => array('nid'),
       'twitter_tweets_history_uid' => array('uid'),
       'twitter_tweets_history_created' => array('created'),
+      'twitter_tweets_history_cron_id' => array('cron_id'),
     )
   );
 
@@ -2087,9 +2122,8 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
   $query->orderBy('p.created', 'ASC');
   $query->range(0, 1);
   $nid = $query->execute()->fetchField();
-  drupal_set_message(' ' . $nid . ' set for uid' . $uid);
+  tweets_queue_debug_info(' ' . $nid . ' set for uid' . $uid);
   if ($nid) {
-    drupal_set_message('entered' . $nid);
     db_insert(TWITTER_SCHEDULED_MESSAGES_TABLE)
         ->fields(
           array(
@@ -2126,7 +2160,7 @@ function tweets_queue_compile_tweets_scheduling() {
   $current_time = time();
   $next_run = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_LAST_RUN));
   if ($next_run > $current_time) {
-    drupal_set_message(t('Already tweets scheduling scheduled. coming out.'));
+    tweets_queue_debug_info(t('Already tweets scheduling scheduled. coming out.'));
     return;
   }
   $run_interval = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_RUN_INTERVAL));
@@ -2135,7 +2169,8 @@ function tweets_queue_compile_tweets_scheduling() {
   foreach ($user_list as $uid => $data) {
     tweets_queue_populate_scheduled_messages_list($uid);
   }
-  drupal_set_message(t('Tweets scheduler scheduled.'));
+  tweets_queue_debug_info(t('Tweets scheduler scheduled.'));
+
   $config = \Drupal::service('config.factory')->getEditable('tweets_queue_admin.settings');
   $config->set(CRON_SCHEDULER_LAST_RUN, $next_scheduled_run)
       ->save();
@@ -2359,7 +2394,7 @@ function tweets_queue_authenticate_twitter_user() {
    *
    * @param int $logged_uid
    *   Logged user uid.
-   * @param strng $twitter_owner_id
+   * @param string $twitter_owner_id
    *   Twitter account owner id.
    * @param string $twitter_data
    *   Serialized twitter ouath token and oauth secret token.
@@ -3084,11 +3119,14 @@ function tweets_queue_delete_submit($form, \Drupal\Core\Form\FormStateInterface 
  * @return integer
  *   Returns user's uid for a specific email.
  */
-function tweets_queue_check_email_presence($email) {
+function tweets_queue_check_email_presence($email, $active = 0) {
   $uid = '';
   $query = \Drupal::database()->select('users_field_data', 'p');
   $query->addField('p', 'uid');
   $query->condition('p.mail', $email);
+  if ($active) {
+    $query->condition('p.status', 1);
+  }
   $uid = $query->execute()->fetchField();
   return $uid;
 }
@@ -3117,10 +3155,10 @@ function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInt
       t('Password length should be minimum of 6 and maximum of 12 characters.'));
   }
 
-  // if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$password)) {
-  //   $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
-  //     t('<div>Please Enter At least one Uppercase Letter: A-Z,</div>  <div>At least one Lowercase Letter: a-z,</div>  <div>At least one Numerical Character: 0-9,</div>  <div>At least one of the following special character "!", "@", "#"</div>'));
-  // }
+  if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/',$password)) {
+    $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
+      t('<div>At least one Uppercase Letter: A-Z,</div>  <div>At least one Lowercase Letter: a-z,</div>  <div>At least one Numerical Character: 0-9,</div>  <div>At least one of the following special character "!", "@", "#"</div>'));
+  }
 }
 
 
@@ -3309,6 +3347,9 @@ function tweets_queue_format_tweet_time($tweet_time) {
  *   Returns processed message.
  */
 function tweets_queue_perform_hashtag_highlight($message) {
+  if (empty($message)) {
+    return $message;
+  }
   preg_match_all("/(#\w+)/", $message, $matches);
   foreach ($matches[0] as $pos => $data) {
     $message = str_ireplace($data, '<b>' . $data . '</b>', $message);
@@ -3389,4 +3430,188 @@ function tweets_queue_get_message_size($tweet, $got_image = FALSE) {
     $tweet_length += $twitter_pic_length;
   }
   return $tweet_length;
+}
+
+/**
+ * Get token based on the email.
+ *
+ * @param string $email
+ *   A valid email for token generation.
+ *
+ * @return string
+ *   Returns a token.
+ */
+function tweets_queue_get_token($email) {
+  return $email;
+}
+
+/**
+ * Validate a token.
+ *
+ * @param string $token
+ *   A token for the validation.
+ *
+ * @return string
+ *   Returns true if the token is valid otherwise false.
+ */
+function tweets_queue_validate_token($token) {
+  $valid = 1;
+  return $valid;
+}
+
+/**
+ * Read the passed parameter.
+ *
+ * @param string $name
+ *   Name of the parameter to fetch.
+ * @param string $calling_function
+ *   Name of the caller function for some manipulation (optional).
+ *
+ * @return string
+ *   Returns the expected parameter data.
+ */
+function tweets_queue_get_parameter_data($name, $calling_function = '') {
+  $data = '';
+  if (isset($_REQUEST[$name])) {
+    $data = $_REQUEST[$name];
+  }
+  return $data;
+}
+
+/**
+ * Send mail for forgot password.
+ *
+ * @param string $mail
+ *   Valid email address.
+ */
+function tweets_queue_forgot_password_send_mail($mail, $hash_key, $id, $hash_key1) {
+  global $base_url;
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'forgot_password_email'; // Replace with Your key
+  $to = $mail;
+
+  $link = $base_url . '/update-password' . "?hash_key=" . $hash_key . '&id=' . $id . '&hash_key1=' . $hash_key1;
+  $message = t("RESET YOUR PASSWORD\n
+    If you have submitted the request to reset your password, then kindly click on the below link. If you didn't make this request, ignore this email.\n
+    Link: @link", array('@link' => $link));
+  tweets_queue_debug_info($message);
+  $params['message'] = $message;
+  $params['title'] = 'Password Reset Request';
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  \Drupal::logger('mail-log')->notice($message);
+}
+
+/**
+ * Store generated hash key for specific email and user uid.
+ *
+ * @param array $password_message_info
+ *   Array containing user information.
+ *
+ * @return integer
+ *   Returns unique id for the newly created record.
+ */
+function tweets_queue_insert_password_hash_key_record($password_message_info) {
+  if (!is_array($password_message_info)) {
+    $password_message_info = array();
+  }
+  $id = db_insert(TWITTER_PASSWORD_HASH_KEY_TABLE)
+    ->fields($password_message_info)
+    ->execute();
+  if ($id) {
+    return $id;
+  }
+}
+
+/**
+ * Validate  password hash key.
+ *
+ * @param integer $id
+ *   ID of the password hash key record.
+ * @param string $hash_key
+ *   Hash key generated based on the email.
+ * @param string $hash_key1
+ *   Hash key generated based on the created time.
+ *
+ * @return boolean
+ *   Returns true when all the condition is met true otherwise false.
+ */
+function tweets_queue_validate_password_hash_key($id, $hash_key, $hash_key1) {
+  $hash_key_info = tweets_queue_fetch_password_hash_key_info($id);
+  if (!is_object($hash_key_info)) {
+    drupal_set_message(t("You are not allowed to access this page."));
+    return false;
+  }
+  if ($hash_key_info->hash_key != $hash_key) {
+    drupal_set_message(t("You are not allowed to access this page."));
+    return false;
+  }
+  $created_hash_key =  hash('sha256', $hash_key_info->created);
+  if ($hash_key1 != $created_hash_key) {
+    drupal_set_message(t("You are not allowed to access this page."));
+    return false;
+  }
+  $now = time();
+  $elapsed_time = $now - $hash_key_info->created;
+  $elapsed_time_duration = 1 * 60;
+  if ($elapsed_time >  $elapsed_time_duration) {
+    drupal_set_message(t("Your password change time got expired."));;
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Fetch password hash key information.
+ *
+ * @param integer $id
+ *   Id of the password hash key.
+ *
+ * @return object
+ *   Returns object containing the complete password hash key info.
+ */
+function tweets_queue_fetch_password_hash_key_info($id) {
+  $hash_key_info = array();
+  $query = \Drupal::database()->select(TWITTER_PASSWORD_HASH_KEY_TABLE, 'p');
+  $query->fields('p', ['id', 'uid', 'email', 'hash_key', 'created']);
+  $query->condition('p.id', $id);
+  $hash_key_info = $query->execute()->fetchObject();
+  return $hash_key_info;
+}
+
+/**
+ * Change user password.
+ *
+ * @param integer $uid
+ *   User uid.
+ * @param string $password
+ *   Password to be applied.
+ */
+function tweets_queue_change_password($uid, $password) {
+  if (!$uid) {
+    return;
+  }
+  $entity = \Drupal\user\Entity\User::load($uid);
+  $entity->setPassword($password);
+  $entity->save();
+}
+
+/**
+ * Insert record in cron table.
+ *
+ * @return
+ *   Returns cron table inserted id.
+ */
+function tweets_queue_insert_cron_entry() {
+  $cron_info = array('created' => time());
+  $id = db_insert(TWITTER_CRON_HISTORY_TABLE)
+    ->fields($cron_info)
+    ->execute();
+  return $id;
 }

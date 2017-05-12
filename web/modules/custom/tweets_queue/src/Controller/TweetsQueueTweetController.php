@@ -41,7 +41,7 @@ class TweetsQueueTweetController extends ControllerBase {
    * {@inheritdoc}
    */
   public function validateEmail() {
-    $email = $_REQUEST['email'];
+    $email = tweets_queue_get_parameter_data('email');
     if (\Drupal::service('email.validator')->isValid($email)) {
       $uid = tweets_queue_check_email_presence($email);  
       if ($uid) {
@@ -54,9 +54,40 @@ class TweetsQueueTweetController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
+  public function sendToken() {
+    $email = tweets_queue_get_parameter_data('email');
+    if (!\Drupal::service('email.validator')->isValid($email)) {
+      die(t("Please enter a valid email ID"));
+    }
+    $uid = tweets_queue_check_email_presence($email);
+    if (!$uid) {
+      die(t("This Email ID is not registered with us. Kindly enter your registered Email ID"));
+    }
+    $uid = tweets_queue_check_email_presence($email, 1);
+    if (!$uid) {
+      die(t('Your accout is either de-active or blocked. Please check your mail.'));
+    }
+    $created = time();
+    $hash_key = hash('sha256', $email);
+    $hash_key1 = hash('sha256', $created);
+    $password_message_info = array(
+      'uid' => $uid,
+      'email' => $email,
+      'hash_key' => $hash_key,
+      'created' => $created
+    );
+    $id = tweets_queue_insert_password_hash_key_record($password_message_info);
+    //Perform send mail operation and other stuff.
+    tweets_queue_forgot_password_send_mail($email, $hash_key, $id, $hash_key1);
+    die("done");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateUserLogin() {
-    $email = $_REQUEST['email'];
-    $password = $_REQUEST['password'];
+    $email = tweets_queue_get_parameter_data('email');
+    $password = tweets_queue_get_parameter_data('password');
     if ($user = user_load_by_mail($email)) {
       // Set the username for further validation.
       $name = $user->getAccountName();

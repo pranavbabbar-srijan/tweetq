@@ -19,9 +19,16 @@ tweets_queue.send_tweets:
   route_name: tweets_queue.send_tweets
   weight: -14
 
+tweets_queue_current_tweet_history.settingss:
+  title: 'Tweet History'
+  description: 'Shows tweets history for the users.'
+  parent: system.admin_config_services
+  route_name: tweets_queue_current_tweet_history.settings
+  weight: -14
+
 tweets_queue.signup_user:
   title: 'Sign Up'
-  description: 'Sigh up form.'
+  description: 'Sign up form.'
   parent: system.admin_config_services
   route_name: tweets_queue.signup_user
   weight: -14

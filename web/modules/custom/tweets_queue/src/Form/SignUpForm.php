@@ -54,7 +54,6 @@ class SignUpForm extends FormBase {
     $form[SIGNUP_FIELD_FULL_NAME] = array(
       '#type' => 'textfield',
       '#title' => t('Full Name'),
-      '#required' => TRUE,
       '#attributes' => array (
         'placeholder' => t("Required"),
         'autocomplete' => 'off'
@@ -62,9 +61,8 @@ class SignUpForm extends FormBase {
     );
 
     $form[SIGNUP_FIELD_EMAIL] = array(
-      '#type' => 'email',
+      '#type' => 'textfield',
       '#title' => t('Email'),
-      '#required' => TRUE,
       '#attributes' => array (
         'placeholder' => t("Required"),
         'autocomplete' => 'off'
@@ -74,14 +72,13 @@ class SignUpForm extends FormBase {
     $form[SIGNUP_FIELD_PASSWORD] = array(
       '#type' => 'password',
       '#title' => t('Password'),
-      '#required' => TRUE,
       '#attributes' => array (
         'placeholder' => t("Required")
       ),
     );
 
     $form[SIGNUP_FIELD_WEBSITE] = array(
-      '#type' => 'url',
+      '#type' => 'textfield',
       '#title' => t('Website'),
       '#required' => FALSE,
       '#attributes' => array (
@@ -140,13 +137,6 @@ class SignUpForm extends FormBase {
     $user->set(SIGNUP_FIELD_TWITTER_DATA, serialize(array()));
     $field_user_hash_key = hash('sha256', $email);
     $user->set(SIGNUP_FIELD_HASH_KEY, $field_user_hash_key);
-    //Optional settings
-    $url = Url::fromRoute('tweets_queue_verify.verify', array('email' => $email, 'hash' => $field_user_hash_key));
-    $link = \Drupal::l(t('click here'), $url); 
-    $link =  t('@link', array('@link' => $link));
-   $config = \Drupal::service('config.factory')->getEditable('tweets_queue.settings');
-   $config->set('variable_one', $link)
-  ->save();
     $user->activate();
     $user->status = 0;
     $res = $user->save();

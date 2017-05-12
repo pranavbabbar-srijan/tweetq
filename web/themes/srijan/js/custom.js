@@ -17,21 +17,134 @@
 		var login_non_existing_email_msg = "You are yet to sign-up with us";
 		var login_valid_password_msg = "Please enter a valid password";
 
+		var forgot_email_missing_msg = "Please enter the email address";
+		var forgot_email_msg = "Please enter a valid email ID";
+		var forgot_non_existing_email_msg = "This Email ID is not registered with us. Kindly enter your registered Email ID";
+		var forgot_password_sent_email_msg = "An email to change the password has been sent to your Email ID";
+
+		var update_password_no_match_msg = "New password and confirm password must be same";
+
 		var password_missing_msg = "Please enter the password";
-		var password_character_msg = 'Enter password between 6 and 12 characters<br>Please Enter At least one Uppercase Letter: A-Z,<br> At least one Lowercase Letter: a-z, <br>At least one Numerical Character: 0-9, <br>At least one of the following special character "!", "@", "#"';
+		var password_character_msg = 'Enter password between 6 and 12 characters<br>At least one Uppercase Letter: A-Z,<br> At least one Lowercase Letter: a-z, <br>At least one Numerical Character: 0-9, <br>At least one of the following special character "!", "@", "#"';
 		var password_length_msg = "Enter password between 6 and 12 characters";
 		var password_minimum_length = 6;
 		var password_maximum_length = 12;
 		var website_invalid_msg = 'please enter valid website';
 		var signup_error = '';
-		var email_validation_path = '/dashboard/validateEmail';
-		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 
+		var email_validation_path = '/dashboard/validateEmail';
 		var user_login_validation_path = '/dashboard/validateUserLogin';
+		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
+
+		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
+		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
 
 		$( "#foo" ).trigger( "click" );
 
+		//Twitter signup form
+		//Full name validtaion.
+	    $("#twitter-signup-form #edit-field-full-name").on('keyup', function(e) {
+	    	var name = $('#twitter-signup-form #edit-field-full-name').val();
+	    	var alphabet = /^[a-zA-Z ]+$/.test(name);
+	    	$("#fname-validation-error").remove();
+	    	if (name.length > 0) {
+	    		if (!alphabet) {
+	    			$("<span id='fname-validation-error' class='validation-error'>" + alphabet_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    		}
+	    	}
+	    });
+
+	    $("#twitter-signup-form #edit-field-full-name").focusout(function() {
+	   		var name = $('#twitter-signup-form #edit-field-full-name').val();
+	    	if (name.length == 0) {
+	    		$("#fname-validation-error").remove();
+	    		$("<span id='fname-validation-error' class='validation-error'>" + full_name_missing_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    	}
+	  	});
+
+	    $("#witter-signup-form #edit-email").focusout(function() {
+	   		var email = $('#witter-signup-form #edit-email').val();
+	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(email);
+
+  			$("#email-validation-error").remove();
+	    	if (email.length == 0) {
+	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#witter-signup-form #edit-email" );
+	    	}
+
+  			if (email.length > 0) {
+	    		if (!valid) {
+	    			$("#email-validation-error").remove();
+	    			$("<span id='email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#witter-signup-form #edit-email" );
+	    		}
+	    		if (valid) {
+	    			$("#email-validation-error").remove();
+	    			$.post(email_validation_path, {'email' : email}, function(data) {
+	    				if  (data == "exist") {
+							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#witter-signup-form #edit-email" );	    					
+	    				}
+				    });
+	    			
+	    		}
+	    	}
+	  	});
+
+	  	//Valid url check
+	    $("#twitter-signup-form #edit-field-website").focusout(function() {
+	   		var website = $('#twitter-signup-form #edit-field-website').val();
+	   		var valid = /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(website);
+	   		$("#website-validation-error").remove();
+	    	if (website.length > 0) {
+	    		if (!valid) {
+	    			$("<span id='website-validation-error' class='validation-error'>" + website_invalid_msg + "</p>").insertAfter( "#twitter-signup-form #edit-field-website" );
+	    		}
+	    	}
+	  	});
+
+	    //Twitter signup form submit.
+		$('#twitter-signup-form').submit(function() {
+			var passed = true;
+			var name = $('#twitter-signup-form #edit-field-full-name').val();
+	 		var alphabet = /^[a-zA-Z ]+$/.test(name);
+			
+			//Full Name check.
+			$("#fname-validation-error").remove();
+			if (name.length > 0) {
+	    		if (!alphabet) {
+	    			passed = false;
+	    			$("<span id='fname-validation-error' class='validation-error'>" + alphabet_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    		}
+	    	}
+	    	if (name.length == 0) {
+	    		$("#fname-validation-error").remove();
+	    		passed = false;
+	    		$("<span id='fname-validation-error' class='validation-error'>" + full_name_missing_msg + "</p>").insertAfter( "#edit-field-full-name" );
+	    	}
+
+	    	//Email check
+			var email = $('#twitter-signup-form #edit-email').val();
+			$("#email-validation-error").remove();
+	    	if (email.length == 0) {
+	    		passed = false;
+	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#twitter-signup-form #edit-email" );
+	    	}
+
+	    	var website = $('#twitter-signup-form #edit-field-website').val();
+	   		var valid = /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(website);
+	   		$("#website-validation-error").remove();
+	    	if (website.length > 0) {
+	    		if (!valid) {
+	    			passed = false;
+	    			$("<span id='website-validation-error' class='validation-error'>" + website_invalid_msg + "</p>").insertAfter( "#twitter-signup-form #edit-field-website" );
+	    		}
+	    	}
+
+	    	return passed;
+		});
+
+
+		//Signup form submit.
 		$('#signup-form').submit (function() {
 			var passed = true;
 
@@ -57,6 +170,14 @@
 			if (email_failed) {
 				return false;
 			}
+
+			//Email check
+			var email = $('#signup-form #edit-email').val();
+			$("#email-validation-error").remove();
+	    	if (email.length == 0) {
+	    		passed = false;
+	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#signup-form #edit-email" );
+	    	}
 
 	    	//Password check.
 	    	var password = $('#signup-form #edit-user-password').val();
@@ -190,27 +311,43 @@
 	    	}
 	    });
 
+	    //Click on forgot password link.
+		$("#user-login-form #forgot-password").click(function() {
+			$("#email-validation-error").remove();
+			$("#password-validation-error").remove();
+			$("#user-login-validation-error").remove();
+			$("#forgot-password-mail-sent").remove();
+			$("#forgot-email-validation-error").remove();
+		});
+
 	    // Login form email validation.
-	    $("#user-login-form #edit-name").focusout(function() {
+	    $("#user-login-form #edit-pass").focusin(function() {
 	   		var email = $('#user-login-form #edit-name').val();
 	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   			var valid = regex.test(email);
 
+  			$("#password-validation-error").remove();
+			$("#user-login-validation-error").remove();
   			$("#email-validation-error").remove();
 	    	if (email.length == 0) {
 	    		$("<span id='email-validation-error' class='validation-error'>" + login_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
+	    		return;
 	    	}
 
   			if (email.length > 0) {
 	    		if (!valid) {
 	    			$("#email-validation-error").remove();
 	    			$("<span id='email-validation-error' class='validation-error'>" + login_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
+	    			return;
 	    		}
 	    		if (valid) {
 	    			$("#email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data != "exist") {
-							$("<span id='email-validation-error' class='validation-error'>" + login_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );	    					
+	    					$("#password-validation-error").remove();
+							$("#user-login-validation-error").remove();
+							$("<span id='email-validation-error' class='validation-error'>" + login_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
+							return;
 	    				}
 				    });
 	    			
@@ -221,6 +358,12 @@
 		$("#user-login-form #edit-pass").focusout(function() {
 	   		var password = $('#user-login-form #edit-pass').val();
 	   		var email = $('#user-login-form #edit-name').val();
+	   		var email_failed = $("#user-login-form #email-validation-error").hasClass('validation-error');
+			if (email_failed) {
+				$("#password-validation-error").remove();
+				$("#user-login-validation-error").remove();
+				return false;
+			}
 	    	if (password.length == 0) {
 	    		$("#password-validation-error").remove();
 	    		$("<span id='password-validation-error' class='validation-error'>" + login_password_missing_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
@@ -233,7 +376,7 @@
 	    	$("#user-login-validation-error").remove();
 	    	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
 				if  (data != "exist") {
-					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertBefore("#user-login-form #edit-submit" );
+					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
 					$("#user-login-form #edit-submit").attr('disabled', 'true');
 				}
 				else {
@@ -241,6 +384,9 @@
 				}
 		    });
 	  	});
+
+		$('#user-login-form #edit-submit').attr('disabled', 'true');
+		$('#user-login-form #edit-name').blur();
 
 		$('#user-login-form').submit(function() {
 			var email = $('#user-login-form #edit-name').val();
@@ -267,13 +413,123 @@
 			$("#user-login-validation-error").remove();
 	    	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
 				if  (data != "exist") {
-					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertBefore("#user-login-form #edit-submit" );
+					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
 					return false;
 				}
 		    });
 
 			return true;
 		});
+
+		// Forgot password/send password form.
+	  	$("#user-login-form #edit-email").focusout(function() {
+	   		var email = $('#user-login-form #edit-email').val();
+	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(email);
+
+  			$("#forgot-email-validation-error").remove();
+  			$("#forgot-password-mail-sent").remove();
+	    	if (email.length == 0) {
+	    		$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    	}
+
+  			if (email.length > 0) {
+	    		if (!valid) {
+	    			$("#forgot-email-validation-error").remove();
+	    			$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    		}
+	    		if (valid) {
+	    			$("#forgot-email-validation-error").remove();
+	    			$.post(email_validation_path, {'email' : email}, function(data) {
+	    				if  (data != "exist") {
+							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );	    					
+	    				}
+				    });
+	    		}
+	    	}
+	  	});
+
+		$("#user-login-form #forgot-password-submit").click(function() {
+			$("#forgot-email-validation-error").remove();
+			$("#forgot-password-mail-sent").remove();
+			var email = $('#user-login-form #edit-email').val();
+			var email_failed = $("#user-login-form #forgot-email-validation-error").hasClass('validation-error');
+			if (email_failed) {
+				return;
+			}
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(email);
+  			$("#forgot-email-validation-error").remove();
+  			$("#forgot-password-mail-sent").remove();
+
+			if (email.length == 0) {
+	    		$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    		return;
+	    	}
+	    	if (email.length > 0) {
+	    		if (!valid) {
+	    			$("#forgot-email-validation-error").remove();
+	    			$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    		}
+	    		if (valid) {
+	    			$("#forgot-email-validation-error").remove();
+	    			$.post(email_validation_path, {'email' : email}, function(data) {
+	    				if  (data != "exist") {
+							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_password_sent_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+							return;
+	    				}
+				    });
+	    		}
+	    	}
+
+	    	$.post(forgot_password_send_token_path, {'email' : email}, function(data) {
+	    		$("#forgot-email-validation-error").remove();
+	    		$("#forgot-password-mail-sent").remove();
+				if  (data == "done") {
+					$('#user-login-form #edit-email').val('')
+					$("<span id='forgot-password-mail-sent' class='mail-sent'>" + forgot_password_sent_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+					return;
+				}
+				$("<span id='forgot-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-login-form #edit-email" );
+		    });
+
+		});
+
+
+		//Password change validation.
+	    $("#update-password #edit-password").focusout(function() {
+	   		var password = $('#update-password #edit-password').val();
+	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  			var valid = regex.test(password);
+  			var passed = true;
+  			$("#password-validation-error").remove();
+  			if (password.length == 0) {
+	    		$("#password-validation-error").remove();
+	    		$("#update-password #edit-actions #edit-submit").attr('disabled', 'true');
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#update-password #edit-password" );
+	    		return;
+	    	}
+
+  			if (!valid) {
+  				$("#password-validation-error").remove();
+  				$("#update-password #edit-actions #edit-submit").attr('disabled', 'true');
+	    		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#update-password #edit-password" );
+	    		return;
+  			}
+  			$("#update-password #edit-actions #edit-submit").removeAttr('disabled');
+	  	});
+
+		$("#update-password #edit-reset-password").focusout(function() {
+	   		var password = $('#update-password #edit-password').val();
+	   		var reset_password = $('#update-password #edit-reset-password').val();
+	   		$("#reset-password-validation-error").remove();
+  			if (password != reset_password) {
+  				$("#update-password #edit-actions #edit-submit").attr('disabled', 'true');
+	    		$("<span id='reset-password-validation-error' class='validation-error'>" + update_password_no_match_msg + "</p>").insertAfter( "#update-password #edit-reset-password" );
+	    		return;
+  			}
+  			$("#update-password #edit-actions #edit-submit").removeAttr('disabled');
+	  	});
 
 		//Edit tweet message character count as per twitter.
 	    $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
@@ -455,6 +711,8 @@
 
 		// Message position changes.
 		$(".messages").appendTo(".item-list + .item-list").insertBefore(".item-list + .item-list > ul");
+		$(".messages").appendTo(".message-header").insertBefore(".form-type-textarea");
+		$(".messages").insertAfter(".import-tweet-page .block-system-main-block");
 
 		// text overlimit color change.
 		// $('.send-tweets-form #edit-message').on({
@@ -465,6 +723,10 @@
 		//         };
 		//     }
 		// })
+
+		if ($('.messages ul').hasClass('messages__list')) {
+		    $('.messages').addClass('listing-msg');
+		}
 
 	});
 
