@@ -1676,7 +1676,8 @@ body.path-update-password .messages--status {
       visibility: inherit;
       top: 28px;
       background: white;
-      text-align: left; }
+      text-align: left;
+      border-radius: 0; }
     .notifications .notification-message-list > div {
       display: flex;
       flex-flow: row wrap;
