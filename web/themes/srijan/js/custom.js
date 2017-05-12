@@ -629,7 +629,7 @@
 	    });
 
 	     $("#block-usersdashboardheaderblock .profile > a").click(function(e) {
-	     	event.preventDefault();
+	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
 	        e.stopPropagation();
 	    });
