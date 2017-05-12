@@ -23,7 +23,7 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
    */
   public function build() {
     global $base_url;
-    $header = array(t('Cron Id'), t('Cron Time'), t('Twitter Name'), t('Tweet Message'), t('Tweet Time'), t('Status'));
+    $header = array(t('Cron Id'), t('Cron Run Time'), t('Twitter Name'), t('Tweet Message'), t('Tweet Time'), t('Status'));
 
     $query = \Drupal::database()->select(TWITTER_TWEETS_HISTORY_TABLE, 'p');
     $query->fields('p', [TWITTER_FIELD_NID, TWITTER_FIELD_UID, TWITTER_FIELD_STATUS, TWITTER_FIELD_RETWEETED, TWITTER_FIELD_CODE]);
