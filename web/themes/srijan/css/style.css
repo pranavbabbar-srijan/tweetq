@@ -2030,3 +2030,115 @@ body.path-update-password .messages--status {
     position: absolute;
     top: 35%;
     left: 35%; }
+
+.path-tweets-history .main-content {
+  /*--- gutter outside and inside of column width calculate ---*/
+  width: 99%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  -webkit-box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  position: inherit;
+  height: 100%;
+  margin-top: 20px; }
+
+.path-tweets-history #block-alluserstweetshistoryblock {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";
+  /*IE 8*/
+  -moz-box-shadow: 1px 0px 8px #bbb;
+  /*FF 3.5+*/
+  -webkit-box-shadow: 1px 0px 8px #bbb;
+  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+  box-shadow: 1px 0px 8px #bbb;
+  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb);
+  /*IE 5.5-7*/
+  background: white;
+  padding: 2em;
+  border-radius: 10px;
+  /*--- gutter outside and inside of column width calculate ---*/
+  width: 90.66667%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  -webkit-box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto; }
+
+.path-tweets-history table th {
+  font-weight: bold;
+  width: 6%;
+  font-size: 16px; }
+
+.path-tweets-history table td b {
+  color: #2aa9e0;
+  font-weight: normal; }
+
+.path-tweets-history .pager {
+  margin-top: 3em; }
+  .path-tweets-history .pager li {
+    padding: 0;
+    text-decoration: none; }
+    .path-tweets-history .pager li a {
+      text-decoration: none;
+      font-size: .9em;
+      color: #979797;
+      border: 1px solid transparent;
+      padding: .1em .8em; }
+    .path-tweets-history .pager li.is-active a {
+      border: 1px solid #2aa9e0;
+      -webkit-border-radius: 3px;
+      -khtml-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+      border-radius: 3px;
+      color: #2aa9e0; }
+    .path-tweets-history .pager li:hover a {
+      border: 1px solid #979797;
+      -webkit-border-radius: 3px;
+      -khtml-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+      border-radius: 3px;
+      color: #979797; }
+    .path-tweets-history .pager li.pager__item--next {
+      font-size: 0;
+      margin-left: 20px; }
+      .path-tweets-history .pager li.pager__item--next a {
+        border: none; }
+        .path-tweets-history .pager li.pager__item--next a:before {
+          content: "\f105";
+          font: normal normal normal 16px/1 FontAwesome; }
+    .path-tweets-history .pager li.pager__item--previous {
+      font-size: 0;
+      margin-right: 20px; }
+      .path-tweets-history .pager li.pager__item--previous a {
+        border: none; }
+        .path-tweets-history .pager li.pager__item--previous a:before {
+          content: "\f104";
+          font: normal normal normal 16px/1 FontAwesome; }
+    .path-tweets-history .pager li.pager__item--first {
+      font-size: 0;
+      margin-right: 20px; }
+      .path-tweets-history .pager li.pager__item--first a {
+        border: none; }
+        .path-tweets-history .pager li.pager__item--first a:before {
+          content: "\f100";
+          font: normal normal normal 16px/1 FontAwesome; }
+    .path-tweets-history .pager li.pager__item--last {
+      font-size: 0;
+      margin-left: 20px; }
+      .path-tweets-history .pager li.pager__item--last a {
+        border: none; }
+        .path-tweets-history .pager li.pager__item--last a:before {
+          content: "\f101";
+          font: normal normal normal 16px/1 FontAwesome; }
