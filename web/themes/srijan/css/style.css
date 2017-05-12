@@ -239,7 +239,8 @@ button {
         display: block;
         position: absolute;
         top: 28px;
-        left: -5px; }
+        left: -5px;
+        z-index: 1; }
     .block-users-dashboard-header-block .profile .profile-links, .block-users-dashboard-header-profile-block .profile .profile-links {
       visibility: hidden;
       position: absolute;
@@ -591,7 +592,8 @@ body.path-update-password .messages--status {
 .path-signup .messages--status {
   width: 380px;
   margin: 0 auto;
-  display: block !important; }
+  display: block !important;
+  opacity: 1 !important; }
   .path-signup .messages--status ~ .block-system-main-block {
     display: none; }
 
@@ -1637,8 +1639,6 @@ body.path-update-password .messages--status {
     text-align: center;
     display: block;
     z-index: 1; }
-    .notifications > div:nth-child(1).active {
-      left: 0; }
   .notifications .notification-message-list {
     height: 0;
     overflow-y: scroll;
@@ -1676,7 +1676,8 @@ body.path-update-password .messages--status {
       visibility: inherit;
       top: 28px;
       background: white;
-      text-align: left; }
+      text-align: left;
+      border-radius: 0; }
     .notifications .notification-message-list > div {
       display: flex;
       flex-flow: row wrap;
