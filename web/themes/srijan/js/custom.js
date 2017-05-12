@@ -313,6 +313,9 @@
 
 	    //Click on forgot password link.
 		$("#user-login-form #forgot-password").click(function() {
+			$('#user-login-form #edit-name').val('');
+			$('#user-login-form #edit-pass').val('');
+			$('#user-login-form #edit-email').val('');
 			$("#email-validation-error").remove();
 			$("#password-validation-error").remove();
 			$("#user-login-validation-error").remove();
