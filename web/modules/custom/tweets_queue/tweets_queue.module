@@ -1249,9 +1249,9 @@ function tweets_queue_signup_send_mail($mail, $name) {
   $to = $mail;
   $message = t("Dear @full_name,\n
 Welcome to Barbet!\n
-You have successfully signed up with Barbet App. Kindly login to the app and connect with your twitter Details to start using Barbet.", array('@full_name' => $name));
+You have successfully Signed up with Barbet App. Kindly login to the app and connect with your twitter Details to start using Barbet.", array('@full_name' => $name));
   $params['message'] = $message;
-  $params['title'] = 'barbet registration';
+  $params['title'] = 'Barbet Registration';
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
 
