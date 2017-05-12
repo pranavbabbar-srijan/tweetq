@@ -1200,7 +1200,17 @@ body.path-update-password {
 	}
 }
 
-.path-signup, .path-twitter, .path-update-password {
+.path-node.page-node-type-page {
+	.block-system-main-block {
+		width: 1020px !important;
+	}
+	.node--type-page {
+		font-size: 14px;
+		line-height: 1.5;
+	}
+}
+
+.path-signup, .path-twitter, .path-update-password, .path-node.page-node-type-page {
 	.layout-container {
 		.region-content {
 			padding-top: 20px;
