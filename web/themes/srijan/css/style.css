@@ -121,14 +121,14 @@ button {
 /* ================================= Offset-Span ================================= */
 /* ================================= Clearfix ================================= */
 /* ================================= Media Query Breakpoint ================================= */
-#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-frontpage .messages--error a, .path-frontpage .messages--error div[role="alert"]:before, body.path-update-password .update-password label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .path-update-password .block-system-main-block .message-header .js-form-item label:after, .block-users-left-side-bar-block .profile ~ div span.value b:empty, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-frontpage .messages--error a, .path-frontpage .messages--error div[role="alert"]:before, body.path-update-password .update-password label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .path-update-password .block-system-main-block .message-header .js-form-item label:after, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item label:after, .block-users-left-side-bar-block .profile ~ div span.value b:empty, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
   display: none; }
 
 .block-users-dashboard-header-block .profile + a:before, .block-users-dashboard-header-profile-block .profile + a:before, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .region-content .messages--error div[role=alert]:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .edit,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .edit,
-.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .messages--status:before, .block-users-tweets-statistics-block .content > div a > div, .download-csv a:before {
+.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .messages--status:before, .user-logged-in .messages--status.listing-msg .messages__list li:first-child:before, .block-users-tweets-statistics-block .content > div a > div, .download-csv a:before {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -1184,6 +1184,14 @@ body.path-update-password .messages--status {
       margin-top: 15px; }
     .user-logged-in .messages--status .messages__list {
       display: inline-block; }
+    .user-logged-in .messages--status.listing-msg:before {
+      display: none; }
+    .user-logged-in .messages--status.listing-msg .messages__list li:first-child:before {
+      content: "";
+      font-size: 22px;
+      position: absolute;
+      top: 15px;
+      margin-left: -30px; }
 
 .ripple {
   width: 0;
@@ -1237,19 +1245,26 @@ body.path-update-password .messages--status {
       margin-left: 20px;
       border: 1px solid; }
 
-.path-signup .layout-container .region-content, .path-twitter .layout-container .region-content, .path-update-password .layout-container .region-content {
+.path-node.page-node-type-page .block-system-main-block {
+  width: 1020px !important; }
+
+.path-node.page-node-type-page .node--type-page {
+  font-size: 14px;
+  line-height: 1.5; }
+
+.path-signup .layout-container .region-content, .path-twitter .layout-container .region-content, .path-update-password .layout-container .region-content, .path-node.page-node-type-page .layout-container .region-content {
   padding-top: 20px;
   min-height: 600px; }
 
-.path-signup .layout-container .section, .path-twitter .layout-container .section, .path-update-password .layout-container .section {
+.path-signup .layout-container .section, .path-twitter .layout-container .section, .path-update-password .layout-container .section, .path-node.page-node-type-page .layout-container .section {
   background: #F1F1F1; }
 
-.path-signup .password-header, .path-twitter .password-header, .path-update-password .password-header {
+.path-signup .password-header, .path-twitter .password-header, .path-update-password .password-header, .path-node.page-node-type-page .password-header {
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 40px; }
 
-.path-signup .block-system-main-block, .path-twitter .block-system-main-block, .path-update-password .block-system-main-block {
+.path-signup .block-system-main-block, .path-twitter .block-system-main-block, .path-update-password .block-system-main-block, .path-node.page-node-type-page .block-system-main-block {
   width: 755px;
   margin: 0 auto;
   padding: 1.8em 2.5em;
@@ -1260,15 +1275,15 @@ body.path-update-password .messages--status {
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
   border-radius: 6px; }
-  .path-signup .block-system-main-block .message-header, .path-twitter .block-system-main-block .message-header, .path-update-password .block-system-main-block .message-header {
+  .path-signup .block-system-main-block .message-header, .path-twitter .block-system-main-block .message-header, .path-update-password .block-system-main-block .message-header, .path-node.page-node-type-page .block-system-main-block .message-header {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between; }
-    .path-signup .block-system-main-block .message-header .js-form-item, .path-twitter .block-system-main-block .message-header .js-form-item, .path-update-password .block-system-main-block .message-header .js-form-item {
+    .path-signup .block-system-main-block .message-header .js-form-item, .path-twitter .block-system-main-block .message-header .js-form-item, .path-update-password .block-system-main-block .message-header .js-form-item, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item {
       width: 45%;
       margin-right: 10px;
       margin-bottom: 2em; }
-      .path-signup .block-system-main-block .message-header .js-form-item input[type="text"], .path-signup .block-system-main-block .message-header .js-form-item input[type="email"], .path-signup .block-system-main-block .message-header .js-form-item input[type="password"], .path-signup .block-system-main-block .message-header .js-form-item input[type="url"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"], .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"], .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"], .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"], .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"] {
+      .path-signup .block-system-main-block .message-header .js-form-item input[type="text"], .path-signup .block-system-main-block .message-header .js-form-item input[type="email"], .path-signup .block-system-main-block .message-header .js-form-item input[type="password"], .path-signup .block-system-main-block .message-header .js-form-item input[type="url"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"], .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"], .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"], .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"], .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"], .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"], .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="text"], .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="email"], .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="password"], .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="url"] {
         border: 0;
         background: none;
         outline: none;
@@ -1277,27 +1292,27 @@ body.path-update-password .messages--status {
         width: 100%;
         padding-bottom: 7px;
         font-size: 14px; }
-        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"]::-webkit-input-placeholder {
+        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="url"]::-webkit-input-placeholder {
           /* Chrome/Opera/Safari */
           opacity: .5; }
-        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]::-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]::-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]::-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]::-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"]::-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"]::-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"]::-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"]::-moz-placeholder {
+        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]::-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]::-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]::-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]::-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]::-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"]::-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"]::-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"]::-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"]::-moz-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="text"]::-moz-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="email"]::-moz-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="password"]::-moz-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="url"]::-moz-placeholder {
           /* Firefox 19+ */
           opacity: .5; }
-        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"]:-ms-input-placeholder {
+        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="url"]:-ms-input-placeholder {
           /* IE 10+ */
           opacity: .5; }
-        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder {
+        .path-signup .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-signup .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-twitter .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-update-password .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="text"]:-moz-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="email"]:-moz-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="password"]:-moz-placeholder, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item input[type="url"]:-moz-placeholder {
           /* Firefox 18- */
           opacity: .5; }
-      .path-signup .block-system-main-block .message-header .js-form-item.js-form-item-field-organization, .path-twitter .block-system-main-block .message-header .js-form-item.js-form-item-field-organization, .path-update-password .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
+      .path-signup .block-system-main-block .message-header .js-form-item.js-form-item-field-organization, .path-twitter .block-system-main-block .message-header .js-form-item.js-form-item-field-organization, .path-update-password .block-system-main-block .message-header .js-form-item.js-form-item-field-organization, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
         width: 100%; }
-      .path-signup .block-system-main-block .message-header .js-form-item label, .path-twitter .block-system-main-block .message-header .js-form-item label, .path-update-password .block-system-main-block .message-header .js-form-item label {
+      .path-signup .block-system-main-block .message-header .js-form-item label, .path-twitter .block-system-main-block .message-header .js-form-item label, .path-update-password .block-system-main-block .message-header .js-form-item label, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item label {
         color: #949494;
         margin-bottom: 1em;
         display: block;
         font-size: 16px;
         font-weight: bold; }
-  .path-signup .block-system-main-block input[type="submit"], .path-twitter .block-system-main-block input[type="submit"], .path-update-password .block-system-main-block input[type="submit"] {
+  .path-signup .block-system-main-block input[type="submit"], .path-twitter .block-system-main-block input[type="submit"], .path-update-password .block-system-main-block input[type="submit"], .path-node.page-node-type-page .block-system-main-block input[type="submit"] {
     margin: 20px auto 0;
     border: none;
     background: #96c85a;
@@ -1313,27 +1328,27 @@ body.path-update-password .messages--status {
     -o-border-radius: 4px;
     border-radius: 4px; }
 
-.path-signup #header, .path-twitter #header, .path-update-password #header {
+.path-signup #header, .path-twitter #header, .path-update-password #header, .path-node.page-node-type-page #header {
   background: white; }
 
-.path-signup .signup-form, .path-signup .twitter-signup-form, .path-twitter .signup-form, .path-twitter .twitter-signup-form, .path-update-password .signup-form, .path-update-password .twitter-signup-form {
+.path-signup .signup-form, .path-signup .twitter-signup-form, .path-twitter .signup-form, .path-twitter .twitter-signup-form, .path-update-password .signup-form, .path-update-password .twitter-signup-form, .path-node.page-node-type-page .signup-form, .path-node.page-node-type-page .twitter-signup-form {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   margin-bottom: 35px; }
-  .path-signup .signup-form .signup, .path-signup .twitter-signup-form .signup, .path-twitter .signup-form .signup, .path-twitter .twitter-signup-form .signup, .path-update-password .signup-form .signup, .path-update-password .twitter-signup-form .signup {
+  .path-signup .signup-form .signup, .path-signup .twitter-signup-form .signup, .path-twitter .signup-form .signup, .path-twitter .twitter-signup-form .signup, .path-update-password .signup-form .signup, .path-update-password .twitter-signup-form .signup, .path-node.page-node-type-page .signup-form .signup, .path-node.page-node-type-page .twitter-signup-form .signup {
     font-size: 24px;
     font-weight: 300; }
-    .path-signup .signup-form .signup + .signup, .path-signup .twitter-signup-form .signup + .signup, .path-twitter .signup-form .signup + .signup, .path-twitter .twitter-signup-form .signup + .signup, .path-update-password .signup-form .signup + .signup, .path-update-password .twitter-signup-form .signup + .signup {
+    .path-signup .signup-form .signup + .signup, .path-signup .twitter-signup-form .signup + .signup, .path-twitter .signup-form .signup + .signup, .path-twitter .twitter-signup-form .signup + .signup, .path-update-password .signup-form .signup + .signup, .path-update-password .twitter-signup-form .signup + .signup, .path-node.page-node-type-page .signup-form .signup + .signup, .path-node.page-node-type-page .twitter-signup-form .signup + .signup {
       margin-top: .3em; }
-    .path-signup .signup-form .signup div, .path-signup .twitter-signup-form .signup div, .path-twitter .signup-form .signup div, .path-twitter .twitter-signup-form .signup div, .path-update-password .signup-form .signup div, .path-update-password .twitter-signup-form .signup div {
+    .path-signup .signup-form .signup div, .path-signup .twitter-signup-form .signup div, .path-twitter .signup-form .signup div, .path-twitter .twitter-signup-form .signup div, .path-update-password .signup-form .signup div, .path-update-password .twitter-signup-form .signup div, .path-node.page-node-type-page .signup-form .signup div, .path-node.page-node-type-page .twitter-signup-form .signup div {
       font-size: 18px;
       font-weight: bold;
       text-align: right; }
-      .path-signup .signup-form .signup div a, .path-signup .twitter-signup-form .signup div a, .path-twitter .signup-form .signup div a, .path-twitter .twitter-signup-form .signup div a, .path-update-password .signup-form .signup div a, .path-update-password .twitter-signup-form .signup div a {
+      .path-signup .signup-form .signup div a, .path-signup .twitter-signup-form .signup div a, .path-twitter .signup-form .signup div a, .path-twitter .twitter-signup-form .signup div a, .path-update-password .signup-form .signup div a, .path-update-password .twitter-signup-form .signup div a, .path-node.page-node-type-page .signup-form .signup div a, .path-node.page-node-type-page .twitter-signup-form .signup div a {
         text-decoration: none;
         color: #2aa9e0; }
-        .path-signup .signup-form .signup div a:before, .path-signup .twitter-signup-form .signup div a:before, .path-twitter .signup-form .signup div a:before, .path-twitter .twitter-signup-form .signup div a:before, .path-update-password .signup-form .signup div a:before, .path-update-password .twitter-signup-form .signup div a:before {
+        .path-signup .signup-form .signup div a:before, .path-signup .twitter-signup-form .signup div a:before, .path-twitter .signup-form .signup div a:before, .path-twitter .twitter-signup-form .signup div a:before, .path-update-password .signup-form .signup div a:before, .path-update-password .twitter-signup-form .signup div a:before, .path-node.page-node-type-page .signup-form .signup div a:before, .path-node.page-node-type-page .twitter-signup-form .signup div a:before {
           font: normal normal normal 14px/1 FontAwesome;
           content: "\f099";
           font-size: 28px;
@@ -1341,17 +1356,17 @@ body.path-update-password .messages--status {
           display: inline-block;
           vertical-align: text-top;
           margin-top: -4px; }
-    .path-signup .signup-form .signup span, .path-signup .twitter-signup-form .signup span, .path-twitter .signup-form .signup span, .path-twitter .twitter-signup-form .signup span, .path-update-password .signup-form .signup span, .path-update-password .twitter-signup-form .signup span {
+    .path-signup .signup-form .signup span, .path-signup .twitter-signup-form .signup span, .path-twitter .signup-form .signup span, .path-twitter .twitter-signup-form .signup span, .path-update-password .signup-form .signup span, .path-update-password .twitter-signup-form .signup span, .path-node.page-node-type-page .signup-form .signup span, .path-node.page-node-type-page .twitter-signup-form .signup span {
       font-size: 12px;
       color: #bfbfbf;
       text-align: right;
       font-weight: normal;
       display: block;
       margin-top: 5px; }
-      .path-signup .signup-form .signup span:before, .path-signup .twitter-signup-form .signup span:before, .path-twitter .signup-form .signup span:before, .path-twitter .twitter-signup-form .signup span:before, .path-update-password .signup-form .signup span:before, .path-update-password .twitter-signup-form .signup span:before {
+      .path-signup .signup-form .signup span:before, .path-signup .twitter-signup-form .signup span:before, .path-twitter .signup-form .signup span:before, .path-twitter .twitter-signup-form .signup span:before, .path-update-password .signup-form .signup span:before, .path-update-password .twitter-signup-form .signup span:before, .path-node.page-node-type-page .signup-form .signup span:before, .path-node.page-node-type-page .twitter-signup-form .signup span:before {
         content: "*"; }
 
-.path-signup .signup + .message-header, .path-twitter .signup + .message-header, .path-update-password .signup + .message-header {
+.path-signup .signup + .message-header, .path-twitter .signup + .message-header, .path-update-password .signup + .message-header, .path-node.page-node-type-page .signup + .message-header {
   margin-top: 35px; }
 
 .path-twitter .block-system-main-block .message-header .js-form-item.js-form-item-field-organization {
@@ -1616,11 +1631,12 @@ body.path-update-password .messages--status {
     right: 184px;
     background: red;
     color: white;
-    border-radius: 6px;
+    border-radius: 30%;
     padding: .2em;
     font-size: 12px;
     text-align: center;
-    display: block; }
+    display: block;
+    z-index: 1; }
     .notifications > div:nth-child(1).active {
       left: 0; }
   .notifications .notification-message-list {

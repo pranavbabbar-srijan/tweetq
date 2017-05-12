@@ -331,14 +331,12 @@
   			$("#email-validation-error").remove();
 	    	if (email.length == 0) {
 	    		$("<span id='email-validation-error' class='validation-error'>" + login_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
-	    		$('#user-login-form #edit-name').focus();
 	    		return;
 	    	}
 
   			if (email.length > 0) {
 	    		if (!valid) {
 	    			$("#email-validation-error").remove();
-	    			$('#user-login-form #edit-name').focus();
 	    			$("<span id='email-validation-error' class='validation-error'>" + login_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
 	    			return;
 	    		}
@@ -349,7 +347,6 @@
 	    					$("#password-validation-error").remove();
 							$("#user-login-validation-error").remove();
 							$("<span id='email-validation-error' class='validation-error'>" + login_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
-							$('#user-login-form #edit-name').focus();
 							return;
 	    				}
 				    });
@@ -714,6 +711,8 @@
 
 		// Message position changes.
 		$(".messages").appendTo(".item-list + .item-list").insertBefore(".item-list + .item-list > ul");
+		$(".messages").appendTo(".message-header").insertBefore(".send-tweets-form .form-type-textarea");
+		$(".messages").insertAfter(".import-tweet-page .block-system-main-block");
 
 		// text overlimit color change.
 		// $('.send-tweets-form #edit-message').on({
@@ -724,6 +723,10 @@
 		//         };
 		//     }
 		// })
+
+		if ($('.messages ul').hasClass('messages__list')) {
+		    $('.messages').addClass('listing-msg');
+		}
 
 	});
 
