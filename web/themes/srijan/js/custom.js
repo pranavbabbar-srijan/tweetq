@@ -724,6 +724,10 @@
 		//     }
 		// })
 
+		if ($('.messages ul').hasClass('messages__list')) {
+		    $('.messages').addClass('listing-msg');
+		}
+
 	});
 
 })(jQuery);
