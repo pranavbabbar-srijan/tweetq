@@ -179,7 +179,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
       tweets_queue_insert_message_queue_record($twitter_message_info);
     }
     fclose($file);
-    drupal_set_message(t("@total Import completed successfully.<br></br>Total : @total Imported: @imported Valid: @valid
+    drupal_set_message(t("Import completed successfully.<br></br>Total : @total Imported: @imported Valid: @valid
       Invalid : @invalid Duplicate: @duplicate Skipped: @skipped",
       array(
         '@total' => $import_message['total'],
