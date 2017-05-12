@@ -1285,7 +1285,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   $to = $mail;
   
   $user_hash_key = hash('sha256', $mail);
-  $link = $base_url . '/' . $mail . '/' . $user_hash_key;
+  $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
 
   $message = t("Dear @full_name,\n
    Users verification Link: @link", array('@full_name' => $name, '@link' => $link));

@@ -486,7 +486,26 @@ body.path-update-password {
 		.js-form-item {
 			margin-bottom: 40px;
 		}
+	}
+	.messages--status {
+		width: 380px;
+		margin: 0 auto;
+		display: block !important;
+		~ .block-system-main-block {
+			display: none;
+		}
 	} 
+}
+
+.path-signup {
+	.messages--status {
+		width: 380px;
+		margin: 0 auto;
+		display: block !important;
+		~ .block-system-main-block {
+			display: none;
+		}
+	}
 }
 
 #forgot-password-section {
@@ -1181,7 +1200,17 @@ body.path-update-password {
 	}
 }
 
-.path-signup, .path-twitter, .path-update-password {
+.path-node.page-node-type-page {
+	.block-system-main-block {
+		width: 1020px !important;
+	}
+	.node--type-page {
+		font-size: 14px;
+		line-height: 1.5;
+	}
+}
+
+.path-signup, .path-twitter, .path-update-password, .path-node.page-node-type-page {
 	.layout-container {
 		.region-content {
 			padding-top: 20px;
@@ -1621,11 +1650,12 @@ body.path-update-password {
 		    right: 184px;
 		    background: red;
 		    color: white;
-		    border-radius: 6px;
+		    border-radius: 30%;
 		    padding: .2em;
 		    font-size: 12px;
 		    text-align: center;
 		    display: block;
+		    z-index: 1;
 		    &.active {
 		    	left: 0;
 		    }
