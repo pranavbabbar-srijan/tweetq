@@ -158,6 +158,8 @@ const TWITTER_CONNECT_TEXT = 'Connect with Twitter';
 
 const TWITTER_DATE_FORMAT = 'd/m/Y';
 
+const TWITTER_TWEET_DATE_FORMAT = 'd/m/Y H:i:s';
+
 
 const TWITTER_TWEET_FORM_ROUTE_NAME = 'tweets_queue_tweet_form.settings';
 const TWITTER_TWEETED_TWEET_ROUTE_NAME = 'tweets_queue_tweeted_listing.settings';
@@ -3559,7 +3561,7 @@ function tweets_queue_validate_password_hash_key($id, $hash_key, $hash_key1) {
   }
   $now = time();
   $elapsed_time = $now - $hash_key_info->created;
-  $elapsed_time_duration = 1 * 60;
+  $elapsed_time_duration = 24 * 60 * 60;
   if ($elapsed_time >  $elapsed_time_duration) {
     drupal_set_message(t("Your password change time got expired."));;
     return false;
