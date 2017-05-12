@@ -128,7 +128,7 @@ button {
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .edit,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .edit,
-.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .messages--status:before, .block-users-tweets-statistics-block .content > div a > div, .download-csv a:before {
+.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .messages--status:before, .user-logged-in .messages--status.listing-msg .messages__list li:first-child:before, .block-users-tweets-statistics-block .content > div a > div, .download-csv a:before {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -239,7 +239,8 @@ button {
         display: block;
         position: absolute;
         top: 28px;
-        left: -5px; }
+        left: -5px;
+        z-index: 1; }
     .block-users-dashboard-header-block .profile .profile-links, .block-users-dashboard-header-profile-block .profile .profile-links {
       visibility: hidden;
       position: absolute;
@@ -591,7 +592,8 @@ body.path-update-password .messages--status {
 .path-signup .messages--status {
   width: 380px;
   margin: 0 auto;
-  display: block !important; }
+  display: block !important;
+  opacity: 1 !important; }
   .path-signup .messages--status ~ .block-system-main-block {
     display: none; }
 
@@ -1184,6 +1186,14 @@ body.path-update-password .messages--status {
       margin-top: 15px; }
     .user-logged-in .messages--status .messages__list {
       display: inline-block; }
+    .user-logged-in .messages--status.listing-msg:before {
+      display: none; }
+    .user-logged-in .messages--status.listing-msg .messages__list li:first-child:before {
+      content: "";
+      font-size: 22px;
+      position: absolute;
+      top: 15px;
+      margin-left: -30px; }
 
 .ripple {
   width: 0;
@@ -1629,8 +1639,6 @@ body.path-update-password .messages--status {
     text-align: center;
     display: block;
     z-index: 1; }
-    .notifications > div:nth-child(1).active {
-      left: 0; }
   .notifications .notification-message-list {
     height: 0;
     overflow-y: scroll;
@@ -1668,7 +1676,8 @@ body.path-update-password .messages--status {
       visibility: inherit;
       top: 28px;
       background: white;
-      text-align: left; }
+      text-align: left;
+      border-radius: 0; }
     .notifications .notification-message-list > div {
       display: flex;
       flex-flow: row wrap;
