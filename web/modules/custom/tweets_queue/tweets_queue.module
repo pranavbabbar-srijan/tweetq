@@ -2120,6 +2120,7 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
   $query->condition('p.archived', 0 , '=');
   $query->condition('p.message', '' , '!=');
   $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<');
+  $query->where("last_run = first_run");
   $query->orderBy('p.weight', 'ASC');
   $query->orderBy('p.created', 'ASC');
   $query->range(0, 1);
@@ -2158,6 +2159,9 @@ function tweets_queue_fetch_all_unscheduled_users_list() {
   return $user_list;
 }
 
+/**
+ * Perform scheduling of tweets for next cron run.
+ */
 function tweets_queue_compile_tweets_scheduling() {
   $current_time = time();
   $next_run = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_LAST_RUN));
