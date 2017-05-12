@@ -320,7 +320,7 @@
 			$("#forgot-email-validation-error").remove();
 		});
 
-	    // User Login form validation.
+		// User Login form validation.
 	    // User Login form email validation.
 	    $("#user-login-form #edit-pass").focusin(function() {
 	   		var email = $('#user-login-form #edit-name').val();
