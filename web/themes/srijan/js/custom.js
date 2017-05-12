@@ -331,14 +331,12 @@
   			$("#email-validation-error").remove();
 	    	if (email.length == 0) {
 	    		$("<span id='email-validation-error' class='validation-error'>" + login_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
-	    		$('#user-login-form #edit-name').focus();
 	    		return;
 	    	}
 
   			if (email.length > 0) {
 	    		if (!valid) {
 	    			$("#email-validation-error").remove();
-	    			$('#user-login-form #edit-name').focus();
 	    			$("<span id='email-validation-error' class='validation-error'>" + login_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
 	    			return;
 	    		}
@@ -349,7 +347,6 @@
 	    					$("#password-validation-error").remove();
 							$("#user-login-validation-error").remove();
 							$("<span id='email-validation-error' class='validation-error'>" + login_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
-							$('#user-login-form #edit-name').focus();
 							return;
 	    				}
 				    });
