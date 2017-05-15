@@ -62,6 +62,7 @@ const TWITTER_DELETED_TWEET = '2';
 const TWITTER_HANDLER_INVALID_CODE = '32';
 const TWITTER_HANDLER_BAD_AUTHENTICATION_CODE = '215';
 const CRON_TWEET_CHARCATER_LIMIT = 140;
+const DB_TWEET_CHARCATER_LIMIT = 954;
 const TWITTER_CLIENT_ROLE = 'twitter_client';
 const TWITTER_APPROVED_CLIENT_ROLE = 'twitter_approved_client';
 const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
@@ -2119,7 +2120,7 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
   $query->condition('p.status', 1 , '=');
   $query->condition('p.archived', 0 , '=');
   $query->condition('p.message', '' , '!=');
-  $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<');
+  $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<=');
   $query->where("last_run = first_run");
   $query->orderBy('p.weight', 'ASC');
   $query->orderBy('p.created', 'ASC');
