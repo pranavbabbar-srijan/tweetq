@@ -281,7 +281,7 @@ function tweets_queue_user_login_form_changes(&$form) {
 function tweets_queue_forgot_password(&$form) {
   $form['forgot_password_header'] = array(
       '#type' => 'markup',
-      '#prefix' => '<div id="forgot-password-section">',
+      '#prefix' => '<div id="forgot-password-section" class="hidden">',
       '#markup' => t(USER_FORGOT_PASSWORD_SECTION_HEDAER),
       '#weight' => -22,
   );
