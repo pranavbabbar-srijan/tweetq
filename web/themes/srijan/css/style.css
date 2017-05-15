@@ -1703,6 +1703,9 @@ body.path-update-password .messages--status {
           font-size: 12px;
           word-break: break-word;
           width: 100%; }
+          .notifications .notification-message-list > div span.message b {
+            color: #2aa9e0;
+            font-weight: normal; }
         .notifications .notification-message-list > div span.message_history_count {
           display: block;
           border-bottom: 1px solid #979797;
@@ -1939,17 +1942,23 @@ body.path-update-password .messages--status {
 #colorbox, #cboxWrapper, #cboxContent, #cboxLoadedContent {
   width: 100% !important;
   max-width: 350px;
-  height: 210px !important; }
+  height: 230px !important; }
 
 #colorbox {
-  top: 24% !important;
-  left: 36% !important; }
+  top: 40% !important;
+  left: 40% !important;
+  right: 40% !important; }
 
 #cboxOverlay {
   opacity: .65 !important; }
 
+#cboxContent {
+  position: absolute;
+  top: 0;
+  left: 0; }
+
 #cboxLoadedContent {
-  padding: 1em 2em;
+  padding: 1em 0;
   margin-bottom: 0; }
   #cboxLoadedContent .region-content {
     margin-top: 0;
@@ -1958,7 +1967,8 @@ body.path-update-password .messages--status {
     padding-top: 0; }
   #cboxLoadedContent .main-content {
     width: 100%;
-    text-align: center; }
+    text-align: center;
+    position: inherit; }
   #cboxLoadedContent .permanent-delete {
     color: #f56a6a;
     margin-bottom: 40px;
@@ -1968,7 +1978,8 @@ body.path-update-password .messages--status {
     margin-bottom: 20px; }
   #cboxLoadedContent #edit-clone, #cboxLoadedContent #edit-cancel {
     float: left;
-    font-size: 16px; }
+    font-size: 16px;
+    margin-top: 5px; }
   #cboxLoadedContent #edit-clone {
     background: #f56a6a;
     padding: .6em;

@@ -1747,6 +1747,10 @@ body.path-update-password {
 				    font-size: 12px;
 				    word-break: break-word;
 				    width: 100%;
+				    b {
+						color: $twitter;
+						font-weight: normal;
+					}
 				}
 				&.message_history_count {
 					display: block;
@@ -1993,11 +1997,12 @@ body.path-update-password {
 #colorbox, #cboxWrapper, #cboxContent, #cboxLoadedContent {
 	width: 100% !important;
 	max-width: 350px;
-	height: 210px !important;
+	height: 230px !important;
 }
 #colorbox {
-    top: 24% !important;
-    left: 36% !important;
+    top: 40% !important;
+    left: 40% !important;
+    right: 40% !important;
     // height: 210px !important;
 }
 #cboxOverlay {
@@ -2006,8 +2011,13 @@ body.path-update-password {
 #cboxClose {
 @extend %none;
 }
+#cboxContent {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 #cboxLoadedContent {
-	padding: 1em 2em;
+	padding: 1em 0;
 	margin-bottom: 0;
 	header, #sidebar-first, #block-userstweetsstatisticsblock {
 		@extend %none;
@@ -2022,6 +2032,7 @@ body.path-update-password {
 	.main-content {
 		width: 100%;
 		text-align: center;
+		position: inherit;
 	}
 	.permanent-delete {
 		color: #f56a6a;
@@ -2035,6 +2046,7 @@ body.path-update-password {
 	#edit-clone, #edit-cancel {
 		float: left;
 		font-size: 16px;
+		margin-top: 5px;
 	}
 	#edit-clone {
 		background: #f56a6a;
