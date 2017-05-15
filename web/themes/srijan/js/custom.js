@@ -725,22 +725,14 @@
 		  $(".path-frontpage .region-content .messages--error").insertAfter("#user-login-prefix .form-type-password");
 
 		  // Fadeout messages.
+		$('.messages, .messages--error').show(100);
 		$('.messages, .messages--error').delay(8000).fadeOut(300);
 
 		// Message position changes.
 		$(".messages").appendTo(".item-list + .item-list").insertBefore(".item-list + .item-list > ul");
 		$(".messages").appendTo(".send-tweets-form .message-header").insertBefore(".send-tweets-form .form-type-textarea");
+		$(".messages").appendTo(".send-tweets-form .message-header").insertBefore(".send-tweets-form .form-type-textarea");
 		$(".messages").insertAfter(".import-tweet-page .block-system-main-block");
-
-		// text overlimit color change.
-		// $('.send-tweets-form #edit-message').on({
-		//     focus: function() {
-		        
-		//         if (this.value.length >= 20) $('#edit-message').focus(){
-		//         	$(this).addClass("red");
-		//         };
-		//     }
-		// })
 
 		if ($('.messages ul').hasClass('messages__list')) {
 		    $('.messages').addClass('listing-msg');
