@@ -391,7 +391,7 @@ body {
 	.form-item-name {
 		margin-bottom: 2.5em;
 	}
-	input[type=submit], #forgot-password-submit, #forgot-password-cancel {
+	input[type=submit], #forgot-password-submit, #forgot-password-cancel, #log-in-submit {
 		border: none;
 		background: $login-btn;
 		width: 100%;
@@ -800,6 +800,9 @@ body.path-update-password {
 				}
 			}
 		}
+		.messages--status {
+			// display: none;
+		}
 		.item-list {
 			font-size: 14px;
 			.header {
@@ -1124,6 +1127,7 @@ body.path-update-password {
 	    color: #96c85a;
 	    font-size: 18px;
 	    position: relative;
+	    display: none;
 	    &:before {
 	    	@extend %icomoon;
 	    	content: $icon-success;
@@ -1860,6 +1864,10 @@ body.path-update-password {
 		border-color: $gray;
 		opacity: .35;
 	}
+	// .messages {
+	// 	display: none;
+	// 	visibility: hidden;
+	// }
 }
 
 .-form-tweets-queue-csv-upload {
