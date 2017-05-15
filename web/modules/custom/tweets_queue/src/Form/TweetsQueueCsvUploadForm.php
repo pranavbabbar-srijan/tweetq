@@ -154,7 +154,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
 
       $actual_size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
       $size = tweets_queue_get_message_size($message);
-      if ($actual_size >= 954) {
+      if ($actual_size > DB_TWEET_CHARCATER_LIMIT) {
         $import_message['skipped'] = $import_message['skipped'] + 1;
         continue;
       }
@@ -169,7 +169,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
         $import_message['duplicate'] = $import_message['duplicate'] + 1;
         continue;
       }
-      if ($size < CRON_TWEET_CHARCATER_LIMIT) {
+      if ($size <= CRON_TWEET_CHARCATER_LIMIT) {
         $import_message['valid'] = $import_message['valid'] + 1;
       }
       else {
@@ -179,14 +179,14 @@ class TweetsQueueCsvUploadForm extends FormBase {
       tweets_queue_insert_message_queue_record($twitter_message_info);
     }
     fclose($file);
-    drupal_set_message(t("@total Import completed successfully.<br></br>Total : @total Imported: @imported Valid: @valid
+    drupal_set_message(t("Import completed successfully.<br></br>Total : @total Imported: @imported Valid: @valid
       Invalid : @invalid Duplicate: @duplicate Skipped: @skipped",
       array(
         '@total' => $import_message['total'],
         '@imported' => $import_message['imported'],
-        '@duplicate' => $import_message['duplicate'],
         '@valid' => $import_message['valid'],
         '@invalid' => $import_message['invalid'],
+        '@duplicate' => $import_message['duplicate'],
         '@skipped' => $import_message['skipped']
         )
       )

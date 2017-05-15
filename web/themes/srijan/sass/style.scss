@@ -128,6 +128,7 @@
 				    position: absolute;
 				    top: 28px;
 				    left: -5px;
+				    z-index: 1;
 				}
 			}
 		}
@@ -502,6 +503,7 @@ body.path-update-password {
 		width: 380px;
 		margin: 0 auto;
 		display: block !important;
+		opacity: 1 !important;
 		~ .block-system-main-block {
 			display: none;
 		}
@@ -1138,6 +1140,23 @@ body.path-update-password {
 	    .messages__list {
 	    	display: inline-block;
 	    }
+	    &.listing-msg {
+	    	&:before {
+	    		display: none;
+	    	}
+	    	.messages__list {
+	    		li:first-child {
+	    			&:before {
+	    				@extend %icomoon;
+				    	content: $icon-success;
+				    	font-size: 22px;
+					    position: absolute;
+					    top: 15px;
+					    margin-left: -30px;
+	    			}
+	    		}
+	    	}
+	    }
 	}
 }
 
@@ -1200,7 +1219,17 @@ body.path-update-password {
 	}
 }
 
-.path-signup, .path-twitter, .path-update-password {
+.path-node.page-node-type-page {
+	.block-system-main-block {
+		width: 1020px !important;
+	}
+	.node--type-page {
+		font-size: 14px;
+		line-height: 1.5;
+	}
+}
+
+.path-signup, .path-twitter, .path-update-password, .path-node.page-node-type-page {
 	.layout-container {
 		.region-content {
 			padding-top: 20px;
@@ -1647,7 +1676,7 @@ body.path-update-password {
 		    display: block;
 		    z-index: 1;
 		    &.active {
-		    	left: 0;
+		    	// left: 0;
 		    }
 		}
 	}
@@ -1687,6 +1716,7 @@ body.path-update-password {
 			top: 28px;
 			background: white;
 			text-align: left;
+			border-radius: 0;
 		}
 		> div {
 			display: flex;
@@ -2100,6 +2130,112 @@ body.path-update-password {
     		position: absolute;
     		top: 35%;
     		left: 35%;
+		}
+	}
+}
+
+.path-tweets-history {
+	.main-content {
+		@include column(12);
+		position: inherit;
+		height: 100%;
+		margin-top: 20px;
+	}
+	#block-alluserstweetshistoryblock {
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";/*IE 8*/
+		-moz-box-shadow: 1px 0px 8px #bbb;/*FF 3.5+*/
+		-webkit-box-shadow: 1px 0px 8px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+		box-shadow: 1px 0px 8px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb); /*IE 5.5-7*/
+		background: white;
+		padding: 2em;
+		border-radius: 10px;
+		@include column(11);
+		margin: 0 auto;
+	}
+	table {
+		th {
+			font-weight: bold;
+			width: 6%;
+			font-size: 16px;
+		}
+		td {
+			b {
+				color: $twitter;
+				font-weight: normal;
+			}
+		}
+	}
+	.pager {
+		margin-top: 3em;
+		li {
+			padding: 0;
+			text-decoration: none;
+			a {
+				text-decoration: none;
+				font-size: .9em;
+				color: $gray;
+				border: 1px solid transparent;
+				padding: .1em .8em;
+			}
+			&.is-active {
+				a {
+					border: 1px solid $twitter;
+					@include border-radius(3px);
+					color: $twitter;
+				}
+			}
+			&:hover {
+				a {
+					border: 1px solid $gray;
+					@include border-radius(3px);
+					color: $gray;
+				}
+			}
+			&.pager__item--next {
+				font-size: 0;
+				margin-left: 20px;
+				a {
+					border: none;
+					&:before {
+						content: "\f105";
+						font: normal normal normal 16px/1 FontAwesome;
+					}
+				}
+			}
+			&.pager__item--previous {
+				font-size: 0;
+				margin-right: 20px;
+				a {
+					border: none;
+					&:before {
+						content: "\f104";
+						font: normal normal normal 16px/1 FontAwesome;
+					}
+				}
+			}
+			&.pager__item--first {
+				font-size: 0;
+				margin-right: 20px;
+				a {
+					border: none;
+					&:before {
+						content: "\f100";
+						font: normal normal normal 16px/1 FontAwesome;
+					}
+				}
+			}
+			&.pager__item--last {
+				font-size: 0;
+				margin-left: 20px;
+				a {
+					border: none;
+					&:before {
+						content: "\f101";
+						font: normal normal normal 16px/1 FontAwesome;
+					}
+				}
+			}
 		}
 	}
 }

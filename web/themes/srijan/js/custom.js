@@ -303,7 +303,7 @@
 	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
 	    	var tweet_msg_length = tweet_msg.length;
-	    	if (tweet_msg_length > 900) {
+	    	if (tweet_msg_length > 954) {
 	    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
 	    	}
 	    	else {
@@ -313,6 +313,9 @@
 
 	    //Click on forgot password link.
 		$("#user-login-form #forgot-password").click(function() {
+			$('#user-login-form #edit-name').val('');
+			$('#user-login-form #edit-pass').val('');
+			$('#user-login-form #edit-email').val('');
 			$("#email-validation-error").remove();
 			$("#password-validation-error").remove();
 			$("#user-login-validation-error").remove();
