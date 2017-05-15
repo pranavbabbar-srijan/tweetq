@@ -422,6 +422,7 @@ function tweets_queue_fetch_user_auth_map_info($uid) {
  * Implements hook_cron().
  */
 function tweets_queue_cron() {
+  tweets_queue_delete_orphaned_scheduled_messages_list();
   $cron_id = tweets_queue_insert_cron_entry();
   tweets_queue_tweet_scheduled_messages($cron_id);
   tweets_queue_compile_tweets_scheduling();
