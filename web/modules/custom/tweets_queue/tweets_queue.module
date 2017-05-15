@@ -163,6 +163,7 @@ const TWITTER_TWEET_DATE_FORMAT = 'd/m/Y H:i:s';
 
 
 const TWITTER_TWEET_FORM_ROUTE_NAME = 'tweets_queue_tweet_form.settings';
+const TWITTER_TWEET_FORM_DELETE_ROUTE_NAME = 'tweets_queue_tweet_delete_form.settings';
 const TWITTER_TWEETED_TWEET_ROUTE_NAME = 'tweets_queue_tweeted_listing.settings';
 const TWITTER_NEW_TWEET_ROUTE_NAME = 'tweets_queue_new_tweet_listing.settings';
 const TWITTER_VALID_TWEETS_ROUTE_NAME = 'tweets_queue_valid_tweets.settings';
