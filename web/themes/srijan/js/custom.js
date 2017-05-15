@@ -471,10 +471,6 @@
 			$("#forgot-email-validation-error").remove();
 			$("#forgot-password-mail-sent").remove();
 			var email = $('#user-login-form #edit-email').val();
-			var email_failed = $("#user-login-form #forgot-email-validation-error").hasClass('validation-error');
-			if (email_failed) {
-				return;
-			}
 			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   			var valid = regex.test(email);
   			$("#forgot-email-validation-error").remove();

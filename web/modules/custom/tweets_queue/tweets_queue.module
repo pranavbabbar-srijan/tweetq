@@ -1399,8 +1399,35 @@ function tweets_queue_entity_delete(\Drupal\Core\Entity\EntityInterface $entity)
       \Drupal::database()->delete(TWEETS_HANDLER_TABLE)
         ->condition('uid', $entity->id())
         ->execute();
-      drupal_set_message(t('Successfully deleted twitter api configuration data.'));
+      tweets_queue_delete_user_twitter_info($entity->id());
+      drupal_set_message(t('Successfully deleted twitter api data.'));
   }
+}
+
+/**
+ * Delete specific user's twitter related data.
+ */
+function tweets_queue_delete_user_twitter_info($uid) {
+  if (!$uid) {
+    return;
+  }
+  tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_AUTH_MAP_TABLE);
+  tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_TWEETS_HISTORY_TABLE);
+  tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_MESSAGE_QUEUE_TABLE);
+}
+
+/**
+ * Delete twitter specific data.
+ *
+ * @param  [type] $field_name  [description]
+ * @param  [type] $field_value [description]
+ * @param  [type] $table_name  [description]
+ * @return [type]              [description]
+ */
+function tweets_queue_delete_twitter_specific_info($field_name, $field_value, $table_name) {
+  \Drupal::database()->delete($table_name)
+        ->condition($field_name, $field_value)
+        ->execute();
 }
 
 /**
