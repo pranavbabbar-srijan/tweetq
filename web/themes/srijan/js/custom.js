@@ -303,7 +303,7 @@
 	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
 	    	var tweet_msg_length = tweet_msg.length;
-	    	if (tweet_msg_length > 900) {
+	    	if (tweet_msg_length > 954) {
 	    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
 	    	}
 	    	else {
@@ -313,6 +313,9 @@
 
 	    //Click on forgot password link.
 		$("#user-login-form #forgot-password").click(function() {
+			$('#user-login-form #edit-name').val('');
+			$('#user-login-form #edit-pass').val('');
+			$('#user-login-form #edit-email').val('');
 			$("#email-validation-error").remove();
 			$("#password-validation-error").remove();
 			$("#user-login-validation-error").remove();
@@ -468,10 +471,6 @@
 			$("#forgot-email-validation-error").remove();
 			$("#forgot-password-mail-sent").remove();
 			var email = $('#user-login-form #edit-email').val();
-			var email_failed = $("#user-login-form #forgot-email-validation-error").hasClass('validation-error');
-			if (email_failed) {
-				return;
-			}
 			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   			var valid = regex.test(email);
   			$("#forgot-email-validation-error").remove();
@@ -487,10 +486,10 @@
 	    			$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
 	    		}
 	    		if (valid) {
-	    			$("#forgot-email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data != "exist") {
-							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_password_sent_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    					$("#forgot-email-validation-error").remove();
+							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
 							return;
 	    				}
 				    });
@@ -629,7 +628,7 @@
 	    });
 
 	     $("#block-usersdashboardheaderblock .profile > a").click(function(e) {
-	     	event.preventDefault();
+	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
 	        e.stopPropagation();
 	    });

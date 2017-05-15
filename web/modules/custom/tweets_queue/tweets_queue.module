@@ -62,6 +62,7 @@ const TWITTER_DELETED_TWEET = '2';
 const TWITTER_HANDLER_INVALID_CODE = '32';
 const TWITTER_HANDLER_BAD_AUTHENTICATION_CODE = '215';
 const CRON_TWEET_CHARCATER_LIMIT = 140;
+const DB_TWEET_CHARCATER_LIMIT = 954;
 const TWITTER_CLIENT_ROLE = 'twitter_client';
 const TWITTER_APPROVED_CLIENT_ROLE = 'twitter_approved_client';
 const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
@@ -158,8 +159,11 @@ const TWITTER_CONNECT_TEXT = 'Connect with Twitter';
 
 const TWITTER_DATE_FORMAT = 'd/m/Y';
 
+const TWITTER_TWEET_DATE_FORMAT = 'd/m/Y H:i:s';
+
 
 const TWITTER_TWEET_FORM_ROUTE_NAME = 'tweets_queue_tweet_form.settings';
+const TWITTER_TWEET_FORM_DELETE_ROUTE_NAME = 'tweets_queue_tweet_delete_form.settings';
 const TWITTER_TWEETED_TWEET_ROUTE_NAME = 'tweets_queue_tweeted_listing.settings';
 const TWITTER_NEW_TWEET_ROUTE_NAME = 'tweets_queue_new_tweet_listing.settings';
 const TWITTER_VALID_TWEETS_ROUTE_NAME = 'tweets_queue_valid_tweets.settings';
@@ -1395,8 +1399,35 @@ function tweets_queue_entity_delete(\Drupal\Core\Entity\EntityInterface $entity)
       \Drupal::database()->delete(TWEETS_HANDLER_TABLE)
         ->condition('uid', $entity->id())
         ->execute();
-      drupal_set_message(t('Successfully deleted twitter api configuration data.'));
+      tweets_queue_delete_user_twitter_info($entity->id());
+      drupal_set_message(t('Successfully deleted twitter api data.'));
   }
+}
+
+/**
+ * Delete specific user's twitter related data.
+ */
+function tweets_queue_delete_user_twitter_info($uid) {
+  if (!$uid) {
+    return;
+  }
+  tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_AUTH_MAP_TABLE);
+  tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_TWEETS_HISTORY_TABLE);
+  tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_MESSAGE_QUEUE_TABLE);
+}
+
+/**
+ * Delete twitter specific data.
+ *
+ * @param  [type] $field_name  [description]
+ * @param  [type] $field_value [description]
+ * @param  [type] $table_name  [description]
+ * @return [type]              [description]
+ */
+function tweets_queue_delete_twitter_specific_info($field_name, $field_value, $table_name) {
+  \Drupal::database()->delete($table_name)
+        ->condition($field_name, $field_value)
+        ->execute();
 }
 
 /**
@@ -2117,7 +2148,8 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
   $query->condition('p.status', 1 , '=');
   $query->condition('p.archived', 0 , '=');
   $query->condition('p.message', '' , '!=');
-  $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<');
+  $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<=');
+  $query->where("last_run = first_run");
   $query->orderBy('p.weight', 'ASC');
   $query->orderBy('p.created', 'ASC');
   $query->range(0, 1);
@@ -2156,6 +2188,9 @@ function tweets_queue_fetch_all_unscheduled_users_list() {
   return $user_list;
 }
 
+/**
+ * Perform scheduling of tweets for next cron run.
+ */
 function tweets_queue_compile_tweets_scheduling() {
   $current_time = time();
   $next_run = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_LAST_RUN));
@@ -3559,7 +3594,7 @@ function tweets_queue_validate_password_hash_key($id, $hash_key, $hash_key1) {
   }
   $now = time();
   $elapsed_time = $now - $hash_key_info->created;
-  $elapsed_time_duration = 1 * 60;
+  $elapsed_time_duration = 24 * 60 * 60;
   if ($elapsed_time >  $elapsed_time_duration) {
     drupal_set_message(t("Your password change time got expired."));;
     return false;

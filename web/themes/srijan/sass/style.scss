@@ -1747,6 +1747,10 @@ body.path-update-password {
 				    font-size: 12px;
 				    word-break: break-word;
 				    width: 100%;
+				    b {
+						color: $twitter;
+						font-weight: normal;
+					}
 				}
 				&.message_history_count {
 					display: block;
@@ -1993,11 +1997,12 @@ body.path-update-password {
 #colorbox, #cboxWrapper, #cboxContent, #cboxLoadedContent {
 	width: 100% !important;
 	max-width: 350px;
-	height: 210px !important;
+	height: 230px !important;
 }
 #colorbox {
-    top: 24% !important;
-    left: 36% !important;
+    top: 40% !important;
+    left: 40% !important;
+    right: 40% !important;
     // height: 210px !important;
 }
 #cboxOverlay {
@@ -2006,8 +2011,13 @@ body.path-update-password {
 #cboxClose {
 @extend %none;
 }
+#cboxContent {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 #cboxLoadedContent {
-	padding: 1em 2em;
+	padding: 1em 0;
 	margin-bottom: 0;
 	header, #sidebar-first, #block-userstweetsstatisticsblock {
 		@extend %none;
@@ -2022,6 +2032,7 @@ body.path-update-password {
 	.main-content {
 		width: 100%;
 		text-align: center;
+		position: inherit;
 	}
 	.permanent-delete {
 		color: #f56a6a;
@@ -2035,6 +2046,7 @@ body.path-update-password {
 	#edit-clone, #edit-cancel {
 		float: left;
 		font-size: 16px;
+		margin-top: 5px;
 	}
 	#edit-clone {
 		background: #f56a6a;
@@ -2118,6 +2130,112 @@ body.path-update-password {
     		position: absolute;
     		top: 35%;
     		left: 35%;
+		}
+	}
+}
+
+.path-tweets-history {
+	.main-content {
+		@include column(12);
+		position: inherit;
+		height: 100%;
+		margin-top: 20px;
+	}
+	#block-alluserstweetshistoryblock {
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";/*IE 8*/
+		-moz-box-shadow: 1px 0px 8px #bbb;/*FF 3.5+*/
+		-webkit-box-shadow: 1px 0px 8px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+		box-shadow: 1px 0px 8px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb); /*IE 5.5-7*/
+		background: white;
+		padding: 2em;
+		border-radius: 10px;
+		@include column(11);
+		margin: 0 auto;
+	}
+	table {
+		th {
+			font-weight: bold;
+			width: 6%;
+			font-size: 16px;
+		}
+		td {
+			b {
+				color: $twitter;
+				font-weight: normal;
+			}
+		}
+	}
+	.pager {
+		margin-top: 3em;
+		li {
+			padding: 0;
+			text-decoration: none;
+			a {
+				text-decoration: none;
+				font-size: .9em;
+				color: $gray;
+				border: 1px solid transparent;
+				padding: .1em .8em;
+			}
+			&.is-active {
+				a {
+					border: 1px solid $twitter;
+					@include border-radius(3px);
+					color: $twitter;
+				}
+			}
+			&:hover {
+				a {
+					border: 1px solid $gray;
+					@include border-radius(3px);
+					color: $gray;
+				}
+			}
+			&.pager__item--next {
+				font-size: 0;
+				margin-left: 20px;
+				a {
+					border: none;
+					&:before {
+						content: "\f105";
+						font: normal normal normal 16px/1 FontAwesome;
+					}
+				}
+			}
+			&.pager__item--previous {
+				font-size: 0;
+				margin-right: 20px;
+				a {
+					border: none;
+					&:before {
+						content: "\f104";
+						font: normal normal normal 16px/1 FontAwesome;
+					}
+				}
+			}
+			&.pager__item--first {
+				font-size: 0;
+				margin-right: 20px;
+				a {
+					border: none;
+					&:before {
+						content: "\f100";
+						font: normal normal normal 16px/1 FontAwesome;
+					}
+				}
+			}
+			&.pager__item--last {
+				font-size: 0;
+				margin-left: 20px;
+				a {
+					border: none;
+					&:before {
+						content: "\f101";
+						font: normal normal normal 16px/1 FontAwesome;
+					}
+				}
+			}
 		}
 	}
 }
