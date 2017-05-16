@@ -572,7 +572,7 @@
 		$(".-form-tweets-queue-csv-upload .description").insertAfter(".-form-tweets-queue-csv-upload #edit-submit");
 		$("#block-usersdashboardheaderblock .content").append("<a id='notification-display' href='#;'></a>");
 		$("#block-usersdashboardnontwitterheaderblock .content").append("<a id='notification-display' href='#;'></a>");
-		$("#block-usersdashboardheaderblock .profile + a").click(function() {
+		$("#block-usersdashboardheaderblock .profile + a, #block-usersdashboardnontwitterheaderblock .profile + a").click(function() {
 			$(this).toggleClass("active");
 			// $(this).siblings(".notifications").children(".notification-message-list").toggleClass("active");
 		});
@@ -622,12 +622,12 @@
 		    $('body').addClass('import-tweet-page');
 		}
 
-	     $("#block-usersdashboardheaderblock .profile + a").click(function(e) {
+	     $("#block-usersdashboardheaderblock .profile + a, #block-usersdashboardnontwitterheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
 	        e.stopPropagation();
 	    });
 
-	     $("#block-usersdashboardheaderblock .profile > a").click(function(e) {
+	     $("#block-usersdashboardheaderblock .profile > a, #block-usersdashboardnontwitterheaderblock .profile > a").click(function(e) {
 	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
 	        e.stopPropagation();
