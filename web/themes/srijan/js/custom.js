@@ -724,13 +724,13 @@
 		    left: x + 'px'
 			}).addClass("rippleEffect");
 		});
-		  $(".path-frontpage .region-content .messages--error").insertAfter("#user-login-prefix .form-type-password");
 
 		  // Fadeout messages.
 		$('.messages, .messages--error').show(100);
 		$('.messages, .messages--error').delay(8000).fadeOut(300);
 
 		// Message position changes.
+		$(".path-frontpage .region-content .messages--error").insertAfter("#user-login-prefix .form-type-password");
 		$(".messages").appendTo(".item-list + .item-list").insertBefore(".item-list + .item-list > ul");
 		$(".messages").appendTo(".send-tweets-form .message-header").insertBefore(".send-tweets-form .form-type-textarea");
 		$(".messages").appendTo(".send-tweets-form .message-header").insertBefore(".send-tweets-form .form-type-textarea");
