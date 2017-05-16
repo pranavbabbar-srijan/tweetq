@@ -39,6 +39,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
       $name = $user_twitter_profile_info->name;
       $picture = '';
       $picture = $user_twitter_profile_info->profile_image_url;
+      $picture = tweets_queue_process_twitter_picture_url($picture, 'bigger');
       $profile_img = "<img src='" . $picture . "'></img>";
     }
 
