@@ -1168,7 +1168,6 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
 
       $full_name = $entity->get(SIGNUP_FIELD_FULL_NAME)->value;
       $mail = $entity->get('mail')->value;
-      tweets_queue_signup_send_mail($mail, $full_name);
       $hash_key = $entity->get(SIGNUP_FIELD_HASH_KEY)->value;
 
       $twitter_owner_id = $entity->get(SIGNUP_FIELD_TWITTER_OWNER_ID)->value;
@@ -1180,6 +1179,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         $entity->save();
         tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
         tweets_queue_login_twitter_user($uid, TWITTER_TWITTER_SIGNUP_PATH);
+        tweets_queue_signup_send_mail($mail, $full_name);
       }
       else {
         $config = \Drupal::config('tweets_queue.settings');
@@ -1293,7 +1293,9 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
 
   $message = t("Dear @full_name,\n
-   Users verification Link: @link", array('@full_name' => $name, '@link' => $link));
+  Welcome to Barbet!\n
+  You have successfully Signed up with Barbet App. Kindly login to the app and connect with your twitter Details to start using Barbet.
+  Users verification Link: @link", array('@full_name' => $name, '@link' => $link));
   $params['message'] = $message;
   $params['title'] = 'Barbet Registration Verification';
  
