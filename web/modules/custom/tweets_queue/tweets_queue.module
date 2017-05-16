@@ -3651,3 +3651,27 @@ function tweets_queue_insert_cron_entry() {
     ->execute();
   return $id;
 }
+
+/**
+ * change the twitter image url for expected image size.
+ *
+ * @param string $url
+ *   Twitter image url.
+ * @param string $size
+ *   Kind of twitter size expected.
+ *
+ * @return string
+ *   Returns processed url.
+ */
+function tweets_queue_process_twitter_picture_url($url, $size) {
+  $find = "_normal";
+  switch($size) {
+    case 'bigger':
+      $url = str_ireplace($find, "_bigger", $url);
+      break;
+    default:
+      $url = str_ireplace($find, "", $url);
+      break;
+  }
+  return $url;
+}
