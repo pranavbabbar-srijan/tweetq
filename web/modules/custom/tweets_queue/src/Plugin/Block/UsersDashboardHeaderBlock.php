@@ -57,12 +57,12 @@ class UsersDashboardHeaderBlock extends BlockBase {
       <span class='name'>" . $name . "</span></div> " . $profile_link_output . "</a>
       </div>" ;
 
-    $message_history_count_output = "<div>
+    $message_history_count_output = "<div id='twitter-notification-count'>
       <span class='count'>" . $message_history_count . "</span>
     </div>";
 
     $message_history_data = "<div class='notification-message-list'>";
-    $message_history_data .= " <div>
+    $message_history_data .= " <div id='message-history-count-section'>
       <span class='message_history_count'>You have " . $message_history_count_output . " Notifications</span>
     </div>";
     foreach ($tweets_history as $data) {
