@@ -546,7 +546,7 @@ body {
   color: #96c85a; }
 
 .path-frontpage .messages--error {
-  display: block;
+  display: none;
   background: none;
   margin: 0;
   box-shadow: none;

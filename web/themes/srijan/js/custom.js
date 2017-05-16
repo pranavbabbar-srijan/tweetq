@@ -471,10 +471,6 @@
 			$("#forgot-email-validation-error").remove();
 			$("#forgot-password-mail-sent").remove();
 			var email = $('#user-login-form #edit-email').val();
-			var email_failed = $("#user-login-form #forgot-email-validation-error").hasClass('validation-error');
-			if (email_failed) {
-				return;
-			}
 			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   			var valid = regex.test(email);
   			$("#forgot-email-validation-error").remove();
@@ -490,10 +486,10 @@
 	    			$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
 	    		}
 	    		if (valid) {
-	    			$("#forgot-email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data != "exist") {
-							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_password_sent_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
+	    					$("#forgot-email-validation-error").remove();
+							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
 							return;
 	    				}
 				    });
@@ -722,13 +718,13 @@
 		    left: x + 'px'
 			}).addClass("rippleEffect");
 		});
-		  $(".path-frontpage .region-content .messages--error").insertAfter("#user-login-prefix .form-type-password");
 
 		  // Fadeout messages.
 		$('.messages, .messages--error').show(100);
 		$('.messages, .messages--error').delay(8000).fadeOut(300);
 
 		// Message position changes.
+		$(".path-frontpage .region-content .messages--error").insertAfter("#user-login-prefix .form-type-password");
 		$(".messages").appendTo(".item-list + .item-list").insertBefore(".item-list + .item-list > ul");
 		$(".messages").appendTo(".send-tweets-form .message-header").insertBefore(".send-tweets-form .form-type-textarea");
 		$(".messages").appendTo(".send-tweets-form .message-header").insertBefore(".send-tweets-form .form-type-textarea");
