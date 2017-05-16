@@ -37,10 +37,12 @@
 		var email_validation_path = '/dashboard/validateEmail';
 		var user_login_validation_path = '/dashboard/validateUserLogin';
 		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
+		var user_history_path = '/dashboard/user-history';
 
 		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
 		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
+		// var user_history_path = '/barbet_3may/_www/dashboard/user-history';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -677,8 +679,6 @@
 	    	$(".messages--error").remove();
 		});
 
-	    var user_history_path = '/dashboard/user-history';
-	    // var user_history_path = '/tweetQ11Apr/_www/dashboard/user-history';
 		$("#notification-display").click(function(){
             $.ajax({
                 type: 'POST',
@@ -686,6 +686,13 @@
                 success: function(data) {
                 }
             });
+
+            if ($('#message-history-count-section').hasClass('hidden')) {
+			    $('#message-history-count-section').remove();
+			}
+            
+            $("#twitter-notification-count").remove();
+            $("#message-history-count-section").addClass('hidden');
    		});
 
 		// ripple effect
