@@ -504,7 +504,7 @@ body {
     font-size: 16px; }
   .user-login-form .form-item-name {
     margin-bottom: 2.5em; }
-  .user-login-form input[type=submit], .user-login-form #forgot-password-submit, .user-login-form #forgot-password-cancel {
+  .user-login-form input[type=submit], .user-login-form #forgot-password-submit, .user-login-form #forgot-password-cancel, .user-login-form #log-in-submit {
     border: none;
     background: #96c85a;
     width: 100%;
@@ -546,7 +546,7 @@ body {
   color: #96c85a; }
 
 .path-frontpage .messages--error {
-  display: block;
+  display: none;
   background: none;
   margin: 0;
   box-shadow: none;
@@ -1175,7 +1175,8 @@ body.path-update-password .messages--status {
     border: 1px solid rgba(0, 0, 0, 0.15);
     color: #96c85a;
     font-size: 18px;
-    position: relative; }
+    position: relative;
+    display: none; }
     .user-logged-in .messages--status:before {
       content: "";
       font-size: 22px;
