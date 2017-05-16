@@ -244,6 +244,7 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
  */
 function tweets_queue_user_login_form_changes(&$form) {
   global $base_url;
+  unset($form['name']['#attributes']['autofocus']);
   tweets_queue_forgot_password($form);
 
    $form['login_prefix'] = array(
