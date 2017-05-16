@@ -831,8 +831,9 @@ body.path-update-password .messages--status {
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
     /*IE 5.5-7*/
     background: white;
-    overflow-x: scroll;
-    height: 72vh; }
+    overflow-y: auto;
+    height: 100%;
+    max-height: 72vh; }
     .user-logged-in .block-users-valid-tweets-block .valid-tweets-header, .user-logged-in .block-users-in-valid-tweets-block .valid-tweets-header,
     .user-logged-in .block-users-archived-tweets-block .valid-tweets-header, .user-logged-in .block-users-all-tweets-block .valid-tweets-header,
     .user-logged-in .block-users-tweeted-tweets-block .valid-tweets-header {
