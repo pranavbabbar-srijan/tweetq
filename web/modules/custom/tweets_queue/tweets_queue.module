@@ -690,6 +690,7 @@ function tweets_queue_send_direct_message($message) {
     'hashtag' => '',
     'uid' => $uid,
     'size' => $size,
+    'tweeted' => 1
   );
 
   if (!$tweet_id) {
@@ -712,7 +713,6 @@ function tweets_queue_send_direct_message($message) {
     array(
       'tweet_id' => $tweet_id,
       'weight' => 6,
-      'tweeted' => 0,
       'first_run' => time(),
       'last_run' => time(),
     ),
