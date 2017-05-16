@@ -286,10 +286,14 @@ button {
             font-size: 22px;
             margin-right: 15px;
             vertical-align: sub; }
-        .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before {
-          content: ""; }
-        .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
-          content: ""; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile {
+          pointer-events: none; }
+          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before {
+            content: ""; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings {
+          pointer-events: none; }
+          .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
+            content: ""; }
         .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
           content: ""; }
 
@@ -534,7 +538,9 @@ body {
     cursor: pointer;
     color: #2aa9e0;
     font-size: 14px;
-    display: block; }
+    display: block;
+    width: 150px;
+    margin: 0 auto; }
 
 .validation-error, .mail-sent {
   color: #ff5a43;
@@ -1867,7 +1873,7 @@ body.path-update-password .messages--status {
       color: rgba(0, 0, 0, 0.2); }
     .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error {
       display: block;
-      margin-top: 115px;
+      margin-top: 160px;
       background: white;
       left: -24px;
       width: 74vw;

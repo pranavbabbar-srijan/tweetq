@@ -179,11 +179,13 @@
 					}
 				}
 				&.profile-my-profile {
+					pointer-events: none; //remove
 					&:before {
 						content: $icon-user;
 					}
 				}
 				&.profile-settings {
+					pointer-events: none; //remove
 					&:before {
 						content: $icon-settings;
 					}
@@ -420,6 +422,8 @@ body {
 		color: $twitter;
 		font-size: 14px;
 		display: block;
+		width: 150px;
+		margin: 0 auto;
 	}
 }
 
@@ -1927,7 +1931,7 @@ body.path-update-password {
 		}
 		.messages--error {
 		    display: block;
-		    margin-top: 115px;
+		    margin-top: 160px;
 		    background: white;
 		    left: -24px;
 		    width: 74vw;
