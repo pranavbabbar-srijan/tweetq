@@ -33,6 +33,7 @@ class UsersLeftSideBarBlock extends BlockBase {
     $twitter_handle = (!empty($twitter_handle)) ? '@' . $twitter_handle : '';
 
     $picture = $user_twitter_profile_info->profile_image_url;
+    $picture = tweets_queue_process_twitter_picture_url($picture);
     $profile_img = "<img src='" . $picture . "'></img>";
     $twitter_profile_output = "<div class='profile'>
       <span class='img'>" . $profile_img . "</span>

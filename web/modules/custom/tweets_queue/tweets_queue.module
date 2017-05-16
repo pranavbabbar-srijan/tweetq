@@ -690,6 +690,7 @@ function tweets_queue_send_direct_message($message) {
     'hashtag' => '',
     'uid' => $uid,
     'size' => $size,
+    'tweeted' => 1
   );
 
   if (!$tweet_id) {
@@ -712,7 +713,6 @@ function tweets_queue_send_direct_message($message) {
     array(
       'tweet_id' => $tweet_id,
       'weight' => 6,
-      'tweeted' => 0,
       'first_run' => time(),
       'last_run' => time(),
     ),
@@ -1168,7 +1168,6 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
 
       $full_name = $entity->get(SIGNUP_FIELD_FULL_NAME)->value;
       $mail = $entity->get('mail')->value;
-      tweets_queue_signup_send_mail($mail, $full_name);
       $hash_key = $entity->get(SIGNUP_FIELD_HASH_KEY)->value;
 
       $twitter_owner_id = $entity->get(SIGNUP_FIELD_TWITTER_OWNER_ID)->value;
@@ -1180,6 +1179,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         $entity->save();
         tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
         tweets_queue_login_twitter_user($uid, TWITTER_TWITTER_SIGNUP_PATH);
+        tweets_queue_signup_send_mail($mail, $full_name);
       }
       else {
         $config = \Drupal::config('tweets_queue.settings');
@@ -1293,7 +1293,9 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
 
   $message = t("Dear @full_name,\n
-   Users verification Link: @link", array('@full_name' => $name, '@link' => $link));
+  Welcome to Barbet!\n
+  You have successfully Signed up with Barbet App. Kindly login to the app and connect with your twitter Details to start using Barbet.
+  Users verification Link: @link", array('@full_name' => $name, '@link' => $link));
   $params['message'] = $message;
   $params['title'] = 'Barbet Registration Verification';
  
@@ -3650,4 +3652,28 @@ function tweets_queue_insert_cron_entry() {
     ->fields($cron_info)
     ->execute();
   return $id;
+}
+
+/**
+ * change the twitter image url for expected image size.
+ *
+ * @param string $url
+ *   Twitter image url.
+ * @param string $size
+ *   Kind of twitter size expected.
+ *
+ * @return string
+ *   Returns processed url.
+ */
+function tweets_queue_process_twitter_picture_url($url, $size) {
+  $find = "_normal";
+  switch($size) {
+    case 'bigger':
+      $url = str_ireplace($find, "_bigger", $url);
+      break;
+    default:
+      $url = str_ireplace($find, "", $url);
+      break;
+  }
+  return $url;
 }
