@@ -244,6 +244,7 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
  */
 function tweets_queue_user_login_form_changes(&$form) {
   global $base_url;
+  unset($form['name']['#attributes']['autofocus']);
   tweets_queue_forgot_password($form);
 
    $form['login_prefix'] = array(
@@ -1253,10 +1254,11 @@ function tweets_queue_signup_send_mail($mail, $name) {
   $key = 'user_signup_mail'; // Replace with Your key
   $to = $mail;
   $message = t("Dear @full_name,\n
-Welcome to Barbet!\n
-You have successfully Signed up with Barbet App. Kindly login to the app and connect with your twitter Details to start using Barbet.", array('@full_name' => $name));
+Thankyou for connecting with Barebt!\n
+You will now be able to use Barbet for posting your tweets.
+Please check out the Import tweets if you want the bulk of tweets to be handled through Barbet.", array('@full_name' => $name));
   $params['message'] = $message;
-  $params['title'] = 'Barbet Registration';
+  $params['title'] = 'WELCOME TO BARBET';
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
 

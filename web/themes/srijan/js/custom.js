@@ -37,10 +37,12 @@
 		var email_validation_path = '/dashboard/validateEmail';
 		var user_login_validation_path = '/dashboard/validateUserLogin';
 		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
+		var user_history_path = '/dashboard/user-history';
 
 		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
 		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
+		// var user_history_path = '/barbet_3may/_www/dashboard/user-history';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -395,9 +397,6 @@
 		    });
 	  	});
 
-		// $('#user-login-form #edit-submit').attr('disabled', 'true');
-		$('#user-login-form #edit-name').blur();
-
 		$('#user-login-form').submit(function() {
 			var email = $('#user-login-form #edit-name').val();
 			var password = $('#user-login-form #edit-pass').val();
@@ -578,7 +577,7 @@
 		$(".-form-tweets-queue-csv-upload .description").insertAfter(".-form-tweets-queue-csv-upload #edit-submit");
 		$("#block-usersdashboardheaderblock .content").append("<a id='notification-display' href='#;'></a>");
 		$("#block-usersdashboardnontwitterheaderblock .content").append("<a id='notification-display' href='#;'></a>");
-		$("#block-usersdashboardheaderblock .profile + a").click(function() {
+		$("#block-usersdashboardheaderblock .profile + a, #block-usersdashboardnontwitterheaderblock .profile + a").click(function() {
 			$(this).toggleClass("active");
 			// $(this).siblings(".notifications").children(".notification-message-list").toggleClass("active");
 		});
@@ -628,12 +627,12 @@
 		    $('body').addClass('import-tweet-page');
 		}
 
-	     $("#block-usersdashboardheaderblock .profile + a").click(function(e) {
+	     $("#block-usersdashboardheaderblock .profile + a, #block-usersdashboardnontwitterheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
 	        e.stopPropagation();
 	    });
 
-	     $("#block-usersdashboardheaderblock .profile > a").click(function(e) {
+	     $("#block-usersdashboardheaderblock .profile > a, #block-usersdashboardnontwitterheaderblock .profile > a").click(function(e) {
 	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
 	        e.stopPropagation();
@@ -677,8 +676,6 @@
 	    	$(".messages--error").remove();
 		});
 
-	    var user_history_path = '/dashboard/user-history';
-	    // var user_history_path = '/tweetQ11Apr/_www/dashboard/user-history';
 		$("#notification-display").click(function(){
             $.ajax({
                 type: 'POST',
@@ -686,6 +683,13 @@
                 success: function(data) {
                 }
             });
+
+            if ($('#message-history-count-section').hasClass('hidden')) {
+			    $('#message-history-count-section').remove();
+			}
+            
+            $("#twitter-notification-count").remove();
+            $("#message-history-count-section").addClass('hidden');
    		});
 
 		// ripple effect
