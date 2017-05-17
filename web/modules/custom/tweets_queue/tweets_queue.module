@@ -354,7 +354,7 @@ function tweets_queue_tweet_node_form_cancel($form, \Drupal\Core\Form\FormStateI
 
 /* @TODO :: Do post for various users */
 
-function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle, $tweet_id = '') {
+function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle, $tweet_id = '', $undo_retweet = false) {
   require_once   './libraries/codebird-php/codebird.php';
   $status = array('success' => 0, 'message' => 'unsuccessful');
 
@@ -372,6 +372,12 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   if ($tweet_id != '') {
     $retweet = TRUE;
   }
+  if ($undo_retweet) {
+    $params = array(
+        'id' => $tweet_id
+    );
+    $reply = $cb->statuses_unretweet_ID($params); //@TODO chandra
+  }
   switch ($retweet) {
     case TRUE:
       $params = array(
@@ -386,6 +392,75 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
       $reply = $cb->statuses_update($params);
       break;
   }
+  if (is_object($reply) && isset($reply->errors)) {
+    $status['success'] = 0;
+    $status['data'] = $reply;
+    $status['code'] = (isset($reply->errors[0]->code)) ? $reply->errors[0]->code : '';
+    $status['message'] = (isset($reply->errors[0]->message)) ? $reply->errors[0]->message: 'tweet failed.';
+    tweets_queue_debug_info($status['message']);
+    return $status;
+  }
+  if (is_object($reply)) {
+    $status = array('success' => 1, 'message' => 'successful', 'data' => $reply);
+  }
+  return $status;
+}
+
+/**
+ * Perform undo of the twitter retweet.
+ *
+ * @param object $twitter_handler
+ *   Contains twitter specific information.
+ * @param integer $tweet_id
+ *   Twitter tweet's tweet id.
+ *
+ * @return array
+ *   Returns undo rewteet information.
+ */
+function tweets_queue_perform_undo_retweet($twitter_handler, $tweet_id) {
+  $status = array('success' => 0);
+  if (empty($tweet_id)) {
+    return $status;
+  }
+  try {
+    $status = tweets_queue_undo_retweet($twitter_handler, $tweet_id);
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('tweets_queue')->error($e->getMessage());
+    drupal_set_message(t($e->getMessage()));
+  }
+  return $status;
+}
+
+/**
+ * Performs unretweet of the passed twitter tweet ID.
+ *
+ * @param object $twitter_handle
+ *   Contains twitter specific information.
+ * @param integer $tweet_id
+ *   Twitter tweet ID.
+ *
+ * @return array
+ *   Contains twitter tweeted specific information.
+ */
+function tweets_queue_undo_retweet($twitter_handle, $tweet_id) {
+  require_once   './libraries/codebird-php/codebird.php';
+  $status = array('success' => 0, 'message' => 'unsuccessful');
+
+  $consumer_key = tweets_queue_get_tweet_configuration_data(CONSUMER_KEY);
+  $consumer_secret_key = tweets_queue_get_tweet_configuration_data(CONSUMER_SECRET_KEY);
+
+  \Codebird\Codebird::setConsumerKey($consumer_key, $consumer_secret_key);
+  $cb = \Codebird\Codebird::getInstance();
+
+  $access_token = $twitter_handle[TWITTER_OAUTH_TOKEN];
+  $access_secret_token = $twitter_handle[TWITTER_OAUTH_TOKEN_SECRET];
+  $cb->setToken($access_token, $access_secret_token);
+
+  $params = array(
+      'id' => $tweet_id
+  );
+  $reply = $cb->statuses_unretweet_ID($params);
   if (is_object($reply) && isset($reply->errors)) {
     $status['success'] = 0;
     $status['data'] = $reply;
@@ -453,8 +528,73 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cr
     tweets_queue_debug_info(t('Process message @message', array('@message' => $message_data->message)));
     $message = tweets_queue_calculate_tweet_message_size($message_data->message, $message_data->hashtag, 'message');
     $size = tweets_queue_get_message_size($message);
-    $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id);
-    $twitter_history_info = array(
+    if ($message_data->retweet_state) {
+      $status = tweets_queue_perform_undo_retweet($twitter_handler, $message_data->tweet_id);
+      tweets_queue_log_undo_retweet_status($message_data, $status, $cron_id);
+      tweets_queue_debug_info(t('Perform undo retweet'));
+    }else {
+      $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id);
+      tweets_queue_log_tweet_status($message_data, $status, $cron_id);
+    }
+  }
+}
+
+/**
+ * Perform logging at various points.
+ *
+ * @param  [type] $message_data [description]
+ * @param  [type] $status       [description]
+ * @return [type]               [description]
+ */
+function tweets_queue_log_undo_retweet_status($message_data, $status, $cron_id = 0) {
+  $twitter_history_info = array(
+      'nid' => $message_data->nid,
+      'uid' => $message_data->uid,
+      'created' => time(),
+      'code' => 0,
+      'status' => 0,
+      'message' => '',
+      'cron_id' => $cron_id,
+    );
+    if ($status['success']) {
+      tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
+      $tweet_id = $status['data']->id;
+      $twitter_history_info['retweeted'] = 0;
+      $twitter_history_info['status'] = 1;
+      $twitter_history_info['message'] = 'undo retweet';
+      $tweet_info = array(
+        'tweet_id' => $tweet_id,
+        'last_run' => time(),
+        'retweet_state' => 0,
+      );
+      tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 3);
+    }
+    else {
+      $twitter_history_info['code'] = $status['code'];
+      $twitter_history_info['message'] = $status['data']->errors[0]->message;
+      tweets_queue_update_message_queue_priority_info($message_data->nid, array(), 1);
+    }
+    $tweet_handler_info = array(
+      CRON_TWEET_SCHEDULED =>  0,
+    );
+    tweets_queue_update_twittter_tweet_history($message_data->nid, $twitter_history_info);
+    tweets_queue_clean_scheduled_messages_list($message_data->nid);
+    if ($status['code'] == TWITTER_HANDLER_INVALID_CODE) {
+      tweets_queue_register_auth_map($twitter_owner_id, $message_data->uid, $client_twitter_handler->data, TWITTER_HANDLER_INVALID);
+      return;
+    }
+    tweets_queue_debug_info(t('Finished tweet send with nid @nid and user @uid', array('@nid' => $message_data->nid, '@uid' => $message_data->uid)));
+}
+
+/**
+ * Perform logging at various points.
+ *
+ * @param  [type] $message_data [description]
+ * @param  [type] $status       [description]
+ * @return [type]               [description]
+ */
+function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
+  $twitter_history_info = array(
       'nid' => $message_data->nid,
       'uid' => $message_data->uid,
       'created' => time(),
@@ -482,6 +622,7 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cr
         tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 1);
       }
       else {
+        $tweet_info['retweet_state'] = 1;
         tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 3);
       }
     }
@@ -497,13 +638,12 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cr
     tweets_queue_clean_scheduled_messages_list($message_data->nid);
     if ($status['code'] == TWITTER_HANDLER_INVALID_CODE) {
       tweets_queue_register_auth_map($twitter_owner_id, $message_data->uid, $client_twitter_handler->data, TWITTER_HANDLER_INVALID);
-      continue;
+      return;
     }
     tweets_queue_debug_info(t('Finished tweet send with nid @nid and user @uid', array('@nid' => $message_data->nid, '@uid' => $message_data->uid)));
-  }
 }
 
-  /**
+ /**
  * Update the priority table for the tweet.
  *
  * @param integer $nid
@@ -604,12 +744,18 @@ function tweets_queue_tweet_scheduled_messages_user_list($uids = array()) {
   return $result;
 }
 
+/**
+ * Get all scheduled messages information.
+ *
+ * @return array
+ *   Returns all messages.
+ */
 function tweets_queue_tweet_scheduled_messages_list() {
   $message = '';
   $query = \Drupal::database()->select(TWITTER_SCHEDULED_MESSAGES_TABLE, 'p');
   $query->fields('p', ['nid']);
   $query->leftjoin(TWITTER_MESSAGE_QUEUE_TABLE, 't', 'p.nid = t.nid');
-  $query->fields('t', ['uid', 'message', 'hashtag', 'size', 'weight', 'status', 'archived', 'tweet_id']);
+  $query->fields('t', ['uid', 'message', 'hashtag', 'size', 'weight', 'status', 'archived', 'tweet_id', 'retweet_state']);
 
   $data = $query->execute()->fetchAll();
   $output = array('nids' => array(), 'uids' => array(), 'total' => 0);
@@ -634,6 +780,7 @@ function tweets_queue_clean_scheduled_messages_list($nids) {
   \Drupal::database()->delete(TWITTER_SCHEDULED_MESSAGES_TABLE)
       ->condition('nid', $nids, 'IN')
       ->execute();
+  tweets_queue_debug_info(t('Cleanup entry'));
 }
 
 /**
@@ -1520,6 +1667,7 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
       'weight' => array('type' => 'int', 'not null' => TRUE, 'default' => 1),
       'tweet_id' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 24, 'default' => ''),
       'tweeted' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'retweet_state' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
     ),
     'primary key' => array('nid'),
     'indexes' => array(
@@ -1532,6 +1680,7 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
       'twitter_message_queue_created' => array('created'),
       'twitter_message_queue_archived' => array('archived'),
       'twitter_message_queue_status' => array('status'),
+      'twitter_message_queue_retweet_state' => array('retweet_state'),
     )
   );
 
@@ -2155,7 +2304,6 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
   $query->condition('p.archived', 0 , '=');
   $query->condition('p.message', '' , '!=');
   $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<=');
-  $query->where("last_run = first_run");
   $query->orderBy('p.weight', 'ASC');
   $query->orderBy('p.created', 'ASC');
   $query->range(0, 1);
