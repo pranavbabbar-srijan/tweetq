@@ -1181,6 +1181,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
         tweets_queue_login_twitter_user($uid, TWITTER_TWITTER_SIGNUP_PATH);
         // tweets_queue_signup_send_mail($mail, $full_name);
+
       }
       else {
         $config = \Drupal::config('tweets_queue.settings');
