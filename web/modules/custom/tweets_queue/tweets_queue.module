@@ -605,8 +605,8 @@ function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
     );
     if ($status['success']) {
       tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
-      $tweet_id = $status['data']->id;
-      $twitter_history_info['retweeted'] = ($message_data->tweet_id) ? 1 : 0;
+      $tweet_id = ($message_data->tweet_id) ? $message_data->tweet_id : $status['data']->id;
+      $twitter_history_info['retweeted'] = ($status['data']->retweeted);
       $twitter_history_info['status'] = 1;
       $tweet_param = array(
         'tweet_id' => $tweet_id,
