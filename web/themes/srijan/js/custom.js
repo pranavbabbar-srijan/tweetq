@@ -39,10 +39,10 @@
 		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
 		var user_history_path = '/dashboard/user-history';
 
-		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
-		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
-		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
-		// var user_history_path = '/barbet_3may/_www/dashboard/user-history';
+		// var email_validation_path = '/tweetq/_www/dashboard/validateEmail';
+		// var user_login_validation_path = '/tweetq/_www/dashboard/validateUserLogin';
+		// var forgot_password_send_token_path = '/tweetq/_www/dashboard/forgotPasswordSendToken';
+		// var user_history_path = '/tweetq/_www/dashboard/user-history';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -106,6 +106,7 @@
 	    		}
 	    	}
 	  	});
+
 
 	    //Twitter signup form submit.
 		$('#twitter-signup-form').submit(function() {
@@ -385,16 +386,16 @@
 	    	if (email_failed) {
 				return;
 			}
-	    	$("#user-login-validation-error").remove();
-	    	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
-				if  (data != "exist") {
-					$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
-					// $("#user-login-form #edit-submit").attr('disabled', 'true');
-				}
-				else {
-					// $("#user-login-form #edit-submit").removeAttr('disabled');
-				}
-		    });
+	   //  	$("#user-login-validation-error").remove();
+	   //  	$.post(user_login_validation_path, {'email' : email, 'password' : password}, function(data) {
+				// if  (data != "exist") {
+				// 	$("<span id='user-login-validation-error' class='validation-error'>" + login_valid_password_msg + "</p>").insertAfter("#user-login-form #edit-pass" );
+				// 	// $("#user-login-form #edit-submit").attr('disabled', 'true');
+				// }
+				// else {
+				// 	// $("#user-login-form #edit-submit").removeAttr('disabled');
+				// }
+		  //   });
 	  	});
 
 		$('#user-login-form').submit(function() {

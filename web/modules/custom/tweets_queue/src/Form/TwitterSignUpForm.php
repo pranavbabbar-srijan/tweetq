@@ -119,7 +119,6 @@ class TwitterSignUpForm extends FormBase {
     $mail = $user->get('mail')->value;
     //Mandatory settings
     $user->setPassword($password);
-
     $user->set(SIGNUP_FIELD_FULL_NAME, $full_name);
     $user->set(SIGNUP_FIELD_WEBSITE, $website);
     $user->set(SIGNUP_FIELD_ORGANIZATION, $organization);
