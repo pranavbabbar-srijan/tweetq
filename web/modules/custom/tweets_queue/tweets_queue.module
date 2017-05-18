@@ -567,7 +567,7 @@ function tweets_queue_log_undo_retweet_status($message_data, $status, $cron_id =
         'last_run' => time(),
         'retweet_state' => 0,
       );
-      tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 3);
+      tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 4);
     }
     else {
       $twitter_history_info['code'] = $status['code'];
@@ -701,6 +701,15 @@ function tweets_queue_update_message_queue_priority_info($nid, $tweet_priority_i
         ->key(array('nid' => $nid))
         ->expression('weight', 'weight + :inc', array(':inc' => 1))
         ->expression('tweeted', 'tweeted + :inc', array(':inc' => 1))
+        ->expression('last_run', time())
+        ->execute();
+      break;
+    case '4': //Do no Update tweeted on undo retweet
+      db_merge(TWITTER_MESSAGE_QUEUE_TABLE)
+        ->insertFields($created_tweet_priority_info)
+        ->updateFields($tweet_priority_info)
+        ->key(array('nid' => $nid))
+        ->expression('weight', 'weight + :inc', array(':inc' => 1))
         ->expression('last_run', time())
         ->execute();
       break;
