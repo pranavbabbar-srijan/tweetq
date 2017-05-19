@@ -62,10 +62,11 @@ class SendTweetsForm extends FormBase {
         '#multiple' => TRUE,
         '#upload_location' => 'public://images/',
         '#title' => t('Upload some photos'),
+        '#progress_message' => $this->t('Please wait...'),
         '#attributes' => array('multiple' => 'multiple'),
         '#upload_validators' => array(
           'file_validate_extensions' => array('png gif jpg jpeg'),
-          'file_validate_size' => array(25600000),
+          'file_validate_size' => array(TWITTER_TWEET_IMAGE_SIZE_LIMIT),
         ),
     );
 

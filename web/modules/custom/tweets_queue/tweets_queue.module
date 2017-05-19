@@ -63,6 +63,7 @@ const TWITTER_DELETED_TWEET = '2';
 const TWITTER_HANDLER_INVALID_CODE = '32';
 const TWITTER_HANDLER_BAD_AUTHENTICATION_CODE = '215';
 const CRON_TWEET_CHARCATER_LIMIT = 140;
+const TWITTER_TWEET_IMAGE_SIZE_LIMIT = 5000000;
 const DB_TWEET_CHARCATER_LIMIT = 954;
 const TWITTER_CLIENT_ROLE = 'twitter_client';
 const TWITTER_APPROVED_CLIENT_ROLE = 'twitter_approved_client';
@@ -3917,7 +3918,16 @@ function tweets_queue_process_twitter_picture_url($url, $size) {
   return $url;
 }
 
+/**
+ * Handle mapping for a tweet and its images.
+ *
+ * @param $nid
+ *   Tweet message nid.
+ * @param array $images
+ *   Array containg list of images fid.
+ */
 function tweets_queue_map_message_image_record($nid, $images) {
+  tweets_queue_delete_twitter_specific_info('nid', $nid, TWITTER_IMAGE_TABLE);
   if (count($images) <= 0) {
     return;
   }
