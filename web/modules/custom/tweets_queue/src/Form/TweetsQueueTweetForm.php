@@ -46,6 +46,9 @@ class TweetsQueueTweetForm extends FormBase {
     $nid = tweets_queue_get_parameter_data(TWITTER_FIELD_NID);
     $tweet_info = tweets_queue_fetch_tweet_item($nid);
     $tweet_id = $tweet_info->tweet_id;
+
+    tweets_queue_validate_tweet_access($tweet_info->uid);
+
     $archived = $tweet_info->archived;
     $message = $tweet_info->message;
     $size = tweets_queue_get_message_size($message);
@@ -146,11 +149,14 @@ class TweetsQueueTweetForm extends FormBase {
   public function deleteForm(array &$form, FormStateInterface $form_state) {
     $nid = tweets_queue_get_parameter_data(TWITTER_FIELD_NID);
     $tweet_info = tweets_queue_fetch_tweet_item($nid);
+
+    tweets_queue_validate_tweet_access($tweet_info->uid);
+
     $tweet_id = $tweet_info->tweet_id;
     $archived = $tweet_info->archived;
     $message = $tweet_info->message;
     $size = tweets_queue_get_message_size($message);
-    $left = 140 - $size;
+    $left = CRON_TWEET_CHARCATER_LIMIT - $size;
     $form[TWITTER_FIELD_NID] = array(
       '#type' => 'hidden',
       '#title' => t('Node nid'),
@@ -194,9 +200,12 @@ class TweetsQueueTweetForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     global $base_url;
     $input = $form_state->getUserInput();
-    $uid = \Drupal::currentUser()->id();
     $nid = $input[TWITTER_FIELD_NID];
     $message = $input[TWITTER_FIELD_MESSAGE];
+
+    $tweet_info = tweets_queue_fetch_tweet_item($nid);
+    tweets_queue_validate_tweet_access($tweet_info->uid);
+
     $images = array();
     if (is_array($input[TWITTER_FORM_FIELD_IMAGES]) && !empty($input[TWITTER_FORM_FIELD_IMAGES]['fids'])) {
       $images = explode(" ", $input[TWITTER_FORM_FIELD_IMAGES]['fids']);

@@ -20,6 +20,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 const CONSUMER_KEY = 'consumer_key';
 const CONSUMER_SECRET_KEY = 'consumer_secret_key';
@@ -3363,8 +3364,11 @@ function tweets_queue_redirect_on_tweet_save($size, $tweeted = 0, $archived = 0)
 function tweets_queue_delete_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
   global $base_url;
   $input = $form_state->getUserInput();
-  $nid = $input['nid'];
+  $nid = $input[TWITTER_FIELD_NID];
+
   $tweet_info = tweets_queue_fetch_tweet_item($nid);
+  tweets_queue_validate_tweet_access($tweet_info->uid);
+
   $message = $tweet_info->message;
   $tweet_id = $tweet_info->tweet_id;
   $tweeted = 0;
@@ -3952,4 +3956,22 @@ function tweets_queue_map_image_record($nid, $fid, $position) {
   db_insert(TWITTER_IMAGE_TABLE)
     ->fields($file_info)
     ->execute();
+}
+
+/**
+ * Validate access with the content author and logged user.
+ *
+ * @param integer $uid
+ *   Content author uid.
+ * @param string $message
+ *   Message to be displayed.
+ */
+function tweets_queue_validate_tweet_access($uid, $message = 'You are not authorized to access the content.') {
+  $logged_uid = \Drupal::currentUser()->id();
+  if ($uid != $logged_uid) {
+    if ($message) {
+      drupal_set_message(t($message));
+    }
+    throw new AccessDeniedHttpException();
+  }
 }
