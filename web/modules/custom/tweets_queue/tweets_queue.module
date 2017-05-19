@@ -387,7 +387,7 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
     $params = array(
         'id' => $tweet_id
     );
-    $reply = $cb->statuses_unretweet_ID($params); //@TODO chandra
+    $reply = $cb->statuses_unretweet_ID($params);
   }
   switch ($retweet) {
     case TRUE:
@@ -574,7 +574,7 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cr
       tweets_queue_log_undo_retweet_status($message_data, $status, $cron_id);
       tweets_queue_debug_info(t('Perform undo retweet'));
     }else {
-      $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id);
+      $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id, $message_data->images);
       tweets_queue_log_tweet_status($message_data, $status, $cron_id);
     }
   }
