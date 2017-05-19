@@ -804,6 +804,33 @@ function tweets_queue_tweet_scheduled_messages_list() {
     $output['nids'][$tweet_data->nid] = $tweet_data;
     $output['uids'][$tweet_data->uid] = $tweet_data->uid;
     $output['total'] = $output['total'] + 1;
+    $output['nids'][$tweet_data->nid]->images = tweets_queue_get_all_images($tweet_data->nid);
+  }
+  return $output;
+}
+
+/**
+ * Get list of image fid attached with a tweet message.
+ *
+ * @param array $nid
+ *   List of tweet message nid.
+ *
+ * @return array
+ *   Returns array containing list of all images.
+ */
+function tweets_queue_get_all_images($nid = array()) {
+  if (!is_array($nid)) {
+    $nid = array($nid);
+  }
+  $query = \Drupal::database()->select(TWITTER_IMAGE_TABLE, 'p');
+  $query->fields('p', ['nid']);
+  $query->condition('p.nid', $nid , 'IN');
+  $query->addExpression("GROUP_CONCAT(fid ORDER BY delta ASC)", "images");
+  $query->groupBy('nid');
+  $result = $query->execute()->fetchAll();
+  $output = array();
+  foreach ($result as $pos => $data) {
+    $output = explode(",", $data->images);
   }
   return $output;
 }
