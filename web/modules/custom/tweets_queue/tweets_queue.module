@@ -20,6 +20,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 const CONSUMER_KEY = 'consumer_key';
 const CONSUMER_SECRET_KEY = 'consumer_secret_key';
@@ -38,6 +39,7 @@ const TWEETS_PRIORITY_TABLE = 'tweets_priority';
 const TWITTER_AUTH_MAP_TABLE = 'twitter_auth_map';
 const TWITTER_STATISTICS_TABLE = 'twitter_statistics';
 const TWITTER_MESSAGE_QUEUE_TABLE = 'twitter_message_queue';
+const TWITTER_IMAGE_TABLE = 'twitter_images';
 const TWEETS_TWEETER_DATA_TABLE = 'tweets_tweeter_data';
 const TWITTER_SCHEDULED_MESSAGES_TABLE = 'twitter_scheduled_messages';
 const TWITTER_TWEETS_HISTORY_TABLE = 'twitter_tweets_history';
@@ -62,6 +64,7 @@ const TWITTER_DELETED_TWEET = '2';
 const TWITTER_HANDLER_INVALID_CODE = '32';
 const TWITTER_HANDLER_BAD_AUTHENTICATION_CODE = '215';
 const CRON_TWEET_CHARCATER_LIMIT = 140;
+const TWITTER_TWEET_IMAGE_SIZE_LIMIT = 5000000;
 const DB_TWEET_CHARCATER_LIMIT = 954;
 const TWITTER_CLIENT_ROLE = 'twitter_client';
 const TWITTER_APPROVED_CLIENT_ROLE = 'twitter_approved_client';
@@ -101,6 +104,9 @@ const TWITTER_FIELD_RETWEETED = 'retweeted';
 const TWITTER_FIELD_MESSAGE = 'message';
 const TWITTER_FIELD_SIZE = 'size';
 const TWITTER_FIELD_CODE = 'code';
+
+const TWITTER_FORM_FIELD_MESSAGE = 'message';
+const TWITTER_FORM_FIELD_IMAGES = 'images';
 
 const TWITTER_DEFAULT_SORT_FIELD = 'created';
 const TWITTER_DEFAULT_SORT_ORDER = 'DESC';
@@ -352,9 +358,16 @@ function tweets_queue_tweet_node_form_cancel($form, \Drupal\Core\Form\FormStateI
   drupal_set_message(t('Node clone or edit cancelled'));
 }
 
-/* @TODO :: Do post for various users */
-
-function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle, $tweet_id = '', $undo_retweet = false) {
+/**
+ * Performs tweet on the twitter.
+ *
+ * @param  string $message        [description]
+ * @param  [type] $twitter_handle [description]
+ * @param  string $tweet_id       [description]
+ * @param  array  $message_info   [description]
+ * @return [type]                 [description]
+ */
+function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle, $tweet_id = '', $message_info = array()) {
   require_once   './libraries/codebird-php/codebird.php';
   $status = array('success' => 0, 'message' => 'unsuccessful');
 
@@ -376,7 +389,7 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
     $params = array(
         'id' => $tweet_id
     );
-    $reply = $cb->statuses_unretweet_ID($params); //@TODO chandra
+    $reply = $cb->statuses_unretweet_ID($params);
   }
   switch ($retweet) {
     case TRUE:
@@ -389,6 +402,18 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
       $params = array(
         'status' => $message
       );
+
+      //Process for the image.
+      $image = tweets_queue_get_tweets_file_information($message_info);
+      if ($image) {
+        $reply = $cb->media_upload(array(
+            'media' => $image
+        ));
+        //upload the file to your twitter account.
+        $mediaID = $reply->media_id_string;
+        $params['media_ids'] = $mediaID;
+      }
+
       $reply = $cb->statuses_update($params);
       break;
   }
@@ -404,6 +429,24 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
     $status = array('success' => 1, 'message' => 'successful', 'data' => $reply);
   }
   return $status;
+}
+
+/**
+ * Get tweets image information.
+ *
+ * @param array  $message_info
+ *
+ * @return string
+ *   Returns image path.
+ */
+function tweets_queue_get_tweets_file_information($message_info = array()) {
+  if (!$message_info[0]) {
+    return '';
+  }
+  $fids[0] = $message_info[0];
+  $file_path = tweets_queue_get_file_real_path($fids);
+  $file_url = file_create_url($file_path);
+  return $file_url;
 }
 
 /**
@@ -533,7 +576,7 @@ function tweets_queue_send_scheduled_messages($messages_list, $handler_list, $cr
       tweets_queue_log_undo_retweet_status($message_data, $status, $cron_id);
       tweets_queue_debug_info(t('Perform undo retweet'));
     }else {
-      $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id);
+      $status = tweets_queue_tweet_message($message, $twitter_handler, $message_data->tweet_id, $message_data->images);
       tweets_queue_log_tweet_status($message_data, $status, $cron_id);
     }
   }
@@ -772,6 +815,33 @@ function tweets_queue_tweet_scheduled_messages_list() {
     $output['nids'][$tweet_data->nid] = $tweet_data;
     $output['uids'][$tweet_data->uid] = $tweet_data->uid;
     $output['total'] = $output['total'] + 1;
+    $output['nids'][$tweet_data->nid]->images = tweets_queue_get_all_images($tweet_data->nid);
+  }
+  return $output;
+}
+
+/**
+ * Get list of image fid attached with a tweet message.
+ *
+ * @param array $nid
+ *   List of tweet message nid.
+ *
+ * @return array
+ *   Returns array containing list of all images.
+ */
+function tweets_queue_get_all_images($nid = array()) {
+  if (!is_array($nid)) {
+    $nid = array($nid);
+  }
+  $query = \Drupal::database()->select(TWITTER_IMAGE_TABLE, 'p');
+  $query->fields('p', ['nid']);
+  $query->condition('p.nid', $nid , 'IN');
+  $query->addExpression("GROUP_CONCAT(fid ORDER BY delta ASC)", "images");
+  $query->groupBy('nid');
+  $result = $query->execute()->fetchAll();
+  $output = array();
+  foreach ($result as $pos => $data) {
+    $output = explode(",", $data->images);
   }
   return $output;
 }
@@ -795,14 +865,14 @@ function tweets_queue_clean_scheduled_messages_list($nids) {
 /**
  * Tweet the message.
  */
-function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
+function tweets_queue_compile_tweets($message = '', $cron = FALSE, $images = array()) {
   $status = array();
   switch ($cron) {
     case TRUE:
       $status = tweets_queue_tweet_cron_message();
       break;
     case FALSE:
-      tweets_queue_send_direct_message($message);
+      tweets_queue_send_direct_message($message, $images);
       break;
   }
   switch ($status['success']) {
@@ -822,7 +892,7 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE) {
  * @param string $message
  *   Tweet message.
  */
-function tweets_queue_send_direct_message($message) {
+function tweets_queue_send_direct_message($message, $images = array()) {
   $uid = \Drupal::currentUser()->id();
   $oauth_info = tweets_queue_fetch_user_auth_map_info($uid);
   $twitter_owner_id = $oauth_info->twitter_owner_id;
@@ -831,9 +901,10 @@ function tweets_queue_send_direct_message($message) {
     drupal_set_message(t('User not authenticated.'));
     return;
   }
-  $message = tweets_queue_get_urls_present($message);
 
-  $status = tweets_queue_tweet_message($message, $twitter_handler);
+  $tweet_id = '';
+  $status = tweets_queue_tweet_message($message, $twitter_handler, $tweet_id, $images);
+
   if ($status['code'] == TWITTER_HANDLER_INVALID_CODE || $status['code'] == TWITTER_HANDLER_BAD_AUTHENTICATION_CODE) {
     drupal_set_message(t($status['message']), 'error');
     if ($twitter_handler->status != TWITTER_HANDLER_INVALID) {
@@ -859,6 +930,8 @@ function tweets_queue_send_direct_message($message) {
   drupal_set_message(t('Tweet shared and stored in valid tweets successfully.'));
   $twitter_message_info['tweet_id'] = $tweet_id;
   $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
+  tweets_queue_map_message_image_record($nid, $images);
+
   $twitter_history_info = array('nid' => $nid,
     'uid' => $uid,
     'created' => time(),
@@ -1074,13 +1147,13 @@ function tweets_queue_authenticate_url($message, $uid = '') {
  * @return array
  *   Status for the tweet.
  */
-function tweets_queue_tweet_message($message, $twitter_handler, $tweet_id = '') {
+function tweets_queue_tweet_message($message, $twitter_handler, $tweet_id = '', $message_info = array()) {
   $status = array('success' => 0);
   if (empty($message) && empty($tweet_id)) {
     return $status;
   }
   try {
-    $status = tweets_queue_set_single_post($message, $twitter_handler, $tweet_id);
+    $status = tweets_queue_set_single_post($message, $twitter_handler, $tweet_id, $message_info);
   }
   catch (\Exception $e) {
     \Drupal::logger('tweets_queue')->error($e->getMessage());
@@ -1838,6 +1911,19 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
     ),
     'primary key' => array('path', 'api'),
   );
+
+  $schema[TWITTER_IMAGE_TABLE] = array(
+    'description' => 'The base table for twitter message images.',
+    'fields' => array(
+      'nid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'fid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'delta' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+    ),
+    'indexes' => array(
+      'twitter_image_nid_fid' => array('nid', 'fid'),
+    )
+  );
+
   return $schema;
 }
 
@@ -2986,13 +3072,16 @@ function tweets_queue_show_twitter_signin_block(&$form, $weight = 12) {
   }
 }
 
+/**
+ * Save the tweet and handle image mapping.
+ */
 function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $uid = \Drupal::currentUser()->id();
   $data = $form_state->getValues();
-  $message = $data['message'];
-  $message = tweets_queue_get_urls_present($message);
+  $message = $data[TWITTER_FORM_FIELD_MESSAGE];
+  $images = $data[TWITTER_FORM_FIELD_IMAGES];
   $size = tweets_queue_get_message_size($message);
-  $hash_tag= '';
+  $hash_tag = '';
   $twitter_message_info = array('message' => $message,
     'hashtag' => '',
     'uid' => $uid,
@@ -3006,14 +3095,15 @@ function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\For
   }
 
   $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
-  if ($nid && $size <= 140) {
+  tweets_queue_map_message_image_record($nid, $images);
+
+  if ($nid && $size <= CRON_TWEET_CHARCATER_LIMIT) {
     drupal_set_message(t('Tweet has been moved to valid tweets and saved for later.'));
   }
   else {
     drupal_set_message(t('Tweet has been moved to invalid tweets and saved for later.'));
 
   }
-  //tweets_queue_redirect_on_tweet_save($size);
 }
 
 /**
@@ -3284,8 +3374,11 @@ function tweets_queue_redirect_on_tweet_save($size, $tweeted = 0, $archived = 0)
 function tweets_queue_delete_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
   global $base_url;
   $input = $form_state->getUserInput();
-  $nid = $input['nid'];
+  $nid = $input[TWITTER_FIELD_NID];
+
   $tweet_info = tweets_queue_fetch_tweet_item($nid);
+  tweets_queue_validate_tweet_access($tweet_info->uid);
+
   $message = $tweet_info->message;
   $tweet_id = $tweet_info->tweet_id;
   $tweeted = 0;
@@ -3837,4 +3930,58 @@ function tweets_queue_process_twitter_picture_url($url, $size) {
       break;
   }
   return $url;
+}
+
+/**
+ * Handle mapping for a tweet and its images.
+ *
+ * @param $nid
+ *   Tweet message nid.
+ * @param array $images
+ *   Array containg list of images fid.
+ */
+function tweets_queue_map_message_image_record($nid, $images) {
+  tweets_queue_delete_twitter_specific_info('nid', $nid, TWITTER_IMAGE_TABLE);
+  if (count($images) <= 0) {
+    return;
+  }
+  foreach ($images as $pos => $fid) {
+    tweets_queue_map_image_record($nid, $fid, $pos);
+  }
+}
+
+/**
+ * Insert image record mapping.
+ *
+ * @param  [type] $nid      [description]
+ * @param  [type] $fid      [description]
+ * @param  [type] $position [description]
+ * @return [type]           [description]
+ */
+function tweets_queue_map_image_record($nid, $fid, $position) {
+  $file_info = array();
+  $file_info['nid'] = $nid;
+  $file_info['fid'] = $fid;
+  $file_info['delta'] = $position;
+  db_insert(TWITTER_IMAGE_TABLE)
+    ->fields($file_info)
+    ->execute();
+}
+
+/**
+ * Validate access with the content author and logged user.
+ *
+ * @param integer $uid
+ *   Content author uid.
+ * @param string $message
+ *   Message to be displayed.
+ */
+function tweets_queue_validate_tweet_access($uid, $message = 'You are not authorized to access the content.') {
+  $logged_uid = \Drupal::currentUser()->id();
+  if ($uid != $logged_uid) {
+    if ($message) {
+      drupal_set_message(t($message));
+    }
+    throw new AccessDeniedHttpException();
+  }
 }

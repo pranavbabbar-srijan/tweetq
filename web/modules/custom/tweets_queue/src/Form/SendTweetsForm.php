@@ -47,13 +47,27 @@ class SendTweetsForm extends FormBase {
       '#prefix' => '<div class="message-header">',
       '#markup' => t(''),
     );
-    $form['message'] = array(
+    $form[TWITTER_FORM_FIELD_MESSAGE] = array(
       '#type' => 'textarea',
       '#title' => t('Create a Tweet'),
       '#required' => TRUE,
       '#attributes' => array(
         'placeholder' => t("What's happening ?"),
       ),
+    );
+
+    $form[TWITTER_FORM_FIELD_IMAGES] = array(
+        '#type' => 'managed_file',
+        '#name' => 'files[]',
+        '#multiple' => TRUE,
+        '#upload_location' => 'public://images/',
+        '#title' => t('Upload some photos'),
+        '#progress_message' => $this->t('Please wait...'),
+        '#attributes' => array('multiple' => 'multiple'),
+        '#upload_validators' => array(
+          'file_validate_extensions' => array('png gif jpg jpeg'),
+          'file_validate_size' => array(TWITTER_TWEET_IMAGE_SIZE_LIMIT),
+        ),
     );
 
     $form['save'] = array(
@@ -97,8 +111,12 @@ class SendTweetsForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $data = $form_state->getValues();
-    $message = $data['message'];
-    tweets_queue_compile_tweets($message);
+    
+    $message = $data[TWITTER_FORM_FIELD_MESSAGE];
+    $images = $data[TWITTER_FORM_FIELD_IMAGES];
+
+    $cron_run = false;
+    tweets_queue_compile_tweets($message, $cron_run, $images);
   }
 
   /**
