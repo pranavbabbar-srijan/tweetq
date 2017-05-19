@@ -178,3 +178,10 @@ tweets_queue_current_tweet_history.settings:
     _title: 'Tweets history'
   requirements:
     _role: 'administrator'
+
+tweets_queue_access_denied.denied:
+  path: '/access-denied'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::accessDenied'
+  requirements:
+    _access: 'TRUE'
