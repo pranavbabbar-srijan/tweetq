@@ -135,4 +135,13 @@ class TweetsQueueTweetController extends ControllerBase {
     tweets_queue_goto_page();
   }
 }
+
+  /**
+  This function goto tha login page when users got an access denied error message
+  */
+  
+  public function accessDenied() {
+   
+    tweets_queue_goto_page();
+  }
 }
