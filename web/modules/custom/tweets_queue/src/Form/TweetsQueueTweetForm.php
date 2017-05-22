@@ -50,7 +50,7 @@ class TweetsQueueTweetForm extends FormBase {
     tweets_queue_validate_tweet_access($tweet_info->uid);
 
     $archived = $tweet_info->archived;
-    $message = $tweet_info->message;
+    $message = tweets_queue_decrypt_data($tweet_info->{TWITTER_FIELD_MESSAGE});
     $size = tweets_queue_get_message_size($message);
     $left = CRON_TWEET_CHARCATER_LIMIT - $size;
     $form['header'] = array(
@@ -154,7 +154,7 @@ class TweetsQueueTweetForm extends FormBase {
 
     $tweet_id = $tweet_info->tweet_id;
     $archived = $tweet_info->archived;
-    $message = $tweet_info->message;
+    $message = tweets_queue_decrypt_data($message);
     $size = tweets_queue_get_message_size($message);
     $left = CRON_TWEET_CHARCATER_LIMIT - $size;
     $form[TWITTER_FIELD_NID] = array(
@@ -216,7 +216,7 @@ class TweetsQueueTweetForm extends FormBase {
     $size = tweets_queue_get_message_size($message);
     tweets_queue_update_message_queue_priority_info($nid,
       array(
-        'message' => $message,
+        'message' => tweets_queue_encrypt_data($message),
         'size' => $size,
         'changed' => time(),
       ),

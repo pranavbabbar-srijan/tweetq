@@ -22,6 +22,8 @@ use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
+const ENCRYPT_METHOD = 'AES-128-CTR';
+
 const CONSUMER_KEY = 'consumer_key';
 const CONSUMER_SECRET_KEY = 'consumer_secret_key';
 const ACCESS_TOKEN = 'access_token';
@@ -863,6 +865,7 @@ function tweets_queue_tweet_scheduled_messages_list() {
   $data = $query->execute()->fetchAll();
   $output = array('nids' => array(), 'uids' => array(), 'total' => 0);
   foreach ($data as $pos => $tweet_data) {
+    $tweet_data->message = tweets_queue_decrypt_data($tweet_data->message);
     $output['nids'][$tweet_data->nid] = $tweet_data;
     $output['uids'][$tweet_data->uid] = $tweet_data->uid;
     $output['total'] = $output['total'] + 1;
@@ -2388,6 +2391,7 @@ function tweets_queue_insert_message_queue_record($twitter_message_info, $status
   $twitter_message_info['archived'] = 0;
   $twitter_message_info['weight'] = 1;
   $twitter_message_info['changed'] = 0;
+  $twitter_message_info['message'] = tweets_queue_encrypt_data($twitter_message_info['message']);
   $nid = db_insert(TWITTER_MESSAGE_QUEUE_TABLE)
     ->fields($twitter_message_info)
     ->execute();
@@ -3380,7 +3384,7 @@ function tweets_queue_cancel_edit_submit($form, \Drupal\Core\Form\FormStateInter
   }
   $nid = $input['nid'];
   $tweet_info = tweets_queue_fetch_tweet_item($nid);
-  $message = $tweet_info->message;
+  $message = tweets_queue_decrypt_data($tweet_info->message);
   $tweet_id = $tweet_info->tweet_id;
   $tweeted = 0;
   if ($tweet_id) {
@@ -4035,4 +4039,36 @@ function tweets_queue_validate_tweet_access($uid, $message = 'You are not author
     }
     throw new AccessDeniedHttpException();
   }
+}
+
+/**
+ * Encrypt the data.
+ *
+ * @param  [type] $token [description]
+ * @return [type]        [description]
+ */
+function tweets_queue_encrypt_data($token) {
+  $enc_key = openssl_digest(gethostname(), 'SHA256', true);
+  // $enc_key = openssl_digest(gethostname() . "|" . ip2long($_SERVER['SERVER_ADDR'], 'SHA256', true));
+  $enc_iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(ENCRYPT_METHOD));
+  $crypted_token = openssl_encrypt($token, ENCRYPT_METHOD, $enc_key, 0, $enc_iv) . "::" . bin2hex($enc_iv);
+  return $crypted_token;
+}
+
+/**
+ * Decrypt the data.
+ *
+ * @param string $crypted_token [description]
+ * @return [type]                [description]
+ */
+function tweets_queue_decrypt_data($crypted_token) {
+  $decrypted_token = $crypted_token;
+  if(preg_match("/^(.*)::(.*)$/", $crypted_token, $regs)) {
+    // decrypt encrypted string
+    list(, $crypted_token, $enc_iv) = $regs;
+    $enc_key = openssl_digest(gethostname(), 'SHA256', true);
+    // $enc_key = openssl_digest(gethostname() . "|" . ip2long($_SERVER['SERVER_ADDR'], 'SHA256', true));
+    $decrypted_token = openssl_decrypt($crypted_token, ENCRYPT_METHOD, $enc_key, 0, hex2bin($enc_iv));
+  }
+  return $decrypted_token;
 }
