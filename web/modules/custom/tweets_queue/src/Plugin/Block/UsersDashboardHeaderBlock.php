@@ -67,7 +67,8 @@ class UsersDashboardHeaderBlock extends BlockBase {
     </div>";
     foreach ($tweets_history as $data) {
       $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
-      $message = tweets_queue_perform_hashtag_highlight($data->message);
+      $message = tweets_queue_decrypt_data($data->{TWITTER_FIELD_MESSAGE});
+      $message = tweets_queue_perform_hashtag_highlight($message);
       $created = $data->created;
       $tweeted_at = tweets_queue_format_tweet_time($created);
       $message_history_data .= t("<div>

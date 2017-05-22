@@ -97,6 +97,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
   }
 
   private function compileData($row) {
+    $row->message = tweets_queue_decrypt_data($row->{TWITTER_FIELD_MESSAGE});
     $delete_url = Url::fromRoute(TWITTER_TWEET_FORM_DELETE_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'delete', TWITTER_REDIRECT_PATH => TWITTER_ARCHIVED_TWEET_PATH],
       ['attributes' => ['class' => 'delete colorbox cboxElement beautytips', 'title' => t(TWITTER_DELETE_TOOLTIP)]]

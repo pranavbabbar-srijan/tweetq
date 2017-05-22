@@ -53,7 +53,8 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
       $cron_time = ($row->cron_time) ? date(TWITTER_TWEET_DATE_FORMAT, $row->cron_time) : '';
       $tweet_time = ($row->tweet_created_time) ? date(TWITTER_TWEET_DATE_FORMAT, $row->tweet_created_time) : '';
 
-      $message = tweets_queue_perform_hashtag_highlight($row->{TWITTER_FIELD_MESSAGE});
+      $message = tweets_queue_decrypt_data($row->{TWITTER_FIELD_MESSAGE});
+      $message = tweets_queue_perform_hashtag_highlight($message);
       $error = trim(t($row->error));
       if (empty($error)) {
         $error = ($row->{TWITTER_FIELD_RETWEETED}) ? t('Retweet') : t("Tweet");
