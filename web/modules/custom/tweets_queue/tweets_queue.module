@@ -360,12 +360,20 @@ function tweets_queue_tweet_node_form_cancel($form, \Drupal\Core\Form\FormStateI
 
 /**
  * Performs tweet on the twitter.
+ * Handle tweet and retweet of the twitter message.
+ * Also handles images post with the tweet.
  *
- * @param  string $message        [description]
- * @param  [type] $twitter_handle [description]
- * @param  string $tweet_id       [description]
- * @param  array  $message_info   [description]
- * @return [type]                 [description]
+ * @param string $message
+ *   Tweet message.
+ * @param array $twitter_handle
+ *   Holds twitter user specific information needed for the tweet.
+ * @param string $tweet_id
+ *   Twitter tweet id (if already message is tweeted).
+ * @param array $message_info
+ *   Array containg images file fid.
+ *
+ * @return array
+ *   Returns status related to tweet/retweet on the twitter.
  */
 function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_handle, $tweet_id = '', $message_info = array()) {
   require_once   './libraries/codebird-php/codebird.php';
@@ -381,15 +389,30 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   $access_secret_token = $twitter_handle[TWITTER_OAUTH_TOKEN_SECRET];
   $cb->setToken($access_token, $access_secret_token);
 
+  //Perform tweet/retweet on the twitter.
+  $status = tweets_queue_twitter_tweet_retweet($cb, $message, $tweet_id, $message_info);
+  return $status;
+}
+
+/**
+ * Performs tweet/retweet on the twitter for a specific tweet.
+ *
+ * @param object &$cb
+ *   Object for the tweet processing.
+ * @param string $message
+ *   Tweet message.
+ * @param string $tweet_id
+ *   Twitter tweet id (if already message is tweeted).
+ * @param array $message_info
+ *   Array containg images file fid.
+ *
+ * @return array
+ *   Returns status related to tweet/retweet on the twitter.
+ */
+function tweets_queue_twitter_tweet_retweet(&$cb, $message, $tweet_id, $message_info = array()) {
   $retweet = FALSE;
   if ($tweet_id != '') {
     $retweet = TRUE;
-  }
-  if ($undo_retweet) {
-    $params = array(
-        'id' => $tweet_id
-    );
-    $reply = $cb->statuses_unretweet_ID($params);
   }
   switch ($retweet) {
     case TRUE:
@@ -402,18 +425,11 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
       $params = array(
         'status' => $message
       );
-
-      //Process for the image.
-      $image = tweets_queue_get_tweets_file_information($message_info);
-      if ($image) {
-        $reply = $cb->media_upload(array(
-            'media' => $image
-        ));
-        //upload the file to your twitter account.
-        $mediaID = $reply->media_id_string;
-        $params['media_ids'] = $mediaID;
+      //Process for the image(s).
+      $media_id = tweets_queue_upload_image_on_twiiter($cb, $message_info);
+      if ($media_id) {
+        $params['media_ids'] = $media_id;
       }
-
       $reply = $cb->statuses_update($params);
       break;
   }
@@ -432,6 +448,38 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
 }
 
 /**
+ * Upload image on twitter and get the media id.
+ *
+ * @param object &$cb
+ *   Object for the twitter tweet processing.
+ * @param array $message_info
+ *   Array containing image fid.
+ *
+ * @return array
+ *   Returns media id corresponding to each image upload on the twitter.
+ */
+function tweets_queue_upload_image_on_twiiter(&$cb, $message_info = array()) {
+  $images = tweets_queue_get_tweets_file_information($message_info);
+  $ids = '';
+  $media_ids = array();
+  if (!(is_array($images) && count($images >0))) {
+    return $ids;
+  }
+  foreach ($images as $pos => $image) {
+    $reply = $cb->media_upload(array(
+        'media' => $image
+    ));
+    //upload the file to your twitter account.
+    $media_id = $reply->media_id_string;
+    if(!empty($media_id)) {
+      $media_ids[] = $media_id;
+    }
+  }
+  $ids = implode(",", $media_ids);
+  return $ids;
+}
+
+/**
  * Get tweets image information.
  *
  * @param array  $message_info
@@ -440,12 +488,15 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
  *   Returns image path.
  */
 function tweets_queue_get_tweets_file_information($message_info = array()) {
+  $file_url = array();
   if (!$message_info[0]) {
-    return '';
+    return $file_url;
   }
-  $fids[0] = $message_info[0];
-  $file_path = tweets_queue_get_file_real_path($fids);
-  $file_url = file_create_url($file_path);
+  foreach ($message_info as $fid) {
+    $fids[0] = $fid;
+    $file_path = tweets_queue_get_file_real_path($fids);
+    $file_url[] = file_create_url($file_path);
+  }
   return $file_url;
 }
 
