@@ -1792,8 +1792,8 @@ $schema[TWITTER_MESSAGE_QUEUE_TABLE] = array(
     'fields' => array(
       'nid' => array('type' => 'serial', 'not null' => TRUE),
       'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-      'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 954, 'default' => ''),
-      'hashtag' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 954, 'default' => ''),
+      'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => DB_TWEET_CHARCATER_LIMIT, 'default' => ''),
+      'hashtag' => array('type' => 'varchar', 'not null' => TRUE, 'length' => DB_TWEET_CHARCATER_LIMIT, 'default' => ''),
       'image_fid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
       'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
