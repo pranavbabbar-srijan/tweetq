@@ -1464,6 +1464,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       if ($twitter_owner_id) {
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_APPROVED_CLIENT_ROLE);
+        $entity->set(SIGNUP_FIELD_TWITTER_DATA, serialize(array()));
         $entity->save();
         tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
         tweets_queue_login_twitter_user($uid, TWITTER_TWITTER_SIGNUP_PATH);
