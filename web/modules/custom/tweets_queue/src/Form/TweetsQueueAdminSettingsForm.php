@@ -37,7 +37,7 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
     $form[CONSUMER_KEY] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Consumer key'),
-      '#default_value' => $config->get(CONSUMER_KEY),
+      '#default_value' => tweets_queue_decrypt_data($config->get(CONSUMER_KEY)),
       '#description' => t('Consumer Key is used to authenticate requests to the Twitter Platform.'),
       '#required' => TRUE,
     );
@@ -45,7 +45,7 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
     $form[CONSUMER_SECRET_KEY] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Consumer secret key'),
-      '#default_value' => $config->get(CONSUMER_SECRET_KEY),
+      '#default_value' => tweets_queue_decrypt_data($config->get(CONSUMER_SECRET_KEY)),
       '#description' => t('Consumer secret Key is used to authenticate requests to the Twitter Platform.'),
       '#required' => TRUE,
     );
@@ -167,9 +167,9 @@ class TweetsQueueAdminSettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = \Drupal::service('config.factory')->getEditable('tweets_queue_admin.settings');
-    $config->set(CONSUMER_KEY, $form_state->getValue(CONSUMER_KEY))
+    $config->set(CONSUMER_KEY, tweets_queue_encrypt_data($form_state->getValue(CONSUMER_KEY)))
       ->save();
-    $config->set(CONSUMER_SECRET_KEY, $form_state->getValue(CONSUMER_SECRET_KEY))
+    $config->set(CONSUMER_SECRET_KEY, tweets_queue_encrypt_data($form_state->getValue(CONSUMER_SECRET_KEY)))
       ->save();
 
     $total_user = $form_state->getValue(TWITTER_TOTAL_USERS);
