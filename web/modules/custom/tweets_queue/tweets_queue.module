@@ -587,6 +587,13 @@ function tweets_queue_fetch_user_auth_map_info($uid) {
   $query->condition('p.uid', $uid);
   $query->condition('p.status', 1);
   $oauth_info = $query->execute()->fetchObject();
+
+  //Decrypt data.
+  $data = unserialize($oauth_info->data);
+  $data['oauth_token'] = tweets_queue_decrypt_data($data['oauth_token']);
+  $data['oauth_token_secret'] = tweets_queue_decrypt_data($data['oauth_token_secret']);
+  $oauth_info->data = serialize($data);
+
   return $oauth_info;
 }
 
@@ -834,6 +841,12 @@ function tweets_queue_tweet_scheduled_messages_user_list($uids = array()) {
   $query->condition('p.uid', $uids , 'IN');
   $data = $query->execute()->fetchAll();
   foreach ($data as $pos => $handler_object) {
+    //Decrypt data.
+    $data = unserialize($handler_object->data);
+    $data['oauth_token'] = tweets_queue_decrypt_data($data['oauth_token']);
+    $data['oauth_token_secret'] = tweets_queue_decrypt_data($data['oauth_token_secret']);
+    $handler_object->data = serialize($data);
+
     $total++;
     $result['handler'][$handler_object->uid] = $handler_object;
   }
@@ -1457,8 +1470,6 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         // tweets_queue_signup_send_mail($mail, $full_name);
       }
       else {
-        $config = \Drupal::config('tweets_queue.settings');
-        $variable_one = $config->get('variable_one');
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_NON_APPROVED_CLIENT_ROLE);
         $entity->save();
@@ -2769,7 +2780,6 @@ function tweets_queue_authenticate_twitter_user() {
   function tweets_queue_map_twitter_user($twitter_owner_id, $oauth_token, $oauth_token_secret, $twitter_profile_info) {
     global $base_url;
     $logged_uid = \Drupal::currentUser()->id();
-    // $twitter_owner_id = tweets_queue_get_twitter_owner_id($oauth_token);
     $twitter_data = serialize(array(TWITTER_OAUTH_TOKEN => $oauth_token, TWITTER_OAUTH_TOKEN_SECRET => $oauth_token_secret));
     //Authenticate logged user with twitter account.
     if ($logged_uid) {
@@ -2823,10 +2833,27 @@ function tweets_queue_authenticate_twitter_user() {
     $res = $user->save();
   }
 
+  /**
+   * Store twitter authentication information.
+   *
+   * @param string $twitter_owner_id
+   *   Twitter owner id.
+   * @param integer $uid
+   *   User uid.
+   * @param array $twitter_data
+   *   Twitter authentication data.
+   * @param integer $status
+   *   Status of the user account.
+   */
   function tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data, $status = 1) {
     if (empty($twitter_data)) {
       $twitter_data = serialize(array());
     }
+    $data = unserialize($twitter_data);
+    $data['oauth_token'] = tweets_queue_encrypt_data($data['oauth_token']);
+    $data['oauth_token_secret'] = tweets_queue_encrypt_data($data['oauth_token_secret']);
+    $twitter_data = serialize($data);
+
     $twitter_auth_map_create = array(
       'uid' => $uid,
       'status' => $status,
@@ -2863,15 +2890,6 @@ function tweets_queue_authenticate_twitter_user() {
       }
       user_login_finalize($user);
     }
-  }
-
-  function tweets_queue_get_twitter_owner_id($oauth_token) {
-    $twitter_owner_id = "";
-    $oauth_token_arr = explode("-", $oauth_token);
-    if ($oauth_token_arr[0] != '' && $oauth_token_arr[1] != '') {
-      $twitter_owner_id = $oauth_token_arr[0];
-    }
-    return $twitter_owner_id;
   }
 
 function tweets_queue_check_twitter_owner_id_profile_presence($twitter_owner_id) {
