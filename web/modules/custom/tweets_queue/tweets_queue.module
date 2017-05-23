@@ -593,7 +593,6 @@ function tweets_queue_fetch_user_auth_map_info($uid) {
   $data['oauth_token'] = tweets_queue_decrypt_data($data['oauth_token']);
   $data['oauth_token_secret'] = tweets_queue_decrypt_data($data['oauth_token_secret']);
   $oauth_info->data = serialize($data);
-
   return $oauth_info;
 }
 
@@ -1328,10 +1327,10 @@ function tweets_queue_get_tweet_configuration_data($key = CONSUMER_KEY) {
       $data = $config->get(ACCESS_SECRET_TOKEN);
       break;
     case CONSUMER_KEY:
-      $data = $config->get(CONSUMER_KEY);
+      $data = tweets_queue_decrypt_data($config->get(CONSUMER_KEY));
       break;
     case CONSUMER_SECRET_KEY:
-      $data = $config->get(CONSUMER_SECRET_KEY);
+      $data = tweets_queue_decrypt_data($config->get(CONSUMER_SECRET_KEY));
       break;
     case CRON_TWEET_ATTEMP:
       $data = intval($config->get(CRON_TWEET_ATTEMP));
