@@ -110,6 +110,26 @@ class TweetsQueueTweetController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
+  public function changePassword() {
+    $uid = \Drupal::currentUser()->id();
+    if (!$uid) {
+      die("access_denied");
+    }
+    $password = tweets_queue_get_parameter_data('password');
+
+    if (empty($password)) {
+      die("empty_password");
+    }
+    if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/',$password)) {
+      die("weak_password");
+    }
+    tweets_queue_change_password($uid, $password);
+    die("done");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCacheMaxAge() {
     return 0;
   }

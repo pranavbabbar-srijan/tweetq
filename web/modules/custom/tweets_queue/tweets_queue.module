@@ -190,6 +190,8 @@ const TWITTER_DELETE_ACTION = 'delete';
 const TWITTER_EDIT_ACTION = 'edit';
 const TWITTER_ACTION_PARAMETER = 'action';
 
+const SIGNUP_FIELD_MOBILE_NUMBER = 'field_mobile_number';
+const SIGNUP_FIELD_JOB_TITLE = 'field_job_title';
 const SIGNUP_FIELD_ORGANIZATION = 'field_organization';
 const SIGNUP_FIELD_WEBSITE = 'field_website';
 const SIGNUP_FIELD_FULL_NAME = 'field_full_name';
