@@ -38,13 +38,42 @@
 		var user_login_validation_path = '/dashboard/validateUserLogin';
 		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
 		var user_history_path = '/dashboard/user-history';
+		var profile_change_password_path = '/dashboard/changePassword';
 
-		// var email_validation_path = '/tweetq/_www/dashboard/validateEmail';
-		// var user_login_validation_path = '/tweetq/_www/dashboard/validateUserLogin';
-		// var forgot_password_send_token_path = '/tweetq/_www/dashboard/forgotPasswordSendToken';
-		// var user_history_path = '/tweetq/_www/dashboard/user-history';
+		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
+		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
+		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
+		// var user_history_path = '/v/_www/dashboard/user-history';
+		// var profile_change_password_path = '/barbet_3may/_www/dashboard/changePassword';
 
 		$( "#foo" ).trigger( "click" );
+
+		//Profile setting form.
+		$("#profilesettingform #change-password").click(function() {
+	   		var password = $('#profilesettingform #edit-changeuser-password').val();
+	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  			var valid = regex.test(password);
+  			$("#profile-settingform-password-validation-error").remove();
+  			$("#password-changed").remove();
+  			if (password.length == 0) {
+	    		$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#profilesettingform #change-password" );
+	    		return;
+	    	}
+
+  			if (!valid) {
+	    		$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#profilesettingform #change-password" );
+	    		return;
+  			}
+	  	
+	    	$.post(profile_change_password_path, {'password' : password}, function(data) {
+				if  (data == "done") {
+					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password" );
+					return;
+				}
+				$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profilesettingform #change-password" );
+		    });
+
+		});
 
 		//Twitter signup form
 		//Full name validtaion.
