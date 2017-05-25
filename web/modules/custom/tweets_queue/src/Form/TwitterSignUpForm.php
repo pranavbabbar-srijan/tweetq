@@ -49,7 +49,7 @@ class TwitterSignUpForm extends FormBase {
     $form[SIGNUP_FIELD_FULL_NAME] = array(
       '#type' => 'textfield',
       '#title' => t('Full Name'),
-      '#value' => $full_name,
+      '#default_value' => $full_name,
       '#attributes' => array (
         'placeholder' => t("Required")
       ),
@@ -59,27 +59,18 @@ class TwitterSignUpForm extends FormBase {
       '#type' => 'email',
       '#title' => t('Email'),
       '#required' => TRUE,
-      '#value' => $email,
+      '#default_value' => $email,
       '#attributes' => array (
         'placeholder' => t("Required"),
         'readonly' => 'readonly',
       ),
     );
 
-    // $form['user_password'] = array(
-    //   '#type' => 'password',
-    //   '#title' => t('Password'),
-    //   '#required' => TRUE,
-    //   '#attributes' => array (
-    //     'placeholder' => t("Required")
-    //   ),
-    // );
-
     $form[SIGNUP_FIELD_WEBSITE] = array(
       '#type' => 'textfield',
       '#title' => t('Website'),
       '#required' => FALSE,
-      '#value' => $website,
+      '#default_value' => $website,
       '#attributes' => array (
         'placeholder' => t("Optional")
       ),
@@ -89,7 +80,7 @@ class TwitterSignUpForm extends FormBase {
       '#type' => 'textfield',
       '#title' => t('Organization Name'),
       '#required' => FALSE,
-      '#value' => $organization,
+      '#default_value' => $organization,
       '#attributes' => array (
         'placeholder' => t("Optional")
       ),
