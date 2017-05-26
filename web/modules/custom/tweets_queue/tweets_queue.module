@@ -208,6 +208,12 @@ const SIGNUP_FIELD_TWITTER_DATA = 'field_twitter_data';
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
+    case 'views_form_user_admin_people_page_1':
+    case 'user_multiple_cancel_confirm':
+    case 'user_form':
+    case 'user_cancel_form':
+      tweets_queue_goto_page();
+      break;
     case 'send_tweets_form ':
       break;
 
