@@ -272,11 +272,39 @@ body {
 				fill: #ffffff;
 			}
 		}
+		.site-footer {
+			position: fixed;
+		    bottom: 0;
+		    text-align: center;
+		    width: 100%;
+		    background: #333;
+		    padding: 5px 0;
+		    font-size: 14px;
+		    color: rgba(255,255,255,.3);
+		    a {
+		    	color: rgba($orange, .3);
+		    	text-decoration: none;
+		    }
+		}
 	}
 	&.user-logged-in {
 		background: $body-bg;
 		.region-content {
 			max-width: 100%;
+		}
+		.site-footer {
+			// position: fixed;
+		    // bottom: 0;
+		    // text-align: center;
+		    width: 100%;
+		    // background: #333;
+		    padding: 5px 0;
+		    font-size: 14px;
+		    color: rgba(255,255,255,.3);
+		    a {
+		    	color: rgba($orange, .3);
+		    	text-decoration: none;
+		    }
 		}
 	}
 }
@@ -284,7 +312,6 @@ body {
 #page-wrapper {
 	width: 100%;
 }
-#page {}
 
 #block-srijan-local-tasks {
 	@extend %none;
@@ -2019,6 +2046,9 @@ body.path-update-password {
     left: 40% !important;
     right: 40% !important;
     // height: 210px !important;
+    .site-footer {
+    	display: none;
+    }
 }
 #cboxOverlay {
 	opacity: .65 !important;
