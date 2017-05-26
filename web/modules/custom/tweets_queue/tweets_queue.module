@@ -51,6 +51,7 @@ const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const TWITTER_PASSWORD_HASH_KEY_TABLE = 'twitter_password_hash_key';
 const CRON_TWEET_SCHEDULED = 'cron_tweet_scheduled';
+const SHOW_USER_LIST_ACCESS = 'show_user_list_access';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
 const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
 const CRON_TWEET_RETWEET_INTERVAL = 'cron_tweet_retweet_interval';
@@ -212,6 +213,10 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
     case 'user_multiple_cancel_confirm':
     case 'user_form':
     case 'user_cancel_form':
+      $show_user_list_access = tweets_queue_get_tweet_configuration_data(SHOW_USER_LIST_ACCESS);
+      if ($show_user_list_access) {
+        return;
+      }
       tweets_queue_goto_page();
       break;
     case 'send_tweets_form ':
