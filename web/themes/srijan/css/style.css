@@ -388,10 +388,30 @@ body {
       pointer-events: none; }
     body.path-frontpage .site-branding svg {
       fill: #ffffff; }
+    body.path-frontpage .site-footer {
+      position: fixed;
+      bottom: 0;
+      text-align: center;
+      width: 100%;
+      background: #333;
+      padding: 5px 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.3); }
+      body.path-frontpage .site-footer a {
+        color: rgba(241, 173, 64, 0.3);
+        text-decoration: none; }
   body.user-logged-in {
     background: #F1F1F1; }
     body.user-logged-in .region-content {
       max-width: 100%; }
+    body.user-logged-in .site-footer {
+      width: 100%;
+      padding: 5px 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.3); }
+      body.user-logged-in .site-footer a {
+        color: rgba(241, 173, 64, 0.3);
+        text-decoration: none; }
 
 #page-wrapper {
   width: 100%; }
@@ -1957,6 +1977,8 @@ body.path-update-password .messages--status {
   top: 40% !important;
   left: 40% !important;
   right: 40% !important; }
+  #colorbox .site-footer {
+    display: none; }
 
 #cboxOverlay {
   opacity: .65 !important; }
