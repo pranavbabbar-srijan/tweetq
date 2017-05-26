@@ -27,6 +27,13 @@ class ProfileSettingForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     global $base_url;
+
+    $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
+    $user_twitter_profile_info = unserialize($twitter_profile_info);
+    $twitter_handle = $user_twitter_profile_info->screen_name;
+    $twitter_handle = (!empty($twitter_handle)) ? '@' . $twitter_handle : '';
+
+
     $uid = \Drupal::currentUser()->id();
     $user = \Drupal\user\Entity\User::load($uid);
     $full_name = $user->get(SIGNUP_FIELD_FULL_NAME)->value;
@@ -34,21 +41,15 @@ class ProfileSettingForm extends FormBase {
     $full_name = $user->get(SIGNUP_FIELD_FULL_NAME)->value;
     $website = $user->get(SIGNUP_FIELD_WEBSITE)->value;
     $organization = $user->get(SIGNUP_FIELD_ORGANIZATION)->value;
+    $verified_class = 'profile-information-complete';
 
-    $mobile = '';
-    $job_title = '';
+    $mobile = $user->get(SIGNUP_FIELD_MOBILE_NUMBER)->value;
+    $job_title = $user->get(SIGNUP_FIELD_JOB_TITLE)->value;
 
     $form['header_left'] = array(
       '#type' => 'markup',
       '#prefix' => '<div class="profile-setting">',
-      '#markup' => t('Profile & Settings'),
-      '#suffix' => '</div>',
-    );
-
-    $form['header_right'] = array(
-      '#type' => 'markup',
-      '#prefix' => '<div class="signup">',
-      '#markup' => $final_text,
+      '#markup' => t(TWITTER_PROFILE_SETTING_LABEL),
       '#suffix' => '</div>',
     );
 
@@ -60,9 +61,10 @@ class ProfileSettingForm extends FormBase {
     $form[SIGNUP_FIELD_FULL_NAME] = array(
       '#type' => 'textfield',
       '#title' => t('Full Name'),
-      '#value' => $full_name,
+      '#default_value' => $full_name,
       '#attributes' => array (
         'readonly' => 'readonly',
+        'class' => (!empty($full_name)) ? array($verified_class) : array(''),
       ),
     );
 
@@ -70,18 +72,20 @@ class ProfileSettingForm extends FormBase {
     $form['twitter_screen'] = array(
       '#type' => 'textfield',
       '#title' => t('Twitter Username'),
-      '#value' => $twitter_username,
+      '#default_value' => (!empty($twitter_handle)) ? $twitter_handle : '',
       '#attributes' => array (
         'readonly' => 'readonly',
+        'class' => (!empty($twitter_handle)) ? array($verified_class) : array(''),
       ),
     );
 
     $form[SIGNUP_FIELD_EMAIL] = array(
       '#type' => 'textfield',
       '#title' => t('Email'),
-      '#value' => $email,
+      '#default_value' => $email,
       '#attributes' => array (
         'readonly' => 'readonly',
+        'class' => (!empty($twitter_username)) ? array($verified_class) : array(''),
       ),
     );
 
@@ -89,6 +93,7 @@ class ProfileSettingForm extends FormBase {
       '#type' => 'password',
       '#title' => t('Password'),
       '#required' => FALSE,
+      '#default_value' => '',
       '#attributes' => array (
         'autocomplete' => 'off'
       ),
@@ -104,7 +109,7 @@ class ProfileSettingForm extends FormBase {
     $form[SIGNUP_FIELD_MOBILE_NUMBER] = array(
       '#type' => 'textfield',
       '#title' => t('Mobile Number'),
-      '#value' => $mobile,
+      '#default_value' => $mobile,
       '#required' => FALSE,
       '#attributes' => array (
         'placeholder' => t("9999999999"),
@@ -115,7 +120,7 @@ class ProfileSettingForm extends FormBase {
     $form[SIGNUP_FIELD_JOB_TITLE] = array(
       '#type' => 'textfield',
       '#title' => t('Job Title'),
-      '#value' => $job_title,
+      '#default_value' => $job_title,
       '#required' => FALSE,
       '#attributes' => array (
         'autocomplete' => 'off'
@@ -125,6 +130,7 @@ class ProfileSettingForm extends FormBase {
     $form[SIGNUP_FIELD_ORGANIZATION] = array(
       '#type' => 'textfield',
       '#title' => t('Organization Name'),
+      '#default_value' => $organization,
       '#required' => FALSE,
       '#attributes' => array (
         'autocomplete' => 'off'
@@ -133,8 +139,8 @@ class ProfileSettingForm extends FormBase {
 
     $form[SIGNUP_FIELD_WEBSITE] = array(
       '#type' => 'textfield',
-      '#title' => t('Website'),
-      '#value' => $website,
+      '#title' => t('Organization Name'),
+      '#default_value' => $website,
       '#required' => FALSE,
       '#attributes' => array (
         'autocomplete' => 'off'
@@ -163,19 +169,16 @@ class ProfileSettingForm extends FormBase {
     $uid = \Drupal::currentUser()->id();
     $user = \Drupal\user\Entity\User::load($uid);
 
-    // $full_name = $data[SIGNUP_FIELD_FULL_NAME];
-    // $password = $data[SIGNUP_FIELD_PASSWORD];
     $website = $data[SIGNUP_FIELD_WEBSITE];
     $organization = $data[SIGNUP_FIELD_ORGANIZATION];
     $mobile = $data[SIGNUP_FIELD_MOBILE_NUMBER];
     $job_title = $data[SIGNUP_FIELD_JOB_TITLE];
-    // $mail = $user->get('mail')->value;
     
     //Mandatory settings
-    $user->setPassword($password);
-    $user->set(SIGNUP_FIELD_FULL_NAME, $full_name);
     $user->set(SIGNUP_FIELD_WEBSITE, $website);
     $user->set(SIGNUP_FIELD_ORGANIZATION, $organization);
+    $user->set(SIGNUP_FIELD_MOBILE_NUMBER, $mobile);
+    $user->set(SIGNUP_FIELD_JOB_TITLE, $job_title);
     //Optional settings
     $res = $user->save();
   }
