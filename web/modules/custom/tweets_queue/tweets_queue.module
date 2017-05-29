@@ -50,6 +50,7 @@ const TWITTER_CRON_HISTORY_TABLE = 'twitter_cron_history';
 const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const TWITTER_PASSWORD_HASH_KEY_TABLE = 'twitter_password_hash_key';
+const TWITTER_INVITE_FRIEND_HASH_KEY_TABLE = 'twitter_invite_friend_hash_key';
 const CRON_TWEET_SCHEDULED = 'cron_tweet_scheduled';
 const SHOW_USER_LIST_ACCESS = 'show_user_list_access';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
@@ -1747,7 +1748,24 @@ function tweets_queue_delete_twitter_specific_info($field_name, $field_value, $t
  * Implements hook_schema().
  */
 function tweets_queue_schema() {
-   $schema[TWITTER_PASSWORD_HASH_KEY_TABLE] = array(
+  $schema[TWITTER_INVITE_FRIEND_HASH_KEY_TABLE] = array(
+    'description' => 'The base table for friends invited to the barbet.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'email' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'hash_key' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 100, 'default' => ''),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'twitter_invite_friend_hash_key_uid' => array('uid'),
+      'twitter_invite_friend_hash_key_email' => array('email'),
+    )
+  );
+
+  $schema[TWITTER_PASSWORD_HASH_KEY_TABLE] = array(
     'description' => 'The base table for password change.',
     'fields' => array(
       'id' => array('type' => 'serial', 'not null' => TRUE),
@@ -3910,6 +3928,27 @@ function tweets_queue_insert_password_hash_key_record($password_message_info) {
   }
   $id = db_insert(TWITTER_PASSWORD_HASH_KEY_TABLE)
     ->fields($password_message_info)
+    ->execute();
+  if ($id) {
+    return $id;
+  }
+}
+
+/**
+ * Store generated hash key for specific email and user uid.
+ *
+ * @param array $invite_info
+ *   Array containing invite information.
+ *
+ * @return integer
+ *   Returns unique id for the newly created record.
+ */
+function tweets_queue_insert_friend_invite_hash_key_record($invite_info) {
+  if (!is_array($invite_info)) {
+    $invite_info = array();
+  }
+  $id = db_insert(TWITTER_INVITE_FRIEND_HASH_KEY_TABLE)
+    ->fields($invite_info)
     ->execute();
   if ($id) {
     return $id;
