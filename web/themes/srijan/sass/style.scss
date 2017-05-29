@@ -111,9 +111,12 @@
 			color: #666;
 			position: relative;
 			&:before {
-				content: $icon-bell;
-				@extend %icomoon;
-				font-size: 22px;
+				content: "";
+				background: url('../images/noti.svg') no-repeat 0 0;
+				display: block;
+			    height: 34px;
+			    width: 40px;
+			    margin-top: -5px;
 			}
 			&:hover {
 				color: rgba(0,0,0,0.3);
