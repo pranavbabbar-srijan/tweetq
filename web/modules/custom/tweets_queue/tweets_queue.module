@@ -51,6 +51,7 @@ const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const TWITTER_PASSWORD_HASH_KEY_TABLE = 'twitter_password_hash_key';
 const CRON_TWEET_SCHEDULED = 'cron_tweet_scheduled';
+const SHOW_USER_LIST_ACCESS = 'show_user_list_access';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
 const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
 const CRON_TWEET_RETWEET_INTERVAL = 'cron_tweet_retweet_interval';
@@ -90,6 +91,7 @@ const TWITTER_IMPORT_TWEET_PATH = 'dashboard/import-tweets';
 const TWITTER_VALID_TWEET_PATH = 'dashboard/valid-tweets';
 const TWITTER_INVALID_TWEET_PATH = 'dashboard/invalid-tweets';
 const TWITTER_ARCHIVED_TWEET_PATH = 'dashboard/archived-tweets';
+const TWITTER_PROFILE_SETTING_PATH = 'dashboard/profile-settings';
 const TWITTER_TWEETED_TWEET_PATH = 'dashboard/valid-tweets/tweeted-listing';
 const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 const TWITTER_TWITTER_SIGNUP_PATH = 'twitter/register';
@@ -143,6 +145,7 @@ const TWITTER_DOWNLOAD_SAMPLE_CSV_LABEL = 'Download Sample CSV File';
 const TWITTER_VALID_TWEET_LABEL = 'Valid Tweets';
 const TWITTER_INVALID_TWEET_LABEL = 'Invalid Tweets';
 const TWITTER_ARCHIVED_TWEET_LABEL = 'Archived Tweets';
+const TWITTER_PROFILE_SETTING_LABEL = 'Profile & Settings';
 const TWITTER_NO_TWEET_FOUND_LABEL = 'No Tweets Found';
 const TWITTER_TOTAL_TWEET_LABEL = 'Total Tweets';
 const TWITTER_SETTINGS_LABEL = 'Settings';
@@ -190,6 +193,8 @@ const TWITTER_DELETE_ACTION = 'delete';
 const TWITTER_EDIT_ACTION = 'edit';
 const TWITTER_ACTION_PARAMETER = 'action';
 
+const SIGNUP_FIELD_MOBILE_NUMBER = 'field_mobile_number';
+const SIGNUP_FIELD_JOB_TITLE = 'field_job_title';
 const SIGNUP_FIELD_ORGANIZATION = 'field_organization';
 const SIGNUP_FIELD_WEBSITE = 'field_website';
 const SIGNUP_FIELD_FULL_NAME = 'field_full_name';
@@ -204,6 +209,16 @@ const SIGNUP_FIELD_TWITTER_DATA = 'field_twitter_data';
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
+    case 'views_form_user_admin_people_page_1':
+    case 'user_multiple_cancel_confirm':
+    case 'user_form':
+    case 'user_cancel_form':
+      $show_user_list_access = tweets_queue_get_tweet_configuration_data(SHOW_USER_LIST_ACCESS);
+      if ($show_user_list_access) {
+        return;
+      }
+      // tweets_queue_goto_page();
+      break;
     case 'send_tweets_form ':
       break;
 
@@ -1589,12 +1604,9 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   $user_hash_key = hash('sha256', $mail);
   $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
 
-  $message = t("Dear @full_name,\n
-  Welcome to Barbet!\n
-  You have successfully Signed up with Barbet App. Kindly login to the app
-  and connect with your twitter Details to start using Barbet.
-  Users verification Link: @link", array('@full_name' => $name, '@link' => $link));
-  $params['message'] = $message;
+   $message = t("Dear @full_name,\n
+   Users verification Link: @link", array('@full_name' => $name, '@link' => $link));
+   $params['message'] = $message;
   $params['title'] = 'Barbet Registration Verification';
  
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
@@ -2682,7 +2694,6 @@ function tweets_queue_authenticate_twitter_user() {
       $twitter_authentication_process_update_info = array ('data' => serialize($oauth_info_data));
       if ($reply->httpstatus == 200) {
         $twitter_profile_info = tweets_queue_get_twitter_user_profile_information($reply->oauth_token, $reply->oauth_token_secret);
-
         if ($twitter_profile_info->httpstatus != 200) {
           tweets_queue_goto_page();
         }
@@ -2811,6 +2822,17 @@ function tweets_queue_authenticate_twitter_user() {
         tweets_queue_login_twitter_user($uid);
       }
     }
+
+    //Find presence of email.
+    if (!$uid) {
+      $email = $twitter_profile_info->email;
+      $uid = tweets_queue_check_email_presence($email);
+      if ($uid) {
+        tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
+        tweets_queue_login_twitter_user($uid);
+      }
+    }
+
     //Register if there is no entry present.
     if (!$uid) {
       $uid = tweets_queue_register_twitter_user($twitter_data, $twitter_profile_info);

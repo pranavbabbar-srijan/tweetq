@@ -7,6 +7,8 @@
 
 		var website_pattern = /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i
 		var website_pattern_https = /^(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i
+		var mobile_pattern = /^[0-9-+ ]+$/;
+
 		//Signup form validation.
 		var alphabet_msg = "Only Letters are allowed";
 		var full_name_missing_msg = "Please enter full name";
@@ -32,19 +34,118 @@
 		var password_minimum_length = 6;
 		var password_maximum_length = 12;
 		var website_invalid_msg = 'please enter valid website';
+		var mobile_invalid_msg = 'please enter valid mobile number';
 		var signup_error = '';
 
 		var email_validation_path = '/dashboard/validateEmail';
 		var user_login_validation_path = '/dashboard/validateUserLogin';
 		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
 		var user_history_path = '/dashboard/user-history';
+		var profile_change_password_path = '/dashboard/changePassword';
 
-		// var email_validation_path = '/tweetq/_www/dashboard/validateEmail';
-		// var user_login_validation_path = '/tweetq/_www/dashboard/validateUserLogin';
-		// var forgot_password_send_token_path = '/tweetq/_www/dashboard/forgotPasswordSendToken';
-		// var user_history_path = '/tweetq/_www/dashboard/user-history';
+		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
+		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
+		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
+		// var user_history_path = '/v/_www/dashboard/user-history';
+		// var profile_change_password_path = '/barbet_3may/_www/dashboard/changePassword';
 
 		$( "#foo" ).trigger( "click" );
+
+		//Profile setting form Beginning.
+
+		//Valid url check
+	    $("#profilesettingform #edit-field-mobile-number").focusout(function() {
+	   		var mobile = $('#edit-field-mobile-number').val();
+	   		var valid = mobile_pattern.test(mobile);
+	   		$("#mobile-validation-error").remove();
+	    	if (mobile.length > 0) {
+	    		if(mobile.length < 10){
+			        $("<span id='mobile-validation-error' class='validation-error'>" + mobile_invalid_msg + "</p>").insertAfter( "#profilesettingform #edit-field-mobile-number" );
+			        return;
+			    }
+
+	    		if (!(valid)) {
+	    			$("<span id='mobile-validation-error' class='validation-error'>" + mobile_invalid_msg + "</p>").insertAfter( "#profilesettingform #edit-field-mobile-number" );
+	    		}
+	    	}
+	  	});
+
+		//Valid url check
+	    $("#profilesettingform #edit-field-website").focusout(function() {
+	   		var website = $('#profilesettingform #edit-field-website').val();
+	   		var valid = website_pattern.test(website);
+	   		var valid_htttps = website_pattern_https.test(website);
+	   		$("#website-validation-error").remove();
+	    	if (website.length > 0) {
+	    		if (!(valid || valid_htttps)) {
+	    			$("<span id='website-validation-error' class='validation-error'>" + website_invalid_msg + "</p>").insertAfter( "#profilesettingform #edit-field-website" );
+	    		}
+	    	}
+	  	});
+
+		$("#profilesettingform #change-password").click(function() {
+	   		var password = $('#profilesettingform #edit-changeuser-password').val();
+	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  			var valid = regex.test(password);
+  			$("#profile-settingform-password-validation-error").remove();
+  			$("#password-changed").remove();
+  			if (password.length == 0) {
+	    		$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#profilesettingform #change-password" );
+	    		return;
+	    	}
+
+  			if (!valid) {
+	    		$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#profilesettingform #change-password" );
+	    		return;
+  			}
+	  	
+	    	$.post(profile_change_password_path, {'password' : password}, function(data) {
+				if  (data == "done") {
+					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password" );
+					$('#password-changed').delay(5000).fadeOut(300);			
+					return;
+				}
+				$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profilesettingform #change-password" );
+		    });
+
+		});
+
+		//Profile submit validtion.
+		$('#profilesettingform').submit(function() {
+			var mobile = $('#edit-field-mobile-number').val();
+	   		var valid_mobile = mobile_pattern.test(mobile);
+
+	   		var website = $('#profilesettingform #edit-field-website').val();
+	   		var valid_website = website_pattern.test(website);
+	   		var valid_website_htttps = website_pattern_https.test(website);
+
+	   		var passed = true;
+	   		$("#mobile-validation-error").remove();
+	    	if (mobile.length > 0) {
+	    		if(mobile.length < 10){
+			        $("<span id='mobile-validation-error' class='validation-error'>" + mobile_invalid_msg + "</p>").insertAfter( "#profilesettingform #edit-field-mobile-number" );
+			        passed = false;
+			    }
+
+	    		if (!(valid_mobile)) {
+	    			$("#mobile-validation-error").remove();
+	    			$("<span id='mobile-validation-error' class='validation-error'>" + mobile_invalid_msg + "</p>").insertAfter( "#profilesettingform #edit-field-mobile-number" );
+	    			passed = false;
+	    		}
+	    	}
+
+	    	$("#website-validation-error").remove();
+	    	if (website.length > 0) {
+	    		if (!(valid_website || valid_website_htttps)) {
+	    			$("<span id='website-validation-error' class='validation-error'>" + website_invalid_msg + "</p>").insertAfter( "#profilesettingform #edit-field-website" );
+	    			passed = false;
+	    		}
+	    	}
+			return passed;
+		});
+
+		//Profile setting form End.
+	
 
 		//Twitter signup form
 		//Full name validtaion.
