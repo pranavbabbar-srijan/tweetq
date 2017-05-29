@@ -721,6 +721,10 @@
 	    	$('body').addClass('signinwithtwitterblock');
 		}
 
+	    if($('#profilesettingform').length > 0){
+	    	$('body').addClass('profilesettingform-body');
+		}
+
 		if ($('div').hasClass('no-tweet-found')) {
 		    $('body').addClass('no-tweet');
 		}
