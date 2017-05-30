@@ -114,6 +114,12 @@ class ConfirmFriendInvite extends FormBase {
     }
     $friend_invited_info = tweets_queue_fetch_friend_invite_hash_key_info($id);
     $friend_invited_info->password = $data['password'];
+    $uid = tweets_queue_check_email_presence($email);
+    if ($uid) {
+      //TODO: map user record.
+      // tweets_queue_login_twitter_user($uid);
+      return;
+    }
     tweets_queue_register_friend_invited_user($friend_invited_info);
   }
 

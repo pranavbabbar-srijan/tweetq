@@ -39,6 +39,7 @@ const TWEET_QUEUE_CSV_FILE_UPLOAD = 'tweet_queue_csv_file_upload';
 const TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY = 'public://tweets_queue/';
 const TWEETS_PRIORITY_TABLE = 'tweets_priority';
 const TWITTER_AUTH_MAP_TABLE = 'twitter_auth_map';
+const TWITTER_VOLUNTEER_MAP_TABLE = 'twitter_volunteer_map';
 const TWITTER_STATISTICS_TABLE = 'twitter_statistics';
 const TWITTER_MESSAGE_QUEUE_TABLE = 'twitter_message_queue';
 const TWITTER_IMAGE_TABLE = 'twitter_images';
@@ -1770,6 +1771,27 @@ function tweets_queue_delete_twitter_specific_info($field_name, $field_value, $t
  * Implements hook_schema().
  */
 function tweets_queue_schema() {
+  $schema[TWITTER_VOLUNTEER_MAP_TABLE] = array(
+    'description' => 'The base table for twitter tweets data.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'owner_id' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'volunteer_id' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'data' => array('description' => 'The value.', 'type' => 'blob', 'not null' => TRUE, 'size' => 'big'),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'changed' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'twitter_volunteer_map_owner_id' => array('owner_id'),
+      'twitter_volunteer_map_changed' => array('changed'),
+      'twitter_volunteer_map_created' => array('created'),
+      'twitter_volunteer_map_status' => array('status'),
+      'twitter_volunteer_volunteer_id' => array('volunteer_id'),
+    )
+  );
+
   $schema[TWITTER_INVITE_FRIEND_HASH_KEY_TABLE] = array(
     'description' => 'The base table for friends invited to the barbet.',
     'fields' => array(
