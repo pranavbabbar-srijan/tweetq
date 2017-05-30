@@ -111,9 +111,12 @@
 			color: #666;
 			position: relative;
 			&:before {
-				content: $icon-bell;
-				@extend %icomoon;
-				font-size: 22px;
+				content: "";
+				background: url('../images/noti.svg') no-repeat 0 0;
+				display: block;
+			    height: 34px;
+			    width: 40px;
+			    margin-top: -5px;
 			}
 			&:hover {
 				color: rgba(0,0,0,0.3);
@@ -272,11 +275,39 @@ body {
 				fill: #ffffff;
 			}
 		}
+		.site-footer {
+			position: fixed;
+		    bottom: 0;
+		    text-align: center;
+		    width: 100%;
+		    background: #333;
+		    padding: 5px 0;
+		    font-size: 14px;
+		    color: rgba(255,255,255,.3);
+		    a {
+		    	color: rgba($orange, .3);
+		    	text-decoration: none;
+		    }
+		}
 	}
 	&.user-logged-in {
 		background: $body-bg;
 		.region-content {
 			max-width: 100%;
+		}
+		.site-footer {
+			// position: fixed;
+		    // bottom: 0;
+		    // text-align: center;
+		    width: 100%;
+		    // background: #333;
+		    padding: 5px 0;
+		    font-size: 14px;
+		    color: rgba(255,255,255,.3);
+		    a {
+		    	color: rgba($orange, .3);
+		    	text-decoration: none;
+		    }
 		}
 	}
 }
@@ -284,7 +315,6 @@ body {
 #page-wrapper {
 	width: 100%;
 }
-#page {}
 
 #block-srijan-local-tasks {
 	@extend %none;
@@ -1788,6 +1818,101 @@ body.path-update-password {
 		}
 	}
 }
+
+.profilesettingform-body {
+	&.user-logged-in {
+		.main-content {
+			position: absolute;
+		}
+	}
+}
+.profilesettingform {
+	.profile-setting {
+		background: #FCFCFC;
+		padding: 15px 30px;
+		margin-left: 10px;
+		margin-top: 1em;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
+		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
+		-webkit-box-shadow: 0px 0px 3px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+		box-shadow: 0px 0px 3px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
+		font-size: 14px;
+		color: $gray;
+	}
+	.message-header {
+		display: flex;
+    	flex-flow: row wrap;
+    	justify-content: flex-start;
+		overflow: hidden;
+		background: white;
+		padding: 15px 30px;
+		margin-left: 10px;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
+		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
+		-webkit-box-shadow: 0px 0px 3px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+		box-shadow: 0px 0px 3px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
+    	.message-header-title {
+    		width: 100%;
+		    font-size: 22px;
+		    color: #333;
+		    margin-bottom: 20px;
+		    margin-top: 20px;
+    	}
+    	.js-form-item {
+    		width: 35%;
+    		margin-right: 100px;
+    		margin-bottom: 2em;
+    		input[type="text"], input[type="email"], input[type="password"], input[type="url"] {
+				border: 0;
+				background: none;
+				outline: none;
+				border-bottom: 1px solid rgba(0,0,0,.3);
+				display: block;
+				width: 100%;
+				padding-bottom: 7px;
+				font-size: 14px;
+				&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+				  opacity: .5;
+				}
+				&::-moz-placeholder { /* Firefox 19+ */
+				  opacity: .5;
+				}
+				&:-ms-input-placeholder { /* IE 10+ */
+				  opacity: .5;
+				}
+				&:-moz-placeholder { /* Firefox 18- */
+				  opacity: .5;
+				}
+				&[readonly="readonly"] {
+					color: rgba(0,0,0,0.4);
+				}
+    		}
+    		label {
+				color: #949494;
+				margin-bottom: 1em;
+				display: block;
+				font-size: 16px;
+				font-weight: bold;
+				&:after {
+					@extend %none;
+				}
+			}
+    	}
+	    input[type="submit"] {
+    		margin: 20px auto 0;
+    		border: none;
+			background: $login-btn;
+			width: 50%;
+		    padding: .5em;
+		    font-size: 18px;
+		    color: white;
+		    display: block;
+		    @include border-radius(4px);
+    	}
+	}
+}
 .send-tweets-form, .tweets-queue-tweet-form  {
 	// overflow: hidden;
 	// margin-top: 80px;
@@ -2019,6 +2144,9 @@ body.path-update-password {
     left: 40% !important;
     right: 40% !important;
     // height: 210px !important;
+    .site-footer {
+    	display: none;
+    }
 }
 #cboxOverlay {
 	opacity: .65 !important;

@@ -51,6 +51,7 @@ const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const TWITTER_PASSWORD_HASH_KEY_TABLE = 'twitter_password_hash_key';
 const CRON_TWEET_SCHEDULED = 'cron_tweet_scheduled';
+const SHOW_USER_LIST_ACCESS = 'show_user_list_access';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
 const CRON_TWEET_MAX_INTERVAL = 'cron_tweet_max_interval';
 const CRON_TWEET_RETWEET_INTERVAL = 'cron_tweet_retweet_interval';
@@ -208,6 +209,16 @@ const SIGNUP_FIELD_TWITTER_DATA = 'field_twitter_data';
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
+    case 'views_form_user_admin_people_page_1':
+    case 'user_multiple_cancel_confirm':
+    case 'user_form':
+    case 'user_cancel_form':
+      $show_user_list_access = tweets_queue_get_tweet_configuration_data(SHOW_USER_LIST_ACCESS);
+      if ($show_user_list_access) {
+        return;
+      }
+      // tweets_queue_goto_page();
+      break;
     case 'send_tweets_form ':
       break;
 
@@ -2683,7 +2694,6 @@ function tweets_queue_authenticate_twitter_user() {
       $twitter_authentication_process_update_info = array ('data' => serialize($oauth_info_data));
       if ($reply->httpstatus == 200) {
         $twitter_profile_info = tweets_queue_get_twitter_user_profile_information($reply->oauth_token, $reply->oauth_token_secret);
-
         if ($twitter_profile_info->httpstatus != 200) {
           tweets_queue_goto_page();
         }
@@ -2812,6 +2822,17 @@ function tweets_queue_authenticate_twitter_user() {
         tweets_queue_login_twitter_user($uid);
       }
     }
+
+    //Find presence of email.
+    if (!$uid) {
+      $email = $twitter_profile_info->email;
+      $uid = tweets_queue_check_email_presence($email);
+      if ($uid) {
+        tweets_queue_register_auth_map($twitter_owner_id, $uid, $twitter_data);
+        tweets_queue_login_twitter_user($uid);
+      }
+    }
+
     //Register if there is no entry present.
     if (!$uid) {
       $uid = tweets_queue_register_twitter_user($twitter_data, $twitter_profile_info);

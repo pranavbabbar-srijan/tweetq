@@ -56,8 +56,15 @@ class ProfileSettingForm extends FormBase {
     $form['message-header'] = array(
       '#type' => 'markup',
       '#prefix' => '<div  id= "profile-settings-form" class="message-header">',
-      '#markup' => t('Profile'),
     );
+
+    $form['message-header-title'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div class="message-header-title">',
+      '#markup' => t('Profile'),
+      '#suffix' => '</div>',
+    );
+
     $form[SIGNUP_FIELD_FULL_NAME] = array(
       '#type' => 'textfield',
       '#title' => t('Full Name'),
@@ -89,8 +96,16 @@ class ProfileSettingForm extends FormBase {
       ),
     );
 
+
+    $form['change_password_prefix'] = array(
+      '#type' => 'markup',
+      '#markup' => t(''),
+      '#prefix' => '<div id="change-password">',
+    );
+
     $form['change' . SIGNUP_FIELD_PASSWORD] = array(
       '#type' => 'password',
+      // '#prefix' => '<div id="change-password">',
       '#title' => t('Password'),
       '#required' => FALSE,
       '#default_value' => '',
@@ -101,7 +116,6 @@ class ProfileSettingForm extends FormBase {
 
     $form['change_password'] = array(
       '#type' => 'markup',
-      '#prefix' => '<div id="change-password">',
       '#markup' => t('Change'),
       '#suffix' => '</div>',
     );
@@ -150,7 +164,6 @@ class ProfileSettingForm extends FormBase {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Update Profile'),
-      '#weight' => 9,
     );
 
     $form['message-footer'] = array(
