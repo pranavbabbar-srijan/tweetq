@@ -96,9 +96,16 @@ class ProfileSettingForm extends FormBase {
       ),
     );
 
+
+    $form['change_password_prefix'] = array(
+      '#type' => 'markup',
+      '#markup' => t(''),
+      '#prefix' => '<div id="change-password">',
+    );
+
     $form['change' . SIGNUP_FIELD_PASSWORD] = array(
       '#type' => 'password',
-      '#prefix' => '<div id="change-password">',
+      // '#prefix' => '<div id="change-password">',
       '#title' => t('Password'),
       '#required' => FALSE,
       '#default_value' => '',
@@ -157,7 +164,6 @@ class ProfileSettingForm extends FormBase {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Update Profile'),
-      '#weight' => 9,
     );
 
     $form['message-footer'] = array(
