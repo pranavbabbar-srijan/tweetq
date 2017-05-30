@@ -102,6 +102,11 @@ class TweetsQueueTweetController extends ControllerBase {
       'created' => $created,
       'status' => 0
     );
+    $invited_id = tweets_queue_check_invited_friend_email_presence($email);
+    if ($invited_id) {
+      die(t("Already invited @email", array('@email' => $email)));
+      return;
+    }
     $id = tweets_queue_insert_friend_invite_hash_key_record($friend_invite_info);
     //Perform send mail operation and other stuff.
     // tweets_queue_forgot_password_send_mail($email, $hash_key, $id, $hash_key1);

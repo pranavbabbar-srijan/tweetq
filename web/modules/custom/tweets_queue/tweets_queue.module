@@ -3956,6 +3956,26 @@ function tweets_queue_insert_friend_invite_hash_key_record($invite_info) {
 }
 
 /**
+ * Fetch existing invited friend email presence.
+ *
+ * @param string $email
+ *   Email id of the user.
+ *
+ * @return integer
+ *   Returns invited friend id.
+ */
+function tweets_queue_check_invited_friend_email_presence($email) {
+  $logged_uid = \Drupal::currentUser()->id();
+  $id = '';
+  $query = \Drupal::database()->select(TWITTER_INVITE_FRIEND_HASH_KEY_TABLE, 'p');
+  $query->addField('p', 'id');
+  $query->condition('p.email', $email);
+  $query->condition('p.uid', $logged_uid);
+  $id = $query->execute()->fetchField();
+  return $id;
+}
+
+/**
  * Validate  password hash key.
  *
  * @param integer $id
