@@ -215,3 +215,10 @@ tweets_queue_firend_invite_send_token.send_token:
     _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::sendFriendInviteToken'
   requirements:
     _role: 'authenticated'
+
+tweets_queue_confirm_friend_invite.update:
+  path: '/confirm-friend-invite'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\ConfirmFriendInvite'
+  requirements:
+    _access: 'TRUE'

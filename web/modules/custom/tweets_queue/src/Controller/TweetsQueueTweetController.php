@@ -109,7 +109,7 @@ class TweetsQueueTweetController extends ControllerBase {
     }
     $id = tweets_queue_insert_friend_invite_hash_key_record($friend_invite_info);
     //Perform send mail operation and other stuff.
-    // tweets_queue_forgot_password_send_mail($email, $hash_key, $id, $hash_key1);
+    tweets_queue_invite_friend_send_mail($email, $hash_key, $id, $hash_key1);
     die("done");
   }
 
