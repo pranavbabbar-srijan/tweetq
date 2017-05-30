@@ -71,6 +71,7 @@ const CRON_TWEET_CHARCATER_LIMIT = 140;
 const TWITTER_TWEET_IMAGE_SIZE_LIMIT = 5000000;
 const DB_TWEET_CHARCATER_LIMIT = 954;
 const TWITTER_CLIENT_ROLE = 'twitter_client';
+const TWITTER_VOLUNTEER_ROLE = 'twitter_approved_client';
 const TWITTER_APPROVED_CLIENT_ROLE = 'twitter_approved_client';
 const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
 const TWITTER_USER_DASHBOARD = 'dashboard';
@@ -1485,6 +1486,12 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       $twitter_owner_id = $entity->get(SIGNUP_FIELD_TWITTER_OWNER_ID)->value;
       $twitter_data = $entity->get(SIGNUP_FIELD_TWITTER_DATA)->value;
 
+      $user_roles = \Drupal\user\Entity\User::load($uid)->getRoles(TRUE);
+      if(in_array(TWITTER_VOLUNTEER_ROLE, $user_roles)) {
+        tweets_queue_post_process_volunteer_user($entity);
+        return;
+      }
+
       if ($twitter_owner_id) {
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_APPROVED_CLIENT_ROLE);
@@ -1523,6 +1530,16 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         tweets_queue_update_priority_info($entity->id(), $priority_info);
       }
   }
+}
+
+/**
+ * Post process volunteer user.
+ *
+ * @param  Drupal\Core\Entity\EntityInterface $entity [description]
+ * @return [type]                                     [description]
+ */
+function tweets_queue_post_process_volunteer_user(Drupal\Core\Entity\EntityInterface $entity) {
+  tweets_queue_debug_info(t('Post process volunteer user registration.'));
 }
 
 /**
@@ -4070,6 +4087,29 @@ function tweets_queue_fetch_friend_invite_hash_key_info($id) {
   $query->condition('p.id', $id);
   $hash_key_info = $query->execute()->fetchObject();
   return $hash_key_info;
+}
+
+function tweets_queue_register_friend_invited_user($profile_info) {
+  $user = \Drupal\user\Entity\User::create();
+  $created = time();
+  $random = rand(200, 1000);
+  $email = $profile_info->email;
+  $full_name = (isset($profile_info->name)) ? $profile_info->name : 'Volunteer User';
+  $username = 'volunteer_user_' . $random . '_' . $created;
+  $screen_name = 'Volunteer';
+  //Mandatory settings
+  $user->setPassword(user_password());
+  $user->enforceIsNew();
+  $user->setEmail($email);
+  $user->setUsername($username);
+  $user->set(SIGNUP_FIELD_TWITTER_OWNER_ID, $twitter_owner_id);
+  $user->set(SIGNUP_FIELD_FULL_NAME, $full_name);
+  $user->set(SIGNUP_FIELD_TWITTER_DATA, serialize(array()));
+  $user->addRole(TWITTER_VOLUNTEER_ROLE);
+
+  //Optional settings
+  $user->activate();
+  $res = $user->save();
 }
 
 /**
