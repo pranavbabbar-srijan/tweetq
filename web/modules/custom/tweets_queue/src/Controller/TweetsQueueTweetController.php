@@ -85,6 +85,37 @@ class TweetsQueueTweetController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
+  public function sendFriendInviteToken() {
+    $uid = \Drupal::currentUser()->id();
+    $email = tweets_queue_get_parameter_data('email');
+    if (!\Drupal::service('email.validator')->isValid($email)) {
+      die(t("Please enter a valid email ID"));
+    }
+
+    $created = time();
+    $hash_key = hash('sha256', $email);
+    $hash_key1 = hash('sha256', $created);
+    $friend_invite_info = array(
+      'uid' => $uid,
+      'email' => $email,
+      'hash_key' => $hash_key,
+      'created' => $created,
+      'status' => 0
+    );
+    $invited_id = tweets_queue_check_invited_friend_email_presence($email);
+    if ($invited_id) {
+      die(t("Already invited @email", array('@email' => $email)));
+      return;
+    }
+    $id = tweets_queue_insert_friend_invite_hash_key_record($friend_invite_info);
+    //Perform send mail operation and other stuff.
+    tweets_queue_invite_friend_send_mail($email, $hash_key, $id, $hash_key1);
+    die("done");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateUserLogin() {
     $email = tweets_queue_get_parameter_data('email');
     $password = tweets_queue_get_parameter_data('password');
@@ -157,11 +188,10 @@ class TweetsQueueTweetController extends ControllerBase {
 }
 
   /**
-  This function goto tha login page when users got an access denied error message
+  * This function goto than login page when users got an access denied error message.
   */
   
   public function accessDenied() {
-   
     tweets_queue_goto_page();
   }
 }

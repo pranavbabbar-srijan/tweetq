@@ -39,6 +39,7 @@ const TWEET_QUEUE_CSV_FILE_UPLOAD = 'tweet_queue_csv_file_upload';
 const TWEET_QUEUE_CSV_FILE_UPLOAD_DIRECTORY = 'public://tweets_queue/';
 const TWEETS_PRIORITY_TABLE = 'tweets_priority';
 const TWITTER_AUTH_MAP_TABLE = 'twitter_auth_map';
+const TWITTER_VOLUNTEER_MAP_TABLE = 'twitter_volunteer_map';
 const TWITTER_STATISTICS_TABLE = 'twitter_statistics';
 const TWITTER_MESSAGE_QUEUE_TABLE = 'twitter_message_queue';
 const TWITTER_IMAGE_TABLE = 'twitter_images';
@@ -50,6 +51,7 @@ const TWITTER_CRON_HISTORY_TABLE = 'twitter_cron_history';
 const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
 const TWEETS_HANDLER_TABLE = 'tweets_handler';
 const TWITTER_PASSWORD_HASH_KEY_TABLE = 'twitter_password_hash_key';
+const TWITTER_INVITE_FRIEND_HASH_KEY_TABLE = 'twitter_invite_friend_hash_key';
 const CRON_TWEET_SCHEDULED = 'cron_tweet_scheduled';
 const SHOW_USER_LIST_ACCESS = 'show_user_list_access';
 const CRON_TWEET_MIN_INTERVAL = 'cron_tweet_min_interval';
@@ -70,6 +72,7 @@ const CRON_TWEET_CHARCATER_LIMIT = 140;
 const TWITTER_TWEET_IMAGE_SIZE_LIMIT = 5000000;
 const DB_TWEET_CHARCATER_LIMIT = 954;
 const TWITTER_CLIENT_ROLE = 'twitter_client';
+const TWITTER_VOLUNTEER_ROLE = 'twitter_approved_client';
 const TWITTER_APPROVED_CLIENT_ROLE = 'twitter_approved_client';
 const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
 const TWITTER_USER_DASHBOARD = 'dashboard';
@@ -1484,6 +1487,12 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
       $twitter_owner_id = $entity->get(SIGNUP_FIELD_TWITTER_OWNER_ID)->value;
       $twitter_data = $entity->get(SIGNUP_FIELD_TWITTER_DATA)->value;
 
+      $user_roles = \Drupal\user\Entity\User::load($uid)->getRoles(TRUE);
+      if(in_array(TWITTER_VOLUNTEER_ROLE, $user_roles)) {
+        tweets_queue_post_process_volunteer_user($entity);
+        return;
+      }
+
       if ($twitter_owner_id) {
         $entity->addRole(TWITTER_CLIENT_ROLE);
         $entity->addRole(TWITTER_APPROVED_CLIENT_ROLE);
@@ -1525,6 +1534,16 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
 }
 
 /**
+ * Post process volunteer user.
+ *
+ * @param  Drupal\Core\Entity\EntityInterface $entity [description]
+ * @return [type]                                     [description]
+ */
+function tweets_queue_post_process_volunteer_user(Drupal\Core\Entity\EntityInterface $entity) {
+  tweets_queue_debug_info(t('Post process volunteer user registration.'));
+}
+
+/**
  * Implements hook_mail().
  */
 function tweets_queue_mail($key, &$message, $params) {
@@ -1543,6 +1562,11 @@ function tweets_queue_mail($key, &$message, $params) {
       $message['body'][] = Html::escape($params['message']);
       break;
     case 'forgot_password_email':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = $params['message'];
+      break;
+    case 'invite_friend_email':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = $params['message'];
@@ -1747,7 +1771,45 @@ function tweets_queue_delete_twitter_specific_info($field_name, $field_value, $t
  * Implements hook_schema().
  */
 function tweets_queue_schema() {
-   $schema[TWITTER_PASSWORD_HASH_KEY_TABLE] = array(
+  $schema[TWITTER_VOLUNTEER_MAP_TABLE] = array(
+    'description' => 'The base table for twitter tweets data.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'owner_id' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'volunteer_id' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'data' => array('description' => 'The value.', 'type' => 'blob', 'not null' => TRUE, 'size' => 'big'),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'changed' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'twitter_volunteer_map_owner_id' => array('owner_id'),
+      'twitter_volunteer_map_changed' => array('changed'),
+      'twitter_volunteer_map_created' => array('created'),
+      'twitter_volunteer_map_status' => array('status'),
+      'twitter_volunteer_volunteer_id' => array('volunteer_id'),
+    )
+  );
+
+  $schema[TWITTER_INVITE_FRIEND_HASH_KEY_TABLE] = array(
+    'description' => 'The base table for friends invited to the barbet.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'email' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'hash_key' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 100, 'default' => ''),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'twitter_invite_friend_hash_key_uid' => array('uid'),
+      'twitter_invite_friend_hash_key_email' => array('email'),
+    )
+  );
+
+  $schema[TWITTER_PASSWORD_HASH_KEY_TABLE] = array(
     'description' => 'The base table for password change.',
     'fields' => array(
       'id' => array('type' => 'serial', 'not null' => TRUE),
@@ -3914,6 +3976,218 @@ function tweets_queue_insert_password_hash_key_record($password_message_info) {
   if ($id) {
     return $id;
   }
+}
+
+/**
+ * Store generated hash key for specific email and user uid.
+ *
+ * @param array $invite_info
+ *   Array containing invite information.
+ *
+ * @return integer
+ *   Returns unique id for the newly created record.
+ */
+function tweets_queue_insert_friend_invite_hash_key_record($invite_info) {
+  if (!is_array($invite_info)) {
+    $invite_info = array();
+  }
+  $id = db_insert(TWITTER_INVITE_FRIEND_HASH_KEY_TABLE)
+    ->fields($invite_info)
+    ->execute();
+  if ($id) {
+    return $id;
+  }
+}
+
+/**
+ * Fetch existing invited friend email presence.
+ *
+ * @param string $email
+ *   Email id of the user.
+ *
+ * @return integer
+ *   Returns invited friend id.
+ */
+function tweets_queue_check_invited_friend_email_presence($email) {
+  $logged_uid = \Drupal::currentUser()->id();
+  $id = '';
+  $query = \Drupal::database()->select(TWITTER_INVITE_FRIEND_HASH_KEY_TABLE, 'p');
+  $query->addField('p', 'id');
+  $query->condition('p.email', $email);
+  $query->condition('p.uid', $logged_uid);
+  $id = $query->execute()->fetchField();
+  return $id;
+}
+
+/**
+ * Send invite friend mail.
+ *
+ * @param string $mail
+ *   Valid email address.
+ */
+function tweets_queue_invite_friend_send_mail($mail, $hash_key, $id, $hash_key1) {
+  global $base_url;
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'invite_friend_email'; // Replace with Your key
+  $to = $mail;
+
+  $link = $base_url . '/confirm-friend-invite' . "?hash_key=" . $hash_key . '&id=' . $id . '&hash_key1=' . $hash_key1;
+  tweets_queue_debug_info($link);
+  $message = t("Friend Invitation\n
+    Your friend have invited you to join the Barbet.\n
+    Link: @link", array('@link' => $link));
+  tweets_queue_debug_info($message);
+  $params['message'] = $message;
+  $params['title'] = 'Friend invitation to the Barbet';
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  \Drupal::logger('mail-log')->notice($message);
+}
+
+/**
+ * Validate  password hash key.
+ *
+ * @param integer $id
+ *   ID of the password hash key record.
+ * @param string $hash_key
+ *   Hash key generated based on the email.
+ * @param string $hash_key1
+ *   Hash key generated based on the created time.
+ *
+ * @return boolean
+ *   Returns true when all the condition is met true otherwise false.
+ */
+function tweets_queue_validate_friend_invite_hash_key($id, $hash_key, $hash_key1) {
+  $hash_key_info = tweets_queue_fetch_friend_invite_hash_key_info($id);
+  if (!is_object($hash_key_info)) {
+    drupal_set_message(t("You are not allowed to access this page."));
+    return false;
+  }
+  if ($hash_key_info->hash_key != $hash_key) {
+    drupal_set_message(t("You are not allowed to access this page."));
+    return false;
+  }
+  $created_hash_key =  hash('sha256', $hash_key_info->created);
+  if ($hash_key1 != $created_hash_key) {
+    drupal_set_message(t("You are not allowed to access this page."));
+    return false;
+  }
+
+  if ($hash_key_info->status == 1) {
+    drupal_set_message(t("You have already confirmed the invitation."));
+    return false;
+  }
+  $now = time();
+  $elapsed_time = $now - $hash_key_info->created;
+  $elapsed_time_duration = 24 * 60 * 60;
+  if ($elapsed_time >  $elapsed_time_duration) {
+    drupal_set_message(t("Your friend invite time got expired."));;
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Fetch password hash key information.
+ *
+ * @param integer $id
+ *   Id of the password hash key.
+ *
+ * @return object
+ *   Returns object containing the complete password hash key info.
+ */
+function tweets_queue_fetch_friend_invite_hash_key_info($id) {
+  $hash_key_info = array();
+  $query = \Drupal::database()->select(TWITTER_INVITE_FRIEND_HASH_KEY_TABLE, 'p');
+  $query->fields('p', ['id', 'uid', 'email', 'hash_key', 'created']);
+  $query->condition('p.id', $id);
+  $hash_key_info = $query->execute()->fetchObject();
+  return $hash_key_info;
+}
+
+/**
+ * Registration for invited user.
+ *
+ * @param array $profile_info
+ *   Array containing the registration info.
+ *
+ * @return integer
+ *   Returns the registered user uid.
+ */
+function tweets_queue_register_friend_invited_user($profile_info) {
+  $user = \Drupal\user\Entity\User::create();
+  $created = time();
+  $random = rand(200, 1000);
+  $email = $profile_info->email;
+  $full_name = (isset($profile_info->name)) ? $profile_info->name : 'Volunteer User';
+  $username = 'volunteer_user_' . $random . '_' . $created;
+  $screen_name = 'Volunteer';
+  //Mandatory settings
+  $user->setPassword($profile_info->password);
+  $user->enforceIsNew();
+  $user->setEmail($email);
+  $user->setUsername($username);
+  $user->set(SIGNUP_FIELD_TWITTER_OWNER_ID, '');
+  $user->set(SIGNUP_FIELD_FULL_NAME, $full_name);
+  $user->set(SIGNUP_FIELD_TWITTER_DATA, serialize(array()));
+  $user->addRole(TWITTER_VOLUNTEER_ROLE);
+  $user->addRole(TWITTER_CLIENT_ROLE);
+
+  //Optional settings
+  $user->activate();
+  $res = $user->save();
+  $uid = $user->get('uid')->value;
+  if ($uid) {
+    return $uid;
+  }
+}
+
+/**
+ * Map Volunteer with the twitter handle account.
+ *
+ * @param array $volunteer_info
+ *   Array containing volunteer information.
+ *
+ * @return integer
+ *   Returns unique id for the newly created record.
+ */
+function tweets_queue_insert_volunteer_map_record($volunteer_info) {
+  if (!is_array($volunteer_info)) {
+    $volunteer_info = array();
+  }
+  $id = db_insert(TWITTER_VOLUNTEER_MAP_TABLE)
+    ->fields($volunteer_info)
+    ->execute();
+  if ($id) {
+    return $id;
+  }
+}
+
+/**
+ * Fetch invited volunteer map record presence.
+ *
+ * @param integer $owner_id
+ *   User uid of the twitter handle.
+ * @param integer $volunteer_id
+ *   Invited volunteer user uid.
+ *
+ * @return integer
+ *   Returns record id containg the volunteer mapping.
+ */
+function tweets_queue_check_invited_friend_map_presence($owner_id, $volunteer_id) {
+  $id = '';
+  $query = \Drupal::database()->select(TWITTER_VOLUNTEER_MAP_TABLE, 'p');
+  $query->addField('p', 'id');
+  $query->condition('p.volunteer_id', $volunteer_id);
+  $query->condition('p.owner_id', $owner_id);
+  $id = $query->execute()->fetchField();
+  return $id;
 }
 
 /**
