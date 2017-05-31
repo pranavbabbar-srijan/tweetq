@@ -42,14 +42,37 @@
 		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
 		var user_history_path = '/dashboard/user-history';
 		var profile_change_password_path = '/dashboard/changePassword';
+		var friend_invite_send_token_path = '/dashboard/friendInviteSendToken';
 
 		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
 		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
 		// var user_history_path = '/v/_www/dashboard/user-history';
 		// var profile_change_password_path = '/barbet_3may/_www/dashboard/changePassword';
+		// var friend_invite_send_token_path = '/barbet_3may/_www/dashboard/friendInviteSendToken';
 
 		$( "#foo" ).trigger( "click" );
+
+		//Account setting form.
+		$("#profile-account-settings-form #invite-friend").click(function() {
+	   		var emails = $('#profile-account-settings-form #edit-invite-friend-list').val();
+  			$("#profile-account-settings-form-email-validation-error").remove();
+  			$("#email-sent").remove();
+  			if (emails.length == 0) {
+	    		$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#profilesettingform #edit-invite-friend-list" );
+	    		return;
+	    	}
+
+	    	$.post(friend_invite_send_token_path, {'email' : emails}, function(data) {
+				if  (data == "done") {
+					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
+					$('#email-sent').delay(5000).fadeOut(300);			
+					return;
+				}
+				$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
+		    });
+
+		});
 
 		//Profile setting form Beginning.
 
