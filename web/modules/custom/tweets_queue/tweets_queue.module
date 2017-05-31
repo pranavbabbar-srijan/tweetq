@@ -1603,6 +1603,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   
   $user_hash_key = hash('sha256', $mail);
   $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
+  $link1 = '<a href="' . $link . '"> Get started </a>';
 
    $message = t("Hello @full_name,\n
     Thank your for choosing Barbet.
@@ -1621,7 +1622,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   while your relax. 
 
    So what are we waiting for? Let’s begin tweeting. 
-    @link", array('@full_name' => $name, '@link' => $link));
+    @link", array('@full_name' => $name, '@link' => $link1));
    $params['message'] = $message;
   $params['title'] = 'Barbet Registration Verification';
  
@@ -1640,17 +1641,6 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
     drupal_set_message($message);
   }
   \Drupal::logger('mail-log')->notice($message);
-}
-
-function tweets_queue_theme() {
-  return [
-    'mail-body' =>
-    [
-      'variables' => [
-      'text 1' => NULL,
-      ],
-    ]
-  ];
 }
 
 /**
