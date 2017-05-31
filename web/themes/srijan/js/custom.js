@@ -49,7 +49,7 @@
 		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
 		// var user_history_path = '/v/_www/dashboard/user-history';
 		// var profile_change_password_path = '/barbet_3may/_www/dashboard/changePassword';
-		var friend_invite_send_token_path = '/barbet_3may/_www/dashboard/friendInviteSendToken';
+		// var friend_invite_send_token_path = '/barbet_3may/_www/dashboard/friendInviteSendToken';
 
 		$( "#foo" ).trigger( "click" );
 
