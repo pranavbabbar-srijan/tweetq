@@ -180,15 +180,15 @@
 	    	}
 
 	    	//Password check.
-	    	var password = $('#signup-form #edit-user-password').val();
-	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			var valid = regex.test(password);
-  			$("#password-validation-error").remove();
-  			if (!valid) {
-  				$("#password-validation-error").remove();
-  				passed = false;
-	    		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
-  			}
+	    // 	var password = $('#signup-form #edit-user-password').val();
+	    // 	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  			// var valid = regex.test(password);
+  			// $("#password-validation-error").remove();
+  			// if (!valid) {
+  			// 	$("#password-validation-error").remove();
+  			// 	passed = false;
+	    // 		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
+  			// }
   			if (password.length == 0) {
 	    		$("#password-validation-error").remove();
 	    		passed = false;
@@ -256,16 +256,16 @@
 	  	});
 
 	    //Password validation.
-	    $("#signup-form #edit-user-password").focusout(function() {
-	   		var password = $('#signup-form #edit-user-password').val();
-	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			var valid = regex.test(password);
-  			$("#password-validation-error").remove();
-  			if (!valid) {
-  				$("#password-validation-error").remove();
-	    		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
-  			}
-	  	});
+	   //  $("#signup-form #edit-user-password").focusout(function() {
+	   // 		var password = $('#signup-form #edit-user-password').val();
+	   //  	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  		// 	var valid = regex.test(password);
+  		// 	$("#password-validation-error").remove();
+  		// 	if (!valid) {
+  		// 		$("#password-validation-error").remove();
+	   //  		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
+  		// 	}
+	  	// });
 
 	    $("#signup-form #edit-user-password").focusout(function() {
 	   		var password = $('#signup-form #edit-user-password').val();
@@ -725,6 +725,44 @@
 		//     }
 		// })
 
+	});
+
+	$(document).ready(function() {
+		$(' #edit-user-password').keyup(function() {
+			$('#result').html(checkStrength($('#edit-user-password').val()))
+			})
+			function checkStrength(password) {
+			var strength = 0
+			if (password.length < 6 && password.length > 0) {
+			$('#result').removeClass()
+			$('#result').addClass('short')
+			$('#result').html('Too Short');
+			}
+			if (password.length > 7) strength += 1
+			// If password contains both lower and uppercase characters, increase strength value.
+			if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
+			// If it has numbers and characters, increase strength value.
+			if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
+			// If it has one special character, increase strength value.
+			if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+			// If it has two special characters, increase strength value.
+			if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+			// Calculated strength value, we can return messages
+			// If value is less than 2
+			if (strength < 2 && strength != 0) {
+			$('#result').removeClass()
+			$('#result').addClass('weak')
+			return 'Weak';
+			} else if (strength == 2) {
+			$('#result').removeClass()
+			$('#result').addClass('good')
+			return 'Good';
+			} else if (strength > 2 && strength != 0) {
+			$('#result').removeClass()
+			$('#result').addClass('strong')
+			return 'Strong';
+			}
+		}
 	});
 
 })(jQuery);

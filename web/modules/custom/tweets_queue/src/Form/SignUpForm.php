@@ -95,6 +95,14 @@ class SignUpForm extends FormBase {
       ),
     );
 
+    $form['SIGNUP_FIELD_ORGANIZATION'] = array(
+      '#prefix' => '<span id="result">',
+      '#type' => 'hidden',
+      '#title' => t('Password validation'),
+      '#required' => FALSE,
+      '#suffix' => '</span>',
+    );
+
     $form['#validate'][] = 'tweets_queue_user_signup_validate';
     $form['submit'] = array(
       '#type' => 'submit',
@@ -107,6 +115,7 @@ class SignUpForm extends FormBase {
       '#suffix' => '</div>',
       '#markup' => t(''),
     );
+
     return $form;
   }
 
