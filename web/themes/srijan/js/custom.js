@@ -736,7 +736,7 @@
 			if (password.length < 6 && password.length > 0) {
 			$('#result').removeClass()
 			$('#result').addClass('short')
-			$('#result').html('Too Short');
+			$('#result').html('Short').fadeIn(3000).hide(6000);
 			}
 			if (password.length > 7) strength += 1
 			// If password contains both lower and uppercase characters, increase strength value.
