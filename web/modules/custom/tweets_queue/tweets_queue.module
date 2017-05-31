@@ -4111,6 +4111,15 @@ function tweets_queue_fetch_friend_invite_hash_key_info($id) {
   return $hash_key_info;
 }
 
+/**
+ * Registration for invited user.
+ *
+ * @param array $profile_info
+ *   Array containing the registration info.
+ *
+ * @return integer
+ *   Returns the registered user uid.
+ */
 function tweets_queue_register_friend_invited_user($profile_info) {
   $user = \Drupal\user\Entity\User::create();
   $created = time();
@@ -4120,18 +4129,65 @@ function tweets_queue_register_friend_invited_user($profile_info) {
   $username = 'volunteer_user_' . $random . '_' . $created;
   $screen_name = 'Volunteer';
   //Mandatory settings
-  $user->setPassword(user_password());
+  $user->setPassword($profile_info->password);
   $user->enforceIsNew();
   $user->setEmail($email);
   $user->setUsername($username);
-  $user->set(SIGNUP_FIELD_TWITTER_OWNER_ID, $twitter_owner_id);
+  $user->set(SIGNUP_FIELD_TWITTER_OWNER_ID, '');
   $user->set(SIGNUP_FIELD_FULL_NAME, $full_name);
   $user->set(SIGNUP_FIELD_TWITTER_DATA, serialize(array()));
   $user->addRole(TWITTER_VOLUNTEER_ROLE);
+  $user->addRole(TWITTER_CLIENT_ROLE);
 
   //Optional settings
   $user->activate();
   $res = $user->save();
+  $uid = $user->get('uid')->value;
+  if ($uid) {
+    return $uid;
+  }
+}
+
+/**
+ * Map Volunteer with the twitter handle account.
+ *
+ * @param array $volunteer_info
+ *   Array containing volunteer information.
+ *
+ * @return integer
+ *   Returns unique id for the newly created record.
+ */
+function tweets_queue_insert_volunteer_map_record($volunteer_info) {
+  if (!is_array($volunteer_info)) {
+    $volunteer_info = array();
+  }
+  $id = db_insert(TWITTER_VOLUNTEER_MAP_TABLE)
+    ->fields($volunteer_info)
+    ->execute();
+  if ($id) {
+    return $id;
+  }
+}
+
+/**
+ * Fetch invited volunteer map record presence.
+ *
+ * @param integer $owner_id
+ *   User uid of the twitter handle.
+ * @param integer $volunteer_id
+ *   Invited volunteer user uid.
+ *
+ * @return integer
+ *   Returns record id containg the volunteer mapping.
+ */
+function tweets_queue_check_invited_friend_map_presence($owner_id, $volunteer_id) {
+  $id = '';
+  $query = \Drupal::database()->select(TWITTER_VOLUNTEER_MAP_TABLE, 'p');
+  $query->addField('p', 'id');
+  $query->condition('p.volunteer_id', $volunteer_id);
+  $query->condition('p.owner_id', $owner_id);
+  $id = $query->execute()->fetchField();
+  return $id;
 }
 
 /**

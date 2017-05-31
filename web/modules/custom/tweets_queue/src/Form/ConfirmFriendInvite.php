@@ -40,10 +40,33 @@ class ConfirmFriendInvite extends FormBase {
       return;
     }
 
+    $friend_invited_info = tweets_queue_fetch_friend_invite_hash_key_info($id);
+    $uid = tweets_queue_check_email_presence($friend_invited_info->email);
+    if ($uid) {
+      $invited_mapped_id = tweets_queue_check_invited_friend_map_presence($friend_invited_info->uid, $uid);
+      if ($invited_mapped_id) {
+        drupal_set_message(t('Mapping already done.'));
+        tweets_queue_goto_page();
+      }
+      $friend_map_info = array(
+        'owner_id' => $friend_invited_info->uid,
+        'volunteer_id' => $uid,
+        'created' => time(),
+        'data' => serialize(array()),
+        'status' => 1,
+        'changed' => 0
+      );
+      $map_id = tweets_queue_insert_volunteer_map_record($friend_map_info);
+      if ($map_id) {
+        drupal_set_message(t('Mapping successfully done.'));
+        tweets_queue_goto_page();
+      }
+    }
+
     $form['message_header'] = array(
       '#type' => 'markup',
       '#prefix' => '<div class="password-header">',
-      '#markup' => t('Friend Invitation'),
+      '#markup' => t('Confirm Friend Invitation'),
       '#suffix' => '</div>',
     );
     $form['password'] = array(
@@ -114,13 +137,26 @@ class ConfirmFriendInvite extends FormBase {
     }
     $friend_invited_info = tweets_queue_fetch_friend_invite_hash_key_info($id);
     $friend_invited_info->password = $data['password'];
-    $uid = tweets_queue_check_email_presence($email);
+    $uid = tweets_queue_check_email_presence($friend_invited_info->email);
     if ($uid) {
-      //TODO: map user record.
-      // tweets_queue_login_twitter_user($uid);
-      return;
+      drupal_set_message(t('User with email present.'));
+      $invited_mapped_id = tweets_queue_check_invited_friend_map_presence($friend_invited_info->uid, $uid);
+      if ($invited_mapped_id) {
+        drupal_set_message(t('Mapping already done.'));
+        return;
+      }
     }
-    tweets_queue_register_friend_invited_user($friend_invited_info);
+    $invited_user_uid = tweets_queue_register_friend_invited_user($friend_invited_info);
+    $friend_map_info = array(
+      'owner_id' => $friend_invited_info->uid,
+      'volunteer_id' => $invited_user_uid,
+      'created' => time(),
+      'data' => serialize(array()),
+      'status' => 1,
+      'changed' => 0
+    );
+    tweets_queue_insert_volunteer_map_record($friend_map_info);
+    tweets_queue_goto_page();
   }
 
   /**
