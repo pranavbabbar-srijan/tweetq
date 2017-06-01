@@ -222,3 +222,10 @@ tweets_queue_confirm_friend_invite.update:
     _form: '\Drupal\tweets_queue\Form\ConfirmFriendInvite'
   requirements:
     _access: 'TRUE'
+
+tweets_queue_invite_friends.invite:
+  path: '/dashboard/inviteFriends'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::inviteFriends'
+  requirements:
+    _role: 'authenticated'
