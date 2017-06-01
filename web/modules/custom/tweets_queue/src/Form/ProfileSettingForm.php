@@ -116,7 +116,7 @@ class ProfileSettingForm extends FormBase {
 
     $form['change_password'] = array(
       '#type' => 'markup',
-      '#markup' => t('Change'),
+      '#markup' => t('<span class="change">Change</span>'),
       '#suffix' => '</div>',
     );
 
