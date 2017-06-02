@@ -1,12 +1,22 @@
-# The routes of the project.
-#
-# Each route describes how an incoming URL is going
-# to be processed by Platform.sh.
-
-"http://{default}/":
-    type: upstream
-    upstream: "app:http"
-
-"http://www.{default}/":
-    type: redirect
-    to: "http://{default}/"
+http://{default}/:
+  type: upstream
+  upstream: app:http
+http://www.{default}/:
+  type: redirect
+  to: http://{default}/
+http://barbet.io/:
+  type: upstream
+  redirects:
+    expires: -1s
+    paths: {}
+  cache:
+    enabled: true
+    default_ttl: 0
+    cookies:
+    - '*'
+    headers:
+    - Accept
+    - Accept-Language
+  ssi:
+    enabled: false
+  upstream: app:http
