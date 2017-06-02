@@ -43,6 +43,7 @@
 		var user_history_path = '/dashboard/user-history';
 		var profile_change_password_path = '/dashboard/changePassword';
 		var friend_invite_send_token_path = '/dashboard/friendInviteSendToken';
+		var invite_friends_path = '/dashboard/inviteFriends';
 
 		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
@@ -50,10 +51,32 @@
 		// var user_history_path = '/v/_www/dashboard/user-history';
 		// var profile_change_password_path = '/barbet_3may/_www/dashboard/changePassword';
 		// var friend_invite_send_token_path = '/barbet_3may/_www/dashboard/friendInviteSendToken';
+		// var invite_friends_path = '/barbet_3may/_www/dashboard/inviteFriends';
 
 		$( "#foo" ).trigger( "click" );
 
-		//Account setting form.
+		//Account setting invite friends.
+		$("#user-form #invite-friends").click(function() {
+	   		var emails = $('#user-form #edit-invite-friend-list').val();
+  			$("#user-form-email-validation-error").remove();
+  			$("#email-sent").remove();
+  			if (emails.length == 0) {
+	    		$("<span id='user-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+	    		return;
+	    	}
+
+	    	$.post(invite_friends_path, {'email' : emails}, function(data) {
+				if  (data == "done") {
+					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+					$('#email-sent').delay(5000).fadeOut(300);
+					return;
+				}
+				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+		    });
+
+		});
+
+		//Volunteer invite form.
 		$("#profile-account-settings-form #invite-friend").click(function() {
 	   		var emails = $('#profile-account-settings-form #edit-invite-friend-list').val();
   			$("#profile-account-settings-form-email-validation-error").remove();
