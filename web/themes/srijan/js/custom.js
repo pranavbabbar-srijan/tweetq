@@ -42,14 +42,60 @@
 		var forgot_password_send_token_path = '/dashboard/forgotPasswordSendToken';
 		var user_history_path = '/dashboard/user-history';
 		var profile_change_password_path = '/dashboard/changePassword';
+		var friend_invite_send_token_path = '/dashboard/friendInviteSendToken';
+		var invite_friends_path = '/dashboard/inviteFriends';
 
 		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
 		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
 		// var user_history_path = '/v/_www/dashboard/user-history';
 		// var profile_change_password_path = '/barbet_3may/_www/dashboard/changePassword';
+		// var friend_invite_send_token_path = '/barbet_3may/_www/dashboard/friendInviteSendToken';
+		// var invite_friends_path = '/barbet_3may/_www/dashboard/inviteFriends';
 
 		$( "#foo" ).trigger( "click" );
+
+		//Account setting invite friends.
+		$("#user-form #invite-friends").click(function() {
+	   		var emails = $('#user-form #edit-invite-friend-list').val();
+  			$("#user-form-email-validation-error").remove();
+  			$("#email-sent").remove();
+  			if (emails.length == 0) {
+	    		$("<span id='user-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+	    		return;
+	    	}
+
+	    	$.post(invite_friends_path, {'email' : emails}, function(data) {
+				if  (data == "done") {
+					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+					$('#email-sent').delay(5000).fadeOut(300);
+					return;
+				}
+				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+		    });
+
+		});
+
+		//Volunteer invite form.
+		$("#profile-account-settings-form #invite-friend").click(function() {
+	   		var emails = $('#profile-account-settings-form #edit-invite-friend-list').val();
+  			$("#profile-account-settings-form-email-validation-error").remove();
+  			$("#email-sent").remove();
+  			if (emails.length == 0) {
+	    		$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#profilesettingform #edit-invite-friend-list" );
+	    		return;
+	    	}
+
+	    	$.post(friend_invite_send_token_path, {'email' : emails}, function(data) {
+				if  (data == "done") {
+					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
+					$('#email-sent').delay(5000).fadeOut(300);			
+					return;
+				}
+				$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
+		    });
+
+		});
 
 		//Profile setting form Beginning.
 
@@ -288,15 +334,15 @@
 	    	}
 
 	    	//Password check.
-	    	var password = $('#signup-form #edit-user-password').val();
-	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			var valid = regex.test(password);
-  			$("#password-validation-error").remove();
-  			if (!valid) {
-  				$("#password-validation-error").remove();
-  				passed = false;
-	    		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
-  			}
+	    // 	var password = $('#signup-form #edit-user-password').val();
+	    // 	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  			// var valid = regex.test(password);
+  			// $("#password-validation-error").remove();
+  			// if (!valid) {
+  			// 	$("#password-validation-error").remove();
+  			// 	passed = false;
+	    // 		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
+  			// }
   			if (password.length == 0) {
 	    		$("#password-validation-error").remove();
 	    		passed = false;
@@ -365,16 +411,16 @@
 	  	});
 
 	    //Password validation.
-	    $("#signup-form #edit-user-password").focusout(function() {
-	   		var password = $('#signup-form #edit-user-password').val();
-	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			var valid = regex.test(password);
-  			$("#password-validation-error").remove();
-  			if (!valid) {
-  				$("#password-validation-error").remove();
-	    		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
-  			}
-	  	});
+	   //  $("#signup-form #edit-user-password").focusout(function() {
+	   // 		var password = $('#signup-form #edit-user-password').val();
+	   //  	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  		// 	var valid = regex.test(password);
+  		// 	$("#password-validation-error").remove();
+  		// 	if (!valid) {
+  		// 		$("#password-validation-error").remove();
+	   //  		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
+  		// 	}
+	  	// });
 
 	    $("#signup-form #edit-user-password").focusout(function() {
 	   		var password = $('#signup-form #edit-user-password').val();
@@ -850,6 +896,44 @@
 		    $('.messages').addClass('listing-msg');
 		}
 
+	});
+
+	$(document).ready(function() {
+		$(' #edit-user-password').keyup(function() {
+			$('#result').html(checkStrength($('#edit-user-password').val()))
+			})
+			function checkStrength(password) {
+			var strength = 0
+			if (password.length < 6 && password.length > 0) {
+			$('#result').removeClass()
+			$('#result').addClass('short')
+			$('#result').html('Short').fadeIn(3000).hide(6000);
+			}
+			if (password.length > 7) strength += 1
+			// If password contains both lower and uppercase characters, increase strength value.
+			if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
+			// If it has numbers and characters, increase strength value.
+			if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
+			// If it has one special character, increase strength value.
+			if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+			// If it has two special characters, increase strength value.
+			if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+			// Calculated strength value, we can return messages
+			// If value is less than 2
+			if (strength < 2 && strength != 0) {
+			$('#result').removeClass()
+			$('#result').addClass('weak')
+			return 'Weak';
+			} else if (strength == 2) {
+			$('#result').removeClass()
+			$('#result').addClass('good')
+			return 'Good';
+			} else if (strength > 2 && strength != 0) {
+			$('#result').removeClass()
+			$('#result').addClass('strong')
+			return 'Strong';
+			}
+		}
 	});
 
 })(jQuery);

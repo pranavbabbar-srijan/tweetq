@@ -105,7 +105,6 @@ class ProfileSettingForm extends FormBase {
 
     $form['change' . SIGNUP_FIELD_PASSWORD] = array(
       '#type' => 'password',
-      // '#prefix' => '<div id="change-password">',
       '#title' => t('Password'),
       '#required' => FALSE,
       '#default_value' => '',
@@ -116,7 +115,7 @@ class ProfileSettingForm extends FormBase {
 
     $form['change_password'] = array(
       '#type' => 'markup',
-      '#markup' => t('Change'),
+      '#markup' => t('<span class="change">Change</span>'),
       '#suffix' => '</div>',
     );
 
