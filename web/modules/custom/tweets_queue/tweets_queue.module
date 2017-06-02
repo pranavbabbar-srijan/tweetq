@@ -214,13 +214,15 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
   switch ($form_id) {
     case 'views_form_user_admin_people_page_1':
     case 'user_multiple_cancel_confirm':
-    case 'user_form':
     case 'user_cancel_form':
       $show_user_list_access = tweets_queue_get_tweet_configuration_data(SHOW_USER_LIST_ACCESS);
       if ($show_user_list_access) {
         return;
       }
       // tweets_queue_goto_page();
+      break;
+    case 'user_form':
+      tweets_queue_user_profile_form_changes($form);
       break;
     case 'send_tweets_form ':
       break;
@@ -263,6 +265,43 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
     default:
       break;
   }
+}
+
+/**
+ * Account settig form changes.
+ */
+function tweets_queue_user_profile_form_changes(&$form) {
+  $form['message-header'] = array(
+    '#type' => 'markup',
+    '#prefix' => '<div  id="account-settings-form" class="message-header">',
+    '#markup' => t(''),
+    '#weight' => 10,
+  );
+  $form['invite_friend_list'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Invite friends to join Barbet'),
+    '#required' => FALSE,
+    '#default_value' => '',
+    '#attributes' => array (
+      'autocomplete' => 'off',
+      'placeholder' => t("Email address separated by comma"),
+    ),
+    '#weight' => 11,
+  );
+  $form['invite_friend'] = array(
+    '#type' => 'markup',
+    '#prefix' => '<div id="invite-friends">',
+    '#markup' => t('<span class="invite-friend">Invite</span>'),
+    '#suffix' => '</div>',
+    '#weight' => 12,
+  );
+  $form['message-footer'] = array(
+    '#type' => 'markup',
+    '#suffix' => '</div>',
+    '#markup' => t(''),
+    '#weight' => 13,
+  );
+  $form['actions']['submit']['#value'] = t('Update Profile');
 }
 
 /**
@@ -1567,6 +1606,11 @@ function tweets_queue_mail($key, &$message, $params) {
       $message['body'][] = $params['message'];
       break;
     case 'invite_friend_email':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = $params['message'];
+      break;
+    case 'invite_volunteer_email':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = $params['message'];
@@ -4025,11 +4069,40 @@ function tweets_queue_check_invited_friend_email_presence($email) {
  * @param string $mail
  *   Valid email address.
  */
-function tweets_queue_invite_friend_send_mail($mail, $hash_key, $id, $hash_key1) {
+function tweets_queue_invite_friends_send_mail($mail) {
   global $base_url;
   $mailManager = \Drupal::service('plugin.manager.mail');
   $module = 'tweets_queue';
   $key = 'invite_friend_email'; // Replace with Your key
+  $to = $mail;
+  $link = $base_url;
+  $message = t("Friend Invitation\n
+    Your friend have invited you to join the Barbet.\n
+    Link: @link", array('@link' => $link));
+  tweets_queue_debug_info($message);
+  $params['message'] = $message;
+  $params['title'] = 'Friend invitation to the Barbet';
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  \Drupal::logger('mail-log')->notice($message);
+}
+
+/**
+ * Send volunteer invite mail.
+ *
+ * @param string $mail
+ *   Valid email address.
+ */
+function tweets_queue_invite_volunteer_send_mail($mail, $hash_key, $id, $hash_key1) {
+  global $base_url;
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'invite_volunteer_email'; // Replace with Your key
   $to = $mail;
 
   $link = $base_url . '/confirm-friend-invite' . "?hash_key=" . $hash_key . '&id=' . $id . '&hash_key1=' . $hash_key1;
