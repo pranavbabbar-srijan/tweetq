@@ -109,7 +109,22 @@ class TweetsQueueTweetController extends ControllerBase {
     }
     $id = tweets_queue_insert_friend_invite_hash_key_record($friend_invite_info);
     //Perform send mail operation and other stuff.
-    tweets_queue_invite_friend_send_mail($email, $hash_key, $id, $hash_key1);
+    tweets_queue_invite_volunteer_send_mail($email, $hash_key, $id, $hash_key1);
+    die("done");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function inviteFriends() {
+    $uid = \Drupal::currentUser()->id();
+    $email = tweets_queue_get_parameter_data('email');
+    if (!\Drupal::service('email.validator')->isValid($email)) {
+      die(t("Please enter a valid email ID"));
+    }
+
+    //Perform send mail operation and other stuff.
+    tweets_queue_invite_friends_send_mail($email);
     die("done");
   }
 
