@@ -49,20 +49,13 @@ class ProfileSettingForm extends FormBase {
     $form['header_left'] = array(
       '#type' => 'markup',
       '#prefix' => '<div class="profile-setting">',
-      '#markup' => t(TWITTER_PROFILE_SETTING_LABEL),
+      '#markup' => t(TWITTER_PROFILE_LABEL),
       '#suffix' => '</div>',
     );
 
     $form['message-header'] = array(
       '#type' => 'markup',
       '#prefix' => '<div  id= "profile-settings-form" class="message-header">',
-    );
-
-    $form['message-header-title'] = array(
-      '#type' => 'markup',
-      '#prefix' => '<div class="message-header-title">',
-      '#markup' => t('Profile'),
-      '#suffix' => '</div>',
     );
 
     $form[SIGNUP_FIELD_FULL_NAME] = array(
