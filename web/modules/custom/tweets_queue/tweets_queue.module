@@ -94,7 +94,8 @@ const TWITTER_IMPORT_TWEET_PATH = 'dashboard/import-tweets';
 const TWITTER_VALID_TWEET_PATH = 'dashboard/valid-tweets';
 const TWITTER_INVALID_TWEET_PATH = 'dashboard/invalid-tweets';
 const TWITTER_ARCHIVED_TWEET_PATH = 'dashboard/archived-tweets';
-const TWITTER_PROFILE_SETTING_PATH = 'dashboard/profile-settings';
+const TWITTER_PROFILE_PATH = 'dashboard/my-profile';
+const TWITTER_SETTING_PATH = 'dashboard/settings';
 const TWITTER_TWEETED_TWEET_PATH = 'dashboard/valid-tweets/tweeted-listing';
 const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 const TWITTER_TWITTER_SIGNUP_PATH = 'twitter/register';
@@ -148,7 +149,8 @@ const TWITTER_DOWNLOAD_SAMPLE_CSV_LABEL = 'Download Sample CSV File';
 const TWITTER_VALID_TWEET_LABEL = 'Valid Tweets';
 const TWITTER_INVALID_TWEET_LABEL = 'Invalid Tweets';
 const TWITTER_ARCHIVED_TWEET_LABEL = 'Archived Tweets';
-const TWITTER_PROFILE_SETTING_LABEL = 'Profile & Settings';
+const TWITTER_PROFILE_LABEL = 'My Profile';
+const TWITTER_SETTING_LABEL = 'Settings';
 const TWITTER_NO_TWEET_FOUND_LABEL = 'No Tweets Found';
 const TWITTER_TOTAL_TWEET_LABEL = 'Total Tweets';
 const TWITTER_SETTINGS_LABEL = 'Settings';
@@ -1598,7 +1600,8 @@ function tweets_queue_mail($key, &$message, $params) {
     case 'user_verify_signup_mail':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
-      $message['body'][] = Html::escape($params['message']);
+      // $message['body'][] = Html::escape($params['message']);
+      $message['body'][] = $params['message'];
       break;
     case 'forgot_password_email':
       $message['from'] = \Drupal::config('system.site')->get('mail');
@@ -1666,15 +1669,33 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   global $base_url;
   $mailManager = \Drupal::service('plugin.manager.mail');
   $module = 'tweets_queue';
-  $key = 'user_verify_signup_mail'; // Replace with Your key
+  $key = 'user_verify_signup_mail';
   $to = $mail;
   
   $user_hash_key = hash('sha256', $mail);
   $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
+  $link1 = t('<a href="' . $link . '"> Get started </a>');
 
-   $message = t("Dear @full_name,\n
-   Users verification Link: @link", array('@full_name' => $name, '@link' => $link));
-   $params['message'] = $message;
+   $message = t("Hello @full_name,
+   <div>Thank you for choosing Barbet.</div>
+ 
+  <div>Let us tell you how simple it is to use Barbet.</div>
+ 
+  <div>So what are we waiting for? Let’s begin tweeting.</div>
+
+  <div>Create your tweets directly and choose to either
+  post them immediately or save them for later.</div>
+ 
+  <div>Import bulk data in the form of CSV files to Barbet
+  and manage them easily.</div>
+ 
+  <div>Let the tweet-bot post your tweets automatically
+  while your relax.</div>
+
+  <div>So what are we waiting for? Let’s begin tweeting.<d/iv>
+
+  <div>@link</div>", array('@full_name' => $name, '@link' => $link1));
+  $params['message'] = $message;
   $params['title'] = 'Barbet Registration Verification';
  
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
