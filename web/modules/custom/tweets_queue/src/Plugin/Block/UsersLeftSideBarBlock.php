@@ -61,7 +61,8 @@ class UsersLeftSideBarBlock extends BlockBase {
       TWITTER_ARCHIVED_TWEET_LABEL ."</a>";
 
     $class = tweets_queue_match_current_path($current_path, TWITTER_PROFILE_SETTING_PATH);
-    $settings_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_SETTING_PATH . "'>" .
+    $uid = \Drupal::currentUser()->id();
+    $settings_link = "<a " . $class . " href='" . $base_url .'/user/' . $uid . '/edit' . "'>" .
       TWITTER_SETTING_LABEL ."</a>";
 
     $create_tweet_output = "<div class='create_tweets'>
