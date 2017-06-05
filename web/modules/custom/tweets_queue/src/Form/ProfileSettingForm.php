@@ -145,7 +145,7 @@ class ProfileSettingForm extends FormBase {
 
     $form[SIGNUP_FIELD_WEBSITE] = array(
       '#type' => 'textfield',
-      '#title' => t('Organization Name'),
+      '#title' => t('Website'),
       '#default_value' => $website,
       '#required' => FALSE,
       '#attributes' => array (
