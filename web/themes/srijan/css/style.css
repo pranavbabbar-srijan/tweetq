@@ -230,12 +230,15 @@ button {
       top: 5px; }
       .block-users-dashboard-header-block .profile + a:before, .block-users-dashboard-header-profile-block .profile + a:before {
         content: "";
-        background: url("../images/noti.svg") no-repeat 0 0;
+        background: url("../images/noti.svg") no-repeat 0 15px;
         display: block;
-        height: 80px;
-        width: 60px; }
+        height: 65px;
+        width: 60px;
+        transition: all .3s; }
       .block-users-dashboard-header-block .profile + a:hover, .block-users-dashboard-header-profile-block .profile + a:hover {
         color: rgba(0, 0, 0, 0.3); }
+        .block-users-dashboard-header-block .profile + a:hover:before, .block-users-dashboard-header-profile-block .profile + a:hover:before {
+          background-position: 0 8px; }
     .block-users-dashboard-header-block .profile .profile-links, .block-users-dashboard-header-profile-block .profile .profile-links {
       visibility: hidden;
       position: absolute;
@@ -1792,10 +1795,20 @@ body.path-update-password .messages--status {
     color: #333;
     margin-bottom: 20px;
     margin-top: 20px; }
-  .profilesettingform .message-header #change-password .form-type-password {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 0; }
+  .profilesettingform .message-header #change-password {
+    position: relative; }
+    .profilesettingform .message-header #change-password .form-type-password {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 0; }
+    .profilesettingform .message-header #change-password .change {
+      position: absolute;
+      right: 10px;
+      top: 40px;
+      border: 1px solid;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer; }
   .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
     width: 35%;
     margin-right: 100px;
@@ -1830,10 +1843,10 @@ body.path-update-password .messages--status {
       font-size: 16px;
       font-weight: bold; }
   .profilesettingform .message-header input[type="submit"] {
-    margin: 20px auto 0;
+    margin: 20px 0;
     border: none;
     background: #96c85a;
-    width: 50%;
+    width: 30%;
     padding: .5em;
     font-size: 18px;
     color: white;
@@ -1867,7 +1880,7 @@ body.path-update-password .messages--status {
   .send-tweets-form .message-header, .tweets-queue-tweet-form .message-header {
     overflow: hidden;
     background: white;
-    padding: 1em;
+    padding: 1em 1em 2.5em 1em;
     margin-left: 10px;
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
     /*IE 8*/
@@ -1933,6 +1946,29 @@ body.path-update-password .messages--status {
     color: #979797;
     border-color: #979797;
     opacity: .35; }
+  .send-tweets-form .form-type-managed-file, .tweets-queue-tweet-form .form-type-managed-file {
+    position: absolute;
+    margin-top: 0; }
+    .send-tweets-form .form-type-managed-file .form-managed-file, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file {
+      width: 80px;
+      height: 70px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 5px; }
+      .send-tweets-form .form-type-managed-file .form-managed-file:before, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file:before {
+        font: normal normal normal 35px/1 FontAwesome;
+        content: "\f030";
+        padding-top: 19px;
+        display: block;
+        color: rgba(0, 0, 0, 0.2); }
+      .send-tweets-form .form-type-managed-file .form-managed-file input, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file input {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0; }
 
 .-form-tweets-queue-csv-upload {
   padding-top: 5px; }
