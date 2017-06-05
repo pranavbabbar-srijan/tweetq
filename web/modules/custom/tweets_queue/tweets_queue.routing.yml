@@ -187,10 +187,10 @@ tweets_queue_access_denied.denied:
     _access: 'TRUE'
 
 tweets_queue_profile_edit.settings:
-  path: '/dashboard/profile-settings'
+  path: '/dashboard/my-profile'
   defaults:
     _form: '\Drupal\tweets_queue\Form\ProfileSettingForm'
-    _title: 'profile & Settings'
+    _title: 'My Profile'
   requirements:
     _role: 'twitter_approved_client+administrator'
 

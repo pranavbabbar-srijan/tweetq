@@ -136,22 +136,22 @@
   			$("#profile-settingform-password-validation-error").remove();
   			$("#password-changed").remove();
   			if (password.length == 0) {
-	    		$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#profilesettingform #change-password" );
+	    		$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#profilesettingform #change-password .change" );
 	    		return;
 	    	}
 
   			if (!valid) {
-	    		$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#profilesettingform #change-password" );
+	    		$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#profilesettingform #change-password .change" );
 	    		return;
   			}
 	  	
 	    	$.post(profile_change_password_path, {'password' : password}, function(data) {
 				if  (data == "done") {
-					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password" );
+					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
 					$('#password-changed').delay(5000).fadeOut(300);			
 					return;
 				}
-				$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profilesettingform #change-password" );
+				$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profilesettingform #change-password .change" );
 		    });
 
 		});
