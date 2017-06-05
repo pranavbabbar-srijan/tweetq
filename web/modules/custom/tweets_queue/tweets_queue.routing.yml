@@ -200,3 +200,32 @@ tweets_queue_change_password.settings:
     _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::changePassword'
   requirements:
     _role: 'authenticated'
+
+tweets_queue_profile_invitation.settings:
+  path: '/dashboard/invite-friends'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\InviteSettingForm'
+    _title: 'Account Settings'
+  requirements:
+    _role: 'twitter_approved_client+administrator'
+
+tweets_queue_firend_invite_send_token.send_token:
+  path: '/dashboard/friendInviteSendToken'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::sendFriendInviteToken'
+  requirements:
+    _role: 'authenticated'
+
+tweets_queue_confirm_friend_invite.update:
+  path: '/confirm-friend-invite'
+  defaults:
+    _form: '\Drupal\tweets_queue\Form\ConfirmFriendInvite'
+  requirements:
+    _access: 'TRUE'
+
+tweets_queue_invite_friends.invite:
+  path: '/dashboard/inviteFriends'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::inviteFriends'
+  requirements:
+    _role: 'authenticated'
