@@ -1678,25 +1678,23 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
   $link1 = t('<a href="' . $link . '"> Get started </a>');
 
-   $message = t("Hello @full_name,
-   <div>Thank you for choosing Barbet.</div>
- 
-  <div>Let us tell you how simple it is to use Barbet.</div>
- 
-  <div>So what are we waiting for? Let’s begin tweeting.</div>
+   $message = t("<h2>Hello @full_name,</h2>
+   <div style='margin: 30px 0;'>Thank you for choosing Barbet.<br>
+    Let us tell you how simple it is to use Barbet.</div>
 
-  <div>Create your tweets directly and choose to either
-  post them immediately or save them for later.</div>
- 
-  <div>Import bulk data in the form of CSV files to Barbet
-  and manage them easily.</div>
- 
-  <div>Let the tweet-bot post your tweets automatically
-  while your relax.</div>
+  <ul>
+  <li style='margin: 20px 0;'>Create your tweets directly and choose to either
+  post them immediately or save them for later.</li>
+  &#xb7
+  <li style='margin: 20px 0;'>Import bulk data in the form of CSV files to Barbet
+  and manage them easily.</li>
+  &#xb7
+  <li style='margin: 20px 0;'>Let the tweet-bot post your tweets automatically
+  while your relax.</li>
+  </ul>
+  <div style='margin: 30px 0;'>So what are we waiting for? Let’s begin tweeting.</div>
 
-  <div>So what are we waiting for? Let’s begin tweeting.<d/iv>
-
-  <div>@link</div>", array('@full_name' => $name, '@link' => $link1));
+  <div  style='text-align: center; width: 80px; margin: 0 auto; display: flex; background: #2aa9df; padding: 15px 45px; border-radius: 5px; color: white; text-decoration: none;'>@link</div>", array('@full_name' => $name, '@link' => $link1));
   $params['message'] = $message;
   $params['title'] = 'Barbet Registration Verification';
  
