@@ -75,6 +75,7 @@ const TWITTER_CLIENT_ROLE = 'twitter_client';
 const TWITTER_VOLUNTEER_ROLE = 'twitter_volunteer_client';
 const TWITTER_APPROVED_CLIENT_ROLE = 'twitter_approved_client';
 const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
+const TWITTER_ADMINISTRATOR_ROLE = 'administrator';
 const TWITTER_USER_DASHBOARD = 'dashboard';
 const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
 const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';

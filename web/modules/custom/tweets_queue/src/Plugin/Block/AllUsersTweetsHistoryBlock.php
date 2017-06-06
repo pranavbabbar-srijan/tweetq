@@ -28,6 +28,12 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
     $nid = tweets_queue_get_parameter_data(TWITTER_FIELD_NID);
     $uid = tweets_queue_get_parameter_data(TWITTER_FIELD_UID);
     $cron_id = tweets_queue_get_parameter_data('cron_id');
+    $active = ($nid) ? TWITTER_FIELD_NID : ($uid ? TWITTER_FIELD_UID : ($cron_id ? 'cron_id' : ''));
+
+    $user_roles = \Drupal::currentUser()->getRoles();
+    if(!in_array(TWITTER_ADMINISTRATOR_ROLE, $user_roles)) {
+      $uid = \Drupal::currentUser()->id();
+    }
 
     $query = \Drupal::database()->select(TWITTER_TWEETS_HISTORY_TABLE, 'p');
     $query->fields('p', [TWITTER_FIELD_NID, TWITTER_FIELD_UID, TWITTER_FIELD_STATUS, TWITTER_FIELD_RETWEETED, TWITTER_FIELD_CODE]);
@@ -70,20 +76,9 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
       $message = tweets_queue_decrypt_data($row->{TWITTER_FIELD_MESSAGE});
       $message = tweets_queue_perform_hashtag_highlight($message);
 
-      $message_url = Url::fromRoute(TWITTER_HISTORY_ROUTE_NAME,
-        ['nid' => $row->{TWITTER_FIELD_NID}]
-      );
-      $message_url_link = \Drupal::l($message, $message_url);
-
-      $user_url = Url::fromRoute(TWITTER_HISTORY_ROUTE_NAME,
-        ['uid' => $row->{TWITTER_FIELD_UID}]
-      );
-      $user_url_link = \Drupal::l($row->screen_name, $user_url);
-
-      $cron_url = Url::fromRoute(TWITTER_HISTORY_ROUTE_NAME,
-        ['cron_id' => $row->id]
-      );
-      $cron_url_link = \Drupal::l($row->id, $cron_url);
+      $message_url_link = $this->makeLink(TWITTER_HISTORY_ROUTE_NAME, TWITTER_FIELD_NID, $message, $row->{TWITTER_FIELD_NID}, $active);
+      $user_url_link = $this->makeLink(TWITTER_HISTORY_ROUTE_NAME, TWITTER_FIELD_UID, $row->screen_name, $row->{TWITTER_FIELD_UID}, $active);
+      $cron_url_link = $this->makeLink(TWITTER_HISTORY_ROUTE_NAME, 'cron_id', $row->id, $row->id, $active);
 
       $error = trim(t($row->error));
       if (empty($error)) {
@@ -121,6 +116,18 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
         '#markup' => t('No history found'),
       );
     }
+  }
+
+  public function makeLink($route_name, $field_name, $field_value, $label, $active) {
+    $output = $field_value;
+    if ($field_name == $active) {
+      return $field_value;
+    }
+    $url = Url::fromRoute(TWITTER_HISTORY_ROUTE_NAME,
+        [$field_name => $label]
+      );
+    $url_link = \Drupal::l($field_value, $url);
+    return $url_link;
   }
 
   /**
