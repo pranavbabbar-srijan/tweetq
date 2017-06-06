@@ -334,7 +334,7 @@
 	    	}
 
 	    	//Password check.
-	    // 	var password = $('#signup-form #edit-user-password').val();
+	     	var password = $('#signup-form #edit-user-password').val();
 	    // 	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
   			// var valid = regex.test(password);
   			// $("#password-validation-error").remove();
@@ -412,7 +412,7 @@
 
 	    //Password validation.
 	   //  $("#signup-form #edit-user-password").focusout(function() {
-	   // 		var password = $('#signup-form #edit-user-password').val();
+	  		var password = $('#signup-form #edit-user-password').val();
 	   //  	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
   		// 	var valid = regex.test(password);
   		// 	$("#password-validation-error").remove();
