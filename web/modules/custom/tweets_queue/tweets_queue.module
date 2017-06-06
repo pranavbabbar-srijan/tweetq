@@ -75,6 +75,7 @@ const TWITTER_CLIENT_ROLE = 'twitter_client';
 const TWITTER_VOLUNTEER_ROLE = 'twitter_volunteer_client';
 const TWITTER_APPROVED_CLIENT_ROLE = 'twitter_approved_client';
 const TWITTER_NON_APPROVED_CLIENT_ROLE = 'twitter_non_approved_client';
+const TWITTER_ADMINISTRATOR_ROLE = 'administrator';
 const TWITTER_USER_DASHBOARD = 'dashboard';
 const TWITTER_USER_AUTHORIZED = 'twitter_user_authorized';
 const TWITTER_AUTHENTICATION_PROCESS_ID = 'twitter_authentication_process_id';
@@ -187,6 +188,7 @@ const TWITTER_INVALID_TWEETS_ROUTE_NAME = 'tweets_queue_invalid_tweets.settings'
 const TWITTER_ARCHIVED_TWEETS_ROUTE_NAME = 'tweets_queue_archived_tweets.settings';
 const TWITTER_ALL_TWEETS_ROUTE_NAME = 'tweets_queue_all_tweets.settings';
 const TWITTER_VERIFY_PASSWORD_TOKEN_ROUTE_NAME = 'tweets_queue_update_password.update';
+const TWITTER_HISTORY_ROUTE_NAME = 'tweets_queue_current_tweet_history.settings';
 
 const USERS_VALID_TWEET = 'users_valid_tweet';
 const USERS_INVALID_TWEET = 'users_invalid_tweet';
