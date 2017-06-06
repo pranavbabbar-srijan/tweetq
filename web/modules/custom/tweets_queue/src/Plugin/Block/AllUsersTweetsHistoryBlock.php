@@ -118,13 +118,30 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
     }
   }
 
-  public function makeLink($route_name, $field_name, $field_value, $label, $active) {
+  /**
+   * Generate link based on the parameter passed.
+   *
+   * @param string $route_name
+   *   Name of the route.
+   * @param string $field_name
+   *   Name of the parameter.
+   * @param string $field_value
+   *   Value to be displayed.
+   * @param string $filter_value
+   *   Value of the url filter.
+   * @param string $active
+   *   Name of the active field.
+   *
+   * @return string
+   *   Returns url if not active filter.
+   */
+  public function makeLink($route_name, $field_name, $field_value, $filter_value, $active) {
     $output = $field_value;
     if ($field_name == $active) {
       return $field_value;
     }
     $url = Url::fromRoute(TWITTER_HISTORY_ROUTE_NAME,
-        [$field_name => $label]
+        [$field_name => $filter_value]
       );
     $url_link = \Drupal::l($field_value, $url);
     return $url_link;
