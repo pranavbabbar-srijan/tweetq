@@ -180,6 +180,10 @@ button {
   padding-left: 1em;
   margin-right: 1em; }
 
+.block-users-dashboard-header-block .name {
+  min-width: 100px;
+  max-width: 150px; }
+
 .block-users-dashboard-header-block, .block-users-dashboard-header-profile-block {
   float: right;
   position: relative; }
@@ -1856,6 +1860,60 @@ body.path-update-password .messages--status {
     -o-border-radius: 4px;
     border-radius: 4px; }
 
+.send-tweets-form .form-type-managed-file {
+  position: absolute;
+  margin-top: 0; }
+  .send-tweets-form .form-type-managed-file .form-managed-file {
+    width: 80px;
+    height: 70px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px; }
+    .send-tweets-form .form-type-managed-file .form-managed-file:before {
+      font: normal normal normal 35px/1 FontAwesome;
+      content: "\f030";
+      padding-top: 19px;
+      display: block;
+      color: rgba(0, 0, 0, 0.2);
+      float: left;
+      width: 79px; }
+    .send-tweets-form .form-type-managed-file .form-managed-file .form-file {
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0; }
+    .send-tweets-form .form-type-managed-file .form-managed-file .option {
+      display: block; }
+    .send-tweets-form .form-type-managed-file .form-managed-file > div {
+      display: flex;
+      flex-flow: row;
+      justify-content: flex-start; }
+    .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox {
+      margin: 0; }
+      .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] {
+        display: none; }
+      .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file {
+        background: none;
+        padding-left: 0;
+        margin-left: 15px; }
+        .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a {
+          font-size: 0; }
+          .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a:before {
+            content: '';
+            background: url("../images/logo.svg") no-repeat 15px 20px rgba(0, 0, 0, 0.05);
+            padding: 22px 30px;
+            display: block;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            height: 69px;
+            width: 80px;
+            background-size: 60%; }
+    .send-tweets-form .form-type-managed-file .form-managed-file input[name="images_remove_button"] {
+      display: none; }
+
 .send-tweets-form, .tweets-queue-tweet-form {
   padding-top: 5px; }
   .send-tweets-form .create-header, .send-tweets-form .edit-tweet, .tweets-queue-tweet-form .create-header, .tweets-queue-tweet-form .edit-tweet {
@@ -1944,29 +2002,6 @@ body.path-update-password .messages--status {
     color: #979797;
     border-color: #979797;
     opacity: .35; }
-  .send-tweets-form .form-type-managed-file, .tweets-queue-tweet-form .form-type-managed-file {
-    position: absolute;
-    margin-top: 0; }
-    .send-tweets-form .form-type-managed-file .form-managed-file, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file {
-      width: 80px;
-      height: 70px;
-      text-align: center;
-      background-color: rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 5px; }
-      .send-tweets-form .form-type-managed-file .form-managed-file:before, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file:before {
-        font: normal normal normal 35px/1 FontAwesome;
-        content: "\f030";
-        padding-top: 19px;
-        display: block;
-        color: rgba(0, 0, 0, 0.2); }
-      .send-tweets-form .form-type-managed-file .form-managed-file input, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file input {
-        opacity: 0;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0; }
 
 .-form-tweets-queue-csv-upload {
   padding-top: 5px; }
