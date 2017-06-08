@@ -81,8 +81,8 @@ class UsersLeftSideBarBlock extends BlockBase {
     $archived_tweets_output = "<div class='archived_tweets'>
       <span class='text'>" . $archived_tweet_link . "</span></div>" ;
 
-    $settings_output = "<div class='profile_settings'>
-      <span class='text'>" . $settings_link . "</span></div>" ;
+   // $settings_output = "<div class='profile_settings'>
+     // <span class='text'>" . $settings_link . "</span></div>" ;
 
     $output = "<div>" . $twitter_profile_output .
       $create_tweet_output . $import_tweets_output . $valid_tweets_output .
