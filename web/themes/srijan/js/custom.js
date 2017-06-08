@@ -836,12 +836,12 @@
                 }
             });
 
-            if ($('#message-history-count-section').hasClass('hidden')) {
-			    $('#message-history-count-section').remove();
-			}
+   //          if ($('#message-history-count-section').hasClass('hidden')) {
+			//     $('#message-history-count-section').remove();
+			// }
             
-            $("#twitter-notification-count").remove();
-            $("#message-history-count-section").addClass('hidden');
+   //          $("#twitter-notification-count").remove();
+   //          $("#message-history-count-section").addClass('hidden');
    		});
 
 		// ripple effect
@@ -895,6 +895,12 @@
 		if ($('.messages ul').hasClass('messages__list')) {
 		    $('.messages').addClass('listing-msg');
 		}
+
+
+		// $('.send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file').append('<a href="#;"></a>');
+		// $('.send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file:after').click(function(){
+		// 	$('.send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a').remove();
+		// });
 
 	});
 
