@@ -174,7 +174,7 @@
 					}
 				}
 				&.profile-my-profile {
-					pointer-events: none; //remove
+					// pointer-events: none; //remove
 					&:before {
 						content: $icon-user;
 					}
