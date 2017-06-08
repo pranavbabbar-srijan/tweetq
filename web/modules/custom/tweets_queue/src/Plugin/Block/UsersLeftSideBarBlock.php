@@ -60,6 +60,11 @@ class UsersLeftSideBarBlock extends BlockBase {
     $archived_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_ARCHIVED_TWEET_PATH . "'>" .
       TWITTER_ARCHIVED_TWEET_LABEL ."</a>";
 
+    $class = tweets_queue_match_current_path($current_path, TWITTER_PROFILE_SETTING_PATH);
+    $uid = \Drupal::currentUser()->id();
+    $settings_link = "<a " . $class . " href='" . $base_url .'/user/' . $uid . '/edit' . "'>" .
+      TWITTER_SETTING_LABEL ."</a>";
+
     $create_tweet_output = "<div class='create_tweets'>
       <span class='text'>" . $create_tweet_link . "</span></div>" ;
     $import_tweets_output = "<div class='import_tweets'>
@@ -75,12 +80,13 @@ class UsersLeftSideBarBlock extends BlockBase {
 
     $archived_tweets_output = "<div class='archived_tweets'>
       <span class='text'>" . $archived_tweet_link . "</span></div>" ;
-    $settings_output = "<div class='settings'>
-      <span class='text'>" . TWITTER_SETTINGS_LABEL . "</span></div>" ;
+
+   // $settings_output = "<div class='profile_settings'>
+     // <span class='text'>" . $settings_link . "</span></div>" ;
 
     $output = "<div>" . $twitter_profile_output .
       $create_tweet_output . $import_tweets_output . $valid_tweets_output .
-      $invalid_tweets_output . $archived_tweets_output . "</div>";
+      $invalid_tweets_output . $archived_tweets_output . $settings_output . "</div>";
       unset($_SESSION["valid_import"]);
       unset($_SESSION["invalid_import"]);
       unset($_SESSION["new"]);

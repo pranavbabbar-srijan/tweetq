@@ -85,6 +85,52 @@ class TweetsQueueTweetController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
+  public function sendFriendInviteToken() {
+    $uid = \Drupal::currentUser()->id();
+    $email = tweets_queue_get_parameter_data('email');
+    if (!\Drupal::service('email.validator')->isValid($email)) {
+      die(t("Please enter a valid email ID"));
+    }
+
+    $created = time();
+    $hash_key = hash('sha256', $email);
+    $hash_key1 = hash('sha256', $created);
+    $friend_invite_info = array(
+      'uid' => $uid,
+      'email' => $email,
+      'hash_key' => $hash_key,
+      'created' => $created,
+      'status' => 0
+    );
+    $invited_id = tweets_queue_check_invited_friend_email_presence($email);
+    if ($invited_id) {
+      die(t("Already invited @email", array('@email' => $email)));
+      return;
+    }
+    $id = tweets_queue_insert_friend_invite_hash_key_record($friend_invite_info);
+    //Perform send mail operation and other stuff.
+    tweets_queue_invite_volunteer_send_mail($email, $hash_key, $id, $hash_key1);
+    die("done");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function inviteFriends() {
+    $uid = \Drupal::currentUser()->id();
+    $email = tweets_queue_get_parameter_data('email');
+    if (!\Drupal::service('email.validator')->isValid($email)) {
+      die(t("Please enter a valid email ID"));
+    }
+
+    //Perform send mail operation and other stuff.
+    tweets_queue_invite_friends_send_mail($email);
+    die("done");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateUserLogin() {
     $email = tweets_queue_get_parameter_data('email');
     $password = tweets_queue_get_parameter_data('password');
@@ -105,6 +151,26 @@ class TweetsQueueTweetController extends ControllerBase {
       }
     }
     die("no");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function changePassword() {
+    $uid = \Drupal::currentUser()->id();
+    if (!$uid) {
+      die("access_denied");
+    }
+    $password = tweets_queue_get_parameter_data('password');
+
+    if (empty($password)) {
+      die("empty_password");
+    }
+    if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/',$password)) {
+      die("weak_password");
+    }
+    tweets_queue_change_password($uid, $password);
+    die("done");
   }
 
   /**
@@ -135,4 +201,12 @@ class TweetsQueueTweetController extends ControllerBase {
     tweets_queue_goto_page();
   }
 }
+
+  /**
+  * This function goto than login page when users got an access denied error message.
+  */
+  
+  public function accessDenied() {
+    tweets_queue_goto_page();
+  }
 }

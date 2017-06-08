@@ -25,7 +25,7 @@ class TweetsQueueTweetForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $action = (isset($_REQUEST[TWITTER_ACTION_PARAMETER])) ? $_REQUEST[TWITTER_ACTION_PARAMETER] : TWITTER_EDIT_ACTION;
+    $action = (isset($_REQUEST[TWITTER_ACTION_PARAMETER])) ? tweets_queue_get_parameter_data(TWITTER_ACTION_PARAMETER) : TWITTER_EDIT_ACTION;
 
     if ($action == TWITTER_DELETE_ACTION) {
       $this->deleteForm($form, $form_state);
@@ -43,20 +43,23 @@ class TweetsQueueTweetForm extends FormBase {
    * {@inheritdoc}
    */
   public function editForm(array &$form, FormStateInterface $form_state) {
-    $nid = $_REQUEST['nid'];
+    $nid = tweets_queue_get_parameter_data(TWITTER_FIELD_NID);
     $tweet_info = tweets_queue_fetch_tweet_item($nid);
     $tweet_id = $tweet_info->tweet_id;
+
+    tweets_queue_validate_tweet_access($tweet_info->uid);
+
     $archived = $tweet_info->archived;
-    $message = $tweet_info->message;
+    $message = tweets_queue_decrypt_data($tweet_info->{TWITTER_FIELD_MESSAGE});
     $size = tweets_queue_get_message_size($message);
-    $left = 140 - $size;
+    $left = CRON_TWEET_CHARCATER_LIMIT - $size;
     $form['header'] = array(
       '#type' => 'markup',
       '#prefix' => '<div class="edit-tweet">',
       '#markup' => t('Edit Tweet'),
       '#suffix' => '</div>',
     );
-    $form['nid'] = array(
+    $form[TWITTER_FIELD_NID] = array(
       '#type' => 'hidden',
       '#title' => t('Node nid'),
       '#required' => TRUE,
@@ -67,7 +70,7 @@ class TweetsQueueTweetForm extends FormBase {
       '#prefix' => '<div class="message-header">',
       '#markup' => t(''),
     );
-    $form['message'] = array(
+    $form[TWITTER_FIELD_MESSAGE] = array(
       '#type' => 'textarea',
       '#title' => t('Edit Tweet'),
       '#required' => TRUE,
@@ -76,6 +79,25 @@ class TweetsQueueTweetForm extends FormBase {
         'placeholder' => t("What's happening ?")
       ),
     );
+
+    $fid = tweets_queue_get_all_images($nid);
+    // echo '<pre>', print_r($fid);
+    $form[TWITTER_FORM_FIELD_IMAGES] = array(
+      '#type' => 'managed_file',
+      '#name' => 'files[]',
+      '#multiple' => TRUE,
+      '#default_value' => $fid ? $fid : NULL,
+      '#upload_location' => 'public://images/',
+      '#title' => t('Upload some photos'),
+      '#progress_message' => $this->t('Please wait...'),
+      '#attributes' => array('multiple' => 'multiple'),
+      '#upload_validators' => array(
+        'file_validate_extensions' => array('png gif jpg jpeg'),
+        'file_validate_size' => array(TWITTER_TWEET_IMAGE_SIZE_LIMIT),
+      ),
+    );
+
+
     if (!empty($tweet_id) && !$archived) {
       $form['clone'] = array(
         '#type' => 'submit',
@@ -110,7 +132,7 @@ class TweetsQueueTweetForm extends FormBase {
 
     $form[TWITTER_REDIRECT_PATH] = array(
       '#type' => 'hidden',
-      '#value' => $_REQUEST[TWITTER_REDIRECT_PATH],
+      '#value' => tweets_queue_get_parameter_data(TWITTER_REDIRECT_PATH),
       '#required' => FALSE,
     );
     $form['message-footer'] = array(
@@ -125,14 +147,17 @@ class TweetsQueueTweetForm extends FormBase {
    * {@inheritdoc}
    */
   public function deleteForm(array &$form, FormStateInterface $form_state) {
-    $nid = $_REQUEST['nid'];
+    $nid = tweets_queue_get_parameter_data(TWITTER_FIELD_NID);
     $tweet_info = tweets_queue_fetch_tweet_item($nid);
+
+    tweets_queue_validate_tweet_access($tweet_info->uid);
+
     $tweet_id = $tweet_info->tweet_id;
     $archived = $tweet_info->archived;
-    $message = $tweet_info->message;
+    $message = tweets_queue_decrypt_data($message);
     $size = tweets_queue_get_message_size($message);
-    $left = 140 - $size;
-    $form['nid'] = array(
+    $left = CRON_TWEET_CHARCATER_LIMIT - $size;
+    $form[TWITTER_FIELD_NID] = array(
       '#type' => 'hidden',
       '#title' => t('Node nid'),
       '#required' => TRUE,
@@ -158,7 +183,7 @@ class TweetsQueueTweetForm extends FormBase {
     );
     $form[TWITTER_REDIRECT_PATH] = array(
       '#type' => 'hidden',
-      '#value' => $_REQUEST[TWITTER_REDIRECT_PATH],
+      '#value' => tweets_queue_get_parameter_data(TWITTER_REDIRECT_PATH),
       '#required' => FALSE,
     );
     $form['cancel'] = array(
@@ -175,22 +200,29 @@ class TweetsQueueTweetForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     global $base_url;
     $input = $form_state->getUserInput();
-    $uid = \Drupal::currentUser()->id();
-    $nid = $input['nid'];
-    $message = $input['message'];
+    $nid = $input[TWITTER_FIELD_NID];
+    $message = $input[TWITTER_FIELD_MESSAGE];
+
+    $tweet_info = tweets_queue_fetch_tweet_item($nid);
+    tweets_queue_validate_tweet_access($tweet_info->uid);
+
+    $images = array();
+    if (is_array($input[TWITTER_FORM_FIELD_IMAGES]) && !empty($input[TWITTER_FORM_FIELD_IMAGES]['fids'])) {
+      $images = explode(" ", $input[TWITTER_FORM_FIELD_IMAGES]['fids']);
+    }
     if (!$nid) {
       return;
     }
-    $message = tweets_queue_get_urls_present($message);
     $size = tweets_queue_get_message_size($message);
     tweets_queue_update_message_queue_priority_info($nid,
       array(
-        'message' => $message,
+        'message' => tweets_queue_encrypt_data($message),
         'size' => $size,
         'changed' => time(),
       ),
       0
     );
+    tweets_queue_map_message_image_record($nid, $images);
     drupal_set_message(t('Tweet have been saved successfully.'));
     if (isset($input[TWITTER_REDIRECT_PATH]) && !empty($input[TWITTER_REDIRECT_PATH])) {
       header('Location: ' . $base_url . '/' . $input[TWITTER_REDIRECT_PATH]);

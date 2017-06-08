@@ -91,6 +91,7 @@ class UsersInValidTweetsBlock extends BlockBase {
   }
 
   private function compileData($row) {
+    $row->message = tweets_queue_decrypt_data($row->{TWITTER_FIELD_MESSAGE});
     $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'edit', TWITTER_REDIRECT_PATH => TWITTER_INVALID_TWEET_PATH],
       ['attributes' => ['class' => 'edit beautytips', 'title' => t(TWITTER_EDIT_TOOLTIP)]]

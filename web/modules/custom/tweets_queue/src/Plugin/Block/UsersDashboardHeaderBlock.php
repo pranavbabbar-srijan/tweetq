@@ -21,6 +21,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    global $base_url;
     $tweets_history = tweets_queue_fetch_user_tweets_history();
     $message_history_count = tweets_queue_fetch_user_tweets_history_count();
 
@@ -42,10 +43,10 @@ class UsersDashboardHeaderBlock extends BlockBase {
       $picture = tweets_queue_process_twitter_picture_url($picture, 'bigger');
       $profile_img = "<img src='" . $picture . "'></img>";
     }
-
-    $my_profile_link = "<a class ='profile-my-profile' href='" . $base_url .'/' . "'>" .
+    $my_profile_link = "<a class ='profile-my-profile' href='" . $base_url .'/' . TWITTER_PROFILE_PATH . "'>" .
       'My Profile' ."</a>";
-    $setting_link = "<a class ='profile-settings' href='" . $base_url .'/' . "'>" .
+    $uid = \Drupal::currentUser()->id();
+    $setting_link = "<a class ='profile-settings' href='" . $base_url .'/user/' . $uid . "/edit'>" .
       'Settings' ."</a>";
     $logout_link = "<a class ='profile-logout' href='" . $base_url .'/user/logout' . "'>" .
       'Logout' ."</a>";
@@ -67,7 +68,8 @@ class UsersDashboardHeaderBlock extends BlockBase {
     </div>";
     foreach ($tweets_history as $data) {
       $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
-      $message = tweets_queue_perform_hashtag_highlight($data->message);
+      $message = tweets_queue_decrypt_data($data->{TWITTER_FIELD_MESSAGE});
+      $message = tweets_queue_perform_hashtag_highlight($message);
       $created = $data->created;
       $tweeted_at = tweets_queue_format_tweet_time($created);
       $message_history_data .= t("<div>

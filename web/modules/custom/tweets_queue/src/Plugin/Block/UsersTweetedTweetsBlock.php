@@ -98,6 +98,7 @@ class UsersTweetedTweetsBlock extends BlockBase {
   }
 
   private function compileData($row) {
+    $row->message = tweets_queue_decrypt_data($row->{TWITTER_FIELD_MESSAGE});
     $edit_url = Url::fromRoute(TWITTER_TWEET_FORM_ROUTE_NAME,
       ['nid' => $row->nid, 'action' => 'edit', TWITTER_REDIRECT_PATH => TWITTER_TWEETED_TWEET_PATH],
       ['attributes' => ['class' => 'edit beautytips', 'title' => t(TWITTER_EDIT_TOOLTIP)]]
@@ -115,14 +116,9 @@ class UsersTweetedTweetsBlock extends BlockBase {
 
     $tweet_date = ($row->{TWITTER_FIELD_FIRST_RUN}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_FIRST_RUN}) : '-';
     $data['tweet_data'] = $tweet_date;
-    // $data['tweet_data'] = date(TWITTER_DATE_FORMAT, ($row->{TWITTER_FIELD_FIRST_RUN}
-    //  ? $row->{TWITTER_FIELD_FIRST_RUN} : $row->{TWITTER_FIELD_CREATED}));
-
-    
     
     $changed = ($row->{TWITTER_FIELD_CHANGED}) ? date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED}) : '-';
     $data['changed'] = $changed;
-    // $data['changed'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CHANGED});
     $retweeted = ($row->{TWITTER_FIELD_TWEETED}) ? $row->{TWITTER_FIELD_TWEETED} - 1 : 0;
     $data['retweeted'] = t('@times', array('@times' => $retweeted));
     $data['edit_link'] = $edit_url_link ;
