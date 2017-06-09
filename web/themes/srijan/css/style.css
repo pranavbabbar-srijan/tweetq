@@ -297,6 +297,9 @@ button {
         .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
           content: ""; }
 
+.toolbar-horizontal .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile {
+  pointer-events: none; }
+
 .site-branding__logo {
   display: block;
   width: 50px;
@@ -1753,7 +1756,8 @@ body.path-update-password .messages--status {
   width: 69%; }
 
 .profilesettingform-body.user-logged-in .main-content {
-  position: absolute; }
+  position: absolute;
+  top: 70px; }
 
 .profilesettingform .profile-setting {
   background: #FCFCFC;
@@ -1914,6 +1918,18 @@ body.path-update-password .messages--status {
             background-size: 60%; }
     .send-tweets-form .form-type-managed-file .form-managed-file input[name="images_remove_button"] {
       display: none; }
+
+#result {
+  display: block;
+  margin: 6px 0 0; }
+  #result.short {
+    color: gray; }
+  #result.weak {
+    color: red; }
+  #result.good {
+    color: orange; }
+  #result.strong {
+    color: green; }
 
 .send-tweets-form, .tweets-queue-tweet-form {
   padding-top: 5px; }
