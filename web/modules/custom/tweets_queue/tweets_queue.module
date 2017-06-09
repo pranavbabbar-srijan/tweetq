@@ -1676,7 +1676,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   
   $user_hash_key = hash('sha256', $mail);
   $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
-  $link1 = t('<a href="' . $link . '"> Get started </a>');
+  $link1 = t('<a href="' . $link . '"> Click Here </a>');
 
    $message = t("<h2 style='text-transform: capitalize;'>Hello @full_name,</h2>
    <div style='margin: 30px 0;'>Thank you for choosing Barbet.<br>
@@ -3662,10 +3662,10 @@ function tweets_queue_user_signup_validate($form, \Drupal\Core\Form\FormStateInt
     $form_state->setErrorByName('email', t('Email already in use.'));
   }
   // Password validation.
-  if (strlen($password) < 6 || strlen($password) > 12) {
-    $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
-      t('Password length should be minimum of 6 and maximum of 12 characters.'));
-  }
+  // if (strlen($password) < 6 || strlen($password) > 12) {
+  //   $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
+  //     t('Password length should be minimum of 6 and maximum of 12 characters.'));
+  // }
 
   // if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/',$password)) {
   //   $form_state->setErrorByName(SIGNUP_FIELD_PASSWORD,
