@@ -201,6 +201,21 @@
 	}
 }
 
+// admin
+.toolbar-horizontal {
+	.block-users-dashboard-header-block {
+		.profile {
+			.profile-links {
+				a {
+					&.profile-my-profile {
+						pointer-events: none; //remove
+					}
+				}
+			}
+		}
+	}
+}
+
 .site-branding__logo {
 	display: block;
 	width: 50px;
@@ -1827,6 +1842,7 @@ body.path-update-password {
 	&.user-logged-in {
 		.main-content {
 			position: absolute;
+			top: 70px;
 		}
 	}
 }
@@ -2014,6 +2030,23 @@ body.path-update-password {
 	    		display: none;
 	    	}
 		}
+	}
+}
+
+#result {
+	display: block;
+    margin: 6px 0 0;
+	&.short{
+    	color: gray;
+	}
+	&.weak{
+    	color: red;
+	}
+	&.good{
+    	color: orange;
+	}
+	&.strong{
+    	color: green;
 	}
 }
 .send-tweets-form, .tweets-queue-tweet-form  {
