@@ -45,13 +45,13 @@
 		var friend_invite_send_token_path = '/dashboard/friendInviteSendToken';
 		var invite_friends_path = '/dashboard/inviteFriends';
 
-		// var email_validation_path = '/barbet_3may/_www/dashboard/validateEmail';
-		// var user_login_validation_path = '/barbet_3may/_www/dashboard/validateUserLogin';
-		// var forgot_password_send_token_path = '/barbet_3may/_www/dashboard/forgotPasswordSendToken';
-		// var user_history_path = '/v/_www/dashboard/user-history';
-		// var profile_change_password_path = '/barbet_3may/_www/dashboard/changePassword';
-		// var friend_invite_send_token_path = '/barbet_3may/_www/dashboard/friendInviteSendToken';
-		// var invite_friends_path = '/barbet_3may/_www/dashboard/inviteFriends';
+		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
+		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
+		// var forgot_password_send_token_path = '/barbet-new/_www/dashboard/forgotPasswordSendToken';
+		// var user_history_path = '/barbet-new/_www/dashboard/user-history';
+		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
+		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
+		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -131,8 +131,8 @@
 
 		$("#profilesettingform #change-password").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
-	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			var valid = regex.test(password);
+	    	//var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  			//var valid = regex.test(password);
   			$("#profile-settingform-password-validation-error").remove();
   			$("#password-changed").remove();
   			if (password.length == 0) {
@@ -214,7 +214,7 @@
 	    	}
 	  	});
 
-	    $("#witter-signup-form #edit-email").focusout(function() {
+	    $("#twitter-signup-form #edit-email").focusout(function() {
 	   		var email = $('#witter-signup-form #edit-email').val();
 	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   			var valid = regex.test(email);
@@ -383,6 +383,7 @@
 	    	}
 	  	});
 
+	    // $("#email-validation-error").remove();
 	    $("#signup-form #edit-email").focusout(function() {
 	   		var email = $('#signup-form #edit-email').val();
 	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -412,7 +413,7 @@
 
 	    //Password validation.
 	   //  $("#signup-form #edit-user-password").focusout(function() {
-	  		var password = $('#signup-form #edit-user-password').val();
+	  		// var password = $('#signup-form #edit-user-password').val();
 	   //  	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
   		// 	var valid = regex.test(password);
   		// 	$("#password-validation-error").remove();
@@ -903,9 +904,11 @@
 		// });
 
 	});
+	$('#result').insertAfter('#edit-user-password');
+
 
 	$(document).ready(function() {
-		$(' #edit-user-password').keyup(function() {
+		$('#edit-user-password').keyup(function() {
 			$('#result').html(checkStrength($('#edit-user-password').val()))
 			})
 			function checkStrength(password) {
@@ -913,7 +916,7 @@
 			if (password.length < 6 && password.length > 0) {
 			$('#result').removeClass()
 			$('#result').addClass('short')
-			$('#result').html('Short').fadeIn(3000).hide(6000);
+			$('#result').html('Short');
 			}
 			if (password.length > 7) strength += 1
 			// If password contains both lower and uppercase characters, increase strength value.
@@ -940,6 +943,7 @@
 			return 'Strong';
 			}
 		}
+
 	});
 
 })(jQuery);
