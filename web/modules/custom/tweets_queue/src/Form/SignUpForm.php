@@ -31,7 +31,7 @@ class SignUpForm extends FormBase {
     $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_UP_TEXT . "</a>";
     $final_text = '<div>' . $url .
     "</div><span class='note'>Auto fetch your details from Twitter</span></div>";
-
+    unset($form['SIGNUP_FIELD_EMAIL']['#attributes']['autofocus']);
     $form['header_left'] = array(
       '#type' => 'markup',
       '#prefix' => '<div class="signup">',
