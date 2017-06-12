@@ -132,7 +132,7 @@
 		$("#profilesettingform #change-password").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
 	    	//var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			//var valid = regex.test(password);
+  			
   			$("#profile-settingform-password-validation-error").remove();
   			$("#password-changed").remove();
   			if (password.length == 0) {
@@ -140,12 +140,8 @@
 	    		return;
 	    	}
 
-  			if (!valid) {
-	    		$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#profilesettingform #change-password .change" );
-	    		return;
-  			}
-	  	
-	    	$.post(profile_change_password_path, {'password' : password}, function(data) {
+  		
+         	$.post(profile_change_password_path, {'password' : password}, function(data) {
 				if  (data == "done") {
 					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
 					$('#password-changed').delay(5000).fadeOut(300);			
@@ -667,8 +663,8 @@
 		//Password change validation.
 	    $("#update-password #edit-password").focusout(function() {
 	   		var password = $('#update-password #edit-password').val();
-	    	var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			var valid = regex.test(password);
+	    	//var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
+  			//var valid = regex.test(password);
   			var passed = true;
   			$("#password-validation-error").remove();
   			if (password.length == 0) {
@@ -678,13 +674,13 @@
 	    		return;
 	    	}
 
-  			if (!valid) {
-  				$("#password-validation-error").remove();
-  				$("#update-password #edit-actions #edit-submit").attr('disabled', 'true');
-	    		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#update-password #edit-password" );
-	    		return;
-  			}
-  			$("#update-password #edit-actions #edit-submit").removeAttr('disabled');
+  			// if (!valid) {
+  			// 	$("#password-validation-error").remove();
+  			// 	$("#update-password #edit-actions #edit-submit").attr('disabled', 'true');
+	    // 		$("<span id='password-validation-error' class='validation-error'>" + password_character_msg + "</p>").insertAfter( "#update-password #edit-password" );
+	    // 		return;
+  			// }
+  			// $("#update-password #edit-actions #edit-submit").removeAttr('disabled');
 	  	});
 
 		$("#update-password #edit-reset-password").focusout(function() {
