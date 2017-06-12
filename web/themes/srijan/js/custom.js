@@ -215,25 +215,25 @@
 	  	});
 
 	    $("#twitter-signup-form #edit-email").focusout(function() {
-	   		var email = $('#witter-signup-form #edit-email').val();
+	   		var email = $('#twitter-signup-form #edit-email').val();
 	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   			var valid = regex.test(email);
 
   			$("#email-validation-error").remove();
 	    	if (email.length == 0) {
-	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#witter-signup-form #edit-email" );
+	    		$("<span id='email-validation-error' class='validation-error'>" + email_missing_msg + "</p>").insertAfter( "#twitter-signup-form #edit-email" );
 	    	}
 
   			if (email.length > 0) {
 	    		if (!valid) {
 	    			$("#email-validation-error").remove();
-	    			$("<span id='email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#witter-signup-form #edit-email" );
+	    			$("<span id='email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#twitter-signup-form #edit-email" );
 	    		}
 	    		if (valid) {
 	    			$("#email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data == "exist") {
-							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#witter-signup-form #edit-email" );	    					
+							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#twitter-signup-form #edit-email" );	    					
 	    				}
 				    });
 	    			
