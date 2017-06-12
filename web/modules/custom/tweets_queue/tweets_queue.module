@@ -223,7 +223,7 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
       if ($show_user_list_access) {
         return;
       }
-       tweets_queue_goto_page();
+       // tweets_queue_goto_page();
       break;
     case 'user_form':
       tweets_queue_user_profile_form_changes($form);

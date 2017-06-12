@@ -166,9 +166,9 @@ class TweetsQueueTweetController extends ControllerBase {
     if (empty($password)) {
       die("empty_password");
     }
-    if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/',$password)) {
-      die("weak_password");
-    }
+    // if (!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/',$password)) {
+    //   die("weak_password");
+    // }
     tweets_queue_change_password($uid, $password);
     die("done");
   }
