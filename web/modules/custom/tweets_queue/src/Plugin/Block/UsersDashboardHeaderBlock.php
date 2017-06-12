@@ -43,11 +43,11 @@ class UsersDashboardHeaderBlock extends BlockBase {
       $picture = tweets_queue_process_twitter_picture_url($picture, 'bigger');
       $profile_img = "<img src='" . $picture . "'></img>";
     }
-    $my_profile_link = "<a class ='profile-my-profile' href='" . $base_url .'/' . TWITTER_PROFILE_PATH . "'>" .
-      'My Profile' ."</a>";
+    // $my_profile_link = "<a class ='profile-my-profile' href='" . $base_url .'/' . TWITTER_PROFILE_PATH . "'>" .
+    //   'My Profile' ."</a>";
     $uid = \Drupal::currentUser()->id();
-    $setting_link = "<a class ='profile-settings' href='" . $base_url .'/user/' . $uid . "/edit'>" .
-      'Settings' ."</a>";
+    // $setting_link = "<a class ='profile-settings' href='" . $base_url .'/user/' . $uid . "/edit'>" .
+    //   'Settings' ."</a>";
     $logout_link = "<a class ='profile-logout' href='" . $base_url .'/user/logout' . "'>" .
       'Logout' ."</a>";
     $profile_link_output = "<div class='profile-links'> " .
