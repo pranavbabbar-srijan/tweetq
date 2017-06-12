@@ -419,9 +419,11 @@
   		// 	}
 	  	// });
 
-	    $("#signup-form #edit-user-password").focusout(function() {
+	    $("#signup-form #edit-user-password").keyup(function() {
 	   		var password = $('#signup-form #edit-user-password').val();
+	   		$("#password-validation-error").remove();
 	    	if (password.length == 0) {
+
 	    		$("#password-validation-error").remove();
 	    		$("<span id='password-validation-error' class='validation-error'>" + password_missing_msg + "</p>").insertAfter( "#signup-form #edit-user-password" );
 	    	}
@@ -909,10 +911,16 @@
 			})
 			function checkStrength(password) {
 			var strength = 0
+	        if (password.length == 0) {
+            $('#result').removeClass()
+            $('#result').html('');
+              return;       
+            }
+
 			if (password.length < 6 && password.length > 0) {
 			$('#result').removeClass()
 			$('#result').addClass('short')
-			$('#result').html('Short').fadeIn(3000).hide(6000);
+			$('#result').html('Short');
 			}
 			if (password.length > 7) strength += 1
 			// If password contains both lower and uppercase characters, increase strength value.
