@@ -211,7 +211,8 @@ const SIGNUP_FIELD_TWITTER_OWNER_ID = 'field_twitter_owner_id';
 const SIGNUP_FIELD_EMAIL = 'email';
 const SIGNUP_FIELD_TWITTER_DATA = 'field_twitter_data';
 
- /**
+
+/**
  * Implements hook_form_alter().
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
@@ -1676,7 +1677,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   
   $user_hash_key = hash('sha256', $mail);
   $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
-  $link1 = t('<a href="' . $link . '"> Click Here </a>');
+  $link1 = t('<a style="color: #2aa9e0; font-weight: bold; text-decoration: none;" href="' . $link . '"> Click here </a> to verify your account.');
 
    $message = t("<h2 style='text-transform: capitalize;'>Hello @full_name,</h2>
    <div style='margin: 30px 0;'>Thank you for choosing Barbet.<br>
@@ -1692,9 +1693,9 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   </ul>
   <div style='margin: 30px 0;'>So what are we waiting for? Let’s begin tweeting.</div>
 
-  <div  style='text-align: center; width: 92px; margin: 0 auto; display: flex; background: #2aa9df; padding: 15px 45px; border-radius: 5px; color: white; text-decoration: none;'>@link</div>", array('@full_name' => $name, '@link' => $link1));
+  <div  style='text-align: center;'>@link</div>", array('@full_name' => $name, '@link' => $link1));
   $params['message'] = $message;
-  $params['title'] = 'Barbet Registration Verification';
+  $params['title'] = 'Barbet Email Verification';
  
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
@@ -2836,7 +2837,6 @@ function tweets_queue_authenticate_twitter_user() {
       die();
     }
   }
-
   function tweets_queue_goto_page($path = '') {
     global $base_url;
     $default_path = $base_url;
@@ -2846,7 +2846,17 @@ function tweets_queue_authenticate_twitter_user() {
     header('Location: ' . $default_path);
     die();
   }
-
+  
+  function tweets_queue_goto_page_after_verify($path = '') {
+    global $base_url;
+    $default_path = $base_url;
+    if (!empty($path)) {
+      $default_path = $base_url . '/' . $path;
+    }
+    header('Location: ' . $default_path);
+    drupal_set_message('Your account has been activated, you can now login');
+    die();
+  }
   /**
    * Generate key for interaction with statistics table.
    *
