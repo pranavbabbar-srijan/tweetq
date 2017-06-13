@@ -2540,7 +2540,6 @@ function tweets_queue_insert_message_queue_record($twitter_message_info, $status
   $twitter_message_info['archived'] = 0;
   $twitter_message_info['weight'] = 1;
   $twitter_message_info['changed'] = 0;
-  $twitter_message_info['message'] = tweets_queue_encrypt_data($twitter_message_info['message']);
   $nid = db_insert(TWITTER_MESSAGE_QUEUE_TABLE)
     ->fields($twitter_message_info)
     ->execute();
