@@ -85,8 +85,8 @@
 			    padding-top: 0.6em;
 			    margin-bottom: -0.45em;
 			    padding-bottom: .7em;
-			    padding-left: 1em;
-			    margin-right: 1em;
+			    padding-left: 3.5em;
+			    margin-right: 0;
 			}
 		}
 		.img {
@@ -105,6 +105,7 @@
     		margin-left: 10px;
     		color: $gray;
     		font-size: 16px;
+    		display: none;
 		}
 		+ a {
 			display: block;
@@ -134,32 +135,49 @@
 			}
 		}
 		.profile-links {
-			visibility: hidden;
-			position: absolute;
-			opacity: 0;
-			transition: .3s ease-in-out opacity;
-			padding: 1em;
-			background: white;
-			width: 85%;
-			margin-top: 6px;
-			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb)";/*IE 8*/
-			-moz-box-shadow: 0px 0px 35px #bbb;/*FF 3.5+*/
-			-webkit-box-shadow: 0px 0px 35px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-			box-shadow: 0px 0px 35px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-			filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb); /*IE 5.5-7*/
+		    position: absolute;
+		    right: -70px;
+		    top: 20px;
+		    background-color: #fff;
+		    border: 1px solid #ddd;
+		    width: 180px;
+		    border-radius: 4px;
+		    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
+		    padding: 15px 0;
+		    display: none;
 			&.active {
-				opacity: 1;
-				visibility: visible;
+				display: block;
+			    transform: scale(0.8);
+			    opacity: 0;
+			    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 				&:before {
 					content: "";
-				    border-left: 16px solid transparent;
-					border-right: 16px solid transparent;
-					border-bottom: 16px solid white;
 				    display: block;
 				    position: absolute;
-				    top: -12px;
-				    left: 40%;
+				    right: 58px;
+				    top: -9px;
+				    border-left: 9px solid transparent;
+				    border-right: 9px solid transparent;
+				    border-bottom: 9px solid #ddd;
+				    z-index: 1;
 				}
+				&:after {
+					content: "";
+				    display: block;
+				    position: absolute;
+				    right: 59px;
+				    top: -8px;
+				    border-left: 8px solid transparent;
+				    border-right: 8px solid transparent;
+				    border-bottom: 9px solid #fff;
+				    z-index: 9;
+				}
+				&.animate {
+			    	transform: scale(1);
+				    opacity: 1;
+				    top: 60px;
+				    right: -50px;
+			    }
 			}
 			a {
 				display: block;
@@ -169,7 +187,8 @@
 					margin-bottom: 10px;
 					padding: .5em;
 					&:hover, &.active {
-						background: #fcfcfc;
+						background: #444;
+						color: #fff;
 					}
 					&:before {
 						content: "";
@@ -192,6 +211,7 @@
 					}
 				}
 				&.profile-logout {
+					margin-bottom: 0;
 					&:before {
 						content: $icon-logout;
 					}
@@ -1967,7 +1987,7 @@ body.path-update-password {
     	}
 	}
 }
-.send-tweets-form {
+.send-tweets-form, .tweets-queue-tweet-form {
  .form-type-managed-file {
 		position: absolute;
 		margin-top: 0;
@@ -1994,6 +2014,9 @@ body.path-update-password {
 		    	position: absolute;
 		    	top: 0;
 		    	left: 0;
+		    	+ .js-form-submit {
+	    			display: none;
+	    		}
 		    }
 		    .option {
 		    	display: block;

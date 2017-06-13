@@ -786,6 +786,9 @@
 	     $("#block-usersdashboardheaderblock .profile > a, #block-usersdashboardnontwitterheaderblock .profile > a").click(function(e) {
 	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
+	        setTimeout(function() {
+	            $('.profile-links').toggleClass('animate');
+	        }, 100);
 	        e.stopPropagation();
 	    });
 
@@ -905,7 +908,6 @@
 
 	});
 	$('#result').insertAfter('#edit-user-password');
-
 
 	$(document).ready(function() {
 		$('#edit-user-password').keyup(function() {
