@@ -197,8 +197,8 @@ class TweetsQueueTweetController extends ControllerBase {
     if ($account->redirectPath) {
     $redirect_path = $account->redirectPath;
     }
-    drupal_set_message('Your account has been activated, you can now login');
-    tweets_queue_goto_page();
+    tweets_queue_goto_page_after_verify();
+    // drupal_set_message('Your account has been activated, you can now login');
   }
 }
 
