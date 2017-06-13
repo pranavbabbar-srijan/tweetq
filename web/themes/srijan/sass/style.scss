@@ -258,6 +258,22 @@
 	}
 }
 
+.filled {
+	position: relative;
+	&:before {
+		content: '✓';
+		height: 20px;
+	    width: 20px;
+	    background: rgba(0, 128, 0, 0.4);
+	    border-radius: 10px;
+	    position: absolute;
+	    bottom: 5px;
+	    right: 2px;
+	    color: white;
+	    text-align: center;
+	    padding: 3px 0;
+	}
+}
 
 // Content section
 *, *:before, *:after {
