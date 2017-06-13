@@ -216,7 +216,7 @@ class TweetsQueueTweetForm extends FormBase {
     $size = tweets_queue_get_message_size($message);
     tweets_queue_update_message_queue_priority_info($nid,
       array(
-        'message' => tweets_queue_encrypt_data($message),
+        'message' => $message,
         'size' => $size,
         'changed' => time(),
       ),
