@@ -791,6 +791,8 @@
 	        e.stopPropagation();
 	    });
 
+	    $('.profile-information-complete').parent('div').addClass('filled');
+
 	    $(document).click(function(e) {
 	        if (!$(e.target).is('.notification-message-list, #notification-display, .profile-links')) {
 	            $(".notification-message-list, #notification-display, .profile-links").removeClass("active");
