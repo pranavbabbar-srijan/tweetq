@@ -199,8 +199,8 @@ button {
         padding-top: 0.6em;
         margin-bottom: -0.45em;
         padding-bottom: .7em;
-        padding-left: 1em;
-        margin-right: 1em; }
+        padding-left: 3.5em;
+        margin-right: 0; }
     .block-users-dashboard-header-block .profile .img, .block-users-dashboard-header-profile-block .profile .img {
       width: 36px;
       height: 36px;
@@ -219,7 +219,8 @@ button {
       margin-top: 8px;
       margin-left: 10px;
       color: #979797;
-      font-size: 16px; }
+      font-size: 16px;
+      display: none; }
     .block-users-dashboard-header-block .profile + a, .block-users-dashboard-header-profile-block .profile + a {
       display: block;
       height: 37px;
@@ -244,36 +245,46 @@ button {
         .block-users-dashboard-header-block .profile + a:hover:before, .block-users-dashboard-header-profile-block .profile + a:hover:before {
           background-position: 0 8px; }
     .block-users-dashboard-header-block .profile .profile-links, .block-users-dashboard-header-profile-block .profile .profile-links {
-      visibility: hidden;
       position: absolute;
-      opacity: 0;
-      transition: .3s ease-in-out opacity;
-      padding: 1em;
-      background: white;
-      width: 85%;
-      margin-top: 6px;
-      -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb)";
-      /*IE 8*/
-      -moz-box-shadow: 0px 0px 35px #bbb;
-      /*FF 3.5+*/
-      -webkit-box-shadow: 0px 0px 35px #bbb;
-      /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-      box-shadow: 0px 0px 35px #bbb;
-      /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-      filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb);
-      /*IE 5.5-7*/ }
+      right: -70px;
+      top: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      width: 180px;
+      border-radius: 4px;
+      box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+      display: none; }
       .block-users-dashboard-header-block .profile .profile-links.active, .block-users-dashboard-header-profile-block .profile .profile-links.active {
-        opacity: 1;
-        visibility: visible; }
+        display: block;
+        transform: scale(0.8);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
         .block-users-dashboard-header-block .profile .profile-links.active:before, .block-users-dashboard-header-profile-block .profile .profile-links.active:before {
           content: "";
-          border-left: 16px solid transparent;
-          border-right: 16px solid transparent;
-          border-bottom: 16px solid white;
           display: block;
           position: absolute;
-          top: -12px;
-          left: 40%; }
+          right: 58px;
+          top: -9px;
+          border-left: 9px solid transparent;
+          border-right: 9px solid transparent;
+          border-bottom: 9px solid #ddd;
+          z-index: 1; }
+        .block-users-dashboard-header-block .profile .profile-links.active:after, .block-users-dashboard-header-profile-block .profile .profile-links.active:after {
+          content: "";
+          display: block;
+          position: absolute;
+          right: 59px;
+          top: -8px;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-bottom: 9px solid #fff;
+          z-index: 9; }
+        .block-users-dashboard-header-block .profile .profile-links.active.animate, .block-users-dashboard-header-profile-block .profile .profile-links.active.animate {
+          transform: scale(1);
+          opacity: 1;
+          top: 60px;
+          right: -50px; }
       .block-users-dashboard-header-block .profile .profile-links a, .block-users-dashboard-header-profile-block .profile .profile-links a {
         display: block;
         text-decoration: none; }
@@ -282,7 +293,8 @@ button {
           margin-bottom: 10px;
           padding: .5em; }
           .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-logout.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout.active {
-            background: #fcfcfc; }
+            background: #444;
+            color: #fff; }
           .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
             content: "";
             font-size: 22px;
@@ -294,8 +306,10 @@ button {
           pointer-events: none; }
           .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
             content: ""; }
-        .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
-          content: ""; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout {
+          margin-bottom: 0; }
+          .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
+            content: ""; }
 
 .toolbar-horizontal .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile {
   pointer-events: none; }
@@ -1873,17 +1887,17 @@ body.path-update-password .messages--status {
     -o-border-radius: 4px;
     border-radius: 4px; }
 
-.send-tweets-form .form-type-managed-file {
+.send-tweets-form .form-type-managed-file, .tweets-queue-tweet-form .form-type-managed-file {
   position: absolute;
   margin-top: 0; }
-  .send-tweets-form .form-type-managed-file .form-managed-file {
+  .send-tweets-form .form-type-managed-file .form-managed-file, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file {
     width: 80px;
     height: 70px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 5px; }
-    .send-tweets-form .form-type-managed-file .form-managed-file:before {
+    .send-tweets-form .form-type-managed-file .form-managed-file:before, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file:before {
       font: normal normal normal 35px/1 FontAwesome;
       content: "\f030";
       padding-top: 19px;
@@ -1891,31 +1905,33 @@ body.path-update-password .messages--status {
       color: rgba(0, 0, 0, 0.2);
       float: left;
       width: 79px; }
-    .send-tweets-form .form-type-managed-file .form-managed-file .form-file {
+    .send-tweets-form .form-type-managed-file .form-managed-file .form-file, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .form-file {
       opacity: 0;
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
       left: 0; }
-    .send-tweets-form .form-type-managed-file .form-managed-file .option {
+      .send-tweets-form .form-type-managed-file .form-managed-file .form-file + .js-form-submit, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .form-file + .js-form-submit {
+        display: none; }
+    .send-tweets-form .form-type-managed-file .form-managed-file .option, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .option {
       display: block; }
-    .send-tweets-form .form-type-managed-file .form-managed-file > div {
+    .send-tweets-form .form-type-managed-file .form-managed-file > div, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file > div {
       display: flex;
       flex-flow: row;
       justify-content: flex-start; }
-    .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox {
+    .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox {
       margin: 0; }
-      .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] {
+      .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"], .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] {
         display: none; }
-      .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file {
+      .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file {
         background: none;
         padding-left: 0;
         margin-left: 15px;
         position: relative; }
-        .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a {
+        .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a {
           font-size: 0; }
-          .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a:before {
+          .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a:before, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a:before {
             content: '';
             background: url("../images/logo.svg") no-repeat 15px 20px rgba(0, 0, 0, 0.05);
             padding: 22px 30px;
@@ -1925,7 +1941,7 @@ body.path-update-password .messages--status {
             height: 69px;
             width: 80px;
             background-size: 60%; }
-    .send-tweets-form .form-type-managed-file .form-managed-file input[name="images_remove_button"] {
+    .send-tweets-form .form-type-managed-file .form-managed-file input[name="images_remove_button"], .tweets-queue-tweet-form .form-type-managed-file .form-managed-file input[name="images_remove_button"] {
       display: none; }
 
 #result {
