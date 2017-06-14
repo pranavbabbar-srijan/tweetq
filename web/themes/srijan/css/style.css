@@ -1681,8 +1681,8 @@ body.path-update-password .messages--status {
 
 .notifications {
   position: relative;
-  width: 214px; }
-  .notifications > div:nth-child(1) {
+  width: 272px; }
+  .notifications > div#twitter-notification-count {
     position: absolute;
     top: -2px;
     right: 134px;
@@ -1695,26 +1695,27 @@ body.path-update-password .messages--status {
     display: block;
     z-index: 1; }
   .notifications .notification-message-list {
-    height: 0;
+    height: 92vh;
     overflow-y: scroll;
+    padding: 1em;
+    text-align: left;
     visibility: hidden;
-    float: right;
     position: absolute;
     margin-top: 20px;
-    left: -100px;
+    left: 328px;
     top: 28px;
-    width: 230px;
+    width: 275px;
     background: white;
     font-size: 12px;
     color: #979797;
-    transition: .3s ease-in-out height;
+    transition: .3s ease-in-out all;
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb)";
     /*IE 8*/
-    -moz-box-shadow: 0px 0px 35px #bbb;
+    -moz-box-shadow: 0px 0px 5px 2px #bbb;
     /*FF 3.5+*/
-    -webkit-box-shadow: 0px 0px 35px #bbb;
+    -webkit-box-shadow: 0px 0px 5px 2px #bbb;
     /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-    box-shadow: 0px 0px 35px #bbb;
+    box-shadow: 0px 0px 5px 2px #bbb;
     /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb);
     /*IE 5.5-7*/ }
@@ -1726,13 +1727,9 @@ body.path-update-password .messages--status {
       background-color: darkgrey;
       outline: 1px solid slategrey; }
     .notifications .notification-message-list.active {
-      height: 360px;
-      padding: 1em;
       visibility: inherit;
-      top: 28px;
-      left: -30px;
+      left: 55px;
       background: white;
-      text-align: left;
       border-radius: 0; }
     .notifications .notification-message-list > div {
       display: flex;
@@ -1765,7 +1762,7 @@ body.path-update-password .messages--status {
         .notifications .notification-message-list > div span.message_history_count {
           display: block;
           border-bottom: 1px solid #979797;
-          width: 224px;
+          width: 256px;
           position: relative;
           left: -12px;
           top: -12px;
