@@ -126,8 +126,9 @@
 			    height: 65px;
 			    width: 60px;
 			    transition: all .3s;
+			    fill: red;
 			}
-			&:hover {
+			&:hover, &.active {
 				color: rgba(0,0,0,0.3);
 				&:before {
 					background-position: 0 8px;
@@ -143,7 +144,7 @@
 		    width: 180px;
 		    border-radius: 4px;
 		    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
-		    padding: 15px 0;
+		    padding: 15px 10px;
 		    display: none;
 			&.active {
 				display: block;
@@ -1752,9 +1753,9 @@ body.path-update-password {
 }
 .notifications {
 	position: relative;
-	width: 214px;
+	width: 272px;
 	> div {
-		&:nth-child(1) {
+		&#twitter-notification-count {
 			position: absolute;
 		    top: -2px;
 		    right: 134px;
@@ -1772,23 +1773,24 @@ body.path-update-password {
 		}
 	}
 	.notification-message-list {
-		height: 0;
+		height: 92vh;
 		overflow-y: scroll;
+		padding: 1em;
+		text-align: left;
 		visibility: hidden;
-		float: right;
 		position: absolute;
 		margin-top: 20px;
-		left: -100px;
+		left: 328px;
 	    top: 28px;
-	    width: 230px;
+	    width: 275px;
 	    background: white;
 	    font-size: 12px;
 	    color: $gray;
-	    transition: .3s ease-in-out height;
+	    transition: .3s ease-in-out all;
 	    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb)";/*IE 8*/
-		-moz-box-shadow: 0px 0px 35px #bbb;/*FF 3.5+*/
-		-webkit-box-shadow: 0px 0px 35px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-		box-shadow: 0px 0px 35px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+		-moz-box-shadow: 0px 0px 5px 2px #bbb;/*FF 3.5+*/
+		-webkit-box-shadow: 0px 0px 5px 2px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+		box-shadow: 0px 0px 5px 2px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb); /*IE 5.5-7*/
 		&::-webkit-scrollbar {
 		    width: 6px;
@@ -1801,19 +1803,12 @@ body.path-update-password {
 		  outline: 1px solid slategrey;
 		}
 		&.active {
-			height: 360px;
-			padding: 1em;
 			visibility: inherit;
-			top: 28px;
-			left: -30px;
+			left: 55px;
 			background: white;
-			text-align: left;
 			border-radius: 0;
 		}
 		> div {
-			display: flex;
-			flex-flow: row wrap;
-		    justify-content: space-between;
 		    margin-bottom: 14px;
 		    &:nth-child(1) {
 		    	display: block;
@@ -1825,8 +1820,11 @@ body.path-update-password {
 		    }
 		    span {
 		    	font-size: 10px;
+		    	display: block;
 		    	&.state {
 		    		color: $dark;
+		    		font-size: 13px;
+		    		margin-bottom: 3px;
 		    	}
 		    	&.time {
 		    		font-style: italic;
@@ -1847,7 +1845,7 @@ body.path-update-password {
 				&.message_history_count {
 					display: block;
 					border-bottom: 1px solid $gray;
-					width: 224px;
+					width: 256px;
 				    position: relative;
 				    left: -12px;
 				    top: -12px;
@@ -1856,6 +1854,9 @@ body.path-update-password {
 				    background: white;
 				    div {
 				    	display: inline;
+				    	span {
+				    		display: inline;
+				    	}
 				    }
 				}
 			}
