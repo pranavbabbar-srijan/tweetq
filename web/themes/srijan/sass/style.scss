@@ -85,8 +85,8 @@
 			    padding-top: 0.6em;
 			    margin-bottom: -0.45em;
 			    padding-bottom: .7em;
-			    padding-left: 1em;
-			    margin-right: 1em;
+			    padding-left: 3.5em;
+			    margin-right: 0;
 			}
 		}
 		.img {
@@ -105,6 +105,7 @@
     		margin-left: 10px;
     		color: $gray;
     		font-size: 16px;
+    		display: none;
 		}
 		+ a {
 			display: block;
@@ -134,32 +135,49 @@
 			}
 		}
 		.profile-links {
-			visibility: hidden;
-			position: absolute;
-			opacity: 0;
-			transition: .3s ease-in-out opacity;
-			padding: 1em;
-			background: white;
-			width: 85%;
-			margin-top: 6px;
-			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb)";/*IE 8*/
-			-moz-box-shadow: 0px 0px 35px #bbb;/*FF 3.5+*/
-			-webkit-box-shadow: 0px 0px 35px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-			box-shadow: 0px 0px 35px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-			filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=80, Color=#bbb); /*IE 5.5-7*/
+		    position: absolute;
+		    right: -70px;
+		    top: 20px;
+		    background-color: #fff;
+		    border: 1px solid #ddd;
+		    width: 180px;
+		    border-radius: 4px;
+		    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
+		    padding: 15px 0;
+		    display: none;
 			&.active {
-				opacity: 1;
-				visibility: visible;
+				display: block;
+			    transform: scale(0.8);
+			    opacity: 0;
+			    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 				&:before {
 					content: "";
-				    border-left: 16px solid transparent;
-					border-right: 16px solid transparent;
-					border-bottom: 16px solid white;
 				    display: block;
 				    position: absolute;
-				    top: -12px;
-				    left: 40%;
+				    right: 58px;
+				    top: -9px;
+				    border-left: 9px solid transparent;
+				    border-right: 9px solid transparent;
+				    border-bottom: 9px solid #ddd;
+				    z-index: 1;
 				}
+				&:after {
+					content: "";
+				    display: block;
+				    position: absolute;
+				    right: 59px;
+				    top: -8px;
+				    border-left: 8px solid transparent;
+				    border-right: 8px solid transparent;
+				    border-bottom: 9px solid #fff;
+				    z-index: 9;
+				}
+				&.animate {
+			    	transform: scale(1);
+				    opacity: 1;
+				    top: 60px;
+				    right: -50px;
+			    }
 			}
 			a {
 				display: block;
@@ -169,7 +187,8 @@
 					margin-bottom: 10px;
 					padding: .5em;
 					&:hover, &.active {
-						background: #fcfcfc;
+						background: #444;
+						color: #fff;
 					}
 					&:before {
 						content: "";
@@ -192,6 +211,7 @@
 					}
 				}
 				&.profile-logout {
+					margin-bottom: 0;
 					&:before {
 						content: $icon-logout;
 					}
@@ -258,6 +278,22 @@
 	}
 }
 
+.filled {
+	position: relative;
+	&:before {
+		content: '✓';
+		height: 20px;
+	    width: 20px;
+	    background: rgba(0, 128, 0, 0.4);
+	    border-radius: 10px;
+	    position: absolute;
+	    bottom: 5px;
+	    right: 2px;
+	    color: white;
+	    text-align: center;
+	    padding: 3px 0;
+	}
+}
 
 // Content section
 *, *:before, *:after {
@@ -722,7 +758,7 @@ body.path-update-password {
 		.block-page-title-block {
 			background: #FCFCFC;
 			padding: 1em;
-			margin-left: 1em;
+			// margin-left: 1em;
 			margin-top: 1em;
 			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
 			-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
@@ -823,7 +859,7 @@ body.path-update-password {
 	.block-users-tweeted-tweets-block {
 		padding: 1em;
 		top: 79px;
-		margin-left: 10px;
+		// margin-left: 10px;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
 		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
 		-webkit-box-shadow: 0px 0px 3px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
@@ -1241,7 +1277,8 @@ body.path-update-password {
 	.block-users-valid-tweets-block, .block-users-in-valid-tweets-block,
 	.block-users-archived-tweets-block, .block-users-all-tweets-block,
 	.block-users-tweeted-tweets-block {
-		margin-top: 20px;
+		margin-top: 15px;
+		margin-left: 0;
 	}
 }
 .no-tweet-found {
@@ -1431,10 +1468,10 @@ body.path-update-password {
 			padding-top: 52px;
 		}
 		.main-content .block-page-title-block {
-			margin-left: 10px;
+			// margin-left: 10px;
 		}
 		.block-users-archived-tweets-block, .block-users-valid-tweets-block, .block-users-in-valid-tweets-block {
-			margin-left: 10px;
+			// margin-left: 10px;
 			top: 79px;
 		}
 	}
@@ -1611,10 +1648,10 @@ body.path-update-password {
 	box-shadow: 0 0 2px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=20, Color=#bbb); /*IE 5.5-7*/
 	margin-top: 1em;
-	margin-left: 10px;
+	// margin-left: 10px;
 	background: white;
 	position: fixed;
-    width: 74.48%;
+    width: 75%;
     z-index: 1;
     top: 60px;
 	.content {
@@ -1950,7 +1987,7 @@ body.path-update-password {
     	}
 	}
 }
-.send-tweets-form {
+.send-tweets-form, .tweets-queue-tweet-form {
  .form-type-managed-file {
 		position: absolute;
 		margin-top: 0;
@@ -1977,6 +2014,9 @@ body.path-update-password {
 		    	position: absolute;
 		    	top: 0;
 		    	left: 0;
+		    	+ .js-form-submit {
+	    			display: none;
+	    		}
 		    }
 		    .option {
 		    	display: block;
@@ -2059,7 +2099,7 @@ body.path-update-password {
 	.create-header, .edit-tweet {
 		background: #FCFCFC;
 		padding: 1em;
-		margin-left: 10px;
+		// margin-left: 10px;
 		margin-top: 1em;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
 		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
@@ -2073,7 +2113,7 @@ body.path-update-password {
 		overflow: hidden;
 		background: white;
 		padding: 1em 1em 2.5em 1em;
-		margin-left: 10px;
+		// margin-left: 10px;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
 		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
 		-webkit-box-shadow: 0px 0px 3px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
@@ -2081,22 +2121,23 @@ body.path-update-password {
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb); /*IE 5.5-7*/
 		.form-item-display-box {
 			float: left;
-			width: 62%;
+			width: 63%;
 			text-align: right;
-			margin-top: 10px;
+			margin-top: 12px;
 			input {
 				border: 0;
 				text-align: right;
     			pointer-events: none;
     			color: $gray;
     			font-weight: bold;
+    			font-size: 16px;
 			}
 		}
 	}
 	#edit-save, #edit-submit, #edit-clone, #edit-cancel {
 		border: none;
 	    padding: .5em 1em .5em 1em;
-	    font-size: 1.5vw;
+	    font-size: 18px;
 	    @include border-radius(4px);
 	    text-decoration: none;
 	    display: block;
@@ -2107,13 +2148,14 @@ body.path-update-password {
 		color: white;
 		float: right;
 		margin-right: 0;
+		padding: .7em 1.4em;
 	}
 	#edit-save, #edit-cancel {
 		background: white;
 		color: $twitter;
 		border: 2px solid $twitter;
 		float: right;
-		padding: .4em 1em;
+		padding: .6em 1.4em;
 		margin-right: 0;
 		margin-left: 0;
 	}
@@ -2146,7 +2188,7 @@ body.path-update-password {
 	> .create-header {
 		background: #FCFCFC;
 		padding: 1em;
-		margin-left: 10px;
+		// margin-left: 10px;
 		margin-top: 1em;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
 		-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
@@ -2162,7 +2204,7 @@ body.path-update-password {
 			background: white;
 			padding: 1em;
 			min-height: 133px;
-			margin-left: 10px;
+			// margin-left: 10px;
 			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";/*IE 8*/
 			-moz-box-shadow: 0px 0px 3px #bbb;/*FF 3.5+*/
 			-webkit-box-shadow: 0px 0px 3px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
@@ -2364,7 +2406,7 @@ body.path-update-password {
 }
 
 .send-tweets-form, .-form-tweets-queue-csv-upload {
-	padding-top: 8px;
+	padding-top: 0;
 	// margin-top: 80px;
     width: 99.9%;
 }

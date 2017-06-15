@@ -786,8 +786,13 @@
 	     $("#block-usersdashboardheaderblock .profile > a, #block-usersdashboardnontwitterheaderblock .profile > a").click(function(e) {
 	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
+	        setTimeout(function() {
+	            $('.profile-links').toggleClass('animate');
+	        }, 100);
 	        e.stopPropagation();
 	    });
+
+	    $('.profile-information-complete').parent('div').addClass('filled');
 
 	    $(document).click(function(e) {
 	        if (!$(e.target).is('.notification-message-list, #notification-display, .profile-links')) {
@@ -903,7 +908,6 @@
 
 	});
 	$('#result').insertAfter('#edit-user-password');
-
 
 	$(document).ready(function() {
 		$('#edit-user-password').keyup(function() {
