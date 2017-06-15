@@ -1598,7 +1598,8 @@ function tweets_queue_mail($key, &$message, $params) {
     case 'user_signup_mail':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
-      $message['body'][] = Html::escape($params['message']);
+      //$message['body'][] = Html::escape($params['message']);
+      $message['body'][] = $params['message'];
       break;
     case 'user_verify_signup_mail':
       $message['from'] = \Drupal::config('system.site')->get('mail');
@@ -1637,10 +1638,10 @@ function tweets_queue_signup_send_mail($mail, $name) {
   $module = 'tweets_queue';
   $key = 'user_signup_mail'; // Replace with Your key
   $to = $mail;
-  $message = t("Dear @full_name,\n
-Thankyou for connecting with Barebt!\n
-You will now be able to use Barbet for posting your tweets.
-Please check out the Import tweets if you want the bulk of tweets to be handled through Barbet.", array('@full_name' => $name));
+  $message = t("<h2 style='text-transform: capitalize;'>Dear @full_name,</h2>
+   <div style='margin: 30px 0;'>Thankyou for connecting with Barebt!<br>
+    You will now be able to use Barbet for posting your tweets.</div>
+    Please check out the Import tweets if you want the bulk of tweets to be handled through Barbet.", array('@full_name' => $name));
   $params['message'] = $message;
   $params['title'] = 'WELCOME TO BARBET';
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
@@ -2540,7 +2541,6 @@ function tweets_queue_insert_message_queue_record($twitter_message_info, $status
   $twitter_message_info['archived'] = 0;
   $twitter_message_info['weight'] = 1;
   $twitter_message_info['changed'] = 0;
-  $twitter_message_info['message'] = tweets_queue_encrypt_data($twitter_message_info['message']);
   $nid = db_insert(TWITTER_MESSAGE_QUEUE_TABLE)
     ->fields($twitter_message_info)
     ->execute();
@@ -2595,7 +2595,7 @@ function tweets_queue_check_user_message_presence($message, $hash_tag) {
  * @return string
  *   Returns the tweets message.
  */
-function tweets_queue_populate_scheduled_messages_list($uid) {
+function tweets_queue_populate_scheduled_messages_list($uid, $minimum_lapse_interval = 86400) {
   $nid = '';
   $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
   $query->fields('p', ['nid']);
@@ -2603,9 +2603,19 @@ function tweets_queue_populate_scheduled_messages_list($uid) {
   $query->condition('p.status', 1 , '=');
   $query->condition('p.archived', 0 , '=');
   $query->condition('p.message', '' , '!=');
+
+  if ($minimum_lapse_interval) {
+    $last_run = time() - $minimum_lapse_interval;
+    $db_or = db_or();
+    $db_or->condition('p.last_run', 0, '=');
+    $db_or->condition('p.last_run', $last_run, '<');
+    $query->condition($db_or);
+  }
+
   $query->condition('p.size', CRON_TWEET_CHARCATER_LIMIT , '<=');
   $query->orderBy('p.weight', 'ASC');
   $query->orderBy('p.created', 'ASC');
+  //TODO: add expresion to chek last run 0 or > lapse interval
   $query->range(0, 1);
   $nid = $query->execute()->fetchField();
   tweets_queue_debug_info(' ' . $nid . ' set for uid' . $uid);
@@ -2655,8 +2665,10 @@ function tweets_queue_compile_tweets_scheduling() {
   $run_interval = intval(tweets_queue_get_tweet_configuration_data(CRON_SCHEDULER_RUN_INTERVAL));
   $next_scheduled_run = $current_time + ($run_interval * 60);
   $user_list = tweets_queue_fetch_all_unscheduled_users_list();
+
+  $minimum_lapse_interval = tweets_queue_get_tweet_configuration_data(CRON_TWEET_RETWEET_INTERVAL);
   foreach ($user_list as $uid => $data) {
-    tweets_queue_populate_scheduled_messages_list($uid);
+    tweets_queue_populate_scheduled_messages_list($uid, $minimum_lapse_interval);
   }
   tweets_queue_debug_info(t('Tweets scheduler scheduled.'));
 
