@@ -126,8 +126,9 @@
 			    height: 65px;
 			    width: 60px;
 			    transition: all .3s;
+			    fill: red;
 			}
-			&:hover {
+			&:hover, &.active {
 				color: rgba(0,0,0,0.3);
 				&:before {
 					background-position: 0 8px;
@@ -143,7 +144,7 @@
 		    width: 180px;
 		    border-radius: 4px;
 		    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
-		    padding: 15px 0;
+		    padding: 15px 10px;
 		    display: none;
 			&.active {
 				display: block;
@@ -1808,9 +1809,6 @@ body.path-update-password {
 			border-radius: 0;
 		}
 		> div {
-			display: flex;
-			flex-flow: row wrap;
-		    justify-content: space-between;
 		    margin-bottom: 14px;
 		    &:nth-child(1) {
 		    	display: block;
@@ -1822,8 +1820,11 @@ body.path-update-password {
 		    }
 		    span {
 		    	font-size: 10px;
+		    	display: block;
 		    	&.state {
 		    		color: $dark;
+		    		font-size: 13px;
+		    		margin-bottom: 3px;
 		    	}
 		    	&.time {
 		    		font-style: italic;
@@ -1853,6 +1854,9 @@ body.path-update-password {
 				    background: white;
 				    div {
 				    	display: inline;
+				    	span {
+				    		display: inline;
+				    	}
 				    }
 				}
 			}

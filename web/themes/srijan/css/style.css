@@ -239,10 +239,11 @@ button {
         display: block;
         height: 65px;
         width: 60px;
-        transition: all .3s; }
-      .block-users-dashboard-header-block .profile + a:hover, .block-users-dashboard-header-profile-block .profile + a:hover {
+        transition: all .3s;
+        fill: red; }
+      .block-users-dashboard-header-block .profile + a:hover, .block-users-dashboard-header-block .profile + a.active, .block-users-dashboard-header-profile-block .profile + a:hover, .block-users-dashboard-header-profile-block .profile + a.active {
         color: rgba(0, 0, 0, 0.3); }
-        .block-users-dashboard-header-block .profile + a:hover:before, .block-users-dashboard-header-profile-block .profile + a:hover:before {
+        .block-users-dashboard-header-block .profile + a:hover:before, .block-users-dashboard-header-block .profile + a.active:before, .block-users-dashboard-header-profile-block .profile + a:hover:before, .block-users-dashboard-header-profile-block .profile + a.active:before {
           background-position: 0 8px; }
     .block-users-dashboard-header-block .profile .profile-links, .block-users-dashboard-header-profile-block .profile .profile-links {
       position: absolute;
@@ -253,7 +254,7 @@ button {
       width: 180px;
       border-radius: 4px;
       box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
-      padding: 15px 0;
+      padding: 15px 10px;
       display: none; }
       .block-users-dashboard-header-block .profile .profile-links.active, .block-users-dashboard-header-profile-block .profile .profile-links.active {
         display: block;
@@ -1732,9 +1733,6 @@ body.path-update-password .messages--status {
       background: white;
       border-radius: 0; }
     .notifications .notification-message-list > div {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
       margin-bottom: 14px; }
       .notifications .notification-message-list > div:nth-child(1) {
         display: block;
@@ -1743,9 +1741,12 @@ body.path-update-password .messages--status {
       .notifications .notification-message-list > div:nth-child(2) {
         margin-top: 27px; }
       .notifications .notification-message-list > div span {
-        font-size: 10px; }
+        font-size: 10px;
+        display: block; }
         .notifications .notification-message-list > div span.state {
-          color: #212121; }
+          color: #212121;
+          font-size: 13px;
+          margin-bottom: 3px; }
         .notifications .notification-message-list > div span.time {
           font-style: italic; }
         .notifications .notification-message-list > div span.message {
@@ -1771,6 +1772,8 @@ body.path-update-password .messages--status {
           background: white; }
           .notifications .notification-message-list > div span.message_history_count div {
             display: inline; }
+            .notifications .notification-message-list > div span.message_history_count div span {
+              display: inline; }
 
 .tweets-queue-tweet-form .message-header .form-item-message + .form-item-display-box {
   width: 69%; }
