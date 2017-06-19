@@ -544,8 +544,8 @@ body {
         text-decoration: none; }
 
 .user-login-form {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 2em 2em 10em;
+  background: white;
+  padding: 8em 2em 5em 2em;
   -webkit-border-radius: 6px;
   -khtml-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -611,6 +611,9 @@ body {
     display: block;
     width: 150px;
     margin: 0 auto; }
+    .user-login-form #forgot-password + div {
+      position: absolute;
+      bottom: 15px; }
 
 .validation-error, .mail-sent {
   color: #ff5a43;
@@ -699,9 +702,36 @@ body.path-update-password .messages--status {
     cursor: pointer; }
 
 .twitter-btn {
+  background: #F8F8F8;
   position: absolute;
-  bottom: 2em;
-  width: 85%; }
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 25px 30px;
+  border-radius: 6px 6px 0 0; }
+  .twitter-btn a {
+    border: none;
+    background: #2aa9e0;
+    width: 100%;
+    padding: .5em 1em .5em 1em;
+    font-size: 18px;
+    color: white;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: block;
+    text-align: center; }
+    .twitter-btn a:before {
+      font: normal normal normal 14px/1 FontAwesome;
+      content: "\f099";
+      font-size: 23px;
+      margin-right: 0.2em;
+      display: inline-block;
+      vertical-align: text-top; }
   .twitter-btn span {
     width: 100%;
     display: block;
@@ -710,29 +740,6 @@ body.path-update-password .messages--status {
     font-size: 14px; }
   .twitter-btn div {
     margin-top: 1em; }
-    .twitter-btn div a {
-      border: none;
-      background: #2aa9e0;
-      width: 100%;
-      padding: .5em 1em .5em 1em;
-      font-size: 18px;
-      color: white;
-      -webkit-border-radius: 4px;
-      -khtml-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -ms-border-radius: 4px;
-      -o-border-radius: 4px;
-      border-radius: 4px;
-      text-decoration: none;
-      display: block;
-      text-align: center; }
-      .twitter-btn div a:before {
-        font: normal normal normal 14px/1 FontAwesome;
-        content: "\f099";
-        font-size: 23px;
-        margin-right: 0.2em;
-        display: inline-block;
-        vertical-align: text-top; }
 
 .right-nav {
   float: right;
@@ -1746,7 +1753,7 @@ body.path-update-password .messages--status {
       outline: 1px solid slategrey; }
     .notifications .notification-message-list.active {
       visibility: inherit;
-      left: 55px;
+      left: 60px;
       background: white;
       border-radius: 0; }
     .notifications .notification-message-list > div {
@@ -1928,7 +1935,8 @@ body.path-update-password .messages--status {
       height: 100%;
       position: absolute;
       top: 0;
-      left: 0; }
+      left: 0;
+      cursor: pointer; }
       .send-tweets-form .form-type-managed-file .form-managed-file .form-file + .js-form-submit, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .form-file + .js-form-submit {
         display: none; }
     .send-tweets-form .form-type-managed-file .form-managed-file .option, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .option {
@@ -2177,7 +2185,8 @@ body.path-update-password .messages--status {
     border-radius: 0 4px 4px 0;
     text-decoration: none;
     display: block;
-    text-align: center; }
+    text-align: center;
+    font-weight: bold; }
   .-form-tweets-queue-csv-upload .description {
     font-size: .8em;
     font-style: italic;
