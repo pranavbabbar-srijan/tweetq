@@ -2408,6 +2408,10 @@ body.path-update-password .messages--status {
           font: normal normal normal 16px/1 FontAwesome; }
 
 /** Home page Bulk store section is start **/
+.block-block-content .field--name-field-ttitle {
+  text-transform: uppercase;
+  font-size: 28px; }
+
 .region-middle {
   width: 100%;
   float: left; }
@@ -2418,10 +2422,6 @@ body.path-update-password .messages--status {
   background-color: #ffffff; }
   #block-whatbarbetis p {
     line-height: 26px; }
-  #block-whatbarbetis p:first-child {
-    text-transform: uppercase;
-    font-size: 28px;
-    margin-bottom: 40px; }
 
 .green-text {
   color: #96c85a; }
@@ -2437,9 +2437,34 @@ body.path-update-password .messages--status {
     line-height: 26px; }
   .Home-page--blukstore--section .views-row {
     flex: 3; }
+    .Home-page--blukstore--section .views-row .views-field-field-section-image {
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale; }
+      .Home-page--blukstore--section .views-row .views-field-field-section-image:before {
+        height: 140px;
+        width: 140px;
+        display: block;
+        border-radius: 100%;
+        line-height: 140px;
+        color: #fff;
+        font-size: 56px;
+        text-align: center; }
+    .Home-page--blukstore--section .views-row:nth-of-type(1) .views-field-field-section-image:before {
+      content: "\f07c";
+      background: #b6d791; }
+    .Home-page--blukstore--section .views-row:nth-of-type(2) .views-field-field-section-image:before {
+      content: "\f017";
+      background: #2aa9e0; }
+    .Home-page--blukstore--section .views-row:nth-of-type(3) .views-field-field-section-image:before {
+      content: "\f085";
+      background: #f98575; }
   .Home-page--blukstore--section a {
     margin-top: 15px;
-    font-size: 18px;
+    font-size: 24px;
     color: #000000;
     display: block;
     text-decoration: none;
@@ -2463,9 +2488,9 @@ body.path-update-password .messages--status {
   padding: 90px 50px;
   background-color: #fbfbfb; }
   .section__mission--text p {
-    line-height: 26px; }
+    line-height: 28px; }
     .section__mission--text p:first-child {
-      font-size: 24px;
+      font-size: 28px;
       text-transform: uppercase; }
       .section__mission--text p:first-child span {
         color: #96c85a; }
@@ -2477,8 +2502,6 @@ body.path-update-password .messages--status {
 /** social share links section */
 #block-wearealsoavailbleforyourfavouritesocialnetwork {
   text-align: center;
-  font-size: 35px;
-  text-transform: uppercase;
   padding-top: 40px;
   background: #ffffff; }
 

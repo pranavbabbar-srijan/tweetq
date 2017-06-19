@@ -2586,7 +2586,12 @@ body.path-update-password {
 // #edit-message {background: rgba(0,0,0,0); color: red;}
 
 /** Home page Bulk store section is start **/
-
+.block-block-content {
+	.field--name-field-ttitle {
+	   text-transform: uppercase;
+       font-size: 28px;
+	}
+}
 .region-middle {
   	width: 100%;
     float: left;
@@ -2597,15 +2602,9 @@ body.path-update-password {
 	padding: 6em 90px;
 	background-color: $white;
 	p {
-		line-height: 26px;
+	   line-height: 26px;
 	}
-	p {
-		&:first-child {
-           text-transform: uppercase;
-           font-size: 28px;
-           margin-bottom: 40px;
-		}
-	}
+	
 }
 .green-text {
 	color: $login-btn;
@@ -2624,15 +2623,60 @@ body.path-update-password {
 	}
 	.views-row {
 		flex: 3;
+		.views-field-field-section-image {
+			display: inline-block;
+		    font: normal normal normal 14px/1 FontAwesome;
+		    font-size: inherit;
+		    text-rendering: auto;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		    &:before {
+			    height: 140px;
+			    width: 140px;
+			    display: block;
+			    border-radius: 100%;
+			    line-height: 140px;
+			    color: #fff;
+			    font-size: 56px;
+			    text-align: center;
+		   	 }
+		}
+		&:nth-of-type(1) {
+		   .views-field-field-section-image {
+		   	 &:before {
+		   	 	content: "\f07c";
+		   	 	background: #b6d791;
+			   
+		   	 }
+		   }		
+		}
+		&:nth-of-type(2) {
+		   .views-field-field-section-image {
+		   	 &:before {
+		   	 	content: "\f017";
+			    background: #2aa9e0;
+		   	 }
+		   }		
+		}
+		&:nth-of-type(3) {
+		   .views-field-field-section-image {
+		   	 &:before {
+		   	 	content: "\f085";
+		   	 	background: #f98575;
+			    
+		   	 }
+		   }		
+		}
 	}
 	a {
 		margin-top: 15px;
-		font-size: 18px;
+		font-size: 24px;
 		color: $black;
 		display: block;
 		text-decoration: none;
 		text-transform: uppercase;
 	}
+
 }
 
 /** mission and vision section start **/
@@ -2659,9 +2703,9 @@ body.path-update-password {
     padding: 90px 50px;
     background-color: $light-gray;
 	p {
-		line-height: 26px;
+		line-height: 28px;
 		&:first-child {
-			font-size: 24px;
+			font-size: 28px;
 			text-transform: uppercase;
 			span {
 				color: $login-btn;
@@ -2677,8 +2721,6 @@ body.path-update-password {
 /** social share links section */
 #block-wearealsoavailbleforyourfavouritesocialnetwork {
     text-align: center;
-    font-size: 35px;
-    text-transform: uppercase;
     padding-top: 40px;
     background: $white;
 }
