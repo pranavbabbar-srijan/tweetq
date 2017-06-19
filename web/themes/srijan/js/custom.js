@@ -796,7 +796,7 @@
 
 	    $(document).click(function(e) {
 	        if (!$(e.target).is('.notification-message-list, #notification-display, .profile-links')) {
-	            $(".notification-message-list, #notification-display, .profile-links").removeClass("active");
+	            $(".notification-message-list, #notification-display, .profile-links").removeClass("active animate");
 	        }
 	    });
 
