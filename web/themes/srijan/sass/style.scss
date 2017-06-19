@@ -2587,7 +2587,7 @@ body.path-update-password {
 
 /** Home page Bulk store section is start **/
 .block-block-content {
-	.field--name-field-ttitle {
+	.field--name-field-title {
 	   text-transform: uppercase;
        font-size: 28px;
 	}
@@ -2597,7 +2597,7 @@ body.path-update-password {
     float: left;
 }
 
-#block-whatbarbetis {
+.block-what-barbet-is {
 	text-align: center;
 	padding: 6em 90px;
 	background-color: $white;
@@ -2719,12 +2719,12 @@ body.path-update-password {
 }
 
 /** social share links section */
-#block-wearealsoavailbleforyourfavouritesocialnetwork {
+.block-we-vailble-for-your-favour {
     text-align: center;
     padding-top: 40px;
     background: $white;
 }
-#block-socialmenulinkspanblockspan {
+.block-social-menu-link {
 	background: $white;
 	padding-bottom: 50px;
 	.menu {
@@ -2798,7 +2798,7 @@ body.path-update-password {
 	}
 }
 /** Global sub site menu **/
-#block-submenufooterblock {
+.block-sub-menu-footer-block {
 	background: #333333;
 	padding: 50px 0;
 	.menu {
