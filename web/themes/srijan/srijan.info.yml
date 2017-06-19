@@ -15,6 +15,7 @@ libraries:
   - colorbox/colorbox
 
 regions:
+  slider: Slider
   header: Header
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'
