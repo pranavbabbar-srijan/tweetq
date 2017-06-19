@@ -432,6 +432,30 @@ body {
 	}
 }
 
+// Home page carousel
+.view-home-page-carousel {
+	position: absolute;
+	top: 0;
+	z-index: 0;
+	.flexslider {
+		background: none;
+		border: none;
+		.slides {
+			.views-field-title {
+				position: absolute;
+				top: 18%;
+    			left: 6%;
+    			font-size: 20px;
+    			font-weight: bold;
+    			a {
+    				color: white;
+    				text-decoration: none;
+    			}
+			}
+		}
+	}
+}
+
 .user-login-form {
 	background: rgba(255,255,255,.8);
 	padding: 2em 2em 10em;
