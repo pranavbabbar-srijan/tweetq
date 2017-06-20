@@ -53,6 +53,7 @@ class ProfileSettingForm extends FormBase {
       '#suffix' => '</div>',
     );
 
+
     $form['message-header'] = array(
       '#type' => 'markup',
       '#prefix' => '<div  id= "profile-settings-form" class="message-header">',
@@ -85,7 +86,7 @@ class ProfileSettingForm extends FormBase {
       '#default_value' => $email,
       '#attributes' => array (
         'readonly' => 'readonly',
-        'class' => (!empty($twitter_username)) ? array($verified_class) : array(''),
+        'class' => (!empty($twitter_handle))? array($verified_class) : array(''),
       ),
     );
 
@@ -156,13 +157,17 @@ class ProfileSettingForm extends FormBase {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Update Profile'),
+      '#attributes' => array('class' => array('update-profile-button')),
     );
 
     $form['message-footer'] = array(
       '#type' => 'markup',
+      '#prefix' => '<div id="update-message">',
       '#suffix' => '</div>',
       '#markup' => t(''),
+      '#attributes' => array('class' => array('update-profile-message')),
     );
+
     return $form;
   }
 

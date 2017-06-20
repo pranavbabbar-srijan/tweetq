@@ -338,7 +338,8 @@ button {
       font-size: 28px; } }
 
 .region-header {
-  float: left; }
+  float: left;
+  width: 100%; }
 
 #header {
   position: relative;
@@ -2419,23 +2420,26 @@ body.path-update-password .messages--status {
           font: normal normal normal 16px/1 FontAwesome; }
 
 /** Home page Bulk store section is start **/
+.block-block-content .field--name-field-title {
+  text-transform: uppercase;
+  font-size: 28px; }
+
 .region-middle {
   width: 100%;
   float: left; }
 
-#block-whatbarbetis {
+.block-what-barbet-is {
   text-align: center;
   padding: 6em 90px;
   background-color: #ffffff; }
-  #block-whatbarbetis p {
+  .block-what-barbet-is p {
     line-height: 26px; }
-  #block-whatbarbetis p:first-child {
-    text-transform: uppercase;
-    font-size: 28px;
-    margin-bottom: 40px; }
 
 .green-text {
   color: #96c85a; }
+
+.red-text {
+  color: #ffa500; }
 
 .Home-page--blukstore--section {
   background-color: #ffffff;
@@ -2448,9 +2452,34 @@ body.path-update-password .messages--status {
     line-height: 26px; }
   .Home-page--blukstore--section .views-row {
     flex: 3; }
+    .Home-page--blukstore--section .views-row .views-field-field-section-image {
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale; }
+      .Home-page--blukstore--section .views-row .views-field-field-section-image:before {
+        height: 140px;
+        width: 140px;
+        display: block;
+        border-radius: 100%;
+        line-height: 140px;
+        color: #fff;
+        font-size: 56px;
+        text-align: center; }
+    .Home-page--blukstore--section .views-row:nth-of-type(1) .views-field-field-section-image:before {
+      content: "\f07c";
+      background: #b6d791; }
+    .Home-page--blukstore--section .views-row:nth-of-type(2) .views-field-field-section-image:before {
+      content: "\f017";
+      background: #2aa9e0; }
+    .Home-page--blukstore--section .views-row:nth-of-type(3) .views-field-field-section-image:before {
+      content: "\f085";
+      background: #f98575; }
   .Home-page--blukstore--section a {
     margin-top: 15px;
-    font-size: 18px;
+    font-size: 24px;
     color: #000000;
     display: block;
     text-decoration: none;
@@ -2474,9 +2503,9 @@ body.path-update-password .messages--status {
   padding: 90px 50px;
   background-color: #fbfbfb; }
   .section__mission--text p {
-    line-height: 26px; }
+    line-height: 28px; }
     .section__mission--text p:first-child {
-      font-size: 24px;
+      font-size: 28px;
       text-transform: uppercase; }
       .section__mission--text p:first-child span {
         color: #96c85a; }
@@ -2486,30 +2515,29 @@ body.path-update-password .messages--status {
   text-align: center; }
 
 /** social share links section */
-#block-wearealsoavailbleforyourfavouritesocialnetwork {
+.block-we-vailble-for-your-favour {
   text-align: center;
-  font-size: 35px;
-  text-transform: uppercase;
   padding-top: 40px;
   background: #ffffff; }
 
-#block-socialmenulinkspanblockspan {
+.block-social-menu-link {
   background: #ffffff;
   padding-bottom: 50px; }
-  #block-socialmenulinkspanblockspan .menu {
+  .block-social-menu-link .menu {
     text-align: center;
     margin: 0; }
-    #block-socialmenulinkspanblockspan .menu li {
+    .block-social-menu-link .menu li {
       display: inline-block;
       font: normal normal normal 14px/1 FontAwesome;
       font-size: inherit;
       text-rendering: auto;
       -webkit-font-smoothing: antialiased;
-      padding: 6%; }
-      #block-socialmenulinkspanblockspan .menu li a {
+      padding: 5% 9%; }
+      .block-social-menu-link .menu li a {
         color: transparent;
-        position: relative; }
-        #block-socialmenulinkspanblockspan .menu li a:before {
+        position: relative;
+        font-size: 0; }
+        .block-social-menu-link .menu li a:before {
           display: inline-block;
           font-size: 30px;
           line-height: 53px;
@@ -2520,39 +2548,39 @@ body.path-update-password .messages--status {
           border-radius: 100%;
           height: 50px;
           width: 50px; }
-      #block-socialmenulinkspanblockspan .menu li:nth-of-type(1) a:before {
+      .block-social-menu-link .menu li:nth-of-type(1) a:before {
         content: "\f09a";
         /** facebook **/
         background: #3b5999; }
-      #block-socialmenulinkspanblockspan .menu li:nth-of-type(2) a:before {
+      .block-social-menu-link .menu li:nth-of-type(2) a:before {
         content: "\f16d";
         /** instagram **/
         background: #e4405f; }
-      #block-socialmenulinkspanblockspan .menu li:nth-of-type(3) a:before {
+      .block-social-menu-link .menu li:nth-of-type(3) a:before {
         content: "\f099";
         /** twitter **/
         background: #55acee; }
-      #block-socialmenulinkspanblockspan .menu li:nth-of-type(4) a:before {
+      .block-social-menu-link .menu li:nth-of-type(4) a:before {
         content: "\f0e1";
         /** linkedin **/
         background: #0177b5; }
-      #block-socialmenulinkspanblockspan .menu li:nth-of-type(5) a:before {
+      .block-social-menu-link .menu li:nth-of-type(5) a:before {
         content: "\f0d5";
         /** google plus **/
         background: #dd4b39; }
 
 /** Global sub site menu **/
-#block-submenufooterblock {
+.block-sub-menu-footer-block {
   background: #333333;
   padding: 50px 0; }
-  #block-submenufooterblock .menu {
+  .block-sub-menu-footer-block .menu {
     text-align: center;
     margin: 0; }
-    #block-submenufooterblock .menu li {
+    .block-sub-menu-footer-block .menu li {
       display: inline-block;
       position: relative;
-      padding: 0px 30px; }
-      #block-submenufooterblock .menu li:before {
+      padding: 0px 40px; }
+      .block-sub-menu-footer-block .menu li:before {
         content: "";
         position: absolute;
         height: 10px;
@@ -2560,9 +2588,242 @@ body.path-update-password .messages--status {
         background: #ffffff;
         border-radius: 100%;
         top: 5px;
-        left: 0; }
-      #block-submenufooterblock .menu li:first-child:before {
+        left: -9px; }
+      .block-sub-menu-footer-block .menu li:first-child:before {
         content: none; }
-      #block-submenufooterblock .menu li a {
+      .block-sub-menu-footer-block .menu li a {
         text-decoration: none;
         color: #ffffff; }
+
+/** sub main menu **/
+.block-sub-nav-main-menu {
+  padding-top: 10px; }
+  .block-sub-nav-main-menu .menu li {
+    display: inline-block;
+    padding: 0 15px; }
+    .block-sub-nav-main-menu .menu li a {
+      text-decoration: none;
+      color: #ffffff;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 5px;
+      font-size: 14px; }
+      .block-sub-nav-main-menu .menu li a.is-active {
+        border-color: #ffffff; }
+    .block-sub-nav-main-menu .menu li:nth-of-type(4) a {
+      padding: 10px;
+      background: #2aa9e0;
+      border-radius: 5px;
+      border: none; }
+
+.path-frontpage .block-sub-nav-main-menu .menu li:nth-of-type(4),
+.user-logged-in .block-sub-nav-main-menu .menu li:nth-of-type(4) {
+  display: none; }
+
+/** contact us image left side block **/
+.block-contactusimageblock {
+  width: 65%;
+  float: left;
+  text-align: center; }
+  .block-contactusimageblock .content {
+    position: relative; }
+  .block-contactusimageblock .field--name-field-title {
+    position: absolute;
+    right: 11%;
+    bottom: 9%;
+    float: right;
+    width: 174px;
+    text-transform: lowercase;
+    font-size: 30px;
+    text-align: center; }
+    .block-contactusimageblock .field--name-field-title .green-text {
+      font-size: 45px;
+      text-transform: uppercase;
+      font-weight: bold; }
+  .block-contactusimageblock img {
+    max-width: 38%;
+    width: 100%;
+    height: 69%; }
+
+.path-contact #header {
+  z-index: 1;
+  position: relative; }
+
+.path-contact .site-branding svg {
+  fill: #ffffff; }
+
+.path-contact .site-branding a {
+  color: #ffffff; }
+
+.path-contact .block-system-main-block {
+  float: right;
+  width: 35%; }
+
+.featured-top {
+  top: -75px;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  position: relative;
+  z-index: 0; }
+
+.block-product-srijan-technologies {
+  margin-top: 100px;
+  text-align: center; }
+  .block-product-srijan-technologies .field--name-field-company-title {
+    font-size: 34px;
+    color: #ffffff; }
+  .block-product-srijan-technologies .field--name-field-mobile-number,
+  .block-product-srijan-technologies .field--name-field-contact-,
+  .block-product-srijan-technologies .field--name-field-contact {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: #ffffff;
+    margin: 0 12px;
+    padding-left: 50px;
+    position: relative; }
+    .block-product-srijan-technologies .field--name-field-mobile-number:before,
+    .block-product-srijan-technologies .field--name-field-contact-:before,
+    .block-product-srijan-technologies .field--name-field-contact:before {
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: absolute;
+      left: 18px;
+      font-size: 22px;
+      color: #ffffff; }
+  .block-product-srijan-technologies .field--name-field-visit-srijan,
+  .block-product-srijan-technologies .field--name-field-visit-srijan- {
+    display: inline-block; }
+    .block-product-srijan-technologies .field--name-field-visit-srijan a,
+    .block-product-srijan-technologies .field--name-field-visit-srijan- a {
+      display: inline-block;
+      padding: 10px 25px;
+      border-radius: 5px;
+      color: #ffffff;
+      margin: 0 12px;
+      padding-left: 50px;
+      text-decoration: none;
+      background: #f0a328;
+      position: relative; }
+      .block-product-srijan-technologies .field--name-field-visit-srijan a:before,
+      .block-product-srijan-technologies .field--name-field-visit-srijan- a:before {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        left: 18px;
+        font-size: 22px;
+        color: #ffffff;
+        content: "\f08e";
+        /* external linl */ }
+  .block-product-srijan-technologies .field--name-field-mobile-number {
+    background: #96c85a; }
+    .block-product-srijan-technologies .field--name-field-mobile-number:before {
+      content: "\f095";
+      /** phone **/ }
+  .block-product-srijan-technologies .field--name-field-contact-,
+  .block-product-srijan-technologies .field--name-field-contact {
+    background: #2aa9e0; }
+    .block-product-srijan-technologies .field--name-field-contact-:before,
+    .block-product-srijan-technologies .field--name-field-contact:before {
+      content: "\f0e0";
+      /** envolpe **/ }
+  .block-product-srijan-technologies .field--name-field-background-image {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    top: -218px; }
+
+/** Contact-us page style **/
+.contact-message-write-to-us-form {
+  max-width: 300px;
+  width: 100%; }
+  .contact-message-write-to-us-form label {
+    color: #979797;
+    margin-bottom: .5em;
+    display: block;
+    font-size: 16px; }
+  .contact-message-write-to-us-form .field--name-field-message .text-full {
+    margin-top: 70px; }
+  .contact-message-write-to-us-form .form-text,
+  .contact-message-write-to-us-form .form-email {
+    border: 0;
+    background: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    display: block;
+    width: 100%;
+    margin-bottom: 40px; }
+  .contact-message-write-to-us-form .form-submit {
+    border: none;
+    background: #96c85a;
+    width: 100%;
+    padding: .5em;
+    font-size: 18px;
+    color: white;
+    webkit-border-radius: 4px;
+    khtml-border-radius: 4px;
+    moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    margin-top: 1em; }
+    .contact-message-write-to-us-form .form-submit + .form-submit {
+      display: none; }
+
+/** simple news letter block **/
+.block-simplenews {
+  background: #323232;
+  padding: 40px 10px; }
+  .block-simplenews form {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto; }
+  .block-simplenews .form-item-message {
+    text-align: left;
+    font-size: 30px;
+    color: #ffffff;
+    margin-bottom: 0; }
+  .block-simplenews .field--type-email {
+    float: left;
+    width: 70%;
+    margin-right: 20px; }
+    .block-simplenews .field--type-email label {
+      display: none; }
+  .block-simplenews .form-email {
+    border-radius: 5px;
+    border: none;
+    height: 40px;
+    line-height: 36px;
+    color: #898989;
+    padding: 0 15px;
+    background-color: #525252;
+    float: left;
+    width: 100%; }
+  .block-simplenews .description {
+    display: none; }
+  .block-simplenews .form-actions {
+    width: 25%;
+    float: left; }
+    .block-simplenews .form-actions .form-submit {
+      border: none;
+      background: #2aa9e0;
+      width: 100%;
+      padding: .5em;
+      font-size: 18px;
+      color: white;
+      -webkit-border-radius: 4px;
+      -khtml-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      border-radius: 4px;
+      margin-top: 0;
+      width: 100%; }
