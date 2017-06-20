@@ -2607,6 +2607,9 @@ body.path-update-password {
 .green-text {
 	color: $login-btn;
 }
+.red-text {
+	color: #ffa500;
+}
 .Home-page--blukstore--section {
 	background-color: $white;
 	padding-bottom: 8em;
@@ -2874,18 +2877,136 @@ body.path-update-password {
 .block-contactusimageblock {
     width: 65%;
     float: left;
+    text-align: center;
+    .content {
+      position: relative;	
+    }
+    .field--name-field-title {
+    	position: absolute;
+	    right: 11%;
+	    bottom: 9%;
+	    float: right;
+	    width: 174px;
+	    text-transform: lowercase;
+	    font-size: 30px;
+	    text-align: center;
+	    .green-text {
+	    	font-size: 45px;
+    text-transform: uppercase;
+    font-weight: bold;
+	    }
+    }
     img {
-	    max-width: 45%;
-	    width: 100%;
-	    height: 69%;
+	    max-width: 38%;
+    width: 100%;
+    height: 69%;
     }
 }
+
+
 .path-contact {
+	#header {
+		z-index: 1;
+		position: relative;
+	}
+	.site-branding {
+	   svg {
+		 fill: $white;
+	   }
+	   a {
+	   	color: $white;
+	   }
+	}
    .block-system-main-block {
    	    float: right;
         width: 35%;
    }
 }
+
+.featured-top {
+    top: -75px;
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+.block-aproductofsrijantechnologies {
+    margin-top: 100px;
+    text-align: center;
+    .field--name-field-company-title {
+    	font-size: 34px;
+        color: $white;
+    }
+    .field--name-field-mobile-number,
+    .field--name-field-contact-,
+    .field--name-field-contact  {
+    	display: inline-block;
+	    padding: 10px 25px;
+	    border-radius: 5px;
+        color: $white;
+        margin: 0 12px;
+        padding-left: 50px;
+        position: relative;
+        &:before {
+		    display: inline-block;
+		    font: normal normal normal 14px/1 FontAwesome;
+		    font-size: inherit;
+		    text-rendering: auto;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		    position: absolute;
+		    left: 18px;
+		    font-size: 22px;
+		    color: $white;
+        }
+    }
+    .field--name-field-visit-srijan,
+    .field--name-field-visit-srijan- {
+        display: inline-block;
+        a {
+        	display: inline-block;
+		    padding: 10px 25px;
+		    border-radius: 5px;
+	        color: $white;
+	        margin: 0 12px;
+	        padding-left: 50px;
+        	text-decoration: none;
+        	background: #f0a328;
+        	position: relative;
+        	&:before {
+			    display: inline-block;
+			    font: normal normal normal 14px/1 FontAwesome;
+			    font-size: inherit;
+			    text-rendering: auto;
+			    -webkit-font-smoothing: antialiased;
+			    -moz-osx-font-smoothing: grayscale;
+			    position: absolute;
+			    left: 18px;
+			    font-size: 22px;
+			    color: $white;
+			    content: "\f08e"; /* external linl */
+	        }
+        }
+    }
+    .field--name-field-mobile-number {
+    	background: $login-btn;
+       &:before {
+          content: "\f095"; /** phone **/
+       }
+    }
+    .field--name-field-contact-,
+    .field--name-field-contact {
+    	background: $twitter;
+    	&:before {
+         content: "\f0e0"; /** envolpe **/
+       }
+    }
+  
+
+}
+
+
 /** Contact-us page style **/
 .contact-message-write-to-us-form {
 		max-width: 300px;
@@ -2896,6 +3017,9 @@ body.path-update-password {
         display: block;
         font-size: 16px;
 	}
+	.text-full {
+		margin-top: 70px;
+	}
 	.form-text,
 	.form-email {
 		border: 0;
@@ -2904,6 +3028,7 @@ body.path-update-password {
         border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         display: block;
         width: 100%;
+        margin-bottom: 40px;
 	}
 	.form-submit {
 	    border: none;
