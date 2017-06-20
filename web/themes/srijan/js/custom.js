@@ -810,7 +810,7 @@
 
 	    $(document).click(function(e) {
 	        if (!$(e.target).is('.notification-message-list, #notification-display, .profile-links')) {
-	            $(".notification-message-list, #notification-display, .profile-links").removeClass("active");
+	            $(".notification-message-list, #notification-display, .profile-links").removeClass("active animate");
 	        }
 	    });
 
@@ -967,6 +967,8 @@
 		}
 
 	});
+	// js for adding placeholder on newsletter field
+	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
 
 })(jQuery);
 

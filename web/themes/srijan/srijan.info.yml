@@ -15,10 +15,12 @@ libraries:
   - colorbox/colorbox
 
 regions:
+  slider: Slider
   header: Header
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'
   content: Content
+  middle: Middle Section
   sidebar_first: 'Sidebar first'
   sidebar_second: 'Sidebar second'
   footer: 'Footer'
