@@ -2733,10 +2733,11 @@ body.path-update-password {
 		    font-size: inherit;
 		    text-rendering: auto;
 		    -webkit-font-smoothing: antialiased;
-		        padding: 6%;
+		    padding: 5% 9%;
 		    a {
 		    	color: transparent;
 		    	position: relative;
+		    	font-size: 0;
 		        &:before {
 				    display: inline-block;
 				    font-size: 30px;
@@ -2804,7 +2805,7 @@ body.path-update-password {
 		li {
 			display: inline-block;
 			position: relative;
-		    padding: 0px 30px;
+		    padding: 0px 40px;
 			&:before {
 				content: "";
 			    position: absolute;
@@ -2813,7 +2814,7 @@ body.path-update-password {
 			    background: $white;
 			    border-radius: 100%;
 			    top: 5px;
-			    left: 0;
+			    left: -9px;
 			}
 			&:first-child {
 				&:before {
@@ -2826,4 +2827,108 @@ body.path-update-password {
 			}
 		}
 	}
+}
+
+/** sub main menu **/
+.block-sub-nav-main-menu {
+	padding-top: 10px;
+	.menu {
+		li {
+			display: inline-block;
+		    padding: 0 15px;
+		    a {
+		    	text-decoration: none;
+		    	color: $white;
+		    }
+		}
+	}
+}
+/** Contact-us page style **/
+.contact-message-write-to-us-form {
+	label {
+		color: #979797;
+        margin-bottom: .5em;
+        display: block;
+        font-size: 16px;
+	}
+	.form-text,
+	.form-email {
+		border: 0;
+        background: none;
+        outline: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        display: block;
+        width: 100%;
+	}
+	.form-submit {
+	    border: none;
+        background: #96c85a;
+        width: 100%;
+    	padding: .5em;
+    	font-size: 18px;
+    	color: white;
+    	webkit-border-radius: 4px;
+    	khtml-border-radius: 4px;
+	    moz-border-radius: 4px;
+	    -ms-border-radius: 4px;
+	    -o-border-radius: 4px;
+	    border-radius: 4px;
+	    margin-top: 1em;
+	}
+}
+/** simple news letter block **/
+.block-simplenews {
+	background: #323232;
+    padding: 40px 10px;
+	form {
+	 	max-width: 800px;
+	 	width: 100%;
+    	margin: 0 auto;
+	}
+	.form-item-message  {
+		text-align: left;
+        font-size: 30px;
+        color: $white;
+        margin-bottom: 0;
+	}
+	.field--type-email {
+		float: left;
+        width: 70%;
+        margin-right: 20px;
+	}
+	.form-email {
+		border-radius: 5px;
+	    border: none;
+	    height: 40px;
+	    line-height: 36px;
+	    color: #898989;
+	    padding: 0 15px;
+	    background-color: #525252;
+	    float: left;
+	    width: 100%;
+	}
+	.description {
+		display: none;
+	}
+	.form-actions {
+	    width: 25%;
+        float: left;
+        .form-submit {
+        	border: none;
+		    background: #00a9e7;
+		    width: 100%;
+		    padding: .5em;
+		    font-size: 18px;
+		    color: white;
+		    -webkit-border-radius: 4px;
+		    -khtml-border-radius: 4px;
+		    -moz-border-radius: 4px;
+		    -ms-border-radius: 4px;
+		    -o-border-radius: 4px;
+		    border-radius: 4px;
+		    margin-top: 0;
+		    width: 100%;
+        }
+	}
+
 }
