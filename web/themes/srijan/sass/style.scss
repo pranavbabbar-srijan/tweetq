@@ -261,6 +261,7 @@
 }
 .region-header {
 	float: left;
+	width: 100%;
 }
 #header {
 	margin-top: 1.4em;
@@ -2839,12 +2840,42 @@ body.path-update-password {
 		    a {
 		    	text-decoration: none;
 		    	color: $white;
+		    	border-bottom: 2px solid transparent;
+                padding-bottom: 5px;
+                font-size: 14px;
+		    	&.is-active {
+		    		border-color: $white;
+		    	}
 		    }
+		    &:nth-of-type(4) {
+			   	a {
+			   		padding: 10px;
+                    background: $twitter;
+                    border-radius: 5px;
+                    border: none;
+			   	}
+			}
 		}
 	}
 }
+.path-frontpage,
+.user-logged-in {
+	.block-sub-nav-main-menu {
+	    .menu {
+			li {
+			   &:nth-of-type(4) {
+			   	display: none;
+			   }
+			}
+		}
+    }
+}
 /** Contact-us page style **/
 .contact-message-write-to-us-form {
+	form {
+		max-width: 300px;
+		width: 100%;
+	}
 	label {
 		color: #979797;
         margin-bottom: .5em;
@@ -2862,7 +2893,7 @@ body.path-update-password {
 	}
 	.form-submit {
 	    border: none;
-        background: #96c85a;
+        background: $login-btn;
         width: 100%;
     	padding: .5em;
     	font-size: 18px;
@@ -2874,6 +2905,9 @@ body.path-update-password {
 	    -o-border-radius: 4px;
 	    border-radius: 4px;
 	    margin-top: 1em;
+	    + .form-submit {
+	    	display: none;
+	    }
 	}
 }
 /** simple news letter block **/
@@ -2918,7 +2952,7 @@ body.path-update-password {
         float: left;
         .form-submit {
         	border: none;
-		    background: #00a9e7;
+		    background: $twitter;
 		    width: 100%;
 		    padding: .5em;
 		    font-size: 18px;
