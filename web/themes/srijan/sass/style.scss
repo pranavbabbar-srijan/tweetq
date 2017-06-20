@@ -2870,12 +2870,26 @@ body.path-update-password {
 		}
     }
 }
+/** contact us image left side block **/
+.block-contactusimageblock {
+    width: 65%;
+    float: left;
+    img {
+	    max-width: 45%;
+	    width: 100%;
+	    height: 69%;
+    }
+}
+.path-contact {
+   .block-system-main-block {
+   	    float: right;
+        width: 35%;
+   }
+}
 /** Contact-us page style **/
 .contact-message-write-to-us-form {
-	form {
 		max-width: 300px;
 		width: 100%;
-	}
 	label {
 		color: #979797;
         margin-bottom: .5em;

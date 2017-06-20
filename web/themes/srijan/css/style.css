@@ -2615,42 +2615,52 @@ body.path-update-password .messages--status {
 .user-logged-in .block-sub-nav-main-menu .menu li:nth-of-type(4) {
   display: none; }
 
+/** contact us image left side block **/
+.block-contactusimageblock {
+  width: 65%;
+  float: left; }
+  .block-contactusimageblock img {
+    max-width: 45%;
+    width: 100%;
+    height: 69%; }
+
+.path-contact .block-system-main-block {
+  float: right;
+  width: 35%; }
+
 /** Contact-us page style **/
-.contact-message-write-to-us-form form {
+.contact-message-write-to-us-form {
   max-width: 300px;
   width: 100%; }
-
-.contact-message-write-to-us-form label {
-  color: #979797;
-  margin-bottom: .5em;
-  display: block;
-  font-size: 16px; }
-
-.contact-message-write-to-us-form .form-text,
-.contact-message-write-to-us-form .form-email {
-  border: 0;
-  background: none;
-  outline: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  display: block;
-  width: 100%; }
-
-.contact-message-write-to-us-form .form-submit {
-  border: none;
-  background: #96c85a;
-  width: 100%;
-  padding: .5em;
-  font-size: 18px;
-  color: white;
-  webkit-border-radius: 4px;
-  khtml-border-radius: 4px;
-  moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-  margin-top: 1em; }
-  .contact-message-write-to-us-form .form-submit + .form-submit {
-    display: none; }
+  .contact-message-write-to-us-form label {
+    color: #979797;
+    margin-bottom: .5em;
+    display: block;
+    font-size: 16px; }
+  .contact-message-write-to-us-form .form-text,
+  .contact-message-write-to-us-form .form-email {
+    border: 0;
+    background: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    display: block;
+    width: 100%; }
+  .contact-message-write-to-us-form .form-submit {
+    border: none;
+    background: #96c85a;
+    width: 100%;
+    padding: .5em;
+    font-size: 18px;
+    color: white;
+    webkit-border-radius: 4px;
+    khtml-border-radius: 4px;
+    moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    margin-top: 1em; }
+    .contact-message-write-to-us-form .form-submit + .form-submit {
+      display: none; }
 
 /** simple news letter block **/
 .block-simplenews {
