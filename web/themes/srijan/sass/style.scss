@@ -2895,6 +2895,9 @@ body.path-update-password {
 		float: left;
         width: 70%;
         margin-right: 20px;
+        label {
+        	display: none;
+        }
 	}
 	.form-email {
 		border-radius: 5px;
@@ -2930,5 +2933,4 @@ body.path-update-password {
 		    width: 100%;
         }
 	}
-
 }
