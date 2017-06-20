@@ -261,6 +261,7 @@
 }
 .region-header {
 	float: left;
+	width: 100%;
 }
 #header {
 	margin-top: 1.4em;
@@ -457,8 +458,8 @@ body {
 }
 
 .user-login-form {
-	background: rgba(255,255,255,.8);
-	padding: 2em 2em 10em;
+	background: rgba(255,255,255,1);
+	padding: 8em 2em 5em 2em;
 	@include border-radius(6px);
 	width: 360px;
 	float: right;
@@ -528,6 +529,10 @@ body {
 		display: block;
 		width: 150px;
 		margin: 0 auto;
+		+ div {
+			position: absolute;
+			bottom: 15px;
+		}
 	}
 }
 
@@ -652,9 +657,33 @@ body.path-update-password {
 }
 
 .twitter-btn {
-	position: absolute;
-    bottom: 2em;
-    width: 85%;
+	background: #F8F8F8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 30px;
+    border-radius: 6px 6px 0 0;
+    a {
+		border: none;
+		background: $twitter;
+		width: 100%;
+	    padding: .5em 1em .5em 1em;
+	    font-size: 18px;
+	    color: white;
+	    @include border-radius(4px);
+	    text-decoration: none;
+	    display: block;
+		text-align: center;
+	    &:before {
+	    	font: normal normal normal 14px/1 FontAwesome;
+	    	content: "\f099";
+			font-size: 23px;
+		    margin-right: 0.2em;
+		    display: inline-block;
+		    vertical-align: text-top;
+	    }
+	}
     span {
     	width: 100%;
     	display: block;
@@ -664,26 +693,6 @@ body.path-update-password {
     }
     div {
     	margin-top: 1em;
-    	a {
-    		border: none;
-			background: $twitter;
-			width: 100%;
-		    padding: .5em 1em .5em 1em;
-		    font-size: 18px;
-		    color: white;
-		    @include border-radius(4px);
-		    text-decoration: none;
-		    display: block;
-    		text-align: center;
-		    &:before {
-		    	font: normal normal normal 14px/1 FontAwesome;
-		    	content: "\f099";
-				font-size: 23px;
-			    margin-right: 0.2em;
-			    display: inline-block;
-			    vertical-align: text-top;
-		    }
-    	}
     }
 }
 
@@ -894,6 +903,7 @@ body.path-update-password {
 		overflow-y: auto;
 		height: 100%;
 		max-height: 72vh;
+		margin-top: 1.15em;
 		.valid-tweets-header {
 		    background: #FAF9F9;
 		    padding: 1em;
@@ -1672,7 +1682,7 @@ body.path-update-password {
 	-webkit-box-shadow: 0 0 2px #bbb;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
 	box-shadow: 0 0 2px #bbb;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=20, Color=#bbb); /*IE 5.5-7*/
-	margin-top: 1em;
+	margin-top: 1.15em;
 	// margin-left: 10px;
 	background: white;
 	position: fixed;
@@ -1828,7 +1838,7 @@ body.path-update-password {
 		}
 		&.active {
 			visibility: inherit;
-			left: 55px;
+			left: 60px;
 			background: white;
 			border-radius: 0;
 		}
@@ -2034,6 +2044,7 @@ body.path-update-password {
 		    	position: absolute;
 		    	top: 0;
 		    	left: 0;
+		    	cursor: pointer;
 		    	+ .js-form-submit {
 	    			display: none;
 	    		}
@@ -2056,20 +2067,6 @@ body.path-update-password {
 		    		padding-left: 0;
 		    		margin-left: 15px;
 		    		position: relative;
-		    		// &:after {
-	    			// 	content: 'X';
-					   //  background: rgba(255,0,0,.65);
-					   //  border-radius: 20px;
-					   //  padding: 4px;
-					   //  color: white;
-					   //  position: absolute;
-					   //  top: 4px;
-					   //  right: 4px;
-					   //  font-size: 9px;
-					   //  width: 17px;
-					   //  height: 17px;
-					   //  text-align: center;
-	    			// }
 		    		a {
 		    			font-size: 0;
 		    			&:before {
@@ -2316,6 +2313,7 @@ body.path-update-password {
 	    text-decoration: none;
 	    display: block;
 		text-align: center;
+		font-weight: bold;
 	}
 	.description {
 		font-size: .8em;
@@ -2587,7 +2585,7 @@ body.path-update-password {
 
 /** Home page Bulk store section is start **/
 .block-block-content {
-	.field--name-field-ttitle {
+	.field--name-field-title {
 	   text-transform: uppercase;
        font-size: 28px;
 	}
@@ -2597,7 +2595,7 @@ body.path-update-password {
     float: left;
 }
 
-#block-whatbarbetis {
+.block-what-barbet-is {
 	text-align: center;
 	padding: 6em 90px;
 	background-color: $white;
@@ -2719,12 +2717,12 @@ body.path-update-password {
 }
 
 /** social share links section */
-#block-wearealsoavailbleforyourfavouritesocialnetwork {
+.block-we-vailble-for-your-favour {
     text-align: center;
     padding-top: 40px;
     background: $white;
 }
-#block-socialmenulinkspanblockspan {
+.block-social-menu-link {
 	background: $white;
 	padding-bottom: 50px;
 	.menu {
@@ -2736,10 +2734,11 @@ body.path-update-password {
 		    font-size: inherit;
 		    text-rendering: auto;
 		    -webkit-font-smoothing: antialiased;
-		        padding: 6%;
+		    padding: 5% 9%;
 		    a {
 		    	color: transparent;
 		    	position: relative;
+		    	font-size: 0;
 		        &:before {
 				    display: inline-block;
 				    font-size: 30px;
@@ -2798,7 +2797,7 @@ body.path-update-password {
 	}
 }
 /** Global sub site menu **/
-#block-submenufooterblock {
+.block-sub-menu-footer-block {
 	background: #333333;
 	padding: 50px 0;
 	.menu {
@@ -2807,7 +2806,7 @@ body.path-update-password {
 		li {
 			display: inline-block;
 			position: relative;
-		    padding: 0px 30px;
+		    padding: 0px 40px;
 			&:before {
 				content: "";
 			    position: absolute;
@@ -2816,7 +2815,7 @@ body.path-update-password {
 			    background: $white;
 			    border-radius: 100%;
 			    top: 5px;
-			    left: 0;
+			    left: -9px;
 			}
 			&:first-child {
 				&:before {
@@ -2828,5 +2827,144 @@ body.path-update-password {
 				color: $white;
 			}
 		}
+	}
+}
+
+/** sub main menu **/
+.block-sub-nav-main-menu {
+	padding-top: 10px;
+	.menu {
+		li {
+			display: inline-block;
+		    padding: 0 15px;
+		    a {
+		    	text-decoration: none;
+		    	color: $white;
+		    	border-bottom: 2px solid transparent;
+                padding-bottom: 5px;
+                font-size: 14px;
+		    	&.is-active {
+		    		border-color: $white;
+		    	}
+		    }
+		    &:nth-of-type(4) {
+			   	a {
+			   		padding: 10px;
+                    background: $twitter;
+                    border-radius: 5px;
+                    border: none;
+			   	}
+			}
+		}
+	}
+}
+.path-frontpage,
+.user-logged-in {
+	.block-sub-nav-main-menu {
+	    .menu {
+			li {
+			   &:nth-of-type(4) {
+			   	display: none;
+			   }
+			}
+		}
+    }
+}
+/** Contact-us page style **/
+.contact-message-write-to-us-form {
+	form {
+		max-width: 300px;
+		width: 100%;
+	}
+	label {
+		color: #979797;
+        margin-bottom: .5em;
+        display: block;
+        font-size: 16px;
+	}
+	.form-text,
+	.form-email {
+		border: 0;
+        background: none;
+        outline: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        display: block;
+        width: 100%;
+	}
+	.form-submit {
+	    border: none;
+        background: $login-btn;
+        width: 100%;
+    	padding: .5em;
+    	font-size: 18px;
+    	color: white;
+    	webkit-border-radius: 4px;
+    	khtml-border-radius: 4px;
+	    moz-border-radius: 4px;
+	    -ms-border-radius: 4px;
+	    -o-border-radius: 4px;
+	    border-radius: 4px;
+	    margin-top: 1em;
+	    + .form-submit {
+	    	display: none;
+	    }
+	}
+}
+/** simple news letter block **/
+.block-simplenews {
+	background: #323232;
+    padding: 40px 10px;
+	form {
+	 	max-width: 800px;
+	 	width: 100%;
+    	margin: 0 auto;
+	}
+	.form-item-message  {
+		text-align: left;
+        font-size: 30px;
+        color: $white;
+        margin-bottom: 0;
+	}
+	.field--type-email {
+		float: left;
+        width: 70%;
+        margin-right: 20px;
+        label {
+        	display: none;
+        }
+	}
+	.form-email {
+		border-radius: 5px;
+	    border: none;
+	    height: 40px;
+	    line-height: 36px;
+	    color: #898989;
+	    padding: 0 15px;
+	    background-color: #525252;
+	    float: left;
+	    width: 100%;
+	}
+	.description {
+		display: none;
+	}
+	.form-actions {
+	    width: 25%;
+        float: left;
+        .form-submit {
+        	border: none;
+		    background: $twitter;
+		    width: 100%;
+		    padding: .5em;
+		    font-size: 18px;
+		    color: white;
+		    -webkit-border-radius: 4px;
+		    -khtml-border-radius: 4px;
+		    -moz-border-radius: 4px;
+		    -ms-border-radius: 4px;
+		    -o-border-radius: 4px;
+		    border-radius: 4px;
+		    margin-top: 0;
+		    width: 100%;
+        }
 	}
 }
