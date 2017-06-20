@@ -3007,6 +3007,14 @@ body.path-update-password {
 	    top: 0;
 	    z-index: -1;
 	    top: -218px;
+	    &:before {
+	    	content: "";
+		    height: 100%;
+		    width: 100%;
+		    background: #000;
+		    opacity: 0.5;
+		    position: absolute;
+	    }
     }
   
 
