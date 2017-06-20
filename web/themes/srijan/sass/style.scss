@@ -2931,7 +2931,7 @@ body.path-update-password {
     position: relative;
     z-index: 0;
 }
-.block-aproductofsrijantechnologies {
+.block-product-srijan-technologies {
     margin-top: 100px;
     text-align: center;
     .field--name-field-company-title {
@@ -3002,6 +3002,12 @@ body.path-update-password {
          content: "\f0e0"; /** envolpe **/
        }
     }
+    .field--name-field-background-image {
+	    position: absolute;
+	    top: 0;
+	    z-index: -1;
+	    top: -218px;
+    }
   
 
 }
@@ -3009,15 +3015,15 @@ body.path-update-password {
 
 /** Contact-us page style **/
 .contact-message-write-to-us-form {
-		max-width: 300px;
-		width: 100%;
+	max-width: 300px;
+	width: 100%;
 	label {
 		color: #979797;
         margin-bottom: .5em;
         display: block;
         font-size: 16px;
 	}
-	.text-full {
+	.field--name-field-message .text-full {
 		margin-top: 70px;
 	}
 	.form-text,
