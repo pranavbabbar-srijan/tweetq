@@ -953,6 +953,8 @@
 		}
 
 	});
+	// js for adding placeholder on newsletter field
+	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
 
 })(jQuery);
 
