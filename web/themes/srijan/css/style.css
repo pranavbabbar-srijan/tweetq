@@ -341,6 +341,7 @@ button {
   float: left; }
 
 #header {
+  position: relative;
   margin-top: 1.4em;
   padding-bottom: 1.05em;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4); }
