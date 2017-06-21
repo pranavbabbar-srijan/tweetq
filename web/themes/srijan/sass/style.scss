@@ -436,6 +436,9 @@ body {
 	#block-srijan-content {
 		float: right;
 	}
+	#main-wrapper {
+		margin-top: 15vh;
+	}
 }
 
 // Home page carousel
@@ -469,14 +472,14 @@ body {
 			}
 		}
 		.flex-control-paging {
-			bottom: 176px;
+			bottom: 172px;
 		    z-index: 2;
-		    left: 150px;
+		    left: 185px;
 		    width: 20%;
 		    li {
 		    	a {
-		    		width: 20px;
-		    		height: 20px;
+		    		width: 15px;
+		    		height: 15px;
 		    		background: black;
 		    		&:hover, &.flex-active {
 		    			background: white;
@@ -488,10 +491,11 @@ body {
 			width: 20%;
 		    position: absolute;
 		    bottom: 180px;
-		    left: 150px;
+		    left: 185px;
 		    a {
 		    	display: inline;
 		    	opacity: 1;
+		    	height: 32px;
 		    	&:hover {
 		    		opacity: 1;
 		    	}
@@ -848,6 +852,19 @@ body.path-update-password {
 }
 .block-total-twitter-tweets-block {
 	margin-left: 10em;
+}
+.block-total-twitter-users-block:after {
+	content: "\f099";
+    font-family: fontawesome;
+    font-size: 30px;
+    color: white;
+    background: $twitter;
+    border: 4px solid;
+    border-radius: 50%;
+    padding: 15px 17px;
+    position: absolute;
+    top: 50px;
+    left: 120%;
 }
 #sidebar-first {
 	background: white;
