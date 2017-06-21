@@ -323,29 +323,37 @@ function tweets_queue_user_login_form_changes(&$form) {
       '#markup' => t(''),
       '#weight' => -10,
   );
-  $form['login_header'] = array(
-    '#markup' => t("<h2>Sign in to Barbet</h2>"),
+  // $form['login_header'] = array(
+  //   '#markup' => t("<h2>Sign in to Barbet</h2>"),
+  //   '#weight' => -9,
+  // );
+
+  $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
+  $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
+  $final_text = "<div class='twitter-btn'>" . $url .
+    "</div>";
+  $form['or_separator'] = array(
+    '#markup' => t($final_text),
     '#weight' => -9,
   );
+
  $forgot_password_path = $base_url . '/user/password';
  $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
  $form['forgot_password'] = array(
     '#markup' => t($url),
-    '#weight' => 10,
+    '#weight' => 14,
   );
-  $twitter_login_path = $base_url . '/' . TWITTER_SIGN_IN_PATH;
-  $url = "<a href='" . $twitter_login_path ."'>" . TWITTER_SIGN_IN_TEXT . "</a>";
-  $final_text = "<div class='twitter-btn'><span>OR</span>" . '<div>' . $url .
-    "</div><span class='recommended'>recommended</span></div>";
-  $form['or_separator'] = array(
-    '#markup' => t($final_text),
-    '#weight' => 12,
-  );
+
+
   $form['login_suffixfix'] = array(
       '#type' => 'markup',
       '#suffix' => '</div>',
       '#markup' => t(''),
       '#weight' => 13,
+  );
+  $form['sign_up_btn'] = array(
+     '#markup' => t("<div><span>Don't have an account ?</span><a href='/signup' data-drupal-link-system-path='/signup'>Sign up Now</a></div>"),
+     '#weight' => 15,
   );
 }
 
