@@ -2508,7 +2508,7 @@ body.path-update-password .messages--status {
     .Home-page--blukstore--section .views-row:nth-of-type(3) .views-field-field-section-image:before {
       content: "\f085";
       background: #f98575; }
-  .Home-page--blukstore--section a {
+  .Home-page--blukstore--section .views-field-title {
     margin-top: 25px;
     font-size: 24px;
     color: #333333;
@@ -2831,7 +2831,9 @@ body.path-update-password .messages--status {
 /** simple news letter block **/
 .block-simplenews {
   background: #2e2e2e;
-  padding: 40px 10px; }
+  padding: 40px 10px;
+  float: left;
+  width: 100%; }
   .block-simplenews form {
     max-width: 800px;
     width: 100%;
@@ -2883,4 +2885,7 @@ body.path-update-password .messages--status {
       -o-border-radius: 4px;
       border-radius: 4px;
       margin-top: 0;
-      width: 100%; }
+      width: 100%;
+      transition: .2s ease-in-out; }
+      .block-simplenews .form-actions .form-submit:hover {
+        background: #27a3d8; }

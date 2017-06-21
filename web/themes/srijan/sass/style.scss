@@ -2706,7 +2706,7 @@ body.path-update-password {
 		   }		
 		}
 	}
-	a {
+	.views-field-title {
 		margin-top: 25px;
 		font-size: 24px;
 		color: $text_black;
@@ -3118,6 +3118,8 @@ body.path-update-password {
 .block-simplenews {
 	background: #2e2e2e;
     padding: 40px 10px;
+    float: left;
+    width: 100%;
 	form {
 	 	max-width: 800px;
 	 	width: 100%;
@@ -3177,6 +3179,10 @@ body.path-update-password {
 		    border-radius: 4px;
 		    margin-top: 0;
 		    width: 100%;
+		    transition: .2s ease-in-out;
+		    &:hover {
+		    	background: #27a3d8;
+		    }
         }
 	}
 }
