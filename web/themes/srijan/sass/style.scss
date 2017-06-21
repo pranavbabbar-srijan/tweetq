@@ -3426,7 +3426,10 @@ body.path-update-password {
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
     -moz-box-shadow: 0px 0px 3px #bbb;
     -webkit-box-shadow: 0px 0px 3px #bbb;
-    box-shadow: 0px 0px 3px #bbb
+    box-shadow: 0px 0px 3px #bbb;
+    #edit-timezone {
+    	border: none;
+    }
     summary {
 	   	background: #FCFCFC;
 	    padding: 15px 20px;
@@ -3439,13 +3442,14 @@ body.path-update-password {
 	    font-size: 14px;
 	    pointer-events: none;
 	    color: #979797;
+	    margin-bottom: 2.5em;
     } 
     .description {
     	display: none;
     }
    .js-form-item {
    	  &.form-item {
-            color: #949494;
+            color: #949494;g
 		    margin-bottom: 1em;
 		    display: block;
 		    font-size: 16px;
