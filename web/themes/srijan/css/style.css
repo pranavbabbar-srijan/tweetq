@@ -410,34 +410,11 @@ body {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
-  body.path-frontpage {
-    background: url(../images/bg.jpg) 0 0 no-repeat;
-    background-size: cover;
-    background-position: 100%;
-    height: 100%; }
-    @media screen and (max-width: 23.4375em) {
-      body.path-frontpage {
-        background-position: 20% 0; } }
-    body.path-frontpage .site-branding a {
-      color: white;
-      pointer-events: none; }
-    body.path-frontpage .site-branding svg {
-      fill: #ffffff; }
-    body.path-frontpage .site-footer {
-      /*position: fixed;*/
-      /*bottom: 0;*/
-      text-align: center;
-      width: 100%;
-      background: #333;
-      padding: 0 0 30px 0;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.3); }
-      body.path-frontpage .site-footer a {
-        color: rgba(241, 173, 64, 0.3);
-        text-decoration: none;
-        transition: .2s ease-in-out all; }
-        body.path-frontpage .site-footer a:hover {
-          color: #f1ad40; }
+  body.path-frontpage .site-branding a {
+    color: white;
+    pointer-events: none; }
+  body.path-frontpage .site-branding svg {
+    fill: #ffffff; }
   body.user-logged-in {
     background: #F1F1F1; }
     body.user-logged-in .region-content {
@@ -2612,8 +2589,10 @@ body.path-update-password .messages--status {
   background: #ffffff;
   padding-bottom: 50px; }
   .block-social-menu-link .menu {
-    text-align: center;
-    margin: 0; }
+    max-width: 1210px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: left; }
     .block-social-menu-link .menu li {
       display: inline-block;
       font: normal normal normal 14px/1 FontAwesome;
@@ -2963,3 +2942,21 @@ body.path-update-password .messages--status {
       transition: .2s ease-in-out; }
       .block-simplenews .form-actions .form-submit:hover {
         background: #2195c7; }
+
+/** copy right footer **/
+#block-copyrightblock {
+  text-align: center;
+  background: #333;
+  padding: 25px; }
+  #block-copyrightblock .copyright {
+    text-align: center;
+    width: 100%;
+    background: #333;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3); }
+    #block-copyrightblock .copyright a {
+      color: rgba(241, 173, 64, 0.3);
+      text-decoration: none;
+      transition: .2s ease-in-out all; }
+      #block-copyrightblock .copyright a:hover {
+        color: #f1ad40; }
