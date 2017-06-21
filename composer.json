@@ -32,7 +32,9 @@
         "drupal/social_login": "1.2",
         "drupal/views_php": "1.x-dev",
 	"drupal/flexslider": "2.0-beta1",
-        "drupal/blocktabs": "1.0-alpha3"
+        "drupal/blocktabs": "1.0-alpha3",
+	"drupal/svg_image_field": "1.0",
+        "drupal/simplenews": "1.0-alpha3"
     },
     "require-dev": {
         "behat/mink": "~1.7",

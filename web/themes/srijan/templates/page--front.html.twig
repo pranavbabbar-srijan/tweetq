@@ -52,15 +52,10 @@
 #}
 <div id="page-wrapper">
   <div id="page">
+  {{ page.slider }}
     <header id="header" class="header" role="banner" aria-label="{{ 'Site header'|t }}">
       <div class="section layout-container clearfix">
         {{ page.header }}
-        <div class="right-nav">
-          <ul>
-            <li><a href="/about-us">About Barbet</a></li>
-            <li><a href="/signup" data-drupal-link-system-path="/signup">Sign up</a></li>
-          </ul>
-        </div>
         <!-- {{ page.secondary_menu }} -->
       </div>
     </header>
@@ -85,6 +80,9 @@
           <section class="section">
             <a id="main-content" tabindex="-1"></a>
             {{ page.content }}
+          </section>
+          <section class="section">
+              {{ page.middle }}
           </section>
         </main>
         {% if page.sidebar_first %}
@@ -113,6 +111,7 @@
       </div>
     {% endif %}
     <footer class="site-footer">
+    {{ page.footer }}
       <div class="layout-container">
       <div class="copyright">&copy; Barbet 2017 | All Rights Reserved | A Product of <a href="http://www.srijan.net" target="_blank">Srijan Technologies</a></div>
         {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
