@@ -508,6 +508,9 @@ body {
 .path-frontpage #block-srijan-content {
   float: right; }
 
+.path-frontpage #main-wrapper {
+  margin-top: 15vh; }
+
 .view-home-page-carousel {
   position: absolute;
   top: 0;
@@ -533,13 +536,13 @@ body {
       width: 38%;
       font-size: 20px; }
     .view-home-page-carousel .flexslider .flex-control-paging {
-      bottom: 176px;
+      bottom: 172px;
       z-index: 2;
-      left: 150px;
+      left: 185px;
       width: 20%; }
       .view-home-page-carousel .flexslider .flex-control-paging li a {
-        width: 20px;
-        height: 20px;
+        width: 15px;
+        height: 15px;
         background: black; }
         .view-home-page-carousel .flexslider .flex-control-paging li a:hover, .view-home-page-carousel .flexslider .flex-control-paging li a.flex-active {
           background: white; }
@@ -547,10 +550,11 @@ body {
       width: 20%;
       position: absolute;
       bottom: 180px;
-      left: 150px; }
+      left: 185px; }
       .view-home-page-carousel .flexslider .flex-direction-nav a {
         display: inline;
-        opacity: 1; }
+        opacity: 1;
+        height: 32px; }
         .view-home-page-carousel .flexslider .flex-direction-nav a:hover {
           opacity: 1; }
         .view-home-page-carousel .flexslider .flex-direction-nav a:before {
@@ -844,6 +848,19 @@ body.path-update-password .messages--status {
 
 .block-total-twitter-tweets-block {
   margin-left: 10em; }
+
+.block-total-twitter-users-block:after {
+  content: "\f099";
+  font-family: fontawesome;
+  font-size: 30px;
+  color: white;
+  background: #2aa9e0;
+  border: 4px solid;
+  border-radius: 50%;
+  padding: 15px 17px;
+  position: absolute;
+  top: 50px;
+  left: 120%; }
 
 #sidebar-first {
   background: white;
