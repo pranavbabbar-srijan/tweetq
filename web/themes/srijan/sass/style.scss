@@ -2993,6 +2993,12 @@ body.path-update-password {
     }
 }
 /** contact us image left side block **/
+.heading-write-us {
+	font-size: 36px;
+    color: #333;
+    margin-bottom: 40px;
+    display: block;
+}
 .block-contactusimageblock {
     width: 65%;
     float: left;
@@ -3019,6 +3025,9 @@ body.path-update-password {
 	    max-width: 38%;
     width: 100%;
     height: 69%;
+    }
+    .field--type-svg-image-field {
+       padding-top: 75px;
     }
 }
 
@@ -3158,7 +3167,14 @@ body.path-update-password {
         }
 	}
 	.field--name-field-message .text-full {
-		margin-top: 70px;
+		margin-top: 0px;
+		border: none;
+        border-bottom: 1px solid rgba(0,0,0,0.3);
+        &:focus {
+        	border: none;
+            outline: none;
+            border-bottom: 1px solid rgba(0 , 0 ,0 , 0.3);
+        }
 	}
 	.form-text,
 	.form-email {
