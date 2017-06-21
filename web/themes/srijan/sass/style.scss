@@ -311,13 +311,6 @@ body {
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 	&.path-frontpage {
-		background: url(../images/bg.jpg) 0 0 no-repeat;
-		background-size: cover;
-		background-position: 100%;
-		height: 100%;
-		@media screen and (max-width: $minWidth){
-			background-position: 20% 0;
-		}
 		.site-branding {
 			a {
 				color: white;
@@ -326,24 +319,6 @@ body {
 			svg {
 				fill: #ffffff;
 			}
-		}
-		.site-footer {
-			/*position: fixed;*/
-		    /*bottom: 0;*/
-		    text-align: center;
-		    width: 100%;
-		    background: #333;
-		    padding: 0 0 30px 0;
-		    font-size: 12px;
-		    color: rgba(255,255,255,.3);
-		    a {
-		    	color: rgba($orange, .3);
-		    	text-decoration: none;
-		    	transition: .2s ease-in-out all;
-		    	&:hover {
-		    		color: rgba($orange, 1);
-		    	}
-		    }
 		}
 	}
 	&.user-logged-in {
@@ -436,6 +411,9 @@ body {
 	#block-srijan-content {
 		float: right;
 	}
+	#main-wrapper {
+		margin-top: 15vh;
+	}
 }
 
 // Home page carousel
@@ -447,36 +425,39 @@ body {
 		background: none;
 		border: none;
 		.slides {
-			.views-field-title {
+			.slider-content {
 				position: absolute;
 				top: 18%;
     			left: 6%;
-    			font-size: 48px;
-    			font-weight: bold;
-    			width: 510px;
-    			a {
-    				color: white;
-    				text-decoration: none;
-    			}
+    			width: 50%;
+    			z-index: 1;
+				h2 {
+	    			font-size: 40px;
+	    			font-weight: bold;
+	    			color: white;
+	    			z-index: 1;
+	    		}
+	    		p {
+	    			color: white;
+					font-size: 20px;
+	    		}
 			}
-			.views-field-body {
-				position: absolute;
-			    top: 32%;
-			    color: white;
-			    left: 6%;
-			    width: 38%;
-			    font-size: 20px;
+			.views-field-field-front-page-image {
+				background-color: black;
+				img {
+					opacity: .35;
+				}
 			}
 		}
 		.flex-control-paging {
-			bottom: 176px;
+			bottom: 130px;
 		    z-index: 2;
-		    left: 150px;
+		    left: 185px;
 		    width: 20%;
 		    li {
 		    	a {
-		    		width: 20px;
-		    		height: 20px;
+		    		width: 15px;
+		    		height: 15px;
 		    		background: black;
 		    		&:hover, &.flex-active {
 		    			background: white;
@@ -487,11 +468,12 @@ body {
 		.flex-direction-nav {
 			width: 20%;
 		    position: absolute;
-		    bottom: 180px;
-		    left: 150px;
+		    bottom: 136px;
+		    left: 185px;
 		    a {
 		    	display: inline;
 		    	opacity: 1;
+		    	height: 32px;
 		    	&:hover {
 		    		opacity: 1;
 		    	}
@@ -520,13 +502,21 @@ body {
 	}
 }
 
+.path-frontpage .section {
+	+ .section {
+		.region-middle {
+			margin-top: 5vh;
+		}
+	}
+}
+
 .user-login-form {
 	background: rgba(255,255,255,1);
 	padding: 8em 2em 6em 2em;
 	@include border-radius(6px);
 	width: 360px;
 	float: right;
-	margin-top: 10vh;
+	margin-top: -4vh;
 	position: relative;
 	h2 {
 		font-size: 22px;
@@ -595,38 +585,36 @@ body {
 		position: absolute;
 	    bottom: 74px;
 	    right: 15px;
+	    + div {
+			position: absolute;
+		    bottom: 10px;
+		    border-top: 1px solid #ccc;
+		    width: 100%;
+		    left: 0;
+		    padding: 15px 30px 5px;
+		    a {
+		    	float: right;
+		    	background: white;
+				color: $twitter;
+				border: 1px solid $twitter;
+				float: right;
+				padding: .4em 1em;
+				margin-right: 0;
+				margin-left: 0;
+				border-radius: 4px;
+				font-size: 13px;
+				text-decoration: none;
+		    }
+		    span {
+		    	color: #aaa;
+		    	margin-top: 7px;
+			    float: left;
+			    font-size: 13px;
+		    }
+		}
 	}
 }
 
-#user-login-prefix {
-	+ div {
-		position: absolute;
-	    bottom: 10px;
-	    border-top: 1px solid #ccc;
-	    width: 100%;
-	    left: 0;
-	    padding: 15px 30px 5px;
-	    a {
-	    	float: right;
-	    	background: white;
-			color: $twitter;
-			border: 1px solid $twitter;
-			float: right;
-			padding: .4em 1em;
-			margin-right: 0;
-			margin-left: 0;
-			border-radius: 4px;
-			font-size: 13px;
-			text-decoration: none;
-	    }
-	    span {
-	    	color: #aaa;
-	    	margin-top: 7px;
-		    float: left;
-		    font-size: 13px;
-	    }
-	}
-}
 
 .validation-error, .mail-sent {
 	color: #ff5a43;
@@ -818,7 +806,7 @@ body.path-update-password {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
 	float: left;
-	margin-top: 280px;
+	margin-top: 220px;
 	margin-left: 5em;
 	position: relative;
 	.count {
@@ -848,6 +836,19 @@ body.path-update-password {
 }
 .block-total-twitter-tweets-block {
 	margin-left: 10em;
+}
+.block-total-twitter-users-block:after {
+	content: "\f099";
+    font-family: fontawesome;
+    font-size: 30px;
+    color: white;
+    background: $twitter;
+    border: 4px solid;
+    border-radius: 50%;
+    padding: 15px 17px;
+    position: absolute;
+    top: 50px;
+    left: 120%;
 }
 #sidebar-first {
 	background: white;
@@ -1836,12 +1837,13 @@ body.path-update-password {
 				}
 				&.invalid_tweets .valid_tweets {
 					&:before {
-				    content: $icon-cross;
-				    font-size: 2.2em;
-				    color: #f56a6a;
-				    position: absolute;
+				    content: "";
 				    right: 5px;
-    				top: 15px;
+    				top: 12px;
+    				background: url('../images/warning.svg') no-repeat 0 0;
+    				width: 40px;
+				    background-size: 100%;
+				    height: 40px;
 				  }
 				}
 				.archived_tweets {
@@ -2200,8 +2202,6 @@ body.path-update-password {
 	}
 }
 .send-tweets-form, .tweets-queue-tweet-form  {
-	// overflow: hidden;
-	// margin-top: 80px;
 	padding-top: 5px;
 	label {
 		@extend %none;
@@ -2795,6 +2795,13 @@ body.path-update-password {
 			
 		    }
 		}
+		&:nth-of-type(2) {
+			img {
+				max-width: 45%;
+                height: auto;
+                width: 100%;
+			}
+		}
 	}
 }
 .section__mission-vision {
@@ -2806,7 +2813,7 @@ body.path-update-password {
 }
 .section__mission--text {
     width: 50%;
-    padding: 90px 50px;
+    padding: 15px 50px;
     background-color: $light-gray;
 	p {
 		line-height: 1.5;
@@ -2837,8 +2844,10 @@ body.path-update-password {
 	background: $white;
 	padding-bottom: 50px;
 	.menu {
-		text-align: center;
-		margin: 0;
+		max-width: 1210px;
+	    margin: 0 auto;
+	    width: 100%;
+	    text-align: left;
 		li {
 			display: inline-block;
 		    font: normal normal normal 14px/1 FontAwesome;
@@ -2975,6 +2984,12 @@ body.path-update-password {
                     background: $twitter;
                     border-radius: 5px;
                     border: none;
+                    color: $white;
+                    &:hover {
+                    	opacity: 1;
+				        background: #2195c7;
+
+                    }
 			   	}
 			}
 		}
@@ -2993,6 +3008,12 @@ body.path-update-password {
     }
 }
 /** contact us image left side block **/
+.heading-write-us {
+	font-size: 36px;
+    color: #333;
+    margin-bottom: 40px;
+    display: block;
+}
 .block-contactusimageblock {
     width: 65%;
     float: left;
@@ -3006,19 +3027,22 @@ body.path-update-password {
 	    bottom: 9%;
 	    float: right;
 	    width: 174px;
-	    text-transform: lowercase;
-	    font-size: 30px;
+	    text-transform: initial;
+	    font-size: 36px;
 	    text-align: center;
 	    .green-text {
-	    	font-size: 45px;
-    text-transform: uppercase;
-    font-weight: bold;
+	    	font-size: 48px;
+		    text-transform: uppercase;
+		    font-weight: bold;
 	    }
     }
     img {
 	    max-width: 38%;
     width: 100%;
     height: 69%;
+    }
+    .field--type-svg-image-field {
+       padding-top: 75px;
     }
 }
 
@@ -3027,6 +3051,7 @@ body.path-update-password {
 	#header {
 		z-index: 1;
 		position: relative;
+		background: transparent;
 	}
 	.site-branding {
 	   svg {
@@ -3040,6 +3065,15 @@ body.path-update-password {
    	    float: right;
         width: 35%;
    }
+   &.user-logged-in {
+   	   background: $white;
+	   .main-content {
+	   	 position: initial;
+	   }
+	   #main-wrapper {
+	   	padding-top: 0;
+	   }
+	}
 }
 
 .featured-top {
@@ -3054,19 +3088,21 @@ body.path-update-password {
     margin-top: 100px;
     text-align: center;
     .field--name-field-company-title {
-    	font-size: 34px;
+    	font-size: 36px;
         color: $white;
     }
-    .field--name-field-mobile-number,
+    .field--name-field-mobile-number-contact,
     .field--name-field-contact-,
     .field--name-field-contact  {
     	display: inline-block;
+    	a {
 	    padding: 10px 25px;
 	    border-radius: 5px;
         color: $white;
         margin: 0 12px;
         padding-left: 50px;
         position: relative;
+        text-decoration: none;
         &:before {
 		    display: inline-block;
 		    font: normal normal normal 14px/1 FontAwesome;
@@ -3079,6 +3115,7 @@ body.path-update-password {
 		    font-size: 22px;
 		    color: $white;
         }
+      }
     }
     .field--name-field-visit-srijan,
     .field--name-field-visit-srijan- {
@@ -3106,26 +3143,43 @@ body.path-update-password {
 			    color: $white;
 			    content: "\f08e"; /* external linl */
 	        }
+	        &:hover {
+	        	background: #de941d;
+	        }
         }
     }
-    .field--name-field-mobile-number {
-    	background: $login-btn;
-       &:before {
-          content: "\f095"; /** phone **/
-       }
+    .field--name-field-mobile-number-contact {
+    	a {
+      	    background: $login-btn;
+            &:before {
+              content: "\f095"; /** phone **/
+            }
+            &:hover {
+            	background: #82bb3e;
+            }
+        }
     }
     .field--name-field-contact-,
     .field--name-field-contact {
-    	background: $twitter;
-    	&:before {
-         content: "\f0e0"; /** envolpe **/
-       }
+    	a {
+	    	background: $twitter;
+	    	&:before {
+	         content: "\f0e0"; /** envolpe **/
+	       }
+	       &:hover {
+	       	background:  #2195c7;
+	       }
+	   }
     }
     .field--name-field-background-image {
 	    position: absolute;
 	    top: 0;
 	    z-index: -1;
 	    top: -218px;
+	    width: 100%;
+	    img {
+	    	width: 100%;
+	    }
 	    &:before {
 	    	content: "";
 		    height: 100%;
@@ -3149,9 +3203,19 @@ body.path-update-password {
         margin-bottom: .5em;
         display: block;
         font-size: 16px;
+        &:after {
+        	content: none;
+        }
 	}
 	.field--name-field-message .text-full {
-		margin-top: 70px;
+		margin-top: 0px;
+		border: none;
+        border-bottom: 1px solid rgba(0,0,0,0.3);
+        &:focus {
+        	border: none;
+            outline: none;
+            border-bottom: 1px solid rgba(0 , 0 ,0 , 0.3);
+        }
 	}
 	.form-text,
 	.form-email {
@@ -3180,6 +3244,9 @@ body.path-update-password {
 	    + .form-submit {
 	    	display: none;
 	    }
+	    &:hover {
+           background: #82bb3e;
+	    }
 	}
 }
 /** simple news letter block **/
@@ -3189,7 +3256,7 @@ body.path-update-password {
     float: left;
     width: 100%;
 	form {
-	 	max-width: 800px;
+	 	max-width: 950px;
 	 	width: 100%;
     	margin: 0 auto;
 	}
@@ -3198,6 +3265,7 @@ body.path-update-password {
         font-size: 30px;
         color: $white;
         margin-bottom: 0;
+        margin-top: 0;
 	}
 	.field--type-email {
 		float: left;
@@ -3249,8 +3317,179 @@ body.path-update-password {
 		    width: 100%;
 		    transition: .2s ease-in-out;
 		    &:hover {
-		    	background: #27a3d8;
+		    	background: #2195c7;
 		    }
         }
+	}
+}
+
+/** copy right footer **/
+#block-copyrightblock {
+	text-align: center;
+	background: #333;
+	padding: 25px;
+	.copyright {
+		    text-align: center;
+		    width: 100%;
+		    background: #333;
+		    font-size: 12px;
+		    color: rgba(255,255,255,.3);
+		    a {
+		    	color: rgba($orange, .3);
+		    	text-decoration: none;
+		    	transition: .2s ease-in-out all;
+		    	&:hover {
+		    		color: rgba($orange, 1);
+		    	}
+		    }
+		}
+	}
+
+	/** fixed header on scroll **/
+	#header {
+		&.change {
+		    margin-top: 0 ;
+		    padding-top: 1.4em;
+		    position: fixed;
+		    width: 100%;
+		    background: $white;
+		    top: 0;
+		    z-index: 999;
+		    .site-branding {
+				svg {
+					fill: $login-btn;
+				}
+				a {
+					color: $login-btn;
+				}
+			}
+			.block-sub-nav-main-menu {
+				.menu li { 
+					a {
+                       color: #666;
+				    }
+				    &:nth-of-type(4) {
+				    	a {
+				    		color: $white;
+
+				    	}
+				    }
+				}
+		    }
+	    }
+	}
+.path-signup {
+	.block-sub-nav-main-menu { 
+		.menu {
+			li { 
+				a {
+              color: #666;
+			}
+		}
+ 	}
+  }
+}
+/** setting page **/
+.user-form {
+    background: white;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb
+    summary {
+	   	background: #FCFCFC;
+	    padding: 15px 20px;
+	    /* margin-left: 10px; */
+	    margin-top: 1em;
+	    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+	    -moz-box-shadow: 0px 0px 3px #bbb;
+	    -webkit-box-shadow: 0px 0px 3px #bbb;
+	    box-shadow: 0px 0px 3px #bbb;
+	    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb);
+	    font-size: 14px;
+	    pointer-events: none;
+	    color: #979797;
+    }
+   .js-form-item {
+   	  .form-item {
+            color: #949494;
+		    margin-bottom: 1em;
+		    display: block;
+		    font-size: 16px;
+		    font-weight: bold;
+		    display: flex;
+		    margin-bottom: 3em;
+    	}
+   	}
+   	details > .details-wrapper {
+	    padding: 0 20px;
+	    max-width: 725px;
+	    label {
+	    	flex: 5;
+	    }
+	    select {
+	    	flex: 5;
+	    	    border: 0;
+			    background: none;
+			    outline: none;
+			    border-bottom: 1px solid rgba(0,0,0,0.3);
+			    width: 100%;
+			    padding-bottom: 7px;
+			    font-size: 14px;
+			    color: rgba(0,0,0,0.4);
+			    font-weight: normal;
+	    }
+   	}
+   	.message-header {
+   		padding: 0 20px;
+        position: relative;
+        max-width: 725px;
+        .form-item {
+        	display: flex;
+        	label {
+        		flex: 5
+        	}
+        	input {
+        		border: 0;
+			    background: none;
+			    outline: none;
+			    border-bottom: 1px solid rgba(0,0,0,0.3);
+			    width: 100%;
+			    padding-bottom: 7px;
+			    font-size: 14px;
+			    flex: 5;
+			    font-weight: normal;
+        	}
+        }
+   	}
+   	.invite-friend {
+	    position: absolute;
+	    right: 3%;
+	    top: -9px;
+	    border: 1px solid;
+	    border-radius: 5px;
+	    padding: 5px 10px;
+	    cursor: pointer;
+	}
+	.form-actions {
+		padding: 40px 20px;
+		input {
+		border: none;
+	    background: #96c85a;
+	    width: 30%;
+	    padding: .5em;
+	    font-size: 18px;
+	    color: white;
+	    display: block;
+	    -webkit-border-radius: 4px;
+	    -khtml-border-radius: 4px;
+	    -moz-border-radius: 4px;
+	    -ms-border-radius: 4px;
+	    -o-border-radius: 4px;
+	    border-radius: 4px;
+		    &:hover {
+		    	background: #82bb3e;
+		    }
+		}
 	}
 }
