@@ -338,7 +338,8 @@ button {
       font-size: 28px; } }
 
 .region-header {
-  float: left; }
+  float: left;
+  width: 100%; }
 
 #header {
   position: relative;
