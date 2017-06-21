@@ -2800,6 +2800,13 @@ body.path-update-password {
 			
 		    }
 		}
+		&:nth-of-type {
+			img {
+				max-width: 45%;
+                height: auto;
+                width: 100%;
+			}
+		}
 	}
 }
 .section__mission-vision {
@@ -3090,12 +3097,14 @@ body.path-update-password {
     .field--name-field-contact-,
     .field--name-field-contact  {
     	display: inline-block;
+    	a {
 	    padding: 10px 25px;
 	    border-radius: 5px;
         color: $white;
         margin: 0 12px;
         padding-left: 50px;
         position: relative;
+        text-decoration: none;
         &:before {
 		    display: inline-block;
 		    font: normal normal normal 14px/1 FontAwesome;
@@ -3108,6 +3117,7 @@ body.path-update-password {
 		    font-size: 22px;
 		    color: $white;
         }
+      }
     }
     .field--name-field-visit-srijan,
     .field--name-field-visit-srijan- {

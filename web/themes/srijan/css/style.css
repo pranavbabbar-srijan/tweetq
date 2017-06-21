@@ -2578,6 +2578,10 @@ body.path-update-password .messages--status {
   background-color: #ffffff; }
   .views--mission-vision .views-row:last-child .section__mission-vision {
     flex-direction: row-reverse; }
+  .views--mission-vision .views-row:nth-of-type img {
+    max-width: 45%;
+    height: auto;
+    width: 100%; }
 
 .section__mission-vision {
   display: flex;
@@ -2795,26 +2799,30 @@ body.path-update-password .messages--status {
   .block-product-srijan-technologies .field--name-field-mobile-number,
   .block-product-srijan-technologies .field--name-field-contact-,
   .block-product-srijan-technologies .field--name-field-contact {
-    display: inline-block;
-    padding: 10px 25px;
-    border-radius: 5px;
-    color: #ffffff;
-    margin: 0 12px;
-    padding-left: 50px;
-    position: relative; }
-    .block-product-srijan-technologies .field--name-field-mobile-number:before,
-    .block-product-srijan-technologies .field--name-field-contact-:before,
-    .block-product-srijan-technologies .field--name-field-contact:before {
-      display: inline-block;
-      font: normal normal normal 14px/1 FontAwesome;
-      font-size: inherit;
-      text-rendering: auto;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      position: absolute;
-      left: 18px;
-      font-size: 22px;
-      color: #ffffff; }
+    display: inline-block; }
+    .block-product-srijan-technologies .field--name-field-mobile-number a,
+    .block-product-srijan-technologies .field--name-field-contact- a,
+    .block-product-srijan-technologies .field--name-field-contact a {
+      padding: 10px 25px;
+      border-radius: 5px;
+      color: #ffffff;
+      margin: 0 12px;
+      padding-left: 50px;
+      position: relative;
+      text-decoration: none; }
+      .block-product-srijan-technologies .field--name-field-mobile-number a:before,
+      .block-product-srijan-technologies .field--name-field-contact- a:before,
+      .block-product-srijan-technologies .field--name-field-contact a:before {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        left: 18px;
+        font-size: 22px;
+        color: #ffffff; }
   .block-product-srijan-technologies .field--name-field-visit-srijan,
   .block-product-srijan-technologies .field--name-field-visit-srijan- {
     display: inline-block; }
