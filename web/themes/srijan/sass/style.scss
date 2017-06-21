@@ -2800,7 +2800,7 @@ body.path-update-password {
 			
 		    }
 		}
-		&:nth-of-type {
+		&:nth-of-type(2) {
 			img {
 				max-width: 45%;
                 height: auto;
@@ -3148,17 +3148,21 @@ body.path-update-password {
         }
     }
     .field--name-field-mobile-number {
-    	background: $login-btn;
-       &:before {
-          content: "\f095"; /** phone **/
-       }
+    	a {
+      	    background: $login-btn;
+            &:before {
+              content: "\f095"; /** phone **/
+            }
+        }
     }
     .field--name-field-contact-,
     .field--name-field-contact {
-    	background: $twitter;
-    	&:before {
-         content: "\f0e0"; /** envolpe **/
-       }
+    	a {
+	    	background: $twitter;
+	    	&:before {
+	         content: "\f0e0"; /** envolpe **/
+	       }
+	   }
     }
     .field--name-field-background-image {
 	    position: absolute;

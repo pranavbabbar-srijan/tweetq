@@ -2578,7 +2578,7 @@ body.path-update-password .messages--status {
   background-color: #ffffff; }
   .views--mission-vision .views-row:last-child .section__mission-vision {
     flex-direction: row-reverse; }
-  .views--mission-vision .views-row:nth-of-type img {
+  .views--mission-vision .views-row:nth-of-type(2) img {
     max-width: 45%;
     height: auto;
     width: 100%; }
@@ -2851,16 +2851,16 @@ body.path-update-password .messages--status {
         color: #ffffff;
         content: "\f08e";
         /* external linl */ }
-  .block-product-srijan-technologies .field--name-field-mobile-number {
+  .block-product-srijan-technologies .field--name-field-mobile-number a {
     background: #96c85a; }
-    .block-product-srijan-technologies .field--name-field-mobile-number:before {
+    .block-product-srijan-technologies .field--name-field-mobile-number a:before {
       content: "\f095";
       /** phone **/ }
-  .block-product-srijan-technologies .field--name-field-contact-,
-  .block-product-srijan-technologies .field--name-field-contact {
+  .block-product-srijan-technologies .field--name-field-contact- a,
+  .block-product-srijan-technologies .field--name-field-contact a {
     background: #2aa9e0; }
-    .block-product-srijan-technologies .field--name-field-contact-:before,
-    .block-product-srijan-technologies .field--name-field-contact:before {
+    .block-product-srijan-technologies .field--name-field-contact- a:before,
+    .block-product-srijan-technologies .field--name-field-contact a:before {
       content: "\f0e0";
       /** envolpe **/ }
   .block-product-srijan-technologies .field--name-field-background-image {
