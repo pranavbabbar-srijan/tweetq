@@ -2797,7 +2797,7 @@ body.path-update-password .messages--status {
   border-radius: 100px;
   padding-left: 60px;
   font-size: 16px; }
-  .path-contact .messages--status:befor {
+  .path-contact .messages--status:before {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
