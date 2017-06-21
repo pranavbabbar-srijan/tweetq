@@ -524,19 +524,26 @@ body {
       left: 6%;
       font-size: 48px;
       font-weight: bold;
-      width: 510px; }
+      width: 510px;
+      color: white;
+      z-index: 1; }
       .view-home-page-carousel .flexslider .slides .views-field-title a {
         color: white;
         text-decoration: none; }
+    .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image {
+      background-color: black; }
+      .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img {
+        opacity: .35; }
     .view-home-page-carousel .flexslider .slides .views-field-body {
       position: absolute;
       top: 32%;
       color: white;
       left: 6%;
       width: 38%;
-      font-size: 20px; }
+      font-size: 20px;
+      z-index: 1; }
     .view-home-page-carousel .flexslider .flex-control-paging {
-      bottom: 172px;
+      bottom: 100px;
       z-index: 2;
       left: 185px;
       width: 20%; }
@@ -549,7 +556,7 @@ body {
     .view-home-page-carousel .flexslider .flex-direction-nav {
       width: 20%;
       position: absolute;
-      bottom: 180px;
+      bottom: 106px;
       left: 185px; }
       .view-home-page-carousel .flexslider .flex-direction-nav a {
         display: inline;
@@ -572,6 +579,9 @@ body {
           opacity: 1; }
           .view-home-page-carousel .flexslider .flex-direction-nav a.flex-next:before {
             content: "\f105"; }
+
+.path-frontpage .section + .section .region-middle {
+  margin-top: 5vh; }
 
 .user-login-form {
   background: white;
@@ -644,31 +654,30 @@ body {
     position: absolute;
     bottom: 74px;
     right: 15px; }
-
-#user-login-prefix + div {
-  position: absolute;
-  bottom: 10px;
-  border-top: 1px solid #ccc;
-  width: 100%;
-  left: 0;
-  padding: 15px 30px 5px; }
-  #user-login-prefix + div a {
-    float: right;
-    background: white;
-    color: #2aa9e0;
-    border: 1px solid #2aa9e0;
-    float: right;
-    padding: .4em 1em;
-    margin-right: 0;
-    margin-left: 0;
-    border-radius: 4px;
-    font-size: 13px;
-    text-decoration: none; }
-  #user-login-prefix + div span {
-    color: #aaa;
-    margin-top: 7px;
-    float: left;
-    font-size: 13px; }
+    .user-login-form #forgot-password + div {
+      position: absolute;
+      bottom: 10px;
+      border-top: 1px solid #ccc;
+      width: 100%;
+      left: 0;
+      padding: 15px 30px 5px; }
+      .user-login-form #forgot-password + div a {
+        float: right;
+        background: white;
+        color: #2aa9e0;
+        border: 1px solid #2aa9e0;
+        float: right;
+        padding: .4em 1em;
+        margin-right: 0;
+        margin-left: 0;
+        border-radius: 4px;
+        font-size: 13px;
+        text-decoration: none; }
+      .user-login-form #forgot-password + div span {
+        color: #aaa;
+        margin-top: 7px;
+        float: left;
+        font-size: 13px; }
 
 .validation-error, .mail-sent {
   color: #ff5a43;

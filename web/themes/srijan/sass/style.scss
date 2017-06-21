@@ -432,10 +432,18 @@ body {
     			font-size: 48px;
     			font-weight: bold;
     			width: 510px;
+    			color: white;
+    			z-index: 1;
     			a {
     				color: white;
     				text-decoration: none;
     			}
+			}
+			.views-field-field-front-page-image {
+				background-color: black;
+				img {
+					opacity: .35;
+				}
 			}
 			.views-field-body {
 				position: absolute;
@@ -444,10 +452,11 @@ body {
 			    left: 6%;
 			    width: 38%;
 			    font-size: 20px;
+			    z-index: 1;
 			}
 		}
 		.flex-control-paging {
-			bottom: 172px;
+			bottom: 100px;
 		    z-index: 2;
 		    left: 185px;
 		    width: 20%;
@@ -465,7 +474,7 @@ body {
 		.flex-direction-nav {
 			width: 20%;
 		    position: absolute;
-		    bottom: 180px;
+		    bottom: 106px;
 		    left: 185px;
 		    a {
 		    	display: inline;
@@ -495,6 +504,14 @@ body {
 		    		}
 		    	}
 		    }
+		}
+	}
+}
+
+.path-frontpage .section {
+	+ .section {
+		.region-middle {
+			margin-top: 5vh;
 		}
 	}
 }
@@ -574,38 +591,36 @@ body {
 		position: absolute;
 	    bottom: 74px;
 	    right: 15px;
+	    + div {
+			position: absolute;
+		    bottom: 10px;
+		    border-top: 1px solid #ccc;
+		    width: 100%;
+		    left: 0;
+		    padding: 15px 30px 5px;
+		    a {
+		    	float: right;
+		    	background: white;
+				color: $twitter;
+				border: 1px solid $twitter;
+				float: right;
+				padding: .4em 1em;
+				margin-right: 0;
+				margin-left: 0;
+				border-radius: 4px;
+				font-size: 13px;
+				text-decoration: none;
+		    }
+		    span {
+		    	color: #aaa;
+		    	margin-top: 7px;
+			    float: left;
+			    font-size: 13px;
+		    }
+		}
 	}
 }
 
-#user-login-prefix {
-	+ div {
-		position: absolute;
-	    bottom: 10px;
-	    border-top: 1px solid #ccc;
-	    width: 100%;
-	    left: 0;
-	    padding: 15px 30px 5px;
-	    a {
-	    	float: right;
-	    	background: white;
-			color: $twitter;
-			border: 1px solid $twitter;
-			float: right;
-			padding: .4em 1em;
-			margin-right: 0;
-			margin-left: 0;
-			border-radius: 4px;
-			font-size: 13px;
-			text-decoration: none;
-	    }
-	    span {
-	    	color: #aaa;
-	    	margin-top: 7px;
-		    float: left;
-		    font-size: 13px;
-	    }
-	}
-}
 
 .validation-error, .mail-sent {
 	color: #ff5a43;
@@ -2192,8 +2207,6 @@ body.path-update-password {
 	}
 }
 .send-tweets-form, .tweets-queue-tweet-form  {
-	// overflow: hidden;
-	// margin-top: 80px;
 	padding-top: 5px;
 	label {
 		@extend %none;
