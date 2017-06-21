@@ -518,32 +518,26 @@ body {
   .view-home-page-carousel .flexslider {
     background: none;
     border: none; }
-    .view-home-page-carousel .flexslider .slides .views-field-title {
+    .view-home-page-carousel .flexslider .slides .slider-content {
       position: absolute;
       top: 18%;
       left: 6%;
-      font-size: 48px;
-      font-weight: bold;
-      width: 510px;
-      color: white;
+      width: 50%;
       z-index: 1; }
-      .view-home-page-carousel .flexslider .slides .views-field-title a {
+      .view-home-page-carousel .flexslider .slides .slider-content h2 {
+        font-size: 40px;
+        font-weight: bold;
         color: white;
-        text-decoration: none; }
+        z-index: 1; }
+      .view-home-page-carousel .flexslider .slides .slider-content p {
+        color: white;
+        font-size: 20px; }
     .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image {
       background-color: black; }
       .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img {
         opacity: .35; }
-    .view-home-page-carousel .flexslider .slides .views-field-body {
-      position: absolute;
-      top: 32%;
-      color: white;
-      left: 6%;
-      width: 38%;
-      font-size: 20px;
-      z-index: 1; }
     .view-home-page-carousel .flexslider .flex-control-paging {
-      bottom: 100px;
+      bottom: 130px;
       z-index: 2;
       left: 185px;
       width: 20%; }
@@ -556,7 +550,7 @@ body {
     .view-home-page-carousel .flexslider .flex-direction-nav {
       width: 20%;
       position: absolute;
-      bottom: 106px;
+      bottom: 136px;
       left: 185px; }
       .view-home-page-carousel .flexslider .flex-direction-nav a {
         display: inline;
@@ -594,7 +588,7 @@ body {
   border-radius: 6px;
   width: 360px;
   float: right;
-  margin-top: 10vh;
+  margin-top: -4vh;
   position: relative; }
   .user-login-form h2 {
     font-size: 22px;
@@ -831,7 +825,7 @@ body.path-update-password .messages--status {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
   float: left;
-  margin-top: 280px;
+  margin-top: 220px;
   margin-left: 5em;
   position: relative; }
   .block-total-twitter-tweets-block .count, .block-total-twitter-users-block .count {
@@ -1761,12 +1755,13 @@ body.path-update-password .messages--status {
         right: 0;
         top: 10px; }
       .block-users-tweets-statistics-block .content > div a.invalid_tweets .valid_tweets:before {
-        content: "";
-        font-size: 2.2em;
-        color: #f56a6a;
-        position: absolute;
+        content: "";
         right: 5px;
-        top: 15px; }
+        top: 12px;
+        background: url("../images/warning.svg") no-repeat 0 0;
+        width: 40px;
+        background-size: 100%;
+        height: 40px; }
       .block-users-tweets-statistics-block .content > div a .archived_tweets:before {
         content: "";
         font-size: 3em;
