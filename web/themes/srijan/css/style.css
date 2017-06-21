@@ -538,23 +538,59 @@ body {
       position: absolute;
       top: 18%;
       left: 6%;
-      font-size: 42px;
+      font-size: 48px;
       font-weight: bold;
-      width: 460px; }
+      width: 510px; }
       .view-home-page-carousel .flexslider .slides .views-field-title a {
         color: white;
         text-decoration: none; }
     .view-home-page-carousel .flexslider .slides .views-field-body {
       position: absolute;
-      top: 31%;
+      top: 32%;
       color: white;
       left: 6%;
       width: 38%;
       font-size: 20px; }
+    .view-home-page-carousel .flexslider .flex-control-paging {
+      bottom: 176px;
+      z-index: 2;
+      left: 150px;
+      width: 20%; }
+      .view-home-page-carousel .flexslider .flex-control-paging li a {
+        width: 20px;
+        height: 20px;
+        background: black; }
+        .view-home-page-carousel .flexslider .flex-control-paging li a:hover, .view-home-page-carousel .flexslider .flex-control-paging li a.flex-active {
+          background: white; }
+    .view-home-page-carousel .flexslider .flex-direction-nav {
+      width: 20%;
+      position: absolute;
+      bottom: 180px;
+      left: 150px; }
+      .view-home-page-carousel .flexslider .flex-direction-nav a {
+        display: inline;
+        opacity: 1; }
+        .view-home-page-carousel .flexslider .flex-direction-nav a:hover {
+          opacity: 1; }
+        .view-home-page-carousel .flexslider .flex-direction-nav a:before {
+          color: white;
+          box-shadow: none;
+          font-size: 32px;
+          font-family: 'fontawesome'; }
+        .view-home-page-carousel .flexslider .flex-direction-nav a.flex-prev {
+          left: 30px;
+          opacity: 1; }
+          .view-home-page-carousel .flexslider .flex-direction-nav a.flex-prev:before {
+            content: "\f104"; }
+        .view-home-page-carousel .flexslider .flex-direction-nav a.flex-next {
+          right: 30px;
+          opacity: 1; }
+          .view-home-page-carousel .flexslider .flex-direction-nav a.flex-next:before {
+            content: "\f105"; }
 
 .user-login-form {
   background: white;
-  padding: 8em 2em 5em 2em;
+  padding: 8em 2em 6em 2em;
   -webkit-border-radius: 6px;
   -khtml-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -615,14 +651,14 @@ body {
   .user-login-form #forgot-password {
     text-align: center;
     cursor: pointer;
-    color: #2aa9e0;
-    font-size: 14px;
+    color: #aaa;
+    font-size: 12px;
     display: block;
     width: 150px;
-    margin: 0 auto; }
-    .user-login-form #forgot-password + div {
-      position: absolute;
-      bottom: 15px; }
+    margin: 0 auto;
+    position: absolute;
+    bottom: 74px;
+    right: 15px; }
 
 #user-login-prefix + div {
   position: absolute;
@@ -631,6 +667,23 @@ body {
   width: 100%;
   left: 0;
   padding: 15px 30px 5px; }
+  #user-login-prefix + div a {
+    float: right;
+    background: white;
+    color: #2aa9e0;
+    border: 1px solid #2aa9e0;
+    float: right;
+    padding: .4em 1em;
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 4px;
+    font-size: 13px;
+    text-decoration: none; }
+  #user-login-prefix + div span {
+    color: #aaa;
+    margin-top: 7px;
+    float: left;
+    font-size: 13px; }
 
 .validation-error, .mail-sent {
   color: #ff5a43;
@@ -784,8 +837,9 @@ body.path-update-password .messages--status {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
   float: left;
-  margin-top: 36vh;
-  margin-left: 2.1em; }
+  margin-top: 280px;
+  margin-left: 5em;
+  position: relative; }
   .block-total-twitter-tweets-block .count, .block-total-twitter-users-block .count {
     font-size: 60px;
     font-weight: 700;
@@ -808,7 +862,7 @@ body.path-update-password .messages--status {
       margin-top: 6px; }
 
 .block-total-twitter-tweets-block {
-  margin-left: 8em; }
+  margin-left: 10em; }
 
 #sidebar-first {
   background: white;

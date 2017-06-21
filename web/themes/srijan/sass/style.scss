@@ -447,9 +447,9 @@ body {
 				position: absolute;
 				top: 18%;
     			left: 6%;
-    			font-size: 42px;
+    			font-size: 48px;
     			font-weight: bold;
-    			width: 460px;
+    			width: 510px;
     			a {
     				color: white;
     				text-decoration: none;
@@ -457,19 +457,68 @@ body {
 			}
 			.views-field-body {
 				position: absolute;
-			    top: 31%;
+			    top: 32%;
 			    color: white;
 			    left: 6%;
 			    width: 38%;
 			    font-size: 20px;
 			}
 		}
+		.flex-control-paging {
+			bottom: 176px;
+		    z-index: 2;
+		    left: 150px;
+		    width: 20%;
+		    li {
+		    	a {
+		    		width: 20px;
+		    		height: 20px;
+		    		background: black;
+		    		&:hover, &.flex-active {
+		    			background: white;
+		    		}
+		    	}
+		    }
+		}
+		.flex-direction-nav {
+			width: 20%;
+		    position: absolute;
+		    bottom: 180px;
+		    left: 150px;
+		    a {
+		    	display: inline;
+		    	opacity: 1;
+		    	&:hover {
+		    		opacity: 1;
+		    	}
+		    	&:before {
+		    		color: rgba(255,255,255,1);
+		    		box-shadow: none;
+		    		font-size: 32px;
+		    		font-family: 'fontawesome';
+		    	}
+		    	&.flex-prev {
+		    		left: 30px;
+		    		opacity: 1;
+		    		&:before {
+		    			content: "\f104";
+		    		}
+		    	}
+		    	&.flex-next {
+		    		right: 30px;
+		    		opacity: 1;
+		    		&:before {
+		    			content: "\f105";
+		    		}
+		    	}
+		    }
+		}
 	}
 }
 
 .user-login-form {
 	background: rgba(255,255,255,1);
-	padding: 8em 2em 5em 2em;
+	padding: 8em 2em 6em 2em;
 	@include border-radius(6px);
 	width: 360px;
 	float: right;
@@ -534,15 +583,14 @@ body {
 	#forgot-password {
 		text-align: center;
 		cursor: pointer;
-		color: $twitter;
-		font-size: 14px;
+		color: #aaa;
+		font-size: 12px;
 		display: block;
 		width: 150px;
 		margin: 0 auto;
-		+ div {
-			position: absolute;
-			bottom: 15px;
-		}
+		position: absolute;
+	    bottom: 74px;
+	    right: 15px;
 	}
 }
 
@@ -554,6 +602,25 @@ body {
 	    width: 100%;
 	    left: 0;
 	    padding: 15px 30px 5px;
+	    a {
+	    	float: right;
+	    	background: white;
+			color: $twitter;
+			border: 1px solid $twitter;
+			float: right;
+			padding: .4em 1em;
+			margin-right: 0;
+			margin-left: 0;
+			border-radius: 4px;
+			font-size: 13px;
+			text-decoration: none;
+	    }
+	    span {
+	    	color: #aaa;
+	    	margin-top: 7px;
+		    float: left;
+		    font-size: 13px;
+	    }
 	}
 }
 
@@ -747,8 +814,9 @@ body.path-update-password {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
 	float: left;
-	margin-top: 36vh;
-	margin-left: 2.1em;
+	margin-top: 280px;
+	margin-left: 5em;
+	position: relative;
 	.count {
 		font-size: 60px;
 		font-weight: 700;
@@ -775,7 +843,7 @@ body.path-update-password {
 	}
 }
 .block-total-twitter-tweets-block {
-	margin-left: 8em;
+	margin-left: 10em;
 }
 #sidebar-first {
 	background: white;
