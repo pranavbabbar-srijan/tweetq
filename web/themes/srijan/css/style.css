@@ -3043,18 +3043,22 @@ body.path-update-password .messages--status {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
   -moz-box-shadow: 0px 0px 3px #bbb;
   -webkit-box-shadow: 0px 0px 3px #bbb;
-  box-shadow: 0px 0px 3px #bbb summary;
-    box-shadow-background: #FCFCFC;
-    box-shadow-padding: 15px 20px;
-    box-shadow-margin-top: 1em;
-    box-shadow--ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
-    box-shadow--moz-box-shadow: 0px 0px 3px #bbb;
-    box-shadow--webkit-box-shadow: 0px 0px 3px #bbb;
-    box-shadow-box-shadow: 0px 0px 3px #bbb;
-    box-shadow-filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb);
-    box-shadow-font-size: 14px;
-    box-shadow-pointer-events: none;
-    box-shadow-color: #979797; }
+  box-shadow: 0px 0px 3px #bbb; }
+  .user-form #edit-timezone {
+    border: none; }
+  .user-form summary {
+    background: #FCFCFC;
+    padding: 15px 20px;
+    margin-top: 1em;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb);
+    font-size: 14px;
+    pointer-events: none;
+    color: #979797;
+    margin-bottom: 2.5em; }
   .user-form .description {
     display: none; }
   .user-form .js-form-item.form-item {
