@@ -2690,6 +2690,8 @@ body.path-update-password .messages--status {
       background: #2aa9e0;
       border-radius: 5px;
       border: none; }
+      .block-sub-nav-main-menu .menu li:nth-of-type(4) a:hover {
+        opacity: 1; }
 
 .path-frontpage .block-sub-nav-main-menu .menu li:nth-of-type(4),
 .user-logged-in .block-sub-nav-main-menu .menu li:nth-of-type(4) {
@@ -2715,10 +2717,10 @@ body.path-update-password .messages--status {
     float: right;
     width: 174px;
     text-transform: initial;
-    font-size: 30px;
+    font-size: 36px;
     text-align: center; }
     .block-contactusimageblock .field--name-field-title .green-text {
-      font-size: 45px;
+      font-size: 48px;
       text-transform: uppercase;
       font-weight: bold; }
   .block-contactusimageblock img {
@@ -2730,7 +2732,8 @@ body.path-update-password .messages--status {
 
 .path-contact #header {
   z-index: 1;
-  position: relative; }
+  position: relative;
+  background: transparent; }
 
 .path-contact .site-branding svg {
   fill: #ffffff; }
@@ -2741,6 +2744,13 @@ body.path-update-password .messages--status {
 .path-contact .block-system-main-block {
   float: right;
   width: 35%; }
+
+.path-contact.user-logged-in {
+  background: #ffffff; }
+  .path-contact.user-logged-in .main-content {
+    position: initial; }
+  .path-contact.user-logged-in #main-wrapper {
+    padding-top: 0; }
 
 .featured-top {
   top: -75px;
@@ -2754,7 +2764,7 @@ body.path-update-password .messages--status {
   margin-top: 100px;
   text-align: center; }
   .block-product-srijan-technologies .field--name-field-company-title {
-    font-size: 34px;
+    font-size: 36px;
     color: #ffffff; }
   .block-product-srijan-technologies .field--name-field-mobile-number,
   .block-product-srijan-technologies .field--name-field-contact-,
@@ -2960,3 +2970,19 @@ body.path-update-password .messages--status {
       transition: .2s ease-in-out all; }
       #block-copyrightblock .copyright a:hover {
         color: #f1ad40; }
+
+/** fixed header on scroll **/
+#header.change {
+  margin-top: 0;
+  padding-top: 1.4em;
+  position: fixed;
+  width: 100%;
+  background: #ffffff; }
+  #header.change .site-branding svg {
+    fill: #96c85a; }
+  #header.change .site-branding a {
+    color: #96c85a; }
+  #header.change .block-sub-nav-main-menu .menu li a {
+    color: #666; }
+  #header.change .block-sub-nav-main-menu .menu li:nth-of-type(4) a {
+    color: #ffffff; }
