@@ -206,7 +206,7 @@
 					}
 				}
 				&.profile-settings {
-					pointer-events: none; //remove
+					// pointer-events: none; //remove
 					&:before {
 						content: $icon-settings;
 					}
@@ -3443,7 +3443,11 @@ body.path-update-password {
 	    pointer-events: none;
 	    color: #979797;
 	    margin-bottom: 2.5em;
-    } 
+		
+    }
+    summary::-webkit-details-marker {
+		display: none;
+	}
     .description {
     	display: none;
     }
@@ -3486,6 +3490,7 @@ body.path-update-password {
         max-width: 725px;
         .form-item {
         	display: flex;
+        	flex-wrap: wrap;
         	label {
         		flex: 5
         	}
@@ -3500,6 +3505,10 @@ body.path-update-password {
 			    flex: 5;
 			    font-weight: normal;
         	}
+        	.validation-error {
+        		width: 100%;
+        		padding-left: 50%;
+        	}
         }
    	}
    	.invite-friend {
@@ -3510,6 +3519,7 @@ body.path-update-password {
 	    border-radius: 5px;
 	    padding: 5px 10px;
 	    cursor: pointer;
+	    background: $white;
 	}
 	.form-actions {
 		padding: 40px 20px;

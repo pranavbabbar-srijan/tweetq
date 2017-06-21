@@ -970,7 +970,7 @@
 	// js for adding placeholder on newsletter field
 	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
 	$(".contact-message-form").prepend("<div class='heading-write-us'>Write to us</div>");
-	$(window).scroll(function() {    
+	/*$(window).scroll(function() {    
     var scroll = $(window).scrollTop();
 
        if(scroll >= 200) {
@@ -978,7 +978,9 @@
        } else {
         $(".header").removeClass("change");
        }
-    });
+    });*/
+    // change text of summary 
+    $(".user-form summary").text("Settings");
 	
 
 })(jQuery);

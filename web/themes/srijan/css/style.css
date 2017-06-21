@@ -303,10 +303,8 @@ button {
             vertical-align: sub; }
         .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before {
           content: ""; }
-        .block-users-dashboard-header-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings {
-          pointer-events: none; }
-          .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
-            content: ""; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
+          content: ""; }
         .block-users-dashboard-header-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout {
           margin-bottom: 0; }
           .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
@@ -3059,6 +3057,8 @@ body.path-update-password .messages--status {
     pointer-events: none;
     color: #979797;
     margin-bottom: 2.5em; }
+  .user-form summary::-webkit-details-marker {
+    display: none; }
   .user-form .description {
     display: none; }
   .user-form .js-form-item.form-item {
@@ -3094,7 +3094,8 @@ body.path-update-password .messages--status {
     position: relative;
     max-width: 725px; }
     .user-form .message-header .form-item {
-      display: flex; }
+      display: flex;
+      flex-wrap: wrap; }
       .user-form .message-header .form-item label {
         flex: 5; }
       .user-form .message-header .form-item input {
@@ -3107,6 +3108,9 @@ body.path-update-password .messages--status {
         font-size: 14px;
         flex: 5;
         font-weight: normal; }
+      .user-form .message-header .form-item .validation-error {
+        width: 100%;
+        padding-left: 50%; }
   .user-form .invite-friend {
     position: absolute;
     right: 3%;
@@ -3114,7 +3118,8 @@ body.path-update-password .messages--status {
     border: 1px solid;
     border-radius: 5px;
     padding: 5px 10px;
-    cursor: pointer; }
+    cursor: pointer;
+    background: #ffffff; }
   .user-form .form-actions {
     padding: 40px 20px; }
     .user-form .form-actions input {
