@@ -2798,11 +2798,11 @@ body.path-update-password .messages--status {
   .block-product-srijan-technologies .field--name-field-company-title {
     font-size: 36px;
     color: #ffffff; }
-  .block-product-srijan-technologies .field--name-field-mobile-number,
+  .block-product-srijan-technologies .field--name-field-mobile-number-contact,
   .block-product-srijan-technologies .field--name-field-contact-,
   .block-product-srijan-technologies .field--name-field-contact {
     display: inline-block; }
-    .block-product-srijan-technologies .field--name-field-mobile-number a,
+    .block-product-srijan-technologies .field--name-field-mobile-number-contact a,
     .block-product-srijan-technologies .field--name-field-contact- a,
     .block-product-srijan-technologies .field--name-field-contact a {
       padding: 10px 25px;
@@ -2812,7 +2812,7 @@ body.path-update-password .messages--status {
       padding-left: 50px;
       position: relative;
       text-decoration: none; }
-      .block-product-srijan-technologies .field--name-field-mobile-number a:before,
+      .block-product-srijan-technologies .field--name-field-mobile-number-contact a:before,
       .block-product-srijan-technologies .field--name-field-contact- a:before,
       .block-product-srijan-technologies .field--name-field-contact a:before {
         display: inline-block;
@@ -2856,12 +2856,12 @@ body.path-update-password .messages--status {
       .block-product-srijan-technologies .field--name-field-visit-srijan a:hover,
       .block-product-srijan-technologies .field--name-field-visit-srijan- a:hover {
         background: #de941d; }
-  .block-product-srijan-technologies .field--name-field-mobile-number a {
+  .block-product-srijan-technologies .field--name-field-mobile-number-contact a {
     background: #96c85a; }
-    .block-product-srijan-technologies .field--name-field-mobile-number a:before {
+    .block-product-srijan-technologies .field--name-field-mobile-number-contact a:before {
       content: "\f095";
       /** phone **/ }
-    .block-product-srijan-technologies .field--name-field-mobile-number a:hover {
+    .block-product-srijan-technologies .field--name-field-mobile-number-contact a:hover {
       background: #82bb3e; }
   .block-product-srijan-technologies .field--name-field-contact- a,
   .block-product-srijan-technologies .field--name-field-contact a {
@@ -3037,3 +3037,91 @@ body.path-update-password .messages--status {
 
 .path-signup .block-sub-nav-main-menu .menu li a {
   color: #666; }
+
+/** setting page **/
+.user-form {
+  background: white;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+  -moz-box-shadow: 0px 0px 3px #bbb;
+  -webkit-box-shadow: 0px 0px 3px #bbb;
+  box-shadow: 0px 0px 3px #bbb summary;
+    box-shadow-background: #FCFCFC;
+    box-shadow-padding: 15px 20px;
+  box-shadow-/* margin-left: 10px; */
+    box-shadow-margin-top: 1em;
+    box-shadow--ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+    box-shadow--moz-box-shadow: 0px 0px 3px #bbb;
+    box-shadow--webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow-box-shadow: 0px 0px 3px #bbb;
+    box-shadow-filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb);
+    box-shadow-font-size: 14px;
+    box-shadow-pointer-events: none;
+    box-shadow-color: #979797; }
+  .user-form .js-form-item .form-item {
+    color: #949494;
+    margin-bottom: 1em;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    margin-bottom: 3em; }
+  .user-form details > .details-wrapper {
+    padding: 0 20px;
+    max-width: 725px; }
+    .user-form details > .details-wrapper label {
+      flex: 5; }
+    .user-form details > .details-wrapper select {
+      flex: 5;
+      border: 0;
+      background: none;
+      outline: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      width: 100%;
+      padding-bottom: 7px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.4);
+      font-weight: normal; }
+  .user-form .message-header {
+    padding: 0 20px;
+    position: relative;
+    max-width: 725px; }
+    .user-form .message-header .form-item {
+      display: flex; }
+      .user-form .message-header .form-item label {
+        flex: 5; }
+      .user-form .message-header .form-item input {
+        border: 0;
+        background: none;
+        outline: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        width: 100%;
+        padding-bottom: 7px;
+        font-size: 14px;
+        flex: 5;
+        font-weight: normal; }
+  .user-form .invite-friend {
+    position: absolute;
+    right: 3%;
+    top: -9px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer; }
+  .user-form .form-actions {
+    padding: 40px 20px; }
+    .user-form .form-actions input {
+      border: none;
+      background: #96c85a;
+      width: 30%;
+      padding: .5em;
+      font-size: 18px;
+      color: white;
+      display: block;
+      -webkit-border-radius: 4px;
+      -khtml-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      border-radius: 4px; }
+      .user-form .form-actions input:hover {
+        background: #82bb3e; }

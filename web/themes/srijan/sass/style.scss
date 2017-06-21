@@ -3096,7 +3096,7 @@ body.path-update-password {
     	font-size: 36px;
         color: $white;
     }
-    .field--name-field-mobile-number,
+    .field--name-field-mobile-number-contact,
     .field--name-field-contact-,
     .field--name-field-contact  {
     	display: inline-block;
@@ -3153,7 +3153,7 @@ body.path-update-password {
 	        }
         }
     }
-    .field--name-field-mobile-number {
+    .field--name-field-mobile-number-contact {
     	a {
       	    background: $login-btn;
             &:before {
@@ -3393,4 +3393,108 @@ body.path-update-password {
 		}
  	}
   }
+}
+/** setting page **/
+.user-form {
+    background: white;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb
+    summary {
+	   	background: #FCFCFC;
+	    padding: 15px 20px;
+	    /* margin-left: 10px; */
+	    margin-top: 1em;
+	    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+	    -moz-box-shadow: 0px 0px 3px #bbb;
+	    -webkit-box-shadow: 0px 0px 3px #bbb;
+	    box-shadow: 0px 0px 3px #bbb;
+	    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb);
+	    font-size: 14px;
+	    pointer-events: none;
+	    color: #979797;
+    }
+   .js-form-item {
+   	  .form-item {
+            color: #949494;
+		    margin-bottom: 1em;
+		    display: block;
+		    font-size: 16px;
+		    font-weight: bold;
+		    display: flex;
+		    margin-bottom: 3em;
+    	}
+   	}
+   	details > .details-wrapper {
+	    padding: 0 20px;
+	    max-width: 725px;
+	    label {
+	    	flex: 5;
+	    }
+	    select {
+	    	flex: 5;
+	    	    border: 0;
+			    background: none;
+			    outline: none;
+			    border-bottom: 1px solid rgba(0,0,0,0.3);
+			    width: 100%;
+			    padding-bottom: 7px;
+			    font-size: 14px;
+			    color: rgba(0,0,0,0.4);
+			    font-weight: normal;
+	    }
+   	}
+   	.message-header {
+   		padding: 0 20px;
+        position: relative;
+        max-width: 725px;
+        .form-item {
+        	display: flex;
+        	label {
+        		flex: 5
+        	}
+        	input {
+        		border: 0;
+			    background: none;
+			    outline: none;
+			    border-bottom: 1px solid rgba(0,0,0,0.3);
+			    width: 100%;
+			    padding-bottom: 7px;
+			    font-size: 14px;
+			    flex: 5;
+			    font-weight: normal;
+        	}
+        }
+   	}
+   	.invite-friend {
+	    position: absolute;
+	    right: 3%;
+	    top: -9px;
+	    border: 1px solid;
+	    border-radius: 5px;
+	    padding: 5px 10px;
+	    cursor: pointer;
+	}
+	.form-actions {
+		padding: 40px 20px;
+		input {
+		border: none;
+	    background: #96c85a;
+	    width: 30%;
+	    padding: .5em;
+	    font-size: 18px;
+	    color: white;
+	    display: block;
+	    -webkit-border-radius: 4px;
+	    -khtml-border-radius: 4px;
+	    -moz-border-radius: 4px;
+	    -ms-border-radius: 4px;
+	    -o-border-radius: 4px;
+	    border-radius: 4px;
+		    &:hover {
+		    	background: #82bb3e;
+		    }
+		}
+	}
 }
