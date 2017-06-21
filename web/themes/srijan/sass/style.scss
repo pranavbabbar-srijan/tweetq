@@ -2800,7 +2800,7 @@ body.path-update-password {
 			
 		    }
 		}
-		&:nth-of-type {
+		&:nth-of-type(2) {
 			img {
 				max-width: 45%;
                 height: auto;
@@ -2989,8 +2989,11 @@ body.path-update-password {
                     background: $twitter;
                     border-radius: 5px;
                     border: none;
+                    color: $white;
                     &:hover {
                     	opacity: 1;
+				        background: #2195c7;
+
                     }
 			   	}
 			}
@@ -3145,20 +3148,33 @@ body.path-update-password {
 			    color: $white;
 			    content: "\f08e"; /* external linl */
 	        }
+	        &:hover {
+	        	background: #de941d;
+	        }
         }
     }
     .field--name-field-mobile-number {
-    	background: $login-btn;
-       &:before {
-          content: "\f095"; /** phone **/
-       }
+    	a {
+      	    background: $login-btn;
+            &:before {
+              content: "\f095"; /** phone **/
+            }
+            &:hover {
+            	background: #82bb3e;
+            }
+        }
     }
     .field--name-field-contact-,
     .field--name-field-contact {
-    	background: $twitter;
-    	&:before {
-         content: "\f0e0"; /** envolpe **/
-       }
+    	a {
+	    	background: $twitter;
+	    	&:before {
+	         content: "\f0e0"; /** envolpe **/
+	       }
+	       &:hover {
+	       	background:  #2195c7;
+	       }
+	   }
     }
     .field--name-field-background-image {
 	    position: absolute;
@@ -3232,6 +3248,9 @@ body.path-update-password {
 	    margin-top: 1em;
 	    + .form-submit {
 	    	display: none;
+	    }
+	    &:hover {
+           background: #82bb3e;
 	    }
 	}
 }
@@ -3357,11 +3376,21 @@ body.path-update-password {
 				    &:nth-of-type(4) {
 				    	a {
 				    		color: $white;
+
 				    	}
 				    }
 				}
 		    }
 	    }
-		
-		
 	}
+.path-signup {
+	.block-sub-nav-main-menu { 
+		.menu {
+			li { 
+				a {
+              color: #666;
+			}
+		}
+ 	}
+  }
+}
