@@ -130,17 +130,17 @@
 	  	});
 
 	  	//Checking out data in fields for updation of profile
-	  	$("#profilesettingform .update-profile-button").click(function() {
-	  		//	var password = $('#profilesettingform #edit-changeuser-password').val();
-	  		var jobtitle = $('#profilesettingform #edit-field-job-title').val();
-	  		var orgname = $('#profilesettingform #edit-field-organization').val();
-	  		var website = $('#profilesettingform #edit-field-website').val();
-	  		if (jobtitle.length > 0 || orgname.length > 0 || website.length > 0) {
-	  			$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
-	  		}
+	  	// $("#profilesettingform .update-profile-button").click(function() {
+	  	// 	//	var password = $('#profilesettingform #edit-changeuser-password').val();
+	  	// 	var jobtitle = $('#profilesettingform #edit-field-job-title').val();
+	  	// 	var orgname = $('#profilesettingform #edit-field-organization').val();
+	  	// 	var website = $('#profilesettingform #edit-field-website').val();
+	  	// 	if (jobtitle.length > 0 || orgname.length > 0 || website.length > 0) {
+	  	// 		$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
+	  	// 	}
 
 	  		
-	  	});
+	  	// });
 
 		$("#profilesettingform #change-password").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
