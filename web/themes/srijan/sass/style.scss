@@ -3316,6 +3316,8 @@ body.path-update-password {
 		    position: fixed;
 		    width: 100%;
 		    background: $white;
+		    top: 0;
+		    z-index: 999;
 		    .site-branding {
 				svg {
 					fill: $login-btn;

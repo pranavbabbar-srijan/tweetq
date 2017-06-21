@@ -2994,7 +2994,9 @@ body.path-update-password .messages--status {
   padding-top: 1.4em;
   position: fixed;
   width: 100%;
-  background: #ffffff; }
+  background: #ffffff;
+  top: 0;
+  z-index: 999; }
   #header.change .site-branding svg {
     fill: #96c85a; }
   #header.change .site-branding a {

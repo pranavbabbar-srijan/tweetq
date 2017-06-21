@@ -973,7 +973,7 @@
 	$(window).scroll(function() {    
     var scroll = $(window).scrollTop();
 
-       if(scroll >= 100) {
+       if(scroll >= 200) {
         $(".header").addClass("change");
        } else {
         $(".header").removeClass("change");
