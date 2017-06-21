@@ -2738,7 +2738,7 @@ body.path-update-password {
 }
 .section__mission--text {
     width: 50%;
-    padding: 90px 50px;
+    padding: 15px 50px;
     background-color: $light-gray;
 	p {
 		line-height: 1.5;
@@ -2938,7 +2938,7 @@ body.path-update-password {
 	    bottom: 9%;
 	    float: right;
 	    width: 174px;
-	    text-transform: lowercase;
+	    text-transform: initial;
 	    font-size: 30px;
 	    text-align: center;
 	    .green-text {
@@ -3058,6 +3058,10 @@ body.path-update-password {
 	    top: 0;
 	    z-index: -1;
 	    top: -218px;
+	    width: 100%;
+	    img {
+	    	width: 100%;
+	    }
 	    &:before {
 	    	content: "";
 		    height: 100%;
@@ -3081,6 +3085,9 @@ body.path-update-password {
         margin-bottom: .5em;
         display: block;
         font-size: 16px;
+        &:after {
+        	content: none;
+        }
 	}
 	.field--name-field-message .text-full {
 		margin-top: 70px;
@@ -3121,7 +3128,7 @@ body.path-update-password {
     float: left;
     width: 100%;
 	form {
-	 	max-width: 800px;
+	 	max-width: 950px;
 	 	width: 100%;
     	margin: 0 auto;
 	}
@@ -3130,6 +3137,7 @@ body.path-update-password {
         font-size: 30px;
         color: $white;
         margin-bottom: 0;
+        margin-top: 0;
 	}
 	.field--type-email {
 		float: left;
@@ -3181,7 +3189,7 @@ body.path-update-password {
 		    width: 100%;
 		    transition: .2s ease-in-out;
 		    &:hover {
-		    	background: #27a3d8;
+		    	background: #2195c7;
 		    }
         }
 	}

@@ -2531,7 +2531,7 @@ body.path-update-password .messages--status {
 
 .section__mission--text {
   width: 50%;
-  padding: 90px 50px;
+  padding: 15px 50px;
   background-color: #fbfbfb; }
   .section__mission--text p {
     line-height: 1.5;
@@ -2675,7 +2675,7 @@ body.path-update-password .messages--status {
     bottom: 9%;
     float: right;
     width: 174px;
-    text-transform: lowercase;
+    text-transform: initial;
     font-size: 30px;
     text-align: center; }
     .block-contactusimageblock .field--name-field-title .green-text {
@@ -2782,7 +2782,10 @@ body.path-update-password .messages--status {
     position: absolute;
     top: 0;
     z-index: -1;
-    top: -218px; }
+    top: -218px;
+    width: 100%; }
+    .block-product-srijan-technologies .field--name-field-background-image img {
+      width: 100%; }
     .block-product-srijan-technologies .field--name-field-background-image:before {
       content: "";
       height: 100%;
@@ -2800,6 +2803,8 @@ body.path-update-password .messages--status {
     margin-bottom: .5em;
     display: block;
     font-size: 16px; }
+    .contact-message-write-to-us-form label:after {
+      content: none; }
   .contact-message-write-to-us-form .field--name-field-message .text-full {
     margin-top: 70px; }
   .contact-message-write-to-us-form .form-text,
@@ -2835,14 +2840,15 @@ body.path-update-password .messages--status {
   float: left;
   width: 100%; }
   .block-simplenews form {
-    max-width: 800px;
+    max-width: 950px;
     width: 100%;
     margin: 0 auto; }
   .block-simplenews .form-item-message {
     text-align: left;
     font-size: 30px;
     color: #ffffff;
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    margin-top: 0; }
   .block-simplenews .field--type-email {
     float: left;
     width: 70%;
@@ -2888,4 +2894,4 @@ body.path-update-password .messages--status {
       width: 100%;
       transition: .2s ease-in-out; }
       .block-simplenews .form-actions .form-submit:hover {
-        background: #27a3d8; }
+        background: #2195c7; }
