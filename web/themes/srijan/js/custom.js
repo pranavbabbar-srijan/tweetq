@@ -129,6 +129,19 @@
 	    	}
 	  	});
 
+	  	//Checking out data in fields for updation of profile
+	  	$("#profilesettingform .update-profile-button").click(function() {
+	  		//	var password = $('#profilesettingform #edit-changeuser-password').val();
+	  		var jobtitle = $('#profilesettingform #edit-field-job-title').val();
+	  		var orgname = $('#profilesettingform #edit-field-organization').val();
+	  		var website = $('#profilesettingform #edit-field-website').val();
+	  		if (jobtitle.length > 0 || orgname.length > 0 || website.length > 0) {
+	  			$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
+	  		}
+
+	  		
+	  	});
+
 		$("#profilesettingform #change-password").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
 	    	//var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
@@ -145,6 +158,7 @@
 				if  (data == "done") {
 					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
 					$('#password-changed').delay(5000).fadeOut(300);			
+					location.reload();
 					return;
 				}
 				$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profilesettingform #change-password .change" );
@@ -796,7 +810,7 @@
 
 	    $(document).click(function(e) {
 	        if (!$(e.target).is('.notification-message-list, #notification-display, .profile-links')) {
-	            $(".notification-message-list, #notification-display, .profile-links").removeClass("active");
+	            $(".notification-message-list, #notification-display, .profile-links").removeClass("active animate");
 	        }
 	    });
 
@@ -953,6 +967,8 @@
 		}
 
 	});
+	// js for adding placeholder on newsletter field
+	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
 
 })(jQuery);
 
