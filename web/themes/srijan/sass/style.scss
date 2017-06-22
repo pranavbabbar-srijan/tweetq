@@ -518,6 +518,7 @@ body {
 	float: right;
 	margin-top: -4vh;
 	position: relative;
+	min-height: 415px;
 	h2 {
 		font-size: 22px;
 		font-weight: 300;
@@ -583,7 +584,7 @@ body {
 		width: 150px;
 		margin: 0 auto;
 		position: absolute;
-	    bottom: 74px;
+	    bottom: 88px;
 	    right: 15px;
 	}
 }
@@ -710,13 +711,18 @@ body.path-update-password {
 	font-size: 22px;
 	text-align: center;
 	font-weight: 300;
-	margin-bottom: -4.5em;
+	margin-bottom: 0;
+	position: relative;
+    top: -65px;
+    position: absolute;
+    top: 40px;
+    width: 86%;
 	.signup {
 		margin-top: 10px;
 		font-size: 16px;
 		color: $gray;
 		font-weight: normal;
-		margin-bottom: 6em;
+		margin-bottom: 4em;
 	}
 	.form-item-email {
 		label {
@@ -730,7 +736,7 @@ body.path-update-password {
 	#forgot-password-submit {
 		font-weight: normal;
 		cursor: pointer;
-		margin-top: 50px;
+		margin-top: 20px;
 	}
 	#forgot-password-cancel {
 		font-weight: normal;
