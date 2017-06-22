@@ -206,7 +206,7 @@
 					}
 				}
 				&.profile-settings {
-					pointer-events: none; //remove
+					// pointer-events: none; //remove
 					&:before {
 						content: $icon-settings;
 					}
@@ -3141,10 +3141,55 @@ body.path-update-password {
    	   background: $white;
 	   .main-content {
 	   	 position: initial;
+	   	 width: 100%;
 	   }
 	   #main-wrapper {
 	   	padding-top: 0;
 	   }
+	}
+	// messages 
+	.region-content {
+		position: relative;
+	}
+	.messages--status {
+        color: $login-btn;
+	    background-color: $white;
+	    box-shadow: -3px 2px 11px 2px #ddd;
+	    position: absolute;
+	    max-width: 503px;
+	    right: 11.7%;
+	    top: 80px;
+	    border: none;
+	    z-index: 99;
+	    border-radius: 5px;
+	    font-size: 24px;
+	    width: 295px;
+	    padding-left: 93px;
+	    align-items: center;
+	    background-image: none;
+	    opacity: 1;
+	    padding-top: 140px;
+	    padding-bottom: 150px;
+	    &:before {
+		        display: inline-block;
+			    font: normal normal normal 14px/1 FontAwesome;
+			    font-size: inherit;
+			    text-rendering: auto;
+			    -webkit-font-smoothing: antialiased;
+			    -moz-osx-font-smoothing: grayscale;
+			    content: "\f00c";
+			    position: absolute;
+			    left: 38px;
+			    height: 40px;
+			    width: 40px;
+			    background: $login-btn;
+			    color: $white;
+			    border-radius: 100px;
+			    line-height: 40px;
+			    text-align: center;
+			    top: 145px;
+			    font-size: 24px;
+	    }
 	}
 }
 
@@ -3467,11 +3512,13 @@ body.path-update-password {
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
     -moz-box-shadow: 0px 0px 3px #bbb;
     -webkit-box-shadow: 0px 0px 3px #bbb;
-    box-shadow: 0px 0px 3px #bbb
+    box-shadow: 0px 0px 3px #bbb;
+    #edit-timezone {
+    	border: none;
+    }
     summary {
 	   	background: #FCFCFC;
 	    padding: 15px 20px;
-	    /* margin-left: 10px; */
 	    margin-top: 1em;
 	    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
 	    -moz-box-shadow: 0px 0px 3px #bbb;
@@ -3481,9 +3528,17 @@ body.path-update-password {
 	    font-size: 14px;
 	    pointer-events: none;
 	    color: #979797;
+	    margin-bottom: 2.5em;
+		
+    }
+    summary::-webkit-details-marker {
+		display: none;
+	}
+    .description {
+    	display: none;
     }
    .js-form-item {
-   	  .form-item {
+   	  &.form-item {
             color: #949494;
 		    margin-bottom: 1em;
 		    display: block;
@@ -3491,9 +3546,12 @@ body.path-update-password {
 		    font-weight: bold;
 		    display: flex;
 		    margin-bottom: 3em;
+		    display: flex;
     	}
    	}
-   	details > .details-wrapper {
+
+   	.details-wrapper,
+   	.field--name-field-country {
 	    padding: 0 20px;
 	    max-width: 725px;
 	    label {
@@ -3518,6 +3576,7 @@ body.path-update-password {
         max-width: 725px;
         .form-item {
         	display: flex;
+        	flex-wrap: wrap;
         	label {
         		flex: 5
         	}
@@ -3532,8 +3591,16 @@ body.path-update-password {
 			    flex: 5;
 			    font-weight: normal;
         	}
+        	.validation-error {
+        		width: 100%;
+        		padding-left: 50%;
+        	}
         }
    	}
+   	.mail-sent {
+      width: 100%;
+      padding-left: 50%;
+    }
    	.invite-friend {
 	    position: absolute;
 	    right: 3%;
@@ -3542,6 +3609,7 @@ body.path-update-password {
 	    border-radius: 5px;
 	    padding: 5px 10px;
 	    cursor: pointer;
+	    background: $white;
 	}
 	.form-actions {
 		padding: 40px 20px;

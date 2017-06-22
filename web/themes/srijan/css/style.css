@@ -303,10 +303,8 @@ button {
             vertical-align: sub; }
         .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before {
           content: ""; }
-        .block-users-dashboard-header-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings {
-          pointer-events: none; }
-          .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
-            content: ""; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
+          content: ""; }
         .block-users-dashboard-header-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout {
           margin-bottom: 0; }
           .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
@@ -2813,9 +2811,52 @@ body.path-update-password .messages--status {
 .path-contact.user-logged-in {
   background: #ffffff; }
   .path-contact.user-logged-in .main-content {
-    position: initial; }
+    position: initial;
+    width: 100%; }
   .path-contact.user-logged-in #main-wrapper {
     padding-top: 0; }
+
+.path-contact .region-content {
+  position: relative; }
+
+.path-contact .messages--status {
+  color: #96c85a;
+  background-color: #ffffff;
+  box-shadow: -3px 2px 11px 2px #ddd;
+  position: absolute;
+  max-width: 503px;
+  right: 11.7%;
+  top: 80px;
+  border: none;
+  z-index: 99;
+  border-radius: 5px;
+  font-size: 24px;
+  width: 295px;
+  padding-left: 93px;
+  align-items: center;
+  background-image: none;
+  opacity: 1;
+  padding-top: 140px;
+  padding-bottom: 150px; }
+  .path-contact .messages--status:before {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f00c";
+    position: absolute;
+    left: 38px;
+    height: 40px;
+    width: 40px;
+    background: #96c85a;
+    color: #ffffff;
+    border-radius: 100px;
+    line-height: 40px;
+    text-align: center;
+    top: 145px;
+    font-size: 24px; }
 
 .featured-top {
   top: -75px;
@@ -3077,33 +3118,44 @@ body.path-update-password .messages--status {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
   -moz-box-shadow: 0px 0px 3px #bbb;
   -webkit-box-shadow: 0px 0px 3px #bbb;
-  box-shadow: 0px 0px 3px #bbb summary;
-    box-shadow-background: #FCFCFC;
-    box-shadow-padding: 15px 20px;
-  box-shadow-/* margin-left: 10px; */
-    box-shadow-margin-top: 1em;
-    box-shadow--ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
-    box-shadow--moz-box-shadow: 0px 0px 3px #bbb;
-    box-shadow--webkit-box-shadow: 0px 0px 3px #bbb;
-    box-shadow-box-shadow: 0px 0px 3px #bbb;
-    box-shadow-filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb);
-    box-shadow-font-size: 14px;
-    box-shadow-pointer-events: none;
-    box-shadow-color: #979797; }
-  .user-form .js-form-item .form-item {
+  box-shadow: 0px 0px 3px #bbb; }
+  .user-form #edit-timezone {
+    border: none; }
+  .user-form summary {
+    background: #FCFCFC;
+    padding: 15px 20px;
+    margin-top: 1em;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb);
+    font-size: 14px;
+    pointer-events: none;
+    color: #979797;
+    margin-bottom: 2.5em; }
+  .user-form summary::-webkit-details-marker {
+    display: none; }
+  .user-form .description {
+    display: none; }
+  .user-form .js-form-item.form-item {
     color: #949494;
     margin-bottom: 1em;
     display: block;
     font-size: 16px;
     font-weight: bold;
     display: flex;
-    margin-bottom: 3em; }
-  .user-form details > .details-wrapper {
+    margin-bottom: 3em;
+    display: flex; }
+  .user-form .details-wrapper,
+  .user-form .field--name-field-country {
     padding: 0 20px;
     max-width: 725px; }
-    .user-form details > .details-wrapper label {
+    .user-form .details-wrapper label,
+    .user-form .field--name-field-country label {
       flex: 5; }
-    .user-form details > .details-wrapper select {
+    .user-form .details-wrapper select,
+    .user-form .field--name-field-country select {
       flex: 5;
       border: 0;
       background: none;
@@ -3119,7 +3171,8 @@ body.path-update-password .messages--status {
     position: relative;
     max-width: 725px; }
     .user-form .message-header .form-item {
-      display: flex; }
+      display: flex;
+      flex-wrap: wrap; }
       .user-form .message-header .form-item label {
         flex: 5; }
       .user-form .message-header .form-item input {
@@ -3132,6 +3185,12 @@ body.path-update-password .messages--status {
         font-size: 14px;
         flex: 5;
         font-weight: normal; }
+      .user-form .message-header .form-item .validation-error {
+        width: 100%;
+        padding-left: 50%; }
+  .user-form .mail-sent {
+    width: 100%;
+    padding-left: 50%; }
   .user-form .invite-friend {
     position: absolute;
     right: 3%;
@@ -3139,7 +3198,8 @@ body.path-update-password .messages--status {
     border: 1px solid;
     border-radius: 5px;
     padding: 5px 10px;
-    cursor: pointer; }
+    cursor: pointer;
+    background: #ffffff; }
   .user-form .form-actions {
     padding: 40px 20px; }
     .user-form .form-actions input {
