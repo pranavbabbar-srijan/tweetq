@@ -635,8 +635,6 @@ body {
     font-size: 14px;
     margin-top: .5em;
     display: block; }
-  .user-login-form #email-validation-error {
-    position: absolute; }
   .user-login-form #forgot-password {
     text-align: center;
     cursor: pointer;
@@ -1936,8 +1934,6 @@ body.path-update-password .messages--status {
       border-radius: 5px;
       padding: 5px 10px;
       cursor: pointer; }
-  .profilesettingform .message-header #password-changed, .profilesettingform .message-header #profile-settingform-password-validation-error {
-    position: absolute; }
   .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
     width: 35%;
     margin-right: 100px;
