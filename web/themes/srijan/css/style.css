@@ -529,7 +529,7 @@ body {
         z-index: 1; }
       .view-home-page-carousel .flexslider .slides .slider-content p {
         color: white;
-        font-size: 20px; }
+        font-size: 18px; }
     .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image {
       background-color: black; }
       .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img {
@@ -635,8 +635,6 @@ body {
     font-size: 14px;
     margin-top: .5em;
     display: block; }
-  .user-login-form #email-validation-error {
-    position: absolute; }
   .user-login-form #forgot-password {
     text-align: center;
     cursor: pointer;
@@ -1332,7 +1330,10 @@ body.path-update-password .messages--status {
     color: #96c85a;
     font-size: 18px;
     position: relative;
-    display: none; }
+    position: absolute;
+    bottom: -80px;
+    left: 20%;
+    border-radius: 35px; }
     .user-logged-in .messages--status:before {
       content: "";
       font-size: 22px;
@@ -1351,6 +1352,27 @@ body.path-update-password .messages--status {
       position: absolute;
       top: 15px;
       margin-left: -30px; }
+
+#my_tweets > span.text {
+  cursor: pointer; }
+  #my_tweets > span.text ~ div {
+    padding-left: 35px;
+    display: none; }
+  #my_tweets > span.text:before {
+    content: "\f099";
+    font-family: 'fontawesome';
+    font-size: 10px;
+    background: #979797;
+    color: white;
+    padding: 3px;
+    border-radius: 4px;
+    vertical-align: bottom;
+    margin-right: 10px; }
+  #my_tweets > span.text:after {
+    content: "\f107";
+    position: absolute;
+    right: 26px;
+    font-family: 'fontawesome'; }
 
 .ripple {
   width: 0;
@@ -1623,6 +1645,26 @@ body.path-update-password .messages--status {
           padding: 1px 10px;
           font-style: normal;
           border-radius: 10px; }
+      .block-users-left-side-bar-block .profile ~ div.create_tweets:before, .block-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before, .block-non-twitter-users-left-side-bar-block .profile ~ div.create_tweets:before, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before {
+        content: "\f044";
+        font-family: 'fontawesome';
+        font-size: 16px;
+        background: white;
+        color: #979797;
+        padding: 3px;
+        border-radius: 4px;
+        vertical-align: bottom;
+        margin-right: 10px; }
+      .block-users-left-side-bar-block .profile ~ div.import_tweets:before, .block-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before, .block-non-twitter-users-left-side-bar-block .profile ~ div.import_tweets:before, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before {
+        content: "\f019";
+        font-family: 'fontawesome';
+        font-size: 16px;
+        background: white;
+        color: #979797;
+        padding: 3px;
+        border-radius: 4px;
+        vertical-align: bottom;
+        margin-right: 10px; }
       .block-users-left-side-bar-block .profile ~ div.valid_tweets .value b, .block-users-left-side-bar-block .non-twitter-profile ~ div.valid_tweets .value b, .block-non-twitter-users-left-side-bar-block .profile ~ div.valid_tweets .value b, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.valid_tweets .value b {
         color: #96c85a; }
       .block-users-left-side-bar-block .profile ~ div.invalid_tweets .value b, .block-users-left-side-bar-block .non-twitter-profile ~ div.invalid_tweets .value b, .block-non-twitter-users-left-side-bar-block .profile ~ div.invalid_tweets .value b, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.invalid_tweets .value b {
@@ -1936,8 +1978,6 @@ body.path-update-password .messages--status {
       border-radius: 5px;
       padding: 5px 10px;
       cursor: pointer; }
-  .profilesettingform .message-header #password-changed, .profilesettingform .message-header #profile-settingform-password-validation-error {
-    position: absolute; }
   .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
     width: 35%;
     margin-right: 100px;

@@ -341,7 +341,7 @@ function tweets_queue_user_login_form_changes(&$form) {
  $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
  $form['forgot_password'] = array(
     '#markup' => t($url),
-    '#weight' => 14,
+    '#weight' => 13,
   );
 
 
@@ -349,7 +349,7 @@ function tweets_queue_user_login_form_changes(&$form) {
       '#type' => 'markup',
       '#suffix' => '</div>',
       '#markup' => t(''),
-      '#weight' => 13,
+      '#weight' => 14,
   );
   $form['sign_up_btn'] = array(
      '#markup' => t("<div><span>Don't have an account ?</span><a href='/signup' data-drupal-link-system-path='/signup'>Sign up Now</a></div>"),
@@ -4125,10 +4125,9 @@ function tweets_queue_invite_friends_send_mail($mail) {
   $key = 'invite_friend_email'; // Replace with Your key
   $to = $mail;
   $link = $base_url;
-  $link1 = t('<a style="color: #2aa9e0; font-weight: bold; text-decoration: none;" href="' . $link . '"> Join Us </a>');
-  $message = t("<div style='text-align: center;'>Friend Invitation,&nbsp;
-    Your friend have invited you to join the Barbet.</div><br>
-    <div  style='text-align: center;'>@link</div>", array('@link' => $link1));
+  $message = t("Friend Invitation\n
+    Your friend have invited you to join the Barbet.\n
+    Link: @link", array('@link' => $link));
   tweets_queue_debug_info($message);
   $params['message'] = $message;
   $params['title'] = 'Friend invitation to the Barbet';

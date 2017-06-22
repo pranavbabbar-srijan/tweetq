@@ -979,9 +979,15 @@
         $(".header").removeClass("change");
        }
     });*/
+
+	$('#my_tweets .text').click(function() {
+		$(this).siblings('div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	});
+
+	$('.messages').delay(500).animate({'bottom': '0'}, 50);
+
     // change text of summary 
     $(".user-form summary").text("Settings");
-	
 
 })(jQuery);
 

@@ -439,7 +439,7 @@ body {
 	    		}
 	    		p {
 	    			color: white;
-					font-size: 20px;
+					font-size: 18px;
 	    		}
 			}
 			.views-field-field-front-page-image {
@@ -573,9 +573,6 @@ body {
 		font-size: 14px;
 		margin-top: .5em;
 		display: block;
-	}
-	#email-validation-error {
-		position: absolute;
 	}
 	#forgot-password {
 		text-align: center;
@@ -1345,7 +1342,11 @@ body.path-update-password {
 	    color: #96c85a;
 	    font-size: 18px;
 	    position: relative;
-	    display: none;
+	    // display: none;
+	    position: absolute;
+	    bottom: -80px;
+	    left: 20%;
+	    border-radius: 35px;
 	    &:before {
 	    	@extend %icomoon;
 	    	content: $icon-success;
@@ -1406,6 +1407,32 @@ body.path-update-password {
 // 	    margin-left: -30px;
 //     }
 // }
+
+// left menu 
+#my_tweets > span.text {
+	cursor: pointer;
+	~ div {
+		padding-left: 35px;
+		display: none;
+	}
+	&:before {
+		content: "\f099";
+		font-family: 'fontawesome';
+		font-size: 10px;
+	    background: #979797;
+	    color: white;
+	    padding: 3px;
+	    border-radius: 4px;
+	    vertical-align: bottom;
+	    margin-right: 10px;
+	}
+	&:after {
+		content: "\f107";
+	    position: absolute;
+	    right: 26px;
+	    font-family: 'fontawesome';
+	}
+}
 
 // ripple effect.
 .ripple {
@@ -1715,6 +1742,32 @@ body.path-update-password {
 				    	@extend %none;
 				    }
 			    }
+			}
+			&.create_tweets {
+				&:before {
+					content: "\f044";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
+			}
+			&.import_tweets {
+				&:before {
+					content: "\f019";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
 			}
 			&.valid_tweets {
 				.value {
@@ -2086,9 +2139,6 @@ body.path-update-password {
 			    padding: 5px 10px;
 			    cursor: pointer;
     		}
-    	}
-    	#password-changed, #profile-settingform-password-validation-error {
-    		position: absolute;
     	}
     	.js-form-item, #change-password {
     		width: 35%;
