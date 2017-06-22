@@ -3147,6 +3147,9 @@ body.path-update-password .messages--status {
       .user-form .message-header .form-item .validation-error {
         width: 100%;
         padding-left: 50%; }
+  .user-form .mail-sent {
+    width: 100%;
+    padding-left: 50%; }
   .user-form .invite-friend {
     position: absolute;
     right: 3%;
