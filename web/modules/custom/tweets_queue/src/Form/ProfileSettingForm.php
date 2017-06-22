@@ -191,6 +191,7 @@ class ProfileSettingForm extends FormBase {
     $user->set(SIGNUP_FIELD_JOB_TITLE, $job_title);
     //Optional settings
     $res = $user->save();
+    drupal_set_message('Profile has been updated');
   }
 
   /**

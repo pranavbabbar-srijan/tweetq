@@ -206,7 +206,7 @@
 					}
 				}
 				&.profile-settings {
-					pointer-events: none; //remove
+					// pointer-events: none; //remove
 					&:before {
 						content: $icon-settings;
 					}
@@ -311,13 +311,6 @@ body {
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 	&.path-frontpage {
-		background: url(../images/bg.jpg) 0 0 no-repeat;
-		background-size: cover;
-		background-position: 100%;
-		height: 100%;
-		@media screen and (max-width: $minWidth){
-			background-position: 20% 0;
-		}
 		.site-branding {
 			a {
 				color: white;
@@ -326,20 +319,6 @@ body {
 			svg {
 				fill: #ffffff;
 			}
-		}
-		.site-footer {
-			position: fixed;
-		    bottom: 0;
-		    text-align: center;
-		    width: 100%;
-		    background: #333;
-		    padding: 5px 0;
-		    font-size: 14px;
-		    color: rgba(255,255,255,.3);
-		    a {
-		    	color: rgba($orange, .3);
-		    	text-decoration: none;
-		    }
 		}
 	}
 	&.user-logged-in {
@@ -432,6 +411,9 @@ body {
 	#block-srijan-content {
 		float: right;
 	}
+	#main-wrapper {
+		margin-top: 15vh;
+	}
 }
 
 // Home page carousel
@@ -443,37 +425,98 @@ body {
 		background: none;
 		border: none;
 		.slides {
-			.views-field-title {
+			.slider-content {
 				position: absolute;
 				top: 18%;
     			left: 6%;
-    			font-size: 42px;
-    			font-weight: bold;
-    			width: 460px;
-    			a {
-    				color: white;
-    				text-decoration: none;
-    			}
+    			width: 50%;
+    			z-index: 1;
+				h2 {
+	    			font-size: 40px;
+	    			font-weight: bold;
+	    			color: white;
+	    			z-index: 1;
+	    		}
+	    		p {
+	    			color: white;
+					font-size: 18px;
+	    		}
 			}
-			.views-field-body {
-				position: absolute;
-			    top: 31%;
-			    color: white;
-			    left: 6%;
-			    width: 38%;
-			    font-size: 20px;
+			.views-field-field-front-page-image {
+				background-color: black;
+				img {
+					opacity: .35;
+				}
 			}
+		}
+		.flex-control-paging {
+			bottom: 130px;
+		    z-index: 2;
+		    left: 185px;
+		    width: 20%;
+		    li {
+		    	a {
+		    		width: 15px;
+		    		height: 15px;
+		    		background: black;
+		    		&:hover, &.flex-active {
+		    			background: white;
+		    		}
+		    	}
+		    }
+		}
+		.flex-direction-nav {
+			width: 20%;
+		    position: absolute;
+		    bottom: 136px;
+		    left: 185px;
+		    a {
+		    	display: inline;
+		    	opacity: 1;
+		    	height: 32px;
+		    	&:hover {
+		    		opacity: 1;
+		    	}
+		    	&:before {
+		    		color: rgba(255,255,255,1);
+		    		box-shadow: none;
+		    		font-size: 32px;
+		    		font-family: 'fontawesome';
+		    	}
+		    	&.flex-prev {
+		    		left: 30px;
+		    		opacity: 1;
+		    		&:before {
+		    			content: "\f104";
+		    		}
+		    	}
+		    	&.flex-next {
+		    		right: 30px;
+		    		opacity: 1;
+		    		&:before {
+		    			content: "\f105";
+		    		}
+		    	}
+		    }
+		}
+	}
+}
+
+.path-frontpage .section {
+	+ .section {
+		.region-middle {
+			margin-top: 5vh;
 		}
 	}
 }
 
 .user-login-form {
 	background: rgba(255,255,255,1);
-	padding: 8em 2em 5em 2em;
+	padding: 8em 2em 6em 2em;
 	@include border-radius(6px);
 	width: 360px;
 	float: right;
-	margin-top: 10vh;
+	margin-top: -4vh;
 	position: relative;
 	h2 {
 		font-size: 22px;
@@ -534,28 +577,44 @@ body {
 	#forgot-password {
 		text-align: center;
 		cursor: pointer;
-		color: $twitter;
-		font-size: 14px;
+		color: #aaa;
+		font-size: 12px;
 		display: block;
 		width: 150px;
 		margin: 0 auto;
-		+ div {
+		position: absolute;
+	    bottom: 74px;
+	    right: 15px;
+	    + div {
 			position: absolute;
-			bottom: 15px;
+		    bottom: 10px;
+		    border-top: 1px solid #ccc;
+		    width: 100%;
+		    left: 0;
+		    padding: 15px 30px 5px;
+		    a {
+		    	float: right;
+		    	background: white;
+				color: $twitter;
+				border: 1px solid $twitter;
+				float: right;
+				padding: .4em 1em;
+				margin-right: 0;
+				margin-left: 0;
+				border-radius: 4px;
+				font-size: 13px;
+				text-decoration: none;
+		    }
+		    span {
+		    	color: #aaa;
+		    	margin-top: 7px;
+			    float: left;
+			    font-size: 13px;
+		    }
 		}
 	}
 }
 
-#user-login-prefix {
-	+ div {
-		position: absolute;
-	    bottom: 10px;
-	    border-top: 1px solid #ccc;
-	    width: 100%;
-	    left: 0;
-	    padding: 15px 30px 5px;
-	}
-}
 
 .validation-error, .mail-sent {
 	color: #ff5a43;
@@ -747,8 +806,9 @@ body.path-update-password {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
 	float: left;
-	margin-top: 36vh;
-	margin-left: 2.1em;
+	margin-top: 220px;
+	margin-left: 5em;
+	position: relative;
 	.count {
 		font-size: 60px;
 		font-weight: 700;
@@ -775,7 +835,20 @@ body.path-update-password {
 	}
 }
 .block-total-twitter-tweets-block {
-	margin-left: 8em;
+	margin-left: 10em;
+}
+.block-total-twitter-users-block:after {
+	content: "\f099";
+    font-family: fontawesome;
+    font-size: 30px;
+    color: white;
+    background: $twitter;
+    border: 4px solid;
+    border-radius: 50%;
+    padding: 15px 17px;
+    position: absolute;
+    top: 50px;
+    left: 120%;
 }
 #sidebar-first {
 	background: white;
@@ -1269,7 +1342,11 @@ body.path-update-password {
 	    color: #96c85a;
 	    font-size: 18px;
 	    position: relative;
-	    display: none;
+	    // display: none;
+	    position: absolute;
+	    bottom: -80px;
+	    left: 20%;
+	    border-radius: 35px;
 	    &:before {
 	    	@extend %icomoon;
 	    	content: $icon-success;
@@ -1303,6 +1380,57 @@ body.path-update-password {
 	    		}
 	    	}
 	    }
+	}
+}
+
+// #update-message {
+// 	box-shadow: none;
+// 	margin-left: 10px;
+// 	text-align: center;
+//     background: none white;
+//     border: 1px solid rgba(0,0,0,0.15);
+//     color: #96c85a;
+//     font-size: 18px;
+//     position: relative;
+//     // display: none;
+//     padding: 14px;
+// 	border-radius: 30px;
+// 	height: 100%;
+// 	top: 15px;
+// 	box-shadow: 0px 0px 20px -10px #333;
+//     &:before {
+//     	@extend %icomoon;
+//     	content: $icon-success;
+//     	font-size: 22px;
+// 	    position: absolute;
+// 	    top: 15px;
+// 	    margin-left: -30px;
+//     }
+// }
+
+// left menu 
+#my_tweets > span.text {
+	cursor: pointer;
+	~ div {
+		padding-left: 35px;
+		display: none;
+	}
+	&:before {
+		content: "\f099";
+		font-family: 'fontawesome';
+		font-size: 10px;
+	    background: #979797;
+	    color: white;
+	    padding: 3px;
+	    border-radius: 4px;
+	    vertical-align: bottom;
+	    margin-right: 10px;
+	}
+	&:after {
+		content: "\f107";
+	    position: absolute;
+	    right: 26px;
+	    font-family: 'fontawesome';
 	}
 }
 
@@ -1615,6 +1743,32 @@ body.path-update-password {
 				    }
 			    }
 			}
+			&.create_tweets {
+				&:before {
+					content: "\f044";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
+			}
+			&.import_tweets {
+				&:before {
+					content: "\f019";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
+			}
 			&.valid_tweets {
 				.value {
 					b {
@@ -1764,12 +1918,13 @@ body.path-update-password {
 				}
 				&.invalid_tweets .valid_tweets {
 					&:before {
-				    content: $icon-cross;
-				    font-size: 2.2em;
-				    color: #f56a6a;
-				    position: absolute;
+				    content: "";
 				    right: 5px;
-    				top: 15px;
+    				top: 12px;
+    				background: url('../images/warning.svg') no-repeat 0 0;
+    				width: 40px;
+				    background-size: 100%;
+				    height: 40px;
 				  }
 				}
 				.archived_tweets {
@@ -2128,8 +2283,6 @@ body.path-update-password {
 	}
 }
 .send-tweets-form, .tweets-queue-tweet-form  {
-	// overflow: hidden;
-	// margin-top: 80px;
 	padding-top: 5px;
 	label {
 		@extend %none;
@@ -2608,7 +2761,12 @@ body.path-update-password {
 .block-block-content {
 	.field--name-field-title {
 	   text-transform: uppercase;
-       font-size: 28px;
+       font-size: 36px;
+       color: $text_black;
+	}
+	.field--type-text-with-summary {
+		font-size: 16px;
+		color: #666;
 	}
 }
 .region-middle {
@@ -2621,7 +2779,7 @@ body.path-update-password {
 	padding: 6em 90px;
 	background-color: $white;
 	p {
-	   line-height: 26px;
+	    line-height: 1.5;
 	}
 	
 }
@@ -2631,9 +2789,14 @@ body.path-update-password {
 .red-text {
 	color: #ffa500;
 }
+.block-home-page--blukstore--section {
+	background: $white;
+}
 .Home-page--blukstore--section {
 	background-color: $white;
-	padding-bottom: 8em;
+	padding-bottom: 6em;
+    max-width: 1100px;
+    margin: 0 auto;
 
 	.view-content {
 		display: flex;
@@ -2641,7 +2804,9 @@ body.path-update-password {
 	}
 	.views-field-body {
 		padding: 0px 30px;
-		line-height: 26px;
+		line-height: 1.5;
+		color: #666;
+		font-size: 16px;
 	}
 	.views-row {
 		flex: 3;
@@ -2690,10 +2855,10 @@ body.path-update-password {
 		   }		
 		}
 	}
-	a {
-		margin-top: 15px;
+	.views-field-title {
+		margin-top: 25px;
 		font-size: 24px;
-		color: $black;
+		color: $text_black;
 		display: block;
 		text-decoration: none;
 		text-transform: uppercase;
@@ -2711,6 +2876,13 @@ body.path-update-password {
 			
 		    }
 		}
+		&:nth-of-type(2) {
+			img {
+				max-width: 45%;
+                height: auto;
+                width: 100%;
+			}
+		}
 	}
 }
 .section__mission-vision {
@@ -2722,13 +2894,16 @@ body.path-update-password {
 }
 .section__mission--text {
     width: 50%;
-    padding: 90px 50px;
+    padding: 15px 50px;
     background-color: $light-gray;
 	p {
-		line-height: 28px;
+		line-height: 1.5;
+		color: #666;
+		font-size: 16px;
 		&:first-child {
-			font-size: 28px;
+			font-size: 36px;
 			text-transform: uppercase;
+			color: $text_black;
 			span {
 				color: $login-btn;
 			}
@@ -2750,8 +2925,10 @@ body.path-update-password {
 	background: $white;
 	padding-bottom: 50px;
 	.menu {
-		text-align: center;
-		margin: 0;
+		max-width: 1210px;
+	    margin: 0 auto;
+	    width: 100%;
+	    text-align: left;
 		li {
 			display: inline-block;
 		    font: normal normal normal 14px/1 FontAwesome;
@@ -2765,8 +2942,8 @@ body.path-update-password {
 		    	font-size: 0;
 		        &:before {
 				    display: inline-block;
-				    font-size: 30px;
-				    line-height: 53px;
+				    font-size: 26px;
+				    line-height: 50px;
 				    text-align: center;
 				    position: absolute;
 				    left: 10%;
@@ -2822,8 +2999,10 @@ body.path-update-password {
 }
 /** Global sub site menu **/
 .block-sub-menu-footer-block {
-	background: #333333;
+	background: $text_black;
 	padding: 50px 0;
+	float: left;
+	width: 100%;
 	.menu {
 		text-align: center;
 		margin: 0;
@@ -2834,12 +3013,12 @@ body.path-update-password {
 			&:before {
 				content: "";
 			    position: absolute;
-			    height: 10px;
-			    width: 10px;
+			    height: 6px;
+			    width: 6px;
 			    background: $white;
 			    border-radius: 100%;
-			    top: 5px;
-			    left: -9px;
+			    top: 7px;
+			    left: -4px;
 			}
 			&:first-child {
 				&:before {
@@ -2849,6 +3028,11 @@ body.path-update-password {
 			a {
 				text-decoration: none;
 				color: $white;
+				font-size: 14px;
+				transition: 0.2s ease-in-out;
+				&:hover {
+					opacity: 0.8;
+				}
 			}
 		}
 	}
@@ -2866,7 +3050,11 @@ body.path-update-password {
 		    	color: $white;
 		    	border-bottom: 2px solid transparent;
                 padding-bottom: 5px;
-                font-size: 14px;
+                font-size: 16px;
+                transition: .2s ease-in-out;
+                &:hover {
+                	opacity: 0.8;
+                }
 		    	&.is-active {
 		    		border-color: $white;
 		    	}
@@ -2877,6 +3065,12 @@ body.path-update-password {
                     background: $twitter;
                     border-radius: 5px;
                     border: none;
+                    color: $white;
+                    &:hover {
+                    	opacity: 1;
+				        background: #2195c7;
+
+                    }
 			   	}
 			}
 		}
@@ -2895,6 +3089,12 @@ body.path-update-password {
     }
 }
 /** contact us image left side block **/
+.heading-write-us {
+	font-size: 36px;
+    color: #333;
+    margin-bottom: 40px;
+    display: block;
+}
 .block-contactusimageblock {
     width: 65%;
     float: left;
@@ -2908,19 +3108,22 @@ body.path-update-password {
 	    bottom: 9%;
 	    float: right;
 	    width: 174px;
-	    text-transform: lowercase;
-	    font-size: 30px;
+	    text-transform: initial;
+	    font-size: 36px;
 	    text-align: center;
 	    .green-text {
-	    	font-size: 45px;
-    text-transform: uppercase;
-    font-weight: bold;
+	    	font-size: 48px;
+		    text-transform: uppercase;
+		    font-weight: bold;
 	    }
     }
     img {
 	    max-width: 38%;
     width: 100%;
     height: 69%;
+    }
+    .field--type-svg-image-field {
+       padding-top: 75px;
     }
 }
 
@@ -2929,6 +3132,7 @@ body.path-update-password {
 	#header {
 		z-index: 1;
 		position: relative;
+		background: transparent;
 	}
 	.site-branding {
 	   svg {
@@ -2942,6 +3146,60 @@ body.path-update-password {
    	    float: right;
         width: 35%;
    }
+   &.user-logged-in {
+   	   background: $white;
+	   .main-content {
+	   	 position: initial;
+	   	 width: 100%;
+	   }
+	   #main-wrapper {
+	   	padding-top: 0;
+	   }
+	}
+	// messages 
+	.region-content {
+		position: relative;
+	}
+	.messages--status {
+        color: $login-btn;
+	    background-color: $white;
+	    box-shadow: -3px 2px 11px 2px #ddd;
+	    position: absolute;
+	    max-width: 503px;
+	    right: 11.7%;
+	    top: 80px;
+	    border: none;
+	    z-index: 99;
+	    border-radius: 5px;
+	    font-size: 24px;
+	    width: 295px;
+	    padding-left: 93px;
+	    align-items: center;
+	    background-image: none;
+	    opacity: 1;
+	    padding-top: 140px;
+	    padding-bottom: 150px;
+	    &:before {
+		        display: inline-block;
+			    font: normal normal normal 14px/1 FontAwesome;
+			    font-size: inherit;
+			    text-rendering: auto;
+			    -webkit-font-smoothing: antialiased;
+			    -moz-osx-font-smoothing: grayscale;
+			    content: "\f00c";
+			    position: absolute;
+			    left: 38px;
+			    height: 40px;
+			    width: 40px;
+			    background: $login-btn;
+			    color: $white;
+			    border-radius: 100px;
+			    line-height: 40px;
+			    text-align: center;
+			    top: 145px;
+			    font-size: 24px;
+	    }
+	}
 }
 
 .featured-top {
@@ -2956,19 +3214,21 @@ body.path-update-password {
     margin-top: 100px;
     text-align: center;
     .field--name-field-company-title {
-    	font-size: 34px;
+    	font-size: 36px;
         color: $white;
     }
-    .field--name-field-mobile-number,
+    .field--name-field-mobile-number-contact,
     .field--name-field-contact-,
     .field--name-field-contact  {
     	display: inline-block;
+    	a {
 	    padding: 10px 25px;
 	    border-radius: 5px;
         color: $white;
         margin: 0 12px;
         padding-left: 50px;
         position: relative;
+        text-decoration: none;
         &:before {
 		    display: inline-block;
 		    font: normal normal normal 14px/1 FontAwesome;
@@ -2981,6 +3241,7 @@ body.path-update-password {
 		    font-size: 22px;
 		    color: $white;
         }
+      }
     }
     .field--name-field-visit-srijan,
     .field--name-field-visit-srijan- {
@@ -3008,26 +3269,43 @@ body.path-update-password {
 			    color: $white;
 			    content: "\f08e"; /* external linl */
 	        }
+	        &:hover {
+	        	background: #de941d;
+	        }
         }
     }
-    .field--name-field-mobile-number {
-    	background: $login-btn;
-       &:before {
-          content: "\f095"; /** phone **/
-       }
+    .field--name-field-mobile-number-contact {
+    	a {
+      	    background: $login-btn;
+            &:before {
+              content: "\f095"; /** phone **/
+            }
+            &:hover {
+            	background: #82bb3e;
+            }
+        }
     }
     .field--name-field-contact-,
     .field--name-field-contact {
-    	background: $twitter;
-    	&:before {
-         content: "\f0e0"; /** envolpe **/
-       }
+    	a {
+	    	background: $twitter;
+	    	&:before {
+	         content: "\f0e0"; /** envolpe **/
+	       }
+	       &:hover {
+	       	background:  #2195c7;
+	       }
+	   }
     }
     .field--name-field-background-image {
 	    position: absolute;
 	    top: 0;
 	    z-index: -1;
 	    top: -218px;
+	    width: 100%;
+	    img {
+	    	width: 100%;
+	    }
 	    &:before {
 	    	content: "";
 		    height: 100%;
@@ -3051,9 +3329,19 @@ body.path-update-password {
         margin-bottom: .5em;
         display: block;
         font-size: 16px;
+        &:after {
+        	content: none;
+        }
 	}
 	.field--name-field-message .text-full {
-		margin-top: 70px;
+		margin-top: 0px;
+		border: none;
+        border-bottom: 1px solid rgba(0,0,0,0.3);
+        &:focus {
+        	border: none;
+            outline: none;
+            border-bottom: 1px solid rgba(0 , 0 ,0 , 0.3);
+        }
 	}
 	.form-text,
 	.form-email {
@@ -3082,14 +3370,19 @@ body.path-update-password {
 	    + .form-submit {
 	    	display: none;
 	    }
+	    &:hover {
+           background: #82bb3e;
+	    }
 	}
 }
 /** simple news letter block **/
 .block-simplenews {
-	background: #323232;
+	background: #2e2e2e;
     padding: 40px 10px;
+    float: left;
+    width: 100%;
 	form {
-	 	max-width: 800px;
+	 	max-width: 950px;
 	 	width: 100%;
     	margin: 0 auto;
 	}
@@ -3098,6 +3391,7 @@ body.path-update-password {
         font-size: 30px;
         color: $white;
         margin-bottom: 0;
+        margin-top: 0;
 	}
 	.field--type-email {
 		float: left;
@@ -3117,6 +3411,13 @@ body.path-update-password {
 	    background-color: #525252;
 	    float: left;
 	    width: 100%;
+	    border: 1px solid transparent;
+	    &:focus {
+	    	outline: none;
+		    border: 1px solid $white;
+		    background: #ddd;
+		    color: $text_black;
+	    }
 	}
 	.description {
 		display: none;
@@ -3130,7 +3431,8 @@ body.path-update-password {
 		    width: 100%;
 		    padding: .5em;
 		    font-size: 18px;
-		    color: white;
+		    color: $white;
+		    text-transform: uppercase;
 		    -webkit-border-radius: 4px;
 		    -khtml-border-radius: 4px;
 		    -moz-border-radius: 4px;
@@ -3139,6 +3441,204 @@ body.path-update-password {
 		    border-radius: 4px;
 		    margin-top: 0;
 		    width: 100%;
+		    transition: .2s ease-in-out;
+		    &:hover {
+		    	background: #2195c7;
+		    }
         }
+	}
+}
+
+/** copy right footer **/
+#block-copyrightblock {
+	text-align: center;
+	background: #333;
+	padding: 25px;
+	.copyright {
+		    text-align: center;
+		    width: 100%;
+		    background: #333;
+		    font-size: 12px;
+		    color: rgba(255,255,255,.3);
+		    a {
+		    	color: rgba($orange, .3);
+		    	text-decoration: none;
+		    	transition: .2s ease-in-out all;
+		    	&:hover {
+		    		color: rgba($orange, 1);
+		    	}
+		    }
+		}
+	}
+
+	/** fixed header on scroll **/
+	#header {
+		&.change {
+		    margin-top: 0 ;
+		    padding-top: 1.4em;
+		    position: fixed;
+		    width: 100%;
+		    background: $white;
+		    top: 0;
+		    z-index: 999;
+		    .site-branding {
+				svg {
+					fill: $login-btn;
+				}
+				a {
+					color: $login-btn;
+				}
+			}
+			.block-sub-nav-main-menu {
+				.menu li { 
+					a {
+                       color: #666;
+				    }
+				    &:nth-of-type(4) {
+				    	a {
+				    		color: $white;
+
+				    	}
+				    }
+				}
+		    }
+	    }
+	}
+.path-signup {
+	.block-sub-nav-main-menu { 
+		.menu {
+			li { 
+				a {
+              color: #666;
+			}
+		}
+ 	}
+  }
+}
+/** setting page **/
+.user-form {
+    background: white;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb;
+    #edit-timezone {
+    	border: none;
+    }
+    summary {
+	   	background: #FCFCFC;
+	    padding: 15px 20px;
+	    margin-top: 1em;
+	    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+	    -moz-box-shadow: 0px 0px 3px #bbb;
+	    -webkit-box-shadow: 0px 0px 3px #bbb;
+	    box-shadow: 0px 0px 3px #bbb;
+	    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb);
+	    font-size: 14px;
+	    pointer-events: none;
+	    color: #979797;
+	    margin-bottom: 2.5em;
+		
+    }
+    summary::-webkit-details-marker {
+		display: none;
+	}
+    .description {
+    	display: none;
+    }
+   .js-form-item {
+   	  &.form-item {
+            color: #949494;
+		    margin-bottom: 1em;
+		    display: block;
+		    font-size: 16px;
+		    font-weight: bold;
+		    display: flex;
+		    margin-bottom: 3em;
+		    display: flex;
+    	}
+   	}
+
+   	.details-wrapper,
+   	.field--name-field-country {
+	    padding: 0 20px;
+	    max-width: 725px;
+	    label {
+	    	flex: 5;
+	    }
+	    select {
+	    	flex: 5;
+	    	    border: 0;
+			    background: none;
+			    outline: none;
+			    border-bottom: 1px solid rgba(0,0,0,0.3);
+			    width: 100%;
+			    padding-bottom: 7px;
+			    font-size: 14px;
+			    color: rgba(0,0,0,0.4);
+			    font-weight: normal;
+	    }
+   	}
+   	.message-header {
+   		padding: 0 20px;
+        position: relative;
+        max-width: 725px;
+        .form-item {
+        	display: flex;
+        	flex-wrap: wrap;
+        	label {
+        		flex: 5
+        	}
+        	input {
+        		border: 0;
+			    background: none;
+			    outline: none;
+			    border-bottom: 1px solid rgba(0,0,0,0.3);
+			    width: 100%;
+			    padding-bottom: 7px;
+			    font-size: 14px;
+			    flex: 5;
+			    font-weight: normal;
+        	}
+        	.validation-error {
+        		width: 100%;
+        		padding-left: 50%;
+        	}
+        }
+   	}
+   	.mail-sent {
+      width: 100%;
+      padding-left: 50%;
+    }
+   	.invite-friend {
+	    position: absolute;
+	    right: 3%;
+	    top: -9px;
+	    border: 1px solid;
+	    border-radius: 5px;
+	    padding: 5px 10px;
+	    cursor: pointer;
+	    background: $white;
+	}
+	.form-actions {
+		padding: 40px 20px;
+		input {
+		border: none;
+	    background: #96c85a;
+	    width: 30%;
+	    padding: .5em;
+	    font-size: 18px;
+	    color: white;
+	    display: block;
+	    -webkit-border-radius: 4px;
+	    -khtml-border-radius: 4px;
+	    -moz-border-radius: 4px;
+	    -ms-border-radius: 4px;
+	    -o-border-radius: 4px;
+	    border-radius: 4px;
+		    &:hover {
+		    	background: #82bb3e;
+		    }
+		}
 	}
 }

@@ -130,17 +130,17 @@
 	  	});
 
 	  	//Checking out data in fields for updation of profile
-	  	$("#profilesettingform .update-profile-button").click(function() {
-	  		//	var password = $('#profilesettingform #edit-changeuser-password').val();
-	  		var jobtitle = $('#profilesettingform #edit-field-job-title').val();
-	  		var orgname = $('#profilesettingform #edit-field-organization').val();
-	  		var website = $('#profilesettingform #edit-field-website').val();
-	  		if (jobtitle.length > 0 || orgname.length > 0 || website.length > 0) {
-	  			$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
-	  		}
+	  	// $("#profilesettingform .update-profile-button").click(function() {
+	  	// 	//	var password = $('#profilesettingform #edit-changeuser-password').val();
+	  	// 	var jobtitle = $('#profilesettingform #edit-field-job-title').val();
+	  	// 	var orgname = $('#profilesettingform #edit-field-organization').val();
+	  	// 	var website = $('#profilesettingform #edit-field-website').val();
+	  	// 	if (jobtitle.length > 0 || orgname.length > 0 || website.length > 0) {
+	  	// 		$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
+	  	// 	}
 
 	  		
-	  	});
+	  	// });
 
 		$("#profilesettingform #change-password").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
@@ -969,6 +969,25 @@
 	});
 	// js for adding placeholder on newsletter field
 	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
+	$(".contact-message-form").prepend("<div class='heading-write-us'>Write to us</div>");
+	/*$(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
+
+       if(scroll >= 200) {
+        $(".header").addClass("change");
+       } else {
+        $(".header").removeClass("change");
+       }
+    });*/
+
+	$('#my_tweets .text').click(function() {
+		$(this).siblings('div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	});
+
+	$('.messages').delay(500).animate({'bottom': '0'}, 50);
+
+    // change text of summary 
+    $(".user-form summary").text("Settings");
 
 })(jQuery);
 
