@@ -439,7 +439,7 @@ body {
 	    		}
 	    		p {
 	    			color: white;
-					font-size: 20px;
+					font-size: 18px;
 	    		}
 			}
 			.views-field-field-front-page-image {
@@ -1342,7 +1342,11 @@ body.path-update-password {
 	    color: #96c85a;
 	    font-size: 18px;
 	    position: relative;
-	    display: none;
+	    // display: none;
+	    position: absolute;
+	    bottom: -80px;
+	    left: 20%;
+	    border-radius: 35px;
 	    &:before {
 	    	@extend %icomoon;
 	    	content: $icon-success;
@@ -1376,6 +1380,57 @@ body.path-update-password {
 	    		}
 	    	}
 	    }
+	}
+}
+
+// #update-message {
+// 	box-shadow: none;
+// 	margin-left: 10px;
+// 	text-align: center;
+//     background: none white;
+//     border: 1px solid rgba(0,0,0,0.15);
+//     color: #96c85a;
+//     font-size: 18px;
+//     position: relative;
+//     // display: none;
+//     padding: 14px;
+// 	border-radius: 30px;
+// 	height: 100%;
+// 	top: 15px;
+// 	box-shadow: 0px 0px 20px -10px #333;
+//     &:before {
+//     	@extend %icomoon;
+//     	content: $icon-success;
+//     	font-size: 22px;
+// 	    position: absolute;
+// 	    top: 15px;
+// 	    margin-left: -30px;
+//     }
+// }
+
+// left menu 
+#my_tweets > span.text {
+	cursor: pointer;
+	~ div {
+		padding-left: 35px;
+		display: none;
+	}
+	&:before {
+		content: "\f099";
+		font-family: 'fontawesome';
+		font-size: 10px;
+	    background: #979797;
+	    color: white;
+	    padding: 3px;
+	    border-radius: 4px;
+	    vertical-align: bottom;
+	    margin-right: 10px;
+	}
+	&:after {
+		content: "\f107";
+	    position: absolute;
+	    right: 26px;
+	    font-family: 'fontawesome';
 	}
 }
 
@@ -1687,6 +1742,32 @@ body.path-update-password {
 				    	@extend %none;
 				    }
 			    }
+			}
+			&.create_tweets {
+				&:before {
+					content: "\f044";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
+			}
+			&.import_tweets {
+				&:before {
+					content: "\f019";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
 			}
 			&.valid_tweets {
 				.value {
