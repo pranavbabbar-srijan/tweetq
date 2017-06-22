@@ -518,6 +518,7 @@ body {
 	float: right;
 	margin-top: -4vh;
 	position: relative;
+	min-height: 415px;
 	h2 {
 		font-size: 22px;
 		font-weight: 300;
@@ -583,35 +584,38 @@ body {
 		width: 150px;
 		margin: 0 auto;
 		position: absolute;
-	    bottom: 74px;
+	    bottom: 88px;
 	    right: 15px;
-	    + div {
-			position: absolute;
-		    bottom: 10px;
-		    border-top: 1px solid #ccc;
-		    width: 100%;
-		    left: 0;
-		    padding: 15px 30px 5px;
-		    a {
-		    	float: right;
-		    	background: white;
-				color: $twitter;
-				border: 1px solid $twitter;
-				float: right;
-				padding: .4em 1em;
-				margin-right: 0;
-				margin-left: 0;
-				border-radius: 4px;
-				font-size: 13px;
-				text-decoration: none;
-		    }
-		    span {
-		    	color: #aaa;
-		    	margin-top: 7px;
-			    float: left;
-			    font-size: 13px;
-		    }
-		}
+	}
+}
+
+#user-login-prefix {
+	+ div {
+		position: absolute;
+	    bottom: 10px;
+	    border-top: 1px solid #ccc;
+	    width: 100%;
+	    left: 0;
+	    padding: 15px 30px 5px;
+	    a {
+	    	float: right;
+	    	background: white;
+			color: $twitter;
+			border: 1px solid $twitter;
+			float: right;
+			padding: .4em 1em;
+			margin-right: 0;
+			margin-left: 0;
+			border-radius: 4px;
+			font-size: 13px;
+			text-decoration: none;
+	    }
+	    span {
+	    	color: #aaa;
+	    	margin-top: 7px;
+		    float: left;
+		    font-size: 13px;
+	    }
 	}
 }
 
@@ -707,13 +711,18 @@ body.path-update-password {
 	font-size: 22px;
 	text-align: center;
 	font-weight: 300;
-	margin-bottom: -4.5em;
+	margin-bottom: 0;
+	position: relative;
+    top: -65px;
+    position: absolute;
+    top: 40px;
+    width: 86%;
 	.signup {
 		margin-top: 10px;
 		font-size: 16px;
 		color: $gray;
 		font-weight: normal;
-		margin-bottom: 6em;
+		margin-bottom: 4em;
 	}
 	.form-item-email {
 		label {
@@ -727,7 +736,7 @@ body.path-update-password {
 	#forgot-password-submit {
 		font-weight: normal;
 		cursor: pointer;
-		margin-top: 50px;
+		margin-top: 20px;
 	}
 	#forgot-password-cancel {
 		font-weight: normal;

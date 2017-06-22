@@ -587,7 +587,8 @@ body {
   width: 360px;
   float: right;
   margin-top: -4vh;
-  position: relative; }
+  position: relative;
+  min-height: 415px; }
   .user-login-form h2 {
     font-size: 22px;
     font-weight: 300;
@@ -644,32 +645,33 @@ body {
     width: 150px;
     margin: 0 auto;
     position: absolute;
-    bottom: 74px;
+    bottom: 88px;
     right: 15px; }
-    .user-login-form #forgot-password + div {
-      position: absolute;
-      bottom: 10px;
-      border-top: 1px solid #ccc;
-      width: 100%;
-      left: 0;
-      padding: 15px 30px 5px; }
-      .user-login-form #forgot-password + div a {
-        float: right;
-        background: white;
-        color: #2aa9e0;
-        border: 1px solid #2aa9e0;
-        float: right;
-        padding: .4em 1em;
-        margin-right: 0;
-        margin-left: 0;
-        border-radius: 4px;
-        font-size: 13px;
-        text-decoration: none; }
-      .user-login-form #forgot-password + div span {
-        color: #aaa;
-        margin-top: 7px;
-        float: left;
-        font-size: 13px; }
+
+#user-login-prefix + div {
+  position: absolute;
+  bottom: 10px;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  left: 0;
+  padding: 15px 30px 5px; }
+  #user-login-prefix + div a {
+    float: right;
+    background: white;
+    color: #2aa9e0;
+    border: 1px solid #2aa9e0;
+    float: right;
+    padding: .4em 1em;
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 4px;
+    font-size: 13px;
+    text-decoration: none; }
+  #user-login-prefix + div span {
+    color: #aaa;
+    margin-top: 7px;
+    float: left;
+    font-size: 13px; }
 
 .validation-error, .mail-sent {
   color: #ff5a43;
@@ -736,13 +738,18 @@ body.path-update-password .messages--status {
   font-size: 22px;
   text-align: center;
   font-weight: 300;
-  margin-bottom: -4.5em; }
+  margin-bottom: 0;
+  position: relative;
+  top: -65px;
+  position: absolute;
+  top: 40px;
+  width: 86%; }
   #forgot-password-section .signup {
     margin-top: 10px;
     font-size: 16px;
     color: #979797;
     font-weight: normal;
-    margin-bottom: 6em; }
+    margin-bottom: 4em; }
   #forgot-password-section .form-item-email label {
     text-align: left;
     font-weight: bold; }
@@ -751,7 +758,7 @@ body.path-update-password .messages--status {
   #forgot-password-section #forgot-password-submit {
     font-weight: normal;
     cursor: pointer;
-    margin-top: 50px; }
+    margin-top: 20px; }
   #forgot-password-section #forgot-password-cancel {
     font-weight: normal;
     background: #f56a6a;
