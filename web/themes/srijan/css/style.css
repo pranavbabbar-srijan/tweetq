@@ -1333,7 +1333,7 @@ body.path-update-password .messages--status {
     font-size: 18px;
     position: relative;
     position: absolute;
-    bottom: 5%;
+    bottom: -80px;
     left: 20%;
     border-radius: 35px; }
     .user-logged-in .messages--status:before {
@@ -1647,12 +1647,22 @@ body.path-update-password .messages--status {
           padding: 1px 10px;
           font-style: normal;
           border-radius: 10px; }
-      .block-users-left-side-bar-block .profile ~ div.create_tweets, .block-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets, .block-non-twitter-users-left-side-bar-block .profile ~ div.create_tweets, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets {
-        content: "\f099";
+      .block-users-left-side-bar-block .profile ~ div.create_tweets:before, .block-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before, .block-non-twitter-users-left-side-bar-block .profile ~ div.create_tweets:before, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before {
+        content: "\f044";
         font-family: 'fontawesome';
-        font-size: 10px;
-        background: #979797;
-        color: white;
+        font-size: 16px;
+        background: white;
+        color: #979797;
+        padding: 3px;
+        border-radius: 4px;
+        vertical-align: bottom;
+        margin-right: 10px; }
+      .block-users-left-side-bar-block .profile ~ div.import_tweets:before, .block-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before, .block-non-twitter-users-left-side-bar-block .profile ~ div.import_tweets:before, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before {
+        content: "\f019";
+        font-family: 'fontawesome';
+        font-size: 16px;
+        background: white;
+        color: #979797;
         padding: 3px;
         border-radius: 4px;
         vertical-align: bottom;

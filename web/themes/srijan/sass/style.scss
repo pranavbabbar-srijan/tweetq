@@ -1347,7 +1347,7 @@ body.path-update-password {
 	    position: relative;
 	    // display: none;
 	    position: absolute;
-	    bottom: 5%;
+	    bottom: -80px;
 	    left: 20%;
 	    border-radius: 35px;
 	    &:before {
@@ -1747,15 +1747,30 @@ body.path-update-password {
 			    }
 			}
 			&.create_tweets {
-				content: "\f099";
-				font-family: 'fontawesome';
-				font-size: 10px;
-				background: #979797;
-				color: white;
-				padding: 3px;
-				border-radius: 4px;
-				vertical-align: bottom;
-				margin-right: 10px;
+				&:before {
+					content: "\f044";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
+			}
+			&.import_tweets {
+				&:before {
+					content: "\f019";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
 			}
 			&.valid_tweets {
 				.value {
