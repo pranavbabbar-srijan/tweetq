@@ -585,33 +585,36 @@ body {
 		position: absolute;
 	    bottom: 74px;
 	    right: 15px;
-	    + div {
-			position: absolute;
-		    bottom: 10px;
-		    border-top: 1px solid #ccc;
-		    width: 100%;
-		    left: 0;
-		    padding: 15px 30px 5px;
-		    a {
-		    	float: right;
-		    	background: white;
-				color: $twitter;
-				border: 1px solid $twitter;
-				float: right;
-				padding: .4em 1em;
-				margin-right: 0;
-				margin-left: 0;
-				border-radius: 4px;
-				font-size: 13px;
-				text-decoration: none;
-		    }
-		    span {
-		    	color: #aaa;
-		    	margin-top: 7px;
-			    float: left;
-			    font-size: 13px;
-		    }
-		}
+	}
+}
+
+#user-login-prefix {
+	+ div {
+		position: absolute;
+	    bottom: 10px;
+	    border-top: 1px solid #ccc;
+	    width: 100%;
+	    left: 0;
+	    padding: 15px 30px 5px;
+	    a {
+	    	float: right;
+	    	background: white;
+			color: $twitter;
+			border: 1px solid $twitter;
+			float: right;
+			padding: .4em 1em;
+			margin-right: 0;
+			margin-left: 0;
+			border-radius: 4px;
+			font-size: 13px;
+			text-decoration: none;
+	    }
+	    span {
+	    	color: #aaa;
+	    	margin-top: 7px;
+		    float: left;
+		    font-size: 13px;
+	    }
 	}
 }
 
