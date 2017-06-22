@@ -412,7 +412,7 @@ body {
 		float: right;
 	}
 	#main-wrapper {
-		margin-top: 15vh;
+		margin-top: 12vh;
 	}
 }
 
@@ -505,7 +505,7 @@ body {
 .path-frontpage .section {
 	+ .section {
 		.region-middle {
-			margin-top: 5vh;
+			margin-top: 10vh;
 		}
 	}
 }
@@ -815,7 +815,7 @@ body.path-update-password {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
 	float: left;
-	margin-top: 220px;
+	margin-top: 200px;
 	margin-left: 5em;
 	position: relative;
 	.count {
@@ -1498,7 +1498,9 @@ body.path-update-password {
 			background: none;
 			color: $twitter;
 			margin-left: 20px;
-			border: 1px solid;
+			border: 2px solid;
+		    padding-top: 0.5em;
+		    padding-bottom: .5em;
 		}
 	}
 }
@@ -3175,19 +3177,19 @@ body.path-update-password {
 	    box-shadow: -3px 2px 11px 2px #ddd;
 	    position: absolute;
 	    max-width: 503px;
-	    right: 11.7%;
+	    right: 11.5%;
 	    top: 80px;
 	    border: none;
 	    z-index: 99;
 	    border-radius: 5px;
 	    font-size: 24px;
-	    width: 295px;
+	    width: 300px;
 	    padding-left: 93px;
 	    align-items: center;
 	    background-image: none;
 	    opacity: 1;
 	    padding-top: 140px;
-	    padding-bottom: 150px;
+	    padding-bottom: 180px;
 	    &:before {
 		        display: inline-block;
 			    font: normal normal normal 14px/1 FontAwesome;

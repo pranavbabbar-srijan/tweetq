@@ -507,7 +507,7 @@ body {
   float: right; }
 
 .path-frontpage #main-wrapper {
-  margin-top: 15vh; }
+  margin-top: 12vh; }
 
 .view-home-page-carousel {
   position: absolute;
@@ -573,7 +573,7 @@ body {
             content: "\f105"; }
 
 .path-frontpage .section + .section .region-middle {
-  margin-top: 5vh; }
+  margin-top: 10vh; }
 
 .user-login-form {
   background: white;
@@ -830,7 +830,7 @@ body.path-update-password .messages--status {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
   float: left;
-  margin-top: 220px;
+  margin-top: 200px;
   margin-left: 5em;
   position: relative; }
   .block-total-twitter-tweets-block .count, .block-total-twitter-users-block .count {
@@ -1432,7 +1432,9 @@ body.path-update-password .messages--status {
       background: none;
       color: #2aa9e0;
       margin-left: 20px;
-      border: 1px solid; }
+      border: 2px solid;
+      padding-top: 0.5em;
+      padding-bottom: .5em; }
 
 .path-node.page-node-type-page .block-system-main-block {
   width: 1020px !important; }
@@ -2838,19 +2840,19 @@ body.path-update-password .messages--status {
   box-shadow: -3px 2px 11px 2px #ddd;
   position: absolute;
   max-width: 503px;
-  right: 11.7%;
+  right: 11.5%;
   top: 80px;
   border: none;
   z-index: 99;
   border-radius: 5px;
   font-size: 24px;
-  width: 295px;
+  width: 300px;
   padding-left: 93px;
   align-items: center;
   background-image: none;
   opacity: 1;
   padding-top: 140px;
-  padding-bottom: 150px; }
+  padding-bottom: 180px; }
   .path-contact .messages--status:before {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
