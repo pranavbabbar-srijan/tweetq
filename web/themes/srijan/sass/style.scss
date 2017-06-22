@@ -574,9 +574,6 @@ body {
 		margin-top: .5em;
 		display: block;
 	}
-	#email-validation-error {
-		position: absolute;
-	}
 	#forgot-password {
 		text-align: center;
 		cursor: pointer;
@@ -2142,9 +2139,6 @@ body.path-update-password {
 			    padding: 5px 10px;
 			    cursor: pointer;
     		}
-    	}
-    	#password-changed, #profile-settingform-password-validation-error {
-    		position: absolute;
     	}
     	.js-form-item, #change-password {
     		width: 35%;
