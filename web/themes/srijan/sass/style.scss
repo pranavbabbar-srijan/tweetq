@@ -3059,7 +3059,7 @@ body.path-update-password {
 		    		border-color: $white;
 		    	}
 		    }
-		    &:nth-of-type(4) {
+		    &:last-child {
 			   	a {
 			   		padding: 10px;
                     background: $twitter;
@@ -3081,7 +3081,7 @@ body.path-update-password {
 	.block-sub-nav-main-menu {
 	    .menu {
 			li {
-			   &:nth-of-type(4) {
+			   &:last-child {
 			   	display: none;
 			   }
 			}
@@ -3680,4 +3680,37 @@ body.path-update-password {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/** thanku page **/
+.thankyou-page {
+	.st0, .st1 {
+		fill: #EBEBEB;
+	}
+	.st2 {
+		fill: $login-btn;
+	}
+	.page-wrap {
+		display: flex;
+	    max-width: 781px;
+	    margin: 0 auto;
+	    align-items: center;
+	}
+	.figure.envelop {
+		flex: 3;
+		margin-right: 15px;
+	}
+	.content-wrap {
+		flex: 7;
+	    h2 {
+	    	text-align: left;
+		    color: $login-btn;
+		    text-transform: uppercase;
+		    font-weight: bold;
+		    font-size: 1.5rem;
+	    }
+	    .teaser-txt {
+	    	font-size: 18px;
+	    }
+	}
 }

@@ -2752,18 +2752,18 @@ body.path-update-password .messages--status {
         opacity: 0.8; }
       .block-sub-nav-main-menu .menu li a.is-active {
         border-color: #ffffff; }
-    .block-sub-nav-main-menu .menu li:nth-of-type(4) a {
+    .block-sub-nav-main-menu .menu li:last-child a {
       padding: 10px;
       background: #2aa9e0;
       border-radius: 5px;
       border: none;
       color: #ffffff; }
-      .block-sub-nav-main-menu .menu li:nth-of-type(4) a:hover {
+      .block-sub-nav-main-menu .menu li:last-child a:hover {
         opacity: 1;
         background: #2195c7; }
 
-.path-frontpage .block-sub-nav-main-menu .menu li:nth-of-type(4),
-.user-logged-in .block-sub-nav-main-menu .menu li:nth-of-type(4) {
+.path-frontpage .block-sub-nav-main-menu .menu li:last-child,
+.user-logged-in .block-sub-nav-main-menu .menu li:last-child {
   display: none; }
 
 /** contact us image left side block **/
@@ -3258,3 +3258,31 @@ body.path-update-password .messages--status {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+
+/** thanku page **/
+.thankyou-page .st0, .thankyou-page .st1 {
+  fill: #EBEBEB; }
+
+.thankyou-page .st2 {
+  fill: #96c85a; }
+
+.thankyou-page .page-wrap {
+  display: flex;
+  max-width: 781px;
+  margin: 0 auto;
+  align-items: center; }
+
+.thankyou-page .figure.envelop {
+  flex: 3;
+  margin-right: 15px; }
+
+.thankyou-page .content-wrap {
+  flex: 7; }
+  .thankyou-page .content-wrap h2 {
+    text-align: left;
+    color: #96c85a;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5rem; }
+  .thankyou-page .content-wrap .teaser-txt {
+    font-size: 18px; }
