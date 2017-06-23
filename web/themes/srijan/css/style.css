@@ -2845,6 +2845,10 @@ body.path-update-password .messages--status {
 .path-contact .region-content {
   position: relative; }
 
+.path-contact .messages--error {
+  position: absolute;
+  left: 30%; }
+
 .path-contact .messages--status {
   color: #96c85a;
   background-color: #ffffff;
@@ -3308,7 +3312,7 @@ body.path-update-password .messages--status {
     font-size: 18px; }
 
 .page-node-type-thanku-pages {
-  background: #ffffff; }
+  background: #ffffff !important; }
   .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
     color: #666; }
   .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li:last-child a {
@@ -3318,3 +3322,25 @@ body.path-update-password .messages--status {
     margin: 0;
     position: relative;
     top: 0; }
+
+/** css for spinner **/
+body {
+  position: relative; }
+
+#overlayspin {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  opacity: .6; }
+
+#spinner {
+  position: absolute;
+  left: 48%;
+  top: 48%;
+  z-index: 9999; }
+  #spinner .fa {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    font-size: 30px;
+    color: #96c85a; }

@@ -992,6 +992,19 @@
     // change text of summary 
     $(".user-form summary").text("Settings");
 
+    // add spinner when click on submit button
+    $("body").prepend('<div id="overlayspin" class="ui-widget-overlay" style="z-index: 1001; display: none;"></div>');
+	$("body").prepend("<div id='spinner' style='display: none;'><i class='fa fa-spinner' aria-hidden='true'></i></div>");
+	$('#contact-message-write-to-us-form').submit(function() {
+	    var pass = true;
+	    //some validations
+	    if(pass == false){
+	        return false;
+	    }
+	    $("#overlayspin, #spinner").show();
+	    return true;
+	});
+
 })(jQuery);
 
 

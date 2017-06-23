@@ -3184,7 +3184,12 @@ body.path-update-password {
 	.region-content {
 		position: relative;
 	}
-	.messages--status {
+	.messages--error {
+	    position: absolute;
+	    left: 30%;
+	}
+	.messages--status,
+	 {
         color: $login-btn;
 	    background-color: $white;
 	    box-shadow: -3px 2px 11px 2px #ddd;
@@ -3739,7 +3744,7 @@ body.path-update-password {
 	}
 }
 .page-node-type-thanku-pages {
-	background: $white;
+	background: $white !important;
 	.block-sub-nav-main-menu .menu li a {
 		color: #666;
 	}
@@ -3752,4 +3757,27 @@ body.path-update-password {
 		position: relative;
 		top: 0;
 	}
+}
+/** css for spinner **/
+body {
+	position: relative;
+}
+#overlayspin {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: $white;
+  opacity: .6;
+}
+#spinner {
+	position: absolute;
+	left: 48%;
+	top: 48%;
+	z-index: 9999;
+  .fa {
+  	-webkit-animation: spin 2s linear infinite;
+     animation: spin 2s linear infinite;
+     font-size: 30px;
+     color: $login-btn;
+  }
 }
