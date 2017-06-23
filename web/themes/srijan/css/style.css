@@ -3292,7 +3292,7 @@ body.path-update-password .messages--status {
   margin: 0 auto;
   align-items: center; }
 
-.thankyou-page .figure.envelop {
+.thankyou-page .envelop {
   flex: 3;
   margin-right: 15px; }
 
@@ -3306,3 +3306,6 @@ body.path-update-password .messages--status {
     font-size: 1.5rem; }
   .thankyou-page .content-wrap .teaser-txt {
     font-size: 18px; }
+
+.page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
+  color: #666; }
