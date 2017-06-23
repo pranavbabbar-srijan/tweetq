@@ -3337,7 +3337,7 @@ body {
 #spinner {
   position: absolute;
   left: 48%;
-  top: 48%;
+  top: 40%;
   z-index: 9999; }
   #spinner .fa {
     -webkit-animation: spin 2s linear infinite;
