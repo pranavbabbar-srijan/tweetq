@@ -3307,5 +3307,14 @@ body.path-update-password .messages--status {
   .thankyou-page .content-wrap .teaser-txt {
     font-size: 18px; }
 
-.page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
-  color: #666; }
+.page-node-type-thanku-pages {
+  background: #ffffff; }
+  .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
+    color: #666; }
+  .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li:last-child a {
+    color: #ffffff; }
+  .page-node-type-thanku-pages .main-content {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    top: 0; }

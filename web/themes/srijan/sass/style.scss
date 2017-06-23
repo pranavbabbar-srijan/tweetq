@@ -3739,7 +3739,17 @@ body.path-update-password {
 	}
 }
 .page-node-type-thanku-pages {
+	background: $white;
 	.block-sub-nav-main-menu .menu li a {
 		color: #666;
+	}
+	.block-sub-nav-main-menu .menu li:last-child a {
+		color: $white;
+	}
+	.main-content {
+		width: 100%;
+		margin: 0;
+		position: relative;
+		top: 0;
 	}
 }
