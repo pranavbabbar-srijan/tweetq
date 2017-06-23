@@ -749,12 +749,17 @@ body.path-update-password .messages--status {
     font-size: 16px;
     color: #979797;
     font-weight: normal;
-    margin-bottom: 4em; }
-  #forgot-password-section .form-item-email label {
-    text-align: left;
-    font-weight: bold; }
-  #forgot-password-section .form-item-email input {
-    font-size: 12.8px; }
+    margin-bottom: 3em; }
+  #forgot-password-section .form-item-email {
+    margin-bottom: 2em; }
+    #forgot-password-section .form-item-email label {
+      text-align: left;
+      font-weight: bold; }
+    #forgot-password-section .form-item-email input {
+      font-size: 12.8px; }
+  #forgot-password-section .validation-error {
+    position: absolute;
+    width: 100%; }
   #forgot-password-section #forgot-password-submit {
     font-weight: normal;
     cursor: pointer;
@@ -1928,113 +1933,119 @@ body.path-update-password .messages--status {
   width: 69%; }
 
 .profilesettingform-body.user-logged-in .main-content {
-  position: absolute;
-  top: 70px; }
+  position: absolute; }
 
-.profilesettingform .profile-setting {
-  background: #FCFCFC;
-  padding: 15px 30px;
-  margin-left: 10px;
-  margin-top: 1em;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
-  /*IE 8*/
-  -moz-box-shadow: 0px 0px 3px #bbb;
-  /*FF 3.5+*/
-  -webkit-box-shadow: 0px 0px 3px #bbb;
-  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-  box-shadow: 0px 0px 3px #bbb;
-  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
-  /*IE 5.5-7*/
-  font-size: 14px;
-  color: #979797; }
+.profilesettingform-body.user-logged-in .messages--status {
+  bottom: -70px !important;
+  left: 45% !important; }
 
-.profilesettingform .message-header {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  overflow: hidden;
-  background: white;
-  padding: 15px 30px;
-  margin-left: 10px;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
-  /*IE 8*/
-  -moz-box-shadow: 0px 0px 3px #bbb;
-  /*FF 3.5+*/
-  -webkit-box-shadow: 0px 0px 3px #bbb;
-  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-  box-shadow: 0px 0px 3px #bbb;
-  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
-  /*IE 5.5-7*/ }
-  .profilesettingform .message-header .message-header-title {
-    width: 100%;
-    font-size: 22px;
-    color: #333;
-    margin-bottom: 20px;
-    margin-top: 20px; }
-  .profilesettingform .message-header #change-password {
-    position: relative; }
-    .profilesettingform .message-header #change-password .form-type-password {
+.profilesettingform {
+  margin-top: -8em; }
+  .profilesettingform .profile-setting {
+    background: #FCFCFC;
+    padding: 15px 30px;
+    margin-left: 10px;
+    margin-top: 1em;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+    /*IE 8*/
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    /*FF 3.5+*/
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+    box-shadow: 0px 0px 3px #bbb;
+    /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+    /*IE 5.5-7*/
+    font-size: 14px;
+    color: #979797; }
+  .profilesettingform .message-header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    overflow: hidden;
+    background: white;
+    padding: 15px 30px;
+    margin-left: 10px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+    /*IE 8*/
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    /*FF 3.5+*/
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+    box-shadow: 0px 0px 3px #bbb;
+    /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+    /*IE 5.5-7*/ }
+    .profilesettingform .message-header .message-header-title {
       width: 100%;
-      margin-right: 0;
-      margin-bottom: 0; }
-    .profilesettingform .message-header #change-password .change {
-      position: absolute;
-      right: 10px;
-      top: 40px;
-      border: 1px solid;
-      border-radius: 5px;
-      padding: 5px 10px;
-      cursor: pointer; }
-  .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
-    width: 35%;
-    margin-right: 100px;
-    margin-bottom: 2em; }
-    .profilesettingform .message-header .js-form-item input[type="text"], .profilesettingform .message-header .js-form-item input[type="email"], .profilesettingform .message-header .js-form-item input[type="password"], .profilesettingform .message-header .js-form-item input[type="url"], .profilesettingform .message-header #change-password input[type="text"], .profilesettingform .message-header #change-password input[type="email"], .profilesettingform .message-header #change-password input[type="password"], .profilesettingform .message-header #change-password input[type="url"] {
-      border: 0;
-      background: none;
-      outline: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 20px;
+      margin-top: 20px; }
+    .profilesettingform .message-header #change-password {
+      position: relative; }
+      .profilesettingform .message-header #change-password .form-type-password {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 0; }
+      .profilesettingform .message-header #change-password .change {
+        position: absolute;
+        right: 10px;
+        top: 40px;
+        border: 1px solid;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer; }
+    .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
+      width: 35%;
+      margin-right: 100px;
+      margin-bottom: 2em; }
+      .profilesettingform .message-header .js-form-item input[type="text"], .profilesettingform .message-header .js-form-item input[type="email"], .profilesettingform .message-header .js-form-item input[type="password"], .profilesettingform .message-header .js-form-item input[type="url"], .profilesettingform .message-header #change-password input[type="text"], .profilesettingform .message-header #change-password input[type="email"], .profilesettingform .message-header #change-password input[type="password"], .profilesettingform .message-header #change-password input[type="url"] {
+        border: 0;
+        background: none;
+        outline: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        display: block;
+        width: 100%;
+        padding-bottom: 7px;
+        font-size: 14px; }
+        .profilesettingform .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="text"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="email"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="password"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="url"]::-webkit-input-placeholder {
+          /* Chrome/Opera/Safari */
+          opacity: .5; }
+        .profilesettingform .message-header .js-form-item input[type="text"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="text"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="email"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="password"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="url"]::-moz-placeholder {
+          /* Firefox 19+ */
+          opacity: .5; }
+        .profilesettingform .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="text"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="email"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="password"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="url"]:-ms-input-placeholder {
+          /* IE 10+ */
+          opacity: .5; }
+        .profilesettingform .message-header .js-form-item input[type="text"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="text"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="email"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="password"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="url"]:-moz-placeholder {
+          /* Firefox 18- */
+          opacity: .5; }
+        .profilesettingform .message-header .js-form-item input[type="text"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="email"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="password"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="url"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="text"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="email"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="password"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="url"][readonly="readonly"] {
+          color: rgba(0, 0, 0, 0.4); }
+      .profilesettingform .message-header .js-form-item label, .profilesettingform .message-header #change-password label {
+        color: #949494;
+        margin-bottom: 1em;
+        display: block;
+        font-size: 16px;
+        font-weight: bold; }
+    .profilesettingform .message-header input[type="submit"] {
+      margin: 20px 0;
+      border: none;
+      background: #96c85a;
+      width: 30%;
+      padding: .5em;
+      font-size: 18px;
+      color: white;
       display: block;
-      width: 100%;
-      padding-bottom: 7px;
-      font-size: 14px; }
-      .profilesettingform .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="text"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="email"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="password"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="url"]::-webkit-input-placeholder {
-        /* Chrome/Opera/Safari */
-        opacity: .5; }
-      .profilesettingform .message-header .js-form-item input[type="text"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="text"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="email"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="password"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="url"]::-moz-placeholder {
-        /* Firefox 19+ */
-        opacity: .5; }
-      .profilesettingform .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="text"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="email"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="password"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="url"]:-ms-input-placeholder {
-        /* IE 10+ */
-        opacity: .5; }
-      .profilesettingform .message-header .js-form-item input[type="text"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="text"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="email"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="password"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="url"]:-moz-placeholder {
-        /* Firefox 18- */
-        opacity: .5; }
-      .profilesettingform .message-header .js-form-item input[type="text"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="email"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="password"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="url"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="text"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="email"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="password"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="url"][readonly="readonly"] {
-        color: rgba(0, 0, 0, 0.4); }
-    .profilesettingform .message-header .js-form-item label, .profilesettingform .message-header #change-password label {
-      color: #949494;
-      margin-bottom: 1em;
-      display: block;
-      font-size: 16px;
-      font-weight: bold; }
-  .profilesettingform .message-header input[type="submit"] {
-    margin: 20px 0;
-    border: none;
-    background: #96c85a;
-    width: 30%;
-    padding: .5em;
-    font-size: 18px;
-    color: white;
-    display: block;
-    -webkit-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px; }
+      -webkit-border-radius: 4px;
+      -khtml-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      border-radius: 4px; }
+  .profilesettingform #profile-settingform-password-validation-error, .profilesettingform #password-changed {
+    position: absolute; }
 
 .send-tweets-form .form-type-managed-file, .tweets-queue-tweet-form .form-type-managed-file {
   position: absolute;
