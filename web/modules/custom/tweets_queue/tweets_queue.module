@@ -4126,7 +4126,7 @@ function tweets_queue_invite_friends_send_mail($mail) {
   $to = $mail;
   $link = $base_url;
   $link1 = t('<a style="color: #2aa9e0; font-weight: bold; text-decoration: none;" href="' . $link . '"> Join Us </a>');
-  $message = t("<div style='text-align: center;'>Friend Invitation,&nbps;
+  $message = t("<div style='text-align: center;'>Friend Invitation, 
     Your friend have invited you to join the Barbet.</div><br>
       <div  style='text-align: center;'>@link</div>", array('@link' => $link1));
   tweets_queue_debug_info($message);

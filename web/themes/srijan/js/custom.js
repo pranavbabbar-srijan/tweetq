@@ -69,10 +69,12 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
+					location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 		    });
+
 
 		});
 
@@ -89,7 +91,8 @@
 	    	$.post(friend_invite_send_token_path, {'email' : emails}, function(data) {
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
-					$('#email-sent').delay(5000).fadeOut(300);			
+					$('#email-sent').delay(5000).fadeOut(300);	
+					location.reload();		
 					return;
 				}
 				$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
