@@ -722,9 +722,10 @@ body.path-update-password {
 		font-size: 16px;
 		color: $gray;
 		font-weight: normal;
-		margin-bottom: 4em;
+		margin-bottom: 3em;
 	}
 	.form-item-email {
+		margin-bottom: 2em;
 		label {
 			text-align: left;
 			font-weight: bold;
@@ -732,6 +733,10 @@ body.path-update-password {
 		input {
 			font-size: 12.8px;
 		}
+	}
+	.validation-error {
+		position: absolute;
+		width: 100%;
 	}
 	#forgot-password-submit {
 		font-weight: normal;
@@ -2096,11 +2101,16 @@ body.path-update-password {
 	&.user-logged-in {
 		.main-content {
 			position: absolute;
-			top: 70px;
+			// top: 70px;
+		}
+		.messages--status {
+			bottom: -70px !important;
+		    left: 45% !important;
 		}
 	}
 }
 .profilesettingform {
+	margin-top: -8em;
 	.profile-setting {
 		background: #FCFCFC;
 		padding: 15px 30px;
@@ -2202,6 +2212,9 @@ body.path-update-password {
 		    display: block;
 		    @include border-radius(4px);
     	}
+	}
+	#profile-settingform-password-validation-error, #password-changed {
+		position: absolute;
 	}
 }
 .send-tweets-form, .tweets-queue-tweet-form {
