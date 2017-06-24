@@ -303,10 +303,8 @@ button {
             vertical-align: sub; }
         .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before {
           content: ""; }
-        .block-users-dashboard-header-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings {
-          pointer-events: none; }
-          .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
-            content: ""; }
+        .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before {
+          content: ""; }
         .block-users-dashboard-header-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout {
           margin-bottom: 0; }
           .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
@@ -509,7 +507,7 @@ body {
   float: right; }
 
 .path-frontpage #main-wrapper {
-  margin-top: 15vh; }
+  margin-top: 12vh; }
 
 .view-home-page-carousel {
   position: absolute;
@@ -518,32 +516,26 @@ body {
   .view-home-page-carousel .flexslider {
     background: none;
     border: none; }
-    .view-home-page-carousel .flexslider .slides .views-field-title {
+    .view-home-page-carousel .flexslider .slides .slider-content {
       position: absolute;
       top: 18%;
       left: 6%;
-      font-size: 48px;
-      font-weight: bold;
-      width: 510px;
-      color: white;
+      width: 50%;
       z-index: 1; }
-      .view-home-page-carousel .flexslider .slides .views-field-title a {
+      .view-home-page-carousel .flexslider .slides .slider-content h2 {
+        font-size: 40px;
+        font-weight: bold;
         color: white;
-        text-decoration: none; }
+        z-index: 1; }
+      .view-home-page-carousel .flexslider .slides .slider-content p {
+        color: white;
+        font-size: 18px; }
     .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image {
       background-color: black; }
       .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img {
         opacity: .35; }
-    .view-home-page-carousel .flexslider .slides .views-field-body {
-      position: absolute;
-      top: 32%;
-      color: white;
-      left: 6%;
-      width: 38%;
-      font-size: 20px;
-      z-index: 1; }
     .view-home-page-carousel .flexslider .flex-control-paging {
-      bottom: 100px;
+      bottom: 130px;
       z-index: 2;
       left: 185px;
       width: 20%; }
@@ -556,7 +548,7 @@ body {
     .view-home-page-carousel .flexslider .flex-direction-nav {
       width: 20%;
       position: absolute;
-      bottom: 106px;
+      bottom: 136px;
       left: 185px; }
       .view-home-page-carousel .flexslider .flex-direction-nav a {
         display: inline;
@@ -581,7 +573,7 @@ body {
             content: "\f105"; }
 
 .path-frontpage .section + .section .region-middle {
-  margin-top: 5vh; }
+  margin-top: 10vh; }
 
 .user-login-form {
   background: white;
@@ -594,8 +586,9 @@ body {
   border-radius: 6px;
   width: 360px;
   float: right;
-  margin-top: 10vh;
-  position: relative; }
+  margin-top: -4vh;
+  position: relative;
+  min-height: 415px; }
   .user-login-form h2 {
     font-size: 22px;
     font-weight: 300;
@@ -652,32 +645,33 @@ body {
     width: 150px;
     margin: 0 auto;
     position: absolute;
-    bottom: 74px;
+    bottom: 88px;
     right: 15px; }
-    .user-login-form #forgot-password + div {
-      position: absolute;
-      bottom: 10px;
-      border-top: 1px solid #ccc;
-      width: 100%;
-      left: 0;
-      padding: 15px 30px 5px; }
-      .user-login-form #forgot-password + div a {
-        float: right;
-        background: white;
-        color: #2aa9e0;
-        border: 1px solid #2aa9e0;
-        float: right;
-        padding: .4em 1em;
-        margin-right: 0;
-        margin-left: 0;
-        border-radius: 4px;
-        font-size: 13px;
-        text-decoration: none; }
-      .user-login-form #forgot-password + div span {
-        color: #aaa;
-        margin-top: 7px;
-        float: left;
-        font-size: 13px; }
+
+#user-login-prefix + div {
+  position: absolute;
+  bottom: 10px;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  left: 0;
+  padding: 15px 30px 5px; }
+  #user-login-prefix + div a {
+    float: right;
+    background: white;
+    color: #2aa9e0;
+    border: 1px solid #2aa9e0;
+    float: right;
+    padding: .4em 1em;
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 4px;
+    font-size: 13px;
+    text-decoration: none; }
+  #user-login-prefix + div span {
+    color: #aaa;
+    margin-top: 7px;
+    float: left;
+    font-size: 13px; }
 
 .validation-error, .mail-sent {
   color: #ff5a43;
@@ -744,22 +738,32 @@ body.path-update-password .messages--status {
   font-size: 22px;
   text-align: center;
   font-weight: 300;
-  margin-bottom: -4.5em; }
+  margin-bottom: 0;
+  position: relative;
+  top: -65px;
+  position: absolute;
+  top: 40px;
+  width: 86%; }
   #forgot-password-section .signup {
     margin-top: 10px;
     font-size: 16px;
     color: #979797;
     font-weight: normal;
-    margin-bottom: 6em; }
-  #forgot-password-section .form-item-email label {
-    text-align: left;
-    font-weight: bold; }
-  #forgot-password-section .form-item-email input {
-    font-size: 12.8px; }
+    margin-bottom: 3em; }
+  #forgot-password-section .form-item-email {
+    margin-bottom: 2em; }
+    #forgot-password-section .form-item-email label {
+      text-align: left;
+      font-weight: bold; }
+    #forgot-password-section .form-item-email input {
+      font-size: 12.8px; }
+  #forgot-password-section .validation-error {
+    position: absolute;
+    width: 100%; }
   #forgot-password-section #forgot-password-submit {
     font-weight: normal;
     cursor: pointer;
-    margin-top: 50px; }
+    margin-top: 20px; }
   #forgot-password-section #forgot-password-cancel {
     font-weight: normal;
     background: #f56a6a;
@@ -831,7 +835,7 @@ body.path-update-password .messages--status {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
   float: left;
-  margin-top: 280px;
+  margin-top: 200px;
   margin-left: 5em;
   position: relative; }
   .block-total-twitter-tweets-block .count, .block-total-twitter-users-block .count {
@@ -1338,7 +1342,10 @@ body.path-update-password .messages--status {
     color: #96c85a;
     font-size: 18px;
     position: relative;
-    display: none; }
+    position: absolute;
+    bottom: -80px;
+    left: 20%;
+    border-radius: 35px; }
     .user-logged-in .messages--status:before {
       content: "";
       font-size: 22px;
@@ -1357,6 +1364,27 @@ body.path-update-password .messages--status {
       position: absolute;
       top: 15px;
       margin-left: -30px; }
+
+#my_tweets > span.text {
+  cursor: pointer; }
+  #my_tweets > span.text ~ div {
+    padding-left: 35px;
+    display: none; }
+  #my_tweets > span.text:before {
+    content: "\f099";
+    font-family: 'fontawesome';
+    font-size: 10px;
+    background: #979797;
+    color: white;
+    padding: 3px;
+    border-radius: 4px;
+    vertical-align: bottom;
+    margin-right: 10px; }
+  #my_tweets > span.text:after {
+    content: "\f107";
+    position: absolute;
+    right: 26px;
+    font-family: 'fontawesome'; }
 
 .ripple {
   width: 0;
@@ -1409,7 +1437,9 @@ body.path-update-password .messages--status {
       background: none;
       color: #2aa9e0;
       margin-left: 20px;
-      border: 1px solid; }
+      border: 2px solid;
+      padding-top: 0.5em;
+      padding-bottom: .5em; }
 
 .path-node.page-node-type-page .block-system-main-block {
   width: 1020px !important; }
@@ -1629,6 +1659,26 @@ body.path-update-password .messages--status {
           padding: 1px 10px;
           font-style: normal;
           border-radius: 10px; }
+      .block-users-left-side-bar-block .profile ~ div.create_tweets:before, .block-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before, .block-non-twitter-users-left-side-bar-block .profile ~ div.create_tweets:before, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before {
+        content: "\f044";
+        font-family: 'fontawesome';
+        font-size: 16px;
+        background: white;
+        color: #979797;
+        padding: 3px;
+        border-radius: 4px;
+        vertical-align: bottom;
+        margin-right: 10px; }
+      .block-users-left-side-bar-block .profile ~ div.import_tweets:before, .block-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before, .block-non-twitter-users-left-side-bar-block .profile ~ div.import_tweets:before, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before {
+        content: "\f019";
+        font-family: 'fontawesome';
+        font-size: 16px;
+        background: white;
+        color: #979797;
+        padding: 3px;
+        border-radius: 4px;
+        vertical-align: bottom;
+        margin-right: 10px; }
       .block-users-left-side-bar-block .profile ~ div.valid_tweets .value b, .block-users-left-side-bar-block .non-twitter-profile ~ div.valid_tweets .value b, .block-non-twitter-users-left-side-bar-block .profile ~ div.valid_tweets .value b, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.valid_tweets .value b {
         color: #96c85a; }
       .block-users-left-side-bar-block .profile ~ div.invalid_tweets .value b, .block-users-left-side-bar-block .non-twitter-profile ~ div.invalid_tweets .value b, .block-non-twitter-users-left-side-bar-block .profile ~ div.invalid_tweets .value b, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.invalid_tweets .value b {
@@ -1761,12 +1811,13 @@ body.path-update-password .messages--status {
         right: 0;
         top: 10px; }
       .block-users-tweets-statistics-block .content > div a.invalid_tweets .valid_tweets:before {
-        content: "";
-        font-size: 2.2em;
-        color: #f56a6a;
-        position: absolute;
+        content: "";
         right: 5px;
-        top: 15px; }
+        top: 12px;
+        background: url("../images/warning.svg") no-repeat 0 0;
+        width: 40px;
+        background-size: 100%;
+        height: 40px; }
       .block-users-tweets-statistics-block .content > div a .archived_tweets:before {
         content: "";
         font-size: 3em;
@@ -1882,113 +1933,119 @@ body.path-update-password .messages--status {
   width: 69%; }
 
 .profilesettingform-body.user-logged-in .main-content {
-  position: absolute;
-  top: 70px; }
+  position: absolute; }
 
-.profilesettingform .profile-setting {
-  background: #FCFCFC;
-  padding: 15px 30px;
-  margin-left: 10px;
-  margin-top: 1em;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
-  /*IE 8*/
-  -moz-box-shadow: 0px 0px 3px #bbb;
-  /*FF 3.5+*/
-  -webkit-box-shadow: 0px 0px 3px #bbb;
-  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-  box-shadow: 0px 0px 3px #bbb;
-  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
-  /*IE 5.5-7*/
-  font-size: 14px;
-  color: #979797; }
+.profilesettingform-body.user-logged-in .messages--status {
+  bottom: -70px !important;
+  left: 45% !important; }
 
-.profilesettingform .message-header {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  overflow: hidden;
-  background: white;
-  padding: 15px 30px;
-  margin-left: 10px;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
-  /*IE 8*/
-  -moz-box-shadow: 0px 0px 3px #bbb;
-  /*FF 3.5+*/
-  -webkit-box-shadow: 0px 0px 3px #bbb;
-  /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-  box-shadow: 0px 0px 3px #bbb;
-  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
-  /*IE 5.5-7*/ }
-  .profilesettingform .message-header .message-header-title {
-    width: 100%;
-    font-size: 22px;
-    color: #333;
-    margin-bottom: 20px;
-    margin-top: 20px; }
-  .profilesettingform .message-header #change-password {
-    position: relative; }
-    .profilesettingform .message-header #change-password .form-type-password {
+.profilesettingform {
+  margin-top: -8em; }
+  .profilesettingform .profile-setting {
+    background: #FCFCFC;
+    padding: 15px 30px;
+    margin-left: 10px;
+    margin-top: 1em;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+    /*IE 8*/
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    /*FF 3.5+*/
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+    box-shadow: 0px 0px 3px #bbb;
+    /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+    /*IE 5.5-7*/
+    font-size: 14px;
+    color: #979797; }
+  .profilesettingform .message-header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    overflow: hidden;
+    background: white;
+    padding: 15px 30px;
+    margin-left: 10px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+    /*IE 8*/
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    /*FF 3.5+*/
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+    box-shadow: 0px 0px 3px #bbb;
+    /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+    /*IE 5.5-7*/ }
+    .profilesettingform .message-header .message-header-title {
       width: 100%;
-      margin-right: 0;
-      margin-bottom: 0; }
-    .profilesettingform .message-header #change-password .change {
-      position: absolute;
-      right: 10px;
-      top: 40px;
-      border: 1px solid;
-      border-radius: 5px;
-      padding: 5px 10px;
-      cursor: pointer; }
-  .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
-    width: 35%;
-    margin-right: 100px;
-    margin-bottom: 2em; }
-    .profilesettingform .message-header .js-form-item input[type="text"], .profilesettingform .message-header .js-form-item input[type="email"], .profilesettingform .message-header .js-form-item input[type="password"], .profilesettingform .message-header .js-form-item input[type="url"], .profilesettingform .message-header #change-password input[type="text"], .profilesettingform .message-header #change-password input[type="email"], .profilesettingform .message-header #change-password input[type="password"], .profilesettingform .message-header #change-password input[type="url"] {
-      border: 0;
-      background: none;
-      outline: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 20px;
+      margin-top: 20px; }
+    .profilesettingform .message-header #change-password {
+      position: relative; }
+      .profilesettingform .message-header #change-password .form-type-password {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 0; }
+      .profilesettingform .message-header #change-password .change {
+        position: absolute;
+        right: 10px;
+        top: 40px;
+        border: 1px solid;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer; }
+    .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
+      width: 35%;
+      margin-right: 100px;
+      margin-bottom: 2em; }
+      .profilesettingform .message-header .js-form-item input[type="text"], .profilesettingform .message-header .js-form-item input[type="email"], .profilesettingform .message-header .js-form-item input[type="password"], .profilesettingform .message-header .js-form-item input[type="url"], .profilesettingform .message-header #change-password input[type="text"], .profilesettingform .message-header #change-password input[type="email"], .profilesettingform .message-header #change-password input[type="password"], .profilesettingform .message-header #change-password input[type="url"] {
+        border: 0;
+        background: none;
+        outline: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        display: block;
+        width: 100%;
+        padding-bottom: 7px;
+        font-size: 14px; }
+        .profilesettingform .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="text"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="email"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="password"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="url"]::-webkit-input-placeholder {
+          /* Chrome/Opera/Safari */
+          opacity: .5; }
+        .profilesettingform .message-header .js-form-item input[type="text"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="text"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="email"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="password"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="url"]::-moz-placeholder {
+          /* Firefox 19+ */
+          opacity: .5; }
+        .profilesettingform .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="text"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="email"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="password"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="url"]:-ms-input-placeholder {
+          /* IE 10+ */
+          opacity: .5; }
+        .profilesettingform .message-header .js-form-item input[type="text"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="text"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="email"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="password"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="url"]:-moz-placeholder {
+          /* Firefox 18- */
+          opacity: .5; }
+        .profilesettingform .message-header .js-form-item input[type="text"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="email"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="password"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="url"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="text"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="email"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="password"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="url"][readonly="readonly"] {
+          color: rgba(0, 0, 0, 0.4); }
+      .profilesettingform .message-header .js-form-item label, .profilesettingform .message-header #change-password label {
+        color: #949494;
+        margin-bottom: 1em;
+        display: block;
+        font-size: 16px;
+        font-weight: bold; }
+    .profilesettingform .message-header input[type="submit"] {
+      margin: 20px 0;
+      border: none;
+      background: #96c85a;
+      width: 30%;
+      padding: .5em;
+      font-size: 18px;
+      color: white;
       display: block;
-      width: 100%;
-      padding-bottom: 7px;
-      font-size: 14px; }
-      .profilesettingform .message-header .js-form-item input[type="text"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]::-webkit-input-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="text"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="email"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="password"]::-webkit-input-placeholder, .profilesettingform .message-header #change-password input[type="url"]::-webkit-input-placeholder {
-        /* Chrome/Opera/Safari */
-        opacity: .5; }
-      .profilesettingform .message-header .js-form-item input[type="text"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]::-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="text"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="email"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="password"]::-moz-placeholder, .profilesettingform .message-header #change-password input[type="url"]::-moz-placeholder {
-        /* Firefox 19+ */
-        opacity: .5; }
-      .profilesettingform .message-header .js-form-item input[type="text"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]:-ms-input-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="text"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="email"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="password"]:-ms-input-placeholder, .profilesettingform .message-header #change-password input[type="url"]:-ms-input-placeholder {
-        /* IE 10+ */
-        opacity: .5; }
-      .profilesettingform .message-header .js-form-item input[type="text"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="email"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="password"]:-moz-placeholder, .profilesettingform .message-header .js-form-item input[type="url"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="text"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="email"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="password"]:-moz-placeholder, .profilesettingform .message-header #change-password input[type="url"]:-moz-placeholder {
-        /* Firefox 18- */
-        opacity: .5; }
-      .profilesettingform .message-header .js-form-item input[type="text"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="email"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="password"][readonly="readonly"], .profilesettingform .message-header .js-form-item input[type="url"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="text"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="email"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="password"][readonly="readonly"], .profilesettingform .message-header #change-password input[type="url"][readonly="readonly"] {
-        color: rgba(0, 0, 0, 0.4); }
-    .profilesettingform .message-header .js-form-item label, .profilesettingform .message-header #change-password label {
-      color: #949494;
-      margin-bottom: 1em;
-      display: block;
-      font-size: 16px;
-      font-weight: bold; }
-  .profilesettingform .message-header input[type="submit"] {
-    margin: 20px 0;
-    border: none;
-    background: #96c85a;
-    width: 30%;
-    padding: .5em;
-    font-size: 18px;
-    color: white;
-    display: block;
-    -webkit-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px; }
+      -webkit-border-radius: 4px;
+      -khtml-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      border-radius: 4px; }
+  .profilesettingform #profile-settingform-password-validation-error, .profilesettingform #password-changed {
+    position: absolute; }
 
 .send-tweets-form .form-type-managed-file, .tweets-queue-tweet-form .form-type-managed-file {
   position: absolute;
@@ -2578,6 +2635,10 @@ body.path-update-password .messages--status {
   background-color: #ffffff; }
   .views--mission-vision .views-row:last-child .section__mission-vision {
     flex-direction: row-reverse; }
+  .views--mission-vision .views-row:nth-of-type(2) img {
+    max-width: 45%;
+    height: auto;
+    width: 100%; }
 
 .section__mission-vision {
   display: flex;
@@ -2711,14 +2772,18 @@ body.path-update-password .messages--status {
         opacity: 0.8; }
       .block-sub-nav-main-menu .menu li a.is-active {
         border-color: #ffffff; }
-    .block-sub-nav-main-menu .menu li:nth-of-type(4) a {
+    .block-sub-nav-main-menu .menu li:last-child a {
       padding: 10px;
       background: #2aa9e0;
       border-radius: 5px;
-      border: none; }
+      border: none;
+      color: #ffffff; }
+      .block-sub-nav-main-menu .menu li:last-child a:hover {
+        opacity: 1;
+        background: #2195c7; }
 
-.path-frontpage .block-sub-nav-main-menu .menu li:nth-of-type(4),
-.user-logged-in .block-sub-nav-main-menu .menu li:nth-of-type(4) {
+.path-frontpage .block-sub-nav-main-menu .menu li:last-child,
+.user-logged-in .block-sub-nav-main-menu .menu li:last-child {
   display: none; }
 
 /** contact us image left side block **/
@@ -2741,10 +2806,10 @@ body.path-update-password .messages--status {
     float: right;
     width: 174px;
     text-transform: initial;
-    font-size: 30px;
+    font-size: 36px;
     text-align: center; }
     .block-contactusimageblock .field--name-field-title .green-text {
-      font-size: 45px;
+      font-size: 48px;
       text-transform: uppercase;
       font-weight: bold; }
   .block-contactusimageblock img {
@@ -2756,7 +2821,8 @@ body.path-update-password .messages--status {
 
 .path-contact #header {
   z-index: 1;
-  position: relative; }
+  position: relative;
+  background: transparent; }
 
 .path-contact .site-branding svg {
   fill: #ffffff; }
@@ -2767,6 +2833,60 @@ body.path-update-password .messages--status {
 .path-contact .block-system-main-block {
   float: right;
   width: 35%; }
+
+.path-contact.user-logged-in {
+  background: #ffffff; }
+  .path-contact.user-logged-in .main-content {
+    position: initial;
+    width: 100%; }
+  .path-contact.user-logged-in #main-wrapper {
+    padding-top: 0; }
+
+.path-contact .region-content {
+  position: relative; }
+
+.path-contact .messages--error {
+  position: absolute;
+  left: 30%; }
+
+.path-contact .messages--status {
+  color: #96c85a;
+  background-color: #ffffff;
+  box-shadow: -3px 2px 11px 2px #ddd;
+  position: absolute;
+  max-width: 503px;
+  right: 11.5%;
+  top: 80px;
+  border: none;
+  z-index: 99;
+  border-radius: 5px;
+  font-size: 24px;
+  width: 300px;
+  padding-left: 93px;
+  align-items: center;
+  background-image: none;
+  opacity: 1;
+  padding-top: 140px;
+  padding-bottom: 180px; }
+  .path-contact .messages--status:before {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f00c";
+    position: absolute;
+    left: 38px;
+    height: 40px;
+    width: 40px;
+    background: #96c85a;
+    color: #ffffff;
+    border-radius: 100px;
+    line-height: 40px;
+    text-align: center;
+    top: 145px;
+    font-size: 24px; }
 
 .featured-top {
   top: -75px;
@@ -2780,31 +2900,35 @@ body.path-update-password .messages--status {
   margin-top: 100px;
   text-align: center; }
   .block-product-srijan-technologies .field--name-field-company-title {
-    font-size: 34px;
+    font-size: 36px;
     color: #ffffff; }
-  .block-product-srijan-technologies .field--name-field-mobile-number,
+  .block-product-srijan-technologies .field--name-field-mobile-number-contact,
   .block-product-srijan-technologies .field--name-field-contact-,
   .block-product-srijan-technologies .field--name-field-contact {
-    display: inline-block;
-    padding: 10px 25px;
-    border-radius: 5px;
-    color: #ffffff;
-    margin: 0 12px;
-    padding-left: 50px;
-    position: relative; }
-    .block-product-srijan-technologies .field--name-field-mobile-number:before,
-    .block-product-srijan-technologies .field--name-field-contact-:before,
-    .block-product-srijan-technologies .field--name-field-contact:before {
-      display: inline-block;
-      font: normal normal normal 14px/1 FontAwesome;
-      font-size: inherit;
-      text-rendering: auto;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      position: absolute;
-      left: 18px;
-      font-size: 22px;
-      color: #ffffff; }
+    display: inline-block; }
+    .block-product-srijan-technologies .field--name-field-mobile-number-contact a,
+    .block-product-srijan-technologies .field--name-field-contact- a,
+    .block-product-srijan-technologies .field--name-field-contact a {
+      padding: 10px 25px;
+      border-radius: 5px;
+      color: #ffffff;
+      margin: 0 12px;
+      padding-left: 50px;
+      position: relative;
+      text-decoration: none; }
+      .block-product-srijan-technologies .field--name-field-mobile-number-contact a:before,
+      .block-product-srijan-technologies .field--name-field-contact- a:before,
+      .block-product-srijan-technologies .field--name-field-contact a:before {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        left: 18px;
+        font-size: 22px;
+        color: #ffffff; }
   .block-product-srijan-technologies .field--name-field-visit-srijan,
   .block-product-srijan-technologies .field--name-field-visit-srijan- {
     display: inline-block; }
@@ -2833,18 +2957,26 @@ body.path-update-password .messages--status {
         color: #ffffff;
         content: "\f08e";
         /* external linl */ }
-  .block-product-srijan-technologies .field--name-field-mobile-number {
+      .block-product-srijan-technologies .field--name-field-visit-srijan a:hover,
+      .block-product-srijan-technologies .field--name-field-visit-srijan- a:hover {
+        background: #de941d; }
+  .block-product-srijan-technologies .field--name-field-mobile-number-contact a {
     background: #96c85a; }
-    .block-product-srijan-technologies .field--name-field-mobile-number:before {
+    .block-product-srijan-technologies .field--name-field-mobile-number-contact a:before {
       content: "\f095";
       /** phone **/ }
-  .block-product-srijan-technologies .field--name-field-contact-,
-  .block-product-srijan-technologies .field--name-field-contact {
+    .block-product-srijan-technologies .field--name-field-mobile-number-contact a:hover {
+      background: #82bb3e; }
+  .block-product-srijan-technologies .field--name-field-contact- a,
+  .block-product-srijan-technologies .field--name-field-contact a {
     background: #2aa9e0; }
-    .block-product-srijan-technologies .field--name-field-contact-:before,
-    .block-product-srijan-technologies .field--name-field-contact:before {
+    .block-product-srijan-technologies .field--name-field-contact- a:before,
+    .block-product-srijan-technologies .field--name-field-contact a:before {
       content: "\f0e0";
       /** envolpe **/ }
+    .block-product-srijan-technologies .field--name-field-contact- a:hover,
+    .block-product-srijan-technologies .field--name-field-contact a:hover {
+      background: #2195c7; }
   .block-product-srijan-technologies .field--name-field-background-image {
     position: absolute;
     top: 0;
@@ -2905,6 +3037,8 @@ body.path-update-password .messages--status {
     margin-top: 1em; }
     .contact-message-write-to-us-form .form-submit + .form-submit {
       display: none; }
+    .contact-message-write-to-us-form .form-submit:hover {
+      background: #82bb3e; }
 
 /** simple news letter block **/
 .block-simplenews {
@@ -2986,3 +3120,227 @@ body.path-update-password .messages--status {
       transition: .2s ease-in-out all; }
       #block-copyrightblock .copyright a:hover {
         color: #f1ad40; }
+
+/** fixed header on scroll **/
+#header.change {
+  margin-top: 0;
+  padding-top: 1.4em;
+  position: fixed;
+  width: 100%;
+  background: #ffffff;
+  top: 0;
+  z-index: 999; }
+  #header.change .site-branding svg {
+    fill: #96c85a; }
+  #header.change .site-branding a {
+    color: #96c85a; }
+  #header.change .block-sub-nav-main-menu .menu li a {
+    color: #666; }
+  #header.change .block-sub-nav-main-menu .menu li:nth-of-type(4) a {
+    color: #ffffff; }
+
+.path-signup .block-sub-nav-main-menu .menu li a {
+  color: #666; }
+
+/** setting page **/
+.user-form {
+  background: white;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+  -moz-box-shadow: 0px 0px 3px #bbb;
+  -webkit-box-shadow: 0px 0px 3px #bbb;
+  box-shadow: 0px 0px 3px #bbb; }
+  .user-form #edit-timezone {
+    border: none; }
+  .user-form summary {
+    background: #FCFCFC;
+    padding: 15px 20px;
+    margin-top: 1em;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0,Direction=30,Color=#bbb);
+    font-size: 14px;
+    pointer-events: none;
+    color: #979797;
+    margin-bottom: 2.5em; }
+  .user-form summary::-webkit-details-marker {
+    display: none; }
+  .user-form .description {
+    display: none; }
+  .user-form .js-form-item.form-item {
+    color: #949494;
+    margin-bottom: 1em;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    margin-bottom: 3em;
+    display: flex; }
+  .user-form .details-wrapper,
+  .user-form .field--name-field-country {
+    padding: 0 20px;
+    max-width: 725px; }
+    .user-form .details-wrapper label,
+    .user-form .field--name-field-country label {
+      flex: 5; }
+    .user-form .details-wrapper select,
+    .user-form .field--name-field-country select {
+      flex: 5;
+      border: 0;
+      background: none;
+      outline: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      width: 100%;
+      padding-bottom: 7px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.4);
+      font-weight: normal; }
+  .user-form .message-header {
+    padding: 0 20px;
+    position: relative;
+    max-width: 725px; }
+    .user-form .message-header .form-item {
+      display: flex;
+      flex-wrap: wrap; }
+      .user-form .message-header .form-item label {
+        flex: 5; }
+      .user-form .message-header .form-item input {
+        border: 0;
+        background: none;
+        outline: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        width: 100%;
+        padding-bottom: 7px;
+        font-size: 14px;
+        flex: 5;
+        font-weight: normal; }
+      .user-form .message-header .form-item .validation-error {
+        width: 100%;
+        padding-left: 50%; }
+  .user-form .mail-sent {
+    width: 100%;
+    padding-left: 50%; }
+  .user-form .invite-friend {
+    position: absolute;
+    right: 3%;
+    top: -9px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background: #ffffff; }
+  .user-form .form-actions {
+    padding: 40px 20px; }
+    .user-form .form-actions input {
+      border: none;
+      background: #96c85a;
+      width: 30%;
+      padding: .5em;
+      font-size: 18px;
+      color: white;
+      display: block;
+      -webkit-border-radius: 4px;
+      -khtml-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      border-radius: 4px; }
+      .user-form .form-actions input:hover {
+        background: #82bb3e; }
+
+/** ajax for dashborad **/
+.-form-tweets-queue-csv-upload .ajax-progress.ajax-progress-throbber {
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  border-radius: 7px;
+  position: absolute; }
+  .-form-tweets-queue-csv-upload .ajax-progress.ajax-progress-throbber .throbber {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: none;
+    position: absolute;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    top: 35px; }
+    .-form-tweets-queue-csv-upload .ajax-progress.ajax-progress-throbber .throbber:before {
+      content: "\f110";
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      font-size: 30px;
+      color: #96c85a; }
+  .-form-tweets-queue-csv-upload .ajax-progress.ajax-progress-throbber .message {
+    display: none; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+/** thanku page **/
+.thankyou-page .st0, .thankyou-page .st1 {
+  fill: #EBEBEB; }
+
+.thankyou-page .st2 {
+  fill: #96c85a; }
+
+.thankyou-page .page-wrap {
+  display: flex;
+  max-width: 781px;
+  margin: 0 auto;
+  align-items: center; }
+
+.thankyou-page .envelop {
+  flex: 3;
+  margin-right: 15px; }
+
+.thankyou-page .content-wrap {
+  flex: 7; }
+  .thankyou-page .content-wrap h2 {
+    text-align: left;
+    color: #96c85a;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5rem; }
+  .thankyou-page .content-wrap .teaser-txt {
+    font-size: 18px; }
+
+.page-node-type-thanku-pages {
+  background: #ffffff !important; }
+  .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
+    color: #666; }
+  .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li:last-child a {
+    color: #ffffff; }
+  .page-node-type-thanku-pages .main-content {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    top: 0; }
+
+/** css for spinner **/
+body {
+  position: relative; }
+
+#overlayspin {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  opacity: .6; }
+
+#spinner {
+  position: absolute;
+  left: 48%;
+  top: 48%;
+  z-index: 9999; }
+  #spinner .fa {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    font-size: 30px;
+    color: #96c85a; }

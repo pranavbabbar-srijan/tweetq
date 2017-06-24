@@ -69,10 +69,12 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
+					location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 		    });
+
 
 		});
 
@@ -89,7 +91,8 @@
 	    	$.post(friend_invite_send_token_path, {'email' : emails}, function(data) {
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
-					$('#email-sent').delay(5000).fadeOut(300);			
+					$('#email-sent').delay(5000).fadeOut(300);	
+					location.reload();		
 					return;
 				}
 				$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
@@ -130,17 +133,17 @@
 	  	});
 
 	  	//Checking out data in fields for updation of profile
-	  	$("#profilesettingform .update-profile-button").click(function() {
-	  		//	var password = $('#profilesettingform #edit-changeuser-password').val();
-	  		var jobtitle = $('#profilesettingform #edit-field-job-title').val();
-	  		var orgname = $('#profilesettingform #edit-field-organization').val();
-	  		var website = $('#profilesettingform #edit-field-website').val();
-	  		if (jobtitle.length > 0 || orgname.length > 0 || website.length > 0) {
-	  			$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
-	  		}
+	  	// $("#profilesettingform .update-profile-button").click(function() {
+	  	// 	//	var password = $('#profilesettingform #edit-changeuser-password').val();
+	  	// 	var jobtitle = $('#profilesettingform #edit-field-job-title').val();
+	  	// 	var orgname = $('#profilesettingform #edit-field-organization').val();
+	  	// 	var website = $('#profilesettingform #edit-field-website').val();
+	  	// 	if (jobtitle.length > 0 || orgname.length > 0 || website.length > 0) {
+	  	// 		$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
+	  	// 	}
 
 	  		
-	  	});
+	  	// });
 
 		$("#profilesettingform #change-password").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
@@ -970,7 +973,37 @@
 	// js for adding placeholder on newsletter field
 	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
 	$(".contact-message-form").prepend("<div class='heading-write-us'>Write to us</div>");
-	
+	/*$(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
+
+       if(scroll >= 200) {
+        $(".header").addClass("change");
+       } else {
+        $(".header").removeClass("change");
+       }
+    });*/
+
+	$('#my_tweets .text').click(function() {
+		$(this).siblings('div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	});
+
+	$('.messages').delay(500).animate({'bottom': '0'}, 50);
+
+    // change text of summary 
+    $(".user-form summary").text("Settings");
+
+    // add spinner when click on submit button
+    $("body").prepend('<div id="overlayspin" class="ui-widget-overlay" style="z-index: 1001; display: none;"></div>');
+	$("body").prepend("<div id='spinner' style='display: none;'><i class='fa fa-spinner' aria-hidden='true'></i></div>");
+	$('#contact-message-write-to-us-form').submit(function() {
+	    var pass = true;
+	    //some validations
+	    if(pass == false){
+	        return false;
+	    }
+	    $("#overlayspin, #spinner").show();
+	    return true;
+	});
 
 })(jQuery);
 
