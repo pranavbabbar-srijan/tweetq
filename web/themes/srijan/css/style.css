@@ -3418,3 +3418,7 @@ body {
     width: 100%; }
   .page-node-type-article.user-logged-in #main-wrapper {
     padding-top: 0; }
+
+.path-signup .layout-container .region-content {
+  min-height: auto;
+  padding-bottom: 20px; }
