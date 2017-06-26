@@ -1,0 +1,40 @@
+default:
+  #formatters:
+   #    progress:
+   #    junit: [ci/build/behat/junit]
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+  #formatters:
+   #pretty: true
+   #html:
+     #output_path: %paths.base%/build/html
+  extensions:
+    Behat\MinkExtension:
+      files_path: "%paths.base%"
+      goutte:
+        guzzle_parameters:
+            verify: false
+      browser_name: chrome
+      selenium2:
+        wd_host: "http://127.0.0.1:8643/wd/hub"
+      javascript_session: selenium2
+      base_url: "http://testing-z6am3cq-na2rj6uui4vei.eu.platform.sh/"
+    Drupal\DrupalExtension:
+      blackbox: ~
+      api_driver: "drupal"
+      region_map:
+        content: "#signup-form"
+        footer: "#footer"
+        left_header: "#header-left"
+        right_header: "#header-right"
+        right_sidebar: "#column-right"
+        header: "ul.header"
+        valid_tweet: ".valid-tweets-header"
+        homepagefooter: "#block-submenufooterblock"
+
