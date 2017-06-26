@@ -3345,3 +3345,73 @@ body {
     animation: spin 2s linear infinite;
     font-size: 30px;
     color: #96c85a; }
+
+/** node type article **/
+.page-node-type-article .featured-top {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+  margin-top: -75px; }
+
+.page-node-type-article .block-page-title-block {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  color: #fff;
+  top: 175px; }
+  .page-node-type-article .block-page-title-block h1 {
+    font-size: 36px;
+    font-weight: normal; }
+
+.page-node-type-article .node--type-article .field--type-image {
+  position: relative;
+  top: 0;
+  z-index: -1;
+  height: 380px;
+  overflow: hidden; }
+  .page-node-type-article .node--type-article .field--type-image:before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: 0.5;
+    position: absolute;
+    z-index: 0; }
+  .page-node-type-article .node--type-article .field--type-image img {
+    width: 100%;
+    height: auto;
+    min-height: 380px; }
+
+.page-node-type-article .node--type-article .field--name-body {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 60px 10px; }
+  .page-node-type-article .node--type-article .field--name-body p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 2.5em; }
+  .page-node-type-article .node--type-article .field--name-body h2, .page-node-type-article .node--type-article .field--name-body h1, .page-node-type-article .node--type-article .field--name-body h3, .page-node-type-article .node--type-article .field--name-body h4, .page-node-type-article .node--type-article .field--name-body h5 {
+    font-size: 18px;
+    color: #333; }
+
+.page-node-type-article #header {
+  z-index: 9;
+  position: relative;
+  background: transparent; }
+
+.page-node-type-article .site-branding svg {
+  fill: #ffffff; }
+
+.page-node-type-article .site-branding a {
+  color: #ffffff; }
+
+.page-node-type-article.user-logged-in {
+  background: #ffffff; }
+  .page-node-type-article.user-logged-in .main-content {
+    position: initial;
+    width: 100%; }
+  .page-node-type-article.user-logged-in #main-wrapper {
+    padding-top: 0; }
