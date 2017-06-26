@@ -3388,11 +3388,14 @@ body {
 .page-node-type-article .node--type-article .field--name-body {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 60px 10px; }
+  padding: 60px 10px;
+  padding-bottom: 0; }
   .page-node-type-article .node--type-article .field--name-body p {
     font-size: 16px;
     color: #666;
     margin-bottom: 2.5em; }
+    .page-node-type-article .node--type-article .field--name-body p:last-child {
+      margin-bottom: 0; }
   .page-node-type-article .node--type-article .field--name-body h2, .page-node-type-article .node--type-article .field--name-body h1, .page-node-type-article .node--type-article .field--name-body h3, .page-node-type-article .node--type-article .field--name-body h4, .page-node-type-article .node--type-article .field--name-body h5 {
     font-size: 18px;
     color: #333; }

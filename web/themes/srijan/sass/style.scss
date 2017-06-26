@@ -3832,10 +3832,14 @@ body {
 			max-width: 1080px;
 		    margin: 0 auto;
 		    padding: 60px 10px;
+		    padding-bottom: 0;
 		    p {
 		    	font-size: 16px;
                 color: #666;
                 margin-bottom: 2.5em;
+                &:last-child {
+                	margin-bottom: 0;
+                }
 		    }
 		    h2,h1,h3,h4,h5 {
 		    	font-size: 18px;
