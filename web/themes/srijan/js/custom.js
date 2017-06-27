@@ -795,6 +795,11 @@
 		    $('body').addClass('import-tweet-page');
 		}
 
+	     $(".message_history_count b").click(function(e) {
+	        $(".notification-message-list, #notification-display").removeClass("active");
+	        e.stopPropagation();
+	    });
+
 	     $("#block-usersdashboardheaderblock .profile + a, #block-usersdashboardnontwitterheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
 	        e.stopPropagation();

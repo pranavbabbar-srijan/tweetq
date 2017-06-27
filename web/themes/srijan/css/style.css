@@ -1860,7 +1860,7 @@ body.path-update-password .messages--status {
     margin-top: 20px;
     left: 328px;
     top: 28px;
-    width: 275px;
+    width: 305px;
     background: white;
     font-size: 12px;
     color: #979797;
@@ -1884,7 +1884,7 @@ body.path-update-password .messages--status {
       outline: 1px solid slategrey; }
     .notifications .notification-message-list.active {
       visibility: inherit;
-      left: 60px;
+      left: 30px;
       background: white;
       border-radius: 0; }
     .notifications .notification-message-list > div {
@@ -1918,13 +1918,18 @@ body.path-update-password .messages--status {
         .notifications .notification-message-list > div span.message_history_count {
           display: block;
           border-bottom: 1px solid #979797;
-          width: 256px;
+          width: 299px;
           position: relative;
           left: -12px;
           top: -12px;
           padding: 5px 10px;
-          font-size: 12px;
-          background: white; }
+          font-size: 18px;
+          background: #eee;
+          color: #666; }
+          .notifications .notification-message-list > div span.message_history_count b {
+            float: right;
+            font-weight: normal;
+            cursor: pointer; }
           .notifications .notification-message-list > div span.message_history_count div {
             display: inline; }
             .notifications .notification-message-list > div span.message_history_count div span {
@@ -2982,7 +2987,6 @@ body.path-update-password .messages--status {
     position: absolute;
     top: 0;
     z-index: -1;
-    top: -218px;
     width: 100%; }
     .block-product-srijan-technologies .field--name-field-background-image img {
       width: 100%; }

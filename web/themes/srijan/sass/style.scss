@@ -2009,7 +2009,7 @@ body.path-update-password {
 		margin-top: 20px;
 		left: 328px;
 	    top: 28px;
-	    width: 275px;
+	    width: 305px;
 	    background: white;
 	    font-size: 12px;
 	    color: $gray;
@@ -2031,7 +2031,7 @@ body.path-update-password {
 		}
 		&.active {
 			visibility: inherit;
-			left: 60px;
+			left: 30px;
 			background: white;
 			border-radius: 0;
 		}
@@ -2072,13 +2072,19 @@ body.path-update-password {
 				&.message_history_count {
 					display: block;
 					border-bottom: 1px solid $gray;
-					width: 256px;
+					width: 299px;
 				    position: relative;
 				    left: -12px;
 				    top: -12px;
 				    padding: 5px 10px;
-				    font-size: 12px;
-				    background: white;
+				    font-size: 18px;
+				    background: #eee;
+				    color: #666;
+				    b {
+				    	float: right;
+				    	font-weight: normal;
+				    	cursor: pointer;
+				    }
 				    div {
 				    	display: inline;
 				    	span {
@@ -3331,7 +3337,7 @@ body.path-update-password {
 	    position: absolute;
 	    top: 0;
 	    z-index: -1;
-	    top: -218px;
+	    // top: -218px;
 	    width: 100%;
 	    img {
 	    	width: 100%;
