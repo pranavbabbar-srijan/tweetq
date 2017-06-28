@@ -1005,6 +1005,36 @@
 	    return true;
 	});
 
+
+ 	 // $.ajax(function(){
+ 	 	function onChangeCheckbox(){
+ 	 		console.log('change');
+ 	 	}
+ 	 	$('.js-form-managed-file').on('change', '.form-checbox', onChangeCheckbox);
+         // $('.form-checbox').on('change',function(){
+         // 	console.log('change');
+         //    $('.option + .form-submit').submit();
+         //    });
+         // });
+
 })(jQuery);
 
 
+(function ($) {
+
+	function onFormCheckBoxChange() {
+				$(this).parent().next().trigger('mousedown');
+
+	      // console.log(selector);
+	      // $('.button.js-form-submit.form-submit').trigger('click');
+	      // console.log('submit');
+	}
+
+
+	 Drupal.behaviors.ajax_send_tweet = {
+	 	attach: function attach() {
+	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
+	 		.bind('change', onFormCheckBoxChange);
+	 	}
+	 };
+})(jQuery);
