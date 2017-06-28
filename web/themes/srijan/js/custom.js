@@ -145,7 +145,7 @@
 	  		
 	  	// });
 
-		$("#profilesettingform #change-password").click(function() {
+		$("#profilesettingform #change-password .change").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
 	    	//var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
   			
