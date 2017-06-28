@@ -266,6 +266,9 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
          unset($form['actions']['preview']);
       }
       break;
+    case 'contact_message_write_to_us_form':
+    $form['actions']['submit']['#submit'][]  = 'tweets_queue_contact_form_submit';
+      break;
 
     default:
       break;
@@ -1630,6 +1633,12 @@ function tweets_queue_mail($key, &$message, $params) {
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = $params['message'];
       break;
+    case 'contact_us_thankyou_mail':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = $params['message'];
+      break;
+
   }
 }
 
@@ -1668,6 +1677,47 @@ function tweets_queue_signup_send_mail($mail, $name) {
   }
   \Drupal::logger('mail-log')->notice($message);
 }
+
+/**
+ * Verification mail for sign up users.
+ *
+ * @param string $mail
+ *   User email.
+ * @param string $name
+ *   User full name.
+ */
+
+function tweets_queue_contact_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  global $base_url;
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'contact_us_thankyou_mail';
+  $to = 'pranav.babbar@srijan.net';
+  
+  $user_hash_key = hash('sha256', $mail);
+  $message = t("Thankyou");
+  $params['message'] = $message;
+  $params['title'] = 'Thankyou mail';
+ 
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    $message = t('There was a problem sending your email notification to @email.', array('@email' => $to));
+    drupal_set_message($message, 'error');
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  else {
+    $message = t('An email notification has been sent to @email ', array('@email' => $to));
+    drupal_set_message($message);
+  }
+  \Drupal::logger('mail-log')->notice($message);
+}
+
+
+
 
 /**
  * Verification mail for sign up users.
