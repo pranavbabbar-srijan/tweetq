@@ -160,7 +160,7 @@
          	$.post(profile_change_password_path, {'password' : password}, function(data) {
 				if  (data == "done") {
 					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
-					$('#password-changed').delay(5000).fadeOut(300);			
+					$('#password-changed').delay(5000).fadeOut(3000);			
 					location.reload();
 					return;
 				}
