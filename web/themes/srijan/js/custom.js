@@ -992,6 +992,10 @@
 		$(this).siblings('div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
 	});
 
+	if ($('#my_tweets > div a').hasClass('active')) {
+	    $('#my_tweets > div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	}
+
 	$('.messages').delay(500).animate({'bottom': '0'}, 50);
 
     // change text of summary 

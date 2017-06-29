@@ -2043,14 +2043,14 @@ body.path-update-password {
 				position: fixed;
 		    }
 		    &:nth-child(2) {
-		    	margin-top: 27px;
+		    	margin-top: 55px;
 		    }
 		    span {
 		    	font-size: 10px;
 		    	display: block;
 		    	&.state {
 		    		color: $dark;
-		    		font-size: 13px;
+		    		font-size: 16px;
 		    		margin-bottom: 3px;
 		    	}
 		    	&.time {
@@ -2076,7 +2076,7 @@ body.path-update-password {
 				    position: relative;
 				    left: -12px;
 				    top: -12px;
-				    padding: 5px 10px;
+				    padding: 15px 12px;
 				    font-size: 18px;
 				    background: #eee;
 				    color: #666;
@@ -2258,6 +2258,23 @@ body.path-update-password {
 		    }
 		    .option {
 		    	display: block;
+		    	position: relative;
+		    	pointer-events: none;
+		    	&:after {
+		    		content: 'x';
+				    background: red;
+				    height: 20px;
+				    width: 20px;
+				    display: block;
+				    position: absolute;
+				    top: 5px;
+				    right: 5px;
+				    border-radius: 30px;
+				    color: white;
+				    padding: 2px 6px;
+				    text-align: center;
+				    cursor: pointer;
+		    	}
 		    }
 		    > div {
 		    	display: flex;
@@ -2332,6 +2349,9 @@ body.path-update-password {
 		color: $gray;
 	}
 	.message-header {
+		.ajax-new-content {
+    		display: none !important;
+    	}
 		overflow: hidden;
 		background: white;
 		padding: 1em 1em 2.5em 1em;
