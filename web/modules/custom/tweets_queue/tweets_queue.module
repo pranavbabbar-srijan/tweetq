@@ -791,6 +791,7 @@ function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
       if (empty($message_data->tweet_id)) {
         $tweet_info['first_run'] = time();
         $tweet_info['tweeted'] = 1;
+        $twitter_history_info['retweeted'] = 0;
         tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 1);
       }
       else {
