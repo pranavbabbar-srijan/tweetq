@@ -2886,19 +2886,19 @@ body.path-update-password .messages--status {
   box-shadow: -3px 2px 11px 2px #ddd;
   position: absolute;
   max-width: 503px;
-  right: 11.5%;
-  top: 80px;
+  left: 90px;
+  top: 810px;
   border: none;
   z-index: 99;
   border-radius: 5px;
   font-size: 24px;
-  width: 300px;
-  padding-left: 93px;
+  width: 84%;
+  padding-left: 75px;
   align-items: center;
   background-image: none;
   opacity: 1;
-  padding-top: 140px;
-  padding-bottom: 180px; }
+  padding-top: 15px;
+  padding-bottom: 70px; }
   .path-contact .messages--status:before {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -2908,7 +2908,7 @@ body.path-update-password .messages--status {
     -moz-osx-font-smoothing: grayscale;
     content: "\f00c";
     position: absolute;
-    left: 38px;
+    left: 20px;
     height: 40px;
     width: 40px;
     background: #96c85a;
@@ -2916,7 +2916,7 @@ body.path-update-password .messages--status {
     border-radius: 100px;
     line-height: 40px;
     text-align: center;
-    top: 145px;
+    top: 20px;
     font-size: 24px; }
 
 .featured-top {
