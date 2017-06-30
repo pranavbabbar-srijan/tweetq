@@ -1658,7 +1658,7 @@ function tweets_queue_signup_send_mail($mail, $name) {
   $key = 'user_signup_mail'; // Replace with Your key
   $to = $mail;
   $message = t("<h2 style='text-transform: capitalize;'>Dear @full_name,</h2>
-   <div style='margin: 30px 0;'>Thankyou for connecting with Barebt!<br>
+   <div style='margin: 30px 0;'>Thankyou for connecting with Barbet!<br>
     You will now be able to use Barbet for posting your tweets.</div>
     Please check out the Import tweets if you want the bulk of tweets to be handled through Barbet.", array('@full_name' => $name));
   $params['message'] = $message;
@@ -1698,7 +1698,7 @@ function tweets_queue_contact_form_submit($form, \Drupal\Core\Form\FormStateInte
   $to = $to[0]['value'];
   
   $user_hash_key = hash('sha256', $mail);
-  $message = t("Thankyou");
+  $message = t("<div  style='text-align: center;'>Thankyou for reaching to us");
   $params['message'] = $message;
   $params['title'] = 'Thankyou mail';
  
