@@ -1362,13 +1362,14 @@ body.path-update-password {
 	    bottom: -80px;
 	    left: 20%;
 	    border-radius: 35px;
+	    padding-left: 50px;
 	    &:before {
 	    	@extend %icomoon;
 	    	content: $icon-success;
-	    	font-size: 22px;
+	    	font-size: 38px;
 		    position: absolute;
-		    top: 15px;
-		    margin-left: -30px;
+		    top: 6px;
+		    margin-left: -43px;
 	    }
 	    + .block {
 	    	+ .block-sign-in-with-twitter-block {
@@ -2009,7 +2010,7 @@ body.path-update-password {
 		margin-top: 20px;
 		left: 328px;
 	    top: 28px;
-	    width: 275px;
+	    width: 305px;
 	    background: white;
 	    font-size: 12px;
 	    color: $gray;
@@ -2031,7 +2032,7 @@ body.path-update-password {
 		}
 		&.active {
 			visibility: inherit;
-			left: 60px;
+			left: 30px;
 			background: white;
 			border-radius: 0;
 		}
@@ -2043,14 +2044,14 @@ body.path-update-password {
 				position: fixed;
 		    }
 		    &:nth-child(2) {
-		    	margin-top: 27px;
+		    	margin-top: 55px;
 		    }
 		    span {
 		    	font-size: 10px;
 		    	display: block;
 		    	&.state {
 		    		color: $dark;
-		    		font-size: 13px;
+		    		font-size: 16px;
 		    		margin-bottom: 3px;
 		    	}
 		    	&.time {
@@ -2071,14 +2072,24 @@ body.path-update-password {
 				}
 				&.message_history_count {
 					display: block;
-					border-bottom: 1px solid $gray;
-					width: 256px;
+					// border-bottom: 1px solid $gray;
+					width: 299px;
 				    position: relative;
 				    left: -12px;
 				    top: -12px;
-				    padding: 5px 10px;
-				    font-size: 12px;
-				    background: white;
+				    padding: 15px 12px;
+				    font-size: 18px;
+				    background: #eee;
+				    color: #999;
+				    b {
+				    	float: right;
+				    	font-weight: normal;
+				    	cursor: pointer;
+				    	font-family: 'fontawesome';
+				    	&:after {
+				    		content: "\f00d";
+				    	}
+				    }
 				    div {
 				    	display: inline;
 				    	span {
@@ -2105,8 +2116,8 @@ body.path-update-password {
 			// top: 70px;
 		}
 		.messages--status {
-			bottom: -70px !important;
-		    left: 45% !important;
+			bottom: -490px !important;
+		    left: 27.3% !important;
 		}
 	}
 }
@@ -2160,6 +2171,11 @@ body.path-update-password {
 			    border-radius: 5px;
 			    padding: 5px 10px;
 			    cursor: pointer;
+				background: rgba(0, 128, 0, .4);
+			    color: white;
+			    &:hover {
+			    	background: rgba(0, 128, 0, .8); 
+			    }
     		}
     	}
     	.js-form-item, #change-password {
@@ -2203,7 +2219,7 @@ body.path-update-password {
 			}
     	}
 	    input[type="submit"] {
-    		margin: 20px 0;
+    		margin: 20px 240px;
     		border: none;
 			background: $login-btn;
 			width: 30%;
@@ -2252,6 +2268,23 @@ body.path-update-password {
 		    }
 		    .option {
 		    	display: block;
+		    	position: relative;
+		    	pointer-events: none;
+		    	&:after {
+		    		content: 'x';
+				    background: red;
+				    height: 20px;
+				    width: 20px;
+				    display: block;
+				    position: absolute;
+				    top: 5px;
+				    right: 5px;
+				    border-radius: 30px;
+				    color: white;
+				    padding: 2px 6px;
+				    text-align: center;
+				    cursor: pointer;
+		    	}
 		    }
 		    > div {
 		    	display: flex;
@@ -2326,6 +2359,9 @@ body.path-update-password {
 		color: $gray;
 	}
 	.message-header {
+		.ajax-new-content {
+    		display: none !important;
+    	}
 		overflow: hidden;
 		background: white;
 		padding: 1em 1em 2.5em 1em;
@@ -3331,7 +3367,7 @@ body.path-update-password {
 	    position: absolute;
 	    top: 0;
 	    z-index: -1;
-	    top: -218px;
+	    // top: -218px;
 	    width: 100%;
 	    img {
 	    	width: 100%;

@@ -1346,13 +1346,14 @@ body.path-update-password .messages--status {
     position: absolute;
     bottom: -80px;
     left: 20%;
-    border-radius: 35px; }
+    border-radius: 35px;
+    padding-left: 50px; }
     .user-logged-in .messages--status:before {
       content: "";
-      font-size: 22px;
+      font-size: 38px;
       position: absolute;
-      top: 15px;
-      margin-left: -30px; }
+      top: 6px;
+      margin-left: -43px; }
     .user-logged-in .messages--status + .block + .block-sign-in-with-twitter-block {
       margin-top: 15px; }
     .user-logged-in .messages--status .messages__list {
@@ -1860,7 +1861,7 @@ body.path-update-password .messages--status {
     margin-top: 20px;
     left: 328px;
     top: 28px;
-    width: 275px;
+    width: 305px;
     background: white;
     font-size: 12px;
     color: #979797;
@@ -1884,7 +1885,7 @@ body.path-update-password .messages--status {
       outline: 1px solid slategrey; }
     .notifications .notification-message-list.active {
       visibility: inherit;
-      left: 60px;
+      left: 30px;
       background: white;
       border-radius: 0; }
     .notifications .notification-message-list > div {
@@ -1894,13 +1895,13 @@ body.path-update-password .messages--status {
         color: #212121;
         position: fixed; }
       .notifications .notification-message-list > div:nth-child(2) {
-        margin-top: 27px; }
+        margin-top: 55px; }
       .notifications .notification-message-list > div span {
         font-size: 10px;
         display: block; }
         .notifications .notification-message-list > div span.state {
           color: #212121;
-          font-size: 13px;
+          font-size: 16px;
           margin-bottom: 3px; }
         .notifications .notification-message-list > div span.time {
           font-style: italic; }
@@ -1917,14 +1918,21 @@ body.path-update-password .messages--status {
             font-weight: normal; }
         .notifications .notification-message-list > div span.message_history_count {
           display: block;
-          border-bottom: 1px solid #979797;
-          width: 256px;
+          width: 299px;
           position: relative;
           left: -12px;
           top: -12px;
-          padding: 5px 10px;
-          font-size: 12px;
-          background: white; }
+          padding: 15px 12px;
+          font-size: 18px;
+          background: #eee;
+          color: #999; }
+          .notifications .notification-message-list > div span.message_history_count b {
+            float: right;
+            font-weight: normal;
+            cursor: pointer;
+            font-family: 'fontawesome'; }
+            .notifications .notification-message-list > div span.message_history_count b:after {
+              content: "\f00d"; }
           .notifications .notification-message-list > div span.message_history_count div {
             display: inline; }
             .notifications .notification-message-list > div span.message_history_count div span {
@@ -1937,8 +1945,8 @@ body.path-update-password .messages--status {
   position: absolute; }
 
 .profilesettingform-body.user-logged-in .messages--status {
-  bottom: -70px !important;
-  left: 45% !important; }
+  bottom: -490px !important;
+  left: 27.3% !important; }
 
 .profilesettingform {
   margin-top: -8em; }
@@ -1996,7 +2004,11 @@ body.path-update-password .messages--status {
         border: 1px solid;
         border-radius: 5px;
         padding: 5px 10px;
-        cursor: pointer; }
+        cursor: pointer;
+        background: rgba(0, 128, 0, 0.4);
+        color: white; }
+        .profilesettingform .message-header #change-password .change:hover {
+          background: rgba(0, 128, 0, 0.8); }
     .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
       width: 35%;
       margin-right: 100px;
@@ -2031,7 +2043,7 @@ body.path-update-password .messages--status {
         font-size: 16px;
         font-weight: bold; }
     .profilesettingform .message-header input[type="submit"] {
-      margin: 20px 0;
+      margin: 20px 240px;
       border: none;
       background: #96c85a;
       width: 30%;
@@ -2077,7 +2089,23 @@ body.path-update-password .messages--status {
       .send-tweets-form .form-type-managed-file .form-managed-file .form-file + .js-form-submit, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .form-file + .js-form-submit {
         display: none; }
     .send-tweets-form .form-type-managed-file .form-managed-file .option, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .option {
-      display: block; }
+      display: block;
+      position: relative;
+      pointer-events: none; }
+      .send-tweets-form .form-type-managed-file .form-managed-file .option:after, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .option:after {
+        content: 'x';
+        background: red;
+        height: 20px;
+        width: 20px;
+        display: block;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        border-radius: 30px;
+        color: white;
+        padding: 2px 6px;
+        text-align: center;
+        cursor: pointer; }
     .send-tweets-form .form-type-managed-file .form-managed-file > div, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file > div {
       display: flex;
       flex-flow: row;
@@ -2150,6 +2178,8 @@ body.path-update-password .messages--status {
     /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
     /*IE 5.5-7*/ }
+    .send-tweets-form .message-header .ajax-new-content, .tweets-queue-tweet-form .message-header .ajax-new-content {
+      display: none !important; }
     .send-tweets-form .message-header .form-item-display-box, .tweets-queue-tweet-form .message-header .form-item-display-box {
       float: left;
       width: 63%;
@@ -2982,7 +3012,6 @@ body.path-update-password .messages--status {
     position: absolute;
     top: 0;
     z-index: -1;
-    top: -218px;
     width: 100%; }
     .block-product-srijan-technologies .field--name-field-background-image img {
       width: 100%; }
