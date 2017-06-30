@@ -1346,13 +1346,14 @@ body.path-update-password .messages--status {
     position: absolute;
     bottom: -80px;
     left: 20%;
-    border-radius: 35px; }
+    border-radius: 35px;
+    padding-left: 50px; }
     .user-logged-in .messages--status:before {
       content: "";
-      font-size: 22px;
+      font-size: 38px;
       position: absolute;
-      top: 15px;
-      margin-left: -30px; }
+      top: 6px;
+      margin-left: -43px; }
     .user-logged-in .messages--status + .block + .block-sign-in-with-twitter-block {
       margin-top: 15px; }
     .user-logged-in .messages--status .messages__list {
@@ -1917,7 +1918,6 @@ body.path-update-password .messages--status {
             font-weight: normal; }
         .notifications .notification-message-list > div span.message_history_count {
           display: block;
-          border-bottom: 1px solid #979797;
           width: 299px;
           position: relative;
           left: -12px;
@@ -1925,11 +1925,14 @@ body.path-update-password .messages--status {
           padding: 15px 12px;
           font-size: 18px;
           background: #eee;
-          color: #666; }
+          color: #999; }
           .notifications .notification-message-list > div span.message_history_count b {
             float: right;
             font-weight: normal;
-            cursor: pointer; }
+            cursor: pointer;
+            font-family: 'fontawesome'; }
+            .notifications .notification-message-list > div span.message_history_count b:after {
+              content: "\f00d"; }
           .notifications .notification-message-list > div span.message_history_count div {
             display: inline; }
             .notifications .notification-message-list > div span.message_history_count div span {
@@ -1942,8 +1945,8 @@ body.path-update-password .messages--status {
   position: absolute; }
 
 .profilesettingform-body.user-logged-in .messages--status {
-  bottom: -70px !important;
-  left: 45% !important; }
+  bottom: -490px !important;
+  left: 27.3% !important; }
 
 .profilesettingform {
   margin-top: -8em; }
@@ -2001,7 +2004,11 @@ body.path-update-password .messages--status {
         border: 1px solid;
         border-radius: 5px;
         padding: 5px 10px;
-        cursor: pointer; }
+        cursor: pointer;
+        background: rgba(0, 128, 0, 0.4);
+        color: white; }
+        .profilesettingform .message-header #change-password .change:hover {
+          background: rgba(0, 128, 0, 0.8); }
     .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
       width: 35%;
       margin-right: 100px;
@@ -2036,7 +2043,7 @@ body.path-update-password .messages--status {
         font-size: 16px;
         font-weight: bold; }
     .profilesettingform .message-header input[type="submit"] {
-      margin: 20px 0;
+      margin: 20px 240px;
       border: none;
       background: #96c85a;
       width: 30%;

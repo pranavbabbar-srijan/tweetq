@@ -802,12 +802,16 @@
 
 	     $("#block-usersdashboardheaderblock .profile + a, #block-usersdashboardnontwitterheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
+	        $('#block-usersdashboardheaderblock .profile .profile-links').removeClass('active animate');
+			// $('#block-usersdashboardheaderblock .profile > a').removeClass('active');
 	        e.stopPropagation();
 	    });
 
 	     $("#block-usersdashboardheaderblock .profile > a, #block-usersdashboardnontwitterheaderblock .profile > a").click(function(e) {
 	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
+	        $('#notification-display').removeClass('active');
+			$('.notification-message-list').removeClass('active');
 	        setTimeout(function() {
 	            $('.profile-links').toggleClass('animate');
 	        }, 100);
@@ -871,7 +875,7 @@
    		});
 
 		// ripple effect
-		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit").click(function (e) {
+		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit, #change-password .change").click(function (e) {
 
 		  // Remove any old one
 		  $(".ripple").remove();

@@ -1362,13 +1362,14 @@ body.path-update-password {
 	    bottom: -80px;
 	    left: 20%;
 	    border-radius: 35px;
+	    padding-left: 50px;
 	    &:before {
 	    	@extend %icomoon;
 	    	content: $icon-success;
-	    	font-size: 22px;
+	    	font-size: 38px;
 		    position: absolute;
-		    top: 15px;
-		    margin-left: -30px;
+		    top: 6px;
+		    margin-left: -43px;
 	    }
 	    + .block {
 	    	+ .block-sign-in-with-twitter-block {
@@ -2071,7 +2072,7 @@ body.path-update-password {
 				}
 				&.message_history_count {
 					display: block;
-					border-bottom: 1px solid $gray;
+					// border-bottom: 1px solid $gray;
 					width: 299px;
 				    position: relative;
 				    left: -12px;
@@ -2079,11 +2080,15 @@ body.path-update-password {
 				    padding: 15px 12px;
 				    font-size: 18px;
 				    background: #eee;
-				    color: #666;
+				    color: #999;
 				    b {
 				    	float: right;
 				    	font-weight: normal;
 				    	cursor: pointer;
+				    	font-family: 'fontawesome';
+				    	&:after {
+				    		content: "\f00d";
+				    	}
 				    }
 				    div {
 				    	display: inline;
@@ -2111,8 +2116,8 @@ body.path-update-password {
 			// top: 70px;
 		}
 		.messages--status {
-			bottom: -70px !important;
-		    left: 45% !important;
+			bottom: -490px !important;
+		    left: 27.3% !important;
 		}
 	}
 }
@@ -2166,6 +2171,11 @@ body.path-update-password {
 			    border-radius: 5px;
 			    padding: 5px 10px;
 			    cursor: pointer;
+				background: rgba(0, 128, 0, .4);
+			    color: white;
+			    &:hover {
+			    	background: rgba(0, 128, 0, .8); 
+			    }
     		}
     	}
     	.js-form-item, #change-password {
@@ -2209,7 +2219,7 @@ body.path-update-password {
 			}
     	}
 	    input[type="submit"] {
-    		margin: 20px 0;
+    		margin: 20px 240px;
     		border: none;
 			background: $login-btn;
 			width: 30%;
