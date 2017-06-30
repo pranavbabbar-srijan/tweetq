@@ -275,6 +275,7 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
   }
 }
 
+
 /**
  * Account settig form changes.
  */
@@ -1692,7 +1693,8 @@ function tweets_queue_contact_form_submit($form, \Drupal\Core\Form\FormStateInte
   $mailManager = \Drupal::service('plugin.manager.mail');
   $module = 'tweets_queue';
   $key = 'contact_us_thankyou_mail';
-  $to = 'pranav.babbar@srijan.net';
+  $to = $form_state->getValue('field_email');
+  $to = $to[0]['value'];
   
   $user_hash_key = hash('sha256', $mail);
   $message = t("Thankyou");
