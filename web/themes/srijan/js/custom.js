@@ -1038,6 +1038,8 @@
         	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
         }, 500);
 
+        $('.faq-header').append('Articles');
+
 })(jQuery);
 
 
