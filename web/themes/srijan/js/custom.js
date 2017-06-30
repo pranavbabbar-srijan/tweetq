@@ -1029,6 +1029,14 @@
          //    $('.option + .form-submit').submit();
          //    });
          // });
+        $( ".faq .faq-qa-header" ).each(function( index ) {
+		  $(this).unwrap();
+		});
+		$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
+        
+        setTimeout(function(){ 
+        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
+        }, 500);
 
 })(jQuery);
 
@@ -1048,6 +1056,7 @@
 	 	attach: function attach() {
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
+	 		
 	 	}
 	 };
 })(jQuery);
