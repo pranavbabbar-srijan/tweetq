@@ -460,10 +460,9 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   $access_token = $twitter_handle[TWITTER_OAUTH_TOKEN];
   $access_secret_token = $twitter_handle[TWITTER_OAUTH_TOKEN_SECRET];
   $cb->setToken($access_token, $access_secret_token);
-
   //Perform tweet/retweet on the twitter.
   $status = tweets_queue_twitter_tweet_retweet($cb, $message, $tweet_id, $message_info);
-  return $status;
+   return $status;
 }
 
 /**
@@ -1056,7 +1055,6 @@ function tweets_queue_send_direct_message($message, $images = array()) {
     'size' => $size,
     'tweeted' => 1
   );
-
   if (!$tweet_id) {
     drupal_set_message(t('Your tweet message "@message" already exists.',
     array('@message' => $message)));

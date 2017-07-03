@@ -154,8 +154,11 @@ class TweetsQueueTweetForm extends FormBase {
   public function tweets_queue_tweet_now_submit(array &$form, FormStateInterface $form_state) {
     global $base_url;
     $input = $form_state->getUserInput();
+
+    $data = $form_state->getValues();
     $nid = $input[TWITTER_FIELD_NID];
     $message = $input[TWITTER_FIELD_MESSAGE];
+    $images = $data[TWITTER_FORM_FIELD_IMAGES];
 
     $tweet_info = tweets_queue_fetch_tweet_item($nid);
     tweets_queue_validate_tweet_access($tweet_info->uid);
@@ -181,20 +184,10 @@ class TweetsQueueTweetForm extends FormBase {
     //drupal_set_message(t('Tweet hannnnnve been saved successfully.'));
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['message']);
-    //$query->condition('nid',$nid);
     $query->execute()->fetchField();
-    //foreach ($query as $key => $value) {
-      echo "<pre>";
-      print_r($query);
-    //}
-    die('hi');
-    
-    // $data = $form_state->getValues();
-    // $message = $data[TWITTER_FORM_FIELD_MESSAGE];
-    // $images = $data[TWITTER_FORM_FIELD_IMAGES];
 
-    // $cron_run = false;
-    // tweets_queue_compile_tweets($message, $cron_run, $images);
+    $cron_run = false;
+    tweets_queue_compile_tweets($message, $cron_run, $images);
     }
 
   /**
