@@ -562,6 +562,9 @@ body {
 	    color: white;
 	    @include border-radius(4px);
 	    margin-top: 1em;
+	    &:hover {
+	    	background: #82bb3e;
+	    }
 	}
 	> input + a {
 		display: block;
@@ -582,11 +585,8 @@ body {
 		color: #aaa;
 		font-size: 12px;
 		display: block;
-		width: 150px;
 		margin: 0 auto;
-		position: absolute;
-	    bottom: 88px;
-	    right: 15px;
+        text-align: right;
 	}
 }
 
@@ -610,6 +610,10 @@ body {
 			border-radius: 4px;
 			font-size: 13px;
 			text-decoration: none;
+			&:hover {
+				background: $twitter;
+				color: $white;
+			}
 	    }
 	    span {
 	    	color: #aaa;
@@ -777,6 +781,9 @@ body.path-update-password {
 		    margin-right: 0.2em;
 		    display: inline-block;
 		    vertical-align: text-top;
+	    }
+	    &:hover {
+	    	background: #2195c7;
 	    }
 	}
     span {
@@ -2873,47 +2880,6 @@ body.path-update-password {
 		flex: 3;
 		.views-field-field-section-image {
 			display: inline-block;
-		    font: normal normal normal 14px/1 FontAwesome;
-		    font-size: inherit;
-		    text-rendering: auto;
-		    -webkit-font-smoothing: antialiased;
-		    -moz-osx-font-smoothing: grayscale;
-		    &:before {
-			    height: 140px;
-			    width: 140px;
-			    display: block;
-			    border-radius: 100%;
-			    line-height: 140px;
-			    color: #fff;
-			    font-size: 56px;
-			    text-align: center;
-		   	 }
-		}
-		&:nth-of-type(1) {
-		   .views-field-field-section-image {
-		   	 &:before {
-		   	 	content: "\f07c";
-		   	 	background: #b6d791;
-			   
-		   	 }
-		   }		
-		}
-		&:nth-of-type(2) {
-		   .views-field-field-section-image {
-		   	 &:before {
-		   	 	content: "\f017";
-			    background: #2aa9e0;
-		   	 }
-		   }		
-		}
-		&:nth-of-type(3) {
-		   .views-field-field-section-image {
-		   	 &:before {
-		   	 	content: "\f085";
-		   	 	background: #f98575;
-			    
-		   	 }
-		   }		
 		}
 	}
 	.views-field-title {
@@ -2936,13 +2902,6 @@ body.path-update-password {
 			  flex-direction: row-reverse;
 			
 		    }
-		}
-		&:nth-of-type(2) {
-			img {
-				max-width: 45%;
-                height: auto;
-                width: 100%;
-			}
 		}
 	}
 }
@@ -3799,6 +3758,9 @@ body.path-update-password {
 		margin: 0;
 		position: relative;
 		top: 0;
+	}
+	.messages {
+		display: none !important;
 	}
 }
 /** css for spinner **/

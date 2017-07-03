@@ -1039,6 +1039,7 @@
         }, 500);
 
         $('.faq-header').append('Articles');
+        $('.user-login-form #forgot-password').appendTo('.user-login-form');
 
 })(jQuery);
 
