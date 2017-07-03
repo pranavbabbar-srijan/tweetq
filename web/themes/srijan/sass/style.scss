@@ -2300,8 +2300,21 @@ body.path-update-password {
 		    }
 		    .js-form-type-checkbox {
 		    	margin: 0;
+		    	position: relative;
 		    	input[type="checkbox"] {
-		    		display: none;
+				    position: absolute;
+				    right: 0;
+				    opacity: 0;
+				    height: 20px;
+				    width: 20px;
+				    z-index: 999;
+				    right: 5px;
+                    top: 5px;
+                    &:hover {
+                    	 + .option:after {
+                    		background: $twitter;
+                    	}
+                    }
 		    	}
 		    	.file {
 		    		background: none;
@@ -3326,7 +3339,6 @@ body.path-update-password {
 	    position: absolute;
 	    top: 0;
 	    z-index: -1;
-	    // top: -218px;
 	    width: 100%;
 	    img {
 	    	width: 100%;
@@ -4027,7 +4039,7 @@ body {
     	    position: absolute;
 		    width: 100%;
 		    left: 0;
-		    top: -231px;
+		    top: 0;
 	    }
 	    &:before {
     	    content: "";
@@ -4045,4 +4057,21 @@ body {
 	margin-top: -135px;
     z-index: 3;
     position: relative;
+}
+
+.send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] + .option:before, 
+.tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] + .option:before {
+    content: 'x';
+    background: red;
+    height: 20px;
+    width: 20px;
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 30px;
+    color: white;
+    padding: 2px 6px;
+    text-align: center;
+    cursor: pointer;
 }
