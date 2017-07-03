@@ -1744,9 +1744,9 @@ function tweets_queue_contact_recipient_form_submit($form, \Drupal\Core\Form\For
   $email = $form_state->getValue('field_email');
   $recipient_message = $form_state->getValue('field_message'); 
   $user_hash_key = hash('sha256', $mail);
-  $message = t("<h2 style='text-transform: capitalize;'>Name: @name</h2>
-    <h2 style='text-transform: capitalize;'>Email: @email</h2>
-    <h2 style='text-transform: capitalize;'>Message: @message</h2>",array('@name' => $name[0]['value'], '@email' => $email[0]['value'], '@message' => $recipient_message[0]['value']));
+  $message = t("<div style='margin: 30px 0;'>Name: @name</div>
+    <div style='margin: 30px 0;'>Email: @email</div>
+    <div style='margin: 30px 0;'>Message: @message</div>",array('@name' => $name[0]['value'], '@email' => $email[0]['value'], '@message' => $recipient_message[0]['value']));
   $params['message'] = $message;
   $params['title'] = 'Write to us';
  
