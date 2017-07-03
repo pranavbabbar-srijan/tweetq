@@ -2808,7 +2808,7 @@ body.path-update-password .messages--status {
       background: #2aa9e0;
       border-radius: 5px;
       border: none;
-      color: #ffffff; }
+      color: #ffffff !important; }
       .block-sub-nav-main-menu .menu li:last-child a:hover {
         opacity: 1;
         background: #2195c7; }
@@ -3172,6 +3172,9 @@ body.path-update-password .messages--status {
 .path-signup .block-sub-nav-main-menu .menu li a {
   color: #666; }
 
+.path-signup .block-sub-nav-main-menu .menu li:last-child a {
+  color: #ffffff; }
+
 /** setting page **/
 .user-form {
   background: white;
@@ -3275,7 +3278,8 @@ body.path-update-password .messages--status {
       -moz-border-radius: 4px;
       -ms-border-radius: 4px;
       -o-border-radius: 4px;
-      border-radius: 4px; }
+      border-radius: 4px;
+      margin: 0 240px; }
       .user-form .form-actions input:hover {
         background: #82bb3e; }
 

@@ -310,7 +310,7 @@ function tweets_queue_user_profile_form_changes(&$form) {
     '#markup' => t(''),
     '#weight' => 13,
   );
-  $form['actions']['submit']['#value'] = t('Update Profile');
+  $form['actions']['submit']['#value'] = t('Update');
 }
 
 /**
