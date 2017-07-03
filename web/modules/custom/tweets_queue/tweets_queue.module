@@ -322,7 +322,7 @@ function tweets_queue_user_profile_form_changes(&$form) {
     '#markup' => t(''),
     '#weight' => 13,
   );
-  $form['actions']['submit']['#value'] = t('Update');
+  $form['actions']['submit']['#value'] = t('Update Profile');
 }
 
 /**
@@ -1743,7 +1743,6 @@ function tweets_queue_contact_recipient_form_submit($form, \Drupal\Core\Form\For
   $name = $form_state->getValue('field_name');
   $email = $form_state->getValue('field_email');
   $recipient_message = $form_state->getValue('field_message'); 
-  print_r($recipient_message);  
   $user_hash_key = hash('sha256', $mail);
   $message = t("<h2 style='text-transform: capitalize;'>Name: @name</h2>
     <h2 style='text-transform: capitalize;'>Email: @email</h2>
