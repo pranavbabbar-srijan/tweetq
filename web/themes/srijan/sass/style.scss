@@ -711,6 +711,8 @@ body.path-update-password {
 	    height: 320px;
 	    line-height: 500px;
 	    text-align: center;
+	    margin: 0 auto;
+	    display: block !important;
 	    &:before  {
 	    	content: "";
 		    height: 200px;

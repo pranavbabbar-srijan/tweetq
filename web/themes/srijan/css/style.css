@@ -738,7 +738,9 @@ body.path-update-password .messages--status {
   box-shadow: none;
   height: 320px;
   line-height: 500px;
-  text-align: center; }
+  text-align: center;
+  margin: 0 auto;
+  display: block !important; }
   .path-signup .messages--status:before {
     content: "";
     height: 200px;
