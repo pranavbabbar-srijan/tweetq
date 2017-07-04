@@ -565,6 +565,10 @@ body {
 	    &:hover {
 	    	background: #82bb3e;
 	    }
+	    &:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
 	}
 	> input + a {
 		display: block;
@@ -613,6 +617,10 @@ body {
 			&:hover {
 				background: $twitter;
 				color: $white;
+			}
+			&:active {
+				-webkit-transform: translateY(1px);
+				transform: translateY(1px);
 			}
 	    }
 	    span {
@@ -808,6 +816,10 @@ body.path-update-password {
 	    &:hover {
 	    	background: #2195c7;
 	    }
+	    &:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
 	}
     span {
     	width: 100%;
@@ -1527,10 +1539,15 @@ body.path-update-password {
 		border: 0;
 	    padding: .65em 1em;
 	    font-size: 18px;
+	    display: inline-block;
 	    @include border-radius( 3px);
 	    text-decoration: none;
 		text-align: center;
 		font-weight: bold;
+		&:active {
+	    	-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+	    }
 		&.import-tweet {
 			background: none;
 			color: $twitter;
@@ -1538,6 +1555,10 @@ body.path-update-password {
 			border: 2px solid;
 		    padding-top: 0.5em;
 		    padding-bottom: .5em;
+		    &:active {
+	    	  -webkit-transform: translateY(1px);
+			  transform: translateY(1px);
+	       }
 		}
 	}
 }
@@ -1628,6 +1649,10 @@ body.path-update-password {
 		    color: white;
 		    display: block;
 		    @include border-radius(4px);
+		    &:active {
+				-webkit-transform: translateY(1px);
+				transform: translateY(1px);
+			}
     	}
 	}
 	#header {
@@ -2138,6 +2163,9 @@ body.path-update-password {
 			width: 69%;
 		}
 	}
+	.form-item-display-box {
+		width: 53.5% !important;
+	}
 }
 
 .profilesettingform-body {
@@ -2207,6 +2235,10 @@ body.path-update-password {
 			    &:hover {
 			    	background: rgba(0, 128, 0, .8); 
 			    }
+			    &:active {
+		    	    -webkit-transform: translateY(1px);
+    				transform: translateY(1px);
+		        }
     		}
     	}
     	.js-form-item, #change-password {
@@ -2259,6 +2291,10 @@ body.path-update-password {
 		    color: white;
 		    display: block;
 		    @include border-radius(4px);
+		    &:active {
+		    	-webkit-transform: translateY(1px);
+    			transform: translateY(1px);
+		    }
     	}
 	}
 	#profile-settingform-password-validation-error, #password-changed {
@@ -2384,7 +2420,8 @@ body.path-update-password {
     	color: green;
 	}
 }
-.send-tweets-form, .tweets-queue-tweet-form  {
+.send-tweets-form, 
+.tweets-queue-tweet-form  {
 	padding-top: 5px;
 	label {
 		@extend %none;
@@ -2430,7 +2467,7 @@ body.path-update-password {
 			}
 		}
 	}
-	#edit-save, #edit-submit, #edit-clone, #edit-cancel {
+	#edit-save, #edit-submit, #edit-clone, #edit-cancel , #edit-tweet-now{
 		border: none;
 	    padding: .5em 1em .5em 1em;
 	    font-size: 18px;
@@ -2438,14 +2475,22 @@ body.path-update-password {
 	    text-decoration: none;
 	    display: block;
 		text-align: center;
+		&:active {
+			-webkit-transform: translateY(1px);
+            transform: translateY(1px); 
+     	}
 	}
-	#edit-submit, #edit-clone {
+	#edit-submit, #edit-clone , #edit-tweet-now {
 		background: $twitter;
 		color: white;
 		float: right;
 		margin-right: 0;
 		padding: .7em 1.4em;
 		font-weight: bold;
+		&:active {
+			-webkit-transform: translateY(1px);
+            transform: translateY(1px); 
+     	}
 	}
 	#edit-save, #edit-cancel {
 		background: white;
@@ -2456,6 +2501,10 @@ body.path-update-password {
 		margin-right: 0;
 		margin-left: 0;
 		font-weight: bold;
+		&:active {
+			-webkit-transform: translateY(1px);
+            transform: translateY(1px); 
+     	}
 	}
 	.form-textarea {
 		border-color: rgba(0,0,0,0.1);
@@ -2593,6 +2642,10 @@ body.path-update-password {
 	    display: block;
 		text-align: center;
 		font-weight: bold;
+		&:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
 	}
 	.description {
 		font-size: .8em;
@@ -2769,7 +2822,7 @@ body.path-update-password {
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb); /*IE 5.5-7*/
 		background: white;
 		padding: 2em;
-		border-radius: 10px;
+		@include border-radius(10px);
 		@include column(11);
 		margin: 0 auto;
 	}
@@ -3005,7 +3058,7 @@ body.path-update-password {
 				    position: absolute;
 				    left: 10%;
 				    color: $white;
-				    border-radius: 100%;
+				    @include border-radius(100%);
 				    height: 50px;
 				    width: 50px;
 				}
@@ -3128,6 +3181,10 @@ body.path-update-password {
 				        background: #2195c7;
 
                     }
+                    &:active {
+						-webkit-transform: translateY(1px);
+						transform: translateY(1px);
+					}
 			   	}
 			}
 		}
@@ -3291,6 +3348,11 @@ body.path-update-password {
         padding-left: 50px;
         position: relative;
         text-decoration: none;
+        display: block;
+        &:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
         &:before {
 		    display: inline-block;
 		    font: normal normal normal 14px/1 FontAwesome;
@@ -3421,13 +3483,12 @@ body.path-update-password {
     	padding: .5em;
     	font-size: 18px;
     	color: white;
-    	webkit-border-radius: 4px;
-    	khtml-border-radius: 4px;
-	    moz-border-radius: 4px;
-	    -ms-border-radius: 4px;
-	    -o-border-radius: 4px;
-	    border-radius: 4px;
+    	@include border-radius(4px);
 	    margin-top: 1em;
+	    &:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
 	    + .form-submit {
 	    	display: none;
 	    }
@@ -3494,18 +3555,17 @@ body.path-update-password {
 		    font-size: 18px;
 		    color: $white;
 		    text-transform: uppercase;
-		    -webkit-border-radius: 4px;
-		    -khtml-border-radius: 4px;
-		    -moz-border-radius: 4px;
-		    -ms-border-radius: 4px;
-		    -o-border-radius: 4px;
-		    border-radius: 4px;
+		    @include border-radius(4px);
 		    margin-top: 0;
 		    width: 100%;
 		    transition: .2s ease-in-out;
 		    &:hover {
 		    	background: #2195c7;
 		    }
+		    &:active {
+				-webkit-transform: translateY(1px);
+				transform: translateY(1px);
+			}
         }
 	}
 }
@@ -3555,7 +3615,7 @@ body.path-update-password {
 					a {
                        color: #666;
 				    }
-				    &:nth-of-type(4) {
+				    &:last-child {
 				    	a {
 				    		color: $white;
 
@@ -3685,6 +3745,10 @@ body.path-update-password {
 	    padding: 5px 10px;
 	    cursor: pointer;
 	    background: $white;
+	    &:active {
+		    -webkit-transform: translateY(1px);
+    		transform: translateY(1px);
+		}
 	}
 	.form-actions {
 		padding: 40px 20px;
@@ -3696,15 +3760,14 @@ body.path-update-password {
 		    font-size: 18px;
 		    color: white;
 		    display: block;
-		    -webkit-border-radius: 4px;
-		    -khtml-border-radius: 4px;
-		    -moz-border-radius: 4px;
-		    -ms-border-radius: 4px;
-		    -o-border-radius: 4px;
-		    border-radius: 4px;
+		    @include border-radius(4px);
 		    margin: 0 240px;
 		    &:hover {
 		    	background: #82bb3e;
+		    }
+		    &:active {
+		    	-webkit-transform: translateY(1px);
+    			transform: translateY(1px);
 		    }
 		}
 	}
@@ -4119,18 +4182,44 @@ body {
    }
    .form-submit {
    	    flex: 5;
+   	    &:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
+		&:first-child {
+			 border: none;
+		    padding: .5em;
+		    font-size: 18px;
+		    color: white;
+		    @include border-radius(4px);
+		    margin-top: 1em;
+		   	background: $login-btn;
+		   	&:hover {
+		   		background: #82bb3e;
+			}
+		}
+		&:last-child {
+			 background: $white;
+		    color: $twitter;
+		    border: 2px solid $twitter;
+		    margin-top: 1em;
+		    padding: .4em 1em;
+		    margin-right: 0;
+		    border-radius: 4px;
+		    font-size: 18px;
+		    text-decoration: none;
+	    	&:hover {
+	           background: $twitter;
+	           color: $white;
+	    	}
+		}
    }
    #edit-submit {
    	    border: none;
 	    padding: .5em;
 	    font-size: 18px;
 	    color: white;
-	    webkit-border-radius: 4px;
-	    khtml-border-radius: 4px;
-	    moz-border-radius: 4px;
-	    -ms-border-radius: 4px;
-	    -o-border-radius: 4px;
-	    border-radius: 4px;
+	    @include border-radius(4px);
 	    margin-top: 1em;
 	   	background: $login-btn;
 	   	&:hover {
@@ -4153,36 +4242,42 @@ body {
     	}
     }
 }
-.send-tweets-form {
+
+.send-tweets-form,
+.tweets-queue-tweet-form  {
 	.ajax-progress.ajax-progress-throbber {
-	    height: 80px;
-	    width: 80px;
-	    text-align: center;
-	    border-radius: 7px;	
-	    position: absolute;
-	    .throbber {
-	  	    display: inline-block;
-		    font: normal normal normal 14px/1 FontAwesome;
-		    font-size: inherit;
-		    text-rendering: auto;
-		    -webkit-font-smoothing: antialiased;
-		    -moz-osx-font-smoothing: grayscale;
-		    background: none;
-		    position: absolute;
-		    -webkit-animation: spin 2s linear infinite;
-	        animation: spin 2s linear infinite;
-	        top: 20px;
-		    &:before {
-	          content: "\f110";
-	          -webkit-animation: spin 2s linear infinite;
-	          animation: spin 2s linear infinite;
-	          font-size: 30px;
-	          color: $login-btn;
+		display: none;
+		&:last-child {
+		    height: 80px;
+		    width: 80px;
+		    text-align: center;
+		    border-radius: 7px;		
+		    position: relative;
+		    display: block !important;
+		    .throbber {
+		  	    display: inline-block;
+			    font: normal normal normal 14px/1 FontAwesome;
+			    font-size: inherit;
+			    text-rendering: auto;
+			    -webkit-font-smoothing: antialiased;
+			    -moz-osx-font-smoothing: grayscale;
+			    background: none;
+			    position: relative;
+			    -webkit-animation: spin 2s linear infinite;
+		        animation: spin 2s linear infinite;
+		        top: 20px;
+			    &:before {
+		          content: "\f110";
+		          -webkit-animation: spin 2s linear infinite;
+		          animation: spin 2s linear infinite;
+		          font-size: 30px;
+		          color: $login-btn;
+			    }
+		    }	
+		    .message {
+		      	display: none;
 		    }
-	      }	
-	      .message {
-	      	display: none;
-	    }
+		}
 	}
 }
 
@@ -4221,4 +4316,8 @@ body {
 	.js-keeper-placeholder-back em {
 	  background: #fcc !important;
 	}
+}
+
+.form-submit {
+	outline: none;
 }
