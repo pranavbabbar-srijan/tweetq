@@ -49,7 +49,4 @@ Feature: Create a tweet functionality
     And I press "Log in"
     Then I should be on "/dashboard"
 
-
-    @6
-Scenario: To verify the tweet created should be on top of the list
   
