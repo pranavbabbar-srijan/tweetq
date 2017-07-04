@@ -108,6 +108,7 @@ class TweetsQueueTweetForm extends FormBase {
     }
 
     if (empty($tweet_id) && !$archived) {
+     
       $form['submit'] = array(
         '#type' => 'submit',
         '#value' => t('Save Tweet'),
@@ -121,6 +122,13 @@ class TweetsQueueTweetForm extends FormBase {
       '#value' => t('Cancel'),
       '#weight' => 9,
     );
+    $form['tweet_now'] = array(
+      '#type' => 'submit',
+      '#submit' => array('::tweets_queue_tweet_now_submit'), 
+      '#value' => t('Tweet Now'),
+    );
+
+
 
     $form['display_box'] = array(
       '#type' => 'textfield',
@@ -142,6 +150,45 @@ class TweetsQueueTweetForm extends FormBase {
       '#weight' => 20,
     );
   }
+
+  public function tweets_queue_tweet_now_submit(array &$form, FormStateInterface $form_state) {
+    global $base_url;
+    $input = $form_state->getUserInput();
+
+    $data = $form_state->getValues();
+    $nid = $input[TWITTER_FIELD_NID];
+    $message = $input[TWITTER_FIELD_MESSAGE];
+    $images = $data[TWITTER_FORM_FIELD_IMAGES];
+
+    $tweet_info = tweets_queue_fetch_tweet_item($nid);
+    tweets_queue_validate_tweet_access($tweet_info->uid);
+
+    $images = array();
+    if (is_array($input[TWITTER_FORM_FIELD_IMAGES]) && !empty($input[TWITTER_FORM_FIELD_IMAGES]['fids'])) {
+      $images = explode(" ", $input[TWITTER_FORM_FIELD_IMAGES]['fids']);
+    }
+    if (!$nid) {
+      return;
+    }
+    $size = tweets_queue_get_message_size($message);
+    tweets_queue_update_message_queue_priority_info($nid,
+      array(
+        'message' => $message,
+        'size' => $size,
+        'changed' => time(),
+      ),
+      0
+    );
+    tweets_queue_map_message_image_record($nid, $images);
+ 
+    //drupal_set_message(t('Tweet hannnnnve been saved successfully.'));
+    $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
+    $query->fields('p', ['message']);
+    $query->execute()->fetchField();
+
+    $cron_run = false;
+    tweets_queue_compile_tweets($message, $cron_run, $images);
+    }
 
   /**
    * {@inheritdoc}

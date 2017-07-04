@@ -267,7 +267,8 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
       }
       break;
     case 'contact_message_write_to_us_form':
-    $form['actions']['submit']['#submit'][]  = 'tweets_queue_contact_form_submit';
+      $form['actions']['submit']['#submit'][]  = 'tweets_queue_contact_form_submit';
+      $form['actions']['submit']['#submit'][]  = 'tweets_queue_contact_recipient_form_submit';
       break;
 
     default:
@@ -275,6 +276,17 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
   }
 }
 
+// function tweets_queue_mail_alter (&$message) {
+//   if ($message['id'] == 'contact_page_copy') {
+//     if (!example_notifications_optin($message['to'], $message['id'])) {
+//       // If the recipient has opted to not receive such messages, cancel
+//       // sending.
+//       $message['send'] = FALSE;
+//       return;
+//     }
+//     $message['body'][] = "--\nMail sent out from " . \Drupal::config('system.site')->get('name');
+//   }
+// }
 
 /**
  * Account settig form changes.
@@ -464,10 +476,9 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   $access_token = $twitter_handle[TWITTER_OAUTH_TOKEN];
   $access_secret_token = $twitter_handle[TWITTER_OAUTH_TOKEN_SECRET];
   $cb->setToken($access_token, $access_secret_token);
-
   //Perform tweet/retweet on the twitter.
   $status = tweets_queue_twitter_tweet_retweet($cb, $message, $tweet_id, $message_info);
-  return $status;
+   return $status;
 }
 
 /**
@@ -795,6 +806,7 @@ function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
       if (empty($message_data->tweet_id)) {
         $tweet_info['first_run'] = time();
         $tweet_info['tweeted'] = 1;
+        $twitter_history_info['retweeted'] = 0;
         tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 1);
       }
       else {
@@ -1060,7 +1072,6 @@ function tweets_queue_send_direct_message($message, $images = array()) {
     'size' => $size,
     'tweeted' => 1
   );
-
   if (!$tweet_id) {
     drupal_set_message(t('Your tweet message "@message" already exists.',
     array('@message' => $message)));
@@ -1639,6 +1650,11 @@ function tweets_queue_mail($key, &$message, $params) {
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = $params['message'];
       break;
+    case 'contact_us_recipient_mail':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = $params['message'];
+      break;
 
   }
 }
@@ -1700,6 +1716,39 @@ function tweets_queue_contact_form_submit($form, \Drupal\Core\Form\FormStateInte
   $message = t("<div  style='text-align: center;'>Thankyou for reaching to us");
   $params['message'] = $message;
   $params['title'] = 'Thankyou mail';
+ 
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    $message = t('There was a problem sending your email notification to @email.', array('@email' => $to));
+    drupal_set_message($message, 'error');
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  else {
+    $message = t('An email notification has been sent to @email ', array('@email' => $to));
+    drupal_set_message($message);
+  }
+  \Drupal::logger('mail-log')->notice($message);
+}
+
+function tweets_queue_contact_recipient_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  global $base_url;
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'contact_us_recipient_mail';
+  $to = 'barbet@srijan.net';
+  $name = $form_state->getValue('field_name');
+  $email = $form_state->getValue('field_email');
+  $recipient_message = $form_state->getValue('field_message'); 
+  $user_hash_key = hash('sha256', $mail);
+  $message = t("<div style='margin: 30px 0;'>Name: @name</div>
+    <div style='margin: 30px 0;'>Email: @email</div>
+    <div style='margin: 30px 0;'>Message: @message</div>",array('@name' => $name[0]['value'], '@email' => $email[0]['value'], '@message' => $recipient_message[0]['value']));
+  $params['message'] = $message;
+  $params['title'] = 'Write to us';
  
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;

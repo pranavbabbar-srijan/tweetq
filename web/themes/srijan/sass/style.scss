@@ -562,6 +562,9 @@ body {
 	    color: white;
 	    @include border-radius(4px);
 	    margin-top: 1em;
+	    &:hover {
+	    	background: #82bb3e;
+	    }
 	}
 	> input + a {
 		display: block;
@@ -582,11 +585,8 @@ body {
 		color: #aaa;
 		font-size: 12px;
 		display: block;
-		width: 150px;
 		margin: 0 auto;
-		position: absolute;
-	    bottom: 88px;
-	    right: 15px;
+        text-align: right;
 	}
 }
 
@@ -610,6 +610,10 @@ body {
 			border-radius: 4px;
 			font-size: 13px;
 			text-decoration: none;
+			&:hover {
+				background: $twitter;
+				color: $white;
+			}
 	    }
 	    span {
 	    	color: #aaa;
@@ -777,6 +781,9 @@ body.path-update-password {
 		    margin-right: 0.2em;
 		    display: inline-block;
 		    vertical-align: text-top;
+	    }
+	    &:hover {
+	    	background: #2195c7;
 	    }
 	}
     span {
@@ -1362,13 +1369,14 @@ body.path-update-password {
 	    bottom: -80px;
 	    left: 20%;
 	    border-radius: 35px;
+	    padding-left: 50px;
 	    &:before {
 	    	@extend %icomoon;
 	    	content: $icon-success;
-	    	font-size: 22px;
+	    	font-size: 38px;
 		    position: absolute;
-		    top: 15px;
-		    margin-left: -30px;
+		    top: 6px;
+		    margin-left: -43px;
 	    }
 	    + .block {
 	    	+ .block-sign-in-with-twitter-block {
@@ -1983,6 +1991,7 @@ body.path-update-password {
 	width: 272px;
 	> div {
 		&#twitter-notification-count {
+			display: none;
 			position: absolute;
 		    top: -2px;
 		    right: 134px;
@@ -1992,7 +2001,7 @@ body.path-update-password {
 		    padding: .2em;
 		    font-size: 12px;
 		    text-align: center;
-		    display: block;
+		    
 		    z-index: 1;
 		    &.active {
 		    	// left: 0;
@@ -2009,7 +2018,7 @@ body.path-update-password {
 		margin-top: 20px;
 		left: 328px;
 	    top: 28px;
-	    width: 275px;
+	    width: 305px;
 	    background: white;
 	    font-size: 12px;
 	    color: $gray;
@@ -2031,7 +2040,7 @@ body.path-update-password {
 		}
 		&.active {
 			visibility: inherit;
-			left: 60px;
+			left: 30px;
 			background: white;
 			border-radius: 0;
 		}
@@ -2043,14 +2052,14 @@ body.path-update-password {
 				position: fixed;
 		    }
 		    &:nth-child(2) {
-		    	margin-top: 27px;
+		    	margin-top: 55px;
 		    }
 		    span {
 		    	font-size: 10px;
 		    	display: block;
 		    	&.state {
 		    		color: $dark;
-		    		font-size: 13px;
+		    		font-size: 16px;
 		    		margin-bottom: 3px;
 		    	}
 		    	&.time {
@@ -2071,14 +2080,24 @@ body.path-update-password {
 				}
 				&.message_history_count {
 					display: block;
-					border-bottom: 1px solid $gray;
-					width: 256px;
+					// border-bottom: 1px solid $gray;
+					width: 299px;
 				    position: relative;
 				    left: -12px;
 				    top: -12px;
-				    padding: 5px 10px;
-				    font-size: 12px;
-				    background: white;
+				    padding: 15px 12px;
+				    font-size: 18px;
+				    background: #eee;
+				    color: #999;
+				    b {
+				    	float: right;
+				    	font-weight: normal;
+				    	cursor: pointer;
+				    	font-family: 'fontawesome';
+				    	&:after {
+				    		content: "\f00d";
+				    	}
+				    }
 				    div {
 				    	display: inline;
 				    	span {
@@ -2105,8 +2124,8 @@ body.path-update-password {
 			// top: 70px;
 		}
 		.messages--status {
-			bottom: -70px !important;
-		    left: 45% !important;
+			bottom: -490px !important;
+		    left: 27.3% !important;
 		}
 	}
 }
@@ -2160,6 +2179,11 @@ body.path-update-password {
 			    border-radius: 5px;
 			    padding: 5px 10px;
 			    cursor: pointer;
+				background: rgba(0, 128, 0, .4);
+			    color: white;
+			    &:hover {
+			    	background: rgba(0, 128, 0, .8); 
+			    }
     		}
     	}
     	.js-form-item, #change-password {
@@ -2203,7 +2227,7 @@ body.path-update-password {
 			}
     	}
 	    input[type="submit"] {
-    		margin: 20px 0;
+    		margin: 20px 240px;
     		border: none;
 			background: $login-btn;
 			width: 30%;
@@ -2252,6 +2276,23 @@ body.path-update-password {
 		    }
 		    .option {
 		    	display: block;
+		    	position: relative;
+		    	pointer-events: none;
+		    	&:after {
+		    		content: 'x';
+				    background: #dddddd;
+				    height: 20px;
+				    width: 20px;
+				    display: block;
+				    position: absolute;
+				    top: 5px;
+				    right: 5px;
+				    border-radius: 30px;
+				    color: white;
+				    padding: 2px 6px;
+				    text-align: center;
+				    cursor: pointer;
+		    	}
 		    }
 		    > div {
 		    	display: flex;
@@ -2260,8 +2301,21 @@ body.path-update-password {
 		    }
 		    .js-form-type-checkbox {
 		    	margin: 0;
+		    	position: relative;
 		    	input[type="checkbox"] {
-		    		display: none;
+				    position: absolute;
+				    right: 0;
+				    opacity: 0;
+				    height: 20px;
+				    width: 20px;
+				    z-index: 999;
+				    right: 5px;
+                    top: 5px;
+                    &:hover {
+                    	 + .option:after {
+                    		background: $twitter;
+                    	}
+                    }
 		    	}
 		    	.file {
 		    		background: none;
@@ -2326,6 +2380,9 @@ body.path-update-password {
 		color: $gray;
 	}
 	.message-header {
+		.ajax-new-content {
+    		display: none !important;
+    	}
 		overflow: hidden;
 		background: white;
 		padding: 1em 1em 2.5em 1em;
@@ -2837,47 +2894,6 @@ body.path-update-password {
 		flex: 3;
 		.views-field-field-section-image {
 			display: inline-block;
-		    font: normal normal normal 14px/1 FontAwesome;
-		    font-size: inherit;
-		    text-rendering: auto;
-		    -webkit-font-smoothing: antialiased;
-		    -moz-osx-font-smoothing: grayscale;
-		    &:before {
-			    height: 140px;
-			    width: 140px;
-			    display: block;
-			    border-radius: 100%;
-			    line-height: 140px;
-			    color: #fff;
-			    font-size: 56px;
-			    text-align: center;
-		   	 }
-		}
-		&:nth-of-type(1) {
-		   .views-field-field-section-image {
-		   	 &:before {
-		   	 	content: "\f07c";
-		   	 	background: #b6d791;
-			   
-		   	 }
-		   }		
-		}
-		&:nth-of-type(2) {
-		   .views-field-field-section-image {
-		   	 &:before {
-		   	 	content: "\f017";
-			    background: #2aa9e0;
-		   	 }
-		   }		
-		}
-		&:nth-of-type(3) {
-		   .views-field-field-section-image {
-		   	 &:before {
-		   	 	content: "\f085";
-		   	 	background: #f98575;
-			    
-		   	 }
-		   }		
 		}
 	}
 	.views-field-title {
@@ -2900,13 +2916,6 @@ body.path-update-password {
 			  flex-direction: row-reverse;
 			
 		    }
-		}
-		&:nth-of-type(2) {
-			img {
-				max-width: 45%;
-                height: auto;
-                width: 100%;
-			}
 		}
 	}
 }
@@ -3090,7 +3099,7 @@ body.path-update-password {
                     background: $twitter;
                     border-radius: 5px;
                     border: none;
-                    color: $white;
+                    color: $white !important;
                     &:hover {
                     	opacity: 1;
 				        background: #2195c7;
@@ -3196,38 +3205,38 @@ body.path-update-password {
 	    box-shadow: -3px 2px 11px 2px #ddd;
 	    position: absolute;
 	    max-width: 503px;
-	    right: 11.5%;
-	    top: 80px;
+	    left: 90px;
+	    top: 810px;
 	    border: none;
 	    z-index: 99;
 	    border-radius: 5px;
 	    font-size: 24px;
-	    width: 300px;
-	    padding-left: 93px;
+	    width: 84%;
+	    padding-left: 75px;
 	    align-items: center;
 	    background-image: none;
 	    opacity: 1;
-	    padding-top: 140px;
-	    padding-bottom: 180px;
+	    padding-top: 15px;
+	    padding-bottom: 70px;
 	    &:before {
-		        display: inline-block;
-			    font: normal normal normal 14px/1 FontAwesome;
-			    font-size: inherit;
-			    text-rendering: auto;
-			    -webkit-font-smoothing: antialiased;
-			    -moz-osx-font-smoothing: grayscale;
-			    content: "\f00c";
-			    position: absolute;
-			    left: 38px;
-			    height: 40px;
-			    width: 40px;
-			    background: $login-btn;
-			    color: $white;
-			    border-radius: 100px;
-			    line-height: 40px;
-			    text-align: center;
-			    top: 145px;
-			    font-size: 24px;
+	        display: inline-block;
+		    font: normal normal normal 14px/1 FontAwesome;
+		    font-size: inherit;
+		    text-rendering: auto;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		    content: "\f00c";
+		    position: absolute;
+		    left: 20px;
+		    height: 40px;
+		    width: 40px;
+		    background: $login-btn;
+		    color: $white;
+		    border-radius: 100px;
+		    line-height: 40px;
+		    text-align: center;
+		    top: 20px;
+		    font-size: 24px;
 	    }
 	}
 }
@@ -3331,7 +3340,6 @@ body.path-update-password {
 	    position: absolute;
 	    top: 0;
 	    z-index: -1;
-	    top: -218px;
 	    width: 100%;
 	    img {
 	    	width: 100%;
@@ -3539,11 +3547,16 @@ body.path-update-password {
 		.menu {
 			li { 
 				a {
-              color: #666;
-			}
-		}
- 	}
-  }
+                  color: #666;
+			    }
+			    &:last-child {
+			    	a {
+			    		color: $white;
+			    	}
+			    }
+		    }
+ 	    }
+    }
 }
 /** setting page **/
 .user-form {
@@ -3653,19 +3666,20 @@ body.path-update-password {
 	.form-actions {
 		padding: 40px 20px;
 		input {
-		border: none;
-	    background: #96c85a;
-	    width: 30%;
-	    padding: .5em;
-	    font-size: 18px;
-	    color: white;
-	    display: block;
-	    -webkit-border-radius: 4px;
-	    -khtml-border-radius: 4px;
-	    -moz-border-radius: 4px;
-	    -ms-border-radius: 4px;
-	    -o-border-radius: 4px;
-	    border-radius: 4px;
+			border: none;
+		    background: #96c85a;
+		    width: 30%;
+		    padding: .5em;
+		    font-size: 18px;
+		    color: white;
+		    display: block;
+		    -webkit-border-radius: 4px;
+		    -khtml-border-radius: 4px;
+		    -moz-border-radius: 4px;
+		    -ms-border-radius: 4px;
+		    -o-border-radius: 4px;
+		    border-radius: 4px;
+		    margin: 0 240px;
 		    &:hover {
 		    	background: #82bb3e;
 		    }
@@ -3758,6 +3772,9 @@ body.path-update-password {
 		position: relative;
 		top: 0;
 	}
+	.messages {
+		display: none !important;
+	}
 }
 /** css for spinner **/
 body {
@@ -3791,8 +3808,6 @@ body {
 	    overflow: hidden;
 	    position: relative;
 	    z-index: 0;
-	    margin-top: -75px;
-
 	}
 	.block-page-title-block {
 	    position: absolute;
@@ -3879,5 +3894,307 @@ body {
 			min-height: auto;
 		    padding-bottom: 20px;
 		}
+	}
+}
+
+/** faq **/
+.path-faq-page {
+	#header {
+		z-index: 9;
+		position: relative;
+		background: transparent;
+	}
+	.site-branding {
+	   svg {
+		 fill: $white;
+	   }
+	   a {
+	   	color: $white;
+	   }
+	}
+   &.user-logged-in {
+   	   background: $white;
+	   .main-content {
+	   	 position: initial;
+	   	 width: 100%;
+	   }
+	   #main-wrapper {
+	   	padding-top: 0;
+	   }
+	}
+}
+.faq {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .faq-qa-header {
+    	text-align: center;
+        cursor: pointer;
+        margin: 0 1.5%;
+        .faq-header {
+        	font-size: 12px;
+        	padding-bottom: 20px;
+        	border-bottom: 5px solid transparent;
+        	color: $white;
+        	opacity: 0.8;
+        	&:hover {
+        		opacity: 1;
+        	}
+        	&.faq-category-qa-visible {
+    		    border-color: $white;
+    		    opacity: 1;
+    		    a {
+    		    	opacity: 1;
+    		    }
+        	}
+        }
+    	a {
+		    font-size: 18px;
+		    text-decoration: none;
+		    display: block;
+		    padding: 0px 15px;
+		    text-align: center;
+		    color: $white;
+		    opacity: 0.8;
+		    &:hover {
+		    	opacity: 1;
+		    }
+    	}
+    }
+    .faq-qa-hide {
+	    width: 100%;
+	    padding: 8em 4em 1em 4em;
+	    -webkit-order: 1;
+	    order: 1;
+	    word-wrap: break-word;
+	    &:before {
+    	    content: "Frequently Asked Questions";
+		    position: relative;
+		    top: -45px;
+		    font-size: 16px;
+		    color: #666;
+		    text-transform: uppercase;
+		    font-weight: bold;
+		    opacity: .8;
+	    }
+    }
+}
+.faq-answer {
+	padding-left: 65px;
+	font-size: 16px;
+    line-height: 1.5em;
+    position: relative;
+    margin-bottom: 20px;
+    color: #666;
+    &:before {
+    	content: "Ans.";
+	    font-size: 18px;
+	    font-weight: 800;
+	    padding-right: 15px;
+	    position: absolute;
+	    left: 0;
+	    color: #303030;
+
+	}
+	.field--type-entity-reference {
+		display: none;
+	}
+	> a {
+		display: none;
+	}
+}
+.faq-question {
+	padding-left: 65px;
+	position: relative;
+    &:before {
+    	content: "Ques.";
+	    font-size: 18px;
+	    font-weight: 800;
+	    padding-right: 15px;
+	    position: absolute;
+	    left: 0;
+    } 
+    span {
+      font-size: 18px;
+      color: #303030;
+      font-weight: bold;
+    }
+}
+
+/** faq banner image **/
+.block-faq-banner-image {
+	margin-top: 115px;
+    text-align: center;
+    .field--name-field-title {
+    	color: $white;
+    }
+    .field--type-image {
+    	position: absolute;
+	    top: 0;
+	    z-index: -1;
+	    width: 100%;
+	    height: 100%;
+	    img {
+    	    position: absolute;
+		    width: 100%;
+		    left: 0;
+		    top: 0;
+	    }
+	    &:before {
+    	    content: "";
+		    height: 100%;
+		    width: 100%;
+		    background: #000;
+		    opacity: 0.5;
+		    position: absolute;
+		    left: 0;
+            z-index: 1;
+	    }
+    }
+}
+.faq-content {
+	margin-top: -135px;
+    z-index: 3;
+    position: relative;
+}
+
+/** style for feedback form **/
+
+.contact-message-user-feedback-form {
+   label {
+   	    font-size: 18px;
+	    margin-bottom: 25px;
+	    display: block;
+	    color: #303030;
+   }
+   select {
+	   	border: 0;
+	    background: none;
+	    outline: none;
+	    border-bottom: 1px solid rgba(0,0,0,0.3);
+	    width: 100%;
+	    padding-bottom: 7px;
+	    font-size: 14px;
+	    color: rgba(0,0,0,0.4);
+	    font-weight: normal;
+	    margin-bottom: 30px;
+   }
+   textarea {
+   	    margin-top: 0px;
+    	border: none;
+    	border-bottom: 1px solid rgba(0,0,0,0.3);
+    	outline: none;
+   }
+   .form-actions {
+	   	display: flex;
+	    justify-content: space-around;
+	    flex: 10;
+   }
+   .form-submit {
+   	    flex: 5;
+   }
+   #edit-submit {
+   	    border: none;
+	    padding: .5em;
+	    font-size: 18px;
+	    color: white;
+	    webkit-border-radius: 4px;
+	    khtml-border-radius: 4px;
+	    moz-border-radius: 4px;
+	    -ms-border-radius: 4px;
+	    -o-border-radius: 4px;
+	    border-radius: 4px;
+	    margin-top: 1em;
+	   	background: $login-btn;
+	   	&:hover {
+	   		background: #82bb3e;
+		}
+    }
+    #edit-preview {
+	    background: $white;
+	    color: $twitter;
+	    border: 2px solid $twitter;
+	    margin-top: 1em;
+	    padding: .4em 1em;
+	    margin-right: 0;
+	    border-radius: 4px;
+	    font-size: 18px;
+	    text-decoration: none;
+    	&:hover {
+           background: $twitter;
+           color: $white;
+    	}
+    }
+}
+.send-tweets-form {
+	.ajax-progress.ajax-progress-throbber {
+	    height: 80px;
+	    width: 80px;
+	    text-align: center;
+	    border-radius: 7px;	
+	    position: absolute;
+	    .throbber {
+	  	    display: inline-block;
+		    font: normal normal normal 14px/1 FontAwesome;
+		    font-size: inherit;
+		    text-rendering: auto;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		    background: none;
+		    position: absolute;
+		    -webkit-animation: spin 2s linear infinite;
+	        animation: spin 2s linear infinite;
+	        top: 20px;
+		    &:before {
+	          content: "\f110";
+	          -webkit-animation: spin 2s linear infinite;
+	          animation: spin 2s linear infinite;
+	          font-size: 30px;
+	          color: $login-btn;
+		    }
+	      }	
+	      .message {
+	      	display: none;
+	    }
+	}
+}
+
+
+/** twitter box css **/
+
+.send-tweets-form {
+	.form-textarea-wrapper {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+	.js-keeper-placeholder-back,
+	#edit-message {
+	  background: transparent;
+	  font-size: 18px; 
+	  margin: auto;
+	  outline: none; 
+	  padding: 10px;
+	  resize: vertical;
+	  width: 100%;	
+	}
+
+	.js-keeper-placeholder-back {
+	  bottom: 0;
+	  color: transparent;
+	  left: 0;
+	  position: absolute;
+	  top: 0;
+	  white-space: pre-wrap;
+	  width: 100%;
+	  word-wrap: break-word;
+	  z-index: -1;
+	}
+
+	.js-keeper-placeholder-back em {
+	  background: #fcc !important;
 	}
 }
