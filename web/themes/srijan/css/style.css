@@ -3565,7 +3565,8 @@ body {
       position: absolute;
       width: 100%;
       left: 0;
-      top: 0; }
+      top: 0;
+      height: 100%; }
     .block-faq-banner-image .field--type-image:before {
       content: "";
       height: 100%;
