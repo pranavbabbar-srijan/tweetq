@@ -266,11 +266,15 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
          unset($form['actions']['preview']);
       }
       break;
+    case 'contact_message_write_to_us_form':
+    $form['actions']['submit']['#submit'][]  = 'tweets_queue_contact_form_submit';
+      break;
 
     default:
       break;
   }
 }
+
 
 /**
  * Account settig form changes.
@@ -341,7 +345,7 @@ function tweets_queue_user_login_form_changes(&$form) {
  $url = "<span id='forgot-password' >" . USER_FORGOT_PASSWORD_LABEL . "</span>";
  $form['forgot_password'] = array(
     '#markup' => t($url),
-    '#weight' => 14,
+    '#weight' => 13,
   );
 
 
@@ -349,7 +353,7 @@ function tweets_queue_user_login_form_changes(&$form) {
       '#type' => 'markup',
       '#suffix' => '</div>',
       '#markup' => t(''),
-      '#weight' => 13,
+      '#weight' => 14,
   );
   $form['sign_up_btn'] = array(
      '#markup' => t("<div><span>Don't have an account ?</span><a href='/signup' data-drupal-link-system-path='/signup'>Sign up Now</a></div>"),
@@ -1630,6 +1634,12 @@ function tweets_queue_mail($key, &$message, $params) {
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = $params['message'];
       break;
+    case 'contact_us_thankyou_mail':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = $params['message'];
+      break;
+
   }
 }
 
@@ -1647,7 +1657,7 @@ function tweets_queue_signup_send_mail($mail, $name) {
   $key = 'user_signup_mail'; // Replace with Your key
   $to = $mail;
   $message = t("<h2 style='text-transform: capitalize;'>Dear @full_name,</h2>
-   <div style='margin: 30px 0;'>Thankyou for connecting with Barebt!<br>
+   <div style='margin: 30px 0;'>Thankyou for connecting with Barbet!<br>
     You will now be able to use Barbet for posting your tweets.</div>
     Please check out the Import tweets if you want the bulk of tweets to be handled through Barbet.", array('@full_name' => $name));
   $params['message'] = $message;
@@ -1668,6 +1678,48 @@ function tweets_queue_signup_send_mail($mail, $name) {
   }
   \Drupal::logger('mail-log')->notice($message);
 }
+
+/**
+ * Verification mail for sign up users.
+ *
+ * @param string $mail
+ *   User email.
+ * @param string $name
+ *   User full name.
+ */
+
+function tweets_queue_contact_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  global $base_url;
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'contact_us_thankyou_mail';
+  $to = $form_state->getValue('field_email');
+  $to = $to[0]['value'];
+  
+  $user_hash_key = hash('sha256', $mail);
+  $message = t("<div  style='text-align: center;'>Thankyou for reaching to us");
+  $params['message'] = $message;
+  $params['title'] = 'Thankyou mail';
+ 
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    $message = t('There was a problem sending your email notification to @email.', array('@email' => $to));
+    drupal_set_message($message, 'error');
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  else {
+    $message = t('An email notification has been sent to @email ', array('@email' => $to));
+    drupal_set_message($message);
+  }
+  \Drupal::logger('mail-log')->notice($message);
+}
+
+
+
 
 /**
  * Verification mail for sign up users.
@@ -4125,9 +4177,10 @@ function tweets_queue_invite_friends_send_mail($mail) {
   $key = 'invite_friend_email'; // Replace with Your key
   $to = $mail;
   $link = $base_url;
-  $message = t("Friend Invitation\n
-    Your friend have invited you to join the Barbet.\n
-    Link: @link", array('@link' => $link));
+  $link1 = t('<a style="color: #2aa9e0; font-weight: bold; text-decoration: none;" href="' . $link . '"> Join Us </a>');
+  $message = t("<div style='text-align: center;'>Friend Invitation, 
+    Your friend have invited you to join the Barbet.</div><br>
+      <div  style='text-align: center;'>@link</div>", array('@link' => $link1));
   tweets_queue_debug_info($message);
   $params['message'] = $message;
   $params['title'] = 'Friend invitation to the Barbet';
