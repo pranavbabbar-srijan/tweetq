@@ -156,7 +156,7 @@ class ProfileSettingForm extends FormBase {
 
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Update Profile'),
+      '#value' => t('Update'),
       '#attributes' => array('class' => array('update-profile-button')),
     );
 
@@ -191,7 +191,7 @@ class ProfileSettingForm extends FormBase {
     $user->set(SIGNUP_FIELD_JOB_TITLE, $job_title);
     //Optional settings
     $res = $user->save();
-    drupal_set_message('Profile has been updated');
+    drupal_set_message('The changes have been saved');
   }
 
   /**

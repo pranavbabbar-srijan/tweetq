@@ -795,14 +795,23 @@
 		    $('body').addClass('import-tweet-page');
 		}
 
+	     $(".message_history_count b").click(function(e) {
+	        $(".notification-message-list, #notification-display").removeClass("active");
+	        e.stopPropagation();
+	    });
+
 	     $("#block-usersdashboardheaderblock .profile + a, #block-usersdashboardnontwitterheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
+	        $('#block-usersdashboardheaderblock .profile .profile-links').removeClass('active animate');
+			// $('#block-usersdashboardheaderblock .profile > a').removeClass('active');
 	        e.stopPropagation();
 	    });
 
 	     $("#block-usersdashboardheaderblock .profile > a, #block-usersdashboardnontwitterheaderblock .profile > a").click(function(e) {
 	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
+	        $('#notification-display').removeClass('active');
+			$('.notification-message-list').removeClass('active');
 	        setTimeout(function() {
 	            $('.profile-links').toggleClass('animate');
 	        }, 100);
@@ -866,7 +875,7 @@
    		});
 
 		// ripple effect
-		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit").click(function (e) {
+		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit, #change-password .change").click(function (e) {
 
 		  // Remove any old one
 		  $(".ripple").remove();
@@ -972,7 +981,7 @@
 	});
 	// js for adding placeholder on newsletter field
 	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
-	$(".contact-message-form").prepend("<div class='heading-write-us'>Write to us</div>");
+	$(".contact-message-write-to-us-form").prepend("<div class='heading-write-us'>Write to us</div>");
 	/*$(window).scroll(function() {    
     var scroll = $(window).scrollTop();
 
@@ -986,6 +995,10 @@
 	$('#my_tweets .text').click(function() {
 		$(this).siblings('div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
 	});
+
+	if ($('#my_tweets > div a').hasClass('active')) {
+	    $('#my_tweets > div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	}
 
 	$('.messages').delay(500).animate({'bottom': '0'}, 50);
 
@@ -1016,6 +1029,54 @@
          //    $('.option + .form-submit').submit();
          //    });
          // });
+        $( ".faq .faq-qa-header" ).each(function( index ) {
+		  $(this).unwrap();
+		});
+		$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
+        
+        setTimeout(function(){ 
+        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
+        }, 500);
+
+        $('.faq-header').append('Articles');
+        $('.user-login-form #forgot-password').appendTo('.user-login-form');
+
+
+
+        // twitter text box 
+         function onTweetCompose(event) {
+		    var $textarea = $('.send-tweets-form #edit-message'),
+		        $placeholderBacker = $('.js-keeper-placeholder-back'),
+		        currentValue = $textarea.val()
+		    ;
+		    // realLength is not 140, links counts for 23 characters always.
+		    var realLength = 140;
+		    var remainingLength = 140 - currentValue.length;
+
+		    if (0 > remainingLength) {
+		      // Split value if greater than 
+		      var allowedValuePart = currentValue.slice(0, realLength),
+		          refusedValuePart = currentValue.slice(realLength)
+		      ;
+
+		      // Fill the hidden div.
+		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+		    } else {
+		      $placeholderBacker.html('');
+		    }
+		  }
+		  
+		  $(document).ready(function () {
+		    $textarea = $('textarea');
+
+		    // Create a pseudo-element that will be hidden behind the placeholder.
+		    var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
+		    $placeholderBacker.insertAfter($textarea);
+
+		    onTweetCompose();
+		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
+		  });
+
 
 })(jQuery);
 
@@ -1035,6 +1096,7 @@
 	 	attach: function attach() {
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
+	 		
 	 	}
 	 };
 })(jQuery);

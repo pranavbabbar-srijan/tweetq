@@ -626,6 +626,8 @@ body {
     -o-border-radius: 4px;
     border-radius: 4px;
     margin-top: 1em; }
+    .user-login-form input[type=submit]:hover, .user-login-form #forgot-password-submit:hover, .user-login-form #forgot-password-cancel:hover, .user-login-form #log-in-submit:hover {
+      background: #82bb3e; }
   .user-login-form > input + a {
     display: block;
     text-align: center;
@@ -643,11 +645,8 @@ body {
     color: #aaa;
     font-size: 12px;
     display: block;
-    width: 150px;
     margin: 0 auto;
-    position: absolute;
-    bottom: 88px;
-    right: 15px; }
+    text-align: right; }
 
 #user-login-prefix + div {
   position: absolute;
@@ -668,6 +667,9 @@ body {
     border-radius: 4px;
     font-size: 13px;
     text-decoration: none; }
+    #user-login-prefix + div a:hover {
+      background: #2aa9e0;
+      color: #ffffff; }
   #user-login-prefix + div span {
     color: #aaa;
     margin-top: 7px;
@@ -801,6 +803,8 @@ body.path-update-password .messages--status {
       margin-right: 0.2em;
       display: inline-block;
       vertical-align: text-top; }
+    .twitter-btn a:hover {
+      background: #2195c7; }
   .twitter-btn span {
     width: 100%;
     display: block;
@@ -1346,13 +1350,14 @@ body.path-update-password .messages--status {
     position: absolute;
     bottom: -80px;
     left: 20%;
-    border-radius: 35px; }
+    border-radius: 35px;
+    padding-left: 50px; }
     .user-logged-in .messages--status:before {
       content: "";
-      font-size: 22px;
+      font-size: 38px;
       position: absolute;
-      top: 15px;
-      margin-left: -30px; }
+      top: 6px;
+      margin-left: -43px; }
     .user-logged-in .messages--status + .block + .block-sign-in-with-twitter-block {
       margin-top: 15px; }
     .user-logged-in .messages--status .messages__list {
@@ -1839,6 +1844,7 @@ body.path-update-password .messages--status {
   position: relative;
   width: 272px; }
   .notifications > div#twitter-notification-count {
+    display: none;
     position: absolute;
     top: -2px;
     right: 134px;
@@ -1848,7 +1854,6 @@ body.path-update-password .messages--status {
     padding: .2em;
     font-size: 12px;
     text-align: center;
-    display: block;
     z-index: 1; }
   .notifications .notification-message-list {
     height: 92vh;
@@ -1860,7 +1865,7 @@ body.path-update-password .messages--status {
     margin-top: 20px;
     left: 328px;
     top: 28px;
-    width: 275px;
+    width: 305px;
     background: white;
     font-size: 12px;
     color: #979797;
@@ -1884,7 +1889,7 @@ body.path-update-password .messages--status {
       outline: 1px solid slategrey; }
     .notifications .notification-message-list.active {
       visibility: inherit;
-      left: 60px;
+      left: 30px;
       background: white;
       border-radius: 0; }
     .notifications .notification-message-list > div {
@@ -1894,13 +1899,13 @@ body.path-update-password .messages--status {
         color: #212121;
         position: fixed; }
       .notifications .notification-message-list > div:nth-child(2) {
-        margin-top: 27px; }
+        margin-top: 55px; }
       .notifications .notification-message-list > div span {
         font-size: 10px;
         display: block; }
         .notifications .notification-message-list > div span.state {
           color: #212121;
-          font-size: 13px;
+          font-size: 16px;
           margin-bottom: 3px; }
         .notifications .notification-message-list > div span.time {
           font-style: italic; }
@@ -1917,14 +1922,21 @@ body.path-update-password .messages--status {
             font-weight: normal; }
         .notifications .notification-message-list > div span.message_history_count {
           display: block;
-          border-bottom: 1px solid #979797;
-          width: 256px;
+          width: 299px;
           position: relative;
           left: -12px;
           top: -12px;
-          padding: 5px 10px;
-          font-size: 12px;
-          background: white; }
+          padding: 15px 12px;
+          font-size: 18px;
+          background: #eee;
+          color: #999; }
+          .notifications .notification-message-list > div span.message_history_count b {
+            float: right;
+            font-weight: normal;
+            cursor: pointer;
+            font-family: 'fontawesome'; }
+            .notifications .notification-message-list > div span.message_history_count b:after {
+              content: "\f00d"; }
           .notifications .notification-message-list > div span.message_history_count div {
             display: inline; }
             .notifications .notification-message-list > div span.message_history_count div span {
@@ -1937,8 +1949,8 @@ body.path-update-password .messages--status {
   position: absolute; }
 
 .profilesettingform-body.user-logged-in .messages--status {
-  bottom: -70px !important;
-  left: 45% !important; }
+  bottom: -490px !important;
+  left: 27.3% !important; }
 
 .profilesettingform {
   margin-top: -8em; }
@@ -1996,7 +2008,11 @@ body.path-update-password .messages--status {
         border: 1px solid;
         border-radius: 5px;
         padding: 5px 10px;
-        cursor: pointer; }
+        cursor: pointer;
+        background: rgba(0, 128, 0, 0.4);
+        color: white; }
+        .profilesettingform .message-header #change-password .change:hover {
+          background: rgba(0, 128, 0, 0.8); }
     .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
       width: 35%;
       margin-right: 100px;
@@ -2031,7 +2047,7 @@ body.path-update-password .messages--status {
         font-size: 16px;
         font-weight: bold; }
     .profilesettingform .message-header input[type="submit"] {
-      margin: 20px 0;
+      margin: 20px 240px;
       border: none;
       background: #96c85a;
       width: 30%;
@@ -2077,15 +2093,41 @@ body.path-update-password .messages--status {
       .send-tweets-form .form-type-managed-file .form-managed-file .form-file + .js-form-submit, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .form-file + .js-form-submit {
         display: none; }
     .send-tweets-form .form-type-managed-file .form-managed-file .option, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .option {
-      display: block; }
+      display: block;
+      position: relative;
+      pointer-events: none; }
+      .send-tweets-form .form-type-managed-file .form-managed-file .option:after, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .option:after {
+        content: 'x';
+        background: #dddddd;
+        height: 20px;
+        width: 20px;
+        display: block;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        border-radius: 30px;
+        color: white;
+        padding: 2px 6px;
+        text-align: center;
+        cursor: pointer; }
     .send-tweets-form .form-type-managed-file .form-managed-file > div, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file > div {
       display: flex;
       flex-flow: row;
       justify-content: flex-start; }
     .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox {
-      margin: 0; }
+      margin: 0;
+      position: relative; }
       .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"], .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] {
-        display: none; }
+        position: absolute;
+        right: 0;
+        opacity: 0;
+        height: 20px;
+        width: 20px;
+        z-index: 999;
+        right: 5px;
+        top: 5px; }
+        .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"]:hover + .option:after, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"]:hover + .option:after {
+          background: #2aa9e0; }
       .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file {
         background: none;
         padding-left: 0;
@@ -2150,6 +2192,8 @@ body.path-update-password .messages--status {
     /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
     /*IE 5.5-7*/ }
+    .send-tweets-form .message-header .ajax-new-content, .tweets-queue-tweet-form .message-header .ajax-new-content {
+      display: none !important; }
     .send-tweets-form .message-header .form-item-display-box, .tweets-queue-tweet-form .message-header .form-item-display-box {
       float: left;
       width: 63%;
@@ -2599,30 +2643,7 @@ body.path-update-password .messages--status {
   .Home-page--blukstore--section .views-row {
     flex: 3; }
     .Home-page--blukstore--section .views-row .views-field-field-section-image {
-      display: inline-block;
-      font: normal normal normal 14px/1 FontAwesome;
-      font-size: inherit;
-      text-rendering: auto;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale; }
-      .Home-page--blukstore--section .views-row .views-field-field-section-image:before {
-        height: 140px;
-        width: 140px;
-        display: block;
-        border-radius: 100%;
-        line-height: 140px;
-        color: #fff;
-        font-size: 56px;
-        text-align: center; }
-    .Home-page--blukstore--section .views-row:nth-of-type(1) .views-field-field-section-image:before {
-      content: "\f07c";
-      background: #b6d791; }
-    .Home-page--blukstore--section .views-row:nth-of-type(2) .views-field-field-section-image:before {
-      content: "\f017";
-      background: #2aa9e0; }
-    .Home-page--blukstore--section .views-row:nth-of-type(3) .views-field-field-section-image:before {
-      content: "\f085";
-      background: #f98575; }
+      display: inline-block; }
   .Home-page--blukstore--section .views-field-title {
     margin-top: 25px;
     font-size: 24px;
@@ -2636,10 +2657,6 @@ body.path-update-password .messages--status {
   background-color: #ffffff; }
   .views--mission-vision .views-row:last-child .section__mission-vision {
     flex-direction: row-reverse; }
-  .views--mission-vision .views-row:nth-of-type(2) img {
-    max-width: 45%;
-    height: auto;
-    width: 100%; }
 
 .section__mission-vision {
   display: flex;
@@ -2778,7 +2795,7 @@ body.path-update-password .messages--status {
       background: #2aa9e0;
       border-radius: 5px;
       border: none;
-      color: #ffffff; }
+      color: #ffffff !important; }
       .block-sub-nav-main-menu .menu li:last-child a:hover {
         opacity: 1;
         background: #2195c7; }
@@ -2856,19 +2873,19 @@ body.path-update-password .messages--status {
   box-shadow: -3px 2px 11px 2px #ddd;
   position: absolute;
   max-width: 503px;
-  right: 11.5%;
-  top: 80px;
+  left: 90px;
+  top: 810px;
   border: none;
   z-index: 99;
   border-radius: 5px;
   font-size: 24px;
-  width: 300px;
-  padding-left: 93px;
+  width: 84%;
+  padding-left: 75px;
   align-items: center;
   background-image: none;
   opacity: 1;
-  padding-top: 140px;
-  padding-bottom: 180px; }
+  padding-top: 15px;
+  padding-bottom: 70px; }
   .path-contact .messages--status:before {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -2878,7 +2895,7 @@ body.path-update-password .messages--status {
     -moz-osx-font-smoothing: grayscale;
     content: "\f00c";
     position: absolute;
-    left: 38px;
+    left: 20px;
     height: 40px;
     width: 40px;
     background: #96c85a;
@@ -2886,7 +2903,7 @@ body.path-update-password .messages--status {
     border-radius: 100px;
     line-height: 40px;
     text-align: center;
-    top: 145px;
+    top: 20px;
     font-size: 24px; }
 
 .featured-top {
@@ -2982,7 +2999,6 @@ body.path-update-password .messages--status {
     position: absolute;
     top: 0;
     z-index: -1;
-    top: -218px;
     width: 100%; }
     .block-product-srijan-technologies .field--name-field-background-image img {
       width: 100%; }
@@ -3143,6 +3159,9 @@ body.path-update-password .messages--status {
 .path-signup .block-sub-nav-main-menu .menu li a {
   color: #666; }
 
+.path-signup .block-sub-nav-main-menu .menu li:last-child a {
+  color: #ffffff; }
+
 /** setting page **/
 .user-form {
   background: white;
@@ -3246,7 +3265,8 @@ body.path-update-password .messages--status {
       -moz-border-radius: 4px;
       -ms-border-radius: 4px;
       -o-border-radius: 4px;
-      border-radius: 4px; }
+      border-radius: 4px;
+      margin: 0 240px; }
       .user-form .form-actions input:hover {
         background: #82bb3e; }
 
@@ -3323,6 +3343,8 @@ body.path-update-password .messages--status {
     margin: 0;
     position: relative;
     top: 0; }
+  .page-node-type-thanku-pages .messages {
+    display: none !important; }
 
 /** css for spinner **/
 body {
@@ -3352,8 +3374,7 @@ body {
   height: auto;
   overflow: hidden;
   position: relative;
-  z-index: 0;
-  margin-top: -75px; }
+  z-index: 0; }
 
 .page-node-type-article .block-page-title-block {
   position: absolute;
@@ -3422,3 +3443,260 @@ body {
 .path-signup .layout-container .region-content {
   min-height: auto;
   padding-bottom: 20px; }
+
+/** faq **/
+.path-faq-page #header {
+  z-index: 9;
+  position: relative;
+  background: transparent; }
+
+.path-faq-page .site-branding svg {
+  fill: #ffffff; }
+
+.path-faq-page .site-branding a {
+  color: #ffffff; }
+
+.path-faq-page.user-logged-in {
+  background: #ffffff; }
+  .path-faq-page.user-logged-in .main-content {
+    position: initial;
+    width: 100%; }
+  .path-faq-page.user-logged-in #main-wrapper {
+    padding-top: 0; }
+
+.faq {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center; }
+  .faq .faq-qa-header {
+    text-align: center;
+    cursor: pointer;
+    margin: 0 1.5%; }
+    .faq .faq-qa-header .faq-header {
+      font-size: 12px;
+      padding-bottom: 20px;
+      border-bottom: 5px solid transparent;
+      color: #ffffff;
+      opacity: 0.8; }
+      .faq .faq-qa-header .faq-header:hover {
+        opacity: 1; }
+      .faq .faq-qa-header .faq-header.faq-category-qa-visible {
+        border-color: #ffffff;
+        opacity: 1; }
+        .faq .faq-qa-header .faq-header.faq-category-qa-visible a {
+          opacity: 1; }
+    .faq .faq-qa-header a {
+      font-size: 18px;
+      text-decoration: none;
+      display: block;
+      padding: 0px 15px;
+      text-align: center;
+      color: #ffffff;
+      opacity: 0.8; }
+      .faq .faq-qa-header a:hover {
+        opacity: 1; }
+  .faq .faq-qa-hide {
+    width: 100%;
+    padding: 8em 4em 1em 4em;
+    -webkit-order: 1;
+    order: 1;
+    word-wrap: break-word; }
+    .faq .faq-qa-hide:before {
+      content: "Frequently Asked Questions";
+      position: relative;
+      top: -45px;
+      font-size: 16px;
+      color: #666;
+      text-transform: uppercase;
+      font-weight: bold;
+      opacity: .8; }
+
+.faq-answer {
+  padding-left: 65px;
+  font-size: 16px;
+  line-height: 1.5em;
+  position: relative;
+  margin-bottom: 20px;
+  color: #666; }
+  .faq-answer:before {
+    content: "Ans.";
+    font-size: 18px;
+    font-weight: 800;
+    padding-right: 15px;
+    position: absolute;
+    left: 0;
+    color: #303030; }
+  .faq-answer .field--type-entity-reference {
+    display: none; }
+  .faq-answer > a {
+    display: none; }
+
+.faq-question {
+  padding-left: 65px;
+  position: relative; }
+  .faq-question:before {
+    content: "Ques.";
+    font-size: 18px;
+    font-weight: 800;
+    padding-right: 15px;
+    position: absolute;
+    left: 0; }
+  .faq-question span {
+    font-size: 18px;
+    color: #303030;
+    font-weight: bold; }
+
+/** faq banner image **/
+.block-faq-banner-image {
+  margin-top: 115px;
+  text-align: center; }
+  .block-faq-banner-image .field--name-field-title {
+    color: #ffffff; }
+  .block-faq-banner-image .field--type-image {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%; }
+    .block-faq-banner-image .field--type-image img {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 0; }
+    .block-faq-banner-image .field--type-image:before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      background: #000;
+      opacity: 0.5;
+      position: absolute;
+      left: 0;
+      z-index: 1; }
+
+.faq-content {
+  margin-top: -135px;
+  z-index: 3;
+  position: relative; }
+
+/** style for feedback form **/
+.contact-message-user-feedback-form label {
+  font-size: 18px;
+  margin-bottom: 25px;
+  display: block;
+  color: #303030; }
+
+.contact-message-user-feedback-form select {
+  border: 0;
+  background: none;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%;
+  padding-bottom: 7px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: normal;
+  margin-bottom: 30px; }
+
+.contact-message-user-feedback-form textarea {
+  margin-top: 0px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  outline: none; }
+
+.contact-message-user-feedback-form .form-actions {
+  display: flex;
+  justify-content: space-around;
+  flex: 10; }
+
+.contact-message-user-feedback-form .form-submit {
+  flex: 5; }
+
+.contact-message-user-feedback-form #edit-submit {
+  border: none;
+  padding: .5em;
+  font-size: 18px;
+  color: white;
+  webkit-border-radius: 4px;
+  khtml-border-radius: 4px;
+  moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  margin-top: 1em;
+  background: #96c85a; }
+  .contact-message-user-feedback-form #edit-submit:hover {
+    background: #82bb3e; }
+
+.contact-message-user-feedback-form #edit-preview {
+  background: #ffffff;
+  color: #2aa9e0;
+  border: 2px solid #2aa9e0;
+  margin-top: 1em;
+  padding: .4em 1em;
+  margin-right: 0;
+  border-radius: 4px;
+  font-size: 18px;
+  text-decoration: none; }
+  .contact-message-user-feedback-form #edit-preview:hover {
+    background: #2aa9e0;
+    color: #ffffff; }
+
+.send-tweets-form .ajax-progress.ajax-progress-throbber {
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  border-radius: 7px;
+  position: absolute; }
+  .send-tweets-form .ajax-progress.ajax-progress-throbber .throbber {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: none;
+    position: absolute;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    top: 20px; }
+    .send-tweets-form .ajax-progress.ajax-progress-throbber .throbber:before {
+      content: "\f110";
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      font-size: 30px;
+      color: #96c85a; }
+  .send-tweets-form .ajax-progress.ajax-progress-throbber .message {
+    display: none; }
+
+/** twitter box css **/
+.send-tweets-form .form-textarea-wrapper {
+  position: relative;
+  z-index: 1;
+  overflow: hidden; }
+
+.send-tweets-form .js-keeper-placeholder-back,
+.send-tweets-form #edit-message {
+  background: transparent;
+  font-size: 18px;
+  margin: auto;
+  outline: none;
+  padding: 10px;
+  resize: vertical;
+  width: 100%; }
+
+.send-tweets-form .js-keeper-placeholder-back {
+  bottom: 0;
+  color: transparent;
+  left: 0;
+  position: absolute;
+  top: 0;
+  white-space: pre-wrap;
+  width: 100%;
+  word-wrap: break-word;
+  z-index: -1; }
+
+.send-tweets-form .js-keeper-placeholder-back em {
+  background: #fcc !important; }

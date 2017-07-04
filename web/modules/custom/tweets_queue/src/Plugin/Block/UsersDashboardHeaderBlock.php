@@ -64,7 +64,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
 
     $message_history_data = "<div class='notification-message-list'>";
     $message_history_data .= " <div id='message-history-count-section'>
-      <span class='message_history_count'>You have " . $message_history_count_output . " Notifications</span>
+      <span class='message_history_count'>Recent Activity <b></b></span>
     </div>";
     foreach ($tweets_history as $data) {
       $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
