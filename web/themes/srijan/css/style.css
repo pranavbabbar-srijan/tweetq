@@ -3536,12 +3536,15 @@ body {
     display: none; }
 
 .faq-question {
-  padding-left: 0; }
+  padding-left: 65px;
+  position: relative; }
   .faq-question:before {
     content: "Ques.";
     font-size: 18px;
     font-weight: 800;
-    padding-right: 15px; }
+    padding-right: 15px;
+    position: absolute;
+    left: 0; }
   .faq-question span {
     font-size: 18px;
     color: #303030;
@@ -3579,18 +3582,66 @@ body {
   z-index: 3;
   position: relative; }
 
-.send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] + .option:before,
-.tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] + .option:before {
-  content: 'x';
-  background: red;
-  height: 20px;
-  width: 20px;
+/** style for feedback form **/
+.contact-message-user-feedback-form label {
+  font-size: 18px;
+  margin-bottom: 25px;
   display: block;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  border-radius: 30px;
+  color: #303030; }
+
+.contact-message-user-feedback-form select {
+  border: 0;
+  background: none;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%;
+  padding-bottom: 7px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: normal;
+  margin-bottom: 30px; }
+
+.contact-message-user-feedback-form textarea {
+  margin-top: 0px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  outline: none; }
+
+.contact-message-user-feedback-form .form-actions {
+  display: flex;
+  justify-content: space-around;
+  flex: 10; }
+
+.contact-message-user-feedback-form .form-submit {
+  flex: 5; }
+
+.contact-message-user-feedback-form #edit-submit {
+  border: none;
+  padding: .5em;
+  font-size: 18px;
   color: white;
-  padding: 2px 6px;
-  text-align: center;
-  cursor: pointer; }
+  webkit-border-radius: 4px;
+  khtml-border-radius: 4px;
+  moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  margin-top: 1em;
+  background: #96c85a; }
+  .contact-message-user-feedback-form #edit-submit:hover {
+    background: #82bb3e; }
+
+.contact-message-user-feedback-form #edit-preview {
+  background: #ffffff;
+  color: #2aa9e0;
+  border: 2px solid #2aa9e0;
+  margin-top: 1em;
+  padding: .4em 1em;
+  margin-right: 0;
+  margin-left: 0;
+  border-radius: 4px;
+  font-size: 18px;
+  text-decoration: none; }
+  .contact-message-user-feedback-form #edit-preview:hover {
+    background: #2aa9e0;
+    color: #ffffff; }

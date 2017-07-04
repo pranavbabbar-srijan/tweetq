@@ -4008,12 +4008,15 @@ body {
 	}
 }
 .faq-question {
-	padding-left: 0;
+	padding-left: 65px;
+	position: relative;
     &:before {
     	content: "Ques.";
 	    font-size: 18px;
 	    font-weight: 800;
 	    padding-right: 15px;
+	    position: absolute;
+	    left: 0;
     } 
     span {
       font-size: 18px;
@@ -4059,19 +4062,72 @@ body {
     position: relative;
 }
 
-.send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] + .option:before, 
-.tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] + .option:before {
-    content: 'x';
-    background: red;
-    height: 20px;
-    width: 20px;
-    display: block;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    border-radius: 30px;
-    color: white;
-    padding: 2px 6px;
-    text-align: center;
-    cursor: pointer;
+/** style for feedback form **/
+
+.contact-message-user-feedback-form {
+   label {
+   	    font-size: 18px;
+	    margin-bottom: 25px;
+	    display: block;
+	    color: #303030;
+   }
+   select {
+	   	border: 0;
+	    background: none;
+	    outline: none;
+	    border-bottom: 1px solid rgba(0,0,0,0.3);
+	    width: 100%;
+	    padding-bottom: 7px;
+	    font-size: 14px;
+	    color: rgba(0,0,0,0.4);
+	    font-weight: normal;
+	    margin-bottom: 30px;
+   }
+   textarea {
+   	    margin-top: 0px;
+    	border: none;
+    	border-bottom: 1px solid rgba(0,0,0,0.3);
+    	outline: none;
+   }
+   .form-actions {
+	   	display: flex;
+	    justify-content: space-around;
+	    flex: 10;
+   }
+   .form-submit {
+   	    flex: 5;
+   }
+   #edit-submit {
+   	    border: none;
+	    padding: .5em;
+	    font-size: 18px;
+	    color: white;
+	    webkit-border-radius: 4px;
+	    khtml-border-radius: 4px;
+	    moz-border-radius: 4px;
+	    -ms-border-radius: 4px;
+	    -o-border-radius: 4px;
+	    border-radius: 4px;
+	    margin-top: 1em;
+	   	background: $login-btn;
+	   	&:hover {
+	   		background: #82bb3e;
+		}
+    }
+    #edit-preview {
+	    background: $white;
+	    color: $twitter;
+	    border: 2px solid $twitter;
+	    margin-top: 1em;
+	    padding: .4em 1em;
+	    margin-right: 0;
+	    margin-left: 0;
+	    border-radius: 4px;
+	    font-size: 18px;
+	    text-decoration: none;
+    	&:hover {
+           background: $twitter;
+           color: $white;
+    	}
+    }
 }
