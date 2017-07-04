@@ -31,10 +31,11 @@ default:
       region_map:
         content: "#signup-form"
         footer: "#footer"
-        left_header: "#header-left"
+        left_header: "# "
         right_header: "#header-right"
         right_sidebar: "#column-right"
         header: "ul.header"
         valid_tweet: ".valid-tweets-header"
         homepagefooter: "#block-submenufooterblock"
+        mytweets: "#my_tweets"
 

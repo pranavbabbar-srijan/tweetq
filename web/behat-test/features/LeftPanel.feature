@@ -64,22 +64,7 @@ Given I am on "/"
     And I should see text matching "Create a Tweet"
     And I should see text matching "Import Tweets"
 
-    # Scenario: Click on profile Settings
-    # Given I am on "/"
-    # And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    # And I press "Log in"
-    # And I wait for 5 seconds
-    # When I click on the element with xpath "//div[@id='block-usersleftsidebarblock']//div[@class='profile_settings']"
-    # Then I should see text matching "Profile"
-    # And I should see text matching "Full Name"
-    # And I should see text matching "Neha Singh"
-    # And I should see text matching "Twitter Username"
-    # And I should see text matching "@Nehasin05727670"
-    # And I should see text matching "Email"
-    # And I should see text matching "nehasingh767@gmail.com"
-    # And I should see text matching ""
-    # And I should see text matching "Password"
-
+   
 
 
 

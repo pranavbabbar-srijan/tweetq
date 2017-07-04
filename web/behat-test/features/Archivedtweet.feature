@@ -9,7 +9,27 @@ Scenario: Click on valid tweet should navigate to different page
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[4]"
    Then the url should match "/dashboard/archived-tweets"
 
+
 @2
+Scenario: Verify if tweeted tweet is modified, it should move in archived tweet list
+    Given I am on "/"
+    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
+    And I press "Log in"
+    And I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
+    And I click on the element with xpath "//div[@id='block-usersvalidtweetsblock']//a[2]"
+    And I fetch text for archived tweet
+    When I click on the element with xpath "//div[@id='block-userstweetedtweetsblock']//div[@class='item-list'][2]/ul/li[1]//a[contains(@href,'edit')]"
+    And I wait for 5 seconds
+    And I fill in some unique text 
+    And I press "edit-clone"
+    And I wait for 5 seconds
+    Then I should see text matching "Tweet have been saved successfully"
+    And I wait for 5 seconds
+    And Archived Tweet incremented
+
+
+
+@3
     Scenario: Verify columns listed on archived page
     Given I am on "/"
     And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
@@ -25,7 +45,7 @@ Scenario: Click on valid tweet should navigate to different page
     And I should see "Modify" in the "header"
 
 
-@3
+@4
  Scenario: Verify the hover text of delete element
  	Given I am on "/"
     And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
@@ -37,7 +57,7 @@ Scenario: Click on valid tweet should navigate to different page
     Then I should see text matching "Click here to delete your Tweet"
 
 
-@4
+@5
 Scenario: Verify the delete functionality
 Given I am on "/"
     And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
@@ -49,10 +69,11 @@ Given I am on "/"
     And I wait for 5 seconds
     And I should see text matching "This will permanently delete your tweet"
     And I press the "Delete Anyway" button
+    And I wait for 5 seconds
     Then I should see text matching "Tweet Deleted Successfully"
     And archived tweet gets decremented 
 
-@5
+@6
 Scenario: Cancel button functionality
 Given I am on "/"
     And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
@@ -65,3 +86,12 @@ Given I am on "/"
     And I should see text matching "This will permanently delete your tweet"
     And I press the "Cancel" button
     Then the url should match "/dashboard/archived-tweets"
+
+@7
+Scenario: To fetch count of Archived tweet
+    Given I am on "/"
+    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
+    And I press "Log in"
+    And I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
+    And I click on the element with xpath "//div[@id='block-usersvalidtweetsblock']//a[2]"
+    And I fetch text for archived tweet
