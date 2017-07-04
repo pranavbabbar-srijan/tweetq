@@ -3637,7 +3637,6 @@ body {
   margin-top: 1em;
   padding: .4em 1em;
   margin-right: 0;
-  margin-left: 0;
   border-radius: 4px;
   font-size: 18px;
   text-decoration: none; }
@@ -3671,3 +3670,33 @@ body {
       color: #96c85a; }
   .send-tweets-form .ajax-progress.ajax-progress-throbber .message {
     display: none; }
+
+/** twitter box css **/
+.send-tweets-form .form-textarea-wrapper {
+  position: relative;
+  z-index: 1;
+  overflow: hidden; }
+
+.send-tweets-form .js-keeper-placeholder-back,
+.send-tweets-form #edit-message {
+  background: transparent;
+  font-size: 18px;
+  margin: auto;
+  outline: none;
+  padding: 10px;
+  resize: vertical;
+  width: 100%; }
+
+.send-tweets-form .js-keeper-placeholder-back {
+  bottom: 0;
+  color: transparent;
+  left: 0;
+  position: absolute;
+  top: 0;
+  white-space: pre-wrap;
+  width: 100%;
+  word-wrap: break-word;
+  z-index: -1; }
+
+.send-tweets-form .js-keeper-placeholder-back em {
+  background: #fcc !important; }
