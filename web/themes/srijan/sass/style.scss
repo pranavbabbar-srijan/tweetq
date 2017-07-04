@@ -703,15 +703,17 @@ body.path-update-password {
 .path-signup {
 	.messages--status {
         border: none;
-	    background: none;
+	    background: $white;
 	    font-size: 18px;
 	    color: #303030;
 	    width: 730px;
 	    box-shadow: none;
-	    height: 320px;
-	    line-height: 500px;
+	    height: 341px;
+        line-height: 570px;
 	    text-align: center;
 	    margin: 0 auto;
+	    margin-top: -19px;
+        margin-bottom: -20px;
 	    display: block !important;
 	    &:before  {
 	    	content: "";
