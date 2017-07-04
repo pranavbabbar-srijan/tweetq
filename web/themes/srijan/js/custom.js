@@ -69,10 +69,12 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
+					location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 		    });
+
 
 		});
 
@@ -89,7 +91,8 @@
 	    	$.post(friend_invite_send_token_path, {'email' : emails}, function(data) {
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
-					$('#email-sent').delay(5000).fadeOut(300);			
+					$('#email-sent').delay(5000).fadeOut(300);	
+					location.reload();		
 					return;
 				}
 				$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
@@ -988,6 +991,19 @@
 
     // change text of summary 
     $(".user-form summary").text("Settings");
+
+    // add spinner when click on submit button
+    $("body").prepend('<div id="overlayspin" class="ui-widget-overlay" style="z-index: 1001; display: none;"></div>');
+	$("body").prepend("<div id='spinner' style='display: none;'><i class='fa fa-spinner' aria-hidden='true'></i></div>");
+	$('#contact-message-write-to-us-form').submit(function() {
+	    var pass = true;
+	    //some validations
+	    if(pass == false){
+	        return false;
+	    }
+	    $("#overlayspin, #spinner").show();
+	    return true;
+	});
 
 })(jQuery);
 

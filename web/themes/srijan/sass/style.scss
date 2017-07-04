@@ -265,7 +265,7 @@
 }
 #header {
 	position: relative;
-	margin-top: 1.4em;
+	padding-top: 1em;
 	padding-bottom: 1.05em;
 	border-bottom: 1px solid rgba(255, 255, 255, .4);
 	.layout-container {
@@ -412,7 +412,7 @@ body {
 		float: right;
 	}
 	#main-wrapper {
-		margin-top: 15vh;
+		margin-top: 12vh;
 	}
 }
 
@@ -505,7 +505,7 @@ body {
 .path-frontpage .section {
 	+ .section {
 		.region-middle {
-			margin-top: 5vh;
+			margin-top: 10vh;
 		}
 	}
 }
@@ -518,6 +518,7 @@ body {
 	float: right;
 	margin-top: -4vh;
 	position: relative;
+	min-height: 415px;
 	h2 {
 		font-size: 22px;
 		font-weight: 300;
@@ -583,35 +584,38 @@ body {
 		width: 150px;
 		margin: 0 auto;
 		position: absolute;
-	    bottom: 74px;
+	    bottom: 88px;
 	    right: 15px;
-	    + div {
-			position: absolute;
-		    bottom: 10px;
-		    border-top: 1px solid #ccc;
-		    width: 100%;
-		    left: 0;
-		    padding: 15px 30px 5px;
-		    a {
-		    	float: right;
-		    	background: white;
-				color: $twitter;
-				border: 1px solid $twitter;
-				float: right;
-				padding: .4em 1em;
-				margin-right: 0;
-				margin-left: 0;
-				border-radius: 4px;
-				font-size: 13px;
-				text-decoration: none;
-		    }
-		    span {
-		    	color: #aaa;
-		    	margin-top: 7px;
-			    float: left;
-			    font-size: 13px;
-		    }
-		}
+	}
+}
+
+#user-login-prefix {
+	+ div {
+		position: absolute;
+	    bottom: 10px;
+	    border-top: 1px solid #ccc;
+	    width: 100%;
+	    left: 0;
+	    padding: 15px 30px 5px;
+	    a {
+	    	float: right;
+	    	background: white;
+			color: $twitter;
+			border: 1px solid $twitter;
+			float: right;
+			padding: .4em 1em;
+			margin-right: 0;
+			margin-left: 0;
+			border-radius: 4px;
+			font-size: 13px;
+			text-decoration: none;
+	    }
+	    span {
+	    	color: #aaa;
+	    	margin-top: 7px;
+		    float: left;
+		    font-size: 13px;
+	    }
 	}
 }
 
@@ -707,15 +711,21 @@ body.path-update-password {
 	font-size: 22px;
 	text-align: center;
 	font-weight: 300;
-	margin-bottom: -4.5em;
+	margin-bottom: 0;
+	position: relative;
+    top: -65px;
+    position: absolute;
+    top: 40px;
+    width: 86%;
 	.signup {
 		margin-top: 10px;
 		font-size: 16px;
 		color: $gray;
 		font-weight: normal;
-		margin-bottom: 6em;
+		margin-bottom: 3em;
 	}
 	.form-item-email {
+		margin-bottom: 2em;
 		label {
 			text-align: left;
 			font-weight: bold;
@@ -724,10 +734,14 @@ body.path-update-password {
 			font-size: 12.8px;
 		}
 	}
+	.validation-error {
+		position: absolute;
+		width: 100%;
+	}
 	#forgot-password-submit {
 		font-weight: normal;
 		cursor: pointer;
-		margin-top: 50px;
+		margin-top: 20px;
 	}
 	#forgot-password-cancel {
 		font-weight: normal;
@@ -806,7 +820,7 @@ body.path-update-password {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
 	float: left;
-	margin-top: 220px;
+	margin-top: 200px;
 	margin-left: 5em;
 	position: relative;
 	.count {
@@ -1489,7 +1503,9 @@ body.path-update-password {
 			background: none;
 			color: $twitter;
 			margin-left: 20px;
-			border: 1px solid;
+			border: 2px solid;
+		    padding-top: 0.5em;
+		    padding-bottom: .5em;
 		}
 	}
 }
@@ -2085,11 +2101,16 @@ body.path-update-password {
 	&.user-logged-in {
 		.main-content {
 			position: absolute;
-			top: 70px;
+			// top: 70px;
+		}
+		.messages--status {
+			bottom: -70px !important;
+		    left: 45% !important;
 		}
 	}
 }
 .profilesettingform {
+	margin-top: -8em;
 	.profile-setting {
 		background: #FCFCFC;
 		padding: 15px 30px;
@@ -2191,6 +2212,9 @@ body.path-update-password {
 		    display: block;
 		    @include border-radius(4px);
     	}
+	}
+	#profile-settingform-password-validation-error, #password-changed {
+		position: absolute;
 	}
 }
 .send-tweets-form, .tweets-queue-tweet-form {
@@ -3059,7 +3083,7 @@ body.path-update-password {
 		    		border-color: $white;
 		    	}
 		    }
-		    &:nth-of-type(4) {
+		    &:last-child {
 			   	a {
 			   		padding: 10px;
                     background: $twitter;
@@ -3081,7 +3105,7 @@ body.path-update-password {
 	.block-sub-nav-main-menu {
 	    .menu {
 			li {
-			   &:nth-of-type(4) {
+			   &:last-child {
 			   	display: none;
 			   }
 			}
@@ -3160,25 +3184,30 @@ body.path-update-password {
 	.region-content {
 		position: relative;
 	}
-	.messages--status {
+	.messages--error {
+	    position: absolute;
+	    left: 30%;
+	}
+	.messages--status,
+	 {
         color: $login-btn;
 	    background-color: $white;
 	    box-shadow: -3px 2px 11px 2px #ddd;
 	    position: absolute;
 	    max-width: 503px;
-	    right: 11.7%;
+	    right: 11.5%;
 	    top: 80px;
 	    border: none;
 	    z-index: 99;
 	    border-radius: 5px;
 	    font-size: 24px;
-	    width: 295px;
+	    width: 300px;
 	    padding-left: 93px;
 	    align-items: center;
 	    background-image: none;
 	    opacity: 1;
 	    padding-top: 140px;
-	    padding-bottom: 150px;
+	    padding-bottom: 180px;
 	    &:before {
 		        display: inline-block;
 			    font: normal normal normal 14px/1 FontAwesome;
@@ -3641,4 +3670,114 @@ body.path-update-password {
 		    }
 		}
 	}
+}
+
+/** ajax for dashborad **/
+.-form-tweets-queue-csv-upload {
+    .ajax-progress.ajax-progress-throbber {
+    height: 80px;
+    width: 80px;
+    text-align: center;
+    border-radius: 7px;	
+    position: absolute;
+    .throbber {
+  	    display: inline-block;
+	    font: normal normal normal 14px/1 FontAwesome;
+	    font-size: inherit;
+	    text-rendering: auto;
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+	    background: none;
+	    position: absolute;
+	    -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        top: 35px;
+	    &:before {
+          content: "\f110";
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+          font-size: 30px;
+          color: $login-btn;
+	    }
+      }	
+      .message {
+      	display: none;
+      }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/** thanku page **/
+.thankyou-page {
+	.st0, .st1 {
+		fill: #EBEBEB;
+	}
+	.st2 {
+		fill: $login-btn;
+	}
+	.page-wrap {
+		display: flex;
+	    max-width: 781px;
+	    margin: 0 auto;
+	    align-items: center;
+	}
+	.envelop {
+		flex: 3;
+		margin-right: 15px;
+	}
+	.content-wrap {
+		flex: 7;
+	    h2 {
+	    	text-align: left;
+		    color: $login-btn;
+		    text-transform: uppercase;
+		    font-weight: bold;
+		    font-size: 1.5rem;
+	    }
+	    .teaser-txt {
+	    	font-size: 18px;
+	    }
+	}
+}
+.page-node-type-thanku-pages {
+	background: $white !important;
+	.block-sub-nav-main-menu .menu li a {
+		color: #666;
+	}
+	.block-sub-nav-main-menu .menu li:last-child a {
+		color: $white;
+	}
+	.main-content {
+		width: 100%;
+		margin: 0;
+		position: relative;
+		top: 0;
+	}
+}
+/** css for spinner **/
+body {
+	position: relative;
+}
+#overlayspin {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: $white;
+  opacity: .6;
+}
+#spinner {
+	position: absolute;
+	left: 48%;
+	top: 48%;
+	z-index: 9999;
+  .fa {
+  	-webkit-animation: spin 2s linear infinite;
+     animation: spin 2s linear infinite;
+     font-size: 30px;
+     color: $login-btn;
+  }
 }
