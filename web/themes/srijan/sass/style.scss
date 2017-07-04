@@ -702,10 +702,29 @@ body.path-update-password {
 
 .path-signup {
 	.messages--status {
-		width: 380px;
-		margin: 0 auto;
-		display: block !important;
-		opacity: 1 !important;
+        border: none;
+	    background: none;
+	    font-size: 18px;
+	    color: #303030;
+	    width: 730px;
+	    box-shadow: none;
+	    height: 320px;
+	    line-height: 500px;
+	    text-align: center;
+	    &:before  {
+	    	content: "";
+		    height: 200px;
+		    width: 200px;
+		    border: 1px solid #96c85a;
+		    border-radius: 100px;
+		    position: absolute;
+		    background-image: url('../images/verification.svg');
+		    background-repeat: no-repeat;
+		    background-position: 0px 25px;
+		    background-size: 200px;
+		    left: 42%;
+		    top: 110px;
+	    }
 		~ .block-system-main-block {
 			display: none;
 		}
