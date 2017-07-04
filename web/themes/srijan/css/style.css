@@ -1844,6 +1844,7 @@ body.path-update-password .messages--status {
   position: relative;
   width: 272px; }
   .notifications > div#twitter-notification-count {
+    display: none;
     position: absolute;
     top: -2px;
     right: 134px;
@@ -1853,7 +1854,6 @@ body.path-update-password .messages--status {
     padding: .2em;
     font-size: 12px;
     text-align: center;
-    display: block;
     z-index: 1; }
   .notifications .notification-message-list {
     height: 92vh;
@@ -2098,7 +2098,7 @@ body.path-update-password .messages--status {
       pointer-events: none; }
       .send-tweets-form .form-type-managed-file .form-managed-file .option:after, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .option:after {
         content: 'x';
-        background: red;
+        background: #dddddd;
         height: 20px;
         width: 20px;
         display: block;
@@ -3374,8 +3374,7 @@ body {
   height: auto;
   overflow: hidden;
   position: relative;
-  z-index: 0;
-  margin-top: -75px; }
+  z-index: 0; }
 
 .page-node-type-article .block-page-title-block {
   position: absolute;
@@ -3645,3 +3644,30 @@ body {
   .contact-message-user-feedback-form #edit-preview:hover {
     background: #2aa9e0;
     color: #ffffff; }
+
+.send-tweets-form .ajax-progress.ajax-progress-throbber {
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  border-radius: 7px;
+  position: absolute; }
+  .send-tweets-form .ajax-progress.ajax-progress-throbber .throbber {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: none;
+    position: absolute;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    top: 20px; }
+    .send-tweets-form .ajax-progress.ajax-progress-throbber .throbber:before {
+      content: "\f110";
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      font-size: 30px;
+      color: #96c85a; }
+  .send-tweets-form .ajax-progress.ajax-progress-throbber .message {
+    display: none; }

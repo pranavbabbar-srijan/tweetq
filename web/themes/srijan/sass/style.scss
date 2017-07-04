@@ -1991,6 +1991,7 @@ body.path-update-password {
 	width: 272px;
 	> div {
 		&#twitter-notification-count {
+			display: none;
 			position: absolute;
 		    top: -2px;
 		    right: 134px;
@@ -2000,7 +2001,7 @@ body.path-update-password {
 		    padding: .2em;
 		    font-size: 12px;
 		    text-align: center;
-		    display: block;
+		    
 		    z-index: 1;
 		    &.active {
 		    	// left: 0;
@@ -2279,7 +2280,7 @@ body.path-update-password {
 		    	pointer-events: none;
 		    	&:after {
 		    		content: 'x';
-				    background: red;
+				    background: #dddddd;
 				    height: 20px;
 				    width: 20px;
 				    display: block;
@@ -3807,8 +3808,6 @@ body {
 	    overflow: hidden;
 	    position: relative;
 	    z-index: 0;
-	    margin-top: -75px;
-
 	}
 	.block-page-title-block {
 	    position: absolute;
@@ -4130,4 +4129,36 @@ body {
            color: $white;
     	}
     }
+}
+.send-tweets-form {
+	.ajax-progress.ajax-progress-throbber {
+	    height: 80px;
+	    width: 80px;
+	    text-align: center;
+	    border-radius: 7px;	
+	    position: absolute;
+	    .throbber {
+	  	    display: inline-block;
+		    font: normal normal normal 14px/1 FontAwesome;
+		    font-size: inherit;
+		    text-rendering: auto;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		    background: none;
+		    position: absolute;
+		    -webkit-animation: spin 2s linear infinite;
+	        animation: spin 2s linear infinite;
+	        top: 20px;
+		    &:before {
+	          content: "\f110";
+	          -webkit-animation: spin 2s linear infinite;
+	          animation: spin 2s linear infinite;
+	          font-size: 30px;
+	          color: $login-btn;
+		    }
+	      }	
+	      .message {
+	      	display: none;
+	    }
+	}
 }
