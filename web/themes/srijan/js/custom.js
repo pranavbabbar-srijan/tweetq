@@ -44,7 +44,7 @@
 		var profile_change_password_path = '/dashboard/changePassword';
 		var friend_invite_send_token_path = '/dashboard/friendInviteSendToken';
 		var invite_friends_path = '/dashboard/inviteFriends';
-		var multiple-selected-deletion = '/dashboard/delete-tweets';
+		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
 		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
@@ -53,7 +53,7 @@
 		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
 		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
 		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
-		// var multiple-selected-deletion = '/barbet-new/_www/dashboard/delete-tweets';
+		// var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -86,7 +86,7 @@
 		    $("input:checkbox[name=multiple-deletion]:checked").each(function() {
 		         nid.push($(this).val());
 		   });  
-			$.post(multiple-selected-deletion, {'nid' : nid}, function(data) {
+			$.post(multiple_selected_deletion, {'nid' : nid}, function(data) {
 				// $("<span id='delete-selected'>" + data + "</p>").insertAfter( "#delete-selected" );
 				 var nids = data.split(",");
 				 
