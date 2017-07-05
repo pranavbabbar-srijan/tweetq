@@ -78,6 +78,31 @@
 
 		});
 
+		//Multiple deletion
+		$("#delete-selected").click(function() {
+			var nid = [];
+		    $("input:checkbox[name=multiple-deletion]:checked").each(function() {
+		         nid.push($(this).val());
+		   });  
+			$.post('/barbet-new/_www/dashboard/delete-tweets', {'nid' : nid}, function(data) {
+				// $("<span id='delete-selected'>" + data + "</p>").insertAfter( "#delete-selected" );
+				 var nids = data.split(",");
+				 
+		    	 for (var i in nids) {  
+			    	$('#' + nids[i]).parent().parent().parent().hide();   
+				 } 
+			location.reload();
+		    });
+		});
+		//All checks on single check
+	 	 $('[name="all-selected-deleted"]').click(function(){
+      	  if($(this).prop("checked")) {
+      	      $('[name="multiple-deletion"]').prop("checked", true);
+      	  } else {
+     	       $('[name="multiple-deletion"]').prop("checked", false);
+      	  }                
+     	 });
+
 		//Volunteer invite form.
 		$("#profile-account-settings-form #invite-friend").click(function() {
 	   		var emails = $('#profile-account-settings-form #edit-invite-friend-list').val();
