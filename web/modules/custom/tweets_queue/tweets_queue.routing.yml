@@ -229,3 +229,10 @@ tweets_queue_invite_friends.invite:
     _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::inviteFriends'
   requirements:
     _role: 'authenticated'
+
+tweets_queue_multiple_deletion.tweets:
+  path: '/dashboard/delete-tweets'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::deleteTweets'
+  requirements:
+    _role: 'authenticated'
