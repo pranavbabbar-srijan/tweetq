@@ -125,7 +125,7 @@ button {
 .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
   display: none; }
 
-.block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .region-content .messages--error div[role=alert]:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
+.block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-block .profile .profile-links a.feedback_link:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link:before, .region-content .messages--error div[role=alert]:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .edit,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .edit,
@@ -290,14 +290,14 @@ button {
       .block-users-dashboard-header-block .profile .profile-links a, .block-users-dashboard-header-profile-block .profile .profile-links a {
         display: block;
         text-decoration: none; }
-        .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout {
+        .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-block .profile .profile-links a.feedback_link, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link {
           color: #212121;
           margin-bottom: 10px;
           padding: .5em; }
-          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-logout.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout.active {
+          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-logout.active, .block-users-dashboard-header-block .profile .profile-links a.feedback_link:hover, .block-users-dashboard-header-block .profile .profile-links a.feedback_link.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout.active, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link.active {
             background: #444;
             color: #fff; }
-          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
+          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-block .profile .profile-links a.feedback_link:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link:before {
             content: "";
             font-size: 22px;
             margin-right: 15px;
@@ -1511,7 +1511,10 @@ body.path-update-password .messages--status {
     border-radius: 3px;
     text-decoration: none;
     text-align: center;
-    font-weight: bold; }
+    font-weight: bold;
+    transition: .2s ease-in-out; }
+    .no-tweet-found a:hover {
+      background: #2195c7; }
     .no-tweet-found a:active {
       -webkit-transform: translateY(1px);
       transform: translateY(1px); }
@@ -1522,6 +1525,9 @@ body.path-update-password .messages--status {
       border: 2px solid;
       padding-top: 0.5em;
       padding-bottom: .5em; }
+      .no-tweet-found a.import-tweet:hover {
+        background: #2aa9e0;
+        color: #ffffff; }
       .no-tweet-found a.import-tweet:active {
         -webkit-transform: translateY(1px);
         transform: translateY(1px); }
@@ -2339,7 +2345,13 @@ body.path-update-password .messages--status {
     float: right;
     margin-right: 0;
     padding: .7em 1.4em;
-    font-weight: bold; }
+    font-weight: bold;
+    transition: .2s ease-in-out; }
+    .send-tweets-form #edit-submit:hover, .send-tweets-form #edit-clone:hover, .send-tweets-form #edit-tweet-now:hover,
+    .tweets-queue-tweet-form #edit-submit:hover,
+    .tweets-queue-tweet-form #edit-clone:hover,
+    .tweets-queue-tweet-form #edit-tweet-now:hover {
+      background: #2195c7; }
     .send-tweets-form #edit-submit:active, .send-tweets-form #edit-clone:active, .send-tweets-form #edit-tweet-now:active,
     .tweets-queue-tweet-form #edit-submit:active,
     .tweets-queue-tweet-form #edit-clone:active,
@@ -2356,7 +2368,13 @@ body.path-update-password .messages--status {
     padding: .6em 1.4em;
     margin-right: 0;
     margin-left: 0;
-    font-weight: bold; }
+    font-weight: bold;
+    transition: .2s ease-in-out; }
+    .send-tweets-form #edit-save:hover, .send-tweets-form #edit-cancel:hover,
+    .tweets-queue-tweet-form #edit-save:hover,
+    .tweets-queue-tweet-form #edit-cancel:hover {
+      background: #2aa9e0;
+      color: #ffffff; }
     .send-tweets-form #edit-save:active, .send-tweets-form #edit-cancel:active,
     .tweets-queue-tweet-form #edit-save:active,
     .tweets-queue-tweet-form #edit-cancel:active {
@@ -2497,7 +2515,10 @@ body.path-update-password .messages--status {
     text-decoration: none;
     display: block;
     text-align: center;
-    font-weight: bold; }
+    font-weight: bold;
+    transition: .2s ease-in-out; }
+    .-form-tweets-queue-csv-upload #edit-submit:hover {
+      background: #2195c7; }
     .-form-tweets-queue-csv-upload #edit-submit:active {
       -webkit-transform: translateY(1px);
       transform: translateY(1px); }

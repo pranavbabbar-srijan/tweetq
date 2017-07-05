@@ -48,10 +48,11 @@ class UsersDashboardHeaderBlock extends BlockBase {
     $uid = \Drupal::currentUser()->id();
     $setting_link = "<a class ='profile-settings' href='" . $base_url .'/user/' . $uid . "/edit'>" .
       'Settings' ."</a>";
+    $feedback_link ="<a href='" . $base_url . "/feedback' class='use-ajax feedback_link' data-dialog-type='modal'>". 'feedback'."</a>";
     $logout_link = "<a class ='profile-logout' href='" . $base_url .'/user/logout' . "'>" .
       'Logout' ."</a>";
     $profile_link_output = "<div class='profile-links'> " .
-    $my_profile_link . $setting_link . $logout_link . "</div>" ;
+    $my_profile_link . $setting_link . $feedback_link . $logout_link . "</div>" ;
 
     $twitter_profile_output = "<div class='profile'>
       <a href=''>" . "<div><span class='img'>" . $profile_img . "</span>

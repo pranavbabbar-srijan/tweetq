@@ -183,7 +183,7 @@
 			a {
 				display: block;
 				text-decoration: none;
-				&.profile-my-profile, &.profile-settings, &.profile-logout {
+				&.profile-my-profile, &.profile-settings, &.profile-logout, &.feedback_link {
 					color: $dark;
 					margin-bottom: 10px;
 					padding: .5em;
@@ -1589,6 +1589,10 @@ body.path-update-password {
 	    text-decoration: none;
 		text-align: center;
 		font-weight: bold;
+		transition: .2s ease-in-out;
+		&:hover {
+			background: #2195c7;
+		}
 		&:active {
 	    	-webkit-transform: translateY(1px);
 			transform: translateY(1px);
@@ -1600,6 +1604,10 @@ body.path-update-password {
 			border: 2px solid;
 		    padding-top: 0.5em;
 		    padding-bottom: .5em;
+		    &:hover {
+		    	background: $twitter;
+		    	color: $white;
+		    }
 		    &:active {
 	    	  -webkit-transform: translateY(1px);
 			  transform: translateY(1px);
@@ -2532,6 +2540,10 @@ body.path-update-password {
 		margin-right: 0;
 		padding: .7em 1.4em;
 		font-weight: bold;
+		transition: .2s ease-in-out;
+		&:hover {
+          background: #2195c7;
+		}
 		&:active {
 			-webkit-transform: translateY(1px);
             transform: translateY(1px); 
@@ -2546,6 +2558,11 @@ body.path-update-password {
 		margin-right: 0;
 		margin-left: 0;
 		font-weight: bold;
+		transition: .2s ease-in-out;
+		&:hover {
+          background: $twitter;
+          color: $white;
+		}
 		&:active {
 			-webkit-transform: translateY(1px);
             transform: translateY(1px); 
@@ -2687,6 +2704,10 @@ body.path-update-password {
 	    display: block;
 		text-align: center;
 		font-weight: bold;
+		transition: .2s ease-in-out;
+		&:hover {
+			background: #2195c7;
+		}
 		&:active {
 			-webkit-transform: translateY(1px);
 			transform: translateY(1px);
