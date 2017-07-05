@@ -736,20 +736,25 @@ body.path-update-password .messages--status {
   body.path-update-password .messages--status ~ .block-system-main-block {
     display: none; }
 
+.path-signup .header {
+  border-bottom: 1px solid #f1f1f1 !important; }
+
+.path-signup .section.active {
+  background: #ffffff !important; }
+
 .path-signup .messages--status {
   border: none;
   background: #ffffff;
-  font-size: 18px;
+  font-size: 20px;
   color: #303030;
   width: 100%;
   box-shadow: none;
-  height: 341px;
-  line-height: 570px;
+  height: 0;
   text-align: center;
   margin: 0 auto;
-  margin-top: -19px;
-  margin-bottom: -20px;
-  display: block !important; }
+  display: block !important;
+  padding-top: 275px;
+  height: 100%; }
   .path-signup .messages--status:before {
     content: "";
     height: 200px;
@@ -763,6 +768,41 @@ body.path-update-password .messages--status {
     background-size: 200px;
     left: 42%;
     top: 110px; }
+  .path-signup .messages--status em {
+    color: #2aa9e0; }
+  .path-signup .messages--status a {
+    border: none;
+    background: #2aa9e0;
+    width: 100%;
+    padding: .5em 1em .5em 1em;
+    font-size: 18px;
+    color: white;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase; }
+    .path-signup .messages--status a:hover {
+      background: #2195c7; }
+  .path-signup .messages--status span {
+    display: block;
+    padding: 15px 0;
+    font-size: 24px;
+    font-weight: 600;
+    position: relative;
+    margin-bottom: 40px; }
+    .path-signup .messages--status span:before {
+      content: "";
+      width: 115px;
+      height: 2px;
+      background: #999999;
+      position: absolute;
+      bottom: 0;
+      left: 45%; }
   .path-signup .messages--status ~ .block-system-main-block {
     display: none; }
 

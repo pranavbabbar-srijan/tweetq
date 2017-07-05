@@ -1818,7 +1818,8 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
     return;
   }
   else {
-    $message = t('An email notification has been sent to @email ', array('@email' => $to));
+    global $base_url;
+    $message = t('A verification mail has been sent to <em> @email </em> <span> Please Verify to Get Started </span> <a href="'. $base_url . '"> learn how barbet  works </a>', array('@email' => $to));
     drupal_set_message($message);
   }
   \Drupal::logger('mail-log')->notice($message);

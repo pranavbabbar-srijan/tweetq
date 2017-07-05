@@ -1067,6 +1067,8 @@
 		  }
 		  
 		  $(document).ready(function () {
+		  	
+			 
 		    $textarea = $('textarea');
 
 		    // Create a pseudo-element that will be hidden behind the placeholder.
@@ -1076,8 +1078,12 @@
 		    onTweetCompose();
 		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
 		  });
-
-
+          
+          // add class
+	        if($('.path-signup .messages').hasClass('messages--status')) {
+	          $('.section').addClass('active');
+	        }
+	    
 })(jQuery);
 
 
