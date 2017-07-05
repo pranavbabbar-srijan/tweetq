@@ -3768,6 +3768,72 @@ body {
   position: relative; }
 
 /** style for feedback form **/
+.path-dashboard .ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-dialog-buttons {
+  border: none; }
+
+.path-dashboard .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix {
+  border-radius: 5px 5px 0px 0px;
+  background: #f6f6f6;
+  color: #333;
+  font-size: 24px;
+  padding: 15px 20px;
+  font-weight: normal;
+  border: none; }
+
+.path-dashboard .ui-dialog .ui-dialog-content {
+  padding: 1.5em 3em;
+  max-height: 100% !important;
+  padding-bottom: 0; }
+
+.path-dashboard .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  float: left;
+  width: 100%;
+  text-align: center; }
+
+.path-dashboard .ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix {
+  border: none;
+  background: #ffffff;
+  padding-bottom: 40px;
+  border-radius: 0px 0px 5px 5px; }
+
+.path-dashboard .ui-dialog .ui-dialog-titlebar-close {
+  margin-right: 15px; }
+
+.path-dashboard .ul-dialog .form-submit {
+  flex: 5; }
+  .path-dashboard .ul-dialog .form-submit:active {
+    -webkit-transform: translateY(1px);
+    transform: translateY(1px); }
+  .path-dashboard .ul-dialog .form-submit:first-child {
+    border: none;
+    padding: .5em 2em;
+    font-size: 18px;
+    color: white;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    margin-top: 1em;
+    background: #96c85a;
+    margin-right: 20px; }
+    .path-dashboard .ul-dialog .form-submit:first-child:hover {
+      background: #82bb3e; }
+  .path-dashboard .ul-dialog .form-submit:last-child {
+    background: #ffffff;
+    color: #2aa9e0;
+    border: 2px solid #2aa9e0;
+    margin-top: 1em;
+    padding: .5em 2em;
+    margin-right: 0;
+    border-radius: 4px;
+    font-size: 18px;
+    text-decoration: none; }
+    .path-dashboard .ul-dialog .form-submit:last-child:hover {
+      background: #2aa9e0;
+      color: #ffffff; }
+
 .contact-message-user-feedback-form label {
   font-size: 18px;
   margin-bottom: 25px;
@@ -3791,75 +3857,6 @@ body {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   outline: none; }
-
-.contact-message-user-feedback-form .form-actions {
-  display: flex;
-  justify-content: space-around;
-  flex: 10; }
-
-.contact-message-user-feedback-form .form-submit {
-  flex: 5; }
-  .contact-message-user-feedback-form .form-submit:active {
-    -webkit-transform: translateY(1px);
-    transform: translateY(1px); }
-  .contact-message-user-feedback-form .form-submit:first-child {
-    border: none;
-    padding: .5em;
-    font-size: 18px;
-    color: white;
-    -webkit-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px;
-    margin-top: 1em;
-    background: #96c85a; }
-    .contact-message-user-feedback-form .form-submit:first-child:hover {
-      background: #82bb3e; }
-  .contact-message-user-feedback-form .form-submit:last-child {
-    background: #ffffff;
-    color: #2aa9e0;
-    border: 2px solid #2aa9e0;
-    margin-top: 1em;
-    padding: .4em 1em;
-    margin-right: 0;
-    border-radius: 4px;
-    font-size: 18px;
-    text-decoration: none; }
-    .contact-message-user-feedback-form .form-submit:last-child:hover {
-      background: #2aa9e0;
-      color: #ffffff; }
-
-.contact-message-user-feedback-form #edit-submit {
-  border: none;
-  padding: .5em;
-  font-size: 18px;
-  color: white;
-  -webkit-border-radius: 4px;
-  -khtml-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-  margin-top: 1em;
-  background: #96c85a; }
-  .contact-message-user-feedback-form #edit-submit:hover {
-    background: #82bb3e; }
-
-.contact-message-user-feedback-form #edit-preview {
-  background: #ffffff;
-  color: #2aa9e0;
-  border: 2px solid #2aa9e0;
-  margin-top: 1em;
-  padding: .4em 1em;
-  margin-right: 0;
-  border-radius: 4px;
-  font-size: 18px;
-  text-decoration: none; }
-  .contact-message-user-feedback-form #edit-preview:hover {
-    background: #2aa9e0;
-    color: #ffffff; }
 
 .send-tweets-form .ajax-progress.ajax-progress-throbber,
 .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber {
