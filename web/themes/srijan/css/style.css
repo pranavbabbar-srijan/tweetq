@@ -1,8 +1,8 @@
 @charset "UTF-8";
 /* Welcome to Srijan theme.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+* In this file you should write your main styles. (or centralize your imports)
+* Import this file using the following HTML or equivalent:
+* <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* ================================= Reset style ================================= */
 body,
 dd, ol, dl, ul, h1, h2, h3, h4, h5, h6 {
@@ -985,8 +985,8 @@ body.path-update-password .messages--status {
 
 .user-logged-in {
   /*.region-content {
-		margin-top: 120px;
-	}*/ }
+margin-top: 120px;
+}*/ }
   .user-logged-in.path-twitter .main-content {
     position: inherit;
     width: 100%; }
@@ -3833,29 +3833,73 @@ body {
   .path-dashboard .ui-dialog .ui-dialog-buttonpane button.button--primary:hover {
     background: #82bb3e; }
 
-.contact-message-user-feedback-form label {
-  font-size: 18px;
-  margin-bottom: 25px;
-  display: block;
-  color: #303030; }
+.contact-message-user-feedback-form {
+  /** smile rating **/ }
+  .contact-message-user-feedback-form label {
+    font-size: 18px;
+    margin-bottom: 25px;
+    display: block;
+    color: #303030; }
+  .contact-message-user-feedback-form select {
+    border: 0;
+    background: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    width: 100%;
+    padding-bottom: 7px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: normal;
+    margin-bottom: 30px; }
+  .contact-message-user-feedback-form textarea {
+    margin-top: 0px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    outline: none; }
+  .contact-message-user-feedback-form .star,
+  .contact-message-user-feedback-form .star a {
+    background: none;
+    background-repeat: no-repeat; }
+    .contact-message-user-feedback-form .star.hover a, .contact-message-user-feedback-form .star a,
+    .contact-message-user-feedback-form .star a.hover a,
+    .contact-message-user-feedback-form .star a a {
+      background: none; }
+  .contact-message-user-feedback-form .fivestar-widget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; }
+    .contact-message-user-feedback-form .fivestar-widget .star {
+      padding: 20px;
+      outline: none; }
+      .contact-message-user-feedback-form .fivestar-widget .star a {
+        outline: none; }
+      .contact-message-user-feedback-form .fivestar-widget .star.on {
+        padding: 20px; }
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-01,
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-01 a {
+    background: url("../images/1.svg") no-repeat center !important;
+    background-size: 30px !important; }
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-11 a,
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-11 {
+    background: url("../images/2.svg") no-repeat center !important;
+    background-size: 30px !important; }
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-21 a,
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-21 {
+    background: url("../images/3.svg") no-repeat center !important;
+    background-size: 30px !important; }
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-31 a,
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-31 {
+    background: url("../images/4.svg") no-repeat center !important;
+    background-size: 30px !important; }
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-41 a,
+  .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-41 {
+    background: url("../images/5.svg") no-repeat center !important;
+    background-size: 30px !important; }
 
-.contact-message-user-feedback-form select {
-  border: 0;
-  background: none;
-  outline: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  width: 100%;
-  padding-bottom: 7px;
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.4);
-  font-weight: normal;
-  margin-bottom: 30px; }
-
-.contact-message-user-feedback-form textarea {
-  margin-top: 0px;
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  outline: none; }
+.ui-dialog form.contact-message-user-feedback-form .fivestar-user-stars .fivestar-widget .star:hover {
+  background-color: #96c85a !important;
+  border-radius: 5px; }
 
 .send-tweets-form .ajax-progress.ajax-progress-throbber,
 .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber {
