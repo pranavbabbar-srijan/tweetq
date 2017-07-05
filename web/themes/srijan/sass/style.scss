@@ -146,6 +146,9 @@
 		    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
 		    padding: 15px 10px;
 		    display: none;
+		    .ajax-progress {
+		    	display: none;
+		    }
 			&.active {
 				display: block;
 			    transform: scale(0.8);
@@ -4216,8 +4219,9 @@ body {
 
 /** style for feedback form **/
 .path-dashboard {
-	.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-dialog-buttons {
+	.ui-dialog {
 		border: none;
+		width: 580px !important;
 	}
 	.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix {
 	    border-radius: 5px 5px 0px 0px;
@@ -4238,7 +4242,7 @@ body {
 	    width: 100%;
 	    text-align: center;
 	}
-	.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix {
+	.ui-dialog-buttonpane.ui-widget-content {
 		border: none;
         background: $white;
         padding-bottom: 40px;
@@ -4248,28 +4252,8 @@ body {
 	.ui-dialog .ui-dialog-titlebar-close {
 		margin-right: 15px;
 	}
-	.ul-dialog {
-		.form-submit {
-	   	    flex: 5;
-	   	    &:active {
-				-webkit-transform: translateY(1px);
-				transform: translateY(1px);
-			}
-			&:first-child {
-				 border: none;
-			    padding: .5em 2em;
-			    font-size: 18px;
-			    color: white;
-			    @include border-radius(4px);
-			    margin-top: 1em;
-			   	background: $login-btn;
-			   	margin-right: 20px;
-			   	&:hover {
-			   		background: #82bb3e;
-				}
-			}
-			&:last-child {
-				 background: $white;
+	.ui-dialog .ui-dialog-buttonpane button {
+		  background: $white;
 			    color: $twitter;
 			    border: 2px solid $twitter;
 			    margin-top: 1em;
@@ -4282,9 +4266,19 @@ body {
 		           background: $twitter;
 		           color: $white;
 		    	}
-			}
-        }
- 
+	}
+	.ui-dialog .ui-dialog-buttonpane button.button--primary {
+		border: none;
+		padding: .5em 2em;
+		font-size: 18px;
+		color: white;
+		@include border-radius(4px);
+		margin-top: 1em;
+			background: $login-btn;
+			margin-right: 20px;
+			&:hover {
+				background: #82bb3e;
+		}
 	}
 }
 
