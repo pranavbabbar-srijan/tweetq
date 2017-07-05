@@ -202,6 +202,30 @@ class TweetsQueueTweetController extends ControllerBase {
   }
 }
 
+  public function deleteTweets() {
+    $logged_uid = \Drupal::currentUser()->id();
+    $var = $_REQUEST[nid];
+    $deleted = array();
+
+    foreach ($var as $key => $value) {
+    $tweet_info = tweets_queue_fetch_tweet_item($value);
+      if ($tweet_info->uid == $logged_uid) {
+      tweets_queue_update_message_queue_priority_info($value,
+        array(
+        'status' => TWITTER_DELETED_TWEET,
+        'changed' => time()
+        ),
+        0
+      );
+      $deleted[] = $value;
+      }
+
+
+    }
+    $selected = implode(',', $deleted);
+    die($selected);
+  }
+
   /**
   * This function goto than login page when users got an access denied error message.
   */

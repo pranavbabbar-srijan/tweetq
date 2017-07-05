@@ -2692,6 +2692,7 @@ function tweets_queue_check_user_message_presence($message, $hash_tag) {
   $uid = \Drupal::currentUser()->id();
   $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
   $query->addField('p', 'nid');
+  $query->condition('p.status', 1);
   $query->condition('p.message', $message);
   $query->condition('p.hashtag', $hash_tag);
   $query->condition('p.uid', $uid);
@@ -3440,6 +3441,7 @@ function tweets_queue_create_save_tweet_form_submit($form, \Drupal\Core\Form\For
     'size' => $size,
   );
   $nid = tweets_queue_check_user_message_presence($message, $hash_tag);
+
   if ($nid) {
     drupal_set_message(t('Your tweet message "@message" already exists.',
     array('@message' => $message)));
