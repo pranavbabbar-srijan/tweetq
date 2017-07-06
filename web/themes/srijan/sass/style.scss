@@ -1067,7 +1067,7 @@ body.path-update-password {
 			}
 		}
 	}
-	.block-users-valid-tweets-block, .block-users-in-valid-tweets-block,
+/*	.block-users-valid-tweets-block, .block-users-in-valid-tweets-block,
 	.block-users-archived-tweets-block, .block-users-all-tweets-block,
 	.block-users-tweeted-tweets-block {
 		.item-list {
@@ -1086,7 +1086,7 @@ body.path-update-password {
 				}
 			}
 		}
-	}
+	}*/
 	.block-users-valid-tweets-block, .block-users-in-valid-tweets-block,
 	.block-users-archived-tweets-block, .block-users-all-tweets-block,
 	.block-users-tweeted-tweets-block {
@@ -1165,14 +1165,14 @@ body.path-update-password {
 							}
 						}
 					}
-					width: 12.5%;
+					/*width: 12.5%;
 					margin-left: 0;
 					&:first-child {
 						width: 50%;
 					}
 					&:last-child {
 						padding-left: 2.5em;
-					}
+					}*/
 				}
 			}
 			+ .item-list {
@@ -1184,31 +1184,17 @@ body.path-update-password {
 					display: flex;
 					flex-flow: row wrap;
 					justify-content: flex-start;
+					flex: 20;
 					li {
-						width: 12.5%;
-						margin-left: 0;
-						margin-bottom: 20px;
-						word-wrap: break-word;
+						
 						&:first-child {
-							width: 50%;
-							padding-right: 3em;
+							
 							b {
 								color: $twitter;
 								font-weight: normal;
 							}
 						}
-						&:nth-child(2) {
-							width: 6%;
-							padding: 0 1px;
-						}
-						&:nth-child(5) {
-							width: 6.25%;
-							padding-left: 2.5em;
-						}
-						&:nth-child(6) {
-							width: 6.25%;
-							padding-left: 8px;
-						}
+						
 						a {
 							color: $twitter;
 							text-decoration: none;
@@ -1319,79 +1305,138 @@ body.path-update-password {
 			}
 		}
 	}
-	.block-users-archived-tweets-block {
+
+	.block-users-archived-tweets-block,
+	.block-users-valid-tweets-block,
+	.block-users-all-tweets-block, 
+	.block-users-tweeted-tweets-block,
+	.block-users-in-valid-tweets-block {
 		.item-list {
-			+ .item-list ul ul li:last-child {
-				padding-left: 50px;
-			}
-		}
-	}
-	.block-users-archived-tweets-block, .block-users-all-tweets-block, .block-users-tweeted-tweets-block {
-		.item-list {
-			.header {
-				li {
-					width: 10.8%;
-					margin-left: 0;
-					&:first-child {
-						width: 40%;
-					}
-					&:last-child {
-						padding-left: 2em;
-					}
+			ul.header li {
+				&:first-child {
+					flex: 5;
+					order: 2;
+				}
+				&:nth-child(2) {
+					order: 2;
+					flex: 1;
+				}
+				&:nth-child(3) {
+					flex: 3;
+					order: 4;
+				}
+				&:nth-child(4) {
+					flex: 3;
+					order: 5;
+				}
+				&:nth-child(5) {
+					flex: 2;
+					order: 6;
+				}
+				&:nth-child(6) {
+					flex: 1;
+					order: 7;
+				}
+				&:nth-child(7) {
+					flex: 3.5;
+					order: 8;
+					justify-content: center;
+					text-align: center;
+				}
+				&:last-child {
+					flex: 1;
+					order: 1;
 				}
 			}
 			+ .item-list {
 				ul ul {
 					li {
-						width: 10.8%;
 						&:first-child {
-							width: 40%;
-							padding-right: 3em;
+ 							flex: 1;
 						}
 						&:nth-child(2) {
-							width: 6%;
-							padding: 0 1px;
+							display: none;
+						}
+						&:nth-child(3) {
+							flex: 5;
+						}
+						&:nth-child(4) {
+							flex: 1;
 						}
 						&:nth-child(5) {
-							width: 10%;
-							padding-left: inherit;
+							flex: 3;
 						}
 						&:nth-child(6) {
-							width: 10%;
-							padding-left: 9px;
+							flex: 4;
+						}
+						&:nth-child(7) {
+							flex: 3;
+						}
+						&:nth-child(8) {
+							flex: 1;
+						}
+						&:nth-child(9) {
+							flex: 1;
+						}
+						&:last-child {
+							flex: 1;
 						}
 					}
 				}
 			}
 		}
 	}
-	.block-users-all-tweets-block, .block-users-tweeted-tweets-block {
+	.block-users-valid-tweets-block {
 		.item-list {
+			ul.header li {
+				
+				&:nth-child(5) {
+					flex: 5.5;
+					order: 6;
+					text-align: center;
+				}
+				
+			}
+		}
+	}
+	.block-users-archived-tweets-block {
+		.item-list {
+			
 			+ .item-list {
 				ul ul {
 					li {
-						width: 10.8%;
-						&:first-child {
-							width: 40%;
-							padding-right: 3em;
+						
+					    &:nth-child(6) {
+							flex: 3;
 						}
-						&:nth-child(2) {
-							padding: 0 1px;
+																
+						&:last-child {
+							flex: 3.5;
+							text-align: center;
 						}
-						&:nth-child(5) {
-							width: 10%;
-							padding-left: inherit;
-						}
+					}
+				}
+			}
+		}
+	}
+	.block-users-in-valid-tweets-block {
+		.item-list {
+			ul.header li {
+				
+				&:nth-child(5) {
+					flex: 2.9;
+					text-align: center;
+				}
+			
+			}
+			+ .item-list {
+				ul ul {
+					li {
+						
 						&:nth-child(7) {
-							width: 5%;
-							text-align: right;
-							padding-right: 0;
-							padding-left: 44px;
+							flex: 0;
 						}
-						&:nth-child(8) {
-							width: 5%;
-							padding-left: 30px;
-						}
+					
 					}
 				}
 			}
@@ -2578,7 +2623,8 @@ margin-top: 120px;
 				font-size: 16px;
 			}
 			#edit-submit:disabled,
-			#edit-tweet-now:disabled {
+			#edit-tweet-now:disabled,
+			#edit-clone:disabled {
 				background: $gray;
 				opacity: .35;
 			}
@@ -4221,6 +4267,10 @@ margin-top: 120px;
 
 			/** style for feedback form **/
 			.path-dashboard {
+				#block-srijan-content {
+					float: left;
+                    width: 100%;
+				}
 				.ui-dialog {
 					border: none;
 					width: 580px !important;
@@ -4476,3 +4526,57 @@ margin-top: 120px;
 			.form-submit {
 				outline: none;
 			}
+/** custom checkbox **/
+.custom-checkbox {
+	input {
+		opacity: 0;
+    z-index: 999;
+    height: 20px;
+    width: 20px;
+    position: relative;
+	}
+	input[type=checkbox]:checked + label:before {
+	    opacity: 1;
+	    color: $white;
+	    background: $twitter;
+	    padding: 3px;
+	    top: -2px;
+	    position: absolute;
+	    left: -1px;
+	}
+	label {
+		position: relative;
+	    display: inline-block;
+	    margin-left: -22px;
+	    vertical-align: top;
+	    width: 20px;
+	    height: 20px;
+	    border-radius: 0;
+	    border: 1px solid #ccc;
+        font-family: FontAwesome;
+	    font-weight: normal;
+	    font-style: normal;
+	    text-decoration: inherit;
+	    -webkit-font-smoothing: antialiased;
+	    z-index: 0;
+	    &:before {
+    	    content: "\f00c";
+    	    opacity: 0;
+	    }
+	}
+}
+#delete-selected {
+	float: right;
+    padding: 10px 20px;
+    background: #b5b5b5;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 18px;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+    	background: #7d7d7d;
+    }
+}
