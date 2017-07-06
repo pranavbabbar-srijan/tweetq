@@ -1081,7 +1081,7 @@
 
         // twitter text box 
          function onTweetCompose(event) {
-		    var $textarea = $('.send-tweets-form #edit-message'),
+		    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
 		        $placeholderBacker = $('.js-keeper-placeholder-back'),
 		        currentValue = $textarea.val()
 		    ;
@@ -1119,17 +1119,18 @@
 	        if($('.path-signup .messages').hasClass('messages--status')) {
 	          $('.section').addClass('active');
 	        }
-	        $(function(){
-			   $("input[type='file']").change(function(){
-			       var $fileUpload = $("input[type='file']");
-			       if (parseInt($fileUpload.get(0).files.length) > 2){
-			            alert("You can only upload a maximum of 2 files");
-			            this.value = '';
-			       }
-
-			   });    
-			});
-
+	        
+	        $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
+		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
+		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
+		    	if (tweet_msg_length > 140) {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+		    	}
+		    	else {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+		    	}
+	        });
 
 	    
 })(jQuery);

@@ -2394,7 +2394,9 @@ margin-top: 120px;
     padding: 1em;
     font-size: 16px; }
   .send-tweets-form #edit-submit:disabled,
-  .tweets-queue-tweet-form #edit-submit:disabled {
+  .send-tweets-form #edit-tweet-now:disabled,
+  .tweets-queue-tweet-form #edit-submit:disabled,
+  .tweets-queue-tweet-form #edit-tweet-now:disabled {
     background: #979797;
     opacity: .35; }
   .send-tweets-form #edit-save:disabled,
@@ -3937,13 +3939,16 @@ body {
       display: none; }
 
 /** twitter box css **/
-.send-tweets-form .form-textarea-wrapper {
+.send-tweets-form .form-textarea-wrapper,
+.tweets-queue-tweet-form .form-textarea-wrapper {
   position: relative;
   z-index: 1;
   overflow: hidden; }
 
 .send-tweets-form .js-keeper-placeholder-back,
-.send-tweets-form #edit-message {
+.send-tweets-form #edit-message,
+.tweets-queue-tweet-form .js-keeper-placeholder-back,
+.tweets-queue-tweet-form #edit-message {
   background: transparent;
   font-size: 18px;
   margin: auto;
@@ -3952,7 +3957,8 @@ body {
   resize: vertical;
   width: 100%; }
 
-.send-tweets-form .js-keeper-placeholder-back {
+.send-tweets-form .js-keeper-placeholder-back,
+.tweets-queue-tweet-form .js-keeper-placeholder-back {
   bottom: 0;
   color: transparent;
   left: 0;
@@ -3963,7 +3969,8 @@ body {
   word-wrap: break-word;
   z-index: -1; }
 
-.send-tweets-form .js-keeper-placeholder-back em {
+.send-tweets-form .js-keeper-placeholder-back em,
+.tweets-queue-tweet-form .js-keeper-placeholder-back em {
   background: #fcc !important; }
 
 .form-submit {

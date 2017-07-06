@@ -2577,7 +2577,8 @@ margin-top: 120px;
 				padding: 1em;
 				font-size: 16px;
 			}
-			#edit-submit:disabled {
+			#edit-submit:disabled,
+			#edit-tweet-now:disabled {
 				background: $gray;
 				opacity: .35;
 			}
@@ -4417,7 +4418,8 @@ margin-top: 120px;
 
 			/** twitter box css **/
 
-			.send-tweets-form {
+			.send-tweets-form,
+			.tweets-queue-tweet-form {
 				.form-textarea-wrapper {
 					position: relative;
 					z-index: 1;
