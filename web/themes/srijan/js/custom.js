@@ -1114,25 +1114,13 @@
 		    onTweetCompose();
 		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
 		  });
-          
+           // js for to prepend button 
+	        $('#delete-selected').prependTo('#block-srijan-content');
           // add class
 	        if($('.path-signup .messages').hasClass('messages--status')) {
 	          $('.section').addClass('active');
 	        }
-	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    var tweet_msg_length = tweet_msg.length;
-	        if (tweet_msg_length > 140) {
-	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
-	    		$(".tweets-queue-tweet-form #edit-clone").attr('disabled', 'true');
-	    		$(".tweets-queue-tweet-form #edit-submit").attr('disabled', 'true');
-
-	    	}
-	    	else {
-	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-	    		$(".tweets-queue-tweet-form #edit-clone").removeAttr('disabled');
-	    		$(".tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
-
-	    	}
+	       
 	        $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
 		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
 		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
@@ -1156,8 +1144,7 @@
 		    	}
 	        });
 
-	        // js for to prepend button 
-	        $('#delete-selected').prependTo('#block-srijan-content');
+	       
 	        //added place holder for feedback form 
 	        
 
@@ -1169,6 +1156,21 @@
 
                }, 200);
 	        });
+
+	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+		    var tweet_msg_length = tweet_msg.length;
+	        if (tweet_msg_length > 140) {
+	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+	    		$(".tweets-queue-tweet-form #edit-clone").attr('disabled', 'true');
+	    		$(".tweets-queue-tweet-form #edit-submit").attr('disabled', 'true');
+
+	    	}
+	    	else {
+	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+	    		$(".tweets-queue-tweet-form #edit-clone").removeAttr('disabled');
+	    		$(".tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
+
+	    	}
 
 	    
 })(jQuery);
