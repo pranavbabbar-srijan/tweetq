@@ -4310,58 +4310,78 @@ margin-top: 120px;
 					outline: none;
 				}
 				/** smile rating **/ 
-				.star,
-				.star a {
-					background: none;
-					background-repeat: no-repeat;
-					&.hover a, a {
-						background: none;
-					}
+				.fivestar-basic div.fivestar-widget .star, 
+				.fivestar-basic div.fivestar-widget .star a {
+					height: 40px;
+					width: 40px;
+					z-index: 99;
+                    position: relative;
 				}
+				
 				.fivestar-widget {
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
 					margin-bottom: 10px;
-					.star {
-						padding: 20px;
-						outline: none; 
-						a {
-							outline: none;
-						}
-						&.on {
-							padding: 20px;
-						}
-
-					}
+					
 				}
 				.fivestar-basic div.fivestar-widget {
-					.star-01 ,
-					.star-01 a {
+					.star {
+						&.hover:before {
+                           content: "";
+                           height: 40px;
+                           width: 40px;
+                           background: $login-btn;
+                           position: absolute;
+                           border-radius: 5px;
+                           z-index: 0;
+						}
+						&.on:before {
+							   content: "";
+	                           height: 40px;
+	                           width: 40px;
+	                           background: $login-btn;
+	                           position: absolute;
+	                           border-radius: 5px;
+	                           z-index: 0;
+					    }
+						
+					}
+					/*.star-01 ,*/
+					.star-01,
+					.star-01 a,
+					.star-01.hover {
 						background: url('../images/1.svg') no-repeat center !important;
 						background-size: 30px !important;
 					}
 
+					
 					.star-11 a,
-					.star-11 {
+					.star-11,
+					.star-11.hover {
 						background: url('../images/2.svg') no-repeat center !important;
 						background-size: 30px !important;
 					}
 
-					.star-21 a,
-					.star-21{
+					.star-21.hover,
+					.star-21,
+					.star-21 a{
 						background: url('../images/3.svg') no-repeat center !important;
 						background-size: 30px !important;
 					}
 
+					
+					.star-31,
 					.star-31 a,
-					.star-31 {
+					.star-31.hover {
 						background: url('../images/4.svg') no-repeat center !important;
 						background-size: 30px !important;
 					}
 
-					.star-41  a,
-					.star-41{
+					
+					.star-41,
+					.star-41 a,
+					.star-41.hover{
 						background: url('../images/5.svg') no-repeat  center !important;
 						background-size: 30px !important;
 					}
@@ -4369,10 +4389,10 @@ margin-top: 120px;
 
 			}
 
-			.ui-dialog  form.contact-message-user-feedback-form .fivestar-user-stars .fivestar-widget .star:hover {
+			/*.ui-dialog  form.contact-message-user-feedback-form .fivestar-user-stars .fivestar-widget .star:hover {
 				background-color: $login-btn !important;
 				border-radius: 5px;
-			}
+			}*/
 
 
 
