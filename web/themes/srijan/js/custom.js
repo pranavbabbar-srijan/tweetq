@@ -1131,6 +1131,20 @@
 		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 		    	}
 	        });
+	        $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
+	    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
+	    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
+	    	if (tweet_msg_length > 140) {
+	    		$("#tweets-queue-tweet-form #edit-clone").attr('disabled', 'true');
+	    	}
+	    	else {
+	    		$("#tweets-queue-tweet-form #edit-clone").removeAttr('disabled');
+	    	}
+	    });
+
+	        // js for to prepend button 
+	        $('#delete-selected').prependTo('#block-srijan-content');
 
 	    
 })(jQuery);
