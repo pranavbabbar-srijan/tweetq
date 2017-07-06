@@ -1064,13 +1064,16 @@
         setTimeout(function(){ 
         	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
         }, 500);
-
+        
+       
         $('.faq-header').click(function(e){
-          $(this).parent().next().removeClass('collapsed');
-          $(this).addClass('faq-category-qa-visible');
+        	$('.faq-qa-hide').hide();
+        	$('.faq-header').removeClass('active');
+           $(this).parent().next().show();
+           $(this).addClass('active');
            e.preventDefault();
         });
-s
+    
         $('.faq-header').append('Articles');
         $('.user-login-form #forgot-password').appendTo('.user-login-form');
 

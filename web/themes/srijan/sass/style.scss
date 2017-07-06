@@ -4098,7 +4098,8 @@ margin-top: 120px;
 						&:hover {
 							opacity: 1;
 						}
-						&.faq-category-qa-visible {
+						&.faq-category-qa-visible,
+						&.active {
 							border-color: $white;
 							opacity: 1;
 							a {

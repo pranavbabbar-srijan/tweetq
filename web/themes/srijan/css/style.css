@@ -3670,10 +3670,10 @@ body {
       opacity: 0.8; }
       .faq .faq-qa-header .faq-header:hover {
         opacity: 1; }
-      .faq .faq-qa-header .faq-header.faq-category-qa-visible {
+      .faq .faq-qa-header .faq-header.faq-category-qa-visible, .faq .faq-qa-header .faq-header.active {
         border-color: #ffffff;
         opacity: 1; }
-        .faq .faq-qa-header .faq-header.faq-category-qa-visible a {
+        .faq .faq-qa-header .faq-header.faq-category-qa-visible a, .faq .faq-qa-header .faq-header.active a {
           opacity: 1; }
     .faq .faq-qa-header a {
       font-size: 18px;
