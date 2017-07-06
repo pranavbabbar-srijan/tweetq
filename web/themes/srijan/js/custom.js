@@ -1065,9 +1065,10 @@
         	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
         }, 500);
 
-        $('.faq-header').click(function(){
+        $('.faq-header').click(function(e){
           $(this).parent().next().removeClass('collapsed');
           $(this).addClass('faq-category-qa-visible');
+           e.preventDefault();
         });
 s
         $('.faq-header').append('Articles');
