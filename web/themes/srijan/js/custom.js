@@ -1065,6 +1065,11 @@
         	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
         }, 500);
 
+        $('.faq-header').click(function(){
+          $(this).parent().next().removeClass('collapsed');
+          $(this).addClass('faq-category-qa-visible');
+        });
+s
         $('.faq-header').append('Articles');
         $('.user-login-form #forgot-password').appendTo('.user-login-form');
 
@@ -1110,6 +1115,18 @@
 	        if($('.path-signup .messages').hasClass('messages--status')) {
 	          $('.section').addClass('active');
 	        }
+	        $(function(){
+			   $("input[type='file']").change(function(){
+			       var $fileUpload = $("input[type='file']");
+			       if (parseInt($fileUpload.get(0).files.length) > 2){
+			            alert("You can only upload a maximum of 2 files");
+			            this.value = '';
+			       }
+
+			   });    
+			});
+
+
 	    
 })(jQuery);
 
