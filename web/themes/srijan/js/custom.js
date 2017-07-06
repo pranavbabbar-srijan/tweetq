@@ -1145,6 +1145,8 @@
 
 	        // js for to prepend button 
 	        $('#delete-selected').prependTo('#block-srijan-content');
+	        //added place holder for feedback form 
+	        $('.contact-message-user-feedback-form textarea').attr('placeholder','Message');
 
 	    
 })(jQuery);
