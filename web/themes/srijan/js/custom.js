@@ -1144,17 +1144,14 @@
 		    	}
 	        });
 
-	       
-	        //added place holder for feedback form 
-	        
-
+	           
 	        // close popup after open page
 	        $('.feedback_link').click(function(){
                $(this).parent().removeClass('active animate');
                setTimeout(function(){
                   $('.contact-message-user-feedback-form textarea').attr('placeholder','Message');
 
-               }, 200);
+               }, 500);
 	        });
 
 	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
