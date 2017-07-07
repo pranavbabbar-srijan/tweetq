@@ -1302,7 +1302,7 @@ margin-top: 120px;
   .user-logged-in .block-users-all-tweets-block .item-list ul.header li:first-child,
   .user-logged-in .block-users-tweeted-tweets-block .item-list ul.header li:first-child,
   .user-logged-in .block-users-in-valid-tweets-block .item-list ul.header li:first-child {
-    flex: 5;
+    flex: 8;
     order: 2; }
   .user-logged-in .block-users-archived-tweets-block .item-list ul.header li:nth-child(2),
   .user-logged-in .block-users-valid-tweets-block .item-list ul.header li:nth-child(2),
@@ -1372,7 +1372,7 @@ margin-top: 120px;
   .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(3),
   .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(3),
   .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(3) {
-    flex: 5;
+    flex: 8;
     word-wrap: break-word;
     word-break: break-all; }
   .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(4),
