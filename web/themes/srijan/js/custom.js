@@ -501,7 +501,7 @@
 
 	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
-	    	var tweet_msg_length = tweet_msg.length;
+	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
 	    	if (tweet_msg_length > 954) {
 	    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
 	    	}
@@ -756,7 +756,7 @@
 
 	    $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-	    	var tweet_msg_length = tweet_msg.length;
+	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
 	    	if (tweet_msg_length > 900) {
 	    		$("#tweets-queue-tweet-form #edit-save").attr('disabled', 'true');
 	    	}
@@ -1085,9 +1085,12 @@
 		        $placeholderBacker = $('.js-keeper-placeholder-back'),
 		        currentValue = $textarea.val()
 		    ;
+		    var currentValuelength = twttr.txt.getTweetLength(currentValue);
+
 		    // realLength is not 140, links counts for 23 characters always.
 		    var realLength = 140;
-		    var remainingLength = 140 - currentValue.length;
+		    var remainingLength = 140 - currentValuelength;
+
 
 		    if (0 > remainingLength) {
 		      // Split value if greater than 
@@ -1132,19 +1135,7 @@
 		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 		    	}
 	        });
-	        /*$("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
-		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
-		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
-		    	if (tweet_msg_length > 140) {
-		    		$("#tweets-queue-tweet-form #edit-clone").attr('disabled', 'true');
-		    	}
-		    	else {
-		    		$("#tweets-queue-tweet-form #edit-clone").removeAttr('disabled');
-		    	}
-	        });*/
-
-	           
+	       	           
 	        // close popup after open page
 	        $('.feedback_link').click(function(){
                $(this).parent().removeClass('active animate');
@@ -1153,15 +1144,35 @@
 
                }, 500);
 	        });
+            // if checkbox is checked add class
+            
+			  $('.custom-checkbox input[type="checkbox"]').click(function() {
+			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
+			      $('#delete-selected').addClass('active');
+			    } else {
+			      $('#delete-selected').removeClass('active');
+			    }
+			  });
+
+			  $('.header .custom-checkbox input[type="checkbox"]').click(function() {
+			    if ($('.header .custom-checkbox input[type="checkbox"]').is(':checked')) {
+			      $('#delete-selected').addClass('active');
+			    } else {
+			      $('#delete-selected').removeClass('active');
+			    }
+			  });
+
 
 	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    var tweet_msg_length = tweet_msg.length;
+		    var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
 	        if (tweet_msg_length > 140) {
 	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 	    	}
 	    	else {
 	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 	    	}
+	    	
+	    	
 
 	    
 })(jQuery);
