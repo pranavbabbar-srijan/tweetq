@@ -1164,8 +1164,8 @@
 
 
 	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
-	        if (tweet_msg_length > 140) {
+		    var tweet_msg_length = tweet_msg.length;
+		    if (tweet_msg_length > 140) {
 	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 	    	}
 	    	else {

@@ -1504,6 +1504,10 @@ margin-top: 120px;
 	left: 20%;
 	border-radius: 35px;
 	padding-left: 50px;
+	width: 63%;
+    background: #ffffff;
+    z-index: 999;
+    line-height: 30px;
 	&:before {
 		@extend %icomoon;
 		content: $icon-success;
