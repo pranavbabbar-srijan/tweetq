@@ -1158,15 +1158,9 @@
 		    var tweet_msg_length = tweet_msg.length;
 	        if (tweet_msg_length > 140) {
 	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
-	    		$(".tweets-queue-tweet-form #edit-clone").attr('disabled', 'true');
-	    		
-
 	    	}
 	    	else {
 	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-	    		$(".tweets-queue-tweet-form #edit-clone").removeAttr('disabled');
-	    		
-
 	    	}
 
 	    
