@@ -1139,12 +1139,10 @@
 	        // close popup after open page
 	        $('.feedback_link').click(function(){
                $(this).parent().removeClass('active animate');
-               $('.ui-dialog').show().delay('slow');
-               $('.ui-widget-overlay').show();
                setTimeout(function(){
                   $('.contact-message-user-feedback-form textarea').attr('placeholder','Message');
                   $('.ui-dialog-buttonpane .form-actions button:first-child .ui-button-text').text('Submit');
-               }, 150);
+               }, 500);
 	        });
             // if checkbox is checked add class
             
