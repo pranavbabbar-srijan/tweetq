@@ -4319,11 +4319,12 @@ margin-top: 120px;
 					color: $twitter;
 					border: 2px solid $twitter;
 					margin-top: 1em;
-					padding: .5em 2em;
+					padding: .5em .4em;
 					margin-right: 0;
 					border-radius: 4px;
 					font-size: 18px;
 					text-decoration: none;
+					width: 230px;
 					&:hover {
 						background: $twitter;
 						color: $white;

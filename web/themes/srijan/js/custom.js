@@ -1139,10 +1139,19 @@
 	        // close popup after open page
 	        $('.feedback_link').click(function(){
                $(this).parent().removeClass('active animate');
+               $('.ui-dialog').show().delay('slow');
+               $('.ui-widget-overlay').show();
                setTimeout(function(){
                   $('.contact-message-user-feedback-form textarea').attr('placeholder','Message');
-
-               }, 500);
+                  $('.ui-dialog-buttonpane .form-actions button:first-child .ui-button-text').text('Submit');
+                  $('.ui-dialog-buttonpane .form-actions').last('button').click(function(){
+                       $('.ui-dialog').hide().delay('slow');
+                       $('.ui-widget-overlay').hide();
+                  });
+                  $('.ui-widget-header button').click(function(){
+                  	  $('#overlayspin').hide();
+                  });
+               }, 150);
 	        });
             // if checkbox is checked add class
             
@@ -1161,6 +1170,10 @@
 			      $('#delete-selected').removeClass('active');
 			    }
 			  });
+
+			  // change text of submit button on dialog box
+			  
+                
 
 
 	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();

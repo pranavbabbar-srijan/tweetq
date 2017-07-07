@@ -274,6 +274,17 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
     default:
       break;
   }
+  $page = \Drupal::request()->getRequestUri();
+  if (strpos($form_id, 'user_feedback') !== FALSE) {
+    $form['actions']['preview']['#access'] = FALSE;
+    $form['actions']['cancel'] = array(
+    '#type' => 'button',
+    '#value' => t('May be later'),
+    '#weight' => 10,
+    '#attributes' => array('onClick' => 'event.preventDefault();'),
+    );
+  }
+
 }
 
 // function tweets_queue_mail_alter (&$message) {
