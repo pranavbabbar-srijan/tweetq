@@ -1144,13 +1144,6 @@
                setTimeout(function(){
                   $('.contact-message-user-feedback-form textarea').attr('placeholder','Message');
                   $('.ui-dialog-buttonpane .form-actions button:first-child .ui-button-text').text('Submit');
-                  $('.ui-dialog-buttonpane .form-actions').last('button').click(function(){
-                       $('.ui-dialog').hide().delay('slow');
-                       $('.ui-widget-overlay').hide();
-                  });
-                  $('.ui-widget-header button').click(function(){
-                  	  $('#overlayspin').hide();
-                  });
                }, 150);
 	        });
             // if checkbox is checked add class

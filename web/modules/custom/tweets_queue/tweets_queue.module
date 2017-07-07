@@ -281,7 +281,7 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
     '#type' => 'button',
     '#value' => t('May be later'),
     '#weight' => 10,
-    '#attributes' => array('onClick' => 'event.preventDefault();'),
+    '#attributes' => array('onClick' => 'history.go(-1); event.preventDefault();'),
     );
   }
 
