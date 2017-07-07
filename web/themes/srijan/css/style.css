@@ -1353,14 +1353,14 @@ margin-top: 120px;
   .user-logged-in .block-users-all-tweets-block .item-list ul.header li:last-child,
   .user-logged-in .block-users-tweeted-tweets-block .item-list ul.header li:last-child,
   .user-logged-in .block-users-in-valid-tweets-block .item-list ul.header li:last-child {
-    flex: 1;
+    flex: 0;
     order: 1; }
   .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:first-child,
   .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:first-child,
   .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:first-child,
   .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:first-child,
   .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:first-child {
-    flex: 1; }
+    flex: 0; }
   .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(2),
   .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(2),
   .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(2),
@@ -1372,7 +1372,9 @@ margin-top: 120px;
   .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(3),
   .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(3),
   .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(3) {
-    flex: 5; }
+    flex: 5;
+    word-wrap: break-word;
+    word-break: break-all; }
   .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(4),
   .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(4),
   .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(4),
@@ -1428,6 +1430,11 @@ margin-top: 120px;
     flex: 2.9;
     text-align: center; }
   .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(7) {
+    flex: 0; }
+  .user-logged-in .block-users-all-tweets-block .item-list ul.header li:nth-child(5) {
+    flex: 2.9;
+    text-align: center; }
+  .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(7) {
     flex: 0; }
   .user-logged-in #header {
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
@@ -2155,10 +2162,11 @@ margin-top: 120px;
         border-radius: 5px;
         padding: 5px 10px;
         cursor: pointer;
-        background: rgba(0, 128, 0, 0.4);
-        color: white; }
+        background: #ffffff;
+        color: #303030;
+        border: 1px solid #303030; }
         .profilesettingform .message-header #change-password .change:hover {
-          background: rgba(0, 128, 0, 0.8); }
+          opacity: .8; }
         .profilesettingform .message-header #change-password .change:active {
           -webkit-transform: translateY(1px);
           transform: translateY(1px); }
