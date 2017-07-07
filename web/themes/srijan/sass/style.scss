@@ -1297,7 +1297,7 @@ body.path-update-password {
 		.item-list {
 			ul.header li {
 				&:first-child {
-					flex: 5;
+					flex: 8;
 					order: 2;
 				}
 				&:nth-child(2) {
@@ -1341,7 +1341,7 @@ body.path-update-password {
 							display: none;
 						}
 						&:nth-child(3) {
-							flex: 5;
+							flex: 8;
 							word-wrap: break-word;
                             word-break: break-all;
 						}
