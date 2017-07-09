@@ -519,7 +519,9 @@ body {
   z-index: 0; }
   .view-home-page-carousel .flexslider {
     background: none;
-    border: none; }
+    border: none;
+    height: 690px;
+    overflow: hidden; }
     .view-home-page-carousel .flexslider .slides .slider-content {
       position: absolute;
       top: 18%;
