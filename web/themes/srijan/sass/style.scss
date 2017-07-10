@@ -426,11 +426,13 @@ body {
 	position: absolute;
 	top: 0;
 	z-index: 0;
+	width: 100%;
 	.flexslider {
 		background: none;
 		border: none;
 		height: 690px;
 		overflow: hidden;
+		width: 100%;
 		.slides {
 			.slider-content {
 				position: absolute;
@@ -4617,7 +4619,7 @@ margin-top: 120px;
 	    }
 	}
 }
-#delete-selected {
+#delete-selected input {
 	float: right;
     padding: 10px 20px;
     background: #b5b5b5;
@@ -4629,28 +4631,24 @@ margin-top: 120px;
     color: #fff;
     cursor: pointer;
     position: relative;
+    border: none;
     &:active {
       -webkit-transform: translateY(1px);
       transform: translateY(1px);
     }
-    &:before {
-	    content: "";
-	    width: 100%;
-	    height: 100%;
-	    z-index: 999;
-	    cursor: not-allowed;
-    position: absolute;
-    top: 0;
-    left: 0;
+   	&:hover {
+    	background: #7d7d7d;
     }
-    &.active {
-    	&:hover {
-    		background: #7d7d7d;
-    	}
-      &:before {
-      	content: none;
-      }
+    &:disabled {
+    	background: $gray;
+	    opacity: .35;
+	    &:hover {
+    	   background: $gray;
+	       opacity: .35;
+        }
     }
+   
+    
 }
 
 @-webkit-keyframes bounce { 
