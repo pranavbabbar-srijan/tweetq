@@ -1159,17 +1159,17 @@
             
 			  $('.custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
-			      $('#delete-selected input').attr('disabled', true);
-			    } else {
 			      $('#delete-selected input').removeAttr('disabled');
+			    } else {
+			      $('#delete-selected input').attr('disabled', true);
 			    }
 			  });
 
 			  $('.header .custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.header .custom-checkbox input[type="checkbox"]').is(':checked')) {
-			      $('#delete-selected input').attr('disabled', true);
-			    } else {
 			      $('#delete-selected input').removeAttr('disabled');
+			    } else {
+			      $('#delete-selected input').attr('disabled', true);
 			    }
 			  });
 
