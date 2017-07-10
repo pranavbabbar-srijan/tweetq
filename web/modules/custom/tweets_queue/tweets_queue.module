@@ -3971,7 +3971,7 @@ function tweets_queue_fetch_user_tweets_history() {
   // $query->outerjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
   // $query->fields('p', ['uid', 'status']);
   $query->orderBy('h.created', 'DESC');
-  $query->condition('p.uid', $uid);
+  $query->condition('h.uid', $uid);
   //$query->condition('h.created', $last_history_read , '>');
   $result = $query->execute()->fetchAll();
   $output = array();
