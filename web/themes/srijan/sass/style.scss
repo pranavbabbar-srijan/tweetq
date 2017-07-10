@@ -4420,6 +4420,7 @@ margin-top: 120px;
 				}
 				.fivestar-basic div.fivestar-widget {
 					.star {
+						outline: none;
 						&.hover:before {
                            content: "";
                            height: 40px;

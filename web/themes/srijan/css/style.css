@@ -3970,22 +3970,24 @@ body {
     margin-bottom: 10px; }
   .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget {
     /*.star-01 ,*/ }
-    .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star.hover:before {
-      content: "";
-      height: 40px;
-      width: 40px;
-      background: #96c85a;
-      position: absolute;
-      border-radius: 5px;
-      z-index: 0; }
-    .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star.on:before {
-      content: "";
-      height: 40px;
-      width: 40px;
-      background: #96c85a;
-      position: absolute;
-      border-radius: 5px;
-      z-index: 0; }
+    .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star {
+      outline: none; }
+      .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star.hover:before {
+        content: "";
+        height: 40px;
+        width: 40px;
+        background: #96c85a;
+        position: absolute;
+        border-radius: 5px;
+        z-index: 0; }
+      .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star.on:before {
+        content: "";
+        height: 40px;
+        width: 40px;
+        background: #96c85a;
+        position: absolute;
+        border-radius: 5px;
+        z-index: 0; }
     .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-01,
     .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-01 a,
     .contact-message-user-feedback-form .fivestar-basic div.fivestar-widget .star-01.hover {

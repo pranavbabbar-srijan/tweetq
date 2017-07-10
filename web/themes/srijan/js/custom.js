@@ -1148,9 +1148,14 @@
 	                  $('#spinner').hide().removeClass('absolute_top');
 				      $('#overlayspin').hide().removeClass('absolute_top');
 				  });
+				  $('.ui-dialog .ui-dialog-buttonpane .form-actions button:last-child').click(function() {
+				       $('.ui-dialog-titlebar-close').trigger('click');
+				  });
+				  $('.star').removeClass('on');
                }, 500);
 	        });
             // if checkbox is checked add class
+               
             
 			  $('.custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
