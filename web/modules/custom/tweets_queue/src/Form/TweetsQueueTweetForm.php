@@ -89,6 +89,7 @@ class TweetsQueueTweetForm extends FormBase {
       '#default_value' => $fid ? $fid : NULL,
       '#upload_location' => 'public://images/',
       '#title' => t('Upload some photos'),
+      '#maxlength' => 5,
       '#progress_message' => $this->t('Please wait...'),
       '#attributes' => array('multiple' => 'multiple'),
       '#upload_validators' => array(
