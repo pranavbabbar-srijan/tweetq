@@ -46,6 +46,7 @@ const TWITTER_IMAGE_TABLE = 'twitter_images';
 const TWEETS_TWEETER_DATA_TABLE = 'tweets_tweeter_data';
 const TWITTER_SCHEDULED_MESSAGES_TABLE = 'twitter_scheduled_messages';
 const TWITTER_TWEETS_HISTORY_TABLE = 'twitter_tweets_history';
+const TWITTER_TWEETS_RECENT_ACTIVITY_TABLE = 'twitter_tweets_recent_activities';
 const TWEETS_URL_TABLE = 'tweets_url';
 const TWITTER_CRON_HISTORY_TABLE = 'twitter_cron_history';
 const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
@@ -266,11 +267,38 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
          unset($form['actions']['preview']);
       }
       break;
+    case 'contact_message_write_to_us_form':
+      $form['actions']['submit']['#submit'][]  = 'tweets_queue_contact_form_submit';
+      $form['actions']['submit']['#submit'][]  = 'tweets_queue_contact_recipient_form_submit';
+      break;
 
     default:
       break;
   }
+  $page = \Drupal::request()->getRequestUri();
+  if (strpos($form_id, 'user_feedback') !== FALSE) {
+    $form['actions']['preview']['#access'] = FALSE;
+    $form['actions']['cancel'] = array(
+    '#type' => 'button',
+    '#value' => t('May be later'),
+    '#weight' => 10,
+    '#attributes' => array('onClick' => 'event.preventDefault();'),
+    );
+  }
+
 }
+
+// function tweets_queue_mail_alter (&$message) {
+//   if ($message['id'] == 'contact_page_copy') {
+//     if (!example_notifications_optin($message['to'], $message['id'])) {
+//       // If the recipient has opted to not receive such messages, cancel
+//       // sending.
+//       $message['send'] = FALSE;
+//       return;
+//     }
+//     $message['body'][] = "--\nMail sent out from " . \Drupal::config('system.site')->get('name');
+//   }
+// }
 
 /**
  * Account settig form changes.
@@ -306,7 +334,7 @@ function tweets_queue_user_profile_form_changes(&$form) {
     '#markup' => t(''),
     '#weight' => 13,
   );
-  $form['actions']['submit']['#value'] = t('Update Profile');
+  $form['actions']['submit']['#value'] = t('Update');
 }
 
 /**
@@ -460,10 +488,9 @@ function tweets_queue_set_single_post($message = 'Good Evening!!', $twitter_hand
   $access_token = $twitter_handle[TWITTER_OAUTH_TOKEN];
   $access_secret_token = $twitter_handle[TWITTER_OAUTH_TOKEN_SECRET];
   $cb->setToken($access_token, $access_secret_token);
-
   //Perform tweet/retweet on the twitter.
   $status = tweets_queue_twitter_tweet_retweet($cb, $message, $tweet_id, $message_info);
-  return $status;
+   return $status;
 }
 
 /**
@@ -791,6 +818,10 @@ function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
       if (empty($message_data->tweet_id)) {
         $tweet_info['first_run'] = time();
         $tweet_info['tweeted'] = 1;
+        $twitter_history_info = array(
+          'retweeted' => 0,
+          'type' => 'Retweet',
+        );
         tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 1);
       }
       else {
@@ -801,6 +832,7 @@ function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
     else {
       $twitter_history_info['code'] = $status['code'];
       $twitter_history_info['message'] = $status['data']->errors[0]->message;
+      $twitter_history_info['type'] = 'Retweet';
       tweets_queue_update_message_queue_priority_info($message_data->nid, array(), 1);
     }
     $tweet_handler_info = array(
@@ -903,11 +935,12 @@ function tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info)
   if (!is_array($twitter_history_info)) {
     $twitter_history_info = array();
   }
-  $nid = db_insert(TWITTER_TWEETS_HISTORY_TABLE)
+  $nid = db_insert(TWITTER_TWEETS_RECENT_ACTIVITY_TABLE)
     ->fields($twitter_history_info)
     ->execute();
   tweets_queue_debug_info(t('Updated history table for nid @nid', array('@nid' => $nid)));
 }
+
 
 function tweets_queue_tweet_scheduled_messages_user_list($uids = array()) {
   if (!is_array($uids)) {
@@ -1056,7 +1089,6 @@ function tweets_queue_send_direct_message($message, $images = array()) {
     'size' => $size,
     'tweeted' => 1
   );
-
   if (!$tweet_id) {
     drupal_set_message(t('Your tweet message "@message" already exists.',
     array('@message' => $message)));
@@ -1071,9 +1103,10 @@ function tweets_queue_send_direct_message($message, $images = array()) {
   $twitter_history_info = array('nid' => $nid,
     'uid' => $uid,
     'created' => time(),
+    'type' => 'New Tweet',
     'code' => 0,
     'status' => 1,
-    'message' => '',
+    'message' => $message,
   );
   tweets_queue_update_message_queue_priority_info($nid,
     array(
@@ -1084,7 +1117,7 @@ function tweets_queue_send_direct_message($message, $images = array()) {
     ),
     0
   );
-  tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info);
+  tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info);  
 }
 
 /**
@@ -1630,6 +1663,17 @@ function tweets_queue_mail($key, &$message, $params) {
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = $params['message'];
       break;
+    case 'contact_us_thankyou_mail':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = $params['message'];
+      break;
+    case 'contact_us_recipient_mail':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = $params['message'];
+      break;
+
   }
 }
 
@@ -1647,7 +1691,7 @@ function tweets_queue_signup_send_mail($mail, $name) {
   $key = 'user_signup_mail'; // Replace with Your key
   $to = $mail;
   $message = t("<h2 style='text-transform: capitalize;'>Dear @full_name,</h2>
-   <div style='margin: 30px 0;'>Thankyou for connecting with Barebt!<br>
+   <div style='margin: 30px 0;'>Thankyou for connecting with Barbet!<br>
     You will now be able to use Barbet for posting your tweets.</div>
     Please check out the Import tweets if you want the bulk of tweets to be handled through Barbet.", array('@full_name' => $name));
   $params['message'] = $message;
@@ -1668,6 +1712,81 @@ function tweets_queue_signup_send_mail($mail, $name) {
   }
   \Drupal::logger('mail-log')->notice($message);
 }
+
+/**
+ * Verification mail for sign up users.
+ *
+ * @param string $mail
+ *   User email.
+ * @param string $name
+ *   User full name.
+ */
+
+function tweets_queue_contact_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  global $base_url;
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'contact_us_thankyou_mail';
+  $to = $form_state->getValue('field_email');
+  $to = $to[0]['value'];
+  
+  $user_hash_key = hash('sha256', $mail);
+  $message = t("<div  style='text-align: center;'>Thankyou for reaching to us");
+  $params['message'] = $message;
+  $params['title'] = 'Thankyou mail';
+ 
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    $message = t('There was a problem sending your email notification to @email.', array('@email' => $to));
+    drupal_set_message($message, 'error');
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  else {
+    $message = t('An email notification has been sent to @email ', array('@email' => $to));
+    drupal_set_message($message);
+  }
+  \Drupal::logger('mail-log')->notice($message);
+}
+
+function tweets_queue_contact_recipient_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  global $base_url;
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'tweets_queue';
+  $key = 'contact_us_recipient_mail';
+  $to = 'barbet@srijan.net';
+  $name = $form_state->getValue('field_name');
+  $email = $form_state->getValue('field_email');
+  $recipient_message = $form_state->getValue('field_message'); 
+  $user_hash_key = hash('sha256', $mail);
+  $message = t("<div style='margin: 30px 0;'>Name: @name</div>
+    <div style='margin: 30px 0;'>Email: @email</div>
+    <div style='margin: 30px 0;'>Message: @message</div>",array('@name' => $name[0]['value'], '@email' => $email[0]['value'], '@message' => $recipient_message[0]['value']));
+  $params['message'] = $message;
+  $params['title'] = 'Write to us';
+ 
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] != true) {
+    $message = t('There was a problem sending your email notification to @email.', array('@email' => $to));
+    drupal_set_message($message, 'error');
+    \Drupal::logger('mail-log')->error($message);
+    return;
+  }
+  else {
+    $message = t('An email notification has been sent to @email ', array('@email' => $to));
+    drupal_set_message($message);
+  }
+  \Drupal::logger('mail-log')->notice($message);
+}
+
+
+
 
 /**
  * Verification mail for sign up users.
@@ -1717,7 +1836,8 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
     return;
   }
   else {
-    $message = t('An email notification has been sent to @email ', array('@email' => $to));
+    global $base_url;
+    $message = t('A verification mail has been sent to <em> @email </em> <span> Please Verify to Get Started </span> <a href="'. $base_url . '"> learn how barbet  works </a>', array('@email' => $to));
     drupal_set_message($message);
   }
   \Drupal::logger('mail-log')->notice($message);
@@ -1822,7 +1942,7 @@ function tweets_queue_delete_user_twitter_info($uid) {
     return;
   }
   tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_AUTH_MAP_TABLE);
-  tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_TWEETS_HISTORY_TABLE);
+  tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_TWEETS_RECENT_ACTIVITY_TABLE);
   tweets_queue_delete_twitter_specific_info('uid', $uid, TWITTER_MESSAGE_QUEUE_TABLE);
 }
 
@@ -2174,6 +2294,32 @@ function tweets_queue_update_url($message, $uid = '') {
       ->execute();
   }
 }
+function tweets_queue_update_8108() {
+ $schema[TWITTER_TWEETS_RECENT_ACTIVITY_TABLE] = array(
+    'description' => 'The base table for twitter tweets recent activities data.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'nid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'type' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'code' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'retweeted' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => DB_TWEET_CHARCATER_LIMIT, 'default' => ''),
+      'cron_id' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'twitter_tweets_recent_activity_nid' => array('nid'),
+      'twitter_tweets_recent_activity_uid' => array('uid'),
+      'twitter_tweets_recent_activity_created' => array('created'),
+      'twitter_tweets_recent_activity_cron_id' => array('cron_id')      
+    )
+  );
+  db_create_table(TWITTER_TWEETS_RECENT_ACTIVITY_TABLE, $schema[TWITTER_TWEETS_RECENT_ACTIVITY_TABLE]);
+}
+
 
 /**
  * Update the twitter tweet table for the tweet.
@@ -3809,13 +3955,15 @@ function tweets_queue_fetch_user_tweets_history_count() {
   if (empty($last_history_read)) {
     $last_history_read = 0;
   }
-  $query = \Drupal::database()->select(TWITTER_TWEETS_HISTORY_TABLE, 'h');
+  $query = \Drupal::database()->select(TWITTER_TWEETS_RECENT_ACTIVITY_TABLE, 'h');
   $query->addExpression("count(nid)", "total");
   $query->condition('h.uid', $uid);
   $query->condition('h.created', $last_history_read , '>');
   $total = $query->execute()->fetchField();
   return $total;
 }
+
+
 
 /**
  * Fetch current user tweets history.
@@ -3829,13 +3977,13 @@ function tweets_queue_fetch_user_tweets_history() {
   if (empty($last_history_read)) {
     $last_history_read = 0;
   }
-  $query = \Drupal::database()->select(TWITTER_TWEETS_HISTORY_TABLE, 'h');
-  $query->fields('h', ['created', 'retweeted']);
-  $query->leftjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
-  $query->fields('p', ['uid', 'message', 'status', 'tweet_id']);
+  $query = \Drupal::database()->select(TWITTER_TWEETS_RECENT_ACTIVITY_TABLE, 'h');
+  $query->fields('h', ['type', 'created', 'retweeted', 'message']);
+  // $query->outerjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
+  // $query->fields('p', ['uid', 'status']);
   $query->orderBy('h.created', 'DESC');
-  $query->condition('p.uid', $uid);
-  // $query->condition('h.created', $last_history_read , '>');
+  $query->condition('h.uid', $uid);
+  //$query->condition('h.created', $last_history_read , '>');
   $result = $query->execute()->fetchAll();
   $output = array();
   foreach ($result as $pos => $data) {
@@ -3844,6 +3992,7 @@ function tweets_queue_fetch_user_tweets_history() {
   }
   return $output;
 }
+
 
 /**
  * Format tweet time at notification section.
