@@ -125,6 +125,14 @@ class TweetsQueueTweetController extends ControllerBase {
 
     //Perform send mail operation and other stuff.
     tweets_queue_invite_friends_send_mail($email);
+    $twitter_history_info = array(
+     // 'nid' => $message_data->nid,
+      'uid' => $uid,
+      'created' => time(),
+      'type' => 'Invitation',
+      'message' => 'Invitation send to' . ' ' . $email,
+    );
+    tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
     die("done");
   }
 
@@ -170,6 +178,14 @@ class TweetsQueueTweetController extends ControllerBase {
     //   die("weak_password");
     // }
     tweets_queue_change_password($uid, $password);
+    $twitter_history_info = array(
+     // 'nid' => $message_data->nid,
+      'uid' => $uid,
+      'created' => time(),
+      'type' => 'Password',
+      'message' => 'Password has been changed',
+    );
+    tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
     die("done");
   }
 
@@ -201,6 +217,36 @@ class TweetsQueueTweetController extends ControllerBase {
     // drupal_set_message('Your account has been activated, you can now login');
   }
 }
+
+  public function deleteTweets() {
+    $logged_uid = \Drupal::currentUser()->id();
+    $var = $_REQUEST[nid];
+    $deleted = array();
+
+    foreach ($var as $key => $value) {
+    $tweet_info = tweets_queue_fetch_tweet_item($value);
+      if ($tweet_info->uid == $logged_uid) {
+      tweets_queue_update_message_queue_priority_info($value,
+        array(
+        'status' => TWITTER_DELETED_TWEET,
+        'changed' => time()
+        ),
+        0
+      );
+      $deleted[] = $value;
+      }
+    }
+    $selected = implode(',', $deleted);
+    $twitter_history_info = array(
+      'nid' => $value,
+      'uid' => $logged_uid,
+      'created' => time(),
+      'type' => 'Delete',
+      'message' => 'Message have been deleted',
+    );
+    tweets_queue_update_twittter_tweet_history($value, $twitter_history_info);
+    die($selected);
+  }
 
   /**
   * This function goto than login page when users got an access denied error message.

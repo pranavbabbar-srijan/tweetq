@@ -44,6 +44,7 @@
 		var profile_change_password_path = '/dashboard/changePassword';
 		var friend_invite_send_token_path = '/dashboard/friendInviteSendToken';
 		var invite_friends_path = '/dashboard/inviteFriends';
+		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
 		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
@@ -52,6 +53,7 @@
 		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
 		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
 		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
+		// var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -69,12 +71,39 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
+					location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 		    });
 
+
 		});
+
+		//Multiple deletion
+		$("#delete-selected").click(function() {
+			var nid = [];
+		    $("input:checkbox[name=multiple-deletion]:checked").each(function() {
+		         nid.push($(this).val());
+		   });  
+			$.post(multiple_selected_deletion, {'nid' : nid}, function(data) {
+				// $("<span id='delete-selected'>" + data + "</p>").insertAfter( "#delete-selected" );
+				 var nids = data.split(",");
+				 
+		    	 for (var i in nids) {  
+			    	$('#' + nids[i]).parent().parent().parent().hide();   
+				 } 
+			location.reload();
+		    });
+		});
+		//All checks on single check
+	 	 $('[name="all-selected-deleted"]').click(function(){
+      	  if($(this).prop("checked")) {
+      	      $('[name="multiple-deletion"]').prop("checked", true);
+      	  } else {
+     	       $('[name="multiple-deletion"]').prop("checked", false);
+      	  }                
+     	 });
 
 		//Volunteer invite form.
 		$("#profile-account-settings-form #invite-friend").click(function() {
@@ -89,7 +118,8 @@
 	    	$.post(friend_invite_send_token_path, {'email' : emails}, function(data) {
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
-					$('#email-sent').delay(5000).fadeOut(300);			
+					$('#email-sent').delay(5000).fadeOut(300);	
+					location.reload();		
 					return;
 				}
 				$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
@@ -142,7 +172,7 @@
 	  		
 	  	// });
 
-		$("#profilesettingform #change-password").click(function() {
+		$("#profilesettingform #change-password .change").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
 	    	//var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
   			
@@ -157,7 +187,7 @@
          	$.post(profile_change_password_path, {'password' : password}, function(data) {
 				if  (data == "done") {
 					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
-					$('#password-changed').delay(5000).fadeOut(300);			
+					$('#password-changed').delay(5000).fadeOut(3000);			
 					location.reload();
 					return;
 				}
@@ -792,14 +822,23 @@
 		    $('body').addClass('import-tweet-page');
 		}
 
+	     $(".message_history_count b").click(function(e) {
+	        $(".notification-message-list, #notification-display").removeClass("active");
+	        e.stopPropagation();
+	    });
+
 	     $("#block-usersdashboardheaderblock .profile + a, #block-usersdashboardnontwitterheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
+	        $('#block-usersdashboardheaderblock .profile .profile-links').removeClass('active animate');
+			// $('#block-usersdashboardheaderblock .profile > a').removeClass('active');
 	        e.stopPropagation();
 	    });
 
 	     $("#block-usersdashboardheaderblock .profile > a, #block-usersdashboardnontwitterheaderblock .profile > a").click(function(e) {
 	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
+	        $('#notification-display').removeClass('active');
+			$('.notification-message-list').removeClass('active');
 	        setTimeout(function() {
 	            $('.profile-links').toggleClass('animate');
 	        }, 100);
@@ -863,7 +902,7 @@
    		});
 
 		// ripple effect
-		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit").click(function (e) {
+		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit, #change-password .change").click(function (e) {
 
 		  // Remove any old one
 		  $(".ripple").remove();
@@ -969,7 +1008,7 @@
 	});
 	// js for adding placeholder on newsletter field
 	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
-	$(".contact-message-form").prepend("<div class='heading-write-us'>Write to us</div>");
+	$(".contact-message-write-to-us-form").prepend("<div class='heading-write-us'>Write to us</div>");
 	/*$(window).scroll(function() {    
     var scroll = $(window).scrollTop();
 
@@ -979,10 +1018,118 @@
         $(".header").removeClass("change");
        }
     });*/
+
+	$('#my_tweets .text').click(function() {
+		$(this).siblings('div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	});
+
+	if ($('#my_tweets > div a').hasClass('active')) {
+	    $('#my_tweets > div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	}
+
+	$('.messages').delay(500).animate({'bottom': '0'}, 50);
+
     // change text of summary 
     $(".user-form summary").text("Settings");
-	
 
+    // add spinner when click on submit button
+    $("body").prepend('<div id="overlayspin" class="ui-widget-overlay" style="z-index: 1001; display: none;"></div>');
+	$("body").prepend("<div id='spinner' style='display: none;'><i class='fa fa-spinner' aria-hidden='true'></i></div>");
+	$('#contact-message-write-to-us-form').submit(function() {
+	    var pass = true;
+	    //some validations
+	    if(pass == false){
+	        return false;
+	    }
+	    $("#overlayspin, #spinner").show();
+	    return true;
+	});
+
+
+ 	 // $.ajax(function(){
+ 	 	function onChangeCheckbox(){
+ 	 		console.log('change');
+ 	 	}
+ 	 	$('.js-form-managed-file').on('change', '.form-checbox', onChangeCheckbox);
+         // $('.form-checbox').on('change',function(){
+         // 	console.log('change');
+         //    $('.option + .form-submit').submit();
+         //    });
+         // });
+        $( ".faq .faq-qa-header" ).each(function( index ) {
+		  $(this).unwrap();
+		});
+		$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
+        
+        setTimeout(function(){ 
+        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
+        }, 500);
+
+        $('.faq-header').append('Articles');
+        $('.user-login-form #forgot-password').appendTo('.user-login-form');
+
+
+
+        // twitter text box 
+         function onTweetCompose(event) {
+		    var $textarea = $('.send-tweets-form #edit-message'),
+		        $placeholderBacker = $('.js-keeper-placeholder-back'),
+		        currentValue = $textarea.val()
+		    ;
+		    // realLength is not 140, links counts for 23 characters always.
+		    var realLength = 140;
+		    var remainingLength = 140 - currentValue.length;
+
+		    if (0 > remainingLength) {
+		      // Split value if greater than 
+		      var allowedValuePart = currentValue.slice(0, realLength),
+		          refusedValuePart = currentValue.slice(realLength)
+		      ;
+
+		      // Fill the hidden div.
+		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+		    } else {
+		      $placeholderBacker.html('');
+		    }
+		  }
+		  
+		  $(document).ready(function () {
+		  	
+			 
+		    $textarea = $('textarea');
+
+		    // Create a pseudo-element that will be hidden behind the placeholder.
+		    var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
+		    $placeholderBacker.insertAfter($textarea);
+
+		    onTweetCompose();
+		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
+		  });
+          
+          // add class
+	        if($('.path-signup .messages').hasClass('messages--status')) {
+	          $('.section').addClass('active');
+	        }
+	    
 })(jQuery);
 
 
+(function ($) {
+
+	function onFormCheckBoxChange() {
+				$(this).parent().next().trigger('mousedown');
+
+	      // console.log(selector);
+	      // $('.button.js-form-submit.form-submit').trigger('click');
+	      // console.log('submit');
+	}
+
+
+	 Drupal.behaviors.ajax_send_tweet = {
+	 	attach: function attach() {
+	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
+	 		.bind('change', onFormCheckBoxChange);
+	 		
+	 	}
+	 };
+})(jQuery);

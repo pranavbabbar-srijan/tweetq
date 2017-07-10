@@ -146,6 +146,9 @@
 		    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
 		    padding: 15px 10px;
 		    display: none;
+		    .ajax-progress {
+		    	display: none;
+		    }
 			&.active {
 				display: block;
 			    transform: scale(0.8);
@@ -183,7 +186,7 @@
 			a {
 				display: block;
 				text-decoration: none;
-				&.profile-my-profile, &.profile-settings, &.profile-logout {
+				&.profile-my-profile, &.profile-settings, &.profile-logout, &.feedback_link {
 					color: $dark;
 					margin-bottom: 10px;
 					padding: .5em;
@@ -264,6 +267,7 @@
 	width: 100%;
 }
 #header {
+	z-index: 9;
 	position: relative;
 	margin-top: 1.4em;
 	padding-bottom: 1.05em;
@@ -412,7 +416,7 @@ body {
 		float: right;
 	}
 	#main-wrapper {
-		margin-top: 15vh;
+		margin-top: 12vh;
 	}
 }
 
@@ -439,7 +443,7 @@ body {
 	    		}
 	    		p {
 	    			color: white;
-					font-size: 20px;
+					font-size: 18px;
 	    		}
 			}
 			.views-field-field-front-page-image {
@@ -505,7 +509,7 @@ body {
 .path-frontpage .section {
 	+ .section {
 		.region-middle {
-			margin-top: 5vh;
+			margin-top: 10vh;
 		}
 	}
 }
@@ -518,6 +522,7 @@ body {
 	float: right;
 	margin-top: -4vh;
 	position: relative;
+	min-height: 415px;
 	h2 {
 		font-size: 22px;
 		font-weight: 300;
@@ -560,6 +565,13 @@ body {
 	    color: white;
 	    @include border-radius(4px);
 	    margin-top: 1em;
+	    &:hover {
+	    	background: #82bb3e;
+	    }
+	    &:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
 	}
 	> input + a {
 		display: block;
@@ -580,38 +592,46 @@ body {
 		color: #aaa;
 		font-size: 12px;
 		display: block;
-		width: 150px;
 		margin: 0 auto;
+        text-align: right;
+	}
+}
+
+#user-login-prefix {
+	+ div {
 		position: absolute;
-	    bottom: 74px;
-	    right: 15px;
-	    + div {
-			position: absolute;
-		    bottom: 10px;
-		    border-top: 1px solid #ccc;
-		    width: 100%;
-		    left: 0;
-		    padding: 15px 30px 5px;
-		    a {
-		    	float: right;
-		    	background: white;
-				color: $twitter;
-				border: 1px solid $twitter;
-				float: right;
-				padding: .4em 1em;
-				margin-right: 0;
-				margin-left: 0;
-				border-radius: 4px;
-				font-size: 13px;
-				text-decoration: none;
-		    }
-		    span {
-		    	color: #aaa;
-		    	margin-top: 7px;
-			    float: left;
-			    font-size: 13px;
-		    }
-		}
+	    bottom: 10px;
+	    border-top: 1px solid #ccc;
+	    width: 100%;
+	    left: 0;
+	    padding: 15px 30px 5px;
+	    a {
+	    	float: right;
+	    	background: white;
+			color: $twitter;
+			border: 1px solid $twitter;
+			float: right;
+			padding: .4em 1em;
+			margin-right: 0;
+			margin-left: 0;
+			border-radius: 4px;
+			font-size: 13px;
+			text-decoration: none;
+			&:hover {
+				background: $twitter;
+				color: $white;
+			}
+			&:active {
+				-webkit-transform: translateY(1px);
+				transform: translateY(1px);
+			}
+	    }
+	    span {
+	    	color: #aaa;
+	    	margin-top: 7px;
+		    float: left;
+		    font-size: 13px;
+	    }
 	}
 }
 
@@ -692,11 +712,79 @@ body.path-update-password {
 }
 
 .path-signup {
+	.header {
+		border-bottom: 1px solid #f1f1f1 !important;
+	}
+	.section.active {
+		background: $white !important;
+	}
 	.messages--status {
-		width: 380px;
-		margin: 0 auto;
-		display: block !important;
-		opacity: 1 !important;
+            border: none;
+		    background: $white;
+		    font-size: 20px;
+		    color: #303030;
+		    width: 100%;
+		    box-shadow: none;
+		    height: 0;
+		    text-align: center;
+		    margin: 0 auto;
+		    display: block !important;
+		    padding-top: 275px;
+		    height: 100%;
+	        &:before  {
+	    	content: "";
+		    height: 200px;
+		    width: 200px;
+		    border: 1px solid #96c85a;
+		    border-radius: 100px;
+		    position: absolute;
+		    background-image: url('../images/verification.svg');
+		    background-repeat: no-repeat;
+		    background-position: 0px 25px;
+		    background-size: 200px;
+		    left: 42%;
+		    top: 110px;
+	    }
+	    em {
+	    	color: $twitter;
+	    }
+	    a {
+	    	border: none;
+		    background: #2aa9e0;
+		    width: 100%;
+		    padding: .5em 1em .5em 1em;
+		    font-size: 18px;
+		    color: white;
+		    -webkit-border-radius: 4px;
+		    -khtml-border-radius: 4px;
+		    -moz-border-radius: 4px;
+		    -ms-border-radius: 4px;
+		    -o-border-radius: 4px;
+		    border-radius: 4px;
+		    text-decoration: none;
+		    text-align: center;
+		    text-transform: uppercase;
+		    &:hover {
+		    	background: #2195c7;
+		    }
+	    }
+	    span {
+	    	display: block;
+		    padding: 15px 0;
+		    font-size: 24px;
+		    font-weight: 600;
+		    position: relative;
+		    margin-bottom: 40px;
+		    &:before {					    	
+			    content: "";
+			    width: 115px;
+			    height: 2px;
+			    background: #999999;
+			    position: absolute;
+			    bottom: 0;
+			    left: 45%;
+		    }
+	    }
 		~ .block-system-main-block {
 			display: none;
 		}
@@ -707,15 +795,21 @@ body.path-update-password {
 	font-size: 22px;
 	text-align: center;
 	font-weight: 300;
-	margin-bottom: -4.5em;
+	margin-bottom: 0;
+	position: relative;
+    top: -65px;
+    position: absolute;
+    top: 40px;
+    width: 86%;
 	.signup {
 		margin-top: 10px;
 		font-size: 16px;
 		color: $gray;
 		font-weight: normal;
-		margin-bottom: 6em;
+		margin-bottom: 3em;
 	}
 	.form-item-email {
+		margin-bottom: 2em;
 		label {
 			text-align: left;
 			font-weight: bold;
@@ -724,10 +818,14 @@ body.path-update-password {
 			font-size: 12.8px;
 		}
 	}
+	.validation-error {
+		position: absolute;
+		width: 100%;
+	}
 	#forgot-password-submit {
 		font-weight: normal;
 		cursor: pointer;
-		margin-top: 50px;
+		margin-top: 20px;
 	}
 	#forgot-password-cancel {
 		font-weight: normal;
@@ -763,6 +861,13 @@ body.path-update-password {
 		    display: inline-block;
 		    vertical-align: text-top;
 	    }
+	    &:hover {
+	    	background: #2195c7;
+	    }
+	    &:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
 	}
     span {
     	width: 100%;
@@ -806,7 +911,7 @@ body.path-update-password {
 
 .block-total-twitter-tweets-block, .block-total-twitter-users-block {
 	float: left;
-	margin-top: 220px;
+	margin-top: 200px;
 	margin-left: 5em;
 	position: relative;
 	.count {
@@ -1342,14 +1447,19 @@ body.path-update-password {
 	    color: #96c85a;
 	    font-size: 18px;
 	    position: relative;
-	    display: none;
+	    // display: none;
+	    position: absolute;
+	    bottom: -80px;
+	    left: 20%;
+	    border-radius: 35px;
+	    padding-left: 50px;
 	    &:before {
 	    	@extend %icomoon;
 	    	content: $icon-success;
-	    	font-size: 22px;
+	    	font-size: 38px;
 		    position: absolute;
-		    top: 15px;
-		    margin-left: -30px;
+		    top: 6px;
+		    margin-left: -43px;
 	    }
 	    + .block {
 	    	+ .block-sign-in-with-twitter-block {
@@ -1376,6 +1486,57 @@ body.path-update-password {
 	    		}
 	    	}
 	    }
+	}
+}
+
+// #update-message {
+// 	box-shadow: none;
+// 	margin-left: 10px;
+// 	text-align: center;
+//     background: none white;
+//     border: 1px solid rgba(0,0,0,0.15);
+//     color: #96c85a;
+//     font-size: 18px;
+//     position: relative;
+//     // display: none;
+//     padding: 14px;
+// 	border-radius: 30px;
+// 	height: 100%;
+// 	top: 15px;
+// 	box-shadow: 0px 0px 20px -10px #333;
+//     &:before {
+//     	@extend %icomoon;
+//     	content: $icon-success;
+//     	font-size: 22px;
+// 	    position: absolute;
+// 	    top: 15px;
+// 	    margin-left: -30px;
+//     }
+// }
+
+// left menu 
+#my_tweets > span.text {
+	cursor: pointer;
+	~ div {
+		padding-left: 35px;
+		display: none;
+	}
+	&:before {
+		content: "\f099";
+		font-family: 'fontawesome';
+		font-size: 10px;
+	    background: #979797;
+	    color: white;
+	    padding: 3px;
+	    border-radius: 4px;
+	    vertical-align: bottom;
+	    margin-right: 10px;
+	}
+	&:after {
+		content: "\f107";
+	    position: absolute;
+	    right: 26px;
+	    font-family: 'fontawesome';
 	}
 }
 
@@ -1426,15 +1587,34 @@ body.path-update-password {
 		border: 0;
 	    padding: .65em 1em;
 	    font-size: 18px;
+	    display: inline-block;
 	    @include border-radius( 3px);
 	    text-decoration: none;
 		text-align: center;
 		font-weight: bold;
+		transition: .2s ease-in-out;
+		&:hover {
+			background: #2195c7;
+		}
+		&:active {
+	    	-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+	    }
 		&.import-tweet {
 			background: none;
 			color: $twitter;
 			margin-left: 20px;
-			border: 1px solid;
+			border: 2px solid;
+		    padding-top: 0.5em;
+		    padding-bottom: .5em;
+		    &:hover {
+		    	background: $twitter;
+		    	color: $white;
+		    }
+		    &:active {
+	    	  -webkit-transform: translateY(1px);
+			  transform: translateY(1px);
+	       }
 		}
 	}
 }
@@ -1525,6 +1705,10 @@ body.path-update-password {
 		    color: white;
 		    display: block;
 		    @include border-radius(4px);
+		    &:active {
+				-webkit-transform: translateY(1px);
+				transform: translateY(1px);
+			}
     	}
 	}
 	#header {
@@ -1687,6 +1871,32 @@ body.path-update-password {
 				    	@extend %none;
 				    }
 			    }
+			}
+			&.create_tweets {
+				&:before {
+					content: "\f044";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
+			}
+			&.import_tweets {
+				&:before {
+					content: "\f019";
+					font-family: 'fontawesome';
+					font-size: 16px;
+					background: white;
+					color: #979797;
+					padding: 3px;
+					border-radius: 4px;
+					vertical-align: bottom;
+					margin-right: 10px;
+				}
 			}
 			&.valid_tweets {
 				.value {
@@ -1885,6 +2095,7 @@ body.path-update-password {
 	width: 272px;
 	> div {
 		&#twitter-notification-count {
+			display: none;
 			position: absolute;
 		    top: -2px;
 		    right: 134px;
@@ -1894,7 +2105,7 @@ body.path-update-password {
 		    padding: .2em;
 		    font-size: 12px;
 		    text-align: center;
-		    display: block;
+		    
 		    z-index: 1;
 		    &.active {
 		    	// left: 0;
@@ -1911,7 +2122,7 @@ body.path-update-password {
 		margin-top: 20px;
 		left: 328px;
 	    top: 28px;
-	    width: 275px;
+	    width: 305px;
 	    background: white;
 	    font-size: 12px;
 	    color: $gray;
@@ -1933,7 +2144,7 @@ body.path-update-password {
 		}
 		&.active {
 			visibility: inherit;
-			left: 60px;
+			left: 30px;
 			background: white;
 			border-radius: 0;
 		}
@@ -1945,14 +2156,14 @@ body.path-update-password {
 				position: fixed;
 		    }
 		    &:nth-child(2) {
-		    	margin-top: 27px;
+		    	margin-top: 55px;
 		    }
 		    span {
 		    	font-size: 10px;
 		    	display: block;
 		    	&.state {
 		    		color: $dark;
-		    		font-size: 13px;
+		    		font-size: 16px;
 		    		margin-bottom: 3px;
 		    	}
 		    	&.time {
@@ -1973,14 +2184,24 @@ body.path-update-password {
 				}
 				&.message_history_count {
 					display: block;
-					border-bottom: 1px solid $gray;
-					width: 256px;
+					// border-bottom: 1px solid $gray;
+					width: 299px;
 				    position: relative;
 				    left: -12px;
 				    top: -12px;
-				    padding: 5px 10px;
-				    font-size: 12px;
-				    background: white;
+				    padding: 15px 12px;
+				    font-size: 18px;
+				    background: #eee;
+				    color: #999;
+				    b {
+				    	float: right;
+				    	font-weight: normal;
+				    	cursor: pointer;
+				    	font-family: 'fontawesome';
+				    	&:after {
+				    		content: "\f00d";
+				    	}
+				    }
 				    div {
 				    	display: inline;
 				    	span {
@@ -1998,17 +2219,25 @@ body.path-update-password {
 			width: 69%;
 		}
 	}
+	.form-item-display-box {
+		width: 53.5% !important;
+	}
 }
 
 .profilesettingform-body {
 	&.user-logged-in {
 		.main-content {
 			position: absolute;
-			top: 70px;
+			// top: 70px;
+		}
+		.messages--status {
+			bottom: -490px !important;
+		    left: 27.3% !important;
 		}
 	}
 }
 .profilesettingform {
+	margin-top: -8em;
 	.profile-setting {
 		background: #FCFCFC;
 		padding: 15px 30px;
@@ -2057,6 +2286,15 @@ body.path-update-password {
 			    border-radius: 5px;
 			    padding: 5px 10px;
 			    cursor: pointer;
+				background: rgba(0, 128, 0, .4);
+			    color: white;
+			    &:hover {
+			    	background: rgba(0, 128, 0, .8); 
+			    }
+			    &:active {
+		    	    -webkit-transform: translateY(1px);
+    				transform: translateY(1px);
+		        }
     		}
     	}
     	.js-form-item, #change-password {
@@ -2100,7 +2338,7 @@ body.path-update-password {
 			}
     	}
 	    input[type="submit"] {
-    		margin: 20px 0;
+    		margin: 20px 240px;
     		border: none;
 			background: $login-btn;
 			width: 30%;
@@ -2109,7 +2347,14 @@ body.path-update-password {
 		    color: white;
 		    display: block;
 		    @include border-radius(4px);
+		    &:active {
+		    	-webkit-transform: translateY(1px);
+    			transform: translateY(1px);
+		    }
     	}
+	}
+	#profile-settingform-password-validation-error, #password-changed {
+		position: absolute;
 	}
 }
 .send-tweets-form, .tweets-queue-tweet-form {
@@ -2146,6 +2391,23 @@ body.path-update-password {
 		    }
 		    .option {
 		    	display: block;
+		    	position: relative;
+		    	pointer-events: none;
+		    	&:after {
+		    		content: 'x';
+				    background: #dddddd;
+				    height: 20px;
+				    width: 20px;
+				    display: block;
+				    position: absolute;
+				    top: 5px;
+				    right: 5px;
+				    border-radius: 30px;
+				    color: white;
+				    padding: 2px 6px;
+				    text-align: center;
+				    cursor: pointer;
+		    	}
 		    }
 		    > div {
 		    	display: flex;
@@ -2154,8 +2416,21 @@ body.path-update-password {
 		    }
 		    .js-form-type-checkbox {
 		    	margin: 0;
+		    	position: relative;
 		    	input[type="checkbox"] {
-		    		display: none;
+				    position: absolute;
+				    right: 0;
+				    opacity: 0;
+				    height: 20px;
+				    width: 20px;
+				    z-index: 999;
+				    right: 5px;
+                    top: 5px;
+                    &:hover {
+                    	 + .option:after {
+                    		background: $twitter;
+                    	}
+                    }
 		    	}
 		    	.file {
 		    		background: none;
@@ -2201,7 +2476,8 @@ body.path-update-password {
     	color: green;
 	}
 }
-.send-tweets-form, .tweets-queue-tweet-form  {
+.send-tweets-form, 
+.tweets-queue-tweet-form  {
 	padding-top: 5px;
 	label {
 		@extend %none;
@@ -2220,6 +2496,9 @@ body.path-update-password {
 		color: $gray;
 	}
 	.message-header {
+		.ajax-new-content {
+    		display: none !important;
+    	}
 		overflow: hidden;
 		background: white;
 		padding: 1em 1em 2.5em 1em;
@@ -2244,7 +2523,7 @@ body.path-update-password {
 			}
 		}
 	}
-	#edit-save, #edit-submit, #edit-clone, #edit-cancel {
+	#edit-save, #edit-submit, #edit-clone, #edit-cancel , #edit-tweet-now{
 		border: none;
 	    padding: .5em 1em .5em 1em;
 	    font-size: 18px;
@@ -2252,14 +2531,26 @@ body.path-update-password {
 	    text-decoration: none;
 	    display: block;
 		text-align: center;
+		&:active {
+			-webkit-transform: translateY(1px);
+            transform: translateY(1px); 
+     	}
 	}
-	#edit-submit, #edit-clone {
+	#edit-submit, #edit-clone , #edit-tweet-now {
 		background: $twitter;
 		color: white;
 		float: right;
 		margin-right: 0;
 		padding: .7em 1.4em;
 		font-weight: bold;
+		transition: .2s ease-in-out;
+		&:hover {
+          background: #2195c7;
+		}
+		&:active {
+			-webkit-transform: translateY(1px);
+            transform: translateY(1px); 
+     	}
 	}
 	#edit-save, #edit-cancel {
 		background: white;
@@ -2270,6 +2561,15 @@ body.path-update-password {
 		margin-right: 0;
 		margin-left: 0;
 		font-weight: bold;
+		transition: .2s ease-in-out;
+		&:hover {
+          background: $twitter;
+          color: $white;
+		}
+		&:active {
+			-webkit-transform: translateY(1px);
+            transform: translateY(1px); 
+     	}
 	}
 	.form-textarea {
 		border-color: rgba(0,0,0,0.1);
@@ -2407,6 +2707,14 @@ body.path-update-password {
 	    display: block;
 		text-align: center;
 		font-weight: bold;
+		transition: .2s ease-in-out;
+		&:hover {
+			background: #2195c7;
+		}
+		&:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
 	}
 	.description {
 		font-size: .8em;
@@ -2583,7 +2891,7 @@ body.path-update-password {
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb); /*IE 5.5-7*/
 		background: white;
 		padding: 2em;
-		border-radius: 10px;
+		@include border-radius(10px);
 		@include column(11);
 		margin: 0 auto;
 	}
@@ -2731,47 +3039,6 @@ body.path-update-password {
 		flex: 3;
 		.views-field-field-section-image {
 			display: inline-block;
-		    font: normal normal normal 14px/1 FontAwesome;
-		    font-size: inherit;
-		    text-rendering: auto;
-		    -webkit-font-smoothing: antialiased;
-		    -moz-osx-font-smoothing: grayscale;
-		    &:before {
-			    height: 140px;
-			    width: 140px;
-			    display: block;
-			    border-radius: 100%;
-			    line-height: 140px;
-			    color: #fff;
-			    font-size: 56px;
-			    text-align: center;
-		   	 }
-		}
-		&:nth-of-type(1) {
-		   .views-field-field-section-image {
-		   	 &:before {
-		   	 	content: "\f07c";
-		   	 	background: #b6d791;
-			   
-		   	 }
-		   }		
-		}
-		&:nth-of-type(2) {
-		   .views-field-field-section-image {
-		   	 &:before {
-		   	 	content: "\f017";
-			    background: #2aa9e0;
-		   	 }
-		   }		
-		}
-		&:nth-of-type(3) {
-		   .views-field-field-section-image {
-		   	 &:before {
-		   	 	content: "\f085";
-		   	 	background: #f98575;
-			    
-		   	 }
-		   }		
 		}
 	}
 	.views-field-title {
@@ -2794,13 +3061,6 @@ body.path-update-password {
 			  flex-direction: row-reverse;
 			
 		    }
-		}
-		&:nth-of-type(2) {
-			img {
-				max-width: 45%;
-                height: auto;
-                width: 100%;
-			}
 		}
 	}
 }
@@ -2867,7 +3127,7 @@ body.path-update-password {
 				    position: absolute;
 				    left: 10%;
 				    color: $white;
-				    border-radius: 100%;
+				    @include border-radius(100%);
 				    height: 50px;
 				    width: 50px;
 				}
@@ -2978,18 +3238,22 @@ body.path-update-password {
 		    		border-color: $white;
 		    	}
 		    }
-		    &:nth-of-type(4) {
+		    &:last-child {
 			   	a {
 			   		padding: 10px;
                     background: $twitter;
                     border-radius: 5px;
                     border: none;
-                    color: $white;
+                    color: $white !important;
                     &:hover {
                     	opacity: 1;
 				        background: #2195c7;
 
                     }
+                    &:active {
+						-webkit-transform: translateY(1px);
+						transform: translateY(1px);
+					}
 			   	}
 			}
 		}
@@ -3000,7 +3264,7 @@ body.path-update-password {
 	.block-sub-nav-main-menu {
 	    .menu {
 			li {
-			   &:nth-of-type(4) {
+			   &:last-child {
 			   	display: none;
 			   }
 			}
@@ -3079,44 +3343,49 @@ body.path-update-password {
 	.region-content {
 		position: relative;
 	}
-	.messages--status {
+	.messages--error {
+	    position: absolute;
+	    left: 30%;
+	}
+	.messages--status,
+	 {
         color: $login-btn;
 	    background-color: $white;
 	    box-shadow: -3px 2px 11px 2px #ddd;
 	    position: absolute;
 	    max-width: 503px;
-	    right: 11.7%;
-	    top: 80px;
+	    left: 90px;
+	    top: 810px;
 	    border: none;
 	    z-index: 99;
 	    border-radius: 5px;
 	    font-size: 24px;
-	    width: 295px;
-	    padding-left: 93px;
+	    width: 84%;
+	    padding-left: 75px;
 	    align-items: center;
 	    background-image: none;
 	    opacity: 1;
-	    padding-top: 140px;
-	    padding-bottom: 150px;
+	    padding-top: 15px;
+	    padding-bottom: 70px;
 	    &:before {
-		        display: inline-block;
-			    font: normal normal normal 14px/1 FontAwesome;
-			    font-size: inherit;
-			    text-rendering: auto;
-			    -webkit-font-smoothing: antialiased;
-			    -moz-osx-font-smoothing: grayscale;
-			    content: "\f00c";
-			    position: absolute;
-			    left: 38px;
-			    height: 40px;
-			    width: 40px;
-			    background: $login-btn;
-			    color: $white;
-			    border-radius: 100px;
-			    line-height: 40px;
-			    text-align: center;
-			    top: 145px;
-			    font-size: 24px;
+	        display: inline-block;
+		    font: normal normal normal 14px/1 FontAwesome;
+		    font-size: inherit;
+		    text-rendering: auto;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		    content: "\f00c";
+		    position: absolute;
+		    left: 20px;
+		    height: 40px;
+		    width: 40px;
+		    background: $login-btn;
+		    color: $white;
+		    border-radius: 100px;
+		    line-height: 40px;
+		    text-align: center;
+		    top: 20px;
+		    font-size: 24px;
 	    }
 	}
 }
@@ -3148,6 +3417,11 @@ body.path-update-password {
         padding-left: 50px;
         position: relative;
         text-decoration: none;
+        display: block;
+        &:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
         &:before {
 		    display: inline-block;
 		    font: normal normal normal 14px/1 FontAwesome;
@@ -3220,7 +3494,6 @@ body.path-update-password {
 	    position: absolute;
 	    top: 0;
 	    z-index: -1;
-	    top: -218px;
 	    width: 100%;
 	    img {
 	    	width: 100%;
@@ -3279,13 +3552,12 @@ body.path-update-password {
     	padding: .5em;
     	font-size: 18px;
     	color: white;
-    	webkit-border-radius: 4px;
-    	khtml-border-radius: 4px;
-	    moz-border-radius: 4px;
-	    -ms-border-radius: 4px;
-	    -o-border-radius: 4px;
-	    border-radius: 4px;
+    	@include border-radius(4px);
 	    margin-top: 1em;
+	    &:active {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
 	    + .form-submit {
 	    	display: none;
 	    }
@@ -3352,18 +3624,17 @@ body.path-update-password {
 		    font-size: 18px;
 		    color: $white;
 		    text-transform: uppercase;
-		    -webkit-border-radius: 4px;
-		    -khtml-border-radius: 4px;
-		    -moz-border-radius: 4px;
-		    -ms-border-radius: 4px;
-		    -o-border-radius: 4px;
-		    border-radius: 4px;
+		    @include border-radius(4px);
 		    margin-top: 0;
 		    width: 100%;
 		    transition: .2s ease-in-out;
 		    &:hover {
 		    	background: #2195c7;
 		    }
+		    &:active {
+				-webkit-transform: translateY(1px);
+				transform: translateY(1px);
+			}
         }
 	}
 }
@@ -3413,7 +3684,7 @@ body.path-update-password {
 					a {
                        color: #666;
 				    }
-				    &:nth-of-type(4) {
+				    &:last-child {
 				    	a {
 				    		color: $white;
 
@@ -3428,11 +3699,16 @@ body.path-update-password {
 		.menu {
 			li { 
 				a {
-              color: #666;
-			}
-		}
- 	}
-  }
+                  color: #666;
+			    }
+			    &:last-child {
+			    	a {
+			    		color: $white;
+			    	}
+			    }
+		    }
+ 	    }
+    }
 }
 /** setting page **/
 .user-form {
@@ -3538,26 +3814,578 @@ body.path-update-password {
 	    padding: 5px 10px;
 	    cursor: pointer;
 	    background: $white;
+	    &:active {
+		    -webkit-transform: translateY(1px);
+    		transform: translateY(1px);
+		}
 	}
 	.form-actions {
 		padding: 40px 20px;
 		input {
-		border: none;
-	    background: #96c85a;
-	    width: 30%;
-	    padding: .5em;
-	    font-size: 18px;
-	    color: white;
-	    display: block;
-	    -webkit-border-radius: 4px;
-	    -khtml-border-radius: 4px;
-	    -moz-border-radius: 4px;
-	    -ms-border-radius: 4px;
-	    -o-border-radius: 4px;
-	    border-radius: 4px;
+			border: none;
+		    background: #96c85a;
+		    width: 30%;
+		    padding: .5em;
+		    font-size: 18px;
+		    color: white;
+		    display: block;
+		    @include border-radius(4px);
+		    margin: 0 240px;
 		    &:hover {
 		    	background: #82bb3e;
 		    }
+		    &:active {
+		    	-webkit-transform: translateY(1px);
+    			transform: translateY(1px);
+		    }
 		}
 	}
+}
+
+/** ajax for dashborad **/
+.-form-tweets-queue-csv-upload {
+    .ajax-progress.ajax-progress-throbber {
+    height: 80px;
+    width: 80px;
+    text-align: center;
+    border-radius: 7px;	
+    position: absolute;
+    .throbber {
+  	    display: inline-block;
+	    font: normal normal normal 14px/1 FontAwesome;
+	    font-size: inherit;
+	    text-rendering: auto;
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+	    background: none;
+	    position: absolute;
+	    -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        top: 35px;
+	    &:before {
+          content: "\f110";
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+          font-size: 30px;
+          color: $login-btn;
+	    }
+      }	
+      .message {
+      	display: none;
+      }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/** thanku page **/
+.thankyou-page {
+	.st0, .st1 {
+		fill: #EBEBEB;
+	}
+	.st2 {
+		fill: $login-btn;
+	}
+	.page-wrap {
+		display: flex;
+	    max-width: 781px;
+	    margin: 0 auto;
+	    align-items: center;
+	}
+	.envelop {
+		flex: 3;
+		margin-right: 15px;
+	}
+	.content-wrap {
+		flex: 7;
+	    h2 {
+	    	text-align: left;
+		    color: $login-btn;
+		    text-transform: uppercase;
+		    font-weight: bold;
+		    font-size: 1.5rem;
+	    }
+	    .teaser-txt {
+	    	font-size: 18px;
+	    }
+	}
+}
+.page-node-type-thanku-pages {
+	background: $white !important;
+	.block-sub-nav-main-menu .menu li a {
+		color: #666;
+	}
+	.block-sub-nav-main-menu .menu li:last-child a {
+		color: $white;
+	}
+	.main-content {
+		width: 100%;
+		margin: 0;
+		position: relative;
+		top: 0;
+	}
+	.messages {
+		display: none !important;
+	}
+}
+/** css for spinner **/
+body {
+	position: relative;
+}
+#overlayspin {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: $white;
+  opacity: .6;
+}
+#spinner {
+	position: absolute;
+	left: 48%;
+	top: 40%;
+	z-index: 9999;
+  .fa {
+  	-webkit-animation: spin 2s linear infinite;
+     animation: spin 2s linear infinite;
+     font-size: 30px;
+     color: $login-btn;
+  }
+}
+
+/** node type article **/
+.page-node-type-article {
+	.featured-top {
+        width: 100%;
+	    height: auto;
+	    overflow: hidden;
+	    position: relative;
+	    z-index: 0;
+	}
+	.block-page-title-block {
+	    position: absolute;
+	    width: 100%;
+	    left: 0;
+	    text-align: center;
+	    color: #fff;
+	    top: 175px;
+	     h1 {
+	    	font-size: 36px;
+		    font-weight: normal;
+	    }
+	}
+	.node--type-article {
+		.field--type-image {
+			position: relative;
+		    top: 0;
+		    z-index: -1;
+		    height: 380px;
+		    overflow: hidden;
+		    &:before {
+	    	    content: "";
+			    height: 100%;
+			    width: 100%;
+			    background: #000;
+			    opacity: 0.5;
+			    position: absolute;
+			    z-index: 0;
+		    }
+		    img {
+		        width: 100%;
+			    height: auto;
+			    min-height: 380px;
+			}
+		}
+		.field--name-body {
+			max-width: 1080px;
+		    margin: 0 auto;
+		    padding: 60px 10px;
+		    padding-bottom: 0;
+		    p {
+		    	font-size: 16px;
+                color: #666;
+                margin-bottom: 2.5em;
+                &:last-child {
+                	margin-bottom: 0;
+                }
+		    }
+		    h2,h1,h3,h4,h5 {
+		    	font-size: 18px;
+		    	color: #333;
+		    }
+		}
+
+	}
+	#header {
+		z-index: 9;
+		position: relative;
+		background: transparent;
+	}
+	.site-branding {
+	   svg {
+		 fill: $white;
+	   }
+	   a {
+	   	color: $white;
+	   }
+	}
+   &.user-logged-in {
+   	   background: $white;
+	   .main-content {
+	   	 position: initial;
+	   	 width: 100%;
+	   }
+	   #main-wrapper {
+	   	padding-top: 0;
+	   }
+	}
+}
+
+.path-signup {
+    .layout-container { 
+        .region-content {
+			min-height: auto;
+		    padding-bottom: 20px;
+		}
+	}
+}
+
+/** faq **/
+.path-faq-page {
+	#header {
+		z-index: 9;
+		position: relative;
+		background: transparent;
+	}
+	.site-branding {
+	   svg {
+		 fill: $white;
+	   }
+	   a {
+	   	color: $white;
+	   }
+	}
+   &.user-logged-in {
+   	   background: $white;
+	   .main-content {
+	   	 position: initial;
+	   	 width: 100%;
+	   }
+	   #main-wrapper {
+	   	padding-top: 0;
+	   }
+	}
+}
+.faq {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .faq-qa-header {
+    	text-align: center;
+        cursor: pointer;
+        margin: 0 1.5%;
+        .faq-header {
+        	font-size: 12px;
+        	padding-bottom: 20px;
+        	border-bottom: 5px solid transparent;
+        	color: $white;
+        	opacity: 0.8;
+        	&:hover {
+        		opacity: 1;
+        	}
+        	&.faq-category-qa-visible {
+    		    border-color: $white;
+    		    opacity: 1;
+    		    a {
+    		    	opacity: 1;
+    		    }
+        	}
+        }
+    	a {
+		    font-size: 18px;
+		    text-decoration: none;
+		    display: block;
+		    padding: 0px 15px;
+		    text-align: center;
+		    color: $white;
+		    opacity: 0.8;
+		    &:hover {
+		    	opacity: 1;
+		    }
+    	}
+    }
+    .faq-qa-hide {
+	    width: 100%;
+	    padding: 8em 4em 1em 4em;
+	    -webkit-order: 1;
+	    order: 1;
+	    word-wrap: break-word;
+	    &:before {
+    	    content: "Frequently Asked Questions";
+		    position: relative;
+		    top: -45px;
+		    font-size: 16px;
+		    color: #666;
+		    text-transform: uppercase;
+		    font-weight: bold;
+		    opacity: .8;
+	    }
+    }
+}
+.faq-answer {
+	padding-left: 65px;
+	font-size: 16px;
+    line-height: 1.5em;
+    position: relative;
+    margin-bottom: 20px;
+    color: #666;
+    &:before {
+    	content: "Ans.";
+	    font-size: 18px;
+	    font-weight: 800;
+	    padding-right: 15px;
+	    position: absolute;
+	    left: 0;
+	    color: #303030;
+
+	}
+	.field--type-entity-reference {
+		display: none;
+	}
+	> a {
+		display: none;
+	}
+}
+.faq-question {
+	padding-left: 65px;
+	position: relative;
+    &:before {
+    	content: "Ques.";
+	    font-size: 18px;
+	    font-weight: 800;
+	    padding-right: 15px;
+	    position: absolute;
+	    left: 0;
+    } 
+    span {
+      font-size: 18px;
+      color: #303030;
+      font-weight: bold;
+    }
+}
+
+/** faq banner image **/
+.block-faq-banner-image {
+	margin-top: 115px;
+    text-align: center;
+    .field--name-field-title {
+    	color: $white;
+    }
+    .field--type-image {
+    	position: absolute;
+	    top: 0;
+	    z-index: -1;
+	    width: 100%;
+	    height: 100%;
+	    img {
+    	    position: absolute;
+		    width: 100%;
+		    left: 0;
+		    top: 0;
+		    height: 100%;
+	    }
+	    &:before {
+    	    content: "";
+		    height: 100%;
+		    width: 100%;
+		    background: #000;
+		    opacity: 0.5;
+		    position: absolute;
+		    left: 0;
+            z-index: 1;
+	    }
+    }
+}
+.faq-content {
+	margin-top: -135px;
+    z-index: 3;
+    position: relative;
+}
+
+/** style for feedback form **/
+.path-dashboard {
+	.ui-dialog {
+		border: none;
+		width: 580px !important;
+	}
+	.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix {
+	    border-radius: 5px 5px 0px 0px;
+	    background: #f6f6f6;
+	    color: #333;
+	    font-size: 24px;
+	    padding: 15px 20px;
+	    font-weight: normal;
+	    border: none;
+    }
+    .ui-dialog .ui-dialog-content {
+    	padding: 1.5em 3em;
+    	max-height: 100% !important;
+    	padding-bottom: 0;
+    }
+    .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+	    float: left;
+	    width: 100%;
+	    text-align: center;
+	}
+	.ui-dialog-buttonpane.ui-widget-content {
+		border: none;
+        background: $white;
+        padding-bottom: 40px;
+        border-radius: 0px 0px 5px 5px;
+
+	}
+	.ui-dialog .ui-dialog-titlebar-close {
+		margin-right: 15px;
+	}
+	.ui-dialog .ui-dialog-buttonpane button {
+		  background: $white;
+			    color: $twitter;
+			    border: 2px solid $twitter;
+			    margin-top: 1em;
+			    padding: .5em 2em;
+			    margin-right: 0;
+			    border-radius: 4px;
+			    font-size: 18px;
+			    text-decoration: none;
+		    	&:hover {
+		           background: $twitter;
+		           color: $white;
+		    	}
+	}
+	.ui-dialog .ui-dialog-buttonpane button.button--primary {
+		border: none;
+		padding: .5em 2em;
+		font-size: 18px;
+		color: white;
+		@include border-radius(4px);
+		margin-top: 1em;
+			background: $login-btn;
+			margin-right: 20px;
+			&:hover {
+				background: #82bb3e;
+		}
+	}
+}
+
+.contact-message-user-feedback-form {
+   label {
+   	    font-size: 18px;
+	    margin-bottom: 25px;
+	    display: block;
+	    color: #303030;
+   }
+   select {
+	   	border: 0;
+	    background: none;
+	    outline: none;
+	    border-bottom: 1px solid rgba(0,0,0,0.3);
+	    width: 100%;
+	    padding-bottom: 7px;
+	    font-size: 14px;
+	    color: rgba(0,0,0,0.4);
+	    font-weight: normal;
+	    margin-bottom: 30px;
+   }
+   textarea {
+   	    margin-top: 0px;
+    	border: none;
+    	border-bottom: 1px solid rgba(0,0,0,0.3);
+    	outline: none;
+   }
+
+
+}
+
+.send-tweets-form,
+.tweets-queue-tweet-form  {
+	.ajax-progress.ajax-progress-throbber {
+		display: none;
+		&:last-child {
+		    height: 80px;
+		    width: 80px;
+		    text-align: center;
+		    border-radius: 7px;		
+		    position: relative;
+		    display: block !important;
+		    .throbber {
+		  	    display: inline-block;
+			    font: normal normal normal 14px/1 FontAwesome;
+			    font-size: inherit;
+			    text-rendering: auto;
+			    -webkit-font-smoothing: antialiased;
+			    -moz-osx-font-smoothing: grayscale;
+			    background: none;
+			    position: relative;
+			    -webkit-animation: spin 2s linear infinite;
+		        animation: spin 2s linear infinite;
+		        top: 20px;
+			    &:before {
+		          content: "\f110";
+		          -webkit-animation: spin 2s linear infinite;
+		          animation: spin 2s linear infinite;
+		          font-size: 30px;
+		          color: $login-btn;
+			    }
+		    }	
+		    .message {
+		      	display: none;
+		    }
+		}
+	}
+}
+
+
+/** twitter box css **/
+
+.send-tweets-form {
+	.form-textarea-wrapper {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+	.js-keeper-placeholder-back,
+	#edit-message {
+	  background: transparent;
+	  font-size: 18px; 
+	  margin: auto;
+	  outline: none; 
+	  padding: 10px;
+	  resize: vertical;
+	  width: 100%;	
+	}
+
+	.js-keeper-placeholder-back {
+	  bottom: 0;
+	  color: transparent;
+	  left: 0;
+	  position: absolute;
+	  top: 0;
+	  white-space: pre-wrap;
+	  width: 100%;
+	  word-wrap: break-word;
+	  z-index: -1;
+	}
+
+	.js-keeper-placeholder-back em {
+	  background: #fcc !important;
+	}
+}
+
+.form-submit {
+	outline: none;
 }
