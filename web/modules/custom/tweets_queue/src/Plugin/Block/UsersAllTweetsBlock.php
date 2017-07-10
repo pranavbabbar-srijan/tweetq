@@ -71,9 +71,10 @@ class UsersAllTweetsBlock extends BlockBase {
       ['attributes' => ['class' => 'delete-multiple colorbox cboxElement beautytips', 'title' => t(TWITTER_DELETE_TOOLTIP)]]
     );
 
-      $build['del'] = array(
+      $build['submit'] = array(
         '#prefix' => '<div id="delete-selected">',
-        '#markup' => t('Delete Selected'),
+        '#type' => 'submit',
+        '#value' => t('Delete Selected'),
         '#suffix' => '</div>',
       );
       $build['header'] = array(
