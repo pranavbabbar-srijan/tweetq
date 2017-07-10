@@ -63,12 +63,14 @@ class UsersDashboardHeaderBlock extends BlockBase {
       <span class='count'>" . $message_history_count . "</span>
     </div>";
 
+
     $message_history_data = "<div class='notification-message-list'>";
     $message_history_data .= " <div id='message-history-count-section'>
       <span class='message_history_count'>Recent Activity <b></b></span>
     </div>";
     foreach ($tweets_history as $data) {
-      $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
+      // $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
+      $retweet_label = $data->type;
       $message = tweets_queue_decrypt_data($data->{TWITTER_FIELD_MESSAGE});
       $message = tweets_queue_perform_hashtag_highlight($message);
       $created = $data->created;
@@ -93,7 +95,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
     }
 
     else {
-      $output = "<div class='notifications'>" . $message_history_count_output .
+      $output = "<div class='notifications'>" . $message_history_count .
        $message_history_data . "</div>" . $twitter_profile_output;
     }
 
