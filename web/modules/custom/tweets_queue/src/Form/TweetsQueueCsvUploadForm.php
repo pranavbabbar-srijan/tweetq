@@ -110,6 +110,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $fid = reset($form_state->getValue('managed_file'));
+    $logged_uid = \Drupal::currentUser()->id();
     $file = '';
     if ($fid) {
       $file_path = $this->getFileRealPath($fid);
@@ -129,11 +130,11 @@ class TweetsQueueCsvUploadForm extends FormBase {
     if ($file) {
       $this->importCsvData($file);
     }
+   
   }
 
   public function importCsvData($file) {
     $uid = \Drupal::currentUser()->id();
-    $file = fopen($file, 'r');
     $row = 0;
     $import_message = array('total' => 0, 'duplicate' => 0,
       'imported' => 0 , 'valid' => 0, 'invalid' => 0, 'skipped' => 0);
@@ -198,6 +199,14 @@ class TweetsQueueCsvUploadForm extends FormBase {
     if ($skipped > 0) {
       drupal_set_message(t("Skipped shows the tweets whose character limit exceeds"));
     }
+    $twitter_history_info = array(
+      //'nid' => $fid,
+      'uid' => $uid,
+      'created' => time(),
+      'type' => 'Import',
+      'message' => 'File have been imported' . ' ' . $file,
+    );
+    tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
   }
 
 }

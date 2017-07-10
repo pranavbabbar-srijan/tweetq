@@ -124,4 +124,15 @@ Scenario: Latest Created on should be top of the list
     And I click on the element with xpath "//div[@id='block-usersvalidtweetsblock']//a[2]"
     Then latest created date for Valid Tweet is on top 
 
+@12
+Scenario: To fetch count of validtweet
+    Given I am on "/"
+    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
+    And I press "Log in"
+    And I wait for 5 seconds
+    When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
+    And I wait for 5 seconds
+    And I click on the element with xpath "//div[@id='block-usersvalidtweetsblock']//a[2]"
+    Then I fetch text for valid tweet
+
 

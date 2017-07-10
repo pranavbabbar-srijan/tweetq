@@ -10,12 +10,12 @@ Then the url should match "/signup"
 Scenario: Fill all the fields and click on submit button
 Given I am on "/signup"
 When I fill in "Full Name" with "Neha Singh"
-And I fill in "Email" with "nehasingh767@gmail.com"
+And I fill in "Email" with "neha.singh@srijan.net"
 And I fill in "Password" with "Srijan@123"
-#And I fill in "Website" with "http://Twitter.com"
+And I fill in "Website" with "https://www.google.co.in/"
 And I fill in "Organization Name" with "srijan"
 And I press "Submit"
-Then I should see text matching "An email notification has been sent to nehasingh767@gmail.com"
+Then I should see text matching "An email notification has been sent to neha.singh@srijan.net"
 
 @3
 Scenario: To check the elements visible on Signup page

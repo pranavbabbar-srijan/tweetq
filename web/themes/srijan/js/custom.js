@@ -44,6 +44,7 @@
 		var profile_change_password_path = '/dashboard/changePassword';
 		var friend_invite_send_token_path = '/dashboard/friendInviteSendToken';
 		var invite_friends_path = '/dashboard/inviteFriends';
+		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
 		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
@@ -52,6 +53,7 @@
 		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
 		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
 		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
+		// var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -77,6 +79,31 @@
 
 
 		});
+
+		//Multiple deletion
+		$("#delete-selected").click(function() {
+			var nid = [];
+		    $("input:checkbox[name=multiple-deletion]:checked").each(function() {
+		         nid.push($(this).val());
+		   });  
+			$.post(multiple_selected_deletion, {'nid' : nid}, function(data) {
+				// $("<span id='delete-selected'>" + data + "</p>").insertAfter( "#delete-selected" );
+				 var nids = data.split(",");
+				 
+		    	 for (var i in nids) {  
+			    	$('#' + nids[i]).parent().parent().parent().hide();   
+				 } 
+			location.reload();
+		    });
+		});
+		//All checks on single check
+	 	 $('[name="all-selected-deleted"]').click(function(){
+      	  if($(this).prop("checked")) {
+      	      $('[name="multiple-deletion"]').prop("checked", true);
+      	  } else {
+     	       $('[name="multiple-deletion"]').prop("checked", false);
+      	  }                
+     	 });
 
 		//Volunteer invite form.
 		$("#profile-account-settings-form #invite-friend").click(function() {
@@ -981,7 +1008,7 @@
 	});
 	// js for adding placeholder on newsletter field
 	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
-	$(".contact-message-form").prepend("<div class='heading-write-us'>Write to us</div>");
+	$(".contact-message-write-to-us-form").prepend("<div class='heading-write-us'>Write to us</div>");
 	/*$(window).scroll(function() {    
     var scroll = $(window).scrollTop();
 
@@ -1038,6 +1065,52 @@
         	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
         }, 500);
 
+        $('.faq-header').append('Articles');
+        $('.user-login-form #forgot-password').appendTo('.user-login-form');
+
+
+
+        // twitter text box 
+         function onTweetCompose(event) {
+		    var $textarea = $('.send-tweets-form #edit-message'),
+		        $placeholderBacker = $('.js-keeper-placeholder-back'),
+		        currentValue = $textarea.val()
+		    ;
+		    // realLength is not 140, links counts for 23 characters always.
+		    var realLength = 140;
+		    var remainingLength = 140 - currentValue.length;
+
+		    if (0 > remainingLength) {
+		      // Split value if greater than 
+		      var allowedValuePart = currentValue.slice(0, realLength),
+		          refusedValuePart = currentValue.slice(realLength)
+		      ;
+
+		      // Fill the hidden div.
+		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+		    } else {
+		      $placeholderBacker.html('');
+		    }
+		  }
+		  
+		  $(document).ready(function () {
+		  	
+			 
+		    $textarea = $('textarea');
+
+		    // Create a pseudo-element that will be hidden behind the placeholder.
+		    var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
+		    $placeholderBacker.insertAfter($textarea);
+
+		    onTweetCompose();
+		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
+		  });
+          
+          // add class
+	        if($('.path-signup .messages').hasClass('messages--status')) {
+	          $('.section').addClass('active');
+	        }
+	    
 })(jQuery);
 
 

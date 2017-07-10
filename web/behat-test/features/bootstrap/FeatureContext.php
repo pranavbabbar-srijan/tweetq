@@ -25,10 +25,76 @@ var $originalWindowName = '';
    * context constructor through behat.yml.
    */
 
-  public $validtext, $invalidtext, $Totaltweet, $notification,  $unixTimeStamp, $Valid,$Total,$Invalid,$Archived,$linktext;
+  public $validtext, $invalidtext, $Totaltweet, $notification,  $unixTimeStamp, $Valid,$Total,$Invalid,$Archived,$linktext, $newtweet, $tweeted;
   public function __construct() {
     $this->unixTimeStamp = time();
   }
+
+/**
+ * @Then /^I verified maximum two sliders can be added on "([^"]*)"$/
+ */
+public function maximumslider($xpath){
+
+  $session=$this->getSession();
+
+    $session = $this->getSession(); // get the mink session
+    $text=$session->getPage()->find('css',$xpath);
+    
+
+    print_r($text);
+    //;->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',$xpath));
+   // $dom = new DOMDocument(); 
+   // $htmlString = $dom->saveHTML($xpath->item(0));
+   //$res=$xpath->query($xpath);
+   //print_r($res);
+  //  $text =$text ->getText();
+  // //  print_r($text); die();
+ 
+  // // $text=$text->getText();
+  // //   $dom = new DOMDocument(); 
+  // //   $dom->loadHTML($text); 
+  // //   $value = $dom->getElementsByTagName('li')->length;
+  //  var_dump($xpath);die;
+  //   $count = substr_count($xpath,'<li>');
+   
+
+  //  //echo ()gettype($text);
+  
+
+
+}
+/**
+ * @Then I test 
+ */
+public function test(){
+
+  $dom = new DomDocument;
+/* Load the HTML */
+$dom->loadHTMLFile("http://testing-z6am3cq-na2rj6uui4vei.eu.platform.sh");
+/* Create a new XPath object */
+$xpath = new DomXPath($dom);
+/* Query all <td> nodes containing specified class name */
+$nodes = $xpath->query("//div[@id='flexslider-1']/ol");
+/* Set HTTP response header to plain text for debugging output */
+header("Content-type: text/plain");
+/* Traverse the DOMNodeList object to output each DomNode's nodeValue */
+foreach ($nodes as $i => $node) {
+    echo "Node($i): ", $node->nodeValue, "\n";  $dom = new DomDocument;
+/* Load the HTML */
+$dom->loadHTMLFile("https://forums.eveonline.com");
+/* Create a new XPath object */
+$xpath = new DomXPath($dom);
+/* Query all <td> nodes containing specified class name */
+$nodes = $xpath->query("//td[@class='topicViews']");
+/* Set HTTP response header to plain text for debugging output */
+header("Content-type: text/plain");
+/* Traverse the DOMNodeList object to output each DomNode's nodeValue */
+foreach ($nodes as $i => $node) {
+    echo "Node($i): ", $node->nodeValue, "\n";
+}
+}
+}
+
 
   /**
      * Click on the element with the provided xpath query
@@ -79,6 +145,36 @@ public function uniquetweet(){
     }
     throw new \Behat\Mink\Exception\ElementNotFoundException($this->getSession(), $type . ' form item', 'label', $label);
   }
+
+/**
+      * @Then I fetch the href of form :FormName in :region region
+     */
+public function iFetchTheHrefOfFormInRegion($FormName, $region)
+{
+$actualhref = self::iFetchTheHrefOfFormNameInRegion($FormName,$region);
+// echo "The href is: ". $actualhref;
+}
+
+public function iFetchTheHrefOfFormNameInRegion($FormName, $region)
+{
+   $regionObj = $this->getSession()->getPage()->find('region', $region);
+   $actuallink = $regionObj->findLink($FormName);
+if ($actuallink === null) {
+    throw new Exception("The actuallink was not found!");
+    }
+return $actuallink->getAttribute('href');
+}
+
+/**
+ * @Then I match the href :href of form :FormName in :region region
+ */
+public function iMatchTheHrefOfFormInRegion($expectedhref,$FormName, $region)
+{    $actualhref = self::iFetchTheHrefOfFormNameInRegion($FormName, $region);
+  $pos = strpos($actualhref, $expectedhref);
+        if ($pos === false) {
+           throw new \Exception("Expected href {$expectedhref} not found");
+}
+}
 
 /**
  * @Then /^I fetch href for xpath "([^"]*)"$/
@@ -134,13 +230,100 @@ public function fetchTextForXpathV() {
         $session = $this->getSession(); // get the mink session
         $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath', "//div[@id='block-userstweetsstatisticsblock']//a[2]//span[2]") );
            $validtext = $element ->getText();
-           echo 'Valid Tweet Before is : ' . $validtext,PHP_EOL;
+           echo 'Valid Tweet is : ' . $validtext,PHP_EOL;
          if (null === $validtext) {
         throw new \Exception('text not found');
     }
 
     }
 
+  /**
+ * @Then I fetch text for new tweet
+ */
+  public function fetchnewtweet(){
+
+    global $newtweet;
+    $session = $this->getSession(); 
+    $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath', "//div[@class='valid-tweets-header']//a[1]") );
+     $val = $element ->getText();
+     $text=explode("(",$val);
+    $newtweet=explode(")",$text[1]);
+    echo 'The new tweet count is: ' .$newtweet[0];
+   
+  }
+/**
+* @Then I fetch text for tweeted tweet
+*/
+public function fetchtweeted(){
+  global $tweeted;
+  $session= $this->getSession();
+  $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath', "//div[@class='valid-tweets-header']//a[2]") );
+     $val = $element ->getText();
+     $text=explode("(",$val);
+    $tweeted=explode(")",$text[1]);
+    echo 'The tweeted count is: ' .$tweeted[0];
+}
+
+/**
+ * @Then tweeted decremented
+ */
+    
+  public function tweeteddec()
+  {
+    global $tweeted;
+    $session = $this->getSession(); 
+    $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath', "//div[@class='valid-tweets-header']//a[2]") );
+     $val = $element ->getText();
+     $text=explode("(",$val);
+    $text1=explode(")",$text[1]);
+     $tweeted[0]--;
+     echo 'The tweeted count after :' .$tweeted[0];
+    if ($tweeted[0]==$text1[0])
+      echo 'the tweeted moved to new tweets';
+    else 
+      echo 'invalid operation';
+  }
+
+
+/**
+ * @Then new tweet incremented
+ */
+    
+  public function newtweetinc()
+  {
+    global $newtweet;
+    $session = $this->getSession(); 
+    $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath', "//div[@class='valid-tweets-header']//a[1]") );
+     $val = $element ->getText();
+     $text=explode("(",$val);
+    $text1=explode(")",$text[1]);
+     $newtweet[0]++;
+     echo 'The new tweet count after :' .$newtweet[0];
+    if ($newtweet[0]==$text1[0])
+      echo 'the tweet is moved to new tweet';
+    else 
+      echo 'invalid operation';
+  }
+
+  /**
+ * @Then new tweet updated
+ */
+    
+  public function newtweetupd()
+  {
+    global $newtweet;
+    $session = $this->getSession(); 
+    $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath', "//div[@class='valid-tweets-header']//a[1]") );
+     $val = $element ->getText();
+     $text=explode("(",$val);
+    $text1=explode(")",$text[1]);
+     $newtweet[0]=$newtweet[0]+5;
+     echo "Updated tweet: " .$newtweet[0];
+    if ($newtweet[0]==$text1[0])
+      echo 'New tweet is updated';
+    else 
+      echo 'invalid operation';
+  }
     /**
  * @Then I fetch text for total tweet
  */
@@ -415,7 +598,7 @@ $text1=explode(")",$text[1]);
     /**
  * @Then I fetch new valid and invalid tweet
  */
-public function fetchnewtweet() {
+public function fetchnewvalidtweet() {
         
         $session = $this->getSession(); // get the mink session
         $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath', "//div[@id='block-usersleftsidebarblock']//div[@class='valid_tweets']//span[2]/b") );
@@ -429,6 +612,8 @@ public function fetchnewtweet() {
     }
 
     }
+
+
 
 /**
  * @Then Valid Tweet incremented
@@ -488,6 +673,25 @@ public function invalidincrementTweet()
     }
 }
 
+/**
+ * @Then Archived Tweet incremented
+ */
+public function archivedincrementTweet()
+
+{   
+  global $Archived;
+  $session = $this->getSession(); // get the mink session
+        $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath', "//div[@id='block-userstweetsstatisticsblock']//a[4]//span[2]") );
+           $textnew = $element ->getText();
+        $Archived++;
+    echo 'Value after tweet is : '.$textnew ,PHP_EOL;
+           if ($textnew==$Archived)
+      echo 'archived tweet incremented';
+    else {
+        throw new \Exception('incorrect result');
+    }
+}
+
 
 /**
  * @Then tweets should get updated after import
@@ -528,6 +732,41 @@ public function find($cssSelector)
   $session = $this->getSession(); // get the mink session
   $element = $session->getPage()->find('css', $cssSelector);
 
+  if($element==null){
+    throw new \Exception('CSS Element Not found');
+  }
+
+}
+
+/**
+* @When /^I should see element with xpath "([^"]*)"$/
+*/
+public function findxpath($xpath)
+{
+
+  $session = $this->getSession(); // get the mink session
+  $element = $session->getPage()->find('xpath', $xpath);
+
+  if($element==null){
+    throw new \Exception(' Element Not found');
+  }
+
+}
+
+/**
+* @When /^element is readonly "([^"]*)"$/
+*/
+public function readonly($xpath)
+{
+
+  $session = $this->getSession(); // get the mink session
+  $element = $session->getPage()->find('xpath', $xpath);
+  $element=$element->getAttribute('readonly');
+   if($element==null)  {
+    
+    throw new \Exception('Not found');
+  }
+return $element;
 }
 
 

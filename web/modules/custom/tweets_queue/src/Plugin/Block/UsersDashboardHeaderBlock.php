@@ -48,10 +48,11 @@ class UsersDashboardHeaderBlock extends BlockBase {
     $uid = \Drupal::currentUser()->id();
     $setting_link = "<a class ='profile-settings' href='" . $base_url .'/user/' . $uid . "/edit'>" .
       'Settings' ."</a>";
+    $feedback_link ="<a href='" . $base_url . "/feedback' class='use-ajax feedback_link' data-dialog-type='modal'>". 'feedback'."</a>";
     $logout_link = "<a class ='profile-logout' href='" . $base_url .'/user/logout' . "'>" .
       'Logout' ."</a>";
     $profile_link_output = "<div class='profile-links'> " .
-    $my_profile_link . $setting_link . $logout_link . "</div>" ;
+    $my_profile_link . $setting_link . $feedback_link . $logout_link . "</div>" ;
 
     $twitter_profile_output = "<div class='profile'>
       <a href=''>" . "<div><span class='img'>" . $profile_img . "</span>
@@ -62,12 +63,14 @@ class UsersDashboardHeaderBlock extends BlockBase {
       <span class='count'>" . $message_history_count . "</span>
     </div>";
 
+
     $message_history_data = "<div class='notification-message-list'>";
     $message_history_data .= " <div id='message-history-count-section'>
       <span class='message_history_count'>Recent Activity <b></b></span>
     </div>";
     foreach ($tweets_history as $data) {
-      $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
+      // $retweet_label = ($data->retweeted) ? 'Retweeted' : 'New Tweet';
+      $retweet_label = $data->type;
       $message = tweets_queue_decrypt_data($data->{TWITTER_FIELD_MESSAGE});
       $message = tweets_queue_perform_hashtag_highlight($message);
       $created = $data->created;
@@ -92,7 +95,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
     }
 
     else {
-      $output = "<div class='notifications'>" . $message_history_count_output .
+      $output = "<div class='notifications'>" . $message_history_count .
        $message_history_data . "</div>" . $twitter_profile_output;
     }
 

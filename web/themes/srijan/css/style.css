@@ -121,10 +121,11 @@ button {
 /* ================================= Offset-Span ================================= */
 /* ================================= Clearfix ================================= */
 /* ================================= Media Query Breakpoint ================================= */
-#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-frontpage .messages--error a, .path-frontpage .messages--error div[role="alert"]:before, body.path-update-password .update-password label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .path-update-password .block-system-main-block .message-header .js-form-item label:after, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item label:after, .block-users-left-side-bar-block .profile ~ div span.value b:empty, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .profilesettingform .message-header .js-form-item label:after, .profilesettingform .message-header #change-password label:after, .send-tweets-form label, .tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
+#block-srijan-local-tasks, .path-frontpage .page-title, .user-login-form .description, .user-login-form label:after, .path-frontpage .messages--error a, .path-frontpage .messages--error div[role="alert"]:before, body.path-update-password .update-password label:after, .path-signup .block-system-main-block .message-header .js-form-item label:after, .path-twitter .block-system-main-block .message-header .js-form-item label:after, .path-update-password .block-system-main-block .message-header .js-form-item label:after, .path-node.page-node-type-page .block-system-main-block .message-header .js-form-item label:after, .block-users-left-side-bar-block .profile ~ div span.value b:empty, .block-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .profile ~ div span.value b:empty, .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div span.value b:empty, .profilesettingform .message-header .js-form-item label:after, .profilesettingform .message-header #change-password label:after, .send-tweets-form label,
+.tweets-queue-tweet-form label, .-form-tweets-queue-csv-upload label, .-form-tweets-queue-csv-upload .js-form-managed-file + .description, #cboxClose, #cboxLoadedContent header, #cboxLoadedContent #sidebar-first, #cboxLoadedContent #block-userstweetsstatisticsblock {
   display: none; }
 
-.block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .region-content .messages--error div[role=alert]:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
+.block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-block .profile .profile-links a.feedback_link:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link:before, .region-content .messages--error div[role=alert]:before, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .edit,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .edit,
@@ -256,6 +257,8 @@ button {
       box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
       padding: 15px 10px;
       display: none; }
+      .block-users-dashboard-header-block .profile .profile-links .ajax-progress, .block-users-dashboard-header-profile-block .profile .profile-links .ajax-progress {
+        display: none; }
       .block-users-dashboard-header-block .profile .profile-links.active, .block-users-dashboard-header-profile-block .profile .profile-links.active {
         display: block;
         transform: scale(0.8);
@@ -289,14 +292,14 @@ button {
       .block-users-dashboard-header-block .profile .profile-links a, .block-users-dashboard-header-profile-block .profile .profile-links a {
         display: block;
         text-decoration: none; }
-        .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout {
+        .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-block .profile .profile-links a.feedback_link, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link {
           color: #212121;
           margin-bottom: 10px;
           padding: .5em; }
-          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-logout.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout.active {
+          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-block .profile .profile-links a.profile-logout.active, .block-users-dashboard-header-block .profile .profile-links a.feedback_link:hover, .block-users-dashboard-header-block .profile .profile-links a.feedback_link.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings.active, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout.active, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link:hover, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link.active {
             background: #444;
             color: #fff; }
-          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before {
+          .block-users-dashboard-header-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-block .profile .profile-links a.feedback_link:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-my-profile:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-settings:before, .block-users-dashboard-header-profile-block .profile .profile-links a.profile-logout:before, .block-users-dashboard-header-profile-block .profile .profile-links a.feedback_link:before {
             content: "";
             font-size: 22px;
             margin-right: 15px;
@@ -626,6 +629,11 @@ body {
     -o-border-radius: 4px;
     border-radius: 4px;
     margin-top: 1em; }
+    .user-login-form input[type=submit]:hover, .user-login-form #forgot-password-submit:hover, .user-login-form #forgot-password-cancel:hover, .user-login-form #log-in-submit:hover {
+      background: #82bb3e; }
+    .user-login-form input[type=submit]:active, .user-login-form #forgot-password-submit:active, .user-login-form #forgot-password-cancel:active, .user-login-form #log-in-submit:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
   .user-login-form > input + a {
     display: block;
     text-align: center;
@@ -643,11 +651,8 @@ body {
     color: #aaa;
     font-size: 12px;
     display: block;
-    width: 150px;
     margin: 0 auto;
-    position: absolute;
-    bottom: 88px;
-    right: 15px; }
+    text-align: right; }
 
 #user-login-prefix + div {
   position: absolute;
@@ -668,6 +673,12 @@ body {
     border-radius: 4px;
     font-size: 13px;
     text-decoration: none; }
+    #user-login-prefix + div a:hover {
+      background: #2aa9e0;
+      color: #ffffff; }
+    #user-login-prefix + div a:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
   #user-login-prefix + div span {
     color: #aaa;
     margin-top: 7px;
@@ -727,11 +738,73 @@ body.path-update-password .messages--status {
   body.path-update-password .messages--status ~ .block-system-main-block {
     display: none; }
 
+.path-signup .header {
+  border-bottom: 1px solid #f1f1f1 !important; }
+
+.path-signup .section.active {
+  background: #ffffff !important; }
+
 .path-signup .messages--status {
-  width: 380px;
+  border: none;
+  background: #ffffff;
+  font-size: 20px;
+  color: #303030;
+  width: 100%;
+  box-shadow: none;
+  height: 0;
+  text-align: center;
   margin: 0 auto;
   display: block !important;
-  opacity: 1 !important; }
+  padding-top: 275px;
+  height: 100%; }
+  .path-signup .messages--status:before {
+    content: "";
+    height: 200px;
+    width: 200px;
+    border: 1px solid #96c85a;
+    border-radius: 100px;
+    position: absolute;
+    background-image: url("../images/verification.svg");
+    background-repeat: no-repeat;
+    background-position: 0px 25px;
+    background-size: 200px;
+    left: 42%;
+    top: 110px; }
+  .path-signup .messages--status em {
+    color: #2aa9e0; }
+  .path-signup .messages--status a {
+    border: none;
+    background: #2aa9e0;
+    width: 100%;
+    padding: .5em 1em .5em 1em;
+    font-size: 18px;
+    color: white;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase; }
+    .path-signup .messages--status a:hover {
+      background: #2195c7; }
+  .path-signup .messages--status span {
+    display: block;
+    padding: 15px 0;
+    font-size: 24px;
+    font-weight: 600;
+    position: relative;
+    margin-bottom: 40px; }
+    .path-signup .messages--status span:before {
+      content: "";
+      width: 115px;
+      height: 2px;
+      background: #999999;
+      position: absolute;
+      bottom: 0;
+      left: 45%; }
   .path-signup .messages--status ~ .block-system-main-block {
     display: none; }
 
@@ -801,6 +874,11 @@ body.path-update-password .messages--status {
       margin-right: 0.2em;
       display: inline-block;
       vertical-align: text-top; }
+    .twitter-btn a:hover {
+      background: #2195c7; }
+    .twitter-btn a:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
   .twitter-btn span {
     width: 100%;
     display: block;
@@ -1426,6 +1504,7 @@ body.path-update-password .messages--status {
     border: 0;
     padding: .65em 1em;
     font-size: 18px;
+    display: inline-block;
     -webkit-border-radius: 3px;
     -khtml-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -1434,7 +1513,13 @@ body.path-update-password .messages--status {
     border-radius: 3px;
     text-decoration: none;
     text-align: center;
-    font-weight: bold; }
+    font-weight: bold;
+    transition: .2s ease-in-out; }
+    .no-tweet-found a:hover {
+      background: #2195c7; }
+    .no-tweet-found a:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
     .no-tweet-found a.import-tweet {
       background: none;
       color: #2aa9e0;
@@ -1442,6 +1527,12 @@ body.path-update-password .messages--status {
       border: 2px solid;
       padding-top: 0.5em;
       padding-bottom: .5em; }
+      .no-tweet-found a.import-tweet:hover {
+        background: #2aa9e0;
+        color: #ffffff; }
+      .no-tweet-found a.import-tweet:active {
+        -webkit-transform: translateY(1px);
+        transform: translateY(1px); }
 
 .path-node.page-node-type-page .block-system-main-block {
   width: 1020px !important; }
@@ -1525,6 +1616,9 @@ body.path-update-password .messages--status {
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
     border-radius: 4px; }
+    .path-signup .block-system-main-block input[type="submit"]:active, .path-twitter .block-system-main-block input[type="submit"]:active, .path-update-password .block-system-main-block input[type="submit"]:active, .path-node.page-node-type-page .block-system-main-block input[type="submit"]:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
 
 .path-signup #header, .path-twitter #header, .path-update-password #header, .path-node.page-node-type-page #header {
   background: white; }
@@ -1840,6 +1934,7 @@ body.path-update-password .messages--status {
   position: relative;
   width: 272px; }
   .notifications > div#twitter-notification-count {
+    display: none;
     position: absolute;
     top: -2px;
     right: 134px;
@@ -1849,7 +1944,6 @@ body.path-update-password .messages--status {
     padding: .2em;
     font-size: 12px;
     text-align: center;
-    display: block;
     z-index: 1; }
   .notifications .notification-message-list {
     height: 92vh;
@@ -1941,6 +2035,9 @@ body.path-update-password .messages--status {
 .tweets-queue-tweet-form .message-header .form-item-message + .form-item-display-box {
   width: 69%; }
 
+.tweets-queue-tweet-form .form-item-display-box {
+  width: 53.5% !important; }
+
 .profilesettingform-body.user-logged-in .main-content {
   position: absolute; }
 
@@ -2009,6 +2106,9 @@ body.path-update-password .messages--status {
         color: white; }
         .profilesettingform .message-header #change-password .change:hover {
           background: rgba(0, 128, 0, 0.8); }
+        .profilesettingform .message-header #change-password .change:active {
+          -webkit-transform: translateY(1px);
+          transform: translateY(1px); }
     .profilesettingform .message-header .js-form-item, .profilesettingform .message-header #change-password {
       width: 35%;
       margin-right: 100px;
@@ -2057,6 +2157,9 @@ body.path-update-password .messages--status {
       -ms-border-radius: 4px;
       -o-border-radius: 4px;
       border-radius: 4px; }
+      .profilesettingform .message-header input[type="submit"]:active {
+        -webkit-transform: translateY(1px);
+        transform: translateY(1px); }
   .profilesettingform #profile-settingform-password-validation-error, .profilesettingform #password-changed {
     position: absolute; }
 
@@ -2094,7 +2197,7 @@ body.path-update-password .messages--status {
       pointer-events: none; }
       .send-tweets-form .form-type-managed-file .form-managed-file .option:after, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .option:after {
         content: 'x';
-        background: red;
+        background: #dddddd;
         height: 20px;
         width: 20px;
         display: block;
@@ -2111,9 +2214,19 @@ body.path-update-password .messages--status {
       flex-flow: row;
       justify-content: flex-start; }
     .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox {
-      margin: 0; }
+      margin: 0;
+      position: relative; }
       .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"], .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] {
-        display: none; }
+        position: absolute;
+        right: 0;
+        opacity: 0;
+        height: 20px;
+        width: 20px;
+        z-index: 999;
+        right: 5px;
+        top: 5px; }
+        .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"]:hover + .option:after, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"]:hover + .option:after {
+          background: #2aa9e0; }
       .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file {
         background: none;
         padding-left: 0;
@@ -2146,9 +2259,12 @@ body.path-update-password .messages--status {
   #result.strong {
     color: green; }
 
-.send-tweets-form, .tweets-queue-tweet-form {
+.send-tweets-form,
+.tweets-queue-tweet-form {
   padding-top: 5px; }
-  .send-tweets-form .create-header, .send-tweets-form .edit-tweet, .tweets-queue-tweet-form .create-header, .tweets-queue-tweet-form .edit-tweet {
+  .send-tweets-form .create-header, .send-tweets-form .edit-tweet,
+  .tweets-queue-tweet-form .create-header,
+  .tweets-queue-tweet-form .edit-tweet {
     background: #FCFCFC;
     padding: 1em;
     margin-top: 1em;
@@ -2164,7 +2280,8 @@ body.path-update-password .messages--status {
     /*IE 5.5-7*/
     font-size: 14px;
     color: #979797; }
-  .send-tweets-form .message-header, .tweets-queue-tweet-form .message-header {
+  .send-tweets-form .message-header,
+  .tweets-queue-tweet-form .message-header {
     overflow: hidden;
     background: white;
     padding: 1em 1em 2.5em 1em;
@@ -2178,21 +2295,29 @@ body.path-update-password .messages--status {
     /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
     /*IE 5.5-7*/ }
-    .send-tweets-form .message-header .ajax-new-content, .tweets-queue-tweet-form .message-header .ajax-new-content {
+    .send-tweets-form .message-header .ajax-new-content,
+    .tweets-queue-tweet-form .message-header .ajax-new-content {
       display: none !important; }
-    .send-tweets-form .message-header .form-item-display-box, .tweets-queue-tweet-form .message-header .form-item-display-box {
+    .send-tweets-form .message-header .form-item-display-box,
+    .tweets-queue-tweet-form .message-header .form-item-display-box {
       float: left;
       width: 63%;
       text-align: right;
       margin-top: 12px; }
-      .send-tweets-form .message-header .form-item-display-box input, .tweets-queue-tweet-form .message-header .form-item-display-box input {
+      .send-tweets-form .message-header .form-item-display-box input,
+      .tweets-queue-tweet-form .message-header .form-item-display-box input {
         border: 0;
         text-align: right;
         pointer-events: none;
         color: #979797;
         font-weight: bold;
         font-size: 16px; }
-  .send-tweets-form #edit-save, .send-tweets-form #edit-submit, .send-tweets-form #edit-clone, .send-tweets-form #edit-cancel, .tweets-queue-tweet-form #edit-save, .tweets-queue-tweet-form #edit-submit, .tweets-queue-tweet-form #edit-clone, .tweets-queue-tweet-form #edit-cancel {
+  .send-tweets-form #edit-save, .send-tweets-form #edit-submit, .send-tweets-form #edit-clone, .send-tweets-form #edit-cancel, .send-tweets-form #edit-tweet-now,
+  .tweets-queue-tweet-form #edit-save,
+  .tweets-queue-tweet-form #edit-submit,
+  .tweets-queue-tweet-form #edit-clone,
+  .tweets-queue-tweet-form #edit-cancel,
+  .tweets-queue-tweet-form #edit-tweet-now {
     border: none;
     padding: .5em 1em .5em 1em;
     font-size: 18px;
@@ -2205,14 +2330,39 @@ body.path-update-password .messages--status {
     text-decoration: none;
     display: block;
     text-align: center; }
-  .send-tweets-form #edit-submit, .send-tweets-form #edit-clone, .tweets-queue-tweet-form #edit-submit, .tweets-queue-tweet-form #edit-clone {
+    .send-tweets-form #edit-save:active, .send-tweets-form #edit-submit:active, .send-tweets-form #edit-clone:active, .send-tweets-form #edit-cancel:active, .send-tweets-form #edit-tweet-now:active,
+    .tweets-queue-tweet-form #edit-save:active,
+    .tweets-queue-tweet-form #edit-submit:active,
+    .tweets-queue-tweet-form #edit-clone:active,
+    .tweets-queue-tweet-form #edit-cancel:active,
+    .tweets-queue-tweet-form #edit-tweet-now:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
+  .send-tweets-form #edit-submit, .send-tweets-form #edit-clone, .send-tweets-form #edit-tweet-now,
+  .tweets-queue-tweet-form #edit-submit,
+  .tweets-queue-tweet-form #edit-clone,
+  .tweets-queue-tweet-form #edit-tweet-now {
     background: #2aa9e0;
     color: white;
     float: right;
     margin-right: 0;
     padding: .7em 1.4em;
-    font-weight: bold; }
-  .send-tweets-form #edit-save, .send-tweets-form #edit-cancel, .tweets-queue-tweet-form #edit-save, .tweets-queue-tweet-form #edit-cancel {
+    font-weight: bold;
+    transition: .2s ease-in-out; }
+    .send-tweets-form #edit-submit:hover, .send-tweets-form #edit-clone:hover, .send-tweets-form #edit-tweet-now:hover,
+    .tweets-queue-tweet-form #edit-submit:hover,
+    .tweets-queue-tweet-form #edit-clone:hover,
+    .tweets-queue-tweet-form #edit-tweet-now:hover {
+      background: #2195c7; }
+    .send-tweets-form #edit-submit:active, .send-tweets-form #edit-clone:active, .send-tweets-form #edit-tweet-now:active,
+    .tweets-queue-tweet-form #edit-submit:active,
+    .tweets-queue-tweet-form #edit-clone:active,
+    .tweets-queue-tweet-form #edit-tweet-now:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
+  .send-tweets-form #edit-save, .send-tweets-form #edit-cancel,
+  .tweets-queue-tweet-form #edit-save,
+  .tweets-queue-tweet-form #edit-cancel {
     background: white;
     color: #2aa9e0;
     border: 2px solid #2aa9e0;
@@ -2220,8 +2370,20 @@ body.path-update-password .messages--status {
     padding: .6em 1.4em;
     margin-right: 0;
     margin-left: 0;
-    font-weight: bold; }
-  .send-tweets-form .form-textarea, .tweets-queue-tweet-form .form-textarea {
+    font-weight: bold;
+    transition: .2s ease-in-out; }
+    .send-tweets-form #edit-save:hover, .send-tweets-form #edit-cancel:hover,
+    .tweets-queue-tweet-form #edit-save:hover,
+    .tweets-queue-tweet-form #edit-cancel:hover {
+      background: #2aa9e0;
+      color: #ffffff; }
+    .send-tweets-form #edit-save:active, .send-tweets-form #edit-cancel:active,
+    .tweets-queue-tweet-form #edit-save:active,
+    .tweets-queue-tweet-form #edit-cancel:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
+  .send-tweets-form .form-textarea,
+  .tweets-queue-tweet-form .form-textarea {
     border-color: rgba(0, 0, 0, 0.1);
     -webkit-border-radius: 5px;
     -khtml-border-radius: 5px;
@@ -2231,10 +2393,12 @@ body.path-update-password .messages--status {
     border-radius: 5px;
     padding: 1em;
     font-size: 16px; }
-  .send-tweets-form #edit-submit:disabled, .tweets-queue-tweet-form #edit-submit:disabled {
+  .send-tweets-form #edit-submit:disabled,
+  .tweets-queue-tweet-form #edit-submit:disabled {
     background: #979797;
     opacity: .35; }
-  .send-tweets-form #edit-save:disabled, .tweets-queue-tweet-form #edit-save:disabled {
+  .send-tweets-form #edit-save:disabled,
+  .tweets-queue-tweet-form #edit-save:disabled {
     color: #979797;
     border-color: #979797;
     opacity: .35; }
@@ -2353,7 +2517,13 @@ body.path-update-password .messages--status {
     text-decoration: none;
     display: block;
     text-align: center;
-    font-weight: bold; }
+    font-weight: bold;
+    transition: .2s ease-in-out; }
+    .-form-tweets-queue-csv-upload #edit-submit:hover {
+      background: #2195c7; }
+    .-form-tweets-queue-csv-upload #edit-submit:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
   .-form-tweets-queue-csv-upload .description {
     font-size: .8em;
     font-style: italic;
@@ -2499,6 +2669,11 @@ body.path-update-password .messages--status {
   /*IE 5.5-7*/
   background: white;
   padding: 2em;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
   border-radius: 10px;
   /*--- gutter outside and inside of column width calculate ---*/
   width: 90.66667%;
@@ -2629,30 +2804,7 @@ body.path-update-password .messages--status {
   .Home-page--blukstore--section .views-row {
     flex: 3; }
     .Home-page--blukstore--section .views-row .views-field-field-section-image {
-      display: inline-block;
-      font: normal normal normal 14px/1 FontAwesome;
-      font-size: inherit;
-      text-rendering: auto;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale; }
-      .Home-page--blukstore--section .views-row .views-field-field-section-image:before {
-        height: 140px;
-        width: 140px;
-        display: block;
-        border-radius: 100%;
-        line-height: 140px;
-        color: #fff;
-        font-size: 56px;
-        text-align: center; }
-    .Home-page--blukstore--section .views-row:nth-of-type(1) .views-field-field-section-image:before {
-      content: "\f07c";
-      background: #b6d791; }
-    .Home-page--blukstore--section .views-row:nth-of-type(2) .views-field-field-section-image:before {
-      content: "\f017";
-      background: #2aa9e0; }
-    .Home-page--blukstore--section .views-row:nth-of-type(3) .views-field-field-section-image:before {
-      content: "\f085";
-      background: #f98575; }
+      display: inline-block; }
   .Home-page--blukstore--section .views-field-title {
     margin-top: 25px;
     font-size: 24px;
@@ -2666,10 +2818,6 @@ body.path-update-password .messages--status {
   background-color: #ffffff; }
   .views--mission-vision .views-row:last-child .section__mission-vision {
     flex-direction: row-reverse; }
-  .views--mission-vision .views-row:nth-of-type(2) img {
-    max-width: 45%;
-    height: auto;
-    width: 100%; }
 
 .section__mission-vision {
   display: flex;
@@ -2730,6 +2878,11 @@ body.path-update-password .messages--status {
           position: absolute;
           left: 10%;
           color: #ffffff;
+          -webkit-border-radius: 100%;
+          -khtml-border-radius: 100%;
+          -moz-border-radius: 100%;
+          -ms-border-radius: 100%;
+          -o-border-radius: 100%;
           border-radius: 100%;
           height: 50px;
           width: 50px; }
@@ -2808,10 +2961,13 @@ body.path-update-password .messages--status {
       background: #2aa9e0;
       border-radius: 5px;
       border: none;
-      color: #ffffff; }
+      color: #ffffff !important; }
       .block-sub-nav-main-menu .menu li:last-child a:hover {
         opacity: 1;
         background: #2195c7; }
+      .block-sub-nav-main-menu .menu li:last-child a:active {
+        -webkit-transform: translateY(1px);
+        transform: translateY(1px); }
 
 .path-frontpage .block-sub-nav-main-menu .menu li:last-child,
 .user-logged-in .block-sub-nav-main-menu .menu li:last-child {
@@ -2886,19 +3042,19 @@ body.path-update-password .messages--status {
   box-shadow: -3px 2px 11px 2px #ddd;
   position: absolute;
   max-width: 503px;
-  right: 11.5%;
-  top: 80px;
+  left: 90px;
+  top: 810px;
   border: none;
   z-index: 99;
   border-radius: 5px;
   font-size: 24px;
-  width: 300px;
-  padding-left: 93px;
+  width: 84%;
+  padding-left: 75px;
   align-items: center;
   background-image: none;
   opacity: 1;
-  padding-top: 140px;
-  padding-bottom: 180px; }
+  padding-top: 15px;
+  padding-bottom: 70px; }
   .path-contact .messages--status:before {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -2908,7 +3064,7 @@ body.path-update-password .messages--status {
     -moz-osx-font-smoothing: grayscale;
     content: "\f00c";
     position: absolute;
-    left: 38px;
+    left: 20px;
     height: 40px;
     width: 40px;
     background: #96c85a;
@@ -2916,7 +3072,7 @@ body.path-update-password .messages--status {
     border-radius: 100px;
     line-height: 40px;
     text-align: center;
-    top: 145px;
+    top: 20px;
     font-size: 24px; }
 
 .featured-top {
@@ -2946,7 +3102,13 @@ body.path-update-password .messages--status {
       margin: 0 12px;
       padding-left: 50px;
       position: relative;
-      text-decoration: none; }
+      text-decoration: none;
+      display: block; }
+      .block-product-srijan-technologies .field--name-field-mobile-number-contact a:active,
+      .block-product-srijan-technologies .field--name-field-contact- a:active,
+      .block-product-srijan-technologies .field--name-field-contact a:active {
+        -webkit-transform: translateY(1px);
+        transform: translateY(1px); }
       .block-product-srijan-technologies .field--name-field-mobile-number-contact a:before,
       .block-product-srijan-technologies .field--name-field-contact- a:before,
       .block-product-srijan-technologies .field--name-field-contact a:before {
@@ -3058,13 +3220,16 @@ body.path-update-password .messages--status {
     padding: .5em;
     font-size: 18px;
     color: white;
-    webkit-border-radius: 4px;
-    khtml-border-radius: 4px;
-    moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -moz-border-radius: 4px;
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
     border-radius: 4px;
     margin-top: 1em; }
+    .contact-message-write-to-us-form .form-submit:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
     .contact-message-write-to-us-form .form-submit + .form-submit {
       display: none; }
     .contact-message-write-to-us-form .form-submit:hover {
@@ -3132,6 +3297,9 @@ body.path-update-password .messages--status {
       transition: .2s ease-in-out; }
       .block-simplenews .form-actions .form-submit:hover {
         background: #2195c7; }
+      .block-simplenews .form-actions .form-submit:active {
+        -webkit-transform: translateY(1px);
+        transform: translateY(1px); }
 
 /** copy right footer **/
 #block-copyrightblock {
@@ -3166,11 +3334,14 @@ body.path-update-password .messages--status {
     color: #96c85a; }
   #header.change .block-sub-nav-main-menu .menu li a {
     color: #666; }
-  #header.change .block-sub-nav-main-menu .menu li:nth-of-type(4) a {
+  #header.change .block-sub-nav-main-menu .menu li:last-child a {
     color: #ffffff; }
 
 .path-signup .block-sub-nav-main-menu .menu li a {
   color: #666; }
+
+.path-signup .block-sub-nav-main-menu .menu li:last-child a {
+  color: #ffffff; }
 
 /** setting page **/
 .user-form {
@@ -3260,6 +3431,9 @@ body.path-update-password .messages--status {
     padding: 5px 10px;
     cursor: pointer;
     background: #ffffff; }
+    .user-form .invite-friend:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px); }
   .user-form .form-actions {
     padding: 40px 20px; }
     .user-form .form-actions input {
@@ -3275,9 +3449,13 @@ body.path-update-password .messages--status {
       -moz-border-radius: 4px;
       -ms-border-radius: 4px;
       -o-border-radius: 4px;
-      border-radius: 4px; }
+      border-radius: 4px;
+      margin: 0 240px; }
       .user-form .form-actions input:hover {
         background: #82bb3e; }
+      .user-form .form-actions input:active {
+        -webkit-transform: translateY(1px);
+        transform: translateY(1px); }
 
 /** ajax for dashborad **/
 .-form-tweets-queue-csv-upload .ajax-progress.ajax-progress-throbber {
@@ -3352,6 +3530,8 @@ body.path-update-password .messages--status {
     margin: 0;
     position: relative;
     top: 0; }
+  .page-node-type-thanku-pages .messages {
+    display: none !important; }
 
 /** css for spinner **/
 body {
@@ -3381,8 +3561,7 @@ body {
   height: auto;
   overflow: hidden;
   position: relative;
-  z-index: 0;
-  margin-top: -75px; }
+  z-index: 0; }
 
 .page-node-type-article .block-page-title-block {
   position: absolute;
@@ -3482,7 +3661,7 @@ body {
   .faq .faq-qa-header {
     text-align: center;
     cursor: pointer;
-    margin: 0 2.5%; }
+    margin: 0 1.5%; }
     .faq .faq-qa-header .faq-header {
       font-size: 12px;
       padding-bottom: 20px;
@@ -3543,12 +3722,15 @@ body {
     display: none; }
 
 .faq-question {
-  padding-left: 0; }
+  padding-left: 65px;
+  position: relative; }
   .faq-question:before {
     content: "Ques.";
     font-size: 18px;
     font-weight: 800;
-    padding-right: 15px; }
+    padding-right: 15px;
+    position: absolute;
+    left: 0; }
   .faq-question span {
     font-size: 18px;
     color: #303030;
@@ -3570,7 +3752,8 @@ body {
       position: absolute;
       width: 100%;
       left: 0;
-      top: -231px; }
+      top: 0;
+      height: 100%; }
     .block-faq-banner-image .field--type-image:before {
       content: "";
       height: 100%;
@@ -3585,3 +3768,159 @@ body {
   margin-top: -135px;
   z-index: 3;
   position: relative; }
+
+/** style for feedback form **/
+.path-dashboard .ui-dialog {
+  border: none;
+  width: 580px !important; }
+
+.path-dashboard .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix {
+  border-radius: 5px 5px 0px 0px;
+  background: #f6f6f6;
+  color: #333;
+  font-size: 24px;
+  padding: 15px 20px;
+  font-weight: normal;
+  border: none; }
+
+.path-dashboard .ui-dialog .ui-dialog-content {
+  padding: 1.5em 3em;
+  max-height: 100% !important;
+  padding-bottom: 0; }
+
+.path-dashboard .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  float: left;
+  width: 100%;
+  text-align: center; }
+
+.path-dashboard .ui-dialog-buttonpane.ui-widget-content {
+  border: none;
+  background: #ffffff;
+  padding-bottom: 40px;
+  border-radius: 0px 0px 5px 5px; }
+
+.path-dashboard .ui-dialog .ui-dialog-titlebar-close {
+  margin-right: 15px; }
+
+.path-dashboard .ui-dialog .ui-dialog-buttonpane button {
+  background: #ffffff;
+  color: #2aa9e0;
+  border: 2px solid #2aa9e0;
+  margin-top: 1em;
+  padding: .5em 2em;
+  margin-right: 0;
+  border-radius: 4px;
+  font-size: 18px;
+  text-decoration: none; }
+  .path-dashboard .ui-dialog .ui-dialog-buttonpane button:hover {
+    background: #2aa9e0;
+    color: #ffffff; }
+
+.path-dashboard .ui-dialog .ui-dialog-buttonpane button.button--primary {
+  border: none;
+  padding: .5em 2em;
+  font-size: 18px;
+  color: white;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  margin-top: 1em;
+  background: #96c85a;
+  margin-right: 20px; }
+  .path-dashboard .ui-dialog .ui-dialog-buttonpane button.button--primary:hover {
+    background: #82bb3e; }
+
+.contact-message-user-feedback-form label {
+  font-size: 18px;
+  margin-bottom: 25px;
+  display: block;
+  color: #303030; }
+
+.contact-message-user-feedback-form select {
+  border: 0;
+  background: none;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%;
+  padding-bottom: 7px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: normal;
+  margin-bottom: 30px; }
+
+.contact-message-user-feedback-form textarea {
+  margin-top: 0px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  outline: none; }
+
+.send-tweets-form .ajax-progress.ajax-progress-throbber,
+.tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber {
+  display: none; }
+  .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child,
+  .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child {
+    height: 80px;
+    width: 80px;
+    text-align: center;
+    border-radius: 7px;
+    position: relative;
+    display: block !important; }
+    .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child .throbber,
+    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child .throbber {
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background: none;
+      position: relative;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      top: 20px; }
+      .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child .throbber:before,
+      .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child .throbber:before {
+        content: "\f110";
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        font-size: 30px;
+        color: #96c85a; }
+    .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child .message,
+    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child .message {
+      display: none; }
+
+/** twitter box css **/
+.send-tweets-form .form-textarea-wrapper {
+  position: relative;
+  z-index: 1;
+  overflow: hidden; }
+
+.send-tweets-form .js-keeper-placeholder-back,
+.send-tweets-form #edit-message {
+  background: transparent;
+  font-size: 18px;
+  margin: auto;
+  outline: none;
+  padding: 10px;
+  resize: vertical;
+  width: 100%; }
+
+.send-tweets-form .js-keeper-placeholder-back {
+  bottom: 0;
+  color: transparent;
+  left: 0;
+  position: absolute;
+  top: 0;
+  white-space: pre-wrap;
+  width: 100%;
+  word-wrap: break-word;
+  z-index: -1; }
+
+.send-tweets-form .js-keeper-placeholder-back em {
+  background: #fcc !important; }
+
+.form-submit {
+  outline: none; }
