@@ -1494,22 +1494,21 @@ margin-top: 120px;
 	margin-left: 10px;
 	margin-top: 8px;
 	margin-bottom: 20px;
-	text-align: center;
+	text-align: left;
 	background: none white;
 	border: 1px solid rgba(0,0,0,0.15);
 	color: #96c85a;
 	font-size: 18px;
 	position: relative;
-	// display: none;
 	position: absolute;
 	bottom: -80px;
 	left: 20%;
 	border-radius: 35px;
 	padding-left: 50px;
-	width: 63%;
+	max-width: 63%;
     background: #ffffff;
     z-index: 999;
-    line-height: 30px;
+    line-height: 20px;
 	&:before {
 		@extend %icomoon;
 		content: $icon-success;
@@ -4013,6 +4012,11 @@ margin-top: 120px;
 				}
 				.messages {
 					display: none !important;
+				}
+				.block-block-content { 
+				    .field--name-field-title {
+                       font-size: 30px;
+				    }
 				}
 			}
 			/** css for spinner **/

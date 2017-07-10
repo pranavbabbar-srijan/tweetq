@@ -1479,7 +1479,7 @@ margin-top: 120px;
     margin-left: 10px;
     margin-top: 8px;
     margin-bottom: 20px;
-    text-align: center;
+    text-align: left;
     background: none white;
     border: 1px solid rgba(0, 0, 0, 0.15);
     color: #96c85a;
@@ -1490,10 +1490,10 @@ margin-top: 120px;
     left: 20%;
     border-radius: 35px;
     padding-left: 50px;
-    width: 63%;
+    max-width: 63%;
     background: #ffffff;
     z-index: 999;
-    line-height: 30px; }
+    line-height: 20px; }
     .user-logged-in .messages--status:before {
       content: "";
       font-size: 38px;
@@ -3615,6 +3615,8 @@ margin-top: 120px;
     top: 0; }
   .page-node-type-thanku-pages .messages {
     display: none !important; }
+  .page-node-type-thanku-pages .block-block-content .field--name-field-title {
+    font-size: 30px; }
 
 /** css for spinner **/
 body {
