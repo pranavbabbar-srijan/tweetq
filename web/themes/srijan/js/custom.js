@@ -512,6 +512,7 @@
 
 	    //Click on forgot password link.
 		$("#user-login-form #forgot-password").click(function() {
+			$(this).hide();
 			$('#user-login-form #edit-name').val('');
 			$('#user-login-form #edit-pass').val('');
 			$('#user-login-form #edit-email').val('');
@@ -878,6 +879,7 @@
 	    	$("#forgot-password-section").hide();
 	    	$("#user-login-prefix").show();
 	    	$("#edit-actions").show();
+	    	$("#forgot-password").show();
 		});
 
 	    $(".create-header #ajax-wrapper").click(function() {
@@ -1142,6 +1144,10 @@
                setTimeout(function(){
                   $('.contact-message-user-feedback-form textarea').attr('placeholder','Message');
                   $('.ui-dialog-buttonpane .form-actions button:first-child .ui-button-text').text('Submit');
+                  $('.ui-dialog-titlebar-close').click(function(){
+	                  $('#spinner').hide().removeClass('absolute_top');
+				      $('#overlayspin').hide().removeClass('absolute_top');
+				  });
                }, 500);
 	        });
             // if checkbox is checked add class
@@ -1163,7 +1169,13 @@
 			  });
 
 			  // change text of submit button on dialog box
-			  
+		     $('.feedback_link').click(function(){
+			   $('#spinner').show().addClass('absolute_top');
+			   $('#overlayspin').show().addClass('absolute_top');
+			 });
+			
+	
+
                 
 
 
