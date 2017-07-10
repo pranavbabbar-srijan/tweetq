@@ -95,7 +95,7 @@ class UsersDashboardHeaderBlock extends BlockBase {
     }
 
     else {
-      $output = "<div class='notifications'>" . $message_history_count .
+      $output = "<div class='notifications'>" . $message_history_count_output .
        $message_history_data . "</div>" . $twitter_profile_output;
     }
 
