@@ -66,11 +66,12 @@ class UsersTweetedTweetsBlock extends BlockBase {
     $build = array();
     tweets_queue_show_valid_tweets_header($build);
 
-    $build['del'] = array(
+     $build['submit'] = array(
         '#prefix' => '<div id="delete-selected">',
-        '#markup' => t('Delete Selected'),
+        '#type' => 'submit',
+        '#value' => t('Delete Selected'),
         '#suffix' => '</div>',
-    );
+      );
 
     if ($total) {
       $build['header'] = array(
