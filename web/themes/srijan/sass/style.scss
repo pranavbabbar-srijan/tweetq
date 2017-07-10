@@ -1666,6 +1666,7 @@ margin-top: 120px;
 					&:hover {
 						background: $twitter;
 						color: $white;
+						border: 2px solid $twitter;
 					}
 					&:active {
 						-webkit-transform: translateY(1px);
@@ -4345,6 +4346,7 @@ margin-top: 120px;
 				}
 				.ui-dialog .ui-dialog-titlebar-close {
 					margin-right: 15px;
+					outline: none;
 				}
 				.ui-dialog .ui-dialog-buttonpane button {
 					background: $white;
@@ -4361,6 +4363,10 @@ margin-top: 120px;
 						background: $twitter;
 						color: $white;
 					}
+					&:active {
+				       -webkit-transform: translateY(1px);
+				        transform: translateY(1px);
+				    }
 				}
 				.ui-dialog .ui-dialog-buttonpane button.button--primary {
 					border: none;
@@ -4374,6 +4380,10 @@ margin-top: 120px;
 					&:hover {
 						background: #82bb3e;
 					}
+					&:active {
+				      -webkit-transform: translateY(1px);
+				      transform: translateY(1px);
+				    }
 				}
 			}
 
@@ -4618,6 +4628,10 @@ margin-top: 120px;
     color: #fff;
     cursor: pointer;
     position: relative;
+    &:active {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px);
+    }
     &:before {
 	    content: "";
 	    width: 100%;

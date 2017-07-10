@@ -1597,7 +1597,8 @@ margin-top: 120px;
       padding-bottom: .5em; }
       .no-tweet-found a.import-tweet:hover {
         background: #2aa9e0;
-        color: #ffffff; }
+        color: #ffffff;
+        border: 2px solid #2aa9e0; }
       .no-tweet-found a.import-tweet:active {
         -webkit-transform: translateY(1px);
         transform: translateY(1px); }
@@ -3896,7 +3897,8 @@ body {
 
 .path-dashboard .ui-dialog .ui-dialog-titlebar-close,
 .path-user .ui-dialog .ui-dialog-titlebar-close {
-  margin-right: 15px; }
+  margin-right: 15px;
+  outline: none; }
 
 .path-dashboard .ui-dialog .ui-dialog-buttonpane button,
 .path-user .ui-dialog .ui-dialog-buttonpane button {
@@ -3914,6 +3916,10 @@ body {
   .path-user .ui-dialog .ui-dialog-buttonpane button:hover {
     background: #2aa9e0;
     color: #ffffff; }
+  .path-dashboard .ui-dialog .ui-dialog-buttonpane button:active,
+  .path-user .ui-dialog .ui-dialog-buttonpane button:active {
+    -webkit-transform: translateY(1px);
+    transform: translateY(1px); }
 
 .path-dashboard .ui-dialog .ui-dialog-buttonpane button.button--primary,
 .path-user .ui-dialog .ui-dialog-buttonpane button.button--primary {
@@ -3933,6 +3939,10 @@ body {
   .path-dashboard .ui-dialog .ui-dialog-buttonpane button.button--primary:hover,
   .path-user .ui-dialog .ui-dialog-buttonpane button.button--primary:hover {
     background: #82bb3e; }
+  .path-dashboard .ui-dialog .ui-dialog-buttonpane button.button--primary:active,
+  .path-user .ui-dialog .ui-dialog-buttonpane button.button--primary:active {
+    -webkit-transform: translateY(1px);
+    transform: translateY(1px); }
 
 .contact-message-user-feedback-form {
   /** smile rating **/ }
@@ -4135,6 +4145,9 @@ body {
   color: #fff;
   cursor: pointer;
   position: relative; }
+  #delete-selected:active {
+    -webkit-transform: translateY(1px);
+    transform: translateY(1px); }
   #delete-selected:before {
     content: "";
     width: 100%;
