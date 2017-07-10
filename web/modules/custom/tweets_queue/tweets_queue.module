@@ -277,16 +277,12 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
   $page = \Drupal::request()->getRequestUri();
   if (strpos($form_id, 'user_feedback') !== FALSE) {
     $form['actions']['preview']['#access'] = FALSE;
-      $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), '#',
-           array(
-             'attributes' => array(
-               'class' => 'ctools-close-modal'
-              ),
-             'external' => TRUE
-           )
-         )            
-      );
+    $form['actions']['cancel'] = array(
+    '#type' => 'button',
+    '#value' => t('May be later'),
+    '#weight' => 10,
+    '#attributes' => array('onClick' => 'event.preventDefault();'),
+    );
   }
 
 }
