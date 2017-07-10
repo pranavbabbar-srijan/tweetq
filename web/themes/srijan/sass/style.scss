@@ -4303,7 +4303,8 @@ margin-top: 120px;
 			}
 
 			/** style for feedback form **/
-			.path-dashboard {
+			.path-dashboard,
+			.path-user {
 				#block-srijan-content {
 					float: left;
                     width: 100%;
@@ -4477,10 +4478,7 @@ margin-top: 120px;
 
 			}
 
-			/*.ui-dialog  form.contact-message-user-feedback-form .fivestar-user-stars .fivestar-widget .star:hover {
-				background-color: $login-btn !important;
-				border-radius: 5px;
-			}*/
+		
 
 
 
