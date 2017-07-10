@@ -1155,8 +1155,8 @@
                }, 500);
 	        });
             // if checkbox is checked add class
-               
-            
+             
+              $('#delete-selected input').attr('disabled', true);
 			  $('.custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
 			      $('#delete-selected input').removeAttr('disabled');
