@@ -192,6 +192,16 @@ class ProfileSettingForm extends FormBase {
     //Optional settings
     $res = $user->save();
     drupal_set_message('The changes have been saved');
+
+    $twitter_history_info = array(
+     // 'nid' => $message_data->nid,
+      'uid' => $uid,
+      'created' => time(),
+      'type' => 'Profile',
+      'message' => 'Profile has been updated',
+    );
+    tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
+
   }
 
   /**
