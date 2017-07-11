@@ -1,23 +1,18 @@
 <?php
-
 namespace Drupal\tweets_queue\Form;
-
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
-
 /**
  * Builds a form to test disabled elements.
  */
 class TweetsQueueCsvUploadForm extends FormBase {
-
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
     return '_form_tweets_queue_csv_upload';
   }
-
   /**
    * {@inheritdoc}
    */
@@ -31,7 +26,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
       '#markup' => t('Import Tweets'),
       '#suffix' => '</div>',
     );
-
     $form['import_top'] = array(
       '#type' => 'markup',
       '#prefix' => '<div class="create-header">',
@@ -62,7 +56,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
         'title' => t(TWITTER_IMPORT_TWEET_TOOLTIP),
       ),
     );
-
     $fids[0] = tweets_queue_fetch_twitter_statistics_info(TWITTER_SAMPLE_CSV_FILE);
     $file_path = tweets_queue_get_file_real_path($fids);
     if ($file_path) {
@@ -76,16 +69,13 @@ class TweetsQueueCsvUploadForm extends FormBase {
         '#suffix' => '</div>',
       );
     }
-
     $form['import_bottom'] = array(
       '#type' => 'markup',
       '#markup' => t(''),
       '#suffix' => '</div>',
     );
-
     return $form;
   }
-
   /**
    * Function to validate the key if already in use.
    *
@@ -104,7 +94,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
     $uri = $query->execute()->fetchField();
     return $uri;
   }
-
   /**
    * {@inheritdoc}
    */
@@ -130,7 +119,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
       $this->importCsvData($file);
     }
   }
-
   public function importCsvData($file) {
     $uid = \Drupal::currentUser()->id();
     $file = fopen($file, 'r');
@@ -151,7 +139,6 @@ class TweetsQueueCsvUploadForm extends FormBase {
         $message = $message . ' ' . $hash_tag;
         $hash_tag = '';
       }
-
       $actual_size = tweets_queue_calculate_tweet_message_size($message, '', 'size');
       $size = tweets_queue_get_message_size($message);
       if ($actual_size > DB_TWEET_CHARCATER_LIMIT) {
@@ -198,6 +185,13 @@ class TweetsQueueCsvUploadForm extends FormBase {
     if ($skipped > 0) {
       drupal_set_message(t("Skipped shows the tweets whose character limit exceeds"));
     }
+    $twitter_history_info = array(
+      //'nid' => $fid,
+      'uid' => $uid,
+      'created' => time(),
+      'type' => 'Import',
+      'message' => 'File have been imported' . ' ' . $file,
+    );
+    tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
   }
-
 }
