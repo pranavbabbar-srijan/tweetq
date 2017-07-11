@@ -4224,3 +4224,6 @@ body {
 #overlayspin.absolute_top {
   z-index: 99 !important;
   position: fixed; }
+
+.feedback_link {
+  display: none; }
