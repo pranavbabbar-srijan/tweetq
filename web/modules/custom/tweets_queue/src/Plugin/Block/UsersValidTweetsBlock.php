@@ -35,7 +35,7 @@ class UsersValidTweetsBlock extends BlockBase {
     $changed_sort_link = tweets_queue_generate_filter(TWITTER_VALID_TWEETS_ROUTE_NAME,
       TWITTER_FIELD_CHANGED, $current_filter, $new_filter_order);
 
-    $header = array(t(TWITTER_FIELD_MESSAGE_LABEL), t(TWITTER_FIELD_SIZE_LABEL), $created_sort_link, $changed_sort_link, t(TWITTER_FIELD_EDIT_LABEL), t('<input type="checkbox" name="all-selected-deleted" >'));
+    $header = array(t(TWITTER_FIELD_MESSAGE_LABEL), t(TWITTER_FIELD_SIZE_LABEL), $created_sort_link, $changed_sort_link, t(TWITTER_FIELD_EDIT_LABEL), t('<span class="custom-checkbox"><input type="checkbox" name="all-selected-deleted" ><label></label></span>'));
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', ['nid', TWITTER_FIELD_MESSAGE, TWITTER_FIELD_SIZE, TWITTER_FIELD_CREATED ,TWITTER_FIELD_CHANGED]);
@@ -60,12 +60,12 @@ class UsersValidTweetsBlock extends BlockBase {
     $build = array();
     tweets_queue_show_valid_tweets_header($build);
 
-    $build['del'] = array(
+     $build['submit'] = array(
         '#prefix' => '<div id="delete-selected">',
-        '#markup' => t('Delete Selected'),
+        '#type' => 'submit',
+        '#value' => t('Delete Selected'),
         '#suffix' => '</div>',
-    );
-
+      );
     if ($total) {
        $build['header'] = array(
         '#theme' => 'item_list',
@@ -107,7 +107,7 @@ class UsersValidTweetsBlock extends BlockBase {
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
 
     $data = array();
-    $data['multiple_delete'] = t('<input name="multiple-deletion" id="' . $row->nid . '" type="checkbox" value = "' . $row->nid .'">');
+    $data['multiple_delete'] = t('<span class="custom-checkbox"><input name="multiple-deletion" id="' . $row->nid . '" type="checkbox" value = "' . $row->nid .'"><label></label></span>');
     $data['delete_url_multiple_link'] = $delete_url_multiple_link ;
     $data['message'] = tweets_queue_perform_hashtag_highlight($row->message);
     $data['size'] = $row->size;
