@@ -187,8 +187,7 @@
          	$.post(profile_change_password_path, {'password' : password}, function(data) {
 				if  (data == "done") {
 					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
-					$('#password-changed').delay(5000).fadeOut(3000);			
-					location.reload();
+					$('#password-changed').delay(5000).fadeOut(300);			
 					return;
 				}
 				$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profilesettingform #change-password .change" );
@@ -1155,21 +1154,21 @@
                }, 500);
 	        });
             // if checkbox is checked add class
-               
-            
+             
+              $('#delete-selected input').attr('disabled', true);
 			  $('.custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
-			      $('#delete-selected input').attr('disabled', true);
-			    } else {
 			      $('#delete-selected input').removeAttr('disabled');
+			    } else {
+			      $('#delete-selected input').attr('disabled', true);
 			    }
 			  });
 
 			  $('.header .custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.header .custom-checkbox input[type="checkbox"]').is(':checked')) {
-			      $('#delete-selected input').attr('disabled', true);
-			    } else {
 			      $('#delete-selected input').removeAttr('disabled');
+			    } else {
+			      $('#delete-selected input').attr('disabled', true);
 			    }
 			  });
 
