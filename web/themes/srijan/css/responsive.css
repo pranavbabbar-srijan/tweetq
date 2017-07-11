@@ -1,0 +1,93 @@
+@media only screen and (min-width: 768px) {
+  .mobile-menus {
+    display: none; } }
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  /** home page slider **/
+  .path-frontpage .region-content {
+    display: flex;
+    flex-wrap: wrap; }
+  .path-frontpage #block-srijan-content {
+    order: 3;
+    width: 100%;
+    margin-top: 45px; }
+  .path-frontpage #block-twitterusersblock {
+    order: 2; }
+  .path-frontpage #block-twittertweetsblock {
+    order: 1; }
+  .path-frontpage .user-login-form {
+    width: 90%;
+    float: none;
+    margin: 0 auto;
+    box-shadow: 0px 3px 13px #888888; }
+  .path-frontpage .section + .section .region-middle {
+    margin-top: 0; }
+  .view-home-page-carousel .flexslider {
+    height: 580px; }
+    .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image {
+      height: 580px; }
+      .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img {
+        height: 100%; }
+    .view-home-page-carousel .flexslider .slides .slider-content {
+      top: 80px;
+      left: 0;
+      width: 100%; }
+      .view-home-page-carousel .flexslider .slides .slider-content h2 {
+        font-size: 30px;
+        text-align: center; }
+      .view-home-page-carousel .flexslider .slides .slider-content p {
+        padding: 0 30px;
+        text-align: center; }
+    .view-home-page-carousel .flexslider .flex-control-paging {
+      width: 100%;
+      left: 0; }
+      .view-home-page-carousel .flexslider .flex-control-paging li a {
+        width: 10px;
+        height: 10px;
+        background: #303030; }
+    .view-home-page-carousel .flexslider .flex-direction-nav {
+      bottom: 48%;
+      left: 0;
+      width: 100%; }
+  .block-total-twitter-tweets-block,
+  .block-total-twitter-users-block {
+    width: 50%;
+    margin-left: 0; }
+    .block-total-twitter-tweets-block .count,
+    .block-total-twitter-users-block .count {
+      font-size: 30px; }
+    .block-total-twitter-tweets-block .label,
+    .block-total-twitter-users-block .label {
+      font-size: 18px; }
+      .block-total-twitter-tweets-block .label:after,
+      .block-total-twitter-users-block .label:after {
+        content: none; }
+  /**  css for home page **/
+  .block-what-barbet-is {
+    padding: 2em 20px; }
+  .Home-page--blukstore--section {
+    padding-bottom: 60px; }
+    .Home-page--blukstore--section .view-content {
+      flex-direction: column; }
+    .Home-page--blukstore--section .views-field-body {
+      padding: 0px 20px; }
+  .section__mission-vision {
+    flex-direction: column; }
+  .views--mission-vision .views-row:last-child {
+    background: #dfeecd; }
+    .views--mission-vision .views-row:last-child .section__mission--text {
+      background: transparent; }
+    .views--mission-vision .views-row:last-child .section__mission-vision {
+      flex-direction: column; }
+  .views--mission-vision .views-row:first-child .section__mission-image {
+    background: #fbfbfb; }
+  .section__mission--text,
+  .section__mission-image {
+    padding: 15px 20px;
+    width: 100%;
+    text-align: center; }
+  .block-block-content .field--name-field-title {
+    font-size: 30px;
+    padding: 0 20px; }
+  .section__mission--text p:first-child {
+    font-size: 30px; } }

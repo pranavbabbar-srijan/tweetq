@@ -1,0 +1,145 @@
+@media only screen and (min-width: 768px) {
+    .mobile-menus {
+   	   display: none;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+	/** home page slider **/
+	.path-frontpage {
+		.region-content {
+			display: flex;
+    		flex-wrap: wrap;
+		}
+	    #block-srijan-content {
+		    order: 3;
+		    width: 100%;
+		    margin-top: 45px;
+		}
+		#block-twitterusersblock {
+			order: 2;
+		}
+		#block-twittertweetsblock {
+            order: 1;
+		}
+		.user-login-form {
+			width: 90%;
+            float: none;
+            margin: 0 auto;
+            box-shadow: 0px 3px 13px #888888;
+		}
+		.section + .section .region-middle {
+			margin-top: 0;
+		}
+	}
+	.view-home-page-carousel {
+	    .flexslider {
+		    height: 580px;
+		    .slides {
+		    	.views-field-field-front-page-image {
+		    		height: 580px; 
+		    		img {
+                         height: 100%;
+		    		}
+		    	}
+		    	.slider-content {
+		    		top: 80px;
+				    left: 0;
+				    width: 100%;
+		    		h2 {
+		    		   font-size: 30px;
+		    		   text-align: center;
+		    	    }
+
+		    		p {
+		    		   padding: 0 30px;
+                       text-align: center;	
+		    		}
+		    	}
+		    }
+		    .flex-control-paging {
+		    	width: 100%;
+                left: 0;
+                li {
+	                a {
+	                	width: 10px;
+	                    height: 10px;
+	                    background: #303030;
+	                }
+	            }
+		    }
+		    .flex-direction-nav {
+		    	bottom: 48%;
+                left: 0;
+                width: 100%;
+		    }
+	    }
+	     
+	}
+	.block-total-twitter-tweets-block ,
+	.block-total-twitter-users-block {
+		width: 50%;
+		margin-left: 0;
+	    .count {
+	  	   font-size: 30px;
+	    }
+	    .label {
+            font-size: 18px;
+            &:after {
+            	content: none;
+            }
+	    }
+	}
+	/**  css for home page **/
+	.block-what-barbet-is {
+		padding: 2em 20px;
+	}
+
+	.Home-page--blukstore--section  {
+		padding-bottom: 60px;
+	  .view-content {
+	  	flex-direction: column;
+	  }
+	  .views-field-body {
+	  	padding: 0px 20px;
+	  }
+	}
+	.section__mission-vision {
+		    flex-direction: column;
+	}
+	.views--mission-vision {
+	    .views-row {
+	   	    &:last-child {
+	   	    	background: #dfeecd;
+	   	    	.section__mission--text {
+	   	    		background: transparent;
+	   	    	}
+	           .section__mission-vision {
+	                flex-direction: column;
+		       }
+	        }
+	        &:first-child {
+	        	.section__mission-image {
+	        		background: #fbfbfb;
+	        	}
+	        }
+	    }
+	}
+	.section__mission--text,
+	.section__mission-image {
+		padding: 15px 20px;
+		width: 100%;
+		text-align: center;
+	}
+	.block-block-content {
+	   .field--name-field-title {
+	   	  font-size: 30px;
+	   	  padding: 0 20px;
+	   }
+	}
+	.section__mission--text {
+		p:first-child {
+           font-size: 30px;
+		}
+	}
+}
