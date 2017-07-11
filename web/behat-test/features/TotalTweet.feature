@@ -71,6 +71,7 @@ Scenario: Edit functionality
     And I wait for 5 seconds
     And I fill in some unique text 
     And I press "Save"
+    And I wait for 5 seconds
     Then I should see text matching "Tweet have been saved successfully. "
 
 
@@ -85,17 +86,29 @@ Scenario: Delete Functionality
     When I click on the element with xpath "//div[@id='block-usersalltweetsblock']//div[@class='item-list'][2]/ul/li[1]//a[contains(@href,'delete')]"
     And I wait for 5 seconds
     And I press the "Delete Anyway" button
+    And I wait for 5 seconds
     Then I should see text matching "Tweet Deleted Successfully"
     And total tweet gets decremented 
 
    @8
   Scenario:Verify the size of tweet
-    Given I am on "/"
+    Given I am on "./"
     And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
     And I press "Log in"
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[1]"
     And I am on "dashboard/all-tweets"
     And Size of Tweet "//div[@id='block-usersalltweetsblock']//div[@class='item-list'][2]/ul/li[1]//ul"  
+
+
+ @9
+ Scenario: Verify the count of Total tweet
+    Given I am on "./"
+    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
+    And I press "Log in"
+    When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[1]"
+    And I fetch text for total tweet
+
+
 
 
 

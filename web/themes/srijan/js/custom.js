@@ -44,6 +44,7 @@
 		var profile_change_password_path = '/dashboard/changePassword';
 		var friend_invite_send_token_path = '/dashboard/friendInviteSendToken';
 		var invite_friends_path = '/dashboard/inviteFriends';
+		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
 		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
@@ -52,6 +53,7 @@
 		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
 		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
 		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
+		// var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -77,6 +79,31 @@
 
 
 		});
+
+		//Multiple deletion
+		$("#delete-selected").click(function() {
+			var nid = [];
+		    $("input:checkbox[name=multiple-deletion]:checked").each(function() {
+		         nid.push($(this).val());
+		   });  
+			$.post(multiple_selected_deletion, {'nid' : nid}, function(data) {
+				// $("<span id='delete-selected'>" + data + "</p>").insertAfter( "#delete-selected" );
+				 var nids = data.split(",");
+				 
+		    	 for (var i in nids) {  
+			    	$('#' + nids[i]).parent().parent().parent().hide();   
+				 } 
+			location.reload();
+		    });
+		});
+		//All checks on single check
+	 	 $('[name="all-selected-deleted"]').click(function(){
+      	  if($(this).prop("checked")) {
+      	      $('[name="multiple-deletion"]').prop("checked", true);
+      	  } else {
+     	       $('[name="multiple-deletion"]').prop("checked", false);
+      	  }                
+     	 });
 
 		//Volunteer invite form.
 		$("#profile-account-settings-form #invite-friend").click(function() {
@@ -1067,6 +1094,8 @@
 		  }
 		  
 		  $(document).ready(function () {
+		  	
+			 
 		    $textarea = $('textarea');
 
 		    // Create a pseudo-element that will be hidden behind the placeholder.
@@ -1076,8 +1105,12 @@
 		    onTweetCompose();
 		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
 		  });
-
-
+          
+          // add class
+	        if($('.path-signup .messages').hasClass('messages--status')) {
+	          $('.section').addClass('active');
+	        }
+	    
 })(jQuery);
 
 
