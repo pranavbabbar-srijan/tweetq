@@ -501,7 +501,7 @@
 
 	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
-	    	var tweet_msg_length = tweet_msg.length;
+	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
 	    	if (tweet_msg_length > 954) {
 	    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
 	    	}
@@ -512,6 +512,7 @@
 
 	    //Click on forgot password link.
 		$("#user-login-form #forgot-password").click(function() {
+			$(this).hide();
 			$('#user-login-form #edit-name').val('');
 			$('#user-login-form #edit-pass').val('');
 			$('#user-login-form #edit-email').val('');
@@ -742,7 +743,7 @@
 	  	});
 
 		//Edit tweet message character count as per twitter.
-	    $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
+	    /*$("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
 	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
 	    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
@@ -752,11 +753,11 @@
 	    	else {
 	    		$("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
 	    	}
-	    });
+	    });*/
 
 	    $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-	    	var tweet_msg_length = tweet_msg.length;
+	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
 	    	if (tweet_msg_length > 900) {
 	    		$("#tweets-queue-tweet-form #edit-save").attr('disabled', 'true');
 	    	}
@@ -778,7 +779,7 @@
 	    var moretext = "...";
 	    var lesstext = "Less";
 
-	    $('.block-tweets-queue .item-list + .item-list ul ul li:first-child').each(function() {
+	    $('.block-tweets-queue .item-list + .item-list ul ul li:nth-child(3)').each(function() {
 	        var content = $(this).html();
 
 	        if(content.length > showChar) {
@@ -878,6 +879,7 @@
 	    	$("#forgot-password-section").hide();
 	    	$("#user-login-prefix").show();
 	    	$("#edit-actions").show();
+	    	$("#forgot-password").show();
 		});
 
 	    $(".create-header #ajax-wrapper").click(function() {
@@ -1064,7 +1066,16 @@
         setTimeout(function(){ 
         	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
         }, 500);
-
+        
+       
+        $('.faq-header').click(function(e){
+        	$('.faq-qa-hide').hide();
+        	$('.faq-header').removeClass('active');
+           $(this).parent().next().show();
+           $(this).addClass('active');
+           e.preventDefault();
+        });
+    
         $('.faq-header').append('Articles');
         $('.user-login-form #forgot-password').appendTo('.user-login-form');
 
@@ -1072,13 +1083,16 @@
 
         // twitter text box 
          function onTweetCompose(event) {
-		    var $textarea = $('.send-tweets-form #edit-message'),
+		    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
 		        $placeholderBacker = $('.js-keeper-placeholder-back'),
 		        currentValue = $textarea.val()
 		    ;
+		    var currentValuelength = twttr.txt.getTweetLength(currentValue);
+
 		    // realLength is not 140, links counts for 23 characters always.
 		    var realLength = 140;
-		    var remainingLength = 140 - currentValue.length;
+		    var remainingLength = 140 - currentValuelength;
+
 
 		    if (0 > remainingLength) {
 		      // Split value if greater than 
@@ -1105,11 +1119,82 @@
 		    onTweetCompose();
 		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
 		  });
-          
+           // js for to prepend button 
+	        $('#delete-selected').prependTo('#block-srijan-content');
           // add class
 	        if($('.path-signup .messages').hasClass('messages--status')) {
 	          $('.section').addClass('active');
 	        }
+	       
+	        $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
+		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
+		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
+		    	if (tweet_msg_length > 140) {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+		    	}
+		    	else {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+		    	}
+	        });
+	       	           
+	        // close popup after open page
+	        $('.feedback_link').click(function(){
+               $(this).parent().removeClass('active animate');
+               setTimeout(function(){
+                  $('.contact-message-user-feedback-form textarea').attr('placeholder','Message');
+                  $('.ui-dialog-buttonpane .form-actions button:first-child .ui-button-text').text('Submit');
+                  $('.ui-dialog-titlebar-close').click(function(){
+	                  $('#spinner').hide().removeClass('absolute_top');
+				      $('#overlayspin').hide().removeClass('absolute_top');
+				  });
+				  $('.ui-dialog .ui-dialog-buttonpane .form-actions button:last-child').click(function() {
+				       $('.ui-dialog-titlebar-close').trigger('click');
+				  });
+				  $('.star').removeClass('on');
+               }, 500);
+	        });
+            // if checkbox is checked add class
+               
+            
+			  $('.custom-checkbox input[type="checkbox"]').click(function() {
+			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
+			      $('#delete-selected input').attr('disabled', true);
+			    } else {
+			      $('#delete-selected input').removeAttr('disabled');
+			    }
+			  });
+
+			  $('.header .custom-checkbox input[type="checkbox"]').click(function() {
+			    if ($('.header .custom-checkbox input[type="checkbox"]').is(':checked')) {
+			      $('#delete-selected input').attr('disabled', true);
+			    } else {
+			      $('#delete-selected input').removeAttr('disabled');
+			    }
+			  });
+
+			  // change text of submit button on dialog box
+		     $('.feedback_link').click(function(){
+			   $('#spinner').show().addClass('absolute_top');
+			   $('#overlayspin').show().addClass('absolute_top');
+			 });
+			
+	
+
+                
+
+
+	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+		    var tweet_msg_length = tweet_msg.length;
+		    if (tweet_msg_length > 140) {
+	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+	    	}
+	    	else {
+	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+	    	}
+	    	
+	    	
+
 	    
 })(jQuery);
 

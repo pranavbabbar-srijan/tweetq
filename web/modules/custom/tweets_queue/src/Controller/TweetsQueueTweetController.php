@@ -245,6 +245,7 @@ class TweetsQueueTweetController extends ControllerBase {
       'message' => 'Tweets have been successfully deleted',
     );
     tweets_queue_update_twittter_tweet_history($value, $twitter_history_info);
+    drupal_set_message('Message have been deleted');
     die($selected);
   }
 
