@@ -67,8 +67,12 @@ class UsersLeftSideBarBlock extends BlockBase {
 
     $create_tweet_output = "<div class='create_tweets'>
       <span class='text'>" . $create_tweet_link . "</span></div>" ;
+
     $import_tweets_output = "<div class='import_tweets'>
       <span class='text'>" . $import_tweet_link . "</span></div>" ;
+
+    $my_tweets_prefix = "<div id='my_tweets'> 
+    <span class='text'>My Tweets</span>";
 
     $valid_tweets_output = "<div class='valid_tweets'>
       <span class='text'>" . $valid_tweet_link . "</span>
@@ -80,13 +84,12 @@ class UsersLeftSideBarBlock extends BlockBase {
 
     $archived_tweets_output = "<div class='archived_tweets'>
       <span class='text'>" . $archived_tweet_link . "</span></div>" ;
-
+    $my_tweets_suffix = "</div>";
    // $settings_output = "<div class='profile_settings'>
      // <span class='text'>" . $settings_link . "</span></div>" ;
 
     $output = "<div>" . $twitter_profile_output .
-      $create_tweet_output . $import_tweets_output . $valid_tweets_output .
-      $invalid_tweets_output . $archived_tweets_output . $settings_output . "</div>";
+      $create_tweet_output . $import_tweets_output. $my_tweets_prefix . $valid_tweets_output . $invalid_tweets_output . $archived_tweets_output. $my_tweets_suffix . $settings_output . "</div>";
       unset($_SESSION["valid_import"]);
       unset($_SESSION["invalid_import"]);
       unset($_SESSION["new"]);

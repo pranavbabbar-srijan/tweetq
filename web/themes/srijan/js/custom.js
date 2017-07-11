@@ -44,6 +44,7 @@
 		var profile_change_password_path = '/dashboard/changePassword';
 		var friend_invite_send_token_path = '/dashboard/friendInviteSendToken';
 		var invite_friends_path = '/dashboard/inviteFriends';
+		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
 		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
 		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
@@ -52,6 +53,7 @@
 		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
 		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
 		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
+		// var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -69,12 +71,39 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
+					location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 		    });
 
+
 		});
+
+		//Multiple deletion
+		$("#delete-selected").click(function() {
+			var nid = [];
+		    $("input:checkbox[name=multiple-deletion]:checked").each(function() {
+		         nid.push($(this).val());
+		   });  
+			$.post(multiple_selected_deletion, {'nid' : nid}, function(data) {
+				// $("<span id='delete-selected'>" + data + "</p>").insertAfter( "#delete-selected" );
+				 var nids = data.split(",");
+				 
+		    	 for (var i in nids) {  
+			    	$('#' + nids[i]).parent().parent().parent().hide();   
+				 } 
+			location.reload();
+		    });
+		});
+		//All checks on single check
+	 	 $('[name="all-selected-deleted"]').click(function(){
+      	  if($(this).prop("checked")) {
+      	      $('[name="multiple-deletion"]').prop("checked", true);
+      	  } else {
+     	       $('[name="multiple-deletion"]').prop("checked", false);
+      	  }                
+     	 });
 
 		//Volunteer invite form.
 		$("#profile-account-settings-form #invite-friend").click(function() {
@@ -89,7 +118,8 @@
 	    	$.post(friend_invite_send_token_path, {'email' : emails}, function(data) {
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
-					$('#email-sent').delay(5000).fadeOut(300);			
+					$('#email-sent').delay(5000).fadeOut(300);	
+					location.reload();		
 					return;
 				}
 				$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
@@ -130,19 +160,19 @@
 	  	});
 
 	  	//Checking out data in fields for updation of profile
-	  	$("#profilesettingform .update-profile-button").click(function() {
-	  		//	var password = $('#profilesettingform #edit-changeuser-password').val();
-	  		var jobtitle = $('#profilesettingform #edit-field-job-title').val();
-	  		var orgname = $('#profilesettingform #edit-field-organization').val();
-	  		var website = $('#profilesettingform #edit-field-website').val();
-	  		if (jobtitle.length > 0 || orgname.length > 0 || website.length > 0) {
-	  			$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
-	  		}
+	  	// $("#profilesettingform .update-profile-button").click(function() {
+	  	// 	//	var password = $('#profilesettingform #edit-changeuser-password').val();
+	  	// 	var jobtitle = $('#profilesettingform #edit-field-job-title').val();
+	  	// 	var orgname = $('#profilesettingform #edit-field-organization').val();
+	  	// 	var website = $('#profilesettingform #edit-field-website').val();
+	  	// 	if (jobtitle.length > 0 || orgname.length > 0 || website.length > 0) {
+	  	// 		$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
+	  	// 	}
 
 	  		
-	  	});
+	  	// });
 
-		$("#profilesettingform #change-password").click(function() {
+		$("#profilesettingform #change-password .change").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
 	    	//var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
   			
@@ -158,7 +188,6 @@
 				if  (data == "done") {
 					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
 					$('#password-changed').delay(5000).fadeOut(300);			
-					//location.reload();
 					return;
 				}
 				$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profilesettingform #change-password .change" );
@@ -471,7 +500,7 @@
 
 	    $("#send-tweets-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#send-tweets-form #edit-message').val();
-	    	var tweet_msg_length = tweet_msg.length;
+	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
 	    	if (tweet_msg_length > 954) {
 	    		$("#send-tweets-form #edit-save").attr('disabled', 'true');
 	    	}
@@ -482,6 +511,7 @@
 
 	    //Click on forgot password link.
 		$("#user-login-form #forgot-password").click(function() {
+			$(this).hide();
 			$('#user-login-form #edit-name').val('');
 			$('#user-login-form #edit-pass').val('');
 			$('#user-login-form #edit-email').val('');
@@ -712,7 +742,7 @@
 	  	});
 
 		//Edit tweet message character count as per twitter.
-	    $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
+	    /*$("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
 	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
 	    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
@@ -722,11 +752,11 @@
 	    	else {
 	    		$("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
 	    	}
-	    });
+	    });*/
 
 	    $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
 	    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-	    	var tweet_msg_length = tweet_msg.length;
+	    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
 	    	if (tweet_msg_length > 900) {
 	    		$("#tweets-queue-tweet-form #edit-save").attr('disabled', 'true');
 	    	}
@@ -748,7 +778,7 @@
 	    var moretext = "...";
 	    var lesstext = "Less";
 
-	    $('.block-tweets-queue .item-list + .item-list ul ul li:first-child').each(function() {
+	    $('.block-tweets-queue .item-list + .item-list ul ul li:nth-child(3)').each(function() {
 	        var content = $(this).html();
 
 	        if(content.length > showChar) {
@@ -792,14 +822,23 @@
 		    $('body').addClass('import-tweet-page');
 		}
 
+	     $(".message_history_count b").click(function(e) {
+	        $(".notification-message-list, #notification-display").removeClass("active");
+	        e.stopPropagation();
+	    });
+
 	     $("#block-usersdashboardheaderblock .profile + a, #block-usersdashboardnontwitterheaderblock .profile + a").click(function(e) {
 	        $(".notification-message-list").toggleClass("active");
+	        $('#block-usersdashboardheaderblock .profile .profile-links').removeClass('active animate');
+			// $('#block-usersdashboardheaderblock .profile > a').removeClass('active');
 	        e.stopPropagation();
 	    });
 
 	     $("#block-usersdashboardheaderblock .profile > a, #block-usersdashboardnontwitterheaderblock .profile > a").click(function(e) {
 	     	e.preventDefault();
 	        $(".profile-links").toggleClass("active");
+	        $('#notification-display').removeClass('active');
+			$('.notification-message-list').removeClass('active');
 	        setTimeout(function() {
 	            $('.profile-links').toggleClass('animate');
 	        }, 100);
@@ -839,6 +878,7 @@
 	    	$("#forgot-password-section").hide();
 	    	$("#user-login-prefix").show();
 	    	$("#edit-actions").show();
+	    	$("#forgot-password").show();
 		});
 
 	    $(".create-header #ajax-wrapper").click(function() {
@@ -863,7 +903,7 @@
    		});
 
 		// ripple effect
-		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit").click(function (e) {
+		  $(".block-users-tweets-statistics-block .content > div a, .send-tweets-form #edit-submit, .-form-tweets-queue-csv-upload #edit-submit, #change-password .change").click(function (e) {
 
 		  // Remove any old one
 		  $(".ripple").remove();
@@ -969,7 +1009,211 @@
 	});
 	// js for adding placeholder on newsletter field
 	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
+	$(".contact-message-write-to-us-form").prepend("<div class='heading-write-us'>Write to us</div>");
+	/*$(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
 
+       if(scroll >= 200) {
+        $(".header").addClass("change");
+       } else {
+        $(".header").removeClass("change");
+       }
+    });*/
+
+	$('#my_tweets .text').click(function() {
+		$(this).siblings('div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	});
+
+	if ($('#my_tweets > div a').hasClass('active')) {
+	    $('#my_tweets > div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	}
+
+	$('.messages').delay(500).animate({'bottom': '0'}, 50);
+
+    // change text of summary 
+    $(".user-form summary").text("Settings");
+
+    // add spinner when click on submit button
+    $("body").prepend('<div id="overlayspin" class="ui-widget-overlay" style="z-index: 1001; display: none;"></div>');
+	$("body").prepend("<div id='spinner' style='display: none;'><i class='fa fa-spinner' aria-hidden='true'></i></div>");
+	$('#contact-message-write-to-us-form').submit(function() {
+	    var pass = true;
+	    //some validations
+	    if(pass == false){
+	        return false;
+	    }
+	    $("#overlayspin, #spinner").show();
+	    return true;
+	});
+
+
+ 	 // $.ajax(function(){
+ 	 	function onChangeCheckbox(){
+ 	 		console.log('change');
+ 	 	}
+ 	 	$('.js-form-managed-file').on('change', '.form-checbox', onChangeCheckbox);
+         // $('.form-checbox').on('change',function(){
+         // 	console.log('change');
+         //    $('.option + .form-submit').submit();
+         //    });
+         // });
+        $( ".faq .faq-qa-header" ).each(function( index ) {
+		  $(this).unwrap();
+		});
+		$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
+        
+        setTimeout(function(){ 
+        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
+        }, 500);
+        
+       
+        $('.faq-header').click(function(e){
+        	$('.faq-qa-hide').hide();
+        	$('.faq-header').removeClass('active');
+           $(this).parent().next().show();
+           $(this).addClass('active');
+           e.preventDefault();
+        });
+    
+        $('.faq-header').append('Articles');
+        $('.user-login-form #forgot-password').appendTo('.user-login-form');
+
+
+
+        // twitter text box 
+         function onTweetCompose(event) {
+		    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
+		        $placeholderBacker = $('.js-keeper-placeholder-back'),
+		        currentValue = $textarea.val()
+		    ;
+		    var currentValuelength = twttr.txt.getTweetLength(currentValue);
+
+		    // realLength is not 140, links counts for 23 characters always.
+		    var realLength = 140;
+		    var remainingLength = 140 - currentValuelength;
+
+
+		    if (0 > remainingLength) {
+		      // Split value if greater than 
+		      var allowedValuePart = currentValue.slice(0, realLength),
+		          refusedValuePart = currentValue.slice(realLength)
+		      ;
+
+		      // Fill the hidden div.
+		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+		    } else {
+		      $placeholderBacker.html('');
+		    }
+		  }
+		  
+		  $(document).ready(function () {
+		  	
+			 
+		    $textarea = $('textarea');
+
+		    // Create a pseudo-element that will be hidden behind the placeholder.
+		    var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
+		    $placeholderBacker.insertAfter($textarea);
+
+		    onTweetCompose();
+		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
+		  });
+           // js for to prepend button 
+	        $('#delete-selected').prependTo('#block-srijan-content');
+          // add class
+	        if($('.path-signup .messages').hasClass('messages--status')) {
+	          $('.section').addClass('active');
+	        }
+	       
+	        $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
+		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
+		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
+		    	if (tweet_msg_length > 140) {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+		    	}
+		    	else {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+		    	}
+	        });
+	       	           
+	        // close popup after open page
+	        $('.feedback_link').click(function(){
+               $(this).parent().removeClass('active animate');
+               setTimeout(function(){
+                  $('.contact-message-user-feedback-form textarea').attr('placeholder','Message');
+                  $('.ui-dialog-buttonpane .form-actions button:first-child .ui-button-text').text('Submit');
+                  $('.ui-dialog-titlebar-close').click(function(){
+	                  $('#spinner').hide().removeClass('absolute_top');
+				      $('#overlayspin').hide().removeClass('absolute_top');
+				  });
+				  $('.ui-dialog .ui-dialog-buttonpane .form-actions button:last-child').click(function() {
+				       $('.ui-dialog-titlebar-close').trigger('click');
+				  });
+				  $('.star').removeClass('on');
+               }, 500);
+	        });
+            // if checkbox is checked add class
+             
+              $('#delete-selected input').attr('disabled', true);
+			  $('.custom-checkbox input[type="checkbox"]').click(function() {
+			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
+			      $('#delete-selected input').removeAttr('disabled');
+			    } else {
+			      $('#delete-selected input').attr('disabled', true);
+			    }
+			  });
+
+			  $('.header .custom-checkbox input[type="checkbox"]').click(function() {
+			    if ($('.header .custom-checkbox input[type="checkbox"]').is(':checked')) {
+			      $('#delete-selected input').removeAttr('disabled');
+			    } else {
+			      $('#delete-selected input').attr('disabled', true);
+			    }
+			  });
+
+			  // change text of submit button on dialog box
+		     $('.feedback_link').click(function(){
+			   $('#spinner').show().addClass('absolute_top');
+			   $('#overlayspin').show().addClass('absolute_top');
+			 });
+			
+	
+
+                
+
+
+	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+		    var tweet_msg_length = tweet_msg.length;
+		    if (tweet_msg_length > 140) {
+	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+	    	}
+	    	else {
+	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+	    	}
+	    	
+	    	
+
+	    
 })(jQuery);
 
 
+(function ($) {
+
+	function onFormCheckBoxChange() {
+				$(this).parent().next().trigger('mousedown');
+
+	      // console.log(selector);
+	      // $('.button.js-form-submit.form-submit').trigger('click');
+	      // console.log('submit');
+	}
+
+
+	 Drupal.behaviors.ajax_send_tweet = {
+	 	attach: function attach() {
+	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
+	 		.bind('change', onFormCheckBoxChange);
+	 		
+	 	}
+	 };
+})(jQuery);

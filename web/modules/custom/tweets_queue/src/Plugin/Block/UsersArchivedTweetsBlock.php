@@ -39,7 +39,7 @@ class UsersArchivedTweetsBlock extends BlockBase {
       TWITTER_FIELD_TWEETED, $current_filter, $new_filter_order);
 
     $header = array(t(TWITTER_FIELD_MESSAGE_LABEL), t(TWITTER_FIELD_SIZE_LABEL), $created_sort_link, $tweet_date_sort_link,
-      $changed_sort_link, $tweeted_sort_link, t(TWITTER_FIELD_EDIT_LABEL));
+      $changed_sort_link, $tweeted_sort_link, t(TWITTER_FIELD_EDIT_LABEL), t('<span class="custom-checkbox"><input type="checkbox" name="all-selected-deleted" ><label></label></span>'));
     
     $query = \Drupal::database()->select(TWITTER_MESSAGE_QUEUE_TABLE, 'p');
     $query->fields('p', [TWITTER_FIELD_NID, TWITTER_FIELD_MESSAGE, TWITTER_FIELD_SIZE,
@@ -64,6 +64,13 @@ class UsersArchivedTweetsBlock extends BlockBase {
     if ($total) {
       $build = array(
         '#markup' => ''
+      );
+      
+    $build['submit'] = array(
+        '#prefix' => '<div id="delete-selected">',
+        '#type' => 'submit',
+        '#value' => t('Delete Selected'),
+        '#suffix' => '</div>',
       );
 
       $build['header'] = array(
@@ -104,6 +111,9 @@ class UsersArchivedTweetsBlock extends BlockBase {
     );
     $delete_url_link = \Drupal::l(t('Delete'), $delete_url);
     $data = array();
+    $data['multiple_delete'] = t('<span class="custom-checkbox"><input name="multiple-deletion" id="' . $row->nid . '" type="checkbox" value = "' . $row->nid .'"><label></label></span>');
+    $data['delete_url_multiple_link'] = $delete_url_multiple_link ;
+ 
     $data['message'] = tweets_queue_perform_hashtag_highlight($row->{TWITTER_FIELD_MESSAGE});
     $data['size'] = $row->{TWITTER_FIELD_SIZE};
     $data['created'] = date(TWITTER_DATE_FORMAT, $row->{TWITTER_FIELD_CREATED});

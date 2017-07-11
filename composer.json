@@ -31,10 +31,13 @@
         "drupal/features": "3.0-rc1",
         "drupal/social_login": "1.2",
         "drupal/views_php": "1.x-dev",
-	"drupal/flexslider": "2.0-beta1",
+	    "drupal/flexslider": "2.0-beta1",
         "drupal/blocktabs": "1.0-alpha3",
-	"drupal/svg_image_field": "1.0",
-        "drupal/simplenews": "1.0-alpha3"
+	    "drupal/svg_image_field": "1.0",
+        "drupal/simplenews": "1.0-alpha3",
+	    "drupal/faq": "1.x-dev",
+        "drupal/fivestar": "1.x-dev",
+        "drupal/poll": "1.1"
     },
     "require-dev": {
         "behat/mink": "~1.7",
