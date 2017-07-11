@@ -46,6 +46,7 @@
 		    		top: 80px;
 				    left: 0;
 				    width: 100%;
+				    padding: 20px;
 		    		h2 {
 		    		   font-size: 30px;
 		    		   text-align: center;
@@ -141,5 +142,57 @@
 		p:first-child {
            font-size: 30px;
 		}
+	}
+	.block-total-twitter-users-block:after {
+		content: none;
+	}
+	/** css for footer **/
+	.block-social-menu-link {
+        .menu {
+    	    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    text-align: center;
+        	flex-wrap: wrap;
+            padding-right: 44px;
+            li {
+            	padding: 0;
+			    height: 70px;
+			    width: 33%;
+			    flex-wrap: wrap;
+            }
+        }
+	}
+	.block-simplenews {
+		padding: 30px 20px;
+		padding-bottom: 25px;
+	   .form-item-message {
+	   	text-align: center;
+	   	font-size: 26px;
+	   }
+	   .field--type-email {
+	   	width: 100%;
+	   }
+	   .form-actions {
+	   	width: 100%;
+	   	text-align: center;
+	   	.form-submit {
+	   		width: auto;
+	   		padding: .5em 20px;
+	   		margin-top: 10px;
+	   	}
+	   }
+	}
+	.block-sub-menu-footer-block {
+		display: none;
+	}
+	#block-copyrightblock {
+		float: left;
+	    width: 100%;
+	    .copyright {
+	  	    color: #fff;
+	        padding: 0 20px;
+            font-size: 18px;
+	    }
 	}
 }
