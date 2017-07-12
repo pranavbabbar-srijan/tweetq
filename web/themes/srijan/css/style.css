@@ -4216,6 +4216,9 @@ body {
       margin-left: 7px;
       left: 0; }
 
+.form-submit {
+  outline: none; }
+
 #spinner.absolute_top {
   z-index: 999 !important;
   position: fixed;
