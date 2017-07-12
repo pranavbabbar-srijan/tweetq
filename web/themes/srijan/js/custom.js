@@ -46,14 +46,14 @@
 		var invite_friends_path = '/dashboard/inviteFriends';
 		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
-		var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
-		var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
-		var forgot_password_send_token_path = '/barbet-new/_www/dashboard/forgotPasswordSendToken';
-		var user_history_path = '/barbet-new/_www/dashboard/user-history';
-		var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
-		var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
-		var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
-		var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
+		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
+		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
+		// var forgot_password_send_token_path = '/barbet-new/_www/dashboard/forgotPasswordSendToken';
+		// var user_history_path = '/barbet-new/_www/dashboard/user-history';
+		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
+		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
+		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
+		// var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
 
