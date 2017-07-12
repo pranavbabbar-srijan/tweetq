@@ -158,7 +158,8 @@
     height: 580px; }
     .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image {
       height: 580px; }
-      .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img {
+      .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img,
+      .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image .field-content {
         height: 100%; }
     .view-home-page-carousel .flexslider .slides .slider-content {
       top: 80px;
@@ -226,6 +227,9 @@
     font-size: 30px; }
   .block-total-twitter-users-block:after {
     content: none; }
+  #forgot-password-section {
+    font-size: 18px;
+    width: 79%; }
   /** css for footer **/
   .block-social-menu-link .menu {
     display: flex;
