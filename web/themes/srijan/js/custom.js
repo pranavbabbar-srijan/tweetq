@@ -1192,9 +1192,8 @@
 			   function sidebarnav() {
 			     if(window_width < 767) {
 			       $("#block-primarymenu").appendTo( ".sidenav" );
-			     } else {
-			       $("#block-primarymenu").appendTo( ".region-header" ); 
-			     }
+			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
+			     } 
 			   }
 			   $(window).click(function() {
 				  $('.c-hamburger').removeClass('is-active');

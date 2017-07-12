@@ -417,4 +417,46 @@
             font-size: 14px;
 	    }
 	}
+
+	/** css for logged in user for dashbord **/
+	.block-users-dashboard-header-block .profile, 
+	.block-users-dashboard-header-profile-block { 
+	   .profile {
+	        > a {
+	            > div {
+                   border-left: none;
+                   padding-left: 0;
+	           }
+	        }
+	    }
+	}
+	.block-users-tweets-statistics-block {
+		display: none;
+	}
+	.user-logged-in .main-content {
+		width: calc(100% - 40px);
+		margin-left: 20px;
+		margin-right: 20px;
+		top: 60px;
+		height: calc(100% - 110px);
+	}
+	#sidebar-first {
+	   width: 100%;
+	   margin: 0;
+	   top: initial;
+       height: auto;
+       bottom: 0;
+	}
+	.block-users-left-side-bar-block ,
+	.block-non-twitter-users-left-side-bar-block { 
+	   .profile, 
+	   .non-twitter-profile {
+           display: none;
+           ~ div {
+           	     display: inline-block;
+           }
+	   }
+	}
+
+
 }

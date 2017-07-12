@@ -1,10 +1,10 @@
-@media only screen and (min-width: 768px) {
-  .mobile-menus {
-    display: none; } }
-
 @media screen and (max-width: 23.4375em) {
   .site-branding div a {
     font-size: 8vw; } }
+
+@media only screen and (min-width: 768px) {
+  .mobile-menus {
+    display: none; } }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   /** header **/
@@ -314,4 +314,33 @@
     #block-copyrightblock .copyright {
       color: #fff;
       padding: 0 20px;
-      font-size: 14px; } }
+      font-size: 14px; }
+  /** css for logged in user for dashbord **/
+  .block-users-dashboard-header-block .profile .profile > a > div,
+  .block-users-dashboard-header-profile-block .profile > a > div {
+    border-left: none;
+    padding-left: 0; }
+  .block-users-tweets-statistics-block {
+    display: none; }
+  .user-logged-in .main-content {
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+    top: 60px;
+    height: calc(100% - 110px); }
+  #sidebar-first {
+    width: 100%;
+    margin: 0;
+    top: initial;
+    height: auto;
+    bottom: 0; }
+  .block-users-left-side-bar-block .profile,
+  .block-users-left-side-bar-block .non-twitter-profile,
+  .block-non-twitter-users-left-side-bar-block .profile,
+  .block-non-twitter-users-left-side-bar-block .non-twitter-profile {
+    display: none; }
+    .block-users-left-side-bar-block .profile ~ div,
+    .block-users-left-side-bar-block .non-twitter-profile ~ div,
+    .block-non-twitter-users-left-side-bar-block .profile ~ div,
+    .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div {
+      display: inline-block; } }
