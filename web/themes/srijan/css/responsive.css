@@ -230,6 +230,25 @@
   #forgot-password-section {
     font-size: 18px;
     width: 79%; }
+  /** Global Messages **/
+  .path-frontpage .messages {
+    max-width: 95% !important;
+    width: auto !important;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 40px;
+    left: 0;
+    padding-right: 20px; }
+    .path-frontpage .messages:before {
+      font-size: 30px !important; }
+  .messages {
+    max-width: 95% !important;
+    width: auto !important;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 40px;
+    left: 0;
+    padding-right: 20px; }
   /** css for footer **/
   .block-social-menu-link .menu {
     display: flex;
