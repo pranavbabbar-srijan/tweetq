@@ -192,8 +192,9 @@
 		    height: 580px;
 		    .slides {
 		    	.views-field-field-front-page-image {
-		    		height: 580px; 
-		    		img {
+		    		height: 580px;
+		    		img,
+		    		.field-content  {
                          height: 100%;
 		    		}
 		    	}
