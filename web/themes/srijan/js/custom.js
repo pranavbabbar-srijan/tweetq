@@ -1107,8 +1107,8 @@
 		  }
 		  
 		  $(document).ready(function () {
-		  	
-			 
+		  	 clicksidenav();
+			 sidebarnav();
 		    $textarea = $('textarea');
 
 		    // Create a pseudo-element that will be hidden behind the placeholder.
@@ -1177,11 +1177,23 @@
 			   $('#spinner').show().addClass('absolute_top');
 			   $('#overlayspin').show().addClass('absolute_top');
 			 });
-			
-	
 
-                
 
+			 // js for mobile 
+			   var window_width = $(window).width();
+			   function sidebarnav() {
+			     if(window_width < 767) {
+			       $("#block-primarymenu").appendTo( ".sidenav" );
+			     } else {
+			       $("#block-primarymenu").appendTo( ".region-header" ); 
+			     }
+			   }
+			   $( window ).resize(sidebarnav);
+			   	function clicksidenav() {
+					$('.c-hamburger').click(function(){
+	                    $(this).toggleClass('is-active');
+					});
+				}
 
 	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
 		    var tweet_msg_length = tweet_msg.length;
@@ -1191,10 +1203,7 @@
 	    	else {
 	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 	    	}
-	    	
-	    	
-
-	    
+	    	    
 })(jQuery);
 
 
