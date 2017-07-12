@@ -1034,14 +1034,14 @@ function tweets_queue_clean_scheduled_messages_list($nids) {
 /**
  * Tweet the message.
  */
-function tweets_queue_compile_tweets($message = '', $cron = FALSE, $images = array()) {
+function tweets_queue_compile_tweets($message = '', $cron = FALSE, $images = array(), $nid = 0) {
   $status = array();
   switch ($cron) {
     case TRUE:
       $status = tweets_queue_tweet_cron_message();
       break;
     case FALSE:
-      tweets_queue_send_direct_message($message, $images);
+      tweets_queue_send_direct_message($message, $images, $nid);
       break;
   }
   switch ($status['success']) {
@@ -1061,7 +1061,7 @@ function tweets_queue_compile_tweets($message = '', $cron = FALSE, $images = arr
  * @param string $message
  *   Tweet message.
  */
-function tweets_queue_send_direct_message($message, $images = array()) {
+function tweets_queue_send_direct_message($message, $images = array(), $nid=0) {
   $uid = \Drupal::currentUser()->id();
   $oauth_info = tweets_queue_fetch_user_auth_map_info($uid);
   $twitter_owner_id = $oauth_info->twitter_owner_id;
@@ -1097,7 +1097,9 @@ function tweets_queue_send_direct_message($message, $images = array()) {
   tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
   drupal_set_message(t('Tweet shared and stored in valid tweets successfully.'));
   $twitter_message_info['tweet_id'] = $tweet_id;
-  $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
+  if (!$nid) {    
+   $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
+  }
   tweets_queue_map_message_image_record($nid, $images);
 
   $twitter_history_info = array('nid' => $nid,
