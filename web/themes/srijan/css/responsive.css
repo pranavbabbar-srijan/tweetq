@@ -94,7 +94,7 @@
     -webkit-transition-property: bottom,-webkit-transform;
     transition-property: bottom,transform; }
   .c-hamburger.c-hamburger--htx.is-active + .sidenav {
-    width: 250px; }
+    width: 200px; }
   .c-hamburger--htx.is-active span::after, .c-hamburger--htx.is-active span::before {
     -webkit-transition-delay: 0s,.3s;
     transition-delay: 0s,.3s; }

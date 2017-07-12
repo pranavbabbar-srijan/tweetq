@@ -1196,10 +1196,14 @@
 			       $("#block-primarymenu").appendTo( ".region-header" ); 
 			     }
 			   }
+			   $(window).click(function() {
+				  $('.c-hamburger').removeClass('is-active');
+				});
 			   $( window ).resize(sidebarnav);
 			   	function clicksidenav() {
-					$('.c-hamburger').click(function(){
+					$('.c-hamburger').click(function(e){
 	                    $(this).toggleClass('is-active');
+	                    e.stopPropagation();
 					});
 				}
 })(jQuery);
