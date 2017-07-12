@@ -180,7 +180,7 @@
 	    #block-srijan-content {
 		    order: 3;
 		    width: 100%;
-		    margin-top: 45px;
+		    margin-top: 30px;
 		}
 		#block-twitterusersblock {
 			order: 2;
@@ -199,13 +199,16 @@
 			margin-top: 0;
 		}
 	}
+	.twitter-btn {
+		padding: 15px 30px;
+	}
 	.view-home-page-carousel {
 	    .flexslider {
-		    height: 530px;
+		    height: 460px;
 		    border-radius: 0;
 		    .slides {
 		    	.views-field-field-front-page-image {
-		    		height: 530px;
+		    		height: 460px;
 		    		img,
 		    		.field-content  {
                          height: 100%;
@@ -232,7 +235,7 @@
 		    .flex-control-paging {
 		    	width: 100%;
                 left: 0;
-                bottom: 35%;
+                bottom: 36%;
                 li {
 	                a {
 	                	width: 10px;
@@ -245,6 +248,20 @@
 		    	bottom: 65%;
                 left: 0;
                 width: 100%;
+                a.flex-next {
+                	right: 15px;
+                	opacity: .5;
+                	&:hover {
+                		opacity: 1;
+                	}
+                }
+                a.flex-prev {
+                	left: 15px;
+                	opacity: .5;
+                	&:hover {
+                		opacity: 1;
+                	}
+                }
 		    }
 	    }
 	     
@@ -253,12 +270,12 @@
 	.block-total-twitter-users-block {
 		width: 50%;
 		margin-left: 0;
-		margin-top: 110px;
+		margin-top: 95px;
 	    .count {
-	  	   font-size: 30px;
+	  	   font-size: 24px;
 	    }
 	    .label {
-            font-size: 18px;
+            font-size: 14px;
             &:after {
             	content: none;
             }

@@ -151,7 +151,7 @@
   .path-frontpage #block-srijan-content {
     order: 3;
     width: 100%;
-    margin-top: 45px; }
+    margin-top: 30px; }
   .path-frontpage #block-twitterusersblock {
     order: 2; }
   .path-frontpage #block-twittertweetsblock {
@@ -164,11 +164,13 @@
     padding: 6em 2em 6em 2em; }
   .path-frontpage .section + .section .region-middle {
     margin-top: 0; }
+  .twitter-btn {
+    padding: 15px 30px; }
   .view-home-page-carousel .flexslider {
-    height: 530px;
+    height: 460px;
     border-radius: 0; }
     .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image {
-      height: 530px; }
+      height: 460px; }
       .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img,
       .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image .field-content {
         height: 100%;
@@ -188,7 +190,7 @@
     .view-home-page-carousel .flexslider .flex-control-paging {
       width: 100%;
       left: 0;
-      bottom: 35%; }
+      bottom: 36%; }
       .view-home-page-carousel .flexslider .flex-control-paging li a {
         width: 10px;
         height: 10px;
@@ -197,17 +199,27 @@
       bottom: 65%;
       left: 0;
       width: 100%; }
+      .view-home-page-carousel .flexslider .flex-direction-nav a.flex-next {
+        right: 15px;
+        opacity: .5; }
+        .view-home-page-carousel .flexslider .flex-direction-nav a.flex-next:hover {
+          opacity: 1; }
+      .view-home-page-carousel .flexslider .flex-direction-nav a.flex-prev {
+        left: 15px;
+        opacity: .5; }
+        .view-home-page-carousel .flexslider .flex-direction-nav a.flex-prev:hover {
+          opacity: 1; }
   .block-total-twitter-tweets-block,
   .block-total-twitter-users-block {
     width: 50%;
     margin-left: 0;
-    margin-top: 110px; }
+    margin-top: 95px; }
     .block-total-twitter-tweets-block .count,
     .block-total-twitter-users-block .count {
-      font-size: 30px; }
+      font-size: 24px; }
     .block-total-twitter-tweets-block .label,
     .block-total-twitter-users-block .label {
-      font-size: 18px; }
+      font-size: 14px; }
       .block-total-twitter-tweets-block .label:after,
       .block-total-twitter-users-block .label:after {
         content: none; }
