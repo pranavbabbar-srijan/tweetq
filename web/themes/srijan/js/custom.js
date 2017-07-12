@@ -46,16 +46,18 @@
 		var invite_friends_path = '/dashboard/inviteFriends';
 		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
-		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
-		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
-		// var forgot_password_send_token_path = '/barbet-new/_www/dashboard/forgotPasswordSendToken';
-		// var user_history_path = '/barbet-new/_www/dashboard/user-history';
-		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
-		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
-		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
-		// var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
+		var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
+		var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
+		var forgot_password_send_token_path = '/barbet-new/_www/dashboard/forgotPasswordSendToken';
+		var user_history_path = '/barbet-new/_www/dashboard/user-history';
+		var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
+		var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
+		var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
+		var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
+
+
 
 		//Account setting invite friends.
 		$("#user-form #invite-friends").click(function() {
@@ -1179,19 +1181,14 @@
 			   $('#overlayspin').show().addClass('absolute_top');
 			 });
 			
-	
+			
+		   
 
-                
-
-
-	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    var tweet_msg_length = tweet_msg.length;
-		    if (tweet_msg_length > 140) {
-	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
-	    	}
-	    	else {
-	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-	    	}
+		     var tweet_text_elem =  $('#tweets-queue-tweet-form #edit-message');
+	        if(tweet_text_elem.length){
+	        	(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
+	        	:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+	        }
 	    	
 	    	
 
@@ -1200,6 +1197,16 @@
 
 
 (function ($) {
+
+	function onChangeDisableTweet() {
+		var number_of_divs = $('.form-managed-file').find('div').length;
+		if(number_of_divs > 5) {
+			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+		}
+		else {
+		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
+		}
+	}
 
 	function onFormCheckBoxChange() {
 				$(this).parent().next().trigger('mousedown');
@@ -1214,7 +1221,7 @@
 	 	attach: function attach() {
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
-	 		
+	 		onChangeDisableTweet();
 	 	}
 	 };
 })(jQuery);
