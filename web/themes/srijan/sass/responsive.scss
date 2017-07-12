@@ -14,6 +14,8 @@
 	#header {
 	    padding-left: 15px;
         padding-right: 15px;
+        padding-top: 0.7em;
+        padding-bottom: 0.7em;
 	}
 	.site-branding {
 		float: left !important;
@@ -41,7 +43,7 @@
 	    overflow: hidden;
 	    margin: 0;
 	    padding: 0;
-	    width: 44px;
+	    width: 55px;
 	    right: 0;
 	    top: 9px;
 	    z-index: 2;
@@ -65,6 +67,8 @@
 		    right: 0px;
 		    height: 3px;
 		    background: #fff;
+		    width: 46%;
+		    border-radius: 10px;
 		}
 	}
 	.c-hamburger--htx span::after, 
@@ -83,10 +87,12 @@
 	    height: 3px;
 	    background-color: #fff;
 	    content: "";
+	    border-radius: 10px;
 	}
 
 	.c-hamburger span::before {
 	    top: -8px;
+	    width: 35px;
 	}
 	.c-hamburger--htx span::before {
 	    -webkit-transition-property: top,-webkit-transform;
@@ -101,6 +107,7 @@
 	}
 	.c-hamburger span::after {
 	    bottom: -8px;
+	    width: 28px;
 	}
 	.c-hamburger--htx span::after {
 	    -webkit-transition-property: bottom,-webkit-transform;
@@ -127,11 +134,15 @@
 	}
 	.c-hamburger--htx.is-active span {
 	    background: 0 0;
+	    &:before,
+	    &:after {
+            width: 100%;
+	    }
 	}
 	.c-hamburger.c-hamburger--htx.is-active {
       position: fixed;
       right: 15px;
-      top: 25px;
+      top: 20px;
     }
 	.sidenav {
 	    height: 100%; /* 100% Full-height */
@@ -182,6 +193,7 @@
             float: none;
             margin: 0 auto;
             box-shadow: 0px 3px 13px #888888;
+            padding: 6em 2em 6em 2em;
 		}
 		.section + .section .region-middle {
 			margin-top: 0;
@@ -189,34 +201,38 @@
 	}
 	.view-home-page-carousel {
 	    .flexslider {
-		    height: 580px;
+		    height: 530px;
+		    border-radius: 0;
 		    .slides {
 		    	.views-field-field-front-page-image {
-		    		height: 580px;
+		    		height: 530px;
 		    		img,
 		    		.field-content  {
                          height: 100%;
+                         width: auto;
 		    		}
 		    	}
 		    	.slider-content {
-		    		top: 80px;
+		    		top: 50px;
 				    left: 0;
 				    width: 100%;
 				    padding: 20px;
 		    		h2 {
-		    		   font-size: 26px;
+		    		   font-size: 20px;
 		    		   text-align: center;
 		    	    }
 
 		    		p {
 		    		   padding: 0 30px;
-                       text-align: center;	
+                       text-align: center;
+                       font-size: 14px;	
 		    		}
 		    	}
 		    }
 		    .flex-control-paging {
 		    	width: 100%;
                 left: 0;
+                bottom: 35%;
                 li {
 	                a {
 	                	width: 10px;
@@ -226,7 +242,7 @@
 	            }
 		    }
 		    .flex-direction-nav {
-		    	bottom: 48%;
+		    	bottom: 65%;
                 left: 0;
                 width: 100%;
 		    }
@@ -237,6 +253,7 @@
 	.block-total-twitter-users-block {
 		width: 50%;
 		margin-left: 0;
+		margin-top: 110px;
 	    .count {
 	  	   font-size: 30px;
 	    }
@@ -259,6 +276,9 @@
 	  }
 	  .views-field-body {
 	  	padding: 0px 20px;
+	  }
+	  .views-field-title {
+	  	font-size: 18px;
 	  }
 	}
 	.section__mission-vision {
@@ -290,13 +310,13 @@
 	}
 	.block-block-content {
 	   .field--name-field-title {
-	   	  font-size: 30px;
+	   	  font-size: 22px;
 	   	  padding: 0 20px;
 	   }
 	}
 	.section__mission--text {
 		p:first-child {
-           font-size: 30px;
+           font-size: 22px;
 		}
 	}
 	.block-total-twitter-users-block:after {
@@ -352,7 +372,7 @@
 		padding-bottom: 25px;
 	   .form-item-message {
 	   	text-align: center;
-	   	font-size: 26px;
+	   	font-size: 22px;
 	   }
 	   .field--type-email {
 	   	width: 100%;
@@ -376,7 +396,7 @@
 	    .copyright {
 	  	    color: #fff;
 	        padding: 0 20px;
-            font-size: 18px;
+            font-size: 14px;
 	    }
 	}
 }
