@@ -4226,4 +4226,4 @@ body {
   position: fixed; }
 
 .feedback_link {
-  display: none; }
+  display: none !important; }
