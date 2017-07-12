@@ -189,8 +189,7 @@
          	$.post(profile_change_password_path, {'password' : password}, function(data) {
 				if  (data == "done") {
 					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
-					$('#password-changed').delay(5000).fadeOut(3000);			
-					location.reload();
+					$('#password-changed').delay(5000).fadeOut(300);			
 					return;
 				}
 				$("<span id='profile-settingform-password-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profilesettingform #change-password .change" );
@@ -1110,8 +1109,8 @@
 		  }
 		  
 		  $(document).ready(function () {
-		  	
-			 
+		  	 clicksidenav();
+			 sidebarnav();
 		    $textarea = $('textarea');
 
 		    // Create a pseudo-element that will be hidden behind the placeholder.
@@ -1157,21 +1156,21 @@
                }, 500);
 	        });
             // if checkbox is checked add class
-               
-            
+             
+              $('#delete-selected input').attr('disabled', true);
 			  $('.custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
-			      $('#delete-selected').addClass('active');
+			      $('#delete-selected input').removeAttr('disabled');
 			    } else {
-			      $('#delete-selected').removeClass('active');
+			      $('#delete-selected input').attr('disabled', true);
 			    }
 			  });
 
 			  $('.header .custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.header .custom-checkbox input[type="checkbox"]').is(':checked')) {
-			      $('#delete-selected').addClass('active');
+			      $('#delete-selected input').removeAttr('disabled');
 			    } else {
-			      $('#delete-selected').removeClass('active');
+			      $('#delete-selected input').attr('disabled', true);
 			    }
 			  });
 
@@ -1180,19 +1179,29 @@
 			   $('#spinner').show().addClass('absolute_top');
 			   $('#overlayspin').show().addClass('absolute_top');
 			 });
-			
-			
-		   
 
 		     var tweet_text_elem =  $('#tweets-queue-tweet-form #edit-message');
 	        if(tweet_text_elem.length){
 	        	(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
 	        	:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 	        }
-	    	
-	    	
 
-	    
+
+			 // js for mobile 
+			   var window_width = $(window).width();
+			   function sidebarnav() {
+			     if(window_width < 767) {
+			       $("#block-primarymenu").appendTo( ".sidenav" );
+			     } else {
+			       $("#block-primarymenu").appendTo( ".region-header" ); 
+			     }
+			   }
+			   $( window ).resize(sidebarnav);
+			   	function clicksidenav() {
+					$('.c-hamburger').click(function(){
+	                    $(this).toggleClass('is-active');
+					});
+				}
 })(jQuery);
 
 
