@@ -57,6 +57,8 @@
 
 		$( "#foo" ).trigger( "click" );
 
+
+
 		//Account setting invite friends.
 		$("#user-form #invite-friends").click(function() {
 	   		var emails = $('#user-form #edit-invite-friend-list').val();
@@ -1178,6 +1180,12 @@
 			   $('#overlayspin').show().addClass('absolute_top');
 			 });
 
+		     var tweet_text_elem =  $('#tweets-queue-tweet-form #edit-message');
+	        if(tweet_text_elem.length){
+	        	(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
+	        	:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+	        }
+
 
 			 // js for mobile 
 			   var window_width = $(window).width();
@@ -1194,20 +1202,20 @@
 	                    $(this).toggleClass('is-active');
 					});
 				}
-
-	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    var tweet_msg_length = tweet_msg.length;
-		    if (tweet_msg_length > 140) {
-	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
-	    	}
-	    	else {
-	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-	    	}
-	    	    
 })(jQuery);
 
 
 (function ($) {
+
+	function onChangeDisableTweet() {
+		var number_of_divs = $('.form-managed-file').find('div').length;
+		if(number_of_divs > 5) {
+			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+		}
+		else {
+		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
+		}
+	}
 
 	function onFormCheckBoxChange() {
 				$(this).parent().next().trigger('mousedown');
@@ -1222,7 +1230,7 @@
 	 	attach: function attach() {
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
-	 		
+	 		onChangeDisableTweet();
 	 	}
 	 };
 })(jQuery);
