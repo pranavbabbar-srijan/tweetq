@@ -446,8 +446,9 @@
 		width: calc(100% - 40px);
 		margin-left: 20px;
 		margin-right: 20px;
-		top: 60px;
+		top: 0px;
 		height: calc(100% - 110px);
+		position: relative;
 	}
 	#sidebar-first {
 	   width: 100%;
@@ -455,17 +456,25 @@
 	   top: initial;
        height: auto;
        bottom: 0;
-       z-index: 99
+       z-index: 99;
+       padding-top: 13px;
 	}
 	.block-users-left-side-bar-block ,
-	.block-non-twitter-users-left-side-bar-block { 
+	.block-non-twitter-users-left-side-bar-block {
+		.content {
+			> div {
+			    display: flex;
+			    justify-content: space-around;
+			}
+		}
 	   .profile, 
 	   .non-twitter-profile {
            display: none;
            ~ div {
            	     display: inline-block;
            	     line-height: 20px;
-           	     font-size: 12px;
+           	     font-size: 9px;
+           	     color: transparent;
            	     text-align: center;
            	     &.create_tweets {
            	     	&:before {
@@ -481,7 +490,7 @@
            	     }
            	     a {
            	     	color: transparent;
-           	     	font-size: 12px;
+           	     	font-size: 9px;
            	     }
            }
 	   }
