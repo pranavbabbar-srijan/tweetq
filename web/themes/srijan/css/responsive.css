@@ -333,15 +333,21 @@
     width: calc(100% - 40px);
     margin-left: 20px;
     margin-right: 20px;
-    top: 60px;
-    height: calc(100% - 110px); }
+    top: 0px;
+    height: calc(100% - 110px);
+    position: relative; }
   #sidebar-first {
     width: 100%;
     margin: 0;
     top: initial;
     height: auto;
     bottom: 0;
-    z-index: 99; }
+    z-index: 99;
+    padding-top: 13px; }
+  .block-users-left-side-bar-block .content > div,
+  .block-non-twitter-users-left-side-bar-block .content > div {
+    display: flex;
+    justify-content: space-around; }
   .block-users-left-side-bar-block .profile,
   .block-users-left-side-bar-block .non-twitter-profile,
   .block-non-twitter-users-left-side-bar-block .profile,
@@ -353,7 +359,8 @@
     .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div {
       display: inline-block;
       line-height: 20px;
-      font-size: 12px;
+      font-size: 9px;
+      color: transparent;
       text-align: center; }
       .block-users-left-side-bar-block .profile ~ div.create_tweets:before,
       .block-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before,
@@ -372,7 +379,7 @@
       .block-non-twitter-users-left-side-bar-block .profile ~ div a,
       .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a {
         color: transparent;
-        font-size: 12px; }
+        font-size: 9px; }
   .block-users-left-side-bar-block .import_tweets,
   .block-non-twitter-users-left-side-bar-block .import_tweets {
     border: none; }
