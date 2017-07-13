@@ -217,6 +217,7 @@ const SIGNUP_FIELD_TWITTER_DATA = 'field_twitter_data';
  * Implements hook_form_alter().
  */
 function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    $uid = \Drupal::currentUser()->id();
   switch ($form_id) {
     case 'views_form_user_admin_people_page_1':
     case 'user_multiple_cancel_confirm':
@@ -228,7 +229,15 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
        // tweets_queue_goto_page();
       break;
     case 'user_form':
-      tweets_queue_user_profile_form_changes($form);
+    tweets_queue_user_profile_form_changes($form);
+    $twitter_history_info = array(
+     // 'nid' => $message_data->nid,
+      'uid' => $uid,
+      'created' => time(),
+      'type' => 'Profile',
+      'message' => 'Profile has been updated',
+    );
+    tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
       break;
     case 'send_tweets_form ':
       break;
