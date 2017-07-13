@@ -8,6 +8,8 @@
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   /** header **/
+  .path-dashboard .mobile-menus {
+    display: none; }
   #header {
     padding-left: 15px;
     padding-right: 15px;
@@ -318,10 +320,13 @@
       padding: 0 20px;
       font-size: 14px; }
   /** css for logged in user for dashbord **/
-  .block-users-dashboard-header-block .profile .profile > a > div,
-  .block-users-dashboard-header-profile-block .profile > a > div {
-    border-left: none;
-    padding-left: 0; }
+  .block-users-dashboard-header-block,
+  .block-users-dashboard-header-profile-block {
+    float: none; }
+    .block-users-dashboard-header-block .profile > a > div,
+    .block-users-dashboard-header-profile-block .profile > a > div {
+      border-left: none;
+      padding-left: 0; }
   .block-users-tweets-statistics-block {
     display: none; }
   .user-logged-in .main-content {
@@ -335,7 +340,8 @@
     margin: 0;
     top: initial;
     height: auto;
-    bottom: 0; }
+    bottom: 0;
+    z-index: 99; }
   .block-users-left-side-bar-block .profile,
   .block-users-left-side-bar-block .non-twitter-profile,
   .block-non-twitter-users-left-side-bar-block .profile,
@@ -345,7 +351,48 @@
     .block-users-left-side-bar-block .non-twitter-profile ~ div,
     .block-non-twitter-users-left-side-bar-block .profile ~ div,
     .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div {
-      display: inline-block; } }
+      display: inline-block;
+      line-height: 20px;
+      font-size: 12px;
+      text-align: center; }
+      .block-users-left-side-bar-block .profile ~ div.create_tweets:before,
+      .block-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before,
+      .block-non-twitter-users-left-side-bar-block .profile ~ div.create_tweets:before,
+      .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before {
+        display: block;
+        text-align: center; }
+      .block-users-left-side-bar-block .profile ~ div.import_tweets:before,
+      .block-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before,
+      .block-non-twitter-users-left-side-bar-block .profile ~ div.import_tweets:before,
+      .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before {
+        display: block;
+        text-align: center; }
+      .block-users-left-side-bar-block .profile ~ div a,
+      .block-users-left-side-bar-block .non-twitter-profile ~ div a,
+      .block-non-twitter-users-left-side-bar-block .profile ~ div a,
+      .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a {
+        color: transparent;
+        font-size: 12px; }
+  .block-users-left-side-bar-block .import_tweets,
+  .block-non-twitter-users-left-side-bar-block .import_tweets {
+    border: none; }
+  #my_tweets > span.text:before {
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center; }
+  #my_tweets > span.text:after {
+    content: none; }
+  #notification-display {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+    #notification-display:before {
+      content: "\f1da"; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

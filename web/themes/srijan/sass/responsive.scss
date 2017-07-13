@@ -12,6 +12,11 @@
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 	/** header **/
+	.path-dashboard {
+		.mobile-menus {
+			display: none;
+		}
+	}
 	#header {
 	    padding-left: 15px;
         padding-right: 15px;
@@ -422,8 +427,9 @@
 	}
 
 	/** css for logged in user for dashbord **/
-	.block-users-dashboard-header-block .profile, 
+	.block-users-dashboard-header-block , 
 	.block-users-dashboard-header-profile-block { 
+		float: none;
 	   .profile {
 	        > a {
 	            > div {
@@ -449,6 +455,7 @@
 	   top: initial;
        height: auto;
        bottom: 0;
+       z-index: 99
 	}
 	.block-users-left-side-bar-block ,
 	.block-non-twitter-users-left-side-bar-block { 
@@ -457,10 +464,57 @@
            display: none;
            ~ div {
            	     display: inline-block;
+           	     line-height: 20px;
+           	     font-size: 12px;
+           	     text-align: center;
+           	     &.create_tweets {
+           	     	&:before {
+           	     		  display: block;
+           	     		  text-align: center;
+           	     	}
+           	     }
+           	     &.import_tweets {
+           	     	&:before {
+           	     		  display: block;
+           	     		  text-align: center;
+           	     	}
+           	     }
+           	     a {
+           	     	color: transparent;
+           	     	font-size: 12px;
+           	     }
            }
 	   }
+	   .import_tweets {
+	   	border: none;
+	   }
 	}
+	#my_tweets {
+		  > span.text {
+		    &:before {
+	    	    display: block;
+			    width: 20px;
+			    height: 20px;
+			    line-height: 20px;
+			    text-align: center;
+		    }
+		    &:after {
+		    	content: none;
+		    }
+		}
+	}
+	#notification-display {
 
+	    display: inline-block;
+	    font: normal normal normal 14px/1 FontAwesome;
+	    font-size: inherit;
+	    text-rendering: auto;
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+	    &:before {
+	    	content: "\f1da";
+	    }
+	}
 }
 
 /* css for tablet **/
