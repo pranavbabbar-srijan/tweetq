@@ -3,12 +3,14 @@
     font-size: 8vw; } }
 
 @media only screen and (min-width: 768px) {
-  .mobile-menus {
+  .mobile-menus,
+  .mobile-display {
     display: none; } }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   /** header **/
-  .path-dashboard .mobile-menus {
+  .path-dashboard .mobile-menus,
+  .path-user .mobile-menus {
     display: none; }
   #header {
     padding-left: 15px;
@@ -425,7 +427,7 @@
     position: relative;
     top: 6px; }
     #notification-display:before {
-      content: "\f1da";
+      content: "\f0e2";
       color: #303030;
       opacity: .5; }
     #notification-display:after {
@@ -435,9 +437,45 @@
       display: block;
       color: transparent; }
     #notification-display.active:after {
-      color: #303030; }
+      color: #303030;
+      font-family: 'Roboto',sans-serif; }
     #notification-display.active:before {
-      opacity: 1; } }
+      opacity: 1; }
+  .region-sidebar-first #my_tweets {
+    display: none; }
+  .total_twitt_mobile {
+    text-align: center;
+    line-height: 18px; }
+    .total_twitt_mobile a {
+      font-size: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      position: relative;
+      top: 6px; }
+      .total_twitt_mobile a:before {
+        content: "\f099";
+        font-family: 'fontawesome';
+        font-size: 14px;
+        background: #303030;
+        color: white;
+        padding: 0;
+        border-radius: 4px;
+        vertical-align: bottom;
+        margin-right: 10px;
+        display: block;
+        width: 18px;
+        opacity: 0.5;
+        left: 19px;
+        position: relative;
+        height: 18px;
+        text-align: center;
+        line-height: 18px; }
+      .total_twitt_mobile a.active {
+        color: #303030; }
+        .total_twitt_mobile a.active:before {
+          opacity: 1; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
