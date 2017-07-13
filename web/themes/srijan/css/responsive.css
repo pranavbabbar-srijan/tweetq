@@ -328,14 +328,24 @@
       border-left: none;
       padding-left: 0; }
   .block-users-tweets-statistics-block {
-    display: none; }
+    position: relative;
+    top: 0; }
+    .block-users-tweets-statistics-block .content > div a {
+      text-align: center; }
+      .block-users-tweets-statistics-block .content > div a .text {
+        font-size: 12px;
+        text-align: center; }
+      .block-users-tweets-statistics-block .content > div a .value {
+        font-size: 12px;
+        text-align: center; }
   .user-logged-in .main-content {
-    width: calc(100% - 40px);
-    margin-left: 20px;
-    margin-right: 20px;
+    width: calc(100% - 10px);
+    margin-left: 5px;
+    margin-right: 5px;
     top: 0px;
     height: calc(100% - 110px);
-    position: relative; }
+    position: relative;
+    margin-bottom: 60px; }
   #sidebar-first {
     width: 100%;
     margin: 0;
@@ -358,7 +368,7 @@
     .block-non-twitter-users-left-side-bar-block .profile ~ div,
     .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div {
       display: inline-block;
-      line-height: 20px;
+      line-height: 7px;
       font-size: 9px;
       color: transparent;
       text-align: center; }
@@ -380,6 +390,11 @@
       .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a {
         color: transparent;
         font-size: 9px; }
+        .block-users-left-side-bar-block .profile ~ div a:hover,
+        .block-users-left-side-bar-block .non-twitter-profile ~ div a:hover,
+        .block-non-twitter-users-left-side-bar-block .profile ~ div a:hover,
+        .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a:hover {
+          color: transparent; }
   .block-users-left-side-bar-block .import_tweets,
   .block-non-twitter-users-left-side-bar-block .import_tweets {
     border: none; }
@@ -397,9 +412,23 @@
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; }
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: transparent; }
     #notification-display:before {
-      content: "\f1da"; } }
+      content: "\f1da";
+      color: #303030;
+      opacity: .5; }
+    #notification-display:after {
+      content: 'Recent Activity';
+      text-decoration: none;
+      font-size: 10px;
+      display: block;
+      color: transparent; }
+    #notification-display.active:after {
+      color: #303030; }
+    #notification-display.active:before {
+      opacity: 1; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

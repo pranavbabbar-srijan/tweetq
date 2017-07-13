@@ -440,15 +440,32 @@
 	    }
 	}
 	.block-users-tweets-statistics-block {
-		display: none;
+		position: relative;
+        top: 0;
+        .content {
+           > div {
+	             a  {
+	             	text-align: center;
+	               .text {
+                        font-size: 12px;
+                        text-align: center;
+	               }
+	               .value {	
+	               	    font-size: 12px;
+	               	    text-align: center;
+	               }
+	           }
+	       }
+        }
 	}
 	.user-logged-in .main-content {
-		width: calc(100% - 40px);
-		margin-left: 20px;
-		margin-right: 20px;
+		width: calc(100% - 10px);
+		margin-left: 5px;
+		margin-right: 5px;
 		top: 0px;
 		height: calc(100% - 110px);
 		position: relative;
+		margin-bottom: 60px;
 	}
 	#sidebar-first {
 	   width: 100%;
@@ -472,7 +489,7 @@
            display: none;
            ~ div {
            	     display: inline-block;
-           	     line-height: 20px;
+           	     line-height: 7px;
            	     font-size: 9px;
            	     color: transparent;
            	     text-align: center;
@@ -480,17 +497,22 @@
            	     	&:before {
            	     		  display: block;
            	     		  text-align: center;
+
            	     	}
            	     }
            	     &.import_tweets {
            	     	&:before {
            	     		  display: block;
            	     		  text-align: center;
+           	     		  
            	     	}
            	     }
            	     a {
            	     	color: transparent;
            	     	font-size: 9px;
+           	     	&:hover {
+           	     		color: transparent;
+           	     	}
            	     }
            }
 	   }
@@ -520,8 +542,27 @@
 	    text-rendering: auto;
 	    -webkit-font-smoothing: antialiased;
 	    -moz-osx-font-smoothing: grayscale;
+	    text-align: center;
+	    color: transparent;
 	    &:before {
 	    	content: "\f1da";
+	    	color: #303030;
+	    	opacity: .5;
+	    }
+	    &:after {
+	    	content: 'Recent Activity';
+		    text-decoration: none;
+		    font-size: 10px;
+		    display: block;
+		    color: transparent;
+	    }
+	    &.active {
+	    	&:after {
+	    		color: #303030;
+	    	}
+	    	 &:before { 
+               opacity: 1;
+	    	 }
 	    }
 	}
 }
