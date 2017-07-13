@@ -73,7 +73,7 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
-					location.reload();
+					//location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
@@ -113,7 +113,7 @@
   			$("#profile-account-settings-form-email-validation-error").remove();
   			$("#email-sent").remove();
   			if (emails.length == 0) {
-	    		$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#profilesettingform #edit-invite-friend-list" );
+	    		$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + 'Please enter an email' + "</p>").insertAfter( "#profilesettingform #edit-invite-friend-list" );
 	    		return;
 	    	}
 
