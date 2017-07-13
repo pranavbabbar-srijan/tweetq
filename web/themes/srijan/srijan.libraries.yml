@@ -22,7 +22,7 @@ customjs:
     # js/jquery.colorbox.js: {}
     # js/jquery.colorbox-min.js: {}
     # js/colorbox.js: {}
-  
+
   dependencies:
   - core/jquery
   - core/drupal.ajax
