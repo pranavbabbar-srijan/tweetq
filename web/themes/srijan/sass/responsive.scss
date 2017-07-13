@@ -343,6 +343,9 @@
 	#forgot-password-section {
 		font-size: 18px;
 		width: 79%;
+		.signup {
+			margin-bottom: 1em;
+		}
 	}
 	/** Global Messages **/
 	.path-frontpage {
@@ -467,7 +470,7 @@
    	    width: 320px;
         margin-right: 15px;
         padding: 5em 2em 6em 2em;
-        margin-top: -4vh;
+        margin-top: 125px;
    }
    .twitter-btn {
    	    padding: 15px 30px;
@@ -486,21 +489,22 @@
         .flexslider {
             height: 590px;
             .slides {
-            	h2 {
-            		font-size: 28px;
-            	}
+            	
             	.slider-content {
             		top: 20%;
             		left: 30px;
             		p {
             			font-size: 14px;
             		}
+            		h2 {
+            		   font-size: 28px;
+            	    }
             	}
             	.views-field-field-front-page-image {
             		height: 590px;
             		img {
-            			height: auto;
-            			width: 100%;
+            			height: 100%;
+            			width: auto;
             		}
             	}
             }
@@ -526,6 +530,12 @@
     	}
     	.label {
     		font-size: 16px;
+    	}
+    }
+    .block-total-twitter-tweets-block {
+    	margin-left: 10em !important;
+    	&:after {
+    		left: 115px;
     	}
     }
     .block-what-barbet-is {

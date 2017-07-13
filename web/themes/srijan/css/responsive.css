@@ -259,6 +259,8 @@
   #forgot-password-section {
     font-size: 18px;
     width: 79%; }
+    #forgot-password-section .signup {
+      margin-bottom: 1em; }
   /** Global Messages **/
   .path-frontpage .messages {
     max-width: 95% !important;
@@ -352,7 +354,7 @@
     width: 320px;
     margin-right: 15px;
     padding: 5em 2em 6em 2em;
-    margin-top: -4vh; }
+    margin-top: 125px; }
   .twitter-btn {
     padding: 15px 30px; }
   #forgot-password-section {
@@ -364,18 +366,18 @@
     height: 100%; }
   .view-home-page-carousel .flexslider {
     height: 590px; }
-    .view-home-page-carousel .flexslider .slides h2 {
-      font-size: 28px; }
     .view-home-page-carousel .flexslider .slides .slider-content {
       top: 20%;
       left: 30px; }
       .view-home-page-carousel .flexslider .slides .slider-content p {
         font-size: 14px; }
+      .view-home-page-carousel .flexslider .slides .slider-content h2 {
+        font-size: 28px; }
     .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image {
       height: 590px; }
       .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img {
-        height: auto;
-        width: 100%; }
+        height: 100%;
+        width: auto; }
     .view-home-page-carousel .flexslider .flex-control-paging {
       bottom: 130px;
       left: 95px;
@@ -394,6 +396,10 @@
     .block-total-twitter-tweets-block .label,
     .block-total-twitter-users-block .label {
       font-size: 16px; }
+  .block-total-twitter-tweets-block {
+    margin-left: 10em !important; }
+    .block-total-twitter-tweets-block:after {
+      left: 115px; }
   .block-what-barbet-is {
     padding-top: 0; }
   .block-block-content .field--name-field-title {
