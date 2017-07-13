@@ -344,3 +344,66 @@
     .block-non-twitter-users-left-side-bar-block .profile ~ div,
     .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div {
       display: inline-block; } }
+
+/* css for tablet **/
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+  /** css for slider **/
+  .user-login-form {
+    width: 320px;
+    margin-right: 15px;
+    padding: 5em 2em 6em 2em;
+    margin-top: -4vh; }
+  .twitter-btn {
+    padding: 15px 30px; }
+  #forgot-password-section {
+    width: 80%;
+    font-size: 8px; }
+    #forgot-password-section .signup {
+      margin-bottom: 1.5em; }
+  .view-home-page-carousel .field-content {
+    height: 100%; }
+  .view-home-page-carousel .flexslider {
+    height: 590px; }
+    .view-home-page-carousel .flexslider .slides h2 {
+      font-size: 28px; }
+    .view-home-page-carousel .flexslider .slides .slider-content {
+      top: 20%;
+      left: 30px; }
+      .view-home-page-carousel .flexslider .slides .slider-content p {
+        font-size: 14px; }
+    .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image {
+      height: 590px; }
+      .view-home-page-carousel .flexslider .slides .views-field-field-front-page-image img {
+        height: auto;
+        width: 100%; }
+    .view-home-page-carousel .flexslider .flex-control-paging {
+      bottom: 130px;
+      left: 95px;
+      width: 140px; }
+    .view-home-page-carousel .flexslider .flex-direction-nav {
+      width: 320px;
+      bottom: 24%;
+      left: 0; }
+  .block-total-twitter-tweets-block,
+  .block-total-twitter-users-block {
+    margin-top: 170px;
+    margin-left: 2em; }
+    .block-total-twitter-tweets-block .count,
+    .block-total-twitter-users-block .count {
+      font-size: 24px; }
+    .block-total-twitter-tweets-block .label,
+    .block-total-twitter-users-block .label {
+      font-size: 16px; }
+  .block-what-barbet-is {
+    padding-top: 0; }
+  .block-block-content .field--name-field-title {
+    font-size: 32px; }
+  .Home-page--blukstore--section .views-field-title {
+    font-size: 18px; }
+  .section__mission--text p:first-child {
+    font-size: 32px; }
+  .block-simplenews {
+    padding: 30px 20px; }
+  #block-copyrightblock {
+    float: left;
+    width: 100%; } }
