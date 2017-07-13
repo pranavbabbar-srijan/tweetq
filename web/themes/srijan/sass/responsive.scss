@@ -474,7 +474,7 @@
        height: auto;
        bottom: 0;
        z-index: 99;
-       padding-top: 13px;
+       padding-top: 5px;
 	}
 	.block-users-left-side-bar-block ,
 	.block-non-twitter-users-left-side-bar-block {
@@ -497,6 +497,8 @@
            	     	&:before {
            	     		  display: block;
            	     		  text-align: center;
+           	     		  position: relative;
+    					  top: 10px;
 
            	     	}
            	     }
@@ -504,12 +506,17 @@
            	     	&:before {
            	     		  display: block;
            	     		  text-align: center;
+           	     		  position: relative;
+    					  top: 10px;
            	     		  
            	     	}
            	     }
            	     a {
            	     	color: transparent;
            	     	font-size: 9px;
+           	     	display: block;
+                    height: 20px;
+           	     	line-height: 4;
            	     	&:hover {
            	     		color: transparent;
            	     	}
@@ -544,6 +551,8 @@
 	    -moz-osx-font-smoothing: grayscale;
 	    text-align: center;
 	    color: transparent;
+	    position: relative;
+        top: 6px;
 	    &:before {
 	    	content: "\f1da";
 	    	color: #303030;

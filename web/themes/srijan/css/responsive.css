@@ -353,7 +353,7 @@
     height: auto;
     bottom: 0;
     z-index: 99;
-    padding-top: 13px; }
+    padding-top: 5px; }
   .block-users-left-side-bar-block .content > div,
   .block-non-twitter-users-left-side-bar-block .content > div {
     display: flex;
@@ -377,19 +377,26 @@
       .block-non-twitter-users-left-side-bar-block .profile ~ div.create_tweets:before,
       .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.create_tweets:before {
         display: block;
-        text-align: center; }
+        text-align: center;
+        position: relative;
+        top: 10px; }
       .block-users-left-side-bar-block .profile ~ div.import_tweets:before,
       .block-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before,
       .block-non-twitter-users-left-side-bar-block .profile ~ div.import_tweets:before,
       .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:before {
         display: block;
-        text-align: center; }
+        text-align: center;
+        position: relative;
+        top: 10px; }
       .block-users-left-side-bar-block .profile ~ div a,
       .block-users-left-side-bar-block .non-twitter-profile ~ div a,
       .block-non-twitter-users-left-side-bar-block .profile ~ div a,
       .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a {
         color: transparent;
-        font-size: 9px; }
+        font-size: 9px;
+        display: block;
+        height: 20px;
+        line-height: 4; }
         .block-users-left-side-bar-block .profile ~ div a:hover,
         .block-users-left-side-bar-block .non-twitter-profile ~ div a:hover,
         .block-non-twitter-users-left-side-bar-block .profile ~ div a:hover,
@@ -414,7 +421,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: transparent; }
+    color: transparent;
+    position: relative;
+    top: 6px; }
     #notification-display:before {
       content: "\f1da";
       color: #303030;
