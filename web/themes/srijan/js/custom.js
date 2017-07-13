@@ -65,7 +65,7 @@
   			$("#user-form-email-validation-error").remove();
   			$("#email-sent").remove();
   			if (emails.length == 0) {
-	    		$("<span id='user-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+	    		$("<span id='user-form-email-validation-error' class='validation-error'>" + 'Please enter an email address' + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 	    		return;
 	    	}
 
