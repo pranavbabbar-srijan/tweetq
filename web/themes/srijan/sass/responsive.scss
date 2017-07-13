@@ -1,0 +1,568 @@
+
+@media screen and (max-width: 23.4375em) {
+	.site-branding div a {
+	    font-size: 8vw;
+	}
+}
+@media only screen and (min-width: 768px) {
+    .mobile-menus {
+   	   display: none;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+	/** header **/
+	#header {
+	    padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 0.7em;
+        padding-bottom: 0.7em;
+	}
+	.site-branding {
+		float: left !important;
+        width: auto !important;
+        svg {
+        	width: auto;
+        }
+	}
+	.site-branding__logo {
+		width: 50px;
+	}
+	.c-hamburger:focus {
+        outline: 0;
+    }
+    .c-hamburger--htx {
+       background-color: transparent;
+        span {
+           -webkit-transition: background 0s .3s;
+           transition: background 0s .3s;
+        }
+    }
+    .c-hamburger {
+	    display: block;
+	    position: absolute;
+	    overflow: hidden;
+	    margin: 0;
+	    padding: 0;
+	    width: 55px;
+	    right: 0;
+	    top: 9px;
+	    z-index: 2;
+	    height: 20px;
+	    font-size: 0;
+	    text-indent: -9999px;
+	    -webkit-appearance: none;
+	    -moz-appearance: none;
+	    appearance: none;
+	    box-shadow: none;
+	    border-radius: none;
+	    border: none;
+	    cursor: pointer;
+	    -webkit-transition: background .3s;
+	    transition: background .3s;
+	     span {
+		    display: block;
+		    position: absolute;
+		    top: 8px;
+		    left: 18px;
+		    right: 0px;
+		    height: 3px;
+		    background: #fff;
+		    width: 46%;
+		    border-radius: 10px;
+		}
+	}
+	.c-hamburger--htx span::after, 
+	.c-hamburger--htx span::before {
+	    -webkit-transition-duration: .3s,.3s;
+	    transition-duration: .3s,.3s;
+	    -webkit-transition-delay: .3s,0s;
+	    transition-delay: .3s,0s;
+	}
+	.c-hamburger span::after, 
+	.c-hamburger span::before {
+	    position: absolute;
+	    display: block;
+	    left: 0;
+	    width: 100%;
+	    height: 3px;
+	    background-color: #fff;
+	    content: "";
+	    border-radius: 10px;
+	}
+
+	.c-hamburger span::before {
+	    top: -8px;
+	    width: 35px;
+	}
+	.c-hamburger--htx span::before {
+	    -webkit-transition-property: top,-webkit-transform;
+	    transition-property: top,transform;
+	}
+	.c-hamburger--htx span::after, 
+	.c-hamburger--htx span::before {
+	    -webkit-transition-duration: .3s,.3s;
+	    transition-duration: .3s,.3s;
+	    -webkit-transition-delay: .3s,0s;
+	    transition-delay: .3s,0s;
+	}
+	.c-hamburger span::after {
+	    bottom: -8px;
+	    width: 28px;
+	}
+	.c-hamburger--htx span::after {
+	    -webkit-transition-property: bottom,-webkit-transform;
+	    transition-property: bottom,transform;
+	}
+	.c-hamburger.c-hamburger--htx.is-active + .sidenav {
+		width: 110px;
+	}
+	.c-hamburger--htx.is-active span::after, .c-hamburger--htx.is-active span::before {
+	    -webkit-transition-delay: 0s,.3s;
+	    transition-delay: 0s,.3s;
+	}
+	.c-hamburger--htx.is-active span::after {
+	    bottom: 0;
+	    -webkit-transform: rotate(-45deg);
+	    -ms-transform: rotate(-45deg);
+	    transform: rotate(-45deg);
+	}
+	.c-hamburger--htx.is-active span::before {
+	    top: 0;
+	    -webkit-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	    transform: rotate(45deg);
+	}
+	.c-hamburger--htx.is-active span {
+	    background: 0 0;
+	    &:before,
+	    &:after {
+            width: 100%;
+	    }
+	}
+	.c-hamburger.c-hamburger--htx.is-active {
+      position: fixed;
+      right: 15px;
+      top: 20px;
+    }
+	.sidenav {
+	    height: 100%; /* 100% Full-height */
+	    width: 0; /* 0 width - change this with JavaScript */
+	    position: fixed; /* Stay in place */
+	    z-index: 1; /* Stay on top */
+	    top: 0;
+	    right: 0;
+	    background-color: #111; /* Black*/
+	    overflow-x: hidden; /* Disable horizontal scroll */
+	    padding-top: 60px; /* Place content 60px from the top */
+	    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+	}
+	.sidenav a {
+	    padding: 8px 8px 8px 32px;
+	    text-decoration: none;
+	    font-size: 25px;
+	    color: #818181;
+	    display: block;
+	    transition: 0.3s
+	}
+	.block-sub-nav-main-menu {
+		.menu {
+			li {
+				display: block;
+			}
+		}
+	}
+	/** home page slider **/
+	.path-frontpage {
+		.region-content {
+			display: flex;
+    		flex-wrap: wrap;
+		}
+	    #block-srijan-content {
+		    order: 3;
+		    width: 100%;
+		    margin-top: 30px;
+		}
+		#block-twitterusersblock {
+			order: 2;
+		}
+		#block-twittertweetsblock {
+            order: 1;
+		}
+		.user-login-form {
+			width: 90%;
+            float: none;
+            margin: 0 auto;
+            box-shadow: 0px 3px 13px #888888;
+            padding: 4.5em 2em 6em 2em;
+		}
+		.section + .section .region-middle {
+			margin-top: 0;
+		}
+	}
+	.twitter-btn {
+		padding: 15px 30px;
+	}
+	.view-home-page-carousel {
+	    .flexslider {
+		    height: 460px;
+		    border-radius: 0;
+		    .slides {
+		    	.views-field-field-front-page-image {
+		    		height: 460px;
+		    		img,
+		    		.field-content  {
+                         height: 100%;
+                         width: auto;
+		    		}
+		    	}
+		    	.slider-content {
+		    		top: 50px;
+				    left: 0;
+				    width: 100%;
+				    padding: 20px;
+		    		h2 {
+		    		   font-size: 20px;
+		    		   text-align: center;
+		    	    }
+
+		    		p {
+		    		   padding: 0 30px;
+                       text-align: center;
+                       font-size: 14px;	
+		    		}
+		    	}
+		    }
+		    .flex-control-paging {
+		    	width: 100%;
+                left: 0;
+                bottom: 36%;
+                li {
+	                a {
+	                	width: 10px;
+	                    height: 10px;
+	                    background: #303030;
+	                }
+	            }
+		    }
+		    .flex-direction-nav {
+		    	bottom: 65%;
+                left: 0;
+                width: 100%;
+                a.flex-next {
+                	right: 15px;
+                	opacity: .5;
+                	&:hover {
+                		opacity: 1;
+                	}
+                }
+                a.flex-prev {
+                	left: 15px;
+                	opacity: .5;
+                	&:hover {
+                		opacity: 1;
+                	}
+                }
+		    }
+	    }
+	     
+	}
+	.block-total-twitter-tweets-block ,
+	.block-total-twitter-users-block {
+		width: 50%;
+		margin-left: 0;
+		margin-top: 95px;
+	    .count {
+	  	   font-size: 24px;
+	    }
+	    .label {
+            font-size: 14px;
+            &:after {
+            	content: none;
+            }
+	    }
+	}
+	/**  css for home page **/
+	.block-what-barbet-is {
+		padding: 2em 20px;
+	}
+
+	.Home-page--blukstore--section  {
+		padding-bottom: 60px;
+	  .view-content {
+	  	flex-direction: column;
+	  }
+	  .views-field-body {
+	  	padding: 0px 20px;
+	  }
+	  .views-field-title {
+	  	font-size: 18px;
+	  }
+	}
+	.section__mission-vision {
+		    flex-direction: column;
+	}
+	.views--mission-vision {
+	    .views-row {
+	   	    &:last-child {
+	   	    	background: #dfeecd;
+	   	    	.section__mission--text {
+	   	    		background: transparent;
+	   	    	}
+	           .section__mission-vision {
+	                flex-direction: column;
+		       }
+	        }
+	        &:first-child {
+	        	.section__mission-image {
+	        		background: #fbfbfb;
+	        	}
+	        }
+	    }
+	}
+	.section__mission--text,
+	.section__mission-image {
+		padding: 15px 20px;
+		width: 100%;
+		text-align: center;
+	}
+	.block-block-content {
+	   .field--name-field-title {
+	   	  font-size: 22px;
+	   	  padding: 0 20px;
+	   }
+	}
+	.section__mission--text {
+		p:first-child {
+           font-size: 22px;
+		}
+	}
+	.block-total-twitter-users-block:after {
+		content: none;
+	}
+	#forgot-password-section {
+		font-size: 18px;
+		width: 79%;
+		.signup {
+			margin-bottom: 1em;
+		}
+	}
+	/** Global Messages **/
+	.path-frontpage {
+	  .messages {
+	  	max-width: 95% !important;
+	  	width: auto !important; 
+	  	font-size: 14px;
+	  	line-height: 20px;
+	  	padding-left: 40px;
+	  	left: 0;
+	  	padding-right: 20px;
+	  	&:before {
+	  		font-size: 30px !important;
+	  	}
+	  }
+	}
+	.messages {
+	 	max-width: 95% !important;
+	  	width: auto !important; 
+	  	font-size: 14px;
+	  	line-height: 20px;
+	  	padding-left: 40px;
+	  	left: 0;
+	  	padding-right: 20px;
+	}
+	/** css for footer **/
+	.block-social-menu-link {
+        .menu {
+    	    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    text-align: center;
+        	flex-wrap: wrap;
+            padding-right: 44px;
+            li {
+            	padding: 0;
+			    height: 70px;
+			    width: 33%;
+			    flex-wrap: wrap;
+            }
+        }
+	}
+	.block-simplenews {
+		padding: 30px 20px;
+		padding-bottom: 25px;
+	   .form-item-message {
+	   	text-align: center;
+	   	font-size: 22px;
+	   }
+	   .field--type-email {
+	   	width: 100%;
+	   }
+	   .form-actions {
+	   	width: 100%;
+	   	text-align: center;
+	   	.form-submit {
+	   		width: auto;
+	   		padding: .5em 20px;
+	   		margin-top: 10px;
+	   	}
+	   }
+	}
+	.block-sub-menu-footer-block {
+		display: none;
+	}
+	#block-copyrightblock {
+		float: left;
+	    width: 100%;
+	    .copyright {
+	  	    color: #fff;
+	        padding: 0 20px;
+            font-size: 14px;
+	    }
+	}
+
+	/** css for logged in user for dashbord **/
+	.block-users-dashboard-header-block .profile, 
+	.block-users-dashboard-header-profile-block { 
+	   .profile {
+	        > a {
+	            > div {
+                   border-left: none;
+                   padding-left: 0;
+	           }
+	        }
+	    }
+	}
+	.block-users-tweets-statistics-block {
+		display: none;
+	}
+	.user-logged-in .main-content {
+		width: calc(100% - 40px);
+		margin-left: 20px;
+		margin-right: 20px;
+		top: 60px;
+		height: calc(100% - 110px);
+	}
+	#sidebar-first {
+	   width: 100%;
+	   margin: 0;
+	   top: initial;
+       height: auto;
+       bottom: 0;
+	}
+	.block-users-left-side-bar-block ,
+	.block-non-twitter-users-left-side-bar-block { 
+	   .profile, 
+	   .non-twitter-profile {
+           display: none;
+           ~ div {
+           	     display: inline-block;
+           }
+	   }
+	}
+
+}
+
+/* css for tablet **/
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+   /** css for slider **/
+   .user-login-form {
+   	    width: 320px;
+        margin-right: 15px;
+        padding: 5em 2em 6em 2em;
+        margin-top: 125px;
+   }
+   .twitter-btn {
+   	    padding: 15px 30px;
+   }
+   #forgot-password-section {
+   	    width: 80%;
+   	    font-size: 8px;
+     .signup {
+     	margin-bottom: 1.5em;
+     }
+   }
+    .view-home-page-carousel {
+        .field-content  {
+        	height: 100%;
+        }
+        .flexslider {
+            height: 590px;
+            .slides {
+            	
+            	.slider-content {
+            		top: 20%;
+            		left: 30px;
+            		p {
+            			font-size: 14px;
+            		}
+            		h2 {
+            		   font-size: 28px;
+            	    }
+            	}
+            	.views-field-field-front-page-image {
+            		height: 590px;
+            		img {
+            			height: 100%;
+            			width: auto;
+            		}
+            	}
+            }
+            .flex-control-paging {
+            	bottom: 130px;
+			    left: 95px;
+			    width: 140px;
+
+            }
+            .flex-direction-nav {
+            	width: 320px;
+			    bottom: 24%;
+			    left: 0;
+            }
+        }
+    }
+    .block-total-twitter-tweets-block, 
+    .block-total-twitter-users-block {
+    	margin-top: 170px;
+    	margin-left: 2em;
+    	.count {
+    		font-size: 24px;
+    	}
+    	.label {
+    		font-size: 16px;
+    	}
+    }
+    .block-total-twitter-tweets-block {
+    	margin-left: 10em !important;
+    	&:after {
+    		left: 115px;
+    	}
+    }
+    .block-what-barbet-is {
+    	padding-top: 0;
+    }
+    .block-block-content {
+       .field--name-field-title {
+       	 font-size: 32px;
+       }
+    }
+    .Home-page--blukstore--section {
+       .views-field-title {
+       	  font-size: 18px;
+       }
+    }
+    .section__mission--text {
+        p {
+           &:first-child {
+             font-size: 32px;
+           }  
+        }
+    }
+    .block-simplenews {
+    	padding: 30px 20px;
+    }
+    #block-copyrightblock {
+    	float: left;
+    	width: 100%;
+    }
+}
