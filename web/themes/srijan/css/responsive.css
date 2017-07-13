@@ -331,15 +331,19 @@
       padding-left: 0; }
   .block-users-tweets-statistics-block {
     position: relative;
-    top: 0; }
+    top: 0;
+    width: 100%; }
     .block-users-tweets-statistics-block .content > div a {
-      text-align: center; }
+      text-align: center;
+      padding: 0.5em 0.5em; }
       .block-users-tweets-statistics-block .content > div a .text {
         font-size: 12px;
         text-align: center; }
       .block-users-tweets-statistics-block .content > div a .value {
         font-size: 12px;
         text-align: center; }
+      .block-users-tweets-statistics-block .content > div a div:before {
+        content: none !important; }
   .user-logged-in .main-content {
     width: calc(100% - 10px);
     margin-left: 5px;
@@ -480,7 +484,66 @@
       .total_twitt_mobile a.active {
         color: #303030; }
         .total_twitt_mobile a.active:before {
-          opacity: 1; } }
+          opacity: 1; }
+  .send-tweets-form #edit-save,
+  .send-tweets-form #edit-cancel,
+  .tweets-queue-tweet-form #edit-save,
+  .tweets-queue-tweet-form #edit-cancel {
+    font-size: 16px; }
+  .send-tweets-form .message-header,
+  .tweets-queue-tweet-form .message-header {
+    padding: 0em 0.5em 1.5em 0.5em; }
+    .send-tweets-form .message-header .form-item-display-box,
+    .tweets-queue-tweet-form .message-header .form-item-display-box {
+      position: absolute;
+      right: 10px;
+      margin-bottom: 0;
+      margin-top: -13px; }
+      .send-tweets-form .message-header .form-item-display-box input,
+      .tweets-queue-tweet-form .message-header .form-item-display-box input {
+        font-size: 12px; }
+  .send-tweets-form .create-header,
+  .tweets-queue-tweet-form .create-header {
+    padding: 0.8em; }
+  .send-tweets-form .form-type-managed-file,
+  .tweets-queue-tweet-form .form-type-managed-file {
+    position: relative;
+    margin-top: 18px;
+    width: 100%;
+    margin-bottom: 30px; }
+    .send-tweets-form .form-type-managed-file .form-managed-file,
+    .tweets-queue-tweet-form .form-type-managed-file .form-managed-file {
+      width: 50px;
+      height: 50px;
+      position: relative; }
+      .send-tweets-form .form-type-managed-file .form-managed-file .form-file,
+      .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .form-file {
+        width: 50px;
+        height: 50px; }
+      .send-tweets-form .form-type-managed-file .form-managed-file:before,
+      .tweets-queue-tweet-form .form-type-managed-file .form-managed-file:before {
+        padding-top: 13px;
+        width: 50px;
+        font-size: 24px; }
+      .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"],
+      .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"] {
+        height: 20px;
+        width: 20px;
+        right: 5px;
+        top: 5px; }
+      .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a:before,
+      .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file a:before {
+        height: 50px;
+        width: 50px;
+        background-position: 10px 18px; }
+      .send-tweets-form .form-type-managed-file .form-managed-file .option:after,
+      .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .option:after {
+        top: 4px;
+        right: 4px;
+        height: 15px;
+        width: 15px;
+        line-height: 15px;
+        font-size: 10px; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

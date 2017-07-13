@@ -445,10 +445,12 @@
 	.block-users-tweets-statistics-block {
 		position: relative;
         top: 0;
+        width: 100%;
         .content {
            > div {
 	             a  {
 	             	text-align: center;
+	             	padding: 0.5em 0.5em;
 	               .text {
                         font-size: 12px;
                         text-align: center;
@@ -456,6 +458,11 @@
 	               .value {	
 	               	    font-size: 12px;
 	               	    text-align: center;
+	               }
+	               div {
+		               	&:before {
+		               		content: none !important;
+		               	}
 	               }
 	           }
 	       }
@@ -625,6 +632,75 @@
 		    	}
 		    }
         }
+	}
+	.send-tweets-form , 
+	.tweets-queue-tweet-form {
+		 #edit-save, 		 
+		 #edit-cancel {
+		 	font-size: 16px;
+		 }
+	   .message-header {
+	   	    padding: 0em 0.5em 1.5em 0.5em;
+	   	    .form-item-display-box {
+   	    	    position: absolute;
+			    right: 10px;
+			    margin-bottom: 0;
+			    margin-top: -13px;
+			    input {
+			    	font-size: 12px;
+			    }
+	   	    }
+	   }	
+	   .create-header {
+	   	    padding: 0.8em;
+	   }
+	   .form-type-managed-file  {
+		   	position: relative;
+		    margin-top: 18px;
+		    width: 100%;
+		    margin-bottom: 30px;
+	   	  .form-managed-file {
+   	  	     width: 50px;
+		     height: 50px;
+		     position: relative;
+		     .form-file {
+		     	width: 50px;
+                height: 50px;
+		     }
+             &:before {
+         	    padding-top: 13px;
+			    width: 50px;
+			    font-size: 24px;
+             }
+             .js-form-type-checkbox {
+                 input[type="checkbox"] {
+             	    height: 20px;
+				    width: 20px;
+				    right: 5px;
+				    top: 5px;
+                 }
+                 .file {
+                 	a {
+                 		&:before {
+             			    height: 50px;
+						    width: 50px;
+						    background-position: 10px 18px;
+                 		}
+                 	}
+                 }
+             }
+             .option {
+             	&:after {
+             		top: 4px;
+				    right: 4px;
+				    height: 15px;
+                    width: 15px;
+                    line-height: 15px;
+                    font-size: 10px;
+             	}
+             }
+	   	  }
+	   }
 	}
 }
 
