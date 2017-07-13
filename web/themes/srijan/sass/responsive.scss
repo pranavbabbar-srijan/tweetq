@@ -556,17 +556,21 @@
 	    color: transparent;
 	    position: relative;
         top: 6px;
+        transition: 0.5s ease-in-out;
 	    &:before {
 	    	content: "\f0e2";
 	    	color: #303030;
 	    	opacity: .5;
+	    	font-size: 16px;
 	    }
 	    &:after {
 	    	content: 'Recent Activity';
 		    text-decoration: none;
-		    font-size: 10px;
+		    font-size: 9px;
 		    display: block;
 		    color: transparent;
+		    margin-top: 7px;
+		    transition: 0.5s ease-in-out;
 	    }
 	    &.active {
 	    	&:after {
