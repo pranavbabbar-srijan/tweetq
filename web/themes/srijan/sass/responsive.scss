@@ -587,13 +587,14 @@
 		text-align: center;
         line-height: 18px;
         a {
-        	font-size: 10px;
+        	font-size: 9px;
 		    text-align: center;
 		    text-decoration: none;
 		    display: block;
 		    text-align: center;
 		    position: relative;
 		    top: 6px;
+		    color: transparent;
 		    &:before {
 	    	    content: "\f099";
 			    font-family: 'fontawesome';
