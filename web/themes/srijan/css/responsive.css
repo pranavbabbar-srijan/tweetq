@@ -5,7 +5,9 @@
 @media only screen and (min-width: 768px) {
   .mobile-menus,
   .mobile-display {
-    display: none; } }
+    display: none; }
+  .block_totol_twitt_statistics_mobile.block-users-tweets-statistics-block {
+    display: none !important; } }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   /** header **/
@@ -341,7 +343,10 @@
   .block-users-tweets-statistics-block {
     position: relative;
     top: 0;
-    width: 100%; }
+    width: 100%;
+    display: none; }
+    .block-users-tweets-statistics-block.block_totol_twitt_statistics_mobile {
+      display: block; }
     .block-users-tweets-statistics-block .content > div a {
       text-align: center;
       padding: 0.5em 0.5em; }
@@ -680,9 +685,9 @@
   .block-users-dashboard-header-block .profile > a > div,
   .block-users-dashboard-header-profile-block .profile > a > div {
     padding-right: 10px; }
-  .block-users-tweets-statistics-block .content > div a .total_tweets :before,
-  .block-users-tweets-statistics-block .content > div a .valid_tweets :before,
-  .block-users-tweets-statistics-block .content > div a .archived_tweets :before {
+  .block-users-tweets-statistics-block .content > div a .total_tweets:before,
+  .block-users-tweets-statistics-block .content > div a .valid_tweets:before,
+  .block-users-tweets-statistics-block .content > div a .archived_tweets:before {
     font-size: 2.2em;
     top: 25px; }
   .block-users-tweets-statistics-block .content > div a.invalid_tweets .valid_tweets:before {
@@ -710,9 +715,14 @@
   .tweets-queue-tweet-form #edit-submit,
   .tweets-queue-tweet-form #edit-clone,
   .tweets-queue-tweet-form #edit-tweet-now {
-    margin-top: 60px;
+    margin-top: 90px;
     font-size: 16px; }
+  .send-tweets-form .form-type-textarea,
+  .tweets-queue-tweet-form .form-type-textarea {
+    margin-bottom: 30px; }
   .send-tweets-form .message-header .form-item-display-box,
   .tweets-queue-tweet-form .message-header .form-item-display-box {
     width: 100%;
-    margin-top: -7px; } }
+    margin-top: -25px;
+    position: absolute;
+    right: 17px; } }

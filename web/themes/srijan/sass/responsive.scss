@@ -9,6 +9,11 @@
     .mobile-display {
    	   display: none;
     }
+    .block_totol_twitt_statistics_mobile {
+    	&.block-users-tweets-statistics-block {
+    	    display: none !important;
+        }
+    }
 
 }
 
@@ -460,6 +465,10 @@
 		position: relative;
         top: 0;
         width: 100%;
+        display: none;
+        &.block_totol_twitt_statistics_mobile {
+			display: block;
+		}
         .content {
            > div {
 	             a  {
@@ -920,7 +929,7 @@
                   .total_tweets,
                   .valid_tweets,
                   .archived_tweets {
-                      :before {
+                      &:before {
                       	    font-size: 2.2em;
                       	    top: 25px;
                       }
@@ -959,13 +968,18 @@
 	    #edit-submit,
 	    #edit-clone,
 	    #edit-tweet-now {
-            margin-top: 60px;
+            margin-top: 90px;
             font-size: 16px;
+	    }
+	    .form-type-textarea {
+	    	margin-bottom: 30px;
 	    }
 	    .message-header {
 	       .form-item-display-box {
 	       	    width: 100%;
-	       	    margin-top: -7px;
+	       	    margin-top: -25px;
+	       	    position: absolute;
+    			right: 17px;
 	       }
 	    }
 	}

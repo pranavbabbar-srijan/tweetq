@@ -80,8 +80,8 @@ class UsersLeftSideBarBlock extends BlockBase {
       <span class='text'>" . $import_tweet_link . "</span>" ;
 
     $import_csv_logs_output = "<div class='import_tweets_logs'>
-      <span class='text'>" . $import_csv_logs . "</span></div>" ;
-    "</div>";
+      <span class='text'>" . $import_csv_logs . "</span></div></div>";
+
 
     $my_tweets_prefix = "<span class='mobile-display total_twitt_mobile'>" . $total_twitt_link . "</span><div id='my_tweets'> 
     <span class='text'>My Tweets</span>";
