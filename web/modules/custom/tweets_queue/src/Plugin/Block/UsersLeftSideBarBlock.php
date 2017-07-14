@@ -48,6 +48,9 @@ class UsersLeftSideBarBlock extends BlockBase {
     $class = tweets_queue_match_current_path($current_path, TWITTER_IMPORT_TWEET_PATH);
     $import_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_IMPORT_TWEET_PATH . "'>" .
       TWITTER_IMPORT_TWEET_LABEL ."</a>";
+    
+    $import_csv_logs = "<a " . $class . " href='" . $base_url .'/' . TWITTER_IMPORT_CSV_LOG . "'>" .
+      'logs' ."</a>";
 
     $class = tweets_queue_match_current_path($current_path, TWITTER_VALID_TWEET_PATH);
     $valid_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_VALID_TWEET_PATH . "'>" .
@@ -74,7 +77,11 @@ class UsersLeftSideBarBlock extends BlockBase {
       <span class='text'>" . $create_tweet_link . "</span></div>" ;
 
     $import_tweets_output = "<div class='import_tweets'>
-      <span class='text'>" . $import_tweet_link . "</span></div>" ;
+      <span class='text'>" . $import_tweet_link . "</span>" ;
+
+    $import_csv_logs_output = "<div class='import_tweets_logs'>
+      <span class='text'>" . $import_csv_logs . "</span></div>" ;
+    "</div>";
 
     $my_tweets_prefix = "<span class='mobile-display total_twitt_mobile'>" . $total_twitt_link . "</span><div id='my_tweets'> 
     <span class='text'>My Tweets</span>";
@@ -94,7 +101,7 @@ class UsersLeftSideBarBlock extends BlockBase {
      // <span class='text'>" . $settings_link . "</span></div>" ;
 
     $output = "<div>" . $twitter_profile_output .
-      $create_tweet_output . $import_tweets_output. $my_tweets_prefix . $valid_tweets_output . $invalid_tweets_output . $archived_tweets_output. $my_tweets_suffix . $settings_output . "</div>";
+      $create_tweet_output . $import_tweets_output. $import_csv_logs_output . $my_tweets_prefix . $valid_tweets_output . $invalid_tweets_output . $archived_tweets_output. $my_tweets_suffix . $settings_output . "</div>";
       unset($_SESSION["valid_import"]);
       unset($_SESSION["invalid_import"]);
       unset($_SESSION["new"]);
