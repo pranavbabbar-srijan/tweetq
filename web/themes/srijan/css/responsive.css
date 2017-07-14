@@ -14,6 +14,8 @@
   .path-dashboard .mobile-menus,
   .path-user .mobile-menus {
     display: none; }
+  .import_tweets_logs {
+    display: none; }
   #header {
     padding-left: 15px;
     padding-right: 15px;
@@ -146,7 +148,7 @@
     transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidenav */ }
   .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 8px 8px 8px 0;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
@@ -579,7 +581,8 @@
     top: 0;
     right: 0;
     margin: 20px 0 5px 0;
-    padding: .85em 2em; }
+    padding: .85em 2em;
+    display: inline; }
   .no-tweet-found {
     font-size: 28px;
     padding: .5em 0; }

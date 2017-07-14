@@ -25,6 +25,9 @@
 			display: none;
 		}
 	}
+	.import_tweets_logs {
+		display: none;
+	}
 	#header {
 	    padding-left: 15px;
         padding-right: 15px;
@@ -177,12 +180,12 @@
 	    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 	}
 	.sidenav a {
-	    padding: 8px 8px 8px 32px;
+	    padding: 8px 8px 8px 0;
 	    text-decoration: none;
 	    font-size: 25px;
 	    color: #818181;
 	    display: block;
-	    transition: 0.3s
+	    transition: 0.3s;
 	}
 	.block-sub-nav-main-menu {
 		.menu {
@@ -750,6 +753,7 @@
        	   right: 0;
        	   margin: 20px 0 5px 0;
        	   padding: .85em 2em;
+       	   display: inline;
        }
 	}
 	.no-tweet-found {
