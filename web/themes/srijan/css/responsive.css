@@ -588,12 +588,16 @@
   .path-frontpage #block-srijan-content {
     margin-top: -63px;
     float: none; }
+  .path-frontpage .section + .section .region-middle {
+    margin-top: 50px; }
   .user-login-form {
     width: 320px;
     margin-right: 15px;
     padding: 5em 2em 6em 2em;
     margin-top: 0;
     height: 435px; }
+    .user-login-form .form-item-name {
+      margin-bottom: 1.5em; }
   .twitter-btn {
     padding: 15px 30px; }
   #forgot-password-section {
@@ -601,6 +605,8 @@
     font-size: 18px; }
     #forgot-password-section .signup {
       margin-bottom: 1.5em; }
+  .Home-page--blukstore--section .views-field-body {
+    padding: 0px 20px; }
   .view-home-page-carousel .field-content {
     height: 100%; }
   .view-home-page-carousel .flexslider {
@@ -645,14 +651,26 @@
     padding: 10px 12px;
     font-size: 24px; }
   .block-what-barbet-is {
-    padding: 5em 40px;
+    padding: 5em 20px;
     padding-top: 0; }
   .block-block-content .field--name-field-title {
     font-size: 32px; }
   .Home-page--blukstore--section .views-field-title {
     font-size: 18px; }
-  .section__mission--text p:first-child {
-    font-size: 32px; }
+  .section__mission-image {
+    padding: 20px img;
+      padding-max-width: 100%; }
+  .section__mission--text {
+    padding: 20px 20px; }
+    .section__mission--text p:first-child {
+      font-size: 32px;
+      margin-top: 0;
+      line-height: 1; }
+    .section__mission--text p:last-child {
+      margin-bottom: 0; }
+  .block-we-vailble-for-your-favour .field--name-field-title {
+    max-width: 560px;
+    margin: 0 auto; }
   .block-simplenews {
     padding: 30px 20px; }
   #block-copyrightblock {
