@@ -25,6 +25,19 @@
 			display: none;
 		}
 	}
+	.user-logged-in {
+	   .messages--status {
+	   	  left: 0;
+	   	  position: fixed;
+          font-size: 14px;
+          margin-bottom: 50px;
+	   	  &:before {
+             font-size: 26px;
+             top: 17px;
+             margin-left: -36px;
+	   	  }
+	   }
+	}
 	.import_tweets_logs {
 		display: none;
 	}
@@ -181,7 +194,7 @@
 	}
 	.sidenav a {
 	    padding: 8px 8px 8px 0;
-	    text-decoration: none;
+	    text-decoration: none;	
 	    font-size: 25px;
 	    color: #818181;
 	    display: block;
