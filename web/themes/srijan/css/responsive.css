@@ -598,7 +598,8 @@
     padding: .5em 0; }
     .no-tweet-found a {
       padding: .65em 1em;
-      margin-right: 0; } }
+      margin-right: 0;
+      font-size: 16px; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
