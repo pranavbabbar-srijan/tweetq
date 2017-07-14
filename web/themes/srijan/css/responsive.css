@@ -589,12 +589,12 @@
     width: 320px;
     margin-right: 15px;
     padding: 5em 2em 6em 2em;
-    margin-top: 125px; }
+    margin-top: -30px; }
   .twitter-btn {
     padding: 15px 30px; }
   #forgot-password-section {
     width: 80%;
-    font-size: 8px; }
+    font-size: 18px; }
     #forgot-password-section .signup {
       margin-bottom: 1.5em; }
   .view-home-page-carousel .field-content {
@@ -635,7 +635,13 @@
     margin-left: 10em !important; }
     .block-total-twitter-tweets-block:after {
       left: 115px; }
+  .block-total-twitter-users-block:after {
+    top: 14px;
+    left: 112px;
+    padding: 10px 12px;
+    font-size: 24px; }
   .block-what-barbet-is {
+    padding: 5em 40px;
     padding-top: 0; }
   .block-block-content .field--name-field-title {
     font-size: 32px; }
@@ -647,4 +653,44 @@
     padding: 30px 20px; }
   #block-copyrightblock {
     float: left;
-    width: 100%; } }
+    width: 100%; }
+  /** dashboard **/
+  .block-users-dashboard-header-block .profile > a > div,
+  .block-users-dashboard-header-profile-block .profile > a > div {
+    padding-right: 10px; }
+  .block-users-tweets-statistics-block .content > div a .total_tweets :before,
+  .block-users-tweets-statistics-block .content > div a .valid_tweets :before,
+  .block-users-tweets-statistics-block .content > div a .archived_tweets :before {
+    font-size: 2.2em;
+    top: 25px; }
+  .block-users-tweets-statistics-block .content > div a.invalid_tweets .valid_tweets:before {
+    top: 25px;
+    background-size: 88%; }
+  .block-users-tweets-statistics-block .content > div a .text {
+    font-size: 13px; }
+  .block-users-left-side-bar-block .profile ~ div,
+  .block-users-left-side-bar-block .non-twitter-profile ~ div,
+  .block-non-twitter-users-left-side-bar-block .profile ~ div,
+  .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div {
+    font-size: 13px; }
+    .block-users-left-side-bar-block .profile ~ div a,
+    .block-users-left-side-bar-block .non-twitter-profile ~ div a,
+    .block-non-twitter-users-left-side-bar-block .profile ~ div a,
+    .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div a {
+      font-size: 13px; }
+  .send-tweets-form #edit-save,
+  .send-tweets-form #edit-cancel,
+  .send-tweets-form #edit-submit,
+  .send-tweets-form #edit-clone,
+  .send-tweets-form #edit-tweet-now,
+  .tweets-queue-tweet-form #edit-save,
+  .tweets-queue-tweet-form #edit-cancel,
+  .tweets-queue-tweet-form #edit-submit,
+  .tweets-queue-tweet-form #edit-clone,
+  .tweets-queue-tweet-form #edit-tweet-now {
+    margin-top: 60px;
+    font-size: 16px; }
+  .send-tweets-form .message-header .form-item-display-box,
+  .tweets-queue-tweet-form .message-header .form-item-display-box {
+    width: 100%;
+    margin-top: -7px; } }

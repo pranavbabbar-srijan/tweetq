@@ -760,14 +760,14 @@
    	    width: 320px;
         margin-right: 15px;
         padding: 5em 2em 6em 2em;
-        margin-top: 125px;
+        margin-top: -30px;
    }
    .twitter-btn {
    	    padding: 15px 30px;
    }
    #forgot-password-section {
    	    width: 80%;
-   	    font-size: 8px;
+   	    font-size: 18px;
      .signup {
      	margin-bottom: 1.5em;
      }
@@ -828,7 +828,14 @@
     		left: 115px;
     	}
     }
+    .block-total-twitter-users-block:after {
+		top: 14px;
+		left: 112px;
+		padding: 10px 12px;
+		font-size: 24px;
+    }
     .block-what-barbet-is {
+    	padding: 5em 40px;
     	padding-top: 0;
     }
     .block-block-content {
@@ -855,4 +862,71 @@
     	float: left;
     	width: 100%;
     }
+    /** dashboard **/
+    .block-users-dashboard-header-block , 
+    .block-users-dashboard-header-profile-block {
+        .profile {
+           > a {
+             > div {
+         	    padding-right: 10px;
+             }
+           }
+        }
+    }
+    .block-users-tweets-statistics-block {
+       .content  {
+          > div  {
+               a  {
+                  .total_tweets,
+                  .valid_tweets,
+                  .archived_tweets {
+                      :before {
+                      	    font-size: 2.2em;
+                      	    top: 25px;
+                      }
+                  }
+                  &.invalid_tweets {
+                  	 .valid_tweets {
+                         &:before {
+                     	    top: 25px;
+                 	        background-size: 88%;
+                         }
+                  	  }
+                  }
+                  .text {
+                  	    font-size: 13px;
+                  }
+               }
+          }
+       }
+    }
+    .block-users-left-side-bar-block,
+    .block-non-twitter-users-left-side-bar-block  {
+	    .profile ,
+	    .non-twitter-profile {
+	    	~ div {
+	    		    font-size: 13px;
+	    	    a {
+	    	    	font-size: 13px;
+	    	    }
+	    	}
+	    }
+	}
+	.send-tweets-form,
+	.tweets-queue-tweet-form {
+		#edit-save, 
+	    #edit-cancel,
+	    #edit-submit,
+	    #edit-clone,
+	    #edit-tweet-now {
+            margin-top: 60px;
+            font-size: 16px;
+	    }
+	    .message-header {
+	       .form-item-display-box {
+	       	    width: 100%;
+	       	    margin-top: -7px;
+	       }
+	    }
+	}
 }
