@@ -187,7 +187,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
       drupal_set_message(t("Skipped shows the tweets whose character limit exceeds"));
     }
     $twitter_csv_import_info = array(
-      'nid' => $nid,
+      //'nid' => $nid,
       'uid' => $uid,
       'created' => time(),
       'type' => 'Import CSV',

@@ -257,8 +257,13 @@ class TweetsQueueTweetController extends ControllerBase {
     $query = \Drupal::database()->select(TWITTER_TWEETS_IMPORTS_LOGS_TABLE, 'h');
     $query->fields('h');
     $query->condition('h.uid', $uid);
-    $total = $query->execute()->fetchAll();
-    return $total;
+    $result = $query->execute()->fetchAll();  
+    $output = array();
+    foreach ($result as $pos => $data) {
+      $total++;
+      $output[] = $data;
+    }
+    return $output;
   }
 
   /**

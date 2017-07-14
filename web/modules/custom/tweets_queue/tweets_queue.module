@@ -102,7 +102,7 @@ const TWITTER_SETTING_PATH = 'dashboard/settings';
 const TWITTER_TWEETED_TWEET_PATH = 'dashboard/valid-tweets/tweeted-listing';
 const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 const TWITTER_TWITTER_SIGNUP_PATH = 'twitter/register';
-
+const TWITTER_IMPORT_CSV_LOG = 'dashboard/import-logs';
 const TWITTER_FIELD_NID = 'nid';
 const TWITTER_FIELD_UID = 'uid';
 const TWITTER_FIELD_STATUS = 'status';
