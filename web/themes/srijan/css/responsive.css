@@ -204,7 +204,7 @@
         height: 10px;
         background: #303030; }
     .view-home-page-carousel .flexslider .flex-direction-nav {
-      bottom: 65%;
+      bottom: 60%;
       left: 0;
       width: 100%; }
       .view-home-page-carousel .flexslider .flex-direction-nav a.flex-next {
@@ -257,6 +257,9 @@
     padding: 15px 20px;
     width: 100%;
     text-align: center; }
+    .section__mission--text img,
+    .section__mission-image img {
+      max-width: 100%; }
   .block-block-content .field--name-field-title {
     font-size: 22px;
     padding: 0 20px; }
@@ -265,10 +268,12 @@
   .block-total-twitter-users-block:after {
     content: none; }
   #forgot-password-section {
-    font-size: 18px;
+    font-size: 17px;
     width: 79%; }
     #forgot-password-section .signup {
       margin-bottom: 1em; }
+  #user-login-prefix + div span {
+    font-size: 12px; }
   /** Global Messages **/
   .path-frontpage .messages {
     max-width: 95% !important;
