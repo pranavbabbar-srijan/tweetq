@@ -1031,4 +1031,14 @@
             }
 	    } 
 	}
+	.custom-checkbox {
+	   input {
+	   	    height: 15px;
+    		width: 15px;
+	   }
+	   label {
+	   	 	width: 15px;
+    		height: 15px;
+	   }
+	}
 }

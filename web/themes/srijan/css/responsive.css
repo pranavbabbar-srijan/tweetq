@@ -763,4 +763,10 @@
     .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul,
     .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul,
     .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul {
-      font-size: 9px; } }
+      font-size: 9px; }
+  .custom-checkbox input {
+    height: 15px;
+    width: 15px; }
+  .custom-checkbox label {
+    width: 15px;
+    height: 15px; } }
