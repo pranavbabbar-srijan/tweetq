@@ -28,6 +28,13 @@
 			display: none;
 		}
 	}
+	#header {
+	   .site-branding {
+	       a {
+	       	    margin-left: 20px;
+	       }
+	   }
+	}
 	.user-logged-in {
 	   .messages--status {
 	   	  left: 0;
@@ -327,15 +334,21 @@
 
 	.Home-page--blukstore--section  {
 		padding-bottom: 60px;
-	  .view-content {
-	  	flex-direction: column;
-	  }
-	  .views-field-body {
-	  	padding: 0px 20px;
-	  }
-	  .views-field-title {
-	  	font-size: 18px;
-	  }
+		.views-row {
+			margin-bottom: 35px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+		.view-content {
+			flex-direction: column;
+		}
+		.views-field-body {
+			padding: 0px 20px;
+		}
+		.views-field-title {
+			font-size: 18px;
+		}
 	}
 	.section__mission-vision {
 		    flex-direction: column;
@@ -545,12 +558,15 @@
            	     font-size: 9px;
            	     color: transparent;
            	     text-align: center;
+			     margin-left: 0;
+			     margin-right: 0;
            	     &.create_tweets {
            	     	&:before {
            	     		  display: block;
            	     		  text-align: center;
            	     		  position: relative;
     					  top: 10px;
+    					  margin-right: 0;
 
            	     	}
            	     }
@@ -560,6 +576,7 @@
            	     		  text-align: center;
            	     		  position: relative;
     					  top: 10px;
+    					  margin-right: 0;
            	     		  
            	     	}
            	     }
@@ -661,7 +678,7 @@
 			    display: block;
 			    width: 18px;
 			    opacity: 0.5;
-			    left: 19px;
+			    left: 17px;
 			    position: relative;
 			    height: 18px;
 			    text-align: center;
@@ -779,13 +796,21 @@
 			a {
 				padding: .65em 1em;
 				margin-right: 0;
-				font-size: 16px;
+				font-size: 14px;
 			}
 	}
 }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
+	/** header **/
+	#header {
+	   .site-branding {
+	       a {
+	       	    margin-left: 20px;
+	       }
+	   }
+	}
    /** css for slider **/
    .path-frontpage {
    	  #block-srijan-content {
@@ -1040,5 +1065,17 @@
 	   	 	width: 15px;
     		height: 15px;
 	   }
+	}
+	/** My profile **/
+	.profilesettingform {
+	    .message-header {
+	        .js-form-item, 
+	        #change-password {
+	      	    margin-right: 75px;
+	      	}
+	      	input[type="submit"] {
+	      		margin: 20px 165px;
+	      	}
+	    }
 	}
 }
