@@ -22,14 +22,6 @@
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 	/** header **/
-	.messages {
-		left: 0 !important;
-		position: fixed !important;
-		bottom: 52px !important;
-		z-index: 9 !important;
-	    border-radius: 45px !important;
-	    font-size: 14px !important;
-	}
 	.tooltip-css,
 	#delete-selected {
 		display: none !important;
@@ -93,6 +85,11 @@
 		.invite-friend {
 			right: 20px;
     		top: 25px;
+		}
+		.js-form-item {
+		    &.form-item {
+		    	flex-wrap: wrap;
+		    }
 		}
 	}
 	.user-logged-in {
@@ -484,11 +481,15 @@
 	.messages {
 	 	max-width: 95% !important;
 	  	width: auto !important; 
-	  	font-size: 14px;
 	  	line-height: 20px;
 	  	padding-left: 40px;
-	  	left: 0;
 	  	padding-right: 20px;
+		left: 0 !important;
+		position: fixed !important;
+		z-index: 9 !important;
+	    border-radius: 45px !important;
+	    font-size: 14px !important;
+	    margin-bottom: 52px !important;
 	}
 	/** css for footer **/
 	.block-social-menu-link {
@@ -877,6 +878,8 @@
 	    margin-top: 75px;
 	    margin-bottom: 70px;
 	    .message-header {
+			margin-left: 0;
+	         padding: 15px 15px;
 	        .js-form-item,
 	        #change-password {
 	       	    width: 100%;
@@ -893,6 +896,7 @@
 	   	    margin-left: 0;
    	        font-size: 18px;	   	        
 		    font-weight: bold;
+		    padding: 15px 15px;
 	   }
 	}
 }

@@ -14,13 +14,6 @@
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   /** header **/
-  .messages {
-    left: 0 !important;
-    position: fixed !important;
-    bottom: 52px !important;
-    z-index: 9 !important;
-    border-radius: 45px !important;
-    font-size: 14px !important; }
   .tooltip-css,
   #delete-selected {
     display: none !important; }
@@ -56,6 +49,8 @@
   .user-form .invite-friend {
     right: 20px;
     top: 25px; }
+  .user-form .js-form-item.form-item {
+    flex-wrap: wrap; }
   .user-logged-in .messages--status {
     left: 0;
     position: fixed;
@@ -347,11 +342,15 @@
   .messages {
     max-width: 95% !important;
     width: auto !important;
-    font-size: 14px;
     line-height: 20px;
     padding-left: 40px;
-    left: 0;
-    padding-right: 20px; }
+    padding-right: 20px;
+    left: 0 !important;
+    position: fixed !important;
+    z-index: 9 !important;
+    border-radius: 45px !important;
+    font-size: 14px !important;
+    margin-bottom: 52px !important; }
   /** css for footer **/
   .block-social-menu-link .menu {
     display: flex;
@@ -664,19 +663,23 @@
   .profilesettingform {
     margin-top: 75px;
     margin-bottom: 70px; }
-    .profilesettingform .message-header .js-form-item,
-    .profilesettingform .message-header #change-password {
-      width: 100%;
-      margin-right: 0;
-      margin-bottom: 1em; }
-    .profilesettingform .message-header input[type="submit"] {
-      margin: 20px auto;
-      max-width: 50%;
-      width: 100%; }
+    .profilesettingform .message-header {
+      margin-left: 0;
+      padding: 15px 15px; }
+      .profilesettingform .message-header .js-form-item,
+      .profilesettingform .message-header #change-password {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1em; }
+      .profilesettingform .message-header input[type="submit"] {
+        margin: 20px auto;
+        max-width: 50%;
+        width: 100%; }
     .profilesettingform .profile-setting {
       margin-left: 0;
       font-size: 18px;
-      font-weight: bold; } }
+      font-weight: bold;
+      padding: 15px 15px; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
