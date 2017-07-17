@@ -22,6 +22,14 @@
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 	/** header **/
+	.messages {
+		left: 0 !important;
+		position: fixed !important;
+		bottom: 52px !important;
+		z-index: 9 !important;
+	    border-radius: 45px !important;
+	    font-size: 14px !important;
+	}
 	.tooltip-css,
 	#delete-selected {
 		display: none !important;
