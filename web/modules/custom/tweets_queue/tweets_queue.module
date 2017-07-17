@@ -4024,6 +4024,28 @@ function tweets_queue_fetch_user_tweets_history() {
   return $output;
 }
 
+function tweets_queue_fetch_import_csv_logs() {
+  $uid = \Drupal::currentUser()->id();
+  // $last_history_read = tweets_queue_fetch_twitter_statistics_info(TWITTER_USER_HISTORY_MARK);
+  // if (empty($last_history_read)) {
+  //   $last_history_read = 0;
+  // }
+  $query = \Drupal::database()->select(TWITTER_TWEETS_IMPORTS_LOGS_TABLE, 'h');
+  $query->fields('h', ['type', 'total_tweets', 'valid_tweets', 'invalid_tweets', 'duplicate_tweets', 'skipped_tweets', 'created', 'status']);
+  // $query->outerjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
+  // $query->fields('p', ['uid', 'status']);
+  //$query->orderBy('h.created', 'DESC');
+ // $query->condition('h.uid', $uid);
+  //$query->condition('h.created', $last_history_read , '>');
+  $result = $query->execute()->fetchAll();
+  $output = array();
+  foreach ($result as $pos => $data) {
+    $total++;
+    $output[] = $data;
+  }
+  return $output;
+}
+
 
 /**
  * Format tweet time at notification section.
