@@ -2,7 +2,6 @@
   .site-branding div a {
     font-size: 8vw; } }
 
-
 @media only screen and (min-width: 768px) {
   .mobile-menus,
   .mobile-display {
@@ -50,8 +49,6 @@
   .user-form .invite-friend {
     right: 20px;
     top: 25px; }
-  #header .site-branding a {
-    margin-left: 20px; }
   .user-logged-in .messages--status {
     left: 0;
     position: fixed;
