@@ -22,6 +22,9 @@
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 	/** header **/
+	.tooltip-css {
+		display: none !important;
+	}
 	.path-dashboard,
 	.path-user {
 		.mobile-menus {
@@ -779,6 +782,7 @@
        }
        .js-form-managed-file {
        	    border-radius: 6px;
+       	    text-align: left;
        }
        #edit-submit {
        	   border-radius: 4px;
@@ -788,6 +792,13 @@
        	   margin: 20px 0 5px 0;
        	   padding: .85em 2em;
        	   display: inline;
+       }
+       .file--mime-text-csv {
+       	 + .form-submit {
+       	 	right: 5px;
+            top: 4px;
+            position: absolute;
+       	 }
        }
 	}
 	.no-tweet-found {
