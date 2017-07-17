@@ -1234,6 +1234,7 @@
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
 	 		onChangeDisableTweet();
+	 		$('.messages').delay(500).animate({'bottom': '0'}, 50);
 	 	}
 	 };
 })(jQuery);
