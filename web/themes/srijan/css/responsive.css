@@ -28,29 +28,59 @@
   .user-logged-in .block-users-all-tweets-block,
   .user-logged-in .block-users-tweeted-tweets-block {
     max-height: 100%; }
-  .user-form .form-actions {
-    padding: 0;
-    padding-bottom: 10px; }
-    .user-form .form-actions input {
-      width: 100%;
-      max-width: 50%;
-      margin: 20px auto; }
-  .user-form .field--name-field-country select {
-    flex: none; }
-  .user-form .details-wrapper label {
-    flex: none;
-    width: 100%;
-    margin-bottom: 1em; }
-  .user-form .details-wrapper select {
-    flex: none; }
-  .user-form .message-header .form-item label {
-    flex: none;
-    margin-bottom: 1em; }
-  .user-form .invite-friend {
-    right: 20px;
-    top: 25px; }
-  .user-form .js-form-item.form-item {
-    flex-wrap: wrap; }
+  /*.user-form {
+		.form-actions {
+			padding: 0;
+			padding-bottom: 10px;
+			input {
+				width: 100%;
+				max-width: 50%;
+				margin: 20px auto;
+			}
+		}
+		.field--name-field-country {
+			select {
+                 flex: none;
+			}
+		}
+		.details-wrapper {
+			label {
+				flex: none;
+				width: 100%;
+				margin-bottom: 1em;
+			}
+			select {
+               flex: none;
+			}
+		}
+		.message-header {
+		    .form-item {
+		    	label {
+		    		flex: none;
+		    		margin-bottom: 1em;
+		    	}
+		    	input {
+		    		flex: none;
+		    	}
+		    	.validation-error {
+		    		padding-left: 0;
+		    	}
+		    }
+		}
+		.invite-friend {
+			right: 20px;
+    		top: 25px;
+		}
+		.js-form-item {
+		    &.form-item {
+		    	flex-wrap: wrap;
+		    }
+		}
+		summary {
+			font-size: 18px;
+			font-weight: bold;
+		}
+	}*/
   .user-logged-in .messages--status {
     left: 0;
     position: fixed;
@@ -661,26 +691,37 @@
       margin-right: 0;
       font-size: 14px; }
   /** profile setting page **/
-  .profilesettingform {
-    margin-top: 75px;
-    margin-bottom: 70px; }
-    .profilesettingform .message-header {
-      margin-left: 0;
-      padding: 15px 15px; }
-      .profilesettingform .message-header .js-form-item,
-      .profilesettingform .message-header #change-password {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 1em; }
-      .profilesettingform .message-header input[type="submit"] {
-        margin: 20px auto;
-        max-width: 50%;
-        width: 100%; }
-    .profilesettingform .profile-setting {
-      margin-left: 0;
-      font-size: 18px;
-      font-weight: bold;
-      padding: 15px 15px; } }
+  /*.profilesettingform {
+	    margin-top: 75px;
+	    margin-bottom: 70px;
+	    .message-header {
+			margin-left: 0;
+	         padding: 15px 15px;
+	        .js-form-item,
+	        #change-password {
+	       	    width: 100%;
+			    margin-right: 0;
+			    margin-bottom: 1em;
+	        }
+	        input[type="submit"] {
+	        	margin: 20px auto;
+	        	max-width: 50%;
+                width: 100%;
+	        }
+	    }
+	   .profile-setting {
+	   	    margin-left: 0;
+   	        font-size: 18px;	   	        
+		    font-weight: bold;
+		    padding: 15px 15px;
+	   }
+	}*/
+  /** filled **/
+  .filled:before {
+    font-size: 16px;
+    text-align: center;
+    padding: 0;
+    line-height: 20px; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

@@ -46,7 +46,7 @@
 	   		max-height: 100%;
 	   }
 	}
-	.user-form {
+	/*.user-form {
 		.form-actions {
 			padding: 0;
 			padding-bottom: 10px;
@@ -78,7 +78,10 @@
 		    		margin-bottom: 1em;
 		    	}
 		    	input {
-
+		    		flex: none;
+		    	}
+		    	.validation-error {
+		    		padding-left: 0;
 		    	}
 		    }
 		}
@@ -91,7 +94,11 @@
 		    	flex-wrap: wrap;
 		    }
 		}
-	}
+		summary {
+			font-size: 18px;
+			font-weight: bold;
+		}
+	}*/
 	.user-logged-in {
 	   .messages--status {
 	   	  left: 0;
@@ -868,14 +875,14 @@
 	.no-tweet-found {
 		font-size: 28px;
 		padding: .5em 0;
-			a {
-				padding: .65em 1em;
-				margin-right: 0;
-				font-size: 14px;
-			}
+		a {
+			padding: .65em 1em;
+			margin-right: 0;
+			font-size: 14px;
+		}
 	}
 	/** profile setting page **/
-	.profilesettingform {
+	/*.profilesettingform {
 	    margin-top: 75px;
 	    margin-bottom: 70px;
 	    .message-header {
@@ -899,6 +906,15 @@
 		    font-weight: bold;
 		    padding: 15px 15px;
 	   }
+	}*/
+	/** filled **/
+	.filled {
+	    &:before {
+    	    font-size: 16px;
+		    text-align: center;
+		    padding: 0;
+		    line-height: 20px;
+	    }
 	}
 }
 
