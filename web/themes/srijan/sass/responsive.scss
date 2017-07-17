@@ -34,8 +34,58 @@
 	}
 	.user-logged-in {
 	   &.path-user {
-
+          #main-wrapper {
+          	 margin: 0;
+          }
 	   }
+	   .block-users-valid-tweets-block, 
+	   .block-users-in-valid-tweets-block, 
+	   .block-users-archived-tweets-block, 
+	   .block-users-all-tweets-block, 
+	   .block-users-tweeted-tweets-block {
+	   		max-height: 100%;
+	   }
+	}
+	.user-form {
+		.form-actions {
+			padding: 0;
+			padding-bottom: 10px;
+			input {
+				width: 100%;
+				max-width: 50%;
+				margin: 20px auto;
+			}
+		}
+		.field--name-field-country {
+			select {
+                 flex: none;
+			}
+		}
+		.details-wrapper {
+			label {
+				flex: none;
+				width: 100%;
+				margin-bottom: 1em;
+			}
+			select {
+               flex: none;
+			}
+		}
+		.message-header {
+		    .form-item {
+		    	label {
+		    		flex: none;
+		    		margin-bottom: 1em;
+		    	}
+		    	input {
+
+		    	}
+		    }
+		}
+		.invite-friend {
+			right: 20px;
+    		top: 25px;
+		}
 	}
 	#header {
 	   .site-branding {
@@ -777,7 +827,9 @@
 				    height: 15px;
                     width: 15px;
                     line-height: 15px;
-                    font-size: 10px;
+                    font-size: 12px;
+                    padding: 0;
+                    text-align: center;
              	}
              }
 	   	  }
@@ -822,6 +874,29 @@
 				margin-right: 0;
 				font-size: 14px;
 			}
+	}
+	/** profile setting page **/
+	.profilesettingform {
+	    margin-top: 75px;
+	    margin-bottom: 70px;
+	    .message-header {
+	        .js-form-item,
+	        #change-password {
+	       	    width: 100%;
+			    margin-right: 0;
+			    margin-bottom: 1em;
+	        }
+	        input[type="submit"] {
+	        	margin: 20px auto;
+	        	max-width: 50%;
+                width: 100%;
+	        }
+	    }
+	   .profile-setting {
+	   	    margin-left: 0;
+   	        font-size: 18px;	   	        
+		    font-weight: bold;
+	   }
 	}
 }
 
