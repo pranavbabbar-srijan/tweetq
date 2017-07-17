@@ -1,19 +1,120 @@
-@media only screen and (min-width: 768px) {
-    .mobile-menus {
-   	   display: none;
-    }
-}
 
 @media screen and (max-width: 23.4375em) {
 	.site-branding div a {
 	    font-size: 8vw;
 	}
 }
+@media only screen and (min-width: 768px) {
+    .mobile-menus,
+    .mobile-display {
+   	   display: none;
+    }
+    .block_totol_twitt_statistics_mobile {
+    	&.block-users-tweets-statistics-block {
+    	    display: none !important;
+        }
+    }
+	.import_tweets_logs {
+	    padding-left: 35px;
+	    text-transform: capitalize;
+	}
+}
+
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 	/** header **/
+	.tooltip-css,
+	#delete-selected {
+		display: none !important;
+	}
+	.path-dashboard,
+	.path-user {
+		.mobile-menus {
+			display: none;
+		}
+	}
+	.user-logged-in {
+	   &.path-user {
+          #main-wrapper {
+          	 margin: 0;
+          }
+	   }
+	   .block-users-valid-tweets-block, 
+	   .block-users-in-valid-tweets-block, 
+	   .block-users-archived-tweets-block, 
+	   .block-users-all-tweets-block, 
+	   .block-users-tweeted-tweets-block {
+	   		max-height: 100%;
+	   }
+	}
+	.user-form {
+		.form-actions {
+			padding: 0;
+			padding-bottom: 10px;
+			input {
+				width: 100%;
+				max-width: 50%;
+				margin: 20px auto;
+			}
+		}
+		.field--name-field-country {
+			select {
+                 flex: none;
+			}
+		}
+		.details-wrapper {
+			label {
+				flex: none;
+				width: 100%;
+				margin-bottom: 1em;
+			}
+			select {
+               flex: none;
+			}
+		}
+		.message-header {
+		    .form-item {
+		    	label {
+		    		flex: none;
+		    		margin-bottom: 1em;
+		    	}
+		    	input {
+
+		    	}
+		    }
+		}
+		.invite-friend {
+			right: 20px;
+    		top: 25px;
+		}
+	}
+	#header {
+	   .site-branding {
+	       a {
+	       	    margin-left: 20px;
+	       }
+	   }
+	}
+	.user-logged-in {
+	   .messages--status {
+	   	  left: 0;
+	   	  position: fixed;
+          font-size: 14px;
+          margin-bottom: 50px;
+	   	  &:before {
+             font-size: 26px;
+             top: 17px;
+             margin-left: -36px;
+	   	  }
+	   }
+	}
+	.import_tweets_logs {
+		display: none;
+	}
 	#header {
 	    padding-left: 15px;
         padding-right: 15px;
+        padding-top: 0.7em;
+        padding-bottom: 0.7em;
 	}
 	.site-branding {
 		float: left !important;
@@ -21,6 +122,12 @@
         svg {
         	width: auto;
         }
+	}
+	.block-sub-nav-main-menu {
+		float: left;
+		ul.menu {
+			margin-left: 0;
+		}
 	}
 	.site-branding__logo {
 		width: 50px;
@@ -41,7 +148,7 @@
 	    overflow: hidden;
 	    margin: 0;
 	    padding: 0;
-	    width: 44px;
+	    width: 55px;
 	    right: 0;
 	    top: 9px;
 	    z-index: 2;
@@ -61,10 +168,12 @@
 		    display: block;
 		    position: absolute;
 		    top: 8px;
-		    left: 18px;
+		    left: 25px;
 		    right: 0px;
 		    height: 3px;
 		    background: #fff;
+		    width: 30%;
+		    border-radius: 10px;
 		}
 	}
 	.c-hamburger--htx span::after, 
@@ -83,10 +192,12 @@
 	    height: 3px;
 	    background-color: #fff;
 	    content: "";
+	    border-radius: 10px;
 	}
 
 	.c-hamburger span::before {
 	    top: -8px;
+	    width: 25px;
 	}
 	.c-hamburger--htx span::before {
 	    -webkit-transition-property: top,-webkit-transform;
@@ -101,13 +212,14 @@
 	}
 	.c-hamburger span::after {
 	    bottom: -8px;
+	    width: 22px;
 	}
 	.c-hamburger--htx span::after {
 	    -webkit-transition-property: bottom,-webkit-transform;
 	    transition-property: bottom,transform;
 	}
 	.c-hamburger.c-hamburger--htx.is-active + .sidenav {
-		width: 250px;
+		width: 150px;
 	}
 	.c-hamburger--htx.is-active span::after, .c-hamburger--htx.is-active span::before {
 	    -webkit-transition-delay: 0s,.3s;
@@ -127,11 +239,15 @@
 	}
 	.c-hamburger--htx.is-active span {
 	    background: 0 0;
+	    &:before,
+	    &:after {
+            width: 100%;
+	    }
 	}
 	.c-hamburger.c-hamburger--htx.is-active {
       position: fixed;
       right: 15px;
-      top: 25px;
+      top: 20px;
     }
 	.sidenav {
 	    height: 100%; /* 100% Full-height */
@@ -146,12 +262,12 @@
 	    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 	}
 	.sidenav a {
-	    padding: 8px 8px 8px 32px;
-	    text-decoration: none;
+	    padding: 8px 8px 8px 0;
+	    text-decoration: none;	
 	    font-size: 25px;
 	    color: #818181;
 	    display: block;
-	    transition: 0.3s
+	    transition: 0.3s;
 	}
 	.block-sub-nav-main-menu {
 		.menu {
@@ -169,7 +285,7 @@
 	    #block-srijan-content {
 		    order: 3;
 		    width: 100%;
-		    margin-top: 45px;
+		    margin-top: 30px;
 		}
 		#block-twitterusersblock {
 			order: 2;
@@ -182,41 +298,49 @@
             float: none;
             margin: 0 auto;
             box-shadow: 0px 3px 13px #888888;
+            padding: 4.5em 2em 6em 2em;
 		}
 		.section + .section .region-middle {
 			margin-top: 0;
 		}
 	}
+	.twitter-btn {
+		padding: 15px 30px;
+	}
 	.view-home-page-carousel {
 	    .flexslider {
-		    height: 580px;
+		    height: 460px;
+		    border-radius: 0;
 		    .slides {
 		    	.views-field-field-front-page-image {
-		    		height: 580px;
+		    		height: 460px;
 		    		img,
 		    		.field-content  {
                          height: 100%;
+                         width: auto;
 		    		}
 		    	}
 		    	.slider-content {
-		    		top: 80px;
+		    		top: 50px;
 				    left: 0;
 				    width: 100%;
 				    padding: 20px;
 		    		h2 {
-		    		   font-size: 26px;
+		    		   font-size: 20px;
 		    		   text-align: center;
 		    	    }
 
 		    		p {
 		    		   padding: 0 30px;
-                       text-align: center;	
+                       text-align: center;
+                       font-size: 14px;	
 		    		}
 		    	}
 		    }
 		    .flex-control-paging {
 		    	width: 100%;
                 left: 0;
+                bottom: 36%;
                 li {
 	                a {
 	                	width: 10px;
@@ -226,9 +350,23 @@
 	            }
 		    }
 		    .flex-direction-nav {
-		    	bottom: 48%;
+		    	bottom: 60%;
                 left: 0;
                 width: 100%;
+                a.flex-next {
+                	right: 15px;
+                	opacity: .5;
+                	&:hover {
+                		opacity: 1;
+                	}
+                }
+                a.flex-prev {
+                	left: 15px;
+                	opacity: .5;
+                	&:hover {
+                		opacity: 1;
+                	}
+                }
 		    }
 	    }
 	     
@@ -237,11 +375,12 @@
 	.block-total-twitter-users-block {
 		width: 50%;
 		margin-left: 0;
+		margin-top: 95px;
 	    .count {
-	  	   font-size: 30px;
+	  	   font-size: 24px;
 	    }
 	    .label {
-            font-size: 18px;
+            font-size: 14px;
             &:after {
             	content: none;
             }
@@ -254,12 +393,21 @@
 
 	.Home-page--blukstore--section  {
 		padding-bottom: 60px;
-	  .view-content {
-	  	flex-direction: column;
-	  }
-	  .views-field-body {
-	  	padding: 0px 20px;
-	  }
+		.views-row {
+			margin-bottom: 35px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+		.view-content {
+			flex-direction: column;
+		}
+		.views-field-body {
+			padding: 0px 20px;
+		}
+		.views-field-title {
+			font-size: 18px;
+		}
 	}
 	.section__mission-vision {
 		    flex-direction: column;
@@ -287,24 +435,35 @@
 		padding: 15px 20px;
 		width: 100%;
 		text-align: center;
+		img {
+			max-width: 100%;
+		}
 	}
 	.block-block-content {
 	   .field--name-field-title {
-	   	  font-size: 30px;
+	   	  font-size: 22px;
 	   	  padding: 0 20px;
 	   }
 	}
 	.section__mission--text {
 		p:first-child {
-           font-size: 30px;
+           font-size: 22px;
 		}
 	}
 	.block-total-twitter-users-block:after {
 		content: none;
 	}
 	#forgot-password-section {
-		font-size: 18px;
+		font-size: 17px;
 		width: 79%;
+		.signup {
+			margin-bottom: 1em;
+		}
+	}
+	#user-login-prefix {
+		+ div span {
+			font-size: 12px;
+		}
 	}
 	/** Global Messages **/
 	.path-frontpage {
@@ -352,7 +511,7 @@
 		padding-bottom: 25px;
 	   .form-item-message {
 	   	text-align: center;
-	   	font-size: 26px;
+	   	font-size: 22px;
 	   }
 	   .field--type-email {
 	   	width: 100%;
@@ -376,7 +535,646 @@
 	    .copyright {
 	  	    color: #fff;
 	        padding: 0 20px;
-            font-size: 18px;
+            font-size: 14px;
+	    }
+	}
+
+	/** css for logged in user for dashbord **/
+	.block-users-dashboard-header-block , 
+	.block-users-dashboard-header-profile-block { 
+		float: none;
+	   .profile {
+	        > a {
+	            > div {
+                   border-left: none;
+                   padding-left: 0;
+	           }
+	        }
+	    }
+	}
+	.block-users-tweets-statistics-block {
+		position: relative;
+        top: 0;
+        width: 100%;
+        display: none;
+        &.block_totol_twitt_statistics_mobile {
+			display: block;
+		}
+        .content {
+           > div {
+	             a  {
+	             	text-align: center;
+	             	padding: 0.5em 0.5em;
+	               .text {
+                        font-size: 12px;
+                        text-align: center;
+	               }
+	               .value {	
+	               	    font-size: 12px;
+	               	    text-align: center;
+	               }
+	               div {
+		               	&:before {
+		               		content: none !important;
+		               	}
+	               }
+	           }
+	       }
+        }
+	}
+	.user-logged-in .main-content {
+		width: calc(100% - 10px);
+		margin-left: 5px;
+		margin-right: 5px;
+		top: 0px;
+		height: calc(100% - 110px);
+		position: relative;
+		margin-bottom: 60px;
+	}
+	#sidebar-first {
+	   width: 100%;
+	   margin: 0;
+	   top: initial;
+       height: auto;
+       bottom: 0;
+       z-index: 99;
+       padding-top: 5px;
+	}
+	.block-users-left-side-bar-block ,
+	.block-non-twitter-users-left-side-bar-block {
+		.content {
+			> div {
+			    display: flex;
+			    justify-content: space-around;
+			}
+		}
+	   .profile, 
+	   .non-twitter-profile {
+           display: none;
+           ~ div {
+           	     display: inline-block;
+           	     line-height: 7px;
+           	     font-size: 9px;
+           	     color: transparent;
+           	     text-align: center;
+			     margin-left: 0;
+			     margin-right: 0;
+           	     &.create_tweets {
+           	     	&:before {
+           	     		  display: block;
+           	     		  text-align: center;
+           	     		  position: relative;
+    					  top: 10px;
+    					  margin-right: 0;
+
+           	     	}
+           	     }
+           	     &.import_tweets {
+           	     	&:before {
+           	     		  display: block;
+           	     		  text-align: center;
+           	     		  position: relative;
+    					  top: 10px;
+    					  margin-right: 0;
+           	     		  
+           	     	}
+           	     }
+           	     a {
+           	     	color: transparent;
+           	     	font-size: 9px;
+           	     	display: block;
+                    height: 20px;
+           	     	line-height: 4;
+           	     	&:hover {
+           	     		color: transparent;
+           	     	}
+           	     }
+           }
+	   }
+	   .import_tweets {
+	   	border: none;
+	   }
+	}
+	#my_tweets {
+		  > span.text {
+		    &:before {
+	    	    display: block;
+			    width: 20px;
+			    height: 20px;
+			    line-height: 20px;
+			    text-align: center;
+		    }
+		    &:after {
+		    	content: none;
+		    }
+		}
+	}
+	#notification-display {
+
+	    display: inline-block;
+	    font: normal normal normal 14px/1 FontAwesome;
+	    font-size: inherit;
+	    text-rendering: auto;
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+	    text-align: center;
+	    color: transparent;
+	    position: relative;
+        top: 6px;
+        transition: 0.5s ease-in-out;
+	    &:before {
+	    	content: "\f0e2";
+	    	color: #303030;
+	    	opacity: .5;
+	    	font-size: 16px;
+	    }
+	    &:after {
+	    	content: 'Recent Activity';
+		    text-decoration: none;
+		    font-size: 9px;
+		    display: block;
+		    color: transparent;
+		    margin-top: 7px;
+		    transition: 0.5s ease-in-out;
+	    }
+	    &.active {
+	    	&:after {
+	    		color: #303030;
+	    		font-family: 'Roboto',sans-serif;
+	    	}
+	    	 &:before { 
+               opacity: 1;
+	    	 }
+	    }
+	}
+	.region-sidebar-first {
+		#my_tweets {
+			display: none;
+		}
+	}
+	.total_twitt_mobile {
+		text-align: center;
+        line-height: 18px;
+        a {
+        	font-size: 9px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: block;
+		    text-align: center;
+		    position: relative;
+		    top: 6px;
+		    color: transparent;
+		    &:before {
+	    	    content: "\f099";
+			    font-family: 'fontawesome';
+			    font-size: 14px;
+			    background: #303030;
+			    color: white;
+			    padding: 0;
+			    border-radius: 4px;
+			    vertical-align: bottom;
+			    margin-right: 10px;
+			    display: block;
+			    width: 18px;
+			    opacity: 0.5;
+			    left: 17px;
+			    position: relative;
+			    height: 18px;
+			    text-align: center;
+			    line-height: 18px;
+		    }
+		    &.active {
+		    	color: #303030;
+		    	&:before {
+		    		opacity: 1;
+		    	}
+		    }
+        }
+	}
+	.send-tweets-form , 
+	.tweets-queue-tweet-form {
+		 #edit-save, 		 
+		 #edit-cancel,
+		 #edit-submit,
+		 #edit-tweet-now,
+		 #edit-clone {
+		 	font-size: 14px;
+		 	padding-left: 0.5em;
+            padding-right: 0.5em;
+		 }
+		.form-managed-file {
+			.js-form-type-checkbox {
+			   .file {
+			   	    margin-left: 10px;
+			   }
+			}
+		}
+	   .message-header {
+	   	    padding: 0em 0.5em 1.5em 0.5em;
+	   	    .form-item-display-box {
+   	    	    position: absolute;
+			    right: 10px;
+			    margin-bottom: 0;
+			    margin-top: -105px;
+			    input {
+			    	font-size: 12px;
+			    }
+	   	    }
+	   }	
+	   .create-header {
+	   	    padding: 0.8em;
+	   }
+	   .form-type-managed-file  {
+		   	position: relative;
+		    margin-top: 30px;
+		    width: 100%;
+		    margin-bottom: 30px;
+	   	  .form-managed-file {
+   	  	     width: 50px;
+		     height: 50px;
+		     position: relative;
+		     .form-file {
+		     	width: 50px;
+                height: 50px;
+		     }
+             &:before {
+         	    padding-top: 13px;
+			    width: 50px;
+			    font-size: 24px;
+             }
+             .js-form-type-checkbox {
+                 input[type="checkbox"] {
+             	    height: 20px;
+				    width: 20px;
+				    right: 5px;
+				    top: 5px;
+                 }
+                 .file {
+                 	a {
+                 		&:before {
+             			    height: 50px;
+						    width: 50px;
+						    background-position: 10px 18px;
+						    padding: 0;
+                 		}
+                 	}
+                 }
+             }
+             .option {
+             	&:after {
+             		top: 4px;
+				    right: 4px;
+				    height: 15px;
+                    width: 15px;
+                    line-height: 15px;
+                    font-size: 12px;
+                    padding: 0;
+                    text-align: center;
+             	}
+             }
+	   	  }
+	   }
+	}
+	/** css for import tweet **/
+	.-form-tweets-queue-csv-upload {
+       > .create-header {
+       	 + .create-header {
+       	 	text-align: center;
+       	 	> div {
+       	 		width: 100%;
+       	 	}
+       	 }
+       }
+       .js-form-managed-file {
+       	    border-radius: 6px;
+       	    text-align: left;
+       }
+       #edit-submit {
+       	   border-radius: 4px;
+       	   position: relative;
+       	   top: 0;
+       	   right: 0;
+       	   margin: 20px 0 5px 0;
+       	   padding: .85em 2em;
+       	   display: inline;
+       }
+       .file--mime-text-csv {
+       	 + .form-submit {
+       	 	right: 5px;
+            top: 4px;
+            position: absolute;
+       	 }
+       }
+	}
+	.no-tweet-found {
+		font-size: 28px;
+		padding: .5em 0;
+			a {
+				padding: .65em 1em;
+				margin-right: 0;
+				font-size: 14px;
+			}
+	}
+	/** profile setting page **/
+	.profilesettingform {
+	    margin-top: 75px;
+	    margin-bottom: 70px;
+	    .message-header {
+	        .js-form-item,
+	        #change-password {
+	       	    width: 100%;
+			    margin-right: 0;
+			    margin-bottom: 1em;
+	        }
+	        input[type="submit"] {
+	        	margin: 20px auto;
+	        	max-width: 50%;
+                width: 100%;
+	        }
+	    }
+	   .profile-setting {
+	   	    margin-left: 0;
+   	        font-size: 18px;	   	        
+		    font-weight: bold;
+	   }
+	}
+}
+
+/* css for tablet **/
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+	/** header **/
+	#header {
+	   .site-branding {
+	       a {
+	       	    margin-left: 20px;
+	       }
+	   }
+	}
+   /** css for slider **/
+   .path-frontpage {
+   	  #block-srijan-content {
+   	  	margin-top: -63px;
+   	  	float: none;
+   	  }
+   	  .section { 
+	   	     + .section { 
+	   	        .region-middle {
+                    margin-top: 50px;
+	   	        }
+	   	    }
+	   	}
+   }
+   .user-login-form {
+   	    width: 320px;
+        margin-right: 15px;
+        padding: 5em 2em 6em 2em;
+        margin-top: 0;
+        height: 435px;
+        .form-item-name {
+    	    margin-bottom: 1.5em;
+        }
+   }
+   .twitter-btn {
+   	    padding: 15px 30px;
+   }
+   #forgot-password-section {
+   	    width: 80%;
+   	    font-size: 18px;
+     .signup {
+     	margin-bottom: 1.5em;
+     }
+   }
+   .Home-page--blukstore--section  {
+       .views-field-body {
+       	  padding: 0px 20px;
+       }
+   }
+    .view-home-page-carousel {
+        .field-content  {
+        	height: 100%;
+        }
+        .flexslider {
+            height: 590px;
+            .slides {
+            	
+            	.slider-content {
+            		top: 20%;
+            		left: 30px;
+            		p {
+            			font-size: 14px;
+            		}
+            		h2 {
+            		   font-size: 28px;
+            	    }
+            	}
+            	.views-field-field-front-page-image {
+            		height: 590px;
+            		img {
+            			height: 100%;
+            			width: auto;
+            		}
+            	}
+            }
+            .flex-control-paging {
+            	bottom: 130px;
+			    left: 95px;
+			    width: 140px;
+
+            }
+            .flex-direction-nav {
+            	width: 320px;
+			    bottom: 24%;
+			    left: 0;
+            }
+        }
+    }
+    .block-total-twitter-tweets-block, 
+    .block-total-twitter-users-block {
+    	margin-top: 170px;
+    	margin-left: 2em;
+    	.count {
+    		font-size: 24px;
+    	}
+    	.label {
+    		font-size: 16px;
+    	}
+    }
+    .block-total-twitter-tweets-block {
+    	margin-left: 10em !important;
+    	&:after {
+    		left: 115px;
+    	}
+    }
+    .block-total-twitter-users-block:after {
+		top: 14px;
+		left: 112px;
+		padding: 10px 12px;
+		font-size: 24px;
+    }
+    .block-what-barbet-is {
+    	padding: 5em 20px;
+    	padding-top: 0;
+    }
+    .block-block-content {
+       .field--name-field-title {
+       	 font-size: 32px;
+       }
+    }
+    .Home-page--blukstore--section {
+       .views-field-title {
+       	  font-size: 18px;
+       }
+    }
+    .section__mission-image {
+    	padding: 20px
+    	img {
+    		max-width: 100%;
+    	}
+    }
+    .section__mission--text {
+    	padding: 20px 20px;
+        p {
+           &:first-child {
+               font-size: 32px;
+               margin-top: 0;
+               line-height: 1;
+           }
+           &:last-child {
+           	   margin-bottom: 0;
+           }
+        }
+    }
+    .block-we-vailble-for-your-favour {
+    	.field--name-field-title {
+    		max-width: 560px;
+            margin: 0 auto;
+    	}
+    }
+    .block-simplenews {
+    	padding: 30px 20px;
+    }
+    #block-copyrightblock {
+    	float: left;
+    	width: 100%;
+    }
+    /** dashboard **/
+    .block-users-dashboard-header-block , 
+    .block-users-dashboard-header-profile-block {
+        .profile {
+           > a {
+             > div {
+         	    padding-right: 10px;
+             }
+           }
+        }
+    }
+    .block-users-tweets-statistics-block {
+       .content  {
+          > div  {
+               a  {
+                  .total_tweets,
+                  .valid_tweets,
+                  .archived_tweets {
+                      &:before {
+                      	    font-size: 2.2em;
+                      	    top: 25px;
+                      }
+                  }
+                  &.invalid_tweets {
+                  	 .valid_tweets {
+                         &:before {
+                     	    top: 25px;
+                 	        background-size: 88%;
+                         }
+                  	  }
+                  }
+                  .text {
+                  	    font-size: 13px;
+                  }
+               }
+          }
+       }
+    }
+    .block-users-left-side-bar-block,
+    .block-non-twitter-users-left-side-bar-block  {
+	    .profile ,
+	    .non-twitter-profile {
+	    	~ div {
+	    		    font-size: 13px;
+	    	    a {
+	    	    	font-size: 13px;
+	    	    }
+	    	}
+	    }
+	}
+	.send-tweets-form,
+	.tweets-queue-tweet-form {
+		#edit-save, 
+	    #edit-cancel,
+	    #edit-submit,
+	    #edit-clone,
+	    #edit-tweet-now {
+            margin-top: 90px;
+            font-size: 16px;
+	    }
+	    .form-type-textarea {
+	    	margin-bottom: 30px;
+	    }
+	    .message-header {
+	       .form-item-display-box {
+	       	    width: 100%;
+	       	    margin-top: -25px;
+	       	    position: absolute;
+    			right: 17px;
+	       }
+	    }
+	}
+}
+
+
+/** portrait view for ipad **/
+@media only screen and (min-width: 768px) and (max-width: 980px) {
+   .user-logged-in {
+	    .block-users-valid-tweets-block, 
+	    .block-users-in-valid-tweets-block, 
+	    .block-users-archived-tweets-block, 
+	    .block-users-all-tweets-block, 
+	    .block-users-tweeted-tweets-block {
+            max-height: 75vh;
+            .item-list {
+               .header {
+               	     font-size: 9px;
+               }
+               + .item-list {
+               	   ul {
+               	   	  ul {
+               	   	  	 font-size: 9px;
+               	   	  }
+               	   }
+               }
+            }
+	    } 
+	}
+	.custom-checkbox {
+	   input {
+	   	    height: 15px;
+    		width: 15px;
+	   }
+	   label {
+	   	 	width: 15px;
+    		height: 15px;
+	   }
+	}
+	/** My profile **/
+	.profilesettingform {
+	    .message-header {
+	        .js-form-item, 
+	        #change-password {
+	      	    margin-right: 75px;
+	      	}
+	      	input[type="submit"] {
+	      		margin: 20px 165px;
+	      	}
 	    }
 	}
 }

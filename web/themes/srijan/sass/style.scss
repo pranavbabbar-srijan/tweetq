@@ -542,6 +542,7 @@ body {
 		border-bottom: 1px solid rgba(0,0,0,.3);
 		display: block;
 		width: 100%;
+		border-radius: 0;
 		&.error {
 			border-color: #e74c3c;
 		}
@@ -2486,6 +2487,7 @@ margin-top: 120px;
 							z-index: 999;
 							right: 5px;
 							top: 5px;
+							cursor: pointer;
 							&:hover {
 								+ .option:after {
 									background: $twitter;
@@ -4622,7 +4624,7 @@ margin-top: 120px;
 #delete-selected input {
 	float: right;
     padding: 10px 20px;
-    background: #b5b5b5;
+    background: #7d7d7d;
     border-radius: 5px;
     margin-right: 10px;
     margin-bottom: 18px;
@@ -4642,6 +4644,7 @@ margin-top: 120px;
     &:disabled {
     	background: $gray;
 	    opacity: .35;
+	    cursor: default;
 	    &:hover {
     	   background: $gray;
 	       opacity: .35;
@@ -4725,5 +4728,5 @@ margin-top: 120px;
 }
 
 .feedback_link {
-	display: none;
+	display: none !important;
 }

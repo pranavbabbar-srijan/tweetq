@@ -68,6 +68,11 @@ class UsersLeftSideBarBlock extends BlockBase {
     $settings_link = "<a " . $class . " href='" . $base_url .'/user/' . $uid . '/edit' . "'>" .
       TWITTER_SETTING_LABEL ."</a>";
 
+    $class = tweets_queue_match_current_path($current_path, TWITTER_TOTAL_TWEET_PATH);
+    $total_twitt_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_TOTAL_TWEET_PATH . "'>" .
+      TWITTER_TOTAL_TWEET_LABEL ."</a>";
+    
+
     $create_tweet_output = "<div class='create_tweets'>
       <span class='text'>" . $create_tweet_link . "</span></div>" ;
 
@@ -75,10 +80,10 @@ class UsersLeftSideBarBlock extends BlockBase {
       <span class='text'>" . $import_tweet_link . "</span>" ;
 
     $import_csv_logs_output = "<div class='import_tweets_logs'>
-      <span class='text'>" . $import_csv_logs . "</span></div>" ;
-    "</div>";
+      <span class='text'>" . $import_csv_logs . "</span></div></div>";
 
-    $my_tweets_prefix = "<div id='my_tweets'> 
+
+    $my_tweets_prefix = "<span class='mobile-display total_twitt_mobile'>" . $total_twitt_link . "</span><div id='my_tweets'> 
     <span class='text'>My Tweets</span>";
 
     $valid_tweets_output = "<div class='valid_tweets'>

@@ -610,7 +610,8 @@ body {
     outline: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     display: block;
-    width: 100%; }
+    width: 100%;
+    border-radius: 0; }
     .user-login-form input[type=text].error, .user-login-form input[type=password].error, .user-login-form input[type=email].error {
       border-color: #e74c3c; }
   .user-login-form label {
@@ -2297,7 +2298,8 @@ margin-top: 120px;
         width: 20px;
         z-index: 999;
         right: 5px;
-        top: 5px; }
+        top: 5px;
+        cursor: pointer; }
         .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"]:hover + .option:after, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox input[type="checkbox"]:hover + .option:after {
           background: #2aa9e0; }
       .send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file, .tweets-queue-tweet-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file {
@@ -4139,7 +4141,7 @@ body {
 #delete-selected input {
   float: right;
   padding: 10px 20px;
-  background: #b5b5b5;
+  background: #7d7d7d;
   border-radius: 5px;
   margin-right: 10px;
   margin-bottom: 18px;
@@ -4156,7 +4158,8 @@ body {
     background: #7d7d7d; }
   #delete-selected input:disabled {
     background: #979797;
-    opacity: .35; }
+    opacity: .35;
+    cursor: default; }
     #delete-selected input:disabled:hover {
       background: #979797;
       opacity: .35; }
@@ -4229,4 +4232,4 @@ body {
   position: fixed; }
 
 .feedback_link {
-  display: none; }
+  display: none !important; }

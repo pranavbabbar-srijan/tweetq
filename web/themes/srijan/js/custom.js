@@ -65,7 +65,7 @@
   			$("#user-form-email-validation-error").remove();
   			$("#email-sent").remove();
   			if (emails.length == 0) {
-	    		$("<span id='user-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+	    		$("<span id='user-form-email-validation-error' class='validation-error'>" + 'Please enter an email address' + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 	    		return;
 	    	}
 
@@ -73,7 +73,7 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
-					location.reload();
+					//location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
@@ -113,7 +113,7 @@
   			$("#profile-account-settings-form-email-validation-error").remove();
   			$("#email-sent").remove();
   			if (emails.length == 0) {
-	    		$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#profilesettingform #edit-invite-friend-list" );
+	    		$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + 'Please enter an email' + "</p>").insertAfter( "#profilesettingform #edit-invite-friend-list" );
 	    		return;
 	    	}
 
@@ -1192,14 +1192,17 @@
 			   function sidebarnav() {
 			     if(window_width < 767) {
 			       $("#block-primarymenu").appendTo( ".sidenav" );
-			     } else {
-			       $("#block-primarymenu").appendTo( ".region-header" ); 
-			     }
+			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
+			     } 
 			   }
+			   $(window).click(function() {
+				  $('.c-hamburger').removeClass('is-active');
+				});
 			   $( window ).resize(sidebarnav);
 			   	function clicksidenav() {
-					$('.c-hamburger').click(function(){
+					$('.c-hamburger').click(function(e){
 	                    $(this).toggleClass('is-active');
+	                    e.stopPropagation();
 					});
 				}
 })(jQuery);
@@ -1231,6 +1234,7 @@
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
 	 		onChangeDisableTweet();
+	 		$('.messages').delay(500).animate({'bottom': '0'}, 50);
 	 	}
 	 };
 })(jQuery);
