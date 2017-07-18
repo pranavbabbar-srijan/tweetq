@@ -1121,7 +1121,8 @@
 		    // realLength is not 140, links counts for 23 characters always.
 		    var realLength = 140;
 		    var remainingLength = 140 - currentValuelength;
-
+		    $($textarea).addClass('linked');
+		    $($placeholderBacker).addClass('linked');
 
 		    if (0 > remainingLength) {
 		      // Split value if greater than 
@@ -1130,12 +1131,10 @@
 		      ;
 
 		      // Fill the hidden div.
-		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>').addClass('linked').attr('contenteditable','true');
-		      $($textarea).addClass('deactive linked');
+		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
 		      $('#edit-display-box').addClass('red-text');
 		    } else {
-		      $placeholderBacker.html('').removeClass('linked').removeAttr('contenteditable');
-		      $($textarea).removeClass('deactive linked');
+		      $placeholderBacker.html('');
 		      $('#edit-display-box').removeClass('red-text');
 		    }
 		  }
