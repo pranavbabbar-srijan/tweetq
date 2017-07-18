@@ -1087,9 +1087,12 @@
          //    $('.option + .form-submit').submit();
          //    });
          // });
-        $( ".faq .faq-qa-header" ).each(function( index ) {
-		  $(this).unwrap();
-		});
+         var window_width_ = $(window).width();
+         if(window_width_ > 768) {
+	        $( ".faq .faq-qa-header" ).each(function( index ) {
+			  $(this).unwrap();
+			});
+	    }
 		$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
         
         setTimeout(function(){ 
