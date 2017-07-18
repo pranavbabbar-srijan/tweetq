@@ -1130,10 +1130,12 @@
 		      ;
 
 		      // Fill the hidden div.
-		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>').addClass('active').attr('contenteditable','true');
+		      $($textarea).addClass('deactive');
 		      $('#edit-display-box').addClass('red-text');
 		    } else {
-		      $placeholderBacker.html('');
+		      $placeholderBacker.html('').removeClass('active').removeAttr('contenteditable');
+		      $($textarea).removeClass('deactive');
 		      $('#edit-display-box').removeClass('red-text');
 		    }
 		  }
@@ -1242,6 +1244,9 @@
 	                    e.stopPropagation();
 					});
 				}
+				$(".import_tweets").click(function() {
+				  $(this).toggleClass('active');
+				});
 })(jQuery);
 
 

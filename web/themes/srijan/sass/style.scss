@@ -1577,6 +1577,9 @@ margin-top: 120px;
 		// left menu 
 		#my_tweets > span.text {
 			cursor: pointer;
+			&:hover {
+				color: #212121;
+			}
 			~ div {
 				padding-left: 35px;
 				display: none;
@@ -1603,6 +1606,9 @@ margin-top: 120px;
 			&.active {
 				> span.text {
 					color: #212121;
+					&:after {
+					    content: "\f106";
+					}
 				}
 			}
 		}
@@ -1989,6 +1995,45 @@ margin-top: 120px;
 				border-bottom: 1px solid rgba(0,0,0,.1);
 				padding-bottom: .6em;
 				margin-bottom: 0.6em !important;
+				position: relative;
+				/*&:after {
+					content: "\f107";
+				    position: absolute;
+				    right: 0;
+				    font-family: 'fontawesome';
+				    height: 20px;
+				    width: 20px;
+				    line-height: 20px;
+				    top: 13px;
+				    text-align: center;
+				    cursor: pointer;
+				}
+				&.active {
+					> span {
+						a {
+							color: #212121;
+						}
+					}
+					&:after {
+						content: "\f106";
+						color: #212121;
+					}
+					.import_tweets_logs {
+						transition: .5s ease-in-out;
+						margin-top: 0;
+						a {
+							color: #979797;
+						}
+					}
+				}
+				.import_tweets_logs {
+				    margin-top: -48px;
+				    transition: .5s ease-in-out;
+				    a {
+				    	transition: .5s ease-in-out;
+				    	color: transparent;
+				    }
+				}*/
 			}
 		}
 		.block-sign-in-with-twitter-block {
