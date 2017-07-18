@@ -4032,16 +4032,16 @@ body {
 .send-tweets-form .ajax-progress.ajax-progress-throbber,
 .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber {
   display: none; }
-  .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child,
-  .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child {
+  .send-tweets-form .ajax-progress.ajax-progress-throbber:nth-last-child(2),
+  .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) {
     height: 80px;
     width: 80px;
     text-align: center;
     border-radius: 7px;
     position: relative;
     display: block !important; }
-    .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child .throbber,
-    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child .throbber {
+    .send-tweets-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .throbber,
+    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .throbber {
       display: inline-block;
       font: normal normal normal 14px/1 FontAwesome;
       font-size: inherit;
@@ -4053,15 +4053,15 @@ body {
       -webkit-animation: spin 2s linear infinite;
       animation: spin 2s linear infinite;
       top: 20px; }
-      .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child .throbber:before,
-      .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child .throbber:before {
+      .send-tweets-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .throbber:before,
+      .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .throbber:before {
         content: "\f110";
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
         font-size: 30px;
         color: #96c85a; }
-    .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child .message,
-    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child .message {
+    .send-tweets-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .message,
+    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .message {
       display: none; }
 
 /** twitter box css **/
