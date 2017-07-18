@@ -1130,12 +1130,12 @@
 		      ;
 
 		      // Fill the hidden div.
-		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>').addClass('active').attr('contenteditable','true');
-		      $($textarea).addClass('deactive');
+		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>').addClass('linked').attr('contenteditable','true');
+		      $($textarea).addClass('deactive linked');
 		      $('#edit-display-box').addClass('red-text');
 		    } else {
-		      $placeholderBacker.html('').removeClass('active').removeAttr('contenteditable');
-		      $($textarea).removeClass('deactive');
+		      $placeholderBacker.html('').removeClass('linked').removeAttr('contenteditable');
+		      $($textarea).removeClass('deactive linked');
 		      $('#edit-display-box').removeClass('red-text');
 		    }
 		  }
