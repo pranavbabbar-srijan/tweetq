@@ -1103,8 +1103,10 @@
 
 		      // Fill the hidden div.
 		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+		      $('.edit-display-box').addClass('red-text');
 		    } else {
 		      $placeholderBacker.html('');
+		      $('.edit-display-box').removeClass('red-text');
 		    }
 		  }
 		  
@@ -1219,11 +1221,13 @@
 
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
-		if(number_of_divs > 5) {
+		if(number_of_divs >= 4) {
+			$('.form-managed-file').append( "<span class='file-upload-error'>You can upload only four images</span>" );
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 		}
 		else {
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
+		   $('.form-managed-file').append( "<span class='file-upload-error display-none'>You can upload only four images</span>" );
 		}
 	}
 

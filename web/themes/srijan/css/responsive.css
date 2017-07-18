@@ -737,7 +737,9 @@
       .notifications .notification-message-list > div:nth-child(1) {
         width: calc(100% - 11px); }
       .notifications .notification-message-list > div span.message_history_count {
-        width: 100%; } }
+        width: 100%; }
+  #edit-display-box .red-text {
+    color: red; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
