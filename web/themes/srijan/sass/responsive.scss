@@ -918,11 +918,12 @@
 	}
 	/** css for notification **/
 	.notifications {
+		 width: 100%;
 		.notification-message-list {
 			height: 86vh;
 			width: 100%;
 			&.active {
-				left: 53px;
+				left: 0;
 			}
 			> div {
 				&:nth-child(1) {
