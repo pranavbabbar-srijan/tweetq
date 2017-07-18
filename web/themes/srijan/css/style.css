@@ -1538,6 +1538,9 @@ margin-top: 120px;
     right: 26px;
     font-family: 'fontawesome'; }
 
+#my_tweets.active > span.text {
+  color: #212121; }
+
 .ripple {
   width: 0;
   height: 0;

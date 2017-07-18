@@ -847,6 +847,11 @@
 				}					
 			}
 		}
+		#edit-display-box {
+			&.red-text {
+				color: red;
+			}
+		}
 	}
 	/** css for import tweet **/
 	.-form-tweets-queue-csv-upload {
@@ -943,11 +948,7 @@
 			}
 		}
 	}
-	#edit-display-box {
-		.red-text {
-			color: red;
-		}
-	}
+	
 }
 
 /* css for tablet **/
