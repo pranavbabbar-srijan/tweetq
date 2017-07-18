@@ -73,7 +73,7 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
-					//location.reload();
+					location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
@@ -1186,6 +1186,13 @@
 	        	:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 	        }
 
+	  //       var number_of_fields = $('.js-form-item-field-mobile-number').val();
+			// var length = number_of_divs.length;
+			// if(length = 0){
+			// 	$("#profile-settings-form #edit-submit").attr('disabled', 'true');
+			// }else {
+			//   $("#profile-settings-form #edit-submit").remove('disabled');
+			// }
 
 			 // js for mobile 
 			   var window_width = $(window).width();

@@ -234,8 +234,8 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
      // 'nid' => $message_data->nid,
       'uid' => $uid,
       'created' => time(),
-      'type' => 'Profile',
-      'message' => 'Profile has been updated',
+      'type' => 'Settings',
+      'message' => 'Settings has been updated',
     );
     tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
       break;
