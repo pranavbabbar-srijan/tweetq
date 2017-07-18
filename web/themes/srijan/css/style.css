@@ -4077,13 +4077,12 @@ body {
 
 .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber,
 .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber {
-  /*display: none;*/
   height: 80px;
   width: 80px;
   text-align: center;
   border-radius: 7px;
   position: relative;
-  display: block !important; }
+  display: block; }
   .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .throbber,
   .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .throbber {
     display: inline-block;
@@ -4107,6 +4106,9 @@ body {
   .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .message,
   .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .message {
     display: none; }
+  .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:last-child,
+  .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:last-child {
+    display: none !important; }
 
 /** twitter box css **/
 .send-tweets-form .form-textarea-wrapper,

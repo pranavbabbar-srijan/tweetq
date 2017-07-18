@@ -4558,15 +4558,13 @@ margin-top: 120px;
 			.send-tweets-form,
 			.tweets-queue-tweet-form  {
 				.js-form-type-managed-file {
-					.ajax-progress.ajax-progress-throbber {
-						/*display: none;*/
-						
+					.ajax-progress.ajax-progress-throbber {				
 							height: 80px;
 							width: 80px;
 							text-align: center;
 							border-radius: 7px;		
 							position: relative;
-							display: block !important;
+							display: block ;
 							.throbber {
 								display: inline-block;
 								font: normal normal normal 14px/1 FontAwesome;
@@ -4589,6 +4587,9 @@ margin-top: 120px;
 							}	
 							.message {
 								display: none;
+							}
+							&:last-child {
+								display: none !important;
 							}
 						
 					}
