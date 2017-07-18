@@ -57,7 +57,33 @@
 
 		$( "#foo" ).trigger( "click" );
 
+		// Disable the update button on profile page
+        var disable_elements = $('.profilesettingform .form-text');
+		 if(disable_elements.length){
+	        (disable_elements.val().length <= 0)? $(".profilesettingform #edit-submit").attr('disabled', 'true')
+	        	:$(".profilesettingform #edit-submit").removeAttr('disabled');
+	        }
+		$(".profilesettingform .form-text").keyup(function() {
+			var get_length = $(this);
+			 if(get_length.length){
+	        (get_length.val().length <= 0)? $(".profilesettingform #edit-submit").attr('disabled', 'true')
+	        	:$(".profilesettingform #edit-submit").removeAttr('disabled');
+	        }
+		});
 
+		//Disable the update button on settings page
+		var selected_value = $( "#edit-field-country option:selected" ).text();
+		if (selected_value == '- None -') {
+			$(".user-form #edit-submit").attr('disabled', 'true');
+		}
+		$("#edit-field-country").on('change',function() {
+			  var selected_valuea = $('#edit-field-country :selected').text();
+	          if (selected_valuea == '- None -') {
+				$(".user-form #edit-submit").attr('disabled', 'true');
+			  } else {
+			  	$(".user-form #edit-submit").removeAttr('disabled');
+			  }
+		});
 
 		//Account setting invite friends.
 		$("#user-form #invite-friends").click(function() {
@@ -73,7 +99,7 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
-					//location.reload();
+					location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
@@ -1024,6 +1050,8 @@
 
 	$('#my_tweets .text').click(function() {
 		$(this).siblings('div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+		$(this).parent().toggleClass('active');
+
 	});
 
 	if ($('#my_tweets > div a').hasClass('active')) {
@@ -1186,6 +1214,13 @@
 	        	:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 	        }
 
+	  //       var number_of_fields = $('.js-form-item-field-mobile-number').val();
+			// var length = number_of_divs.length;
+			// if(length = 0){
+			// 	$("#profile-settings-form #edit-submit").attr('disabled', 'true');
+			// }else {
+			//   $("#profile-settings-form #edit-submit").remove('disabled');
+			// }
 
 			 // js for mobile 
 			   var window_width = $(window).width();
