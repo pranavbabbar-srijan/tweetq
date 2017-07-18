@@ -721,7 +721,17 @@
     font-size: 16px;
     text-align: center;
     padding: 0;
-    line-height: 20px; } }
+    line-height: 20px; }
+  /** css for notification **/
+  .notifications .notification-message-list {
+    height: 86vh;
+    width: 100%; }
+    .notifications .notification-message-list.active {
+      left: 53px; }
+    .notifications .notification-message-list > div:nth-child(1) {
+      width: calc(100% - 36px); }
+    .notifications .notification-message-list > div span.message_history_count {
+      width: 100%; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

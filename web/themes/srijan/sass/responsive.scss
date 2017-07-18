@@ -916,6 +916,24 @@
 		    line-height: 20px;
 	    }
 	}
+	/** css for notification **/
+	.notifications {
+		.notification-message-list {
+			height: 86vh;
+			width: 100%;
+			&.active {
+				left: 53px;
+			}
+			> div {
+				&:nth-child(1) {
+					width: calc(100% - 36px);
+				}
+				span.message_history_count {
+					width: 100%;
+				}
+			}
+		}
+	}
 }
 
 /* css for tablet **/
