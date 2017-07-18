@@ -1139,6 +1139,10 @@
 		      $('#edit-display-box').removeClass('red-text');
 		    }
 		  }
+            // scroll two bar same time same class
+		    $('.linked').scroll(function(){
+			    $('.linked').scrollTop($(this).scrollTop());    
+			})
 		  
 		  $(document).ready(function () {
 		  	 clicksidenav();
