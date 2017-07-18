@@ -1222,13 +1222,20 @@
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
 		if(number_of_divs >= 4) {
-			$('.form-managed-file').append( "<span class='file-upload-error'>You can upload only four images</span>" );
+			
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 		}
 		else {
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
-		   $('.form-managed-file').append( "<span class='file-upload-error display-none'>You can upload only four images</span>" );
 		}
+		$(".send-tweets-form input[type='file']").change(function(){
+	       var $fileUpload = $(".send-tweets-form input[type='file']");
+	       if (parseInt($fileUpload.get(0).files.length)>= 4){
+	        alert("You can only upload a maximum of 2 files");
+	                    this.value = ‘’;
+	        }
+
+	     });    
 	}
 
 	function onFormCheckBoxChange() {
