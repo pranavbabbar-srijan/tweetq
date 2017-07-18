@@ -1519,6 +1519,8 @@ margin-top: 120px;
 
 #my_tweets > span.text {
   cursor: pointer; }
+  #my_tweets > span.text:hover {
+    color: #212121; }
   #my_tweets > span.text ~ div {
     padding-left: 35px;
     display: none; }
@@ -1537,6 +1539,11 @@ margin-top: 120px;
     position: absolute;
     right: 26px;
     font-family: 'fontawesome'; }
+
+#my_tweets.active > span.text {
+  color: #212121; }
+  #my_tweets.active > span.text:after {
+    content: "\f106"; }
 
 .ripple {
   width: 0;
@@ -1857,7 +1864,46 @@ margin-top: 120px;
   .block-users-left-side-bar-block .import_tweets, .block-non-twitter-users-left-side-bar-block .import_tweets {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-bottom: .6em;
-    margin-bottom: 0.6em !important; }
+    margin-bottom: 0.6em !important;
+    position: relative;
+    /*&:after {
+					content: "\f107";
+				    position: absolute;
+				    right: 0;
+				    font-family: 'fontawesome';
+				    height: 20px;
+				    width: 20px;
+				    line-height: 20px;
+				    top: 13px;
+				    text-align: center;
+				    cursor: pointer;
+				}
+				&.active {
+					> span {
+						a {
+							color: #212121;
+						}
+					}
+					&:after {
+						content: "\f106";
+						color: #212121;
+					}
+					.import_tweets_logs {
+						transition: .5s ease-in-out;
+						margin-top: 0;
+						a {
+							color: #979797;
+						}
+					}
+				}
+				.import_tweets_logs {
+				    margin-top: -48px;
+				    transition: .5s ease-in-out;
+				    a {
+				    	transition: .5s ease-in-out;
+				    	color: transparent;
+				    }
+				}*/ }
 
 .block-sign-in-with-twitter-block {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";
@@ -4029,40 +4075,38 @@ body {
       background: url("../images/5.svg") no-repeat center !important;
       background-size: 30px !important; }
 
-.send-tweets-form .ajax-progress.ajax-progress-throbber,
-.tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber {
-  display: none; }
-  .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child,
-  .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child {
-    height: 80px;
-    width: 80px;
-    text-align: center;
-    border-radius: 7px;
+.send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber,
+.tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber {
+  /*display: none;*/
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  border-radius: 7px;
+  position: relative;
+  display: block !important; }
+  .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .throbber,
+  .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .throbber {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: none;
     position: relative;
-    display: block !important; }
-    .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child .throbber,
-    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child .throbber {
-      display: inline-block;
-      font: normal normal normal 14px/1 FontAwesome;
-      font-size: inherit;
-      text-rendering: auto;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      background: none;
-      position: relative;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    top: 20px; }
+    .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .throbber:before,
+    .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .throbber:before {
+      content: "\f110";
       -webkit-animation: spin 2s linear infinite;
       animation: spin 2s linear infinite;
-      top: 20px; }
-      .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child .throbber:before,
-      .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child .throbber:before {
-        content: "\f110";
-        -webkit-animation: spin 2s linear infinite;
-        animation: spin 2s linear infinite;
-        font-size: 30px;
-        color: #96c85a; }
-    .send-tweets-form .ajax-progress.ajax-progress-throbber:last-child .message,
-    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:last-child .message {
-      display: none; }
+      font-size: 30px;
+      color: #96c85a; }
+  .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .message,
+  .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber .message {
+    display: none; }
 
 /** twitter box css **/
 .send-tweets-form .form-textarea-wrapper,

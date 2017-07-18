@@ -1130,9 +1130,13 @@
 		      ;
 
 		      // Fill the hidden div.
-		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>').addClass('active').attr('contenteditable','true');
+		      $($textarea).addClass('deactive');
+		      $('#edit-display-box').addClass('red-text');
 		    } else {
-		      $placeholderBacker.html('');
+		      $placeholderBacker.html('').removeClass('active').removeAttr('contenteditable');
+		      $($textarea).removeClass('deactive');
+		      $('#edit-display-box').removeClass('red-text');
 		    }
 		  }
 		  
@@ -1240,6 +1244,9 @@
 	                    e.stopPropagation();
 					});
 				}
+				$(".import_tweets").click(function() {
+				  $(this).toggleClass('active');
+				});
 })(jQuery);
 
 
@@ -1247,7 +1254,7 @@
 
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
-		if(number_of_divs > 5) {
+		if(number_of_divs >= 4) {
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 		}
 		else {
@@ -1269,7 +1276,7 @@
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
 	 		onChangeDisableTweet();
-	 		$('.messages').delay(500).animate({'bottom': '0'}, 50);
+	 		$('.messages').delay(8000).fadeOut(300);
 	 	}
 	 };
 })(jQuery);
