@@ -4507,8 +4507,8 @@ margin-top: 120px;
 			.tweets-queue-tweet-form  {
 				.js-form-type-managed-file {
 					.ajax-progress.ajax-progress-throbber {
-						display: none;
-						&:nth-last-child(1) {
+						/*display: none;*/
+						
 							height: 80px;
 							width: 80px;
 							text-align: center;
@@ -4538,7 +4538,7 @@ margin-top: 120px;
 							.message {
 								display: none;
 							}
-						}
+						
 					}
 				}
 			}
