@@ -1050,6 +1050,8 @@
 
 	$('#my_tweets .text').click(function() {
 		$(this).siblings('div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+		$(this).parent().toggleClass('active');
+
 	});
 
 	if ($('#my_tweets > div a').hasClass('active')) {
