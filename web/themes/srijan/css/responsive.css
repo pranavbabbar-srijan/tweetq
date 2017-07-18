@@ -665,7 +665,7 @@
         text-align: center; }
   .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:last-child,
   .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:last-child {
-    display: none; }
+    display: none !important; }
   /** css for import tweet **/
   .-form-tweets-queue-csv-upload > .create-header + .create-header {
     text-align: center; }

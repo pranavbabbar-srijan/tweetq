@@ -843,7 +843,7 @@
 	   .js-form-type-managed-file {
 			.ajax-progress.ajax-progress-throbber {
 				&:last-child {
-					display: none;
+					display: none !important;
 				}					
 			}
 		}
