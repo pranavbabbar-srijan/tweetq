@@ -1599,6 +1599,13 @@ margin-top: 120px;
 				font-family: 'fontawesome';
 			}
 		}
+		#my_tweets {
+			&.active {
+				> span.text {
+					color: #212121;
+				}
+			}
+		}
 
 		// ripple effect.
 		.ripple {
