@@ -4029,19 +4029,19 @@ body {
       background: url("../images/5.svg") no-repeat center !important;
       background-size: 30px !important; }
 
-.send-tweets-form .ajax-progress.ajax-progress-throbber,
-.tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber {
+.send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber,
+.tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber {
   display: none; }
-  .send-tweets-form .ajax-progress.ajax-progress-throbber:nth-last-child(2),
-  .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) {
+  .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:nth-last-child(1),
+  .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:nth-last-child(1) {
     height: 80px;
     width: 80px;
     text-align: center;
     border-radius: 7px;
     position: relative;
     display: block !important; }
-    .send-tweets-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .throbber,
-    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .throbber {
+    .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:nth-last-child(1) .throbber,
+    .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:nth-last-child(1) .throbber {
       display: inline-block;
       font: normal normal normal 14px/1 FontAwesome;
       font-size: inherit;
@@ -4053,15 +4053,15 @@ body {
       -webkit-animation: spin 2s linear infinite;
       animation: spin 2s linear infinite;
       top: 20px; }
-      .send-tweets-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .throbber:before,
-      .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .throbber:before {
+      .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:nth-last-child(1) .throbber:before,
+      .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:nth-last-child(1) .throbber:before {
         content: "\f110";
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
         font-size: 30px;
         color: #96c85a; }
-    .send-tweets-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .message,
-    .tweets-queue-tweet-form .ajax-progress.ajax-progress-throbber:nth-last-child(2) .message {
+    .send-tweets-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:nth-last-child(1) .message,
+    .tweets-queue-tweet-form .js-form-type-managed-file .ajax-progress.ajax-progress-throbber:nth-last-child(1) .message {
       display: none; }
 
 /** twitter box css **/
