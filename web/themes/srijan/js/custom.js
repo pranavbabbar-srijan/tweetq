@@ -1103,10 +1103,10 @@
 
 		      // Fill the hidden div.
 		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
-		      $('.edit-display-box').addClass('red-text');
+		      $('#edit-display-box').addClass('red-text');
 		    } else {
 		      $placeholderBacker.html('');
-		      $('.edit-display-box').removeClass('red-text');
+		      $('#edit-display-box').removeClass('red-text');
 		    }
 		  }
 		  
@@ -1222,20 +1222,11 @@
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
 		if(number_of_divs >= 4) {
-			
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 		}
 		else {
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
 		}
-		$(".send-tweets-form input[type='file']").change(function(){
-	       var $fileUpload = $(".send-tweets-form input[type='file']");
-	       if (parseInt($fileUpload.get(0).files.length)>= 4){
-	        alert("You can only upload a maximum of 2 files");
-	                    this.value = ‘’;
-	        }
-
-	     });    
 	}
 
 	function onFormCheckBoxChange() {
