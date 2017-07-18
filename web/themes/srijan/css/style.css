@@ -4137,7 +4137,9 @@ body {
   white-space: pre-wrap;
   width: 100%;
   word-wrap: break-word;
-  z-index: -1; }
+  z-index: -1;
+  min-height: 127px;
+  overflow: auto; }
 
 .send-tweets-form .js-keeper-placeholder-back em,
 .tweets-queue-tweet-form .js-keeper-placeholder-back em {

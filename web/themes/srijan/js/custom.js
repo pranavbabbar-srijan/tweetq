@@ -1124,6 +1124,11 @@
 		    $($textarea).addClass('linked');
 		    $($placeholderBacker).addClass('linked');
 
+		     // scroll two bar same time same class
+		    $('.linked').scroll(function(){
+			    $('.linked').scrollTop($(this).scrollTop());    
+			})
+
 		    if (0 > remainingLength) {
 		      // Split value if greater than 
 		      var allowedValuePart = currentValue.slice(0, realLength),
@@ -1138,10 +1143,7 @@
 		      $('#edit-display-box').removeClass('red-text');
 		    }
 		  }
-            // scroll two bar same time same class
-		    $('.linked').scroll(function(){
-			    $('.linked').scrollTop($(this).scrollTop());    
-			})
+           
 		  
 		  $(document).ready(function () {
 		  	 clicksidenav();

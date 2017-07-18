@@ -4626,6 +4626,8 @@ margin-top: 120px;
 					width: 100%;
 					word-wrap: break-word;
 					z-index: -1;
+					min-height: 127px;
+					overflow: auto;
 				}
 
 				.js-keeper-placeholder-back em {
