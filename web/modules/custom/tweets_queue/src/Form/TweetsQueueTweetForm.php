@@ -89,7 +89,6 @@ class TweetsQueueTweetForm extends FormBase {
       '#default_value' => $fid ? $fid : NULL,
       '#upload_location' => 'public://images/',
       '#title' => t('Upload some photos'),
-      '#maxlength' => 5,
       '#progress_message' => $this->t('Please wait...'),
       '#attributes' => array('multiple' => 'multiple'),
       '#upload_validators' => array(
@@ -188,8 +187,11 @@ class TweetsQueueTweetForm extends FormBase {
     $query->execute()->fetchField();
 
     $cron_run = false;
-    tweets_queue_compile_tweets($message, $cron_run, $images);
+    tweets_queue_compile_tweets($message, $cron_run, $images, $nid);
+    tweets_queue_goto_page($_REQUEST[TWITTER_REDIRECT_PATH]);
+    
     }
+
 
   /**
    * {@inheritdoc}

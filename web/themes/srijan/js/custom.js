@@ -57,13 +57,15 @@
 
 		$( "#foo" ).trigger( "click" );
 
+
+
 		//Account setting invite friends.
 		$("#user-form #invite-friends").click(function() {
 	   		var emails = $('#user-form #edit-invite-friend-list').val();
   			$("#user-form-email-validation-error").remove();
   			$("#email-sent").remove();
   			if (emails.length == 0) {
-	    		$("<span id='user-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+	    		$("<span id='user-form-email-validation-error' class='validation-error'>" + 'Please enter an email address' + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 	    		return;
 	    	}
 
@@ -71,7 +73,7 @@
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 					$('#email-sent').delay(5000).fadeOut(300);
-					location.reload();
+					//location.reload();
 					return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
@@ -111,7 +113,7 @@
   			$("#profile-account-settings-form-email-validation-error").remove();
   			$("#email-sent").remove();
   			if (emails.length == 0) {
-	    		$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + 'Missing email' + "</p>").insertAfter( "#profilesettingform #edit-invite-friend-list" );
+	    		$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + 'Please enter an email' + "</p>").insertAfter( "#profilesettingform #edit-invite-friend-list" );
 	    		return;
 	    	}
 
@@ -1107,8 +1109,8 @@
 		  }
 		  
 		  $(document).ready(function () {
-		  	
-			 
+		  	 clicksidenav();
+			 sidebarnav();
 		    $textarea = $('textarea');
 
 		    // Create a pseudo-element that will be hidden behind the placeholder.
@@ -1177,28 +1179,46 @@
 			   $('#spinner').show().addClass('absolute_top');
 			   $('#overlayspin').show().addClass('absolute_top');
 			 });
-			
-	
 
-                
+		     var tweet_text_elem =  $('#tweets-queue-tweet-form #edit-message');
+	        if(tweet_text_elem.length){
+	        	(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
+	        	:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+	        }
 
 
-	        var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    var tweet_msg_length = tweet_msg.length;
-		    if (tweet_msg_length > 140) {
-	    		$(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
-	    	}
-	    	else {
-	    		$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-	    	}
-	    	
-	    	
-
-	    
+			 // js for mobile 
+			   var window_width = $(window).width();
+			   function sidebarnav() {
+			     if(window_width < 767) {
+			       $("#block-primarymenu").appendTo( ".sidenav" );
+			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
+			     } 
+			   }
+			   $(window).click(function() {
+				  $('.c-hamburger').removeClass('is-active');
+				});
+			   $( window ).resize(sidebarnav);
+			   	function clicksidenav() {
+					$('.c-hamburger').click(function(e){
+	                    $(this).toggleClass('is-active');
+	                    e.stopPropagation();
+					});
+				}
 })(jQuery);
 
 
 (function ($) {
+
+	function onChangeDisableTweet() {
+		var number_of_divs = $('.form-managed-file').find('div').length;
+		if(number_of_divs > 5) {
+			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+		}
+		else {
+		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
+		}
+	}
 
 	function onFormCheckBoxChange() {
 				$(this).parent().next().trigger('mousedown');
@@ -1213,7 +1233,8 @@
 	 	attach: function attach() {
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
-	 		
+	 		onChangeDisableTweet();
+	 		$('.messages').delay(500).animate({'bottom': '0'}, 50);
 	 	}
 	 };
 })(jQuery);
