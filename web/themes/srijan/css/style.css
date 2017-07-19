@@ -4302,47 +4302,68 @@ body {
   transition: .5s ease-in-out; }
 
 /** import log **/
-.block-import-csv-log-block h2 {
-  background: #fafafa;
-  padding: 15px;
-  font-size: 20px;
-  color: #666;
-  align-items: center;
-  font-weight: normal; }
-
-.block-import-csv-log-block .content {
-  background: #fff;
-  padding: 20px; }
-
-.block-import-csv-log-block .import_log_items,
-.block-import-csv-log-block #import-csv-log-header {
-  display: flex;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  width: 100%;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  margin: 0;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-  align-items: center;
-  position: relative; }
-  .block-import-csv-log-block .import_log_items span,
-  .block-import-csv-log-block .import_log_items div,
-  .block-import-csv-log-block #import-csv-log-header span,
-  .block-import-csv-log-block #import-csv-log-header div {
-    width: calc(8.33333%*2);
+.block-import-csv-log-block {
+  top: 79px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+  -moz-box-shadow: 0px 0px 3px #bbb;
+  -webkit-box-shadow: 0px 0px 3px #bbb;
+  box-shadow: 0px 0px 3px #bbb;
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+  background: white;
+  overflow-y: auto;
+  height: 100%;
+  margin-top: 1.15em; }
+  .block-import-csv-log-block h2 {
+    background: #fafafa;
+    padding: 15px;
+    font-size: 20px;
+    color: #666;
+    align-items: center;
+    font-weight: normal; }
+  .block-import-csv-log-block .content {
+    background: #fff;
+    padding: 20px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+    background: white;
+    overflow-y: auto;
+    height: 100%;
+    max-height: 62vh; }
+  .block-import-csv-log-block .import_log_items,
+  .block-import-csv-log-block #import-csv-log-header {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
     box-sizing: border-box;
-    margin: 0 0;
-    padding: 0 15px; }
-  .block-import-csv-log-block .import_log_items div,
-  .block-import-csv-log-block #import-csv-log-header div {
-    font-size: 14px;
-    font-weight: bold; }
-  .block-import-csv-log-block .import_log_items span,
-  .block-import-csv-log-block #import-csv-log-header span {
-    color: #979797;
-    font-size: 14px; }
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    align-items: center;
+    position: relative; }
+    .block-import-csv-log-block .import_log_items span,
+    .block-import-csv-log-block .import_log_items div,
+    .block-import-csv-log-block #import-csv-log-header span,
+    .block-import-csv-log-block #import-csv-log-header div {
+      width: calc(8.33333%*2);
+      box-sizing: border-box;
+      margin: 0 0;
+      padding: 0 15px; }
+    .block-import-csv-log-block .import_log_items div,
+    .block-import-csv-log-block #import-csv-log-header div {
+      font-size: 14px;
+      font-weight: bold; }
+    .block-import-csv-log-block .import_log_items span,
+    .block-import-csv-log-block #import-csv-log-header span {
+      color: #979797;
+      font-size: 14px; }
+  .block-import-csv-log-block .import_log_items {
+    padding: 15px 0;
+    border-bottom: 1px dashed  #ddd; }
