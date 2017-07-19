@@ -1146,6 +1146,16 @@
 				font-size: 30px;
 			}
 		}
+		.node--type-article {
+		   .field--name-body {
+		   	   padding-top: 30px;
+		   }
+		   .field--type-image {
+		       img {
+		       	width: auto;
+		       }
+		   }
+		}
 	}
 	
 }
@@ -1426,6 +1436,32 @@
 	      	input[type="submit"] {
 	      		margin: 20px 165px;
 	      	}
+	    }
+	}
+	/** contact us page **/
+	.path-contact {
+	   .block-system-main-block {
+	   	    width: 30%;
+	   }
+	   .region-content {
+	   	display: flex;
+	   }
+	}
+	.block-contactusimageblock {
+		.field--type-svg-image-field {
+			padding-top: 34px;
+		}
+	    img {
+	    	max-width: 60%;
+	    	height: 100%;
+	    }
+	    .field--name-field-title {
+	    	right: 7%;
+	    	bottom: 0;
+	    	font-size: 20px;
+	    	.green-text {
+    		    font-size: 30px;
+	    	}
 	    }
 	}
 }

@@ -1526,7 +1526,7 @@ margin-top: 120px;
   #my_tweets > span.text:hover {
     color: #212121; }
   #my_tweets > span.text ~ div {
-    padding-left: 35px;
+    padding-left: 30px;
     display: none; }
   #my_tweets > span.text:before {
     content: "\f099";
@@ -1537,17 +1537,19 @@ margin-top: 120px;
     padding: 3px;
     border-radius: 4px;
     vertical-align: bottom;
-    margin-right: 10px; }
+    margin-right: 15px; }
   #my_tweets > span.text:after {
     content: "\f107";
     position: absolute;
     right: 26px;
     font-family: 'fontawesome'; }
 
-#my_tweets.active > span.text {
-  color: #212121; }
-  #my_tweets.active > span.text:after {
-    content: "\f106"; }
+#my_tweets {
+  padding-left: 5px; }
+  #my_tweets.active > span.text {
+    color: #212121; }
+    #my_tweets.active > span.text:after {
+      content: "\f106"; }
 
 .ripple {
   width: 0;
@@ -1895,7 +1897,7 @@ margin-top: 120px;
       .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a {
         color: #979797; }
         .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a:hover, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a:hover {
-          color: #979797; }
+          color: #212121 !important; }
         .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.in-active, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.in-active {
           color: #979797; }
         .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.active, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.active {
@@ -3709,6 +3711,9 @@ body {
   position: relative;
   z-index: 0; }
 
+.page-node-type-article .region-middle {
+  margin-top: -75px; }
+
 .page-node-type-article .block-page-title-block {
   position: absolute;
   width: 100%;
@@ -3742,7 +3747,7 @@ body {
 .page-node-type-article .node--type-article .field--name-body {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 60px 10px;
+  padding: 60px 20px;
   padding-bottom: 0; }
   .page-node-type-article .node--type-article .field--name-body p {
     font-size: 16px;

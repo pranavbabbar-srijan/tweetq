@@ -838,7 +838,11 @@
   .page-node-type-article #header {
     border-bottom: none; }
   .page-node-type-article .block-page-title-block h1 {
-    font-size: 30px; } }
+    font-size: 30px; }
+  .page-node-type-article .node--type-article .field--name-body {
+    padding-top: 30px; }
+  .page-node-type-article .node--type-article .field--type-image img {
+    width: auto; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
@@ -1014,4 +1018,20 @@
   .profilesettingform .message-header #change-password {
     margin-right: 75px; }
   .profilesettingform .message-header input[type="submit"] {
-    margin: 20px 165px; } }
+    margin: 20px 165px; }
+  /** contact us page **/
+  .path-contact .block-system-main-block {
+    width: 30%; }
+  .path-contact .region-content {
+    display: flex; }
+  .block-contactusimageblock .field--type-svg-image-field {
+    padding-top: 34px; }
+  .block-contactusimageblock img {
+    max-width: 60%;
+    height: 100%; }
+  .block-contactusimageblock .field--name-field-title {
+    right: 7%;
+    bottom: 0;
+    font-size: 20px; }
+    .block-contactusimageblock .field--name-field-title .green-text {
+      font-size: 30px; } }

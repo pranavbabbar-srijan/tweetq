@@ -1587,7 +1587,7 @@ margin-top: 120px;
 				color: #212121;
 			}
 			~ div {
-				padding-left: 35px;
+				padding-left: 30px;
 				display: none;
 			}
 			&:before {
@@ -1599,7 +1599,7 @@ margin-top: 120px;
 				padding: 3px;
 				border-radius: 4px;
 				vertical-align: bottom;
-				margin-right: 10px;
+				margin-right: 15px;
 			}
 			&:after {
 				content: "\f107";
@@ -1609,6 +1609,7 @@ margin-top: 120px;
 			}
 		}
 		#my_tweets {
+			padding-left: 5px;
 			&.active {
 				> span.text {
 					color: #212121;
@@ -2035,7 +2036,7 @@ margin-top: 120px;
 						a {
 							color: #979797;
 							&:hover {
-								color: #979797;
+								color: #212121 !important;
 							}
 							&.in-active {
 								color: #979797;
@@ -4140,6 +4141,9 @@ margin-top: 120px;
 					position: relative;
 					z-index: 0;
 				}
+				.region-middle {
+					margin-top: -75px;
+				}
 				.block-page-title-block {
 					position: absolute;
 					width: 100%;
@@ -4177,7 +4181,7 @@ margin-top: 120px;
 					.field--name-body {
 						max-width: 1080px;
 						margin: 0 auto;
-						padding: 60px 10px;
+						padding: 60px 20px;
 						padding-bottom: 0;
 						p {
 							font-size: 16px;
