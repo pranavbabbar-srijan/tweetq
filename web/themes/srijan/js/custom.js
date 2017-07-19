@@ -968,8 +968,8 @@
 		});
 
 		  // Fadeout messages.
-		$('.messages, .messages--error').show(100);
-		$('.messages, .messages--error').delay(8000).fadeOut(300);
+		/*$('.messages, .messages--error').show(100);
+		$('.messages, .messages--error').delay(8000).fadeOut(300);*/
 
 		// Message position changes.
 		$(".path-frontpage .region-content .messages--error").insertAfter("#user-login-prefix .form-type-password");
@@ -1058,7 +1058,7 @@
 	    $('#my_tweets > div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
 	}
 
-	$('.messages').delay(500).animate({'bottom': '0'}, 50);
+	
 
     // change text of summary 
     $(".user-form summary").text("Settings");
@@ -1087,9 +1087,12 @@
          //    $('.option + .form-submit').submit();
          //    });
          // });
-        $( ".faq .faq-qa-header" ).each(function( index ) {
-		  $(this).unwrap();
-		});
+         var window_width_ = $(window).width();
+         if(window_width_ > 768) {
+	        $( ".faq .faq-qa-header" ).each(function( index ) {
+			  $(this).unwrap();
+			});
+	    }
 		$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
         
         setTimeout(function(){ 
@@ -1121,7 +1124,13 @@
 		    // realLength is not 140, links counts for 23 characters always.
 		    var realLength = 140;
 		    var remainingLength = 140 - currentValuelength;
+		    $($textarea).addClass('linked');
+		    $($placeholderBacker).addClass('linked');
 
+		     // scroll two bar same time same class
+		    $('.linked').scroll(function(){
+			    $('.linked').scrollTop($(this).scrollTop());    
+			})
 
 		    if (0 > remainingLength) {
 		      // Split value if greater than 
@@ -1131,10 +1140,13 @@
 
 		      // Fill the hidden div.
 		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+		      $('#edit-display-box').addClass('red-text');
 		    } else {
 		      $placeholderBacker.html('');
+		      $('#edit-display-box').removeClass('red-text');
 		    }
 		  }
+           
 		  
 		  $(document).ready(function () {
 		  	 clicksidenav();
@@ -1240,6 +1252,9 @@
 	                    e.stopPropagation();
 					});
 				}
+				$(".import_tweets").click(function() {
+				  $(this).toggleClass('active');
+				});
 })(jQuery);
 
 
@@ -1247,7 +1262,7 @@
 
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
-		if(number_of_divs > 5) {
+		if(number_of_divs >= 4) {
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 		}
 		else {
@@ -1270,6 +1285,7 @@
 	 		.bind('change', onFormCheckBoxChange);
 	 		onChangeDisableTweet();
 	 		$('.messages').delay(500).animate({'bottom': '0'}, 50);
+	 		$('.messages').delay(8000).fadeOut(300);
 	 	}
 	 };
 })(jQuery);
