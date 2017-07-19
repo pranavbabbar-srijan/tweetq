@@ -948,6 +948,14 @@
 			}
 		}
 	}
+	/* messages in content region **/
+	.region-content,
+	.-form-tweets-queue-csv-upload .js-form-managed-file {
+	   .messages--error,
+	   .messages {
+	   	    position: fixed !important;
+	   }
+	}
 	
 }
 
