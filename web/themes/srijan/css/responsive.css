@@ -733,9 +733,9 @@
     margin-top: auto; }
   /** css for signup page **/
   .path-signup .message-header .js-form-item {
-    width: 100%;
-    margin-bottom: 1em;
-    margin-right: 0; }
+    width: 100% !important;
+    margin-bottom: 1em !important;
+    margin-right: 0 !important; }
     .path-signup .message-header .js-form-item label {
       font-weight: normal; }
   .path-signup .layout-container .region-content {
@@ -767,7 +767,32 @@
   .block-sub-nav-main-menu .menu li {
     margin-bottom: 1em; }
     .block-sub-nav-main-menu .menu li a {
-      color: #ffffff; } }
+      color: #ffffff; }
+  /** contact us page **/
+  .path-contact #header {
+    border-bottom: none; }
+  .path-contact .block-system-main-block {
+    width: 100%;
+    padding: 0 20px;
+    margin-top: -50px; }
+  .path-contact .contact-message-write-to-us-form {
+    max-width: 100%;
+    width: 100%; }
+  .block-contactusimageblock {
+    display: none; }
+  .block-product-srijan-technologies .field--name-field-company-logo {
+    display: none; }
+  .block-product-srijan-technologies .field--name-field-company-title {
+    font-size: 30px; }
+    .block-product-srijan-technologies .field--name-field-company-title .red-text {
+      display: block; }
+  .block-product-srijan-technologies .field--name-field-mobile-number-contact,
+  .block-product-srijan-technologies .field--name-field-contact-,
+  .block-product-srijan-technologies .field--name-field-contact {
+    margin-bottom: 1.2em; }
+  .block-product-srijan-technologies .field--name-field-visit-srijan a,
+  .block-product-srijan-technologies .field--name-field-visit-srijan- a {
+    padding: 10px 50px; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
