@@ -1898,6 +1898,8 @@ margin-top: 120px;
           color: #979797; }
         .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.in-active, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.in-active {
           color: #979797; }
+        .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.active, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.active {
+          color: #979797; }
     .block-users-left-side-bar-block .import_tweets .import_tweets_logs, .block-non-twitter-users-left-side-bar-block .import_tweets .import_tweets_logs {
       position: relative;
       z-index: 0;
