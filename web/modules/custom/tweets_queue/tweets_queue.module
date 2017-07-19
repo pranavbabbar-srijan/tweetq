@@ -230,15 +230,7 @@ function tweets_queue_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
       break;
     case 'user_form':
     tweets_queue_user_profile_form_changes($form);
-    $twitter_history_info = array(
-     // 'nid' => $message_data->nid,
-      'uid' => $uid,
-      'created' => time(),
-      'type' => 'Profile',
-      'message' => 'Profile has been updated',
-    );
-    tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
-      break;
+     break;
     case 'send_tweets_form ':
       break;
 
@@ -1606,6 +1598,8 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         tweets_queue_verify_signup_send_mail($mail, $full_name);
         //tweets_queue_login_twitter_user($uid);
       }
+     
+
       break;
     case 'tweet':
       $title = $entity->get('title')->getValue();
@@ -4670,4 +4664,17 @@ function tweets_queue_decrypt_data($crypted_token) {
     $decrypted_token = openssl_decrypt($crypted_token, ENCRYPT_METHOD, $enc_key, 0, hex2bin($enc_iv));
   }
   return $decrypted_token;
+}
+
+function tweets_queue_user_update($account) {
+  $uid = \Drupal::currentUser()->id();
+  $twitter_history_info = array(
+     // 'nid' => $message_data->nid,
+      'uid' => $uid,
+      'created' => time(),
+      'type' => 'Settings',
+      'message' => 'Settings has been updated',
+  );
+    tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
+
 }

@@ -190,7 +190,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
       'uid' => $uid,
       'created' => time(),
       'type' => 'Import',
-      'message' => 'File have been imported' . ' ' . $file,
+      'message' => 'File have been imported',
     );
     tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
   }
