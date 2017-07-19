@@ -659,6 +659,8 @@ body {
     display: block;
     margin: 0 auto;
     text-align: right; }
+    .user-login-form #forgot-password:hover {
+      opacity: 0.8; }
 
 #user-login-prefix + div {
   position: absolute;
@@ -848,6 +850,8 @@ body.path-update-password .messages--status {
     font-weight: normal;
     background: #f56a6a;
     cursor: pointer; }
+    #forgot-password-section #forgot-password-cancel:hover {
+      background: #e24343; }
 
 .twitter-btn {
   background: #F8F8F8;

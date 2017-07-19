@@ -600,6 +600,9 @@ body {
 		display: block;
 		margin: 0 auto;
 		text-align: right;
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 }
 
@@ -837,6 +840,9 @@ body.path-update-password {
 		font-weight: normal;
 		background: #f56a6a;
 		cursor: pointer;
+		&:hover {
+			background: #e24343;
+		}
 	}
 }
 

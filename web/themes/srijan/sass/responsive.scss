@@ -49,8 +49,7 @@
 	}
 	.user-form {
 		.form-actions {
-			padding: 0;
-			padding-bottom: 10px;
+			padding: 0px 20px 10px 20px;
 			input {
 				width: 100%;
 				margin: 20px auto;
@@ -60,12 +59,17 @@
 			select {
                  flex: none;
 			}
+			label {
+				margin-bottom: 1em;
+				font-weight: normal;
+			}
 		}
 		.details-wrapper {
 			label {
 				flex: none;
 				width: 100%;
 				margin-bottom: 1em;
+				font-weight: normal;
 			}
 			select {
                flex: none;
@@ -76,9 +80,11 @@
 		    	label {
 		    		flex: none;
 		    		margin-bottom: 1em;
+		    		font-weight: normal;
 		    	}
 		    	input {
 		    		flex: none;
+		    		font-size: 12px;
 		    	}
 		    	.validation-error {
 		    		padding-left: 0;
@@ -87,7 +93,8 @@
 		}
 		.invite-friend {
 			right: 20px;
-    		top: 25px;
+    		top: 28px;
+		    font-size: 12px;
 		}
 		.js-form-item {
 		    &.form-item {
@@ -95,8 +102,8 @@
 		    }
 		}
 		summary {
-			font-size: 18px;
-			font-weight: bold;
+			font-size: 16px;
+			font-weight: normal;
 		}
 	}
 	.user-logged-in {
@@ -904,16 +911,26 @@
 	       	    width: 100%;
 			    margin-right: 0;
 			    margin-bottom: 1em;
+			    label {
+			    	font-size: 16px;
+    				font-weight: normal;
+			    }
 	        }
 	        input[type="submit"] {
-	        	margin: 20px auto;
+	        	margin: 10px auto;
                 width: 100%;
+	        }
+	        #change-password {
+	           .change {
+		           	font-size: 12px;
+	           	    top: 45px;
+	           }
 	        }
 	    }
 	   .profile-setting {
 	   	    margin-left: 0;
-   	        font-size: 18px;	   	        
-		    font-weight: bold;
+   	        font-size: 16px;	   	        
+		    font-weight: normal;
 		    padding: 15px 15px;
 	   }
 	}
