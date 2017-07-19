@@ -2406,10 +2406,11 @@ margin-top: 120px;
 						padding: 5px 10px;
 						cursor: pointer;
 						background: $white;
-						color: #303030;
-						border: 1px solid #303030;
+						color: #ffffff;
+						background: #96c85a;
 						&:hover {
-							opacity: .8;						}
+							opacity: .8;
+							background: #82bb3e;					}
 						&:active {
 							-webkit-transform: translateY(1px);
 							transform: translateY(1px);
@@ -3956,11 +3957,14 @@ margin-top: 120px;
 					position: absolute;
 					right: 3%;
 					top: -9px;
-					border: 1px solid;
+					color: $white;
 					border-radius: 5px;
 					padding: 5px 10px;
 					cursor: pointer;
-					background: $white;
+					background: #96c85a;
+					&:hover {
+						background: #82bb3e;
+					}
 					&:active {
 						-webkit-transform: translateY(1px);
 						transform: translateY(1px);

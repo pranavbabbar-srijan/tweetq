@@ -10,10 +10,13 @@
     display: none !important; }
   .import_tweets_logs {
     padding-left: 35px;
-    text-transform: capitalize;
-    display: none; } }
+    text-transform: capitalize; } }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+  /** common element **/
+  select,
+  input {
+    border-radius: 0; }
   /** header **/
   .tooltip-css,
   #delete-selected {
@@ -35,10 +38,13 @@
       width: 100%;
       margin: 20px auto; }
   .user-form .field--name-field-country select {
-    flex: none; }
+    flex: none;
+    width: 100%; }
   .user-form .field--name-field-country label {
     margin-bottom: 1em;
-    font-weight: normal; }
+    font-weight: normal;
+    flex: none;
+    width: 100%; }
   .user-form .details-wrapper label {
     flex: none;
     width: 100%;
@@ -363,7 +369,8 @@
     z-index: 9 !important;
     border-radius: 45px !important;
     font-size: 14px !important;
-    margin-bottom: 52px !important; }
+    margin-bottom: 52px !important;
+    text-align: center; }
   /** css for footer **/
   .block-social-menu-link .menu {
     display: flex;
@@ -763,14 +770,14 @@
     border-bottom: 1px solid #d8d8d8; }
   .path-signup .c-hamburger span,
   .page-node-type-thanku-pages .c-hamburger span {
-    background: #000000; }
+    background: #303030; }
     .path-signup .c-hamburger span:before, .path-signup .c-hamburger span:after,
     .page-node-type-thanku-pages .c-hamburger span:before,
     .page-node-type-thanku-pages .c-hamburger span:after {
-      background: #000000; }
-  .path-signup .c-hamburger.is-active:before, .path-signup .c-hamburger.is-active:after,
-  .page-node-type-thanku-pages .c-hamburger.is-active:before,
-  .page-node-type-thanku-pages .c-hamburger.is-active:after {
+      background: #303030; }
+  .path-signup .c-hamburger.is-active span:before, .path-signup .c-hamburger.is-active span:after,
+  .page-node-type-thanku-pages .c-hamburger.is-active span:before,
+  .page-node-type-thanku-pages .c-hamburger.is-active span:after {
     background: #ffffff !important; }
   .path-signup .block-sub-nav-main-menu .menu li a,
   .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
@@ -822,7 +829,16 @@
     width: 100%;
     float: left;
     flex: none;
-    padding: 0 20px; } }
+    padding: 0 20px; }
+    .thankyou-page .content-wrap h2 {
+      font-size: 22px;
+      max-width: 250px;
+      margin: 0 auto; }
+  /** privacy policy and terms of use **/
+  .page-node-type-article #header {
+    border-bottom: none; }
+  .page-node-type-article .block-page-title-block h1 {
+    font-size: 30px; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
