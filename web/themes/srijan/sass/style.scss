@@ -4828,6 +4828,16 @@ margin-top: 120px;
 }
 /** import log **/
 .block-import-csv-log-block {
+    top: 79px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+    background: white;
+    overflow-y: auto;
+    height: 100%;
+    margin-top: 1.15em;
 	h2 {
 		background: #fafafa;
 	    padding: 15px;
@@ -4839,7 +4849,17 @@ margin-top: 120px;
 	.content {
 		background: #fff;
         padding: 20px;
+	    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+	    -moz-box-shadow: 0px 0px 3px #bbb;
+	    -webkit-box-shadow: 0px 0px 3px #bbb;
+	    box-shadow: 0px 0px 3px #bbb;
+	    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+	    background: white;
+	    overflow-y: auto;
+	    height: 100%;
+	    max-height: 62vh;
 	}
+
 	.import_log_items,
 	#import-csv-log-header {
 	    display: flex;
@@ -4872,4 +4892,8 @@ margin-top: 120px;
     	    font-size: 14px;
 	    }
 	}
+	.import_log_items {
+		padding: 15px 0;
+		border-bottom: 1px dashed  #ddd;
+	} 
 }
