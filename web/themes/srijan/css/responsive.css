@@ -746,7 +746,8 @@
   .region-content .messages,
   .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error,
   .-form-tweets-queue-csv-upload .js-form-managed-file .messages {
-    position: fixed !important; } }
+    position: fixed !important;
+    margin-top: auto; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
