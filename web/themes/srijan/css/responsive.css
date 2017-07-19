@@ -730,7 +730,44 @@
   .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error,
   .-form-tweets-queue-csv-upload .js-form-managed-file .messages {
     position: fixed !important;
-    margin-top: auto; } }
+    margin-top: auto; }
+  /** css for signup page **/
+  .path-signup .message-header .js-form-item {
+    width: 100%;
+    margin-bottom: 1em;
+    margin-right: 0; }
+    .path-signup .message-header .js-form-item label {
+      font-weight: normal; }
+  .path-signup .layout-container .region-content {
+    padding-top: 15px; }
+  .path-signup .block-system-main-block {
+    width: calc(100% - 10px);
+    max-width: 100%;
+    padding: 20px; }
+    .path-signup .block-system-main-block input[type="submit"] {
+      width: 100%; }
+  .path-signup .signup-form .signup {
+    font-size: 16px; }
+    .path-signup .signup-form .signup + .signup {
+      margin-top: 0; }
+    .path-signup .signup-form .signup div {
+      font-size: 16px; }
+    .path-signup .signup-form .signup span {
+      font-size: 10px;
+      margin-top: 0; }
+  /** hamburger for loged in white bg **/
+  .path-signup .c-hamburger span {
+    background: #000000; }
+    .path-signup .c-hamburger span:before, .path-signup .c-hamburger span:after {
+      background: #000000; }
+  .path-signup .c-hamburger.is-active:before, .path-signup .c-hamburger.is-active:after {
+    background: #ffffff; }
+  .path-signup .block-sub-nav-main-menu .menu li a {
+    color: #ffffff; }
+  .block-sub-nav-main-menu .menu li {
+    margin-bottom: 1em; }
+    .block-sub-nav-main-menu .menu li a {
+      color: #ffffff; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

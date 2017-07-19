@@ -972,6 +972,80 @@
 	   	    margin-top: auto;
 	   }
 	}
+	/** css for signup page **/
+	.path-signup {
+	    .message-header {
+	       .js-form-item {
+	       	    width: 100%;
+	            margin-bottom: 1em;
+	            margin-right: 0;
+	            label {
+	            	font-weight: normal;
+	            }
+	       }
+	    }
+		.layout-container {
+		   .region-content {
+			   	padding-top: 15px
+		   }
+		}
+		.block-system-main-block {
+			width: calc(100% - 10px);
+			max-width: 100%;
+		    padding: 20px;
+		    input[type="submit"] {
+		    	width: 100%;
+		    }
+		}
+		.signup-form {
+			.signup {
+				font-size: 16px;
+				 + .signup {
+				 	margin-top: 0;
+				 }
+				 div {
+				 	font-size: 16px;
+				 }
+				 span {
+				 	    font-size: 10px;
+				 	    margin-top: 0;
+				 }
+			}
+		}
+	}
+	/** hamburger for loged in white bg **/
+    .path-signup {
+    	.c-hamburger {
+    		span {
+    			background: #000000;
+    			&:before,
+    			&:after {
+    				background: #000000;
+    			}
+    		}
+    		&.is-active {
+    			&:before,
+    			&:after {
+    				background: #ffffff;
+    			}
+    		}
+    	}
+    	.block-sub-nav-main-menu .menu {
+    	    li {
+    	        a {
+    	        	color: #ffffff;
+    	        }
+    	    }
+    	}
+    }
+    .block-sub-nav-main-menu .menu {
+	    li {
+	    	margin-bottom: 1em;
+	        a {
+	        	color: #ffffff;
+	        }
+	    }
+	}
 	
 }
 
@@ -1204,6 +1278,7 @@
 	       }
 	    }
 	}
+
 }
 
 
