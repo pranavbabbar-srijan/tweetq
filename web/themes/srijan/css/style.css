@@ -525,7 +525,8 @@ body {
     border: none;
     height: 690px;
     overflow: hidden;
-    width: 100%; }
+    width: 100%;
+    border-radius: 0; }
     .view-home-page-carousel .flexslider .slides .slider-content {
       position: absolute;
       top: 18%;
@@ -4299,3 +4300,49 @@ body {
 
 .messages {
   transition: .5s ease-in-out; }
+
+/** import log **/
+.block-import-csv-log-block h2 {
+  background: #fafafa;
+  padding: 15px;
+  font-size: 20px;
+  color: #666;
+  align-items: center;
+  font-weight: normal; }
+
+.block-import-csv-log-block .content {
+  background: #fff;
+  padding: 20px; }
+
+.block-import-csv-log-block .import_log_items,
+.block-import-csv-log-block #import-csv-log-header {
+  display: flex;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  align-items: center;
+  position: relative; }
+  .block-import-csv-log-block .import_log_items span,
+  .block-import-csv-log-block .import_log_items div,
+  .block-import-csv-log-block #import-csv-log-header span,
+  .block-import-csv-log-block #import-csv-log-header div {
+    width: calc(8.33333%*2);
+    box-sizing: border-box;
+    margin: 0 0;
+    padding: 0 15px; }
+  .block-import-csv-log-block .import_log_items div,
+  .block-import-csv-log-block #import-csv-log-header div {
+    font-size: 14px;
+    font-weight: bold; }
+  .block-import-csv-log-block .import_log_items span,
+  .block-import-csv-log-block #import-csv-log-header span {
+    color: #979797;
+    font-size: 14px; }

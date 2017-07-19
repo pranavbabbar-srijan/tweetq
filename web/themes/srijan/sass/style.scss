@@ -434,6 +434,7 @@ body {
 		height: 690px;
 		overflow: hidden;
 		width: 100%;
+		border-radius: 0;
 		.slides {
 			.slider-content {
 				position: absolute;
@@ -4824,4 +4825,51 @@ margin-top: 120px;
 }
 .messages {
 	transition: .5s ease-in-out;
+}
+/** import log **/
+.block-import-csv-log-block {
+	h2 {
+		background: #fafafa;
+	    padding: 15px;
+	    font-size: 20px;
+	    color: #666;
+	    align-items: center;
+	    font-weight: normal;
+	}
+	.content {
+		background: #fff;
+        padding: 20px;
+	}
+	.import_log_items,
+	#import-csv-log-header {
+	    display: flex;
+	    flex-direction: row;
+	    -webkit-box-pack: justify;
+	    -webkit-justify-content: space-between;
+	    -ms-flex-pack: justify;
+	    justify-content: space-between;
+	    width: 100%;
+	    box-sizing: border-box;
+	    -webkit-box-sizing: border-box;
+	    margin: 0;
+	    border-bottom: 1px solid #ddd;
+	    padding: 10px 0;
+	    align-items: center;
+	    position: relative;
+	    span,
+	    div {
+            width: calc(8.33333%*2);
+		    box-sizing: border-box;
+		    margin: 0 0;
+		    padding: 0 15px;
+	    }
+	    div {
+	    	font-size: 14px;
+	    	font-weight: bold;
+	    }
+	    span {
+    	    color: #979797;
+    	    font-size: 14px;
+	    }
+	}
 }
