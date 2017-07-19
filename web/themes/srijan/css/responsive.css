@@ -737,13 +737,14 @@
     margin-bottom: 1em !important;
     margin-right: 0 !important; }
     .path-signup .message-header .js-form-item label {
-      font-weight: normal; }
+      font-weight: normal !important; }
   .path-signup .layout-container .region-content {
     padding-top: 15px; }
   .path-signup .block-system-main-block {
     width: calc(100% - 10px);
     max-width: 100%;
-    padding: 20px; }
+    padding: 20px;
+    border-radius: 0; }
     .path-signup .block-system-main-block input[type="submit"] {
       width: 100%; }
   .path-signup .signup-form .signup {
@@ -756,13 +757,23 @@
       font-size: 10px;
       margin-top: 0; }
   /** hamburger for loged in white bg **/
-  .path-signup .c-hamburger span {
+  .path-signup #header,
+  .page-node-type-thanku-pages #header {
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #d8d8d8; }
+  .path-signup .c-hamburger span,
+  .page-node-type-thanku-pages .c-hamburger span {
     background: #000000; }
-    .path-signup .c-hamburger span:before, .path-signup .c-hamburger span:after {
+    .path-signup .c-hamburger span:before, .path-signup .c-hamburger span:after,
+    .page-node-type-thanku-pages .c-hamburger span:before,
+    .page-node-type-thanku-pages .c-hamburger span:after {
       background: #000000; }
-  .path-signup .c-hamburger.is-active:before, .path-signup .c-hamburger.is-active:after {
-    background: #ffffff; }
-  .path-signup .block-sub-nav-main-menu .menu li a {
+  .path-signup .c-hamburger.is-active:before, .path-signup .c-hamburger.is-active:after,
+  .page-node-type-thanku-pages .c-hamburger.is-active:before,
+  .page-node-type-thanku-pages .c-hamburger.is-active:after {
+    background: #ffffff !important; }
+  .path-signup .block-sub-nav-main-menu .menu li a,
+  .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
     color: #ffffff; }
   .block-sub-nav-main-menu .menu li {
     margin-bottom: 1em; }
@@ -778,6 +789,9 @@
   .path-contact .contact-message-write-to-us-form {
     max-width: 100%;
     width: 100%; }
+  .path-contact .heading-write-us {
+    font-size: 20px;
+    text-align: center; }
   .block-contactusimageblock {
     display: none; }
   .block-product-srijan-technologies .field--name-field-company-logo {
@@ -792,7 +806,23 @@
     margin-bottom: 1.2em; }
   .block-product-srijan-technologies .field--name-field-visit-srijan a,
   .block-product-srijan-technologies .field--name-field-visit-srijan- a {
-    padding: 10px 50px; } }
+    padding: 10px 50px; }
+  .block-product-srijan-technologies .field--name-field-background-image img {
+    width: auto; }
+  /** thanku page **/
+  .thankyou-page .page-wrap {
+    flex-wrap: wrap; }
+  .thankyou-page .envelop {
+    margin-right: 0;
+    flex: none;
+    max-width: 160px;
+    margin: 25px auto;
+    width: 100%; }
+  .thankyou-page .content-wrap {
+    width: 100%;
+    float: left;
+    flex: none;
+    padding: 0 20px; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

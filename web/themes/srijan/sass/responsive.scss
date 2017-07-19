@@ -980,7 +980,7 @@
 	            margin-bottom: 1em !important;
 	            margin-right: 0 !important;
 	            label {
-	            	font-weight: normal;
+	            	font-weight: normal !important;
 	            }
 	       }
 	    }
@@ -993,6 +993,7 @@
 			width: calc(100% - 10px);
 			max-width: 100%;
 		    padding: 20px;
+		    border-radius: 0;
 		    input[type="submit"] {
 		    	width: 100%;
 		    }
@@ -1014,7 +1015,12 @@
 		}
 	}
 	/** hamburger for loged in white bg **/
-    .path-signup {
+    .path-signup,
+    .page-node-type-thanku-pages {
+    	#header {
+    		padding-bottom: 0.3em;
+            border-bottom: 1px solid #d8d8d8;
+    	}
     	.c-hamburger {
     		span {
     			background: #000000;
@@ -1026,7 +1032,7 @@
     		&.is-active {
     			&:before,
     			&:after {
-    				background: #ffffff;
+    				background: #ffffff !important;
     			}
     		}
     	}
@@ -1060,6 +1066,10 @@
 	    	    max-width: 100%;
 			    width: 100%;
 	    }
+	    .heading-write-us {
+	    	font-size: 20px;
+	    	text-align: center;
+	    }
 	}
 	.block-contactusimageblock {
 		display: none;
@@ -1086,6 +1096,30 @@
 		    	padding: 10px 50px;
 		    }
 		}
+		.field--name-field-background-image {
+			img {
+				width: auto;
+			}
+		}
+	}
+	/** thanku page **/
+	.thankyou-page {
+	   .page-wrap {
+		   	flex-wrap: wrap;
+	   }
+	   .envelop {
+	   	    margin-right: 0;
+		    flex: none;
+		    max-width: 160px;
+		    margin: 25px auto;
+		    width: 100%;
+	   }
+	   .content-wrap {
+	   	    width: 100%;
+		    float: left;
+		    flex: none;
+		    padding: 0 20px;
+	   }
 	}
 	
 }
