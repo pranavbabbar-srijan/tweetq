@@ -236,3 +236,11 @@ tweets_queue_multiple_deletion.tweets:
     _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::deleteTweets'
   requirements:
     _role: 'authenticated'
+
+tweets_queue_import_csv_log.import_logs:
+  path: '/dashboard/import-logs'
+  defaults:
+    _controller: '\Drupal\tweets_queue\Controller\TweetsQueueTweetController::importCsvLogs'
+  requirements:
+    _role: 'authenticated'
+

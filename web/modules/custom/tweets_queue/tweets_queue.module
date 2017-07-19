@@ -47,6 +47,7 @@ const TWEETS_TWEETER_DATA_TABLE = 'tweets_tweeter_data';
 const TWITTER_SCHEDULED_MESSAGES_TABLE = 'twitter_scheduled_messages';
 const TWITTER_TWEETS_HISTORY_TABLE = 'twitter_tweets_history';
 const TWITTER_TWEETS_RECENT_ACTIVITY_TABLE = 'twitter_tweets_recent_activities';
+const TWITTER_TWEETS_IMPORTS_LOGS_TABLE = 'twitter_tweets_imports_logs';
 const TWEETS_URL_TABLE = 'tweets_url';
 const TWITTER_CRON_HISTORY_TABLE = 'twitter_cron_history';
 const TWITTER_AUTHENTICATION_PROCESS_TABLE = 'twitter_authentication_process';
@@ -101,7 +102,7 @@ const TWITTER_SETTING_PATH = 'dashboard/settings';
 const TWITTER_TWEETED_TWEET_PATH = 'dashboard/valid-tweets/tweeted-listing';
 const TWITTER_TOTAL_TWEET_PATH = 'dashboard/all-tweets';
 const TWITTER_TWITTER_SIGNUP_PATH = 'twitter/register';
-
+const TWITTER_IMPORT_CSV_LOG = 'dashboard/import-logs';
 const TWITTER_FIELD_NID = 'nid';
 const TWITTER_FIELD_UID = 'uid';
 const TWITTER_FIELD_STATUS = 'status';
@@ -2325,6 +2326,34 @@ function tweets_queue_update_8108() {
   db_create_table(TWITTER_TWEETS_RECENT_ACTIVITY_TABLE, $schema[TWITTER_TWEETS_RECENT_ACTIVITY_TABLE]);
 }
 
+function tweets_queue_update_8109() {
+ $schema[TWITTER_TWEETS_IMPORTS_LOGS_TABLE] = array(
+    'description' => 'The base table for import files log.',
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'nid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'type' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'total_tweets' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'valid_tweets' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'invalid_tweets' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'duplicate_tweets' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'skipped_tweets' => array('type' => 'varchar', 'not null' => TRUE, 'length' => 254, 'default' => ''),
+      'created' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'status' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'code' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'retweeted' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'message' => array('type' => 'varchar', 'not null' => TRUE, 'length' => DB_TWEET_CHARCATER_LIMIT, 'default' => ''),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'twitter_tweets_imports_logs_nid' => array('nid'),
+      'twitter_tweets_imports_logs_uid' => array('uid'),
+      'twitter_tweets_imports_logs_created' => array('created')
+    )
+  );
+  db_create_table(TWITTER_TWEETS_IMPORTS_LOGS_TABLE, $schema[TWITTER_TWEETS_IMPORTS_LOGS_TABLE]);
+}
 
 /**
  * Update the twitter tweet table for the tweet.
@@ -3988,6 +4017,28 @@ function tweets_queue_fetch_user_tweets_history() {
   // $query->fields('p', ['uid', 'status']);
   $query->orderBy('h.created', 'DESC');
   $query->condition('h.uid', $uid);
+  //$query->condition('h.created', $last_history_read , '>');
+  $result = $query->execute()->fetchAll();
+  $output = array();
+  foreach ($result as $pos => $data) {
+    $total++;
+    $output[] = $data;
+  }
+  return $output;
+}
+
+function tweets_queue_fetch_import_csv_logs() {
+  $uid = \Drupal::currentUser()->id();
+  // $last_history_read = tweets_queue_fetch_twitter_statistics_info(TWITTER_USER_HISTORY_MARK);
+  // if (empty($last_history_read)) {
+  //   $last_history_read = 0;
+  // }
+  $query = \Drupal::database()->select(TWITTER_TWEETS_IMPORTS_LOGS_TABLE, 'h');
+  $query->fields('h', ['type', 'total_tweets', 'valid_tweets', 'invalid_tweets', 'duplicate_tweets', 'skipped_tweets', 'created', 'status']);
+  // $query->outerjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
+  // $query->fields('p', ['uid', 'status']);
+  //$query->orderBy('h.created', 'DESC');
+ // $query->condition('h.uid', $uid);
   //$query->condition('h.created', $last_history_read , '>');
   $result = $query->execute()->fetchAll();
   $output = array();

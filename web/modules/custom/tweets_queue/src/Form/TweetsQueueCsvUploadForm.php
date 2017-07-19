@@ -119,6 +119,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
       $this->importCsvData($file);
     }
   }
+  
   public function importCsvData($file) {
     $uid = \Drupal::currentUser()->id();
     $file = fopen($file, 'r');
@@ -185,6 +186,20 @@ class TweetsQueueCsvUploadForm extends FormBase {
     if ($skipped > 0) {
       drupal_set_message(t("Skipped shows the tweets whose character limit exceeds"));
     }
+    $twitter_csv_import_info = array(
+      //'nid' => $nid,
+      'uid' => $uid,
+      'created' => time(),
+      'type' => 'Import CSV',
+      'total_tweets' => $import_message['total'],
+      'valid_tweets' => $import_message['valid'],
+      'invalid_tweets' => $import_message['invalid'],
+      'duplicate_tweets' => $import_message['duplicate'],
+      'skipped_tweets' => $import_message['skipped'],
+    );
+    $query = db_insert(TWITTER_TWEETS_IMPORTS_LOGS_TABLE)
+    ->fields($twitter_csv_import_info)
+    ->execute();
     $twitter_history_info = array(
       //'nid' => $fid,
       'uid' => $uid,

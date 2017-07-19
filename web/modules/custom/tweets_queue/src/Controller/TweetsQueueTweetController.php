@@ -250,6 +250,23 @@ class TweetsQueueTweetController extends ControllerBase {
   }
 
   /**
+  * This function shows an upload csv file of users
+  */
+  public function importCsvLogs() {
+    $uid = \Drupal::currentUser()->id();
+    $query = \Drupal::database()->select(TWITTER_TWEETS_IMPORTS_LOGS_TABLE, 'h');
+    $query->fields('h');
+    $query->condition('h.uid', $uid);
+    $result = $query->execute()->fetchAll();  
+    $output = array();
+    foreach ($result as $pos => $data) {
+      $total++;
+      $output[] = $data;
+    }
+    return $output;
+  }
+
+  /**
   * This function goto than login page when users got an access denied error message.
   */
   
