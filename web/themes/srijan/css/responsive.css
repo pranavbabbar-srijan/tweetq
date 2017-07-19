@@ -488,6 +488,11 @@
         position: relative;
         top: 10px;
         margin-right: 0; }
+      .block-users-left-side-bar-block .profile ~ div.import_tweets:after,
+      .block-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:after,
+      .block-non-twitter-users-left-side-bar-block .profile ~ div.import_tweets:after,
+      .block-non-twitter-users-left-side-bar-block .non-twitter-profile ~ div.import_tweets:after {
+        content: none !important; }
       .block-users-left-side-bar-block .profile ~ div a,
       .block-users-left-side-bar-block .non-twitter-profile ~ div a,
       .block-non-twitter-users-left-side-bar-block .profile ~ div a,

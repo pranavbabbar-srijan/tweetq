@@ -662,6 +662,9 @@
     					  margin-right: 0;
            	     		  
            	     	}
+           	     	&:after {
+           	     		content: none !important;
+           	     	}
            	     }
            	     a {
            	     	color: transparent;
