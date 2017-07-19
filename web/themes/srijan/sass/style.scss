@@ -2002,7 +2002,7 @@ margin-top: 120px;
 				padding-bottom: .6em;
 				margin-bottom: 0.6em !important;
 				position: relative;
-				/*&:after {
+				&:after {
 					content: "\f107";
 				    position: absolute;
 				    right: 0;
@@ -2039,7 +2039,7 @@ margin-top: 120px;
 				    	transition: .5s ease-in-out;
 				    	color: transparent;
 				    }
-				}*/
+				}
 			}
 		}
 		.block-sign-in-with-twitter-block {
