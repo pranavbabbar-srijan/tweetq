@@ -4281,3 +4281,6 @@ body {
 
 .feedback_link {
   display: none !important; }
+
+.messages {
+  transition: .5s ease-in-out; }
