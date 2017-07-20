@@ -46,14 +46,14 @@
 		var invite_friends_path = '/dashboard/inviteFriends';
 		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
-		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
-		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
-		// var forgot_password_send_token_path = '/barbet-new/_www/dashboard/forgotPasswordSendToken';
-		// var user_history_path = '/barbet-new/_www/dashboard/user-history';
-		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
-		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
-		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
-		// var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
+		var email_validation_path = '/Barbet/_www/dashboard/validateEmail';
+		var user_login_validation_path = '/Barbet/_www/dashboard/validateUserLogin';
+		var forgot_password_send_token_path = '/Barbet/_www/dashboard/forgotPasswordSendToken';
+		var user_history_path = '/Barbet/_www/dashboard/user-history';
+		var profile_change_password_path = '/Barbet/_www/dashboard/changePassword';
+		var friend_invite_send_token_path = '/Barbet/_www/dashboard/friendInviteSendToken';
+		var invite_friends_path = '/Barbet/_www/dashboard/inviteFriends';
+		var multiple_selected_deletion = '/Barbet/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -1267,15 +1267,17 @@
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
 		if(number_of_divs >= 4) {
+			$("input[type='file']").attr('disabled', 'true');
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 		}
 		else {
+			$("input[type='file']").removeAttr('disabled');
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
 		}
 	}
 
 	function onFormCheckBoxChange() {
-				$(this).parent().next().trigger('mousedown');
+				$(this).parent().parent().find('.form-submit').trigger('mousedown');
 
 	      // console.log(selector);
 	      // $('.button.js-form-submit.form-submit').trigger('click');
@@ -1290,6 +1292,14 @@
 	 		onChangeDisableTweet();
 	 		$('.messages').delay(500).animate({'bottom': '0'}, 50);
 	 		$('.messages').delay(8000).fadeOut(300);
+	 		$("input[type='file']").change(function(){
+		       var $fileUpload = $("input[type='file']");
+		       if (parseInt($fileUpload.get(0).files.length)>4){
+		        alert("You can only upload a maximum of 4 files");
+		                    this.value = '';
+		       }
+
+		    });    
 	 	}
 	 };
 })(jQuery);
