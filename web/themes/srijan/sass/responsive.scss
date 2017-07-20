@@ -1160,6 +1160,29 @@
 		   }
 		}
 	}
+	/** import log **/
+	.block-import-csv-log-block {
+		div.content {
+		    > div {
+		    	&:nth-child(2) {
+		    		margin-top: 0px;
+		    	}
+		    }
+		    #import-csv-log-header {
+	    	    width: 100%;
+			    position: relative;
+			    background: #fff;
+			    div {
+			    	font-size: 10px;
+			    }
+		    }
+		    .import_log_items {
+		    	span {
+		    		font-size: 12px;
+		    	}
+		    }
+		}
+	}
 	
 }
 
