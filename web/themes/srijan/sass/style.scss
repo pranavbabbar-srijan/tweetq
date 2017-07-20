@@ -400,10 +400,19 @@ body {
 .block-system-main-block {
 	+ .messages--error {
 		display: block;
-		width: 74vw;
-		background: white;
-		color: #f56a6a;
-		float: left;
+	    width: 100%;
+	    background: white;
+	    color: #f56a6a;
+	    float: left;
+	    position: absolute;
+	    margin-bottom: 20px;
+	    max-width: 40%;
+	    border-radius: 50px;
+	    left: 32%;
+	    bottom: -80px;
+		div[role=alert]:before {
+			top: 13px;
+		}
 	}
 }
 
@@ -1514,10 +1523,10 @@ margin-top: 120px;
 	position: relative;
 	position: absolute;
 	bottom: -80px;
-	left: 20%;
+	left: 32%;
 	border-radius: 35px;
 	padding-left: 50px;
-	max-width: 63%;
+	max-width: 40%;
     background: #ffffff;
     z-index: 999;
     line-height: 20px;
@@ -2372,10 +2381,6 @@ margin-top: 120px;
 					position: absolute;
 					// top: 70px;
 				}
-				.messages--status {
-					bottom: -490px !important;
-					left: 27.3% !important;
-				}
 			}
 		}
 		.profilesettingform {
@@ -2792,13 +2797,23 @@ margin-top: 120px;
 					}
 					.messages--error {
 						display: block;
-						margin-top: 160px;
-						background: white;
-						left: -24px;
-						width: 74vw;
-						position: absolute;
-						color: #f56a6a;
-						font-size: 18px;
+					    background: white;
+					    left: 42%;
+					    width: 100%;
+					    position: fixed;
+					    color: #f56a6a;
+					    font-size: 18px;
+					    bottom: -80px;
+					    max-width: 40%;
+					    border-radius: 51px;
+					    transition: .5s ease-in-out;
+					    margin-bottom: 20px;
+					    .item-list {
+					    	ul,
+					    	li {
+					    		margin-bottom: 0;
+					    	}
+					    }
 					}
 					#ajax-wrapper {
 						height: 40px;

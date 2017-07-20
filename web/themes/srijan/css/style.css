@@ -501,10 +501,18 @@ body {
 
 .block-system-main-block + .messages--error {
   display: block;
-  width: 74vw;
+  width: 100%;
   background: white;
   color: #f56a6a;
-  float: left; }
+  float: left;
+  position: absolute;
+  margin-bottom: 20px;
+  max-width: 40%;
+  border-radius: 50px;
+  left: 32%;
+  bottom: -80px; }
+  .block-system-main-block + .messages--error div[role=alert]:before {
+    top: 13px; }
 
 .path-frontpage .site-branding__slogan {
   display: block; }
@@ -1497,10 +1505,10 @@ margin-top: 120px;
     position: relative;
     position: absolute;
     bottom: -80px;
-    left: 20%;
+    left: 32%;
     border-radius: 35px;
     padding-left: 50px;
-    max-width: 63%;
+    max-width: 40%;
     background: #ffffff;
     z-index: 999;
     line-height: 20px; }
@@ -2170,10 +2178,6 @@ margin-top: 120px;
 .profilesettingform-body.user-logged-in .main-content {
   position: absolute; }
 
-.profilesettingform-body.user-logged-in .messages--status {
-  bottom: -490px !important;
-  left: 27.3% !important; }
-
 .profilesettingform {
   margin-top: -8em; }
   .profilesettingform .profile-setting {
@@ -2590,13 +2594,20 @@ margin-top: 120px;
       color: rgba(0, 0, 0, 0.2); }
     .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error {
       display: block;
-      margin-top: 160px;
       background: white;
-      left: -24px;
-      width: 74vw;
-      position: absolute;
+      left: 42%;
+      width: 100%;
+      position: fixed;
       color: #f56a6a;
-      font-size: 18px; }
+      font-size: 18px;
+      bottom: -80px;
+      max-width: 40%;
+      border-radius: 51px;
+      transition: .5s ease-in-out;
+      margin-bottom: 20px; }
+      .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error .item-list ul,
+      .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error .item-list li {
+        margin-bottom: 0; }
     .-form-tweets-queue-csv-upload .js-form-managed-file #ajax-wrapper {
       height: 40px;
       overflow: hidden; }
