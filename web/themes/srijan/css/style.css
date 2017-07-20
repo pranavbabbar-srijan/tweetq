@@ -4322,7 +4322,7 @@ body {
     font-weight: normal; }
   .block-import-csv-log-block .content {
     background: #fff;
-    padding: 20px;
+    padding: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
     -moz-box-shadow: 0px 0px 3px #bbb;
     -webkit-box-shadow: 0px 0px 3px #bbb;
@@ -4332,6 +4332,13 @@ body {
     overflow-y: auto;
     height: 100%;
     max-height: 62vh; }
+    .block-import-csv-log-block .content > div:nth-child(2) {
+      margin-top: 48px; }
+    .block-import-csv-log-block .content #import-csv-log-header {
+      width: 73.9%;
+      position: fixed;
+      z-index: 1;
+      background: #fff; }
   .block-import-csv-log-block .import_log_items,
   .block-import-csv-log-block #import-csv-log-header {
     display: flex;
@@ -4345,7 +4352,7 @@ body {
     -webkit-box-sizing: border-box;
     margin: 0;
     border-bottom: 1px solid #ddd;
-    padding: 10px 0;
+    padding: 15px 0;
     align-items: center;
     position: relative; }
     .block-import-csv-log-block .import_log_items span,
@@ -4365,5 +4372,4 @@ body {
       color: #979797;
       font-size: 14px; }
   .block-import-csv-log-block .import_log_items {
-    padding: 15px 0;
     border-bottom: 1px dashed  #ddd; }

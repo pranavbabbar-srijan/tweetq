@@ -847,7 +847,18 @@
   .page-node-type-article .node--type-article .field--name-body {
     padding-top: 30px; }
   .page-node-type-article .node--type-article .field--type-image img {
-    width: auto; } }
+    width: auto; }
+  /** import log **/
+  .block-import-csv-log-block div.content > div:nth-child(2) {
+    margin-top: 0px; }
+  .block-import-csv-log-block div.content #import-csv-log-header {
+    width: 100%;
+    position: relative;
+    background: #fff; }
+    .block-import-csv-log-block div.content #import-csv-log-header div {
+      font-size: 10px; }
+  .block-import-csv-log-block div.content .import_log_items span {
+    font-size: 12px; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
