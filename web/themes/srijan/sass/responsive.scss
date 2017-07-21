@@ -551,7 +551,22 @@
 	   }
 	}
 	.block-sub-menu-footer-block {
-		display: none;
+	    background: transparent;
+	    padding: 35px 0;
+	    border-top: 1px solid #fff;
+	    .menu {
+	    	li {
+	    		padding: 0px 20px;
+			    width: 100%;
+			    text-align: right;
+			    &:nth-child(1), 
+			    &:nth-child(2), 
+			    &:nth-child(3),
+			    &:before {
+			    	display: none;
+			    }
+	    	}
+	    }
 	}
 	#block-copyrightblock {
 		float: left;
@@ -1060,6 +1075,8 @@
     .block-sub-nav-main-menu .menu {
 	    li {
 	    	margin-bottom: 1em;
+	    	text-align: right;
+	    	padding: 0 20px;
 	        a {
 	        	color: #ffffff;
 	        }

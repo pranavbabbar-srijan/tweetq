@@ -400,7 +400,15 @@
         padding: .5em 20px;
         margin-top: 10px; }
   .block-sub-menu-footer-block {
-    display: none; }
+    background: transparent;
+    padding: 35px 0;
+    border-top: 1px solid #fff; }
+    .block-sub-menu-footer-block .menu li {
+      padding: 0px 20px;
+      width: 100%;
+      text-align: right; }
+      .block-sub-menu-footer-block .menu li:nth-child(1), .block-sub-menu-footer-block .menu li:nth-child(2), .block-sub-menu-footer-block .menu li:nth-child(3), .block-sub-menu-footer-block .menu li:before {
+        display: none; }
   #block-copyrightblock {
     float: left;
     width: 100%; }
@@ -788,7 +796,9 @@
   .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
     color: #ffffff; }
   .block-sub-nav-main-menu .menu li {
-    margin-bottom: 1em; }
+    margin-bottom: 1em;
+    text-align: right;
+    padding: 0 20px; }
     .block-sub-nav-main-menu .menu li a {
       color: #ffffff; }
   /** contact us page **/

@@ -4387,4 +4387,5 @@ body {
 
 .max_upload--msg {
   padding: 5px 0;
-  color: red; }
+  color: red;
+  display: none; }

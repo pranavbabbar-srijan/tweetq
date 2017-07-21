@@ -1240,6 +1240,7 @@
 			   function sidebarnav() {
 			     if(window_width < 767) {
 			       $("#block-primarymenu").appendTo( ".sidenav" );
+			       $("#block-submenufooterblock").appendTo( ".sidenav" );
 			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
 			     } 
 			   }
@@ -1258,8 +1259,8 @@
 				});
 				// added target on a 
 				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
-				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form').hide();
-				
+				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form');
+				$('.max_upload--msg').hide();
 })(jQuery);
 
 
