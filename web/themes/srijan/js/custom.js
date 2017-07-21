@@ -1056,6 +1056,7 @@
 
 	if ($('#my_tweets > div a').hasClass('active')) {
 	    $('#my_tweets > div').animate({ height: 'toggle', opacity: 'toggle' }, '1500');
+	    $('#my_tweets').addClass('active');
 	}
 
 	
@@ -1255,6 +1256,9 @@
 				$(".import_tweets").click(function() {
 				  $(this).toggleClass('active');
 				});
+				
+
+				
 })(jQuery);
 
 
