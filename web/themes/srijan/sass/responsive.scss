@@ -1160,6 +1160,12 @@
 		       }
 		   }
 		}
+		main.main-content {
+           margin-bottom: 0;
+		}
+		footer.site-footer {
+			display: none;
+		}
 	}
 	/** import log **/
 	.block-import-csv-log-block {
@@ -1216,6 +1222,16 @@
 		    a {
 		    	font-size: 16px;
 		    }
+		}
+	}
+	body.user-logged-in {
+		&.path-contact {
+			main.main-content {
+	            margin-bottom: 0;
+			}
+			footer.site-footer {
+				display: none;
+			}
 		}
 	}
 }
