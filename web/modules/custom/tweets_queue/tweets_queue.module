@@ -762,7 +762,8 @@ function tweets_queue_log_undo_retweet_status($message_data, $status, $cron_id =
       $tweet_id = $status['data']->id;
       $twitter_history_info['retweeted'] = 0;
       $twitter_history_info['status'] = 1;
-      $twitter_history_info['message'] = 'undo retweet';
+      $twitter_history_info['message'] = 'undo the retweet';
+      $twitter_history_info['type'] = 'undo retweet';
       $tweet_info = array(
         'tweet_id' => $tweet_id,
         'last_run' => time(),
@@ -823,6 +824,7 @@ function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
         $twitter_history_info = array(
           'retweeted' => 0,
           'type' => 'Retweet',
+          'message' => $message_data,
         );
         tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 1);
       }
