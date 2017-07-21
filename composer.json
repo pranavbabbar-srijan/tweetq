@@ -35,10 +35,10 @@
         "drupal/blocktabs": "1.0-alpha3",
 	    "drupal/svg_image_field": "1.0",
         "drupal/simplenews": "1.0-alpha3",
+	    "drupal/himalaya": "5.5",
 	    "drupal/faq": "1.x-dev",
-        "drupal/fivestar": "1.x-dev",
-        "drupal/poll": "1.1",
-	"drupal/himalaya": "5.5"
+        "drupal/bootstrap": "3.5",
+        "drupal/fivestar": "1.x-dev"
     },
     "require-dev": {
         "behat/mink": "~1.7",
