@@ -1274,6 +1274,7 @@
 		else {
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
 		   $("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
+		   $(".max_upload--msg").show().delay(8000).fadeOut(300);
 		}
 		if(number_of_divs > 5) {
 			$(".max_upload--msg").show().delay(8000).fadeOut(300);
