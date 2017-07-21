@@ -46,14 +46,14 @@
 		var invite_friends_path = '/dashboard/inviteFriends';
 		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
-		// var email_validation_path = '/barbet-new/_www/dashboard/validateEmail';
-		// var user_login_validation_path = '/barbet-new/_www/dashboard/validateUserLogin';
-		// var forgot_password_send_token_path = '/barbet-new/_www/dashboard/forgotPasswordSendToken';
-		// var user_history_path = '/barbet-new/_www/dashboard/user-history';
-		// var profile_change_password_path = '/barbet-new/_www/dashboard/changePassword';
-		// var friend_invite_send_token_path = '/barbet-new/_www/dashboard/friendInviteSendToken';
-		// var invite_friends_path = '/barbet-new/_www/dashboard/inviteFriends';
-		// var multiple_selected_deletion = '/barbet-new/_www/dashboard/delete-tweets';
+		var email_validation_path = '/Barbet/_www/dashboard/validateEmail';
+		var user_login_validation_path = '/Barbet/_www/dashboard/validateUserLogin';
+		var forgot_password_send_token_path = '/Barbet/_www/dashboard/forgotPasswordSendToken';
+		var user_history_path = '/Barbet/_www/dashboard/user-history';
+		var profile_change_password_path = '/Barbet/_www/dashboard/changePassword';
+		var friend_invite_send_token_path = '/Barbet/_www/dashboard/friendInviteSendToken';
+		var invite_friends_path = '/Barbet/_www/dashboard/inviteFriends';
+		var multiple_selected_deletion = '/Barbet/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
 
@@ -1256,8 +1256,9 @@
 				$(".import_tweets").click(function() {
 				  $(this).toggleClass('active');
 				});
-				
-
+				// added target on a 
+				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
+				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form').hide();
 				
 })(jQuery);
 
@@ -1266,16 +1267,20 @@
 
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
-		if(number_of_divs >= 4) {
+		if(number_of_divs > 4) {
+			$(".max_upload--msg").show().delay(8000).fadeOut(300);
+			$(".send-tweets-form input[type='file'], .tweets-queue-tweet-form input[type='file']").attr('disabled', 'true');
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+			$("#tweets-queue-tweet-form #edit-submit").attr('disabled', 'true');
 		}
 		else {
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
+		   $("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
 		}
 	}
 
 	function onFormCheckBoxChange() {
-				$(this).parent().next().trigger('mousedown');
+				$(this).parent().parent().find('.form-submit').trigger('mousedown');
 
 	      // console.log(selector);
 	      // $('.button.js-form-submit.form-submit').trigger('click');
@@ -1290,6 +1295,15 @@
 	 		onChangeDisableTweet();
 	 		$('.messages').delay(500).animate({'bottom': '0'}, 50);
 	 		$('.messages').delay(8000).fadeOut(300);
+	 		$("input[type='file']").change(function(){
+		       var $fileUpload = $("input[type='file']");
+		       if (parseInt($fileUpload.get(0).files.length)>4){
+		       	$(".max_upload--msg").show(500).delay(8000).fadeOut(300);
+		            this.value = '';
+		            
+		       }
+
+		    });    
 	 	}
 	 };
 })(jQuery);
