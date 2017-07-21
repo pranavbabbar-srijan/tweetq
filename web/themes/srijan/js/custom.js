@@ -1259,8 +1259,7 @@
 				});
 				// added target on a 
 				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
-				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form');
-				$('.max_upload--msg').hide();
+				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form').hide();
 })(jQuery);
 
 
@@ -1275,7 +1274,6 @@
 		else {
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
 		   $("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
-		   $(".max_upload--msg").show().delay(8000).fadeOut(300);
 		}
 		if(number_of_divs > 5) {
 			$(".max_upload--msg").show().delay(8000).fadeOut(300);
