@@ -1258,7 +1258,7 @@
 				});
 				// added target on a 
 				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
-				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form').hide();
+				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form').hide();
 				
 })(jQuery);
 
@@ -1268,14 +1268,16 @@
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
 		if(number_of_divs > 4) {
-			$(".max_upload--msg").show().delay(8000).fadeOut(300);
-			$(".send-tweets-form input[type='file'], .tweets-queue-tweet-form input[type='file']").attr('disabled', 'true');
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 			$("#tweets-queue-tweet-form #edit-submit").attr('disabled', 'true');
 		}
 		else {
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
 		   $("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
+		   $(".max_upload--msg").show().delay(8000).fadeOut(300);
+		}
+		if(number_of_divs > 5) {
+			$(".max_upload--msg").show().delay(8000).fadeOut(300);
 		}
 	}
 
@@ -1299,8 +1301,6 @@
 		       var $fileUpload = $("input[type='file']");
 		       if (parseInt($fileUpload.get(0).files.length)>4){
 		       	$(".max_upload--msg").show(500).delay(8000).fadeOut(300);
-		            this.value = '';
-		            
 		       }
 
 		    });    
