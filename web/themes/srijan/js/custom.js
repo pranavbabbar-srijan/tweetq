@@ -1275,7 +1275,7 @@
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
 		   $("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
 		}
-		if(number_of_divs > 5) {
+		if(number_of_divs > 4) {
 			$(".max_upload--msg").show().delay(8000).fadeOut(300);
 		}
 	}
@@ -1300,6 +1300,7 @@
 		       var $fileUpload = $("input[type='file']");
 		       if (parseInt($fileUpload.get(0).files.length)>4){
 		       	$(".max_upload--msg").show(500).delay(8000).fadeOut(300);
+		       	 this.value = '';
 		       }
 
 		    });    
