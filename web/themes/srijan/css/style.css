@@ -319,6 +319,7 @@ button {
 .site-branding__logo {
   display: block;
   width: 50px;
+  height: 30px;
   padding-right: .3em; }
   @media screen and (max-width: 23.4375em) {
     .site-branding__logo {
@@ -500,10 +501,18 @@ body {
 
 .block-system-main-block + .messages--error {
   display: block;
-  width: 74vw;
+  width: 100%;
   background: white;
   color: #f56a6a;
-  float: left; }
+  float: left;
+  position: absolute;
+  margin-bottom: 20px;
+  max-width: 40%;
+  border-radius: 50px;
+  left: 32%;
+  bottom: -80px; }
+  .block-system-main-block + .messages--error div[role=alert]:before {
+    top: 13px; }
 
 .path-frontpage .site-branding__slogan {
   display: block; }
@@ -524,7 +533,8 @@ body {
     border: none;
     height: 690px;
     overflow: hidden;
-    width: 100%; }
+    width: 100%;
+    border-radius: 0; }
     .view-home-page-carousel .flexslider .slides .slider-content {
       position: absolute;
       top: 18%;
@@ -1493,12 +1503,12 @@ margin-top: 120px;
     color: #96c85a;
     font-size: 18px;
     position: relative;
-    position: absolute;
+    position: fixed;
     bottom: -80px;
-    left: 20%;
+    left: 50%;
     border-radius: 35px;
     padding-left: 50px;
-    max-width: 63%;
+    max-width: 25%;
     background: #ffffff;
     z-index: 999;
     line-height: 20px; }
@@ -1526,7 +1536,7 @@ margin-top: 120px;
   #my_tweets > span.text:hover {
     color: #212121; }
   #my_tweets > span.text ~ div {
-    padding-left: 35px;
+    padding-left: 30px;
     display: none; }
   #my_tweets > span.text:before {
     content: "\f099";
@@ -1537,17 +1547,19 @@ margin-top: 120px;
     padding: 3px;
     border-radius: 4px;
     vertical-align: bottom;
-    margin-right: 10px; }
+    margin-right: 15px; }
   #my_tweets > span.text:after {
     content: "\f107";
     position: absolute;
     right: 26px;
     font-family: 'fontawesome'; }
 
-#my_tweets.active > span.text {
-  color: #212121; }
-  #my_tweets.active > span.text:after {
-    content: "\f106"; }
+#my_tweets {
+  padding-left: 5px; }
+  #my_tweets.active > span.text {
+    color: #212121; }
+    #my_tweets.active > span.text:after {
+      content: "\f106"; }
 
 .ripple {
   width: 0;
@@ -1869,45 +1881,47 @@ margin-top: 120px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-bottom: .6em;
     margin-bottom: 0.6em !important;
-    position: relative;
-    /*&:after {
-					content: "\f107";
-				    position: absolute;
-				    right: 0;
-				    font-family: 'fontawesome';
-				    height: 20px;
-				    width: 20px;
-				    line-height: 20px;
-				    top: 13px;
-				    text-align: center;
-				    cursor: pointer;
-				}
-				&.active {
-					> span {
-						a {
-							color: #212121;
-						}
-					}
-					&:after {
-						content: "\f106";
-						color: #212121;
-					}
-					.import_tweets_logs {
-						transition: .5s ease-in-out;
-						margin-top: 0;
-						a {
-							color: #979797;
-						}
-					}
-				}
-				.import_tweets_logs {
-				    margin-top: -48px;
-				    transition: .5s ease-in-out;
-				    a {
-				    	transition: .5s ease-in-out;
-				    	color: transparent;
-				    }
-				}*/ }
+    position: relative; }
+    .block-users-left-side-bar-block .import_tweets:after, .block-non-twitter-users-left-side-bar-block .import_tweets:after {
+      content: "\f107";
+      position: absolute;
+      right: 0;
+      font-family: 'fontawesome';
+      height: 20px;
+      width: 20px;
+      line-height: 20px;
+      top: 13px;
+      text-align: center;
+      cursor: pointer; }
+    .block-users-left-side-bar-block .import_tweets > span a, .block-non-twitter-users-left-side-bar-block .import_tweets > span a {
+      position: relative;
+      z-index: 1; }
+    .block-users-left-side-bar-block .import_tweets.active > span a, .block-non-twitter-users-left-side-bar-block .import_tweets.active > span a {
+      color: #212121; }
+    .block-users-left-side-bar-block .import_tweets.active:after, .block-non-twitter-users-left-side-bar-block .import_tweets.active:after {
+      content: "\f106";
+      color: #212121; }
+    .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs {
+      transition: .5s ease-in-out;
+      margin-top: 0; }
+      .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a {
+        color: #979797; }
+        .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a:hover, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a:hover {
+          color: #212121 !important; }
+        .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.in-active, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.in-active {
+          color: #979797; }
+        .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.active, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a.active {
+          color: #979797; }
+    .block-users-left-side-bar-block .import_tweets .import_tweets_logs, .block-non-twitter-users-left-side-bar-block .import_tweets .import_tweets_logs {
+      position: relative;
+      z-index: 0;
+      margin-top: -48px;
+      transition: .5s ease-in-out; }
+      .block-users-left-side-bar-block .import_tweets .import_tweets_logs a, .block-non-twitter-users-left-side-bar-block .import_tweets .import_tweets_logs a {
+        transition: .5s ease-in-out;
+        color: transparent; }
+        .block-users-left-side-bar-block .import_tweets .import_tweets_logs a.active, .block-non-twitter-users-left-side-bar-block .import_tweets .import_tweets_logs a.active {
+          color: transparent; }
 
 .block-sign-in-with-twitter-block {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color=#bbb)";
@@ -2164,10 +2178,6 @@ margin-top: 120px;
 .profilesettingform-body.user-logged-in .main-content {
   position: absolute; }
 
-.profilesettingform-body.user-logged-in .messages--status {
-  bottom: -490px !important;
-  left: 27.3% !important; }
-
 .profilesettingform {
   margin-top: -8em; }
   .profilesettingform .profile-setting {
@@ -2226,10 +2236,11 @@ margin-top: 120px;
         padding: 5px 10px;
         cursor: pointer;
         background: #ffffff;
-        color: #303030;
-        border: 1px solid #303030; }
+        color: #ffffff;
+        background: #96c85a; }
         .profilesettingform .message-header #change-password .change:hover {
-          opacity: .8; }
+          opacity: .8;
+          background: #82bb3e; }
         .profilesettingform .message-header #change-password .change:active {
           -webkit-transform: translateY(1px);
           transform: translateY(1px); }
@@ -2583,13 +2594,20 @@ margin-top: 120px;
       color: rgba(0, 0, 0, 0.2); }
     .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error {
       display: block;
-      margin-top: 160px;
       background: white;
-      left: -24px;
-      width: 74vw;
-      position: absolute;
+      left: 42%;
+      width: 100%;
+      position: fixed;
       color: #f56a6a;
-      font-size: 18px; }
+      font-size: 18px;
+      bottom: -80px;
+      max-width: 40%;
+      border-radius: 51px;
+      transition: .5s ease-in-out;
+      margin-bottom: 20px; }
+      .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error .item-list ul,
+      .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error .item-list li {
+        margin-bottom: 0; }
     .-form-tweets-queue-csv-upload .js-form-managed-file #ajax-wrapper {
       height: 40px;
       overflow: hidden; }
@@ -3565,11 +3583,13 @@ margin-top: 120px;
     position: absolute;
     right: 3%;
     top: -9px;
-    border: 1px solid;
+    color: #ffffff;
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
-    background: #ffffff; }
+    background: #96c85a; }
+    .user-form .invite-friend:hover {
+      background: #82bb3e; }
     .user-form .invite-friend:active {
       -webkit-transform: translateY(1px);
       transform: translateY(1px); }
@@ -3704,6 +3724,9 @@ body {
   position: relative;
   z-index: 0; }
 
+.page-node-type-article .region-middle {
+  margin-top: -75px; }
+
 .page-node-type-article .block-page-title-block {
   position: absolute;
   width: 100%;
@@ -3737,7 +3760,7 @@ body {
 .page-node-type-article .node--type-article .field--name-body {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 60px 10px;
+  padding: 60px 20px;
   padding-bottom: 0; }
   .page-node-type-article .node--type-article .field--name-body p {
     font-size: 16px;
@@ -4288,3 +4311,76 @@ body {
 
 .messages {
   transition: .5s ease-in-out; }
+
+/** import log **/
+.block-import-csv-log-block {
+  top: 79px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+  -moz-box-shadow: 0px 0px 3px #bbb;
+  -webkit-box-shadow: 0px 0px 3px #bbb;
+  box-shadow: 0px 0px 3px #bbb;
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+  background: white;
+  overflow-y: auto;
+  height: 100%;
+  margin-top: 1.15em; }
+  .block-import-csv-log-block h2 {
+    background: #fafafa;
+    padding: 15px;
+    font-size: 20px;
+    color: #666;
+    align-items: center;
+    font-weight: normal; }
+  .block-import-csv-log-block .content {
+    background: #fff;
+    padding: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+    background: white;
+    overflow-y: auto;
+    height: 100%;
+    max-height: 62vh; }
+    .block-import-csv-log-block .content > div:nth-child(2) {
+      margin-top: 48px; }
+    .block-import-csv-log-block .content #import-csv-log-header {
+      width: 73.9%;
+      position: fixed;
+      z-index: 1;
+      background: #fff; }
+  .block-import-csv-log-block .import_log_items,
+  .block-import-csv-log-block #import-csv-log-header {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    align-items: center;
+    position: relative; }
+    .block-import-csv-log-block .import_log_items span,
+    .block-import-csv-log-block .import_log_items div,
+    .block-import-csv-log-block #import-csv-log-header span,
+    .block-import-csv-log-block #import-csv-log-header div {
+      width: calc(8.33333%*2);
+      box-sizing: border-box;
+      margin: 0 0;
+      padding: 0 15px; }
+    .block-import-csv-log-block .import_log_items div,
+    .block-import-csv-log-block #import-csv-log-header div {
+      font-size: 14px;
+      font-weight: bold; }
+    .block-import-csv-log-block .import_log_items span,
+    .block-import-csv-log-block #import-csv-log-header span {
+      color: #979797;
+      font-size: 14px; }
+  .block-import-csv-log-block .import_log_items {
+    border-bottom: 1px dashed  #ddd; }

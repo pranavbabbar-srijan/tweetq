@@ -17,11 +17,15 @@
 	.import_tweets_logs {
 	    padding-left: 35px;
 	    text-transform: capitalize;
-	    display: none;
 	}
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+	/** common element **/
+	select,
+	input {
+		border-radius: 0;
+	}
 	/** header **/
 	.tooltip-css,
 	#delete-selected {
@@ -58,10 +62,13 @@
 		.field--name-field-country {
 			select {
                  flex: none;
+                 width: 100%;
 			}
 			label {
 				margin-bottom: 1em;
 				font-weight: normal;
+				flex: none;
+			    width: 100%;
 			}
 		}
 		.details-wrapper {
@@ -114,7 +121,7 @@
           margin-bottom: 50px;
 	   	  &:before {
              font-size: 26px;
-             top: 17px;
+             top: 13px;
              margin-left: -36px;
 	   	  }
 	   }
@@ -504,6 +511,7 @@
 	    border-radius: 45px !important;
 	    font-size: 14px !important;
 	    margin-bottom: 52px !important;
+	    text-align: center;
 	}
 	/** css for footer **/
 	.block-social-menu-link {
@@ -653,6 +661,9 @@
     					  top: 10px;
     					  margin-right: 0;
            	     		  
+           	     	}
+           	     	&:after {
+           	     		content: none !important;
            	     	}
            	     }
            	     a {
@@ -976,11 +987,11 @@
 	.path-signup {
 	    .message-header {
 	       .js-form-item {
-	       	    width: 100%;
-	            margin-bottom: 1em;
-	            margin-right: 0;
+	       	    width: 100% !important;
+	            margin-bottom: 1em !important;
+	            margin-right: 0 !important;
 	            label {
-	            	font-weight: normal;
+	            	font-weight: normal !important;
 	            }
 	       }
 	    }
@@ -993,6 +1004,7 @@
 			width: calc(100% - 10px);
 			max-width: 100%;
 		    padding: 20px;
+		    border-radius: 0;
 		    input[type="submit"] {
 		    	width: 100%;
 		    }
@@ -1014,20 +1026,27 @@
 		}
 	}
 	/** hamburger for loged in white bg **/
-    .path-signup {
+    .path-signup,
+    .page-node-type-thanku-pages {
+    	#header {
+    		padding-bottom: 0.3em;
+            border-bottom: 1px solid #d8d8d8;
+    	}
     	.c-hamburger {
     		span {
-    			background: #000000;
+    			background: #303030;
     			&:before,
     			&:after {
-    				background: #000000;
+    				background: #303030;
     			}
     		}
     		&.is-active {
-    			&:before,
-    			&:after {
-    				background: #ffffff;
-    			}
+    			span {
+	    			&:before,
+	    			&:after {
+	    				background: #ffffff !important;
+	    			}
+	    		}
     		}
     	}
     	.block-sub-nav-main-menu .menu {
@@ -1046,7 +1065,159 @@
 	        }
 	    }
 	}
-	
+	/** contact us page **/
+	.path-contact {
+		#header {
+			border-bottom: none;
+		}
+	    .block-system-main-block {
+	    	    width: 100%;
+			    padding: 0 20px;
+			    margin-top: -50px;
+	    }
+	    .contact-message-write-to-us-form {
+	    	    max-width: 100%;
+			    width: 100%;
+	    }
+	    .heading-write-us {
+	    	font-size: 20px;
+	    	text-align: center;
+	    }
+	}
+	.block-contactusimageblock {
+		display: none;
+	}
+
+	.block-product-srijan-technologies {
+		.field--name-field-company-logo {
+			display: none;
+		}
+		.field--name-field-company-title  {
+	    	    font-size: 30px;
+	    	    .red-text {
+	    	    	display: block;
+	    	    }
+	    }
+    	.field--name-field-mobile-number-contact, 
+		.field--name-field-contact-, 
+		.field--name-field-contact {
+			    margin-bottom: 1.2em;
+		}
+		.field--name-field-visit-srijan, 
+		.field--name-field-visit-srijan- {
+		    a {
+		    	padding: 10px 50px;
+		    }
+		}
+		.field--name-field-background-image {
+			img {
+				width: auto;
+			}
+		}
+	}
+	/** thanku page **/
+	.thankyou-page {
+	   .page-wrap {
+		   	flex-wrap: wrap;
+	   }
+	   .envelop {
+	   	    margin-right: 0;
+		    flex: none;
+		    max-width: 160px;
+		    margin: 25px auto;
+		    width: 100%;
+	   }
+	   .content-wrap {
+	   	    width: 100%;
+		    float: left;
+		    flex: none;
+		    padding: 0 20px;
+		    h2 {
+		    	font-size: 22px;
+		    	max-width: 250px;
+   				margin: 0 auto;
+   				text-align: center;
+		    }
+	   }
+	}
+	/** privacy policy and terms of use **/
+	.page-node-type-article {
+		#header {
+			border-bottom: none;
+		}
+		.block-page-title-block {
+			h1 {
+				font-size: 30px;
+			}
+		}
+		.node--type-article {
+		   .field--name-body {
+		   	   padding-top: 30px;
+		   }
+		   .field--type-image {
+		       img {
+		       	width: auto;
+		       }
+		   }
+		}
+	}
+	/** import log **/
+	.block-import-csv-log-block {
+		div.content {
+		    > div {
+		    	&:nth-child(2) {
+		    		margin-top: 0px;
+		    	}
+		    }
+		    #import-csv-log-header {
+	    	    width: 100%;
+			    position: relative;
+			    background: #fff;
+			    div {
+			    	font-size: 10px;
+			    }
+		    }
+		    .import_log_items {
+		    	span {
+		    		font-size: 12px;
+		    	}
+		    }
+		}
+	}
+	/** aftet signup **/
+	.path-signup {
+		div.messages--status {
+			max-width: 100% !important;
+			padding-top: 115px;
+		    padding-left: 20px;
+		    padding-right: 20px;
+		    position: relative !important;
+			margin-bottom: 0 !important;
+			z-index: 0 !important;
+			&:before {
+				background-size: 100px;
+				height: 100px;
+				width: 100px;
+				top: 0;
+			    margin-left: auto;
+			    margin-right: auto;
+			    left: 0;
+			    right: 0;
+			}
+		    span {
+		    	font-size: 18px;
+		    	margin-bottom: 30px;
+		    	&:before {
+		    		left: 0;
+				    right: 0;
+				    margin: 0 auto;
+		    	}
+		    }
+		    a {
+		    	font-size: 16px;
+		    }
+		}
+	}
 }
 
 /* css for tablet **/
@@ -1325,6 +1496,32 @@
 	      	input[type="submit"] {
 	      		margin: 20px 165px;
 	      	}
+	    }
+	}
+	/** contact us page **/
+	.path-contact {
+	   .block-system-main-block {
+	   	    width: 30%;
+	   }
+	   .region-content {
+	   	display: flex;
+	   }
+	}
+	.block-contactusimageblock {
+		.field--type-svg-image-field {
+			padding-top: 34px;
+		}
+	    img {
+	    	max-width: 60%;
+	    	height: 100%;
+	    }
+	    .field--name-field-title {
+	    	right: 7%;
+	    	bottom: 0;
+	    	font-size: 20px;
+	    	.green-text {
+    		    font-size: 30px;
+	    	}
 	    }
 	}
 }
