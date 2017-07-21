@@ -24,7 +24,8 @@ default:
       selenium2:
         wd_host: "http://127.0.0.1:8643/wd/hub"
       javascript_session: selenium2
-      base_url: "http://testing-z6am3cq-na2rj6uui4vei.eu.platform.sh/"
+      # base_url: "http://testing-z6am3cq-na2rj6uui4vei.eu.platform.sh/"
+      base_url: "http://dev-54ta5gq-na2rj6uui4vei.eu.platform.sh/"
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: "drupal"
@@ -38,4 +39,6 @@ default:
         valid_tweet: ".valid-tweets-header"
         homepagefooter: "#block-submenufooterblock"
         mytweets: "#my_tweets"
+        message: ".message-header"
+        recent_activity: ".notification-message-list"
 
