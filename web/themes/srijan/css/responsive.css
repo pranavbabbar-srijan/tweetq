@@ -21,7 +21,8 @@
   .tooltip-css,
   #delete-selected,
   #block-submenufooterblock,
-  #block-primarymenu {
+  #block-primarymenu,
+  .tablet_display {
     display: none !important; }
   .path-dashboard .mobile-menus,
   .path-user .mobile-menus {

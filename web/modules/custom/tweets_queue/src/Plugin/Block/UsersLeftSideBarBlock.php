@@ -76,7 +76,8 @@ class UsersLeftSideBarBlock extends BlockBase {
     $create_tweet_output = "<div class='create_tweets'>
       <span class='text'>" . $create_tweet_link . "</span></div>" ;
 
-    $import_tweets_prefix = "<div class='import_tweets'>
+    $import_tweets_prefix = "<div class='mobile-display import_tweets'>
+      <span class='text'>" . $import_tweet_link . "</span></div><div class='tablet_display import_tweets'>
       <span class='text'> <a>Import</a> </span>" ;
 
     $import_tweets_output = "<div class='import_tweets_logs'>
