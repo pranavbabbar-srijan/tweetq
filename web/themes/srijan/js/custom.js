@@ -1265,22 +1265,22 @@
 
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
-		if(number_of_divs > 4) {
+		if(number_of_divs > 5) {
+			$(".max_upload--msg").show().delay(8000).fadeOut(300);
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 			$("#tweets-queue-tweet-form #edit-submit").attr('disabled', 'true');
+			$('.js-form-managed-file .form-file').attr('disabled', 'true').css('cursor','not-allowed');
 		}
 		else {
 		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
 		   $("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
-		}
-		if(number_of_divs > 4) {
-			$(".max_upload--msg").show().delay(8000).fadeOut(300);
+		    $('.js-form-managed-file .form-file').removeAttr('disabled');
 		}
 	}
 
 	function onFormCheckBoxChange() {
 				$(this).parent().parent().find('.form-submit').trigger('mousedown');
-
+				$(this).parent().parent().find('.form-submit').trigger('mousedown');
 	      // console.log(selector);
 	      // $('.button.js-form-submit.form-submit').trigger('click');
 	      // console.log('submit');
@@ -1296,7 +1296,7 @@
 	 		$('.messages').delay(8000).fadeOut(300);
 	 		$("input[type='file']").change(function(){
 		       var $fileUpload = $("input[type='file']");
-		       if (parseInt($fileUpload.get(0).files.length)>4){
+		       if (parseInt($fileUpload.get(0).files.length) > 4){
 		       	$(".max_upload--msg").show(500).delay(8000).fadeOut(300);
 		       	 this.value = '';
 		       }
