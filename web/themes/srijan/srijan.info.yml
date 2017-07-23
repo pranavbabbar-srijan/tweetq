@@ -19,6 +19,7 @@ regions:
   header: 'Header'
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'
+  responsive_menu: 'Responsive Menu'
   featured_top: 'Featured Top'
   content: 'Content'
   middle: 'Middle Section'

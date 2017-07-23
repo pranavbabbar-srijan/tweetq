@@ -1239,8 +1239,6 @@
 			   var window_width = $(window).width();
 			   function sidebarnav() {
 			     if(window_width < 767) {
-			       $("#block-primarymenu").appendTo( ".sidenav" );
-			       $("#block-submenufooterblock").appendTo( ".sidenav" );
 			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
 			     } 
 			   }

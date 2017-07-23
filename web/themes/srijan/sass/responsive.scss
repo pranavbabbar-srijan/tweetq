@@ -28,13 +28,57 @@
 	}
 	/** header **/
 	.tooltip-css,
-	#delete-selected {
+	#delete-selected,
+	#block-submenufooterblock,
+	#block-primarymenu {
 		display: none !important;
 	}
 	.path-dashboard,
 	.path-user {
 		.mobile-menus {
 			display: none;
+		}
+	}
+	.user-logged-in {
+		#block-primaryresponsivemenu {
+			.menu {
+				 li  {
+		        	
+					&:first-child {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+	#block-primaryresponsivemenu {
+	   .menu {
+	   	    margin-left: 0;
+	        li  {
+	        	margin-bottom: 1em;
+	        	padding: 0 20px;
+	        	text-align: right;
+	            a {
+				    color: #ffffff;
+				    font-size: 14px;
+				    padding: 0;
+				}
+				&:first-child {
+					a {
+					    text-align: center;
+					    background: #2aa9e0;
+					    width: 100%;
+					    padding: .7em 1em .7em 1em;
+					}
+				}
+				&:nth-last-child(2) {
+					padding: 30px 20px 5px 20px;
+					border-top: 1px solid #fff;
+					a {
+						
+					}
+				}
+			}
 		}
 	}
 	.user-logged-in {

@@ -19,11 +19,33 @@
     border-radius: 0; }
   /** header **/
   .tooltip-css,
-  #delete-selected {
+  #delete-selected,
+  #block-submenufooterblock,
+  #block-primarymenu {
     display: none !important; }
   .path-dashboard .mobile-menus,
   .path-user .mobile-menus {
     display: none; }
+  .user-logged-in #block-primaryresponsivemenu .menu li:first-child {
+    display: none; }
+  #block-primaryresponsivemenu .menu {
+    margin-left: 0; }
+    #block-primaryresponsivemenu .menu li {
+      margin-bottom: 1em;
+      padding: 0 20px;
+      text-align: right; }
+      #block-primaryresponsivemenu .menu li a {
+        color: #ffffff;
+        font-size: 14px;
+        padding: 0; }
+      #block-primaryresponsivemenu .menu li:first-child a {
+        text-align: center;
+        background: #2aa9e0;
+        width: 100%;
+        padding: .7em 1em .7em 1em; }
+      #block-primaryresponsivemenu .menu li:nth-last-child(2) {
+        padding: 30px 20px 5px 20px;
+        border-top: 1px solid #fff; }
   .user-logged-in.path-user #main-wrapper {
     margin: 0; }
   .user-logged-in .block-users-valid-tweets-block,
