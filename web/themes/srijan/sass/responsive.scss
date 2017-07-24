@@ -1527,6 +1527,10 @@
 	       }
 	    }
 	}
+	.block-users-left-side-bar-block .import_tweets, 
+	.block-non-twitter-users-left-side-bar-block .import_tweets {
+	    padding-bottom: 1.6em;
+	 }
 
 }
 
@@ -1602,4 +1606,15 @@
 	    	}
 	    }
 	}
+	.block-import-csv-log-block {
+	     .import_log_items, 
+	     #import-csv-log-header {
+	     	span {
+              font-size: 10px;
+	     	}
+	     	div  {
+	     		font-size: 11px;
+	     	}
+	     }
+	 }
 }

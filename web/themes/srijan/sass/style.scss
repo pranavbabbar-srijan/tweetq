@@ -4875,17 +4875,17 @@ margin-top: 120px;
 	    overflow-y: auto;
 	    height: 100%;
 	    max-height: 62vh;
-	    > div {
+/*	    > div {
 	    	&:nth-child(2) {
 	    		margin-top: 48px;
 	    	}
-	    }
-	    #import-csv-log-header {
+	    }*/
+/*	    #import-csv-log-header {
     	    width: 73.9%;
 		    position: fixed;
 		    z-index: 1;
 		    background: #fff;
-	    }
+	    }*/
 	}
 
 	.import_log_items,
@@ -4910,6 +4910,7 @@ margin-top: 120px;
 		    box-sizing: border-box;
 		    margin: 0 0;
 		    padding: 0 15px;
+		    word-wrap: break-word;
 	    }
 	    div {
 	    	font-size: 14px;
@@ -4918,6 +4919,7 @@ margin-top: 120px;
 	    span {
     	    color: #979797;
     	    font-size: 14px;
+    	    word-break: break-all;
 	    }
 	}
 	.import_log_items {

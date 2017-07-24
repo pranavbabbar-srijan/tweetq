@@ -1070,7 +1070,10 @@
     width: 100%;
     margin-top: -25px;
     position: absolute;
-    right: 17px; } }
+    right: 17px; }
+  .block-users-left-side-bar-block .import_tweets,
+  .block-non-twitter-users-left-side-bar-block .import_tweets {
+    padding-bottom: 1.6em; } }
 
 /** portrait view for ipad **/
 @media only screen and (min-width: 768px) and (max-width: 980px) {
@@ -1119,4 +1122,10 @@
     bottom: 0;
     font-size: 20px; }
     .block-contactusimageblock .field--name-field-title .green-text {
-      font-size: 30px; } }
+      font-size: 30px; }
+  .block-import-csv-log-block .import_log_items span,
+  .block-import-csv-log-block #import-csv-log-header span {
+    font-size: 10px; }
+  .block-import-csv-log-block .import_log_items div,
+  .block-import-csv-log-block #import-csv-log-header div {
+    font-size: 11px; } }
