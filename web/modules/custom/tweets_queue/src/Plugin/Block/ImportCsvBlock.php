@@ -72,15 +72,12 @@ class ImportCsvBlock extends BlockBase {
       '#type' => 'markup',
       '#markup' => $output,
      );
-     $div = "</div>";
-    // $build['archived_tweets'] = array(
-    //     '#theme' => 'item_list',
-    //     '#items' => $output,
-    //   );
-    //   $build['pager'] = array(
-    //    '#type' => 'pager'
-    //   );
-    //   return $build;
-   
+     $div = "</div>";   
   }
+   /**
+   * {@inheritdoc}
+   */
+     public function getCacheMaxAge() {
+      return 0;
+     }
 }
