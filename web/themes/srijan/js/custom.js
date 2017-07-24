@@ -1253,8 +1253,12 @@
 					});
 				}
 				$(".import_tweets").click(function() {
-				  $(this).toggleClass('active');
+				    $(this).toggleClass('active');
 				});
+				$(".import_tweets div").click(function(e) {
+				   //do something
+				   e.stopPropagation();
+				})
 				// added target on a 
 				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
 				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form').hide();
