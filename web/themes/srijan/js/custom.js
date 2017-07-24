@@ -46,14 +46,14 @@
 		var invite_friends_path = '/dashboard/inviteFriends';
 		var multiple_selected_deletion = '/dashboard/delete-tweets';
 
-		var email_validation_path = '/Barbet/_www/dashboard/validateEmail';
-		var user_login_validation_path = '/Barbet/_www/dashboard/validateUserLogin';
-		var forgot_password_send_token_path = '/Barbet/_www/dashboard/forgotPasswordSendToken';
-		var user_history_path = '/Barbet/_www/dashboard/user-history';
-		var profile_change_password_path = '/Barbet/_www/dashboard/changePassword';
-		var friend_invite_send_token_path = '/Barbet/_www/dashboard/friendInviteSendToken';
-		var invite_friends_path = '/Barbet/_www/dashboard/inviteFriends';
-		var multiple_selected_deletion = '/Barbet/_www/dashboard/delete-tweets';
+		// var email_validation_path = '/Barbet/_www/dashboard/validateEmail';
+		// var user_login_validation_path = '/Barbet/_www/dashboard/validateUserLogin';
+		// var forgot_password_send_token_path = '/Barbet/_www/dashboard/forgotPasswordSendToken';
+		// var user_history_path = '/Barbet/_www/dashboard/user-history';
+		// var profile_change_password_path = '/Barbet/_www/dashboard/changePassword';
+		// var friend_invite_send_token_path = '/Barbet/_www/dashboard/friendInviteSendToken';
+		// var invite_friends_path = '/Barbet/_www/dashboard/inviteFriends';
+		// var multiple_selected_deletion = '/Barbet/_www/dashboard/delete-tweets';
 
 		$( "#foo" ).trigger( "click" );
 
