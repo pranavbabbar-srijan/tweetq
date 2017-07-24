@@ -4310,7 +4310,9 @@ body {
   display: none !important; }
 
 .messages {
-  transition: .5s ease-in-out; }
+  transition: .2s ease-in-out;
+  margin-bottom: -10px !important;
+  bottom: -80px; }
 
 /** import log **/
 .block-import-csv-log-block {
