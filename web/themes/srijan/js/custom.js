@@ -72,17 +72,14 @@
 		});
 
 		//Disable the update button on settings page
-		var selected_value = $( "#edit-field-country option:selected" ).text();
-		if (selected_value == '- None -') {
-			$(".user-form #edit-submit").attr('disabled', 'true');
+    	var getvalue = $('#edit-field-country option:selected').val();
+	    if(getvalue == getvalue) {
+            $(".user-form #edit-submit").attr('disabled', 'true');
 		}
-		$("#edit-field-country").on('change',function() {
-			  var selected_valuea = $('#edit-field-country :selected').text();
-	          if (selected_valuea == '- None -') {
-				$(".user-form #edit-submit").attr('disabled', 'true');
-			  } else {
-			  	$(".user-form #edit-submit").removeAttr('disabled');
-			  }
+        $("#edit-field-country").on('change',function() {
+	          if (getvalue == getvalue) {
+				$(".user-form #edit-submit").removeAttr('disabled');
+		      }
 		});
 
 		//Account setting invite friends.
@@ -1265,7 +1262,7 @@
 				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
 				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form').hide();
                 
-                 var url = $(location).attr('href'),
+                var url = $(location).attr('href'),
 			    parts = url.split("/"),
 			    last_part = parts[parts.length-1];
 				$(".import_tweets_logs .text a").each(function() {   
@@ -1278,6 +1275,7 @@
 				    }
 
 				});
+			
                
 
 
