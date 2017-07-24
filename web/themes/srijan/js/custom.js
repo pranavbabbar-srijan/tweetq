@@ -1279,9 +1279,8 @@
 	}
 
 	function onFormCheckBoxChange() {
-				$(this).parent().parent().find('.form-submit').trigger('mousedown');
-				$(this).parent().parent().find('.form-submit').trigger('mousedown');
-	      // console.log(selector);
+				$(this).parent().parent().find('.form-type-checkbox').next('.form-submit').trigger('mousedown');
+		  // console.log(selector);
 	      // $('.button.js-form-submit.form-submit').trigger('click');
 	      // console.log('submit');
 	}
