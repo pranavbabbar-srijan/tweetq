@@ -4722,13 +4722,16 @@ function tweets_queue_decrypt_data($crypted_token) {
 
 function tweets_queue_user_update($account) {
   $uid = \Drupal::currentUser()->id();
-  $twitter_history_info = array(
-     // 'nid' => $message_data->nid,
-      'uid' => $uid,
-      'created' => time(),
-      'type' => 'Settings',
-      'message' => 'Settings has been updated',
-  );
+  $path = \Drupal::service('path.current')->getPath();
+  if ($path != '/dashboard/my-profile') {
+    $twitter_history_info = array(
+       // 'nid' => $message_data->nid,
+        'uid' => $uid,
+        'created' => time(),
+        'type' => 'Settings',
+        'message' => 'Settings has been updated',
+    );
     tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
+  }
 
 }
