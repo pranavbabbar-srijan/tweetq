@@ -58,16 +58,19 @@
 		$( "#foo" ).trigger( "click" );
 
 		// Disable the update button on profile page
-        var disable_elements = $('.profilesettingform .form-text');
-		 if(disable_elements.length){
-	        (disable_elements.val().length <= 0)? $(".profilesettingform #edit-submit").attr('disabled', 'true')
-	        	:$(".profilesettingform #edit-submit").removeAttr('disabled');
-	        }
+        $(".profilesettingform #edit-submit").attr('disabled', 'true');
 		$(".profilesettingform .form-text").keyup(function() {
 			var get_length = $(this);
 			 if(get_length.length){
 	        (get_length.val().length <= 0)? $(".profilesettingform #edit-submit").attr('disabled', 'true')
 	        	:$(".profilesettingform #edit-submit").removeAttr('disabled');
+	        }
+		});
+		$(".profilesettingform #edit-changeuser-password").keyup(function() {
+			var get_length = $(this);
+			 if(get_length.length){
+	        (get_length.val().length <= 0)? $(".profilesettingform #edit-submit").attr('disabled', 'true')
+	        	:$(".profilesettingform #edit-submit").attr('disabled' ,'true');
 	        }
 		});
 
@@ -81,17 +84,6 @@
 				$(".user-form #edit-submit").removeAttr('disabled');
 		      }
 		});
-
-		    	var getvalue = $('#edit-field-country option:selected').val();
-	    if(getvalue == getvalue) {
-            $(".user-form #edit-submit").attr('disabled', 'true');
-		}
-        $("#edit-field-country").on('change',function() {
-	          if (getvalue == getvalue) {
-				$(".user-form #edit-submit").removeAttr('disabled');
-		      }
-		});
-		
 
 		//Account setting invite friends.
 		$("#user-form #invite-friends").click(function() {
