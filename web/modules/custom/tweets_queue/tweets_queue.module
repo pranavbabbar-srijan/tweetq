@@ -1121,6 +1121,8 @@ function tweets_queue_send_direct_message($message, $images = array(), $nid=0) {
       'weight' => 6,
       'first_run' => time(),
       'last_run' => time(),
+      'message' => $message,
+      'type' => 'New Tweet'
     ),
     0
   );
