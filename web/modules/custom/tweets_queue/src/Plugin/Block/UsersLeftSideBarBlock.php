@@ -92,7 +92,7 @@ class UsersLeftSideBarBlock extends BlockBase {
     $my_tweets_prefix = "<span class='mobile-display total_twitt_mobile'>" . $total_twitt_link . "</span><div id='my_tweets'> 
     <span class='text'>My Tweets</span>";
 
-    $total_twitt_output = "<div class='archived_tweets'>
+    $total_twitt_output = "<div class='total_tweets'>
       <span class='text'>" . $total_twitt_link . "</span></div>";
 
     $valid_tweets_output = "<div class='valid_tweets'>

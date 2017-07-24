@@ -4040,7 +4040,7 @@ function tweets_queue_fetch_import_csv_logs() {
   $query->fields('h', ['type', 'total_tweets', 'valid_tweets', 'invalid_tweets', 'duplicate_tweets', 'skipped_tweets', 'created', 'status']);
   // $query->outerjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
   // $query->fields('p', ['uid', 'status']);
-  //$query->orderBy('h.created', 'DESC');
+  $query->orderBy('h.created', 'DESC');
  // $query->condition('h.uid', $uid);
   //$query->condition('h.created', $last_history_read , '>');
   $result = $query->execute()->fetchAll();
