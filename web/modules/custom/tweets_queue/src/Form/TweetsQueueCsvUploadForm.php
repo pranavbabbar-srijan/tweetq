@@ -122,11 +122,12 @@ class TweetsQueueCsvUploadForm extends FormBase {
   
   public function importCsvData($file) {
     $uid = \Drupal::currentUser()->id();
-    $file = fopen($file, 'r');
+    $file_data = fopen($file, 'r');
+    $file_name = basename($file);
     $row = 0;
     $import_message = array('total' => 0, 'duplicate' => 0,
       'imported' => 0 , 'valid' => 0, 'invalid' => 0, 'skipped' => 0);
-    while (($line = fgetcsv($file)) !== FALSE) {
+    while (($line = fgetcsv($file_data)) !== FALSE) {
       if ($row == 0) {
         $row++;
         continue;
@@ -190,7 +191,7 @@ class TweetsQueueCsvUploadForm extends FormBase {
       //'nid' => $nid,
       'uid' => $uid,
       'created' => time(),
-      'type' => 'Import CSV',
+      'type' => $file_name,
       'total_tweets' => $import_message['total'],
       'valid_tweets' => $import_message['valid'],
       'invalid_tweets' => $import_message['invalid'],
