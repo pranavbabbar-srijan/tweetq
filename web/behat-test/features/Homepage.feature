@@ -28,6 +28,7 @@ Feature: To check the functionality of login page
 		And I should see the link "Privacy Policy"
 		And I should see the link "Terms of Use"
 
+
 	@2
 	Scenario: Fetch href of elements and match with the expected one
 		Given I am on "./"
@@ -92,8 +93,7 @@ Feature: To check the functionality of login page
  		Given I am on "./"
  		Then I should see element with css ".flex-control-nav.flex-control-paging>li>a"
  		And I should see element with css ".flex-control-nav.flex-control-paging>li>a"
- 		Then I verified maximum two sliders can be added on ".flex-control-nav.flex-control-paging"
- 		# Then I test
+ 		
 
  	@7
  	Scenario: To verify the What Barbet section
