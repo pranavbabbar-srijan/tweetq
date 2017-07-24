@@ -31,32 +31,36 @@ var $originalWindowName = '';
   }
 
 /**
- * @Then /^I verified maximum two sliders can be added on "([^"]*)"$/
+ * @Then I verified maximum two sliders can be added on
  */
-public function maximumslider($xpath){
+public function maximumslider(){
 
-  $session=$this->getSession();
-
-    $session = $this->getSession(); // get the mink session
-    $text=$session->getPage()->find('css',$xpath);
+    $session = $this->getSession();// get the mink session
+    $element = $session->getPage()->find('xpath',"//ol[contains(@class,'flex-control-nav')]");
     
 
-    print_r($text);
-    //;->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',$xpath));
-   // $dom = new DOMDocument(); 
-   // $htmlString = $dom->saveHTML($xpath->item(0));
-   //$res=$xpath->query($xpath);
-   //print_r($res);
-  //  $text =$text ->getText();
-  // //  print_r($text); die();
+  //  $dom = new DOMDocument(); 
+  //  $dom->loadHTML($string);
+  //  echo "<pre>";
+  //  $xpath = new DOMXPath($dom);
+  //  $htmlString = $dom->saveHTML($xpath->item(0));
+  //  $xpath_resultset =  $xpath->query("//div[@id='flexslider-1']/ol");
+  //  $htmlString = $dom->saveHTML($xpath_resultset->item(0));
+  // //  $res=$xpath->query($xpath);
+  // //  print_r($res);
+  // //  $text =$element ->getText();
+  // //  echo $text,PHP_EOL;
+  // // // //  print_r($text); die();
  
-  // // $text=$text->getText();
+  // // // // $text=$text->getText();
   // //   $dom = new DOMDocument(); 
   // //   $dom->loadHTML($text); 
-  // //   $value = $dom->getElementsByTagName('li')->length;
-  //  var_dump($xpath);die;
-  //   $count = substr_count($xpath,'<li>');
-   
+  // //   // print_r($dom);
+  // //   $value = $dom->getElementsByTagName("li")->length;
+  // //   // print_r($value);
+  // //  var_dump($xpath);die;
+   $count = substr_count($element->name,'<li>');
+   echo $count;
 
   //  //echo ()gettype($text);
   
@@ -124,6 +128,20 @@ public function uniquetweet(){
   $this->getSession()->getPage()->fillField("edit-message", "tweet#".$this->unixTimeStamp);
 }
 
+/**
+ * @Then I fill in invalid tweet
+ */
+public function invalidtweet(){
+  $this->getSession()->getPage()->fillField("edit-message", "invalid tweet invalid tweet invalid tweet invalid tweet invalid tweet invalid tweet invalid tweet invalid tweet invalid tweet invalid tweet invalid".$this->unixTimeStamp);
+}
+
+
+/**
+ * @Then I fill in some unique email id
+ */
+public function uniqueemail(){
+  $this->getSession()->getPage()->fillField("edit-email", "barbettest".$this->unixTimeStamp."@gmail.com");
+}
 
   /**
    * Checks, that form element with specified label and type is visible on page.
@@ -146,35 +164,6 @@ public function uniquetweet(){
     throw new \Behat\Mink\Exception\ElementNotFoundException($this->getSession(), $type . ' form item', 'label', $label);
   }
 
-/**
-      * @Then I fetch the href of form :FormName in :region region
-     */
-public function iFetchTheHrefOfFormInRegion($FormName, $region)
-{
-$actualhref = self::iFetchTheHrefOfFormNameInRegion($FormName,$region);
-// echo "The href is: ". $actualhref;
-}
-
-public function iFetchTheHrefOfFormNameInRegion($FormName, $region)
-{
-   $regionObj = $this->getSession()->getPage()->find('region', $region);
-   $actuallink = $regionObj->findLink($FormName);
-if ($actuallink === null) {
-    throw new Exception("The actuallink was not found!");
-    }
-return $actuallink->getAttribute('href');
-}
-
-/**
- * @Then I match the href :href of form :FormName in :region region
- */
-public function iMatchTheHrefOfFormInRegion($expectedhref,$FormName, $region)
-{    $actualhref = self::iFetchTheHrefOfFormNameInRegion($FormName, $region);
-  $pos = strpos($actualhref, $expectedhref);
-        if ($pos === false) {
-           throw new \Exception("Expected href {$expectedhref} not found");
-}
-}
 
 /**
  * @Then /^I fetch href for xpath "([^"]*)"$/
@@ -195,31 +184,7 @@ public function fetchhref($xpath) {
 
     }
 
- /**
-      * @Then I fetch the href of :FormName
-      * this method is called to get the href of a particular form
-     */
-public function iFetchTheHrefOfFormName($FormName)
-{ 
-  $page = $this->getSession()->getPage();
-$actuallink = $page->findLink($FormName);
-if ($actuallink === null) {
-    throw new Exception("The actuallink was not found!");
-    }
-return $actuallink->getAttribute('href');
-}
 
-    
-/**
- * @Then I match the href :href of :FormName
- */
-public function iMatchTheHrefOfForm($expectedhref,$FormName)
-{    $actualhref = self::iFetchTheHrefOfFormName($FormName);
-  $pos = strpos($actualhref, $expectedhref);
-        if ($pos === false) {
-           throw new \Exception("Expected href {$expectedhref} not found");
-}
-}
 
 /**
  * @Then I fetch text for valid tweet
@@ -366,13 +331,13 @@ public function tweetsizeinvalid($xpath) {
     $session = $this->getSession(); // get the mink session
      $element1=$session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath', $xpath));
            $element1=$element1 ->getText();
-          echo $element1,PHP_EOL;
-    if ($element1 >= 140) {
+          echo "Element is:  ".$element1,PHP_EOL;
+    if ($element1>= 140) {
        echo "Tweet is invalid tweet";
     }
 else 
   echo "incorrect result";
-    }
+   }
 
 /**
  *@Then I fetch text for invalid tweet
@@ -427,6 +392,42 @@ public function totaltweetdelete(){
     }
 else
   echo "incorrect result";
+}
+
+/**
+ * @Then total tweet after deletion
+ */
+public function deletiontotaltweet(){
+
+  global $Totaltweet;
+  $session = $this->getSession();
+  $element=$session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',"//div[@id='block-userstweetsstatisticsblock']//a[1]//span[2]"));
+  $element=$element->getText();
+  $Totaltweet= $Totaltweet - 3;
+  if($Totaltweet==$element)
+    { 
+    echo "Tweet after deletion is  ".$Totaltweet;
+    }
+else throw new \Exception('incorect result');
+}
+
+/**
+ * @Then all tweets on a page is deleted
+ */
+public function alltweetdelete(){
+
+  global $Totaltweet;
+  $session = $this->getSession();
+  $element=$session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',"//div[@id='block-userstweetsstatisticsblock']//a[1]//span[2]"));
+  $element=$element->getText();
+  $Totaltweet= $Totaltweet - 10;
+  if($Totaltweet==$element)
+    { 
+    echo "Tweet after deletion is  ".$Totaltweet;
+    }
+else throw new \Exception('incorect result');
+
+
 }
 
 /**
@@ -606,7 +607,7 @@ public function fetchnewvalidtweet() {
            $newvalid = $element ->getText();
            $newinvalid=$element1 ->getText();
         echo 'New Valid Tweet : ' . $newvalid,PHP_EOL;
-        echo 'New Invalid Tweet : ' .$newinvalid,PHP_EOL;
+        echo 'New Invalid Tweet : ' .$newinvalid;
     if (null === $newinvalid and null == $newinvalid) {
         throw new \Exception('text not found');
     }
@@ -753,6 +754,39 @@ public function findxpath($xpath)
 
 }
 
+// /**
+// * @When /^I should see 10 tweets with xpath "([^"]*)"$/
+// */
+// public function maxtweet($xpath)
+// {
+
+//   $session = $this->getSession(); // get the mink session
+//   $element = $session->getPage()->find('xpath', $xpath);
+
+//   if($element==null){
+//     throw new \Exception(' element is on next page');
+//   }
+
+// }
+
+/**
+* @When /^I should see pagination on css "([^"]*)"$/
+*/
+public function paginate($el)
+{ global $Totaltweet;
+  $session = $this->getSession(); // get the mink session
+  $element = $session->getPage()->find('css', $el);
+ if (($Totaltweet>10)&&($element!=null))
+ {
+  echo "the pagination is found ";
+ }
+  else
+    throw new \Exception(' Element Not found');
+  
+  
+}
+
+
 /**
 * @When /^element is readonly "([^"]*)"$/
 */
@@ -768,6 +802,23 @@ public function readonly($xpath)
   }
 return $element;
 }
+
+// /**
+// * @When /^I should see change in colour to red "([^"]*)"$/
+// */
+// public function colorchange($cssSelector)
+// {
+
+//   $session = $this->getSession(); // get the mink session
+//   $element = $session->getPage()->find('css', $cssSelector);
+//   $element=$element->getAttribute('em');
+//   echo $element;
+//    if($element==null)  {
+    
+//     throw new \Exception('Not found');
+//   }
+// return $element;
+// }
 
 
 /**
@@ -804,23 +855,24 @@ public function fetchtweet() {
  * @Then latest created date for Total Tweet is on top
  */
  public function latesttotaltweet(){
-  $session=$this->getSession();
-  $elements = array();
-  for ($i=1;$i<=10;$i++)
-    {
-    $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',"//div[@id='block-usersalltweetsblock']/div/div[2]/ul/li[$i]/div/ul/li[3]"));
-    
-    $created_date = $element->getText();
+$session=$this->getSession();
+$elements = array();
+for ($i=1;$i<=10;$i++)
+{
+$element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',"//div[@id='block-usersalltweetsblock']/div/div[2]/ul/li[$i]/div/ul/li[5]"));
+$created_date = $element->getText();
+// echo $created_date;
+$date = date_parse_from_format('d-m-Y', $created_date);
+//print_r(date_parse_from_format('d-m-Y', $created_date));
+$elements[] = mktime(0, 0, 0, $date['year'], $date['month'], $date['day']);
+ }
+if($elements[1]==(max($elements)))
+echo 'Latest tweet is on top';
+else{
+throw new \Exception('incorrect result');
+}
 
- $date = date_parse_from_format('d-m-Y', $created_date);
- $elements[] = mktime(0, 0, 0, $date['month'], $date['day'], $date['year']);
-  }
-    if($elements[1]==(max($elements)))
- echo 'Latest tweet is on top';
- else{
-  throw new \Exception('incorrect result');
- }
- }
+}
 
 /**
  * @Then latest created date for Valid Tweet is on top
@@ -830,12 +882,12 @@ public function fetchtweet() {
   $elements = array();
   for ($i=1;$i<=10;$i++)
     {
-    $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',"//div[@id='block-userstweetedtweetsblock']/div/div[3]/ul/li[$i]/div/ul/li[3]"));
+    $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',"//div[@id='block-userstweetedtweetsblock']/div/div[3]/ul/li[$i]/div/ul/li[5]"));
       
     $created_date = $element->getText();
 
  $date = date_parse_from_format('d-m-Y', $created_date);
- $elements[] = mktime(0, 0, 0, $date['month'], $date['day'], $date['year']);
+ $elements[] = mktime(0, 0, 0, $date['year'], $date['month'], $date['day']);
   }
     if($elements[1]==(max($elements)))
  echo 'Latest tweet is on top';
@@ -852,12 +904,12 @@ public function fetchtweet() {
   $elements = array();
   for ($i=1;$i<=10;$i++)
     {
-    $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',"//div[@id='block-usersinvalidtweetsblock']/div/div[2]/ul/li[1]/div/ul/li[3]"));
+    $element = $session->getPage()->find('xpath',$session->getSelectorsHandler()->selectorToXpath('xpath',"//div[@id='block-usersinvalidtweetsblock']/div/div[2]/ul/li[1]/div/ul/li[5]"));
       
     $created_date = $element->getText();
 
  $date = date_parse_from_format('d-m-Y', $created_date);
- $elements[] = mktime(0, 0, 0, $date['month'], $date['day'], $date['year']);
+ $elements[] = mktime(0, 0, 0, $date['year'], $date['month'], $date['day']);
   }
     if($elements[1]==(max($elements)))
  echo 'Latest tweet is on top';
@@ -865,6 +917,7 @@ public function fetchtweet() {
   throw new \Exception('incorrect result');
  }
  }
+
 
 /**
      * check for is disabled or not
@@ -876,8 +929,16 @@ public function fetchtweet() {
         $session = $this->getSession();
         $element = $session->getPage()->find('xpath', $session->getSelectorsHandler()->selectorToXpath('xpath', $xpath));
 
-        $return = $element->getAttribute('disabled');    
-    }
+        $element = $element->getAttribute('disabled');    
+        if($element==null)  {
+          echo "Button is not disabled";}
+            else{
+              echo "Button is disabled";
+            }
+    
+  
+}
+    
 
  /**
     * @When /^I hover over the element by Xpath "([^"]*)"$/
@@ -893,25 +954,25 @@ public function fetchtweet() {
       $element->mouseOver();
     }
 
-    // /**
-    //  * Click on the element with the provided CSS Selector
-    //  *
-    //  * @When /^I click on the element with css selector "([^"]*)"$/
-    //  */
-    // public function iClickOnTheElementWithCSSSelector($cssSelector)
-    // {
-    //     $session = $this->getSession();
-    //     $element = $session->getPage()->find(
-    //         'xpath',
-    //         $session->getSelectorsHandler()->selectorToXpath('css', $cssSelector) // just changed xpath to css
-    //     );
-    //     if (null === $element) {
-    //         throw new \InvalidArgumentException(sprintf('Could not evaluate CSS Selector: "%s"', $cssSelector));
-    //     }
+    /**
+     * Click on the element with the provided CSS Selector
+     *
+     * @When /^I click on the element with css selector "([^"]*)"$/
+     */
+    public function iClickOnTheElementWithCSSSelector($cssSelector)
+    {
+        $session = $this->getSession();
+        $element = $session->getPage()->find(
+            'xpath',
+            $session->getSelectorsHandler()->selectorToXpath('css', $cssSelector) // just changed xpath to css
+        );
+        if (null === $element) {
+            throw new \InvalidArgumentException(sprintf('Could not evaluate CSS Selector: "%s"', $cssSelector));
+        }
  
-    //     $element->click();
+        $element->click();
  
-    // }
+    }
 
     /** this works with selenium/javascript tags
    * @When /^I hover over the element "([^"]*)"$/
@@ -967,6 +1028,147 @@ public function iAmLoggedInAsWithPassword($email, $password)
 
 }
 
+
+
+/**
+ * @Given I login with valid username and password
+ */
+public function iAmLoggedInAsuser()
+{
+
+  $this->getSession()->getPage()->fillField('edit-name', "nehasingh767@gmail.com");
+  $this->getSession()->getPage()->fillField('edit-pass', "Srijan@123");
+  $this->getSession()->getPage()->pressButton('Log in');
+
+
+}
+
+
+
+/**
+  * @Then I fetch the href of form :FormName
+  */
+public function iFetchTheHrefOfForm($FormName)
+{
+  $actualhref = self::iFetchTheHrefOfFormName($FormName);
+  echo "The href is: ". $actualhref;
+}
+/**
+      * @Then I fetch the href of form :FormName in :region region
+     */
+public function iFetchTheHrefOfFormInRegion($FormName, $region)
+{
+$actualhref = self::iFetchTheHrefOfFormNameInRegion($FormName,$region);
+echo "The href is: ". $actualhref;
+}
+/**
+      * @Then I fetch the href of :FormName
+      * this method is called to get the href of a particular form
+     */
+public function iFetchTheHrefOfFormName($FormName)
+{ 
+  $page = $this->getSession()->getPage();
+$actuallink = $page->findLink($FormName);
+if ($actuallink === null) {
+    throw new Exception("The actuallink was not found!");
+    }
+return $actuallink->getAttribute('href');
+}
+
+public function iFetchTheHrefOfFormNameInRegion($FormName, $region)
+{
+   $regionObj = $this->getSession()->getPage()->find('region', $region);
+   $actuallink = $regionObj->findLink($FormName);
+if ($actuallink === null) {
+    throw new Exception("The actuallink was not found!");
+    }
+return $actuallink->getAttribute('href');
+}
+
+/**
+ * @Then I match the href :href of :FormName
+ */
+public function iMatchTheHrefOfForm($expectedhref,$FormName)
+{    $actualhref = self::iFetchTheHrefOfFormName($FormName);
+  //if ($actualhref $expectedhref);
+      $pos = strcmp($actualhref, $expectedhref);
+    if ($pos != 0) {
+      throw new \Exception("Expected href {$expectedhref} not found");
+    }
+}
+
+/**
+ * @Then I match the href :href of form :FormName in :region region
+ */
+public function iMatchTheHrefOfFormInRegion($expectedhref,$FormName, $region)
+{    $actualhref = self::iFetchTheHrefOfFormNameInRegion($FormName, $region);
+  $pos = strcmp($actualhref, $expectedhref);
+        if ($pos != 0) {
+           throw new \Exception("Expected href {$expectedhref} not found");
+}
+}
+
+// /**
+// * @Then I attach the file :path in path :xpath
+// */
+// public function attachmultiplefile($xpath,$path)
+// {
+//   // $element = $this->fixStepArgument($element);
+//   if ($this->getMinkParameter('files_path')) 
+//   {
+//         $fullPath = rtrim(realpath($this->getMinkParameter('files_path')), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$path;
+//         if (is_file($fullPath)) {
+//             $path = $fullPath;
+//         }
+//     }
+  
+//   $session = $this->getSession(); // get the mink session
+//   $xpath = $session->getPage()->find('xpath', $xpath);
+//   $xpath=$xpath->getText();
+//   echo $xpath;
+//     if (null==$xpath)
+//   {
+//      throw new Exception("File input is not found");
+//   }
+//         $xpath->attachFile($file);
+// }
+
+ /**
+   * @Then I upload the file :path in path :xpath
+   */
+  public function iUploadTheImage($path,$xpath) {
+    // Cannot use the build in MinkExtension function 
+    // because the id of the file input field constantly changes and the input field is hidden
+    if ($this->getMinkParameter('files_path')) {
+      $fullPath = rtrim(realpath($this->getMinkParameter('files_path')), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$path;
+      
+      if (is_file($fullPath)) {
+        $xpath = 'input[type="file"]';
+        $field = $this->getSession()->getPage()->find('css', $xpath);
+
+        if (null === $field) {
+           throw new Exception("File input is not found");
+        }
+        $field->attachFile($fullPath);
+      }
+    }
+    else throw new Exception("File is not found at the given location");      
+  }
+
+
+// /**
+//  * @Then I check the checkbox with css :css
+//  */
+// public function RadioButtonWithIdShouldBeChecked($sId)
+// {
+//     $elementByCss = $this->getSession()->getPage()->find('css',.$sId);
+
+//     $elementByCss->click();
+
+//     if (!$elementByCss) {
+//         throw new Exception('elemnent not found');
+//     }
+// }
 
 
 /**                                     

@@ -4,16 +4,16 @@ Feature: To check the functionality of ValidTweet
 @1
 Scenario: Click on valid tweet should navigate to different page
     Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
    Then the url should match "/dashboard/valid-tweets"
 
 @2
  Scenario: Verify the hover text of edit element
 	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     Then I am on "/dashboard/valid-tweets"
     When I hover over the element by Xpath "//div[@id='block-usersvalidtweetsblock']//div[@class='item-list'][2]/ul/li[1]//a[contains(@href,'edit')]"
@@ -23,28 +23,28 @@ Scenario: Click on valid tweet should navigate to different page
 @3
  Scenario: Verify the hover text of delete element
  	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     Then I am on "/dashboard/valid-tweets"
     When I hover over the element by Xpath "//div[@id='block-usersvalidtweetsblock']//div[@class='item-list'][2]/ul/li[1]//a[contains(@href,'delete')]"
     And I wait for 5 seconds
     Then I should see text matching "Click here to delete your Tweet"
 
-@4
-Scenario: If no New tweets found
-    Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
-    When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
-    Then I am on "/dashboard/valid-tweets"
-    And I fetch text for no tweet found
+# @4
+# Scenario: If no New tweets found
+#     Given I am on "/"
+#     And I login with valid username and password
+#     And I wait for 5 seconds
+#     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
+#     Then I am on "/dashboard/valid-tweets"
+#     And I fetch text for no tweet found
 
 @5
 Scenario: To verify sum of new tweets and tweeted should be equivalent to valid tweet
    Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     Then I am on "/dashboard/valid-tweets"
     Then sum of new tweets and tweeted equivalent to valid tweets
@@ -52,8 +52,8 @@ Scenario: To verify sum of new tweets and tweeted should be equivalent to valid 
 @6
 Scenario: To verify on click of Valid tweet in header , valid tweet option in left slider should be active
     Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     Then I am on "/dashboard/valid-tweets"
     Then I should see element with css "div.valid_tweets a.active"
@@ -61,8 +61,8 @@ Scenario: To verify on click of Valid tweet in header , valid tweet option in le
     @7
     Scenario: If New tweets found
     Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     Then I am on "/dashboard/valid-tweets"
     Then I should see "Message" in the "header"
@@ -75,36 +75,38 @@ Scenario: To verify on click of Valid tweet in header , valid tweet option in le
 @8
 Scenario: Edit functionality
     Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     Then I am on "/dashboard/valid-tweets"
     When I click on the element with xpath "//div[@id='block-usersvalidtweetsblock']//div[@class='item-list'][2]/ul/li[1]//a[contains(@href,'edit')]"
     And I wait for 5 seconds
     And I fill in some unique text 
     And I press "Save Tweet"
+    And I wait for 5 seconds
     Then I should see text matching "Tweet have been saved successfully"
 
 
 @9
 Scenario: Delete Functionality
-     Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    Given I am on "/"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     Then I am on "/dashboard/valid-tweets"
     And I fetch text for valid tweet
     When I click on the element with xpath "//div[@id='block-usersvalidtweetsblock']//div[@class='item-list'][2]/ul/li[1]//a[contains(@href,'delete')]"
-    And I wait for 5 seconds
+    And I wait for 10 seconds
     And I press the "Delete Anyway" button
-    Then I should see text matching "Tweet Deleted Successfully"
+    And I wait for 5 seconds
+    # Then I should see text matching "Tweet Deleted Successfully"
     And valid tweet gets decremented 
 
 @10
     Scenario:Verify the size of tweet
     Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     Then I am on "/dashboard/valid-tweets"
     And I click on the element with xpath "//div[@id='block-usersvalidtweetsblock']//a[2]"
@@ -115,8 +117,7 @@ Scenario: Delete Functionality
 
 Scenario: Latest Created on should be top of the list
     Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
     And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     And I wait for 5 seconds
@@ -127,12 +128,23 @@ Scenario: Latest Created on should be top of the list
 @12
 Scenario: To fetch count of validtweet
     Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
     And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     And I wait for 5 seconds
     And I click on the element with xpath "//div[@id='block-usersvalidtweetsblock']//a[2]"
     Then I fetch text for valid tweet
+
+@13
+Scenario: To check if valid tweet created ,then total tweets and valid tweets should be incremented by 1
+    Given I am on "/"
+    And I login with valid username and password
+    And I wait for 5 seconds
+    Then I fetch text for valid tweet  
+    And I fetch text for total tweet
+    When I fill in some unique text
+    And I press "Tweet Now"
+    Then Valid Tweet incremented
+    And Total Tweet incremented
 
 
