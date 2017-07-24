@@ -72,7 +72,17 @@
 		});
 
 		//Disable the update button on settings page
-    	var getvalue = $('#edit-field-country option:selected').val();
+    	var getvalue = $('#user-form select option:selected').val();
+	    if(getvalue == getvalue) {
+            $(".user-form #edit-submit").attr('disabled', 'true');
+		}
+        $("#user-form select").on('change',function() {
+	          if (getvalue == getvalue) {
+				$(".user-form #edit-submit").removeAttr('disabled');
+		      }
+		});
+
+		    	var getvalue = $('#edit-field-country option:selected').val();
 	    if(getvalue == getvalue) {
             $(".user-form #edit-submit").attr('disabled', 'true');
 		}
@@ -81,6 +91,7 @@
 				$(".user-form #edit-submit").removeAttr('disabled');
 		      }
 		});
+		
 
 		//Account setting invite friends.
 		$("#user-form #invite-friends").click(function() {
