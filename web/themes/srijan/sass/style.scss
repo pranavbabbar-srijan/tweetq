@@ -4932,3 +4932,9 @@ margin-top: 120px;
 	color: red;
 	display: none;
 }
+.success-text {
+	color: $login-btn !important;
+}
+.fail-text {
+	color: red !important;
+}
