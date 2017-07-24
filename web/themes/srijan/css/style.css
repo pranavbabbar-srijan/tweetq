@@ -1904,6 +1904,8 @@ margin-top: 120px;
     .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs {
       transition: .5s ease-in-out;
       margin-top: 0; }
+      .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs .text.active a, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs .text.active a {
+        color: #212121 !important; }
       .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a {
         color: #979797; }
         .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a:hover, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a:hover {
@@ -4344,18 +4346,7 @@ body {
     background: white;
     overflow-y: auto;
     height: 100%;
-    max-height: 62vh;
-    /*	    > div {
-	    	&:nth-child(2) {
-	    		margin-top: 48px;
-	    	}
-	    }*/
-    /*	    #import-csv-log-header {
-    	    width: 73.9%;
-		    position: fixed;
-		    z-index: 1;
-		    background: #fff;
-	    }*/ }
+    max-height: 62vh; }
   .block-import-csv-log-block .import_log_items,
   .block-import-csv-log-block #import-csv-log-header {
     display: flex;
@@ -4403,3 +4394,11 @@ body {
 
 .fail-text {
   color: red !important; }
+
+span.text {
+  cursor: pointer; }
+
+.import-tweet-page.user-logged-in .messages--status {
+  left: 39%;
+  padding-left: 40px;
+  max-width: 46%; }

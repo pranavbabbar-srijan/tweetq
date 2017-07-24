@@ -1254,7 +1254,9 @@
 				}
 				$(".import_tweets").click(function() {
 				    $(this).toggleClass('active');
+
 				});
+				
 				$(".import_tweets div").click(function(e) {
 				   //do something
 				   e.stopPropagation();
@@ -1262,6 +1264,23 @@
 				// added target on a 
 				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
 				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form').hide();
+                
+                 var url = $(location).attr('href'),
+			    parts = url.split("/"),
+			    last_part = parts[parts.length-1];
+				$(".import_tweets_logs .text a").each(function() {   
+				    var partss = this.href.split("/");
+				    last_parts = partss[partss.length-1];
+
+				    if (last_parts == last_part) {
+				        $(this).parent().parent().parent().addClass("active");
+				        $(this).parent().addClass('active');
+				    }
+
+				});
+               
+
+
 })(jQuery);
 
 

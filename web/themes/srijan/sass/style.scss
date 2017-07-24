@@ -2044,6 +2044,11 @@ margin-top: 120px;
 					.import_tweets_logs {
 						transition: .5s ease-in-out;
 						margin-top: 0;
+						.text.active {
+							a {
+							   color: #212121 !important;
+							}
+						}
 						a {
 							color: #979797;
 							&:hover {
@@ -4875,17 +4880,6 @@ margin-top: 120px;
 	    overflow-y: auto;
 	    height: 100%;
 	    max-height: 62vh;
-/*	    > div {
-	    	&:nth-child(2) {
-	    		margin-top: 48px;
-	    	}
-	    }*/
-/*	    #import-csv-log-header {
-    	    width: 73.9%;
-		    position: fixed;
-		    z-index: 1;
-		    background: #fff;
-	    }*/
 	}
 
 	.import_log_items,
@@ -4938,3 +4932,14 @@ margin-top: 120px;
 .fail-text {
 	color: red !important;
 }
+span.text {
+	cursor: pointer;
+}
+.import-tweet-page.user-logged-in {
+  	.messages--status {
+  		left: 39%;
+  		padding-left: 40px;
+  		max-width: 46%;
+  	}
+}
+
