@@ -32,7 +32,7 @@ Given I am on "/"
     Then I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     And I fetch text for new tweet
     When I click on the element with xpath "//div[@class='import_tweets']/span/a"
-    And I attach the file "Import/Sample1.csv" to "edit-managed-file-upload"
+    And I attach the file "Import/Sample3.csv" to "edit-managed-file-upload"
     And I press "edit-submit"
     Then I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"	
     Then new tweet updated

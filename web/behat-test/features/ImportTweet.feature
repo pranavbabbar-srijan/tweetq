@@ -6,15 +6,20 @@ Scenario: Click on Import tweet link should navigate to different page
     Given I am on "/"
     And I login with valid username and password
     And I wait for 5 seconds
-	When I click on the element with xpath "//div[@class='import_tweets']/span/a"	
+	When I click on the element with xpath "//a[text()='Import']"
+    And I wait for 3 seconds
+    When I click on the element with xpath "//div[@id='block-usersleftsidebarblock']/div/div/div[4]/div[1]/span/a"
     And I wait for 5 seconds
-	Then I should be on "/dashboard/import-tweets"
+	Then the url should match "/dashboard/import-tweets"
 
 @javascript @2
 Scenario: Import a csv file and number of Total,valid and invalid tweets should get increased
     Given I am on "/"
     And I login with valid username and password
-    When I click on the element with xpath "//div[@class='import_tweets']/span/a"
+    And I wait for 5 seconds
+    When I click on the element with xpath "//a[text()='Import']"
+    And I wait for 3 seconds
+    When I click on the element with xpath "//div[@id='block-usersleftsidebarblock']/div/div/div[4]/div[1]/span/a"
     And I wait for 5 seconds
     Then I fetch text for valid tweet
     And I fetch text for invalid tweet
@@ -30,7 +35,11 @@ Scenario: Import a csv file and number of Total,valid and invalid tweets should 
 Scenario: To check the number of new valid and invalid tweet updated on left panel
 	Given I am on "/"
     And I login with valid username and password
-    When I click on the element with xpath "//div[@class='import_tweets']/span/a"
+    And I wait for 5 seconds
+    When I click on the element with xpath "//a[text()='Import']"
+    And I wait for 3 seconds
+    When I click on the element with xpath "//div[@id='block-usersleftsidebarblock']/div/div/div[4]/div[1]/span/a"
+    And I wait for 5 seconds
     And I attach the file "Import/Sample1.csv" to "edit-managed-file-upload"
     And I press "edit-submit"
     And I wait for 3 seconds
@@ -42,8 +51,12 @@ Scenario: To check the number of new valid and invalid tweet updated on left pan
 Scenario: To check the success message on importing the tweets
     Given I am on "/"
     And I login with valid username and password
-    When I click on the element with xpath "//div[@class='import_tweets']/span/a"
-    And I attach the file "Import/Sample1.csv" to "edit-managed-file-upload"
+    And I wait for 5 seconds
+    When I click on the element with xpath "//a[text()='Import']"
+    And I wait for 3 seconds
+    When I click on the element with xpath "//div[@id='block-usersleftsidebarblock']/div/div/div[4]/div[1]/span/a"
+    And I wait for 5 seconds
+    And I attach the file "Import/Sample2.csv" to "edit-managed-file-upload"
     And I press "edit-submit"
     And I wait for 5 seconds
     Then I should see text matching "Import completed successfully"

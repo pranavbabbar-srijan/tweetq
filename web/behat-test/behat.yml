@@ -10,10 +10,10 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\DrushContext
-  #formatters:
-   #pretty: true
-   #html:
-     #output_path: %paths.base%/build/html
+  formatters:
+   pretty: true
+   html:
+     output_path: %paths.base%/build/html
   extensions:
     Behat\MinkExtension:
       files_path: "%paths.base%"
@@ -41,4 +41,11 @@ default:
         mytweets: "#my_tweets"
         message: ".message-header"
         recent_activity: ".notification-message-list"
+    emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+      name: html
+      renderer: Twig,Behat2
+      file_name: Report
+      print_args: true
+      print_outp: true
+      loop_break: true
 

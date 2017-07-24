@@ -35,7 +35,7 @@ Scenario: Verify if tweeted tweet is modified, it should move in archived tweet 
     And I login with valid username and password
     And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[4]"
-   Then the url should match "/dashboard/archived-tweets"
+    Then the url should match "/dashboard/archived-tweets"
     Then I should see "Message" in the "header"
     And I should see "Size" in the "header"
     And I should see "Created On" in the "header"
