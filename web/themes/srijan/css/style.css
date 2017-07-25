@@ -4186,7 +4186,10 @@ body {
   height: 20px;
   width: 20px;
   position: relative;
-  cursor: pointer; }
+  cursor: pointer;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  outline: none; }
 
 .custom-checkbox input[type=checkbox]:checked + label:before {
   opacity: 1;

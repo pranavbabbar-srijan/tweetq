@@ -4704,6 +4704,9 @@ margin-top: 120px;
     width: 20px;
     position: relative;
     cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: none;
 	}
 	input[type=checkbox]:checked + label:before {
 	    opacity: 1;
