@@ -15,16 +15,17 @@
 	                  flex: 1;
 	    	       }
 	    	   }
+	   	    	+ .item-list {
+		    	    ul  {
+		    	        ul {
+		    	            li:first-child {
+		                      flex: 1;
+		    	            }
+		    	        }
+		    	    }
+		    	}
 	    	}
-	    	+ .item-list {
-	    	    ul  {
-	    	        ul {
-	    	            li:first-child {
-	                      flex: 1;
-	    	            }
-	    	        }
-	    	    }
-	    	}
+
 	    }
 	}
 }
