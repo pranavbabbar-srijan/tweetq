@@ -26,9 +26,6 @@
 		    	}
 		    	
 	    	}
-	    	input[type="checkbox"] {
-	    		opacity: 0;
-	    	}
 
 	    }
 	    .block-users-all-tweets-block,
@@ -49,6 +46,15 @@
 		   		    }
 		   		}
 		    }
+	    }
+	    .block-users-archived-tweets-block ,
+	    .block-users-valid-tweets-block ,
+	    .block-users-all-tweets-block ,
+	    .block-users-tweeted-tweets-block , 
+	    .block-users-in-valid-tweets-block {
+	        input[type="checkbox"] {
+	    		opacity: 0;
+	    	}
 	    }
 	}
 
