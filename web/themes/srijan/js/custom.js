@@ -1240,6 +1240,7 @@
 			   function sidebarnav() {
 			     if(window_width < 767) {
 			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
+
 			     } 
 			   }
 			   $(window).click(function() {
@@ -1316,6 +1317,10 @@
 	 		.bind('change', onFormCheckBoxChange);
 	 		onChangeDisableTweet();
 	 		$('.messages').animate({'bottom': '35'});
+	 		var window_width = $(window).width();
+	 		if(window_width < 767) {
+	 			$('.messages').animate({'bottom': '0'});
+	 		}
 	 		$('.messages').delay(8000).fadeOut(300);
 	 		$("input[type='file']").change(function(){
 		       var $fileUpload = $("input[type='file']");
