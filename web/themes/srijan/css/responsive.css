@@ -1129,3 +1129,7 @@
   .block-import-csv-log-block .import_log_items div,
   .block-import-csv-log-block #import-csv-log-header div {
     font-size: 11px; } }
+
+@media (hover: on-demand) {
+  .form-submit:hover {
+    display: none; } }
