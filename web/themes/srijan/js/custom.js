@@ -978,9 +978,9 @@
 		$(".messages").appendTo(".send-tweets-form .message-header").insertBefore(".send-tweets-form .form-type-textarea");
 		$(".messages").insertAfter(".import-tweet-page .block-system-main-block");
 
-		if ($('.messages ul').hasClass('messages__list')) {
-		    $('.messages').addClass('listing-msg');
-		}
+		/*if ($('.messages ul').hasClass('messages__list')) {
+		    $('.messages').delay(50).addClass('listing-msg');
+		}*/
 
 
 		// $('.send-tweets-form .form-type-managed-file .form-managed-file .js-form-type-checkbox .file').append('<a href="#;"></a>');
@@ -1316,7 +1316,7 @@
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
 	 		onChangeDisableTweet();
-	 		$('.messages').animate({'bottom': '35'});
+	 		$('.messages').animate({'bottom': '50'});
 	 		var window_width = $(window).width();
 	 		if(window_width < 767) {
 	 			$('.messages').animate({'bottom': '0'});
