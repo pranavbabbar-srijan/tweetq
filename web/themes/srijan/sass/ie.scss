@@ -3,3 +3,28 @@
  * <!--[if IE]>
  *   <link href="/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
  * <![endif]--> */
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.user-logged-in {
+	    .block-users-all-tweets-block,
+	    .block-users-tweeted-tweets-block,
+	    .block-users-archived-tweets-block {
+	    	.item-list {
+	    	    ul.header { 
+	    	       li:last-child {
+	                  flex: 1;
+	    	       }
+	    	   }
+	    	}
+	    	+ .item-list {
+	    	    ul  {
+	    	        ul {
+	    	            li:first-child {
+	                      flex: 1;
+	    	            }
+	    	        }
+	    	    }
+	    	}
+	    }
+	}
+}
