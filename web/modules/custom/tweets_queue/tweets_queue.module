@@ -802,8 +802,9 @@ function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
       'uid' => $message_data->uid,
       'created' => time(),
       'code' => 0,
+      'type' => 'Tweet Status',
       'status' => 0,
-      'message' => '',
+      'message' => 'Success',
       'cron_id' => $cron_id,
     );
     if ($status['success']) {
@@ -1121,8 +1122,6 @@ function tweets_queue_send_direct_message($message, $images = array(), $nid=0) {
       'weight' => 6,
       'first_run' => time(),
       'last_run' => time(),
-      'message' => $message,
-      'type' => 'New Tweet'
     ),
     0
   );
