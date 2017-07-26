@@ -4957,10 +4957,10 @@ span.text {
   		padding-left: 40px;
   		max-width: 46%;
   		bottom: -200px;
-  		margin-bottom: -80px !important;
-  		&.listing-msg {
-  			margin-bottom: 20px !important;
+  		&:before {
+  			font-size: 28px;
+  			margin-left: -31px;
+            top: 11px;
   		}
   	}
 }
-
