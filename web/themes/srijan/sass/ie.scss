@@ -3,3 +3,59 @@
  * <!--[if IE]>
  *   <link href="/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
  * <![endif]--> */
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.user-logged-in {
+	    .block-users-all-tweets-block,
+	    .block-users-tweeted-tweets-block,
+	    .block-users-archived-tweets-block {
+	    	.item-list {
+	    	    ul.header { 
+	    	       li:last-child {
+	                  flex: 1;
+	    	       }
+	    	   }
+	   	    	+ .item-list {
+		    	    ul  {
+		    	        ul {
+		    	            li:first-child {
+		                      flex: 1;
+		    	            }
+		    	        }
+		    	    }
+		    	}
+		    	
+	    	}
+
+	    }
+	    .block-users-all-tweets-block,
+	    .block-users-tweeted-tweets-block {
+		    .item-list {
+		   		ul.header {
+		   			li:nth-child(6) {
+		   				flex: 3;
+		   			}
+		   		}
+		   		+ .item-list  {
+		   		    ul {
+		   		        ul {
+		   		            li:nth-child(8) {
+		   		            	flex: 4.5;
+		   		            }
+		   		        }
+		   		    }
+		   		}
+		    }
+	    }
+	    .block-users-archived-tweets-block ,
+	    .block-users-valid-tweets-block ,
+	    .block-users-all-tweets-block ,
+	    .block-users-tweeted-tweets-block , 
+	    .block-users-in-valid-tweets-block {
+	        input[type="checkbox"] {
+	    		opacity: 0;
+	    	}
+	    }
+	}
+
+}

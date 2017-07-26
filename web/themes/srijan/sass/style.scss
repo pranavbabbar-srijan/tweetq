@@ -2442,7 +2442,6 @@ margin-top: 120px;
 						color: #ffffff;
 						background: #96c85a;
 						&:hover {
-							opacity: .8;
 							background: #82bb3e;					}
 						&:active {
 							-webkit-transform: translateY(1px);
@@ -2500,9 +2499,17 @@ margin-top: 120px;
 					color: white;
 					display: block;
 					@include border-radius(4px);
+					&:hover {
+						background: #82bb3e;
+					}
 					&:active {
 						-webkit-transform: translateY(1px);
 						transform: translateY(1px);
+					}
+					&:disabled {
+						&:hover {
+							background: $login-btn;
+						}
 					}
 				}
 			}
@@ -2808,7 +2815,7 @@ margin-top: 120px;
 					    position: fixed;
 					    color: #f56a6a;
 					    font-size: 18px;
-					    bottom: -80px;
+					    bottom: -130px;
 					    max-width: 40%;
 					    border-radius: 51px;
 					    transition: .5s ease-in-out;
@@ -4032,6 +4039,11 @@ margin-top: 120px;
 							-webkit-transform: translateY(1px);
 							transform: translateY(1px);
 						}
+						&:disabled {
+							&:hover {
+								background: #96c85a;
+							}
+						}
 					}
 				}
 			}
@@ -4698,11 +4710,15 @@ margin-top: 120px;
 /** custom checkbox **/
 .custom-checkbox {
 	input {
-		opacity: 0;
+	pacity: 0;
     z-index: 999;
     height: 20px;
     width: 20px;
     position: relative;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: none;
 	}
 	input[type=checkbox]:checked + label:before {
 	    opacity: 1;
@@ -4846,7 +4862,7 @@ margin-top: 120px;
 .messages {
 	transition: .2s ease-in-out;
 	margin-bottom: -10px !important;
-	bottom: -80px;
+	bottom: -200px;
 }
 /** import log **/
 .block-import-csv-log-block {
@@ -4940,6 +4956,11 @@ span.text {
   		left: 39%;
   		padding-left: 40px;
   		max-width: 46%;
+  		bottom: -200px;
+  		margin-bottom: -80px !important;
+  		&.listing-msg {
+  			margin-bottom: 20px !important;
+  		}
   	}
 }
 

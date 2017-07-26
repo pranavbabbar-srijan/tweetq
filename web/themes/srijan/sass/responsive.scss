@@ -1618,3 +1618,9 @@
 	     }
 	 }
 }
+
+@media (hover:on-demand) {
+    .form-submit:hover {
+       display: none !important;
+    }
+}
