@@ -1221,7 +1221,7 @@
 			   $('#overlayspin').show().addClass('absolute_top');
 			 });
 
-		     var tweet_text_elem =  $('#tweets-queue-tweet-form #edit-message');
+		    var tweet_text_elem =  $('#tweets-queue-tweet-form #edit-message');
 	        if(tweet_text_elem.length){
 	        	(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
 	        	:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
@@ -1294,20 +1294,107 @@
 			$(".max_upload--msg").show().delay(8000).fadeOut(300);
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 			$("#tweets-queue-tweet-form #edit-submit").attr('disabled', 'true');
+			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 			$('.js-form-managed-file .form-file').attr('disabled', 'true').css('cursor','not-allowed');
 		}
 		else {
-		   $("#send-tweets-form #edit-submit").removeAttr('disabled');
-		   $("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
-		    $('.js-form-managed-file .form-file').removeAttr('disabled');
+		    var tweet_text_elem =  $('.tweets-queue-tweet-form .form-textarea');
+		    $(".tweets-queue-tweet-form .form-textarea").on('keyup', function(e) {
+		       	if(tweet_text_elem.val().length <= 140) {
+		        	$("#send-tweets-form #edit-submit").removeAttr('disabled');
+					$("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
+					$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+					$('.js-form-managed-file .form-file').removeAttr('disabled');
+		        }
+		    });
+		    var tweet_text_elem1 = $(".send-tweets-form .form-textarea");
+		    $(".send-tweets-form .form-textarea ").on('keyup', function(e) {
+
+			       	if(tweet_text_elem1.val().length <= 140) {
+			        	$("#send-tweets-form #edit-submit").removeAttr('disabled');
+						$("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
+						$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+						$('.js-form-managed-file .form-file').removeAttr('disabled');
+			        }
+
+
+		    });
+		    
+		}
+
+		if(number_of_divs > 5){
+	        $(".tweets-queue-tweet-form .form-textarea").on('keyup', function(e) {
+		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
+		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
+		    	if (tweet_msg_length < 140) {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+		    	}
+		   
+	        });
+	        $(".send-tweets-form .form-textarea").on('keyup', function(e) {
+	        	var tweet_msg1 = $('#send-tweets-form #edit-message').val();
+		    	var tweet_msg_length1 = twttr.txt.getTweetLength(tweet_msg1);
+		    	$("#send-tweets-form #edit-display-box").val(140-tweet_msg_length1);
+		    	if (tweet_msg_length1 < 140) {
+		    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+		    	}
+	        });
+
+		}
+		if(number_of_divs < 5){
+			$(".tweets-queue-tweet-form .form-textarea").on('keyup', function(e) {
+		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
+		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
+		    	if (tweet_msg_length >= 140) {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+
+		    	}
+		    	else {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+
+		    	}
+		    	
+	        });
+	         $(".send-tweets-form .form-textarea ").on('keyup', function(e) {
+	         	var tweet_msg1 = $('#send-tweets-form #edit-message').val();
+		    	var tweet_msg_length1 = twttr.txt.getTweetLength(tweet_msg1);
+		    	$("#send-tweets-form #edit-display-box").val(140-tweet_msg_length1);
+		    	if (tweet_msg_length1 >= 140) {
+		    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+
+		    	}
+		    	else {
+		    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
+		    	}
+	         });
 		}
 	}
 
 	function onFormCheckBoxChange() {
 				$(this).parent().parent().find('.form-type-checkbox').next('.form-submit').trigger('mousedown');
-		  // console.log(selector);
-	      // $('.button.js-form-submit.form-submit').trigger('click');
-	      // console.log('submit');
+				var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
+		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
+		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
+		    	if (tweet_msg_length >= 140) {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+		    		$("#tweets-queue-tweet-form #edit-submit").attr('disabled', 'true');
+		    	}
+		    	else {
+		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+		    	    $("#tweets-queue-tweet-form #edit-submit").removeAttr('disabled');
+		    	}
+		    	var tweet_msg1 = $('#send-tweets-form #edit-message').val();
+		    	var tweet_msg_length1 = twttr.txt.getTweetLength(tweet_msg1);
+		    	$("#send-tweets-form #edit-display-box").val(140-tweet_msg_length1);
+		    	if (tweet_msg_length1 >= 140) {
+		    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+		    	}
+		    	else {
+		    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
+		    	}
+
 	}
 
 
