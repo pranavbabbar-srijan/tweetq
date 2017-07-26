@@ -878,17 +878,24 @@
       margin: 0 auto;
       text-align: center; }
   /** privacy policy and terms of use **/
-  .page-node-type-article #header {
-    border-bottom: none; }
-  .page-node-type-article .block-page-title-block h1 {
+  .page-node-type-article #header,
+  .path-faq-page #header {
+    border-bottom: none;
+    box-shadow: none; }
+  .page-node-type-article .block-page-title-block h1,
+  .path-faq-page .block-page-title-block h1 {
     font-size: 30px; }
-  .page-node-type-article .node--type-article .field--name-body {
+  .page-node-type-article .node--type-article .field--name-body,
+  .path-faq-page .node--type-article .field--name-body {
     padding-top: 30px; }
-  .page-node-type-article .node--type-article .field--type-image img {
+  .page-node-type-article .node--type-article .field--type-image img,
+  .path-faq-page .node--type-article .field--type-image img {
     width: auto; }
-  .page-node-type-article main.main-content {
+  .page-node-type-article main.main-content,
+  .path-faq-page main.main-content {
     margin-bottom: 0; }
-  .page-node-type-article footer.site-footer {
+  .page-node-type-article footer.site-footer,
+  .path-faq-page footer.site-footer {
     display: none; }
   /** import log **/
   .block-import-csv-log-block div.content > div:nth-child(2) {
@@ -966,7 +973,7 @@
           height: 20px;
           width: 20px;
           line-height: 20px;
-          top: 20px;
+          top: 30px;
           font-size: 22px !important;
           text-align: center;
           cursor: pointer; }

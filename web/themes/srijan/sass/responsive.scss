@@ -1208,9 +1208,11 @@
 	   }
 	}
 	/** privacy policy and terms of use **/
-	.page-node-type-article {
+	.page-node-type-article,
+	.path-faq-page {
 		#header {
 			border-bottom: none;
+			box-shadow: none;
 		}
 		.block-page-title-block {
 			h1 {
@@ -1340,7 +1342,7 @@
 				    height: 20px;
 				    width: 20px;
 				    line-height: 20px;
-				    top: 20px;
+				    top: 30px;
 				    font-size: 22px !important;
 				    text-align: center;
 				    cursor: pointer;
