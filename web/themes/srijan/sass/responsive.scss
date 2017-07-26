@@ -141,6 +141,10 @@
 		    	.validation-error {
 		    		padding-left: 0;
 		    	}
+		    	#email-sent {
+		    		width: 100%;
+		    		padding-left: 0;
+		    	}
 		    }
 		}
 		.invite-friend {
@@ -1023,6 +1027,7 @@
 			&.active {
 				left: -12px;
 			    width: calc(100% + 25px);
+			    padding-bottom: 27px;
 			}
 			> div {
 				&:nth-child(1) {

@@ -84,6 +84,9 @@
     font-size: 12px; }
   .user-form .message-header .form-item .validation-error {
     padding-left: 0; }
+  .user-form .message-header .form-item #email-sent {
+    width: 100%;
+    padding-left: 0; }
   .user-form .invite-friend {
     right: 20px;
     top: 28px;
@@ -762,7 +765,8 @@
       width: 100%; }
       .notifications .notification-message-list.active {
         left: -12px;
-        width: calc(100% + 25px); }
+        width: calc(100% + 25px);
+        padding-bottom: 27px; }
       .notifications .notification-message-list > div:nth-child(1) {
         width: calc(100% - 11px); }
       .notifications .notification-message-list > div span.message_history_count {
