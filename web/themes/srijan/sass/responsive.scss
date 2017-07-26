@@ -28,13 +28,58 @@
 	}
 	/** header **/
 	.tooltip-css,
-	#delete-selected {
+	#delete-selected,
+	#block-submenufooterblock,
+	#block-primarymenu,
+	.tablet_display {
 		display: none !important;
 	}
 	.path-dashboard,
 	.path-user {
 		.mobile-menus {
 			display: none;
+		}
+	}
+	.user-logged-in {
+		#block-primaryresponsivemenu {
+			.menu {
+				 li  {
+		        	
+					&:first-child {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+	#block-primaryresponsivemenu {
+	   .menu {
+	   	    margin-left: 0;
+	        li  {
+	        	margin-bottom: 1em;
+	        	padding: 0 20px;
+	        	text-align: right;
+	            a {
+				    color: #ffffff;
+				    font-size: 14px;
+				    padding: 0;
+				}
+				&:first-child {
+					a {
+					    text-align: center;
+					    background: #2aa9e0;
+					    width: 100%;
+					    padding: .7em 1em .7em 1em;
+					}
+				}
+				&:nth-last-child(2) {
+					padding: 30px 20px 5px 20px;
+					border-top: 1px solid #fff;
+					a {
+						
+					}
+				}
+			}
 		}
 	}
 	.user-logged-in {
@@ -551,7 +596,22 @@
 	   }
 	}
 	.block-sub-menu-footer-block {
-		display: none;
+	    background: transparent;
+	    padding: 35px 0;
+	    border-top: 1px solid #fff;
+	    .menu {
+	    	li {
+	    		padding: 0px 20px;
+			    width: 100%;
+			    text-align: right;
+			    &:nth-child(1), 
+			    &:nth-child(2), 
+			    &:nth-child(3),
+			    &:before {
+			    	display: none;
+			    }
+	    	}
+	    }
 	}
 	#block-copyrightblock {
 		float: left;
@@ -1060,6 +1120,8 @@
     .block-sub-nav-main-menu .menu {
 	    li {
 	    	margin-bottom: 1em;
+	    	text-align: right;
+	    	padding: 0 20px;
 	        a {
 	        	color: #ffffff;
 	        }
@@ -1160,6 +1222,12 @@
 		       }
 		   }
 		}
+		main.main-content {
+           margin-bottom: 0;
+		}
+		footer.site-footer {
+			display: none;
+		}
 	}
 	/** import log **/
 	.block-import-csv-log-block {
@@ -1216,6 +1284,16 @@
 		    a {
 		    	font-size: 16px;
 		    }
+		}
+	}
+	body.user-logged-in {
+		&.path-contact {
+			main.main-content {
+	            margin-bottom: 0;
+			}
+			footer.site-footer {
+				display: none;
+			}
 		}
 	}
 }
@@ -1449,6 +1527,10 @@
 	       }
 	    }
 	}
+	.block-users-left-side-bar-block .import_tweets, 
+	.block-non-twitter-users-left-side-bar-block .import_tweets {
+	    padding-bottom: 1.6em;
+	 }
 
 }
 
@@ -1524,4 +1606,21 @@
 	    	}
 	    }
 	}
+	.block-import-csv-log-block {
+	     .import_log_items, 
+	     #import-csv-log-header {
+	     	span {
+              font-size: 10px;
+	     	}
+	     	div  {
+	     		font-size: 11px;
+	     	}
+	     }
+	 }
+}
+
+@media (hover:on-demand) {
+    .form-submit:hover {
+       display: none !important;
+    }
 }

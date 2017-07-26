@@ -1904,6 +1904,8 @@ margin-top: 120px;
     .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs {
       transition: .5s ease-in-out;
       margin-top: 0; }
+      .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs .text.active a, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs .text.active a {
+        color: #212121 !important; }
       .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a {
         color: #979797; }
         .block-users-left-side-bar-block .import_tweets.active .import_tweets_logs a:hover, .block-non-twitter-users-left-side-bar-block .import_tweets.active .import_tweets_logs a:hover {
@@ -2239,7 +2241,6 @@ margin-top: 120px;
         color: #ffffff;
         background: #96c85a; }
         .profilesettingform .message-header #change-password .change:hover {
-          opacity: .8;
           background: #82bb3e; }
         .profilesettingform .message-header #change-password .change:active {
           -webkit-transform: translateY(1px);
@@ -2292,9 +2293,13 @@ margin-top: 120px;
       -ms-border-radius: 4px;
       -o-border-radius: 4px;
       border-radius: 4px; }
+      .profilesettingform .message-header input[type="submit"]:hover {
+        background: #82bb3e; }
       .profilesettingform .message-header input[type="submit"]:active {
         -webkit-transform: translateY(1px);
         transform: translateY(1px); }
+      .profilesettingform .message-header input[type="submit"]:disabled:hover {
+        background: #96c85a; }
   .profilesettingform #profile-settingform-password-validation-error, .profilesettingform #password-changed {
     position: absolute; }
 
@@ -2600,7 +2605,7 @@ margin-top: 120px;
       position: fixed;
       color: #f56a6a;
       font-size: 18px;
-      bottom: -80px;
+      bottom: -130px;
       max-width: 40%;
       border-radius: 51px;
       transition: .5s ease-in-out;
@@ -3615,6 +3620,8 @@ margin-top: 120px;
       .user-form .form-actions input:active {
         -webkit-transform: translateY(1px);
         transform: translateY(1px); }
+      .user-form .form-actions input:disabled:hover {
+        background: #96c85a; }
 
 /** ajax for dashborad **/
 .-form-tweets-queue-csv-upload .ajax-progress.ajax-progress-throbber {
@@ -4179,11 +4186,15 @@ body {
 
 /** custom checkbox **/
 .custom-checkbox input {
-  opacity: 0;
+  pacity: 0;
   z-index: 999;
   height: 20px;
   width: 20px;
-  position: relative; }
+  position: relative;
+  cursor: pointer;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  outline: none; }
 
 .custom-checkbox input[type=checkbox]:checked + label:before {
   opacity: 1;
@@ -4310,7 +4321,9 @@ body {
   display: none !important; }
 
 .messages {
-  transition: .5s ease-in-out; }
+  transition: .2s ease-in-out;
+  margin-bottom: -10px !important;
+  bottom: -200px; }
 
 /** import log **/
 .block-import-csv-log-block {
@@ -4343,13 +4356,6 @@ body {
     overflow-y: auto;
     height: 100%;
     max-height: 62vh; }
-    .block-import-csv-log-block .content > div:nth-child(2) {
-      margin-top: 48px; }
-    .block-import-csv-log-block .content #import-csv-log-header {
-      width: 73.9%;
-      position: fixed;
-      z-index: 1;
-      background: #fff; }
   .block-import-csv-log-block .import_log_items,
   .block-import-csv-log-block #import-csv-log-header {
     display: flex;
@@ -4373,7 +4379,8 @@ body {
       width: calc(8.33333%*2);
       box-sizing: border-box;
       margin: 0 0;
-      padding: 0 15px; }
+      padding: 0 15px;
+      word-wrap: break-word; }
     .block-import-csv-log-block .import_log_items div,
     .block-import-csv-log-block #import-csv-log-header div {
       font-size: 14px;
@@ -4381,6 +4388,30 @@ body {
     .block-import-csv-log-block .import_log_items span,
     .block-import-csv-log-block #import-csv-log-header span {
       color: #979797;
-      font-size: 14px; }
+      font-size: 14px;
+      word-break: break-all; }
   .block-import-csv-log-block .import_log_items {
     border-bottom: 1px dashed  #ddd; }
+
+.max_upload--msg {
+  padding: 5px 0;
+  color: red;
+  display: none; }
+
+.success-text {
+  color: #96c85a !important; }
+
+.fail-text {
+  color: red !important; }
+
+span.text {
+  cursor: pointer; }
+
+.import-tweet-page.user-logged-in .messages--status {
+  left: 39%;
+  padding-left: 40px;
+  max-width: 46%;
+  bottom: -200px;
+  margin-bottom: -80px !important; }
+  .import-tweet-page.user-logged-in .messages--status.listing-msg {
+    margin-bottom: 20px !important; }

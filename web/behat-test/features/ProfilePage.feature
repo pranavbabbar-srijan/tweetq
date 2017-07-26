@@ -1,10 +1,11 @@
+@javascript
 Feature: To verify the functionality of Profile page
 
 @javascript @1
 Scenario: Click on My Profile should navigate to my profile page
 	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@class='profile']/a"
     And I wait for 3 seconds
     And I click on the element with xpath "//a[@class='profile-my-profile']"
@@ -13,8 +14,8 @@ Scenario: Click on My Profile should navigate to my profile page
 @2
 Scenario: To verify the elements visible on profile page
 	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@class='profile']/a"
     And I wait for 3 seconds
     And I click on the element with xpath "//a[@class='profile-my-profile']"
@@ -26,13 +27,13 @@ Scenario: To verify the elements visible on profile page
     And I should see text matching "Job Title"
     And I should see text matching "Organization Name"
     And I should see text matching "Website"
-    And I should see the button "Update Profile"
+    And I should see the button "Update"
 
 @3
 Scenario: To verify Full name, Email,Twitter Username are read only
 	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@class='profile']/a"
     And I wait for 3 seconds
     And I click on the element with xpath "//a[@class='profile-my-profile']"
@@ -44,20 +45,21 @@ Scenario: To verify Full name, Email,Twitter Username are read only
 @javascript @4
 Scenario: To verify Password change functionality in profile page
 	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@class='profile']/a"
     And I wait for 3 seconds
     And I click on the element with xpath "//a[@class='profile-my-profile']"
     When I fill in "edit-changeuser-password" with "Srijan@123"
     And I click on the element with xpath "//div[@id='change-password']/span"
+    And I wait for 3 seconds
     Then I should see text matching "Password Changed successfully"
 
 @5
 Scenario: To verify the update profile functionality
 	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@class='profile']/a"
     And I wait for 3 seconds
     And I click on the element with xpath "//a[@class='profile-my-profile']"
@@ -66,4 +68,5 @@ Scenario: To verify the update profile functionality
     And I fill in "edit-field-organization" with "ABC"
     And I fill in "edit-field-website" with "https://twitter.com/"
     And I press the "edit-submit" button
-    Then I should see text matching "Profile has been updated"
+    And I wait for 5 seconds
+    Then I should see text matching "The changes have been saved"

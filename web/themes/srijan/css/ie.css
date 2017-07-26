@@ -3,3 +3,24 @@
  * <!--[if IE]>
  *   <link href="/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
  * <![endif]--> */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .user-logged-in .block-users-all-tweets-block .item-list ul.header li:last-child,
+  .user-logged-in .block-users-tweeted-tweets-block .item-list ul.header li:last-child,
+  .user-logged-in .block-users-archived-tweets-block .item-list ul.header li:last-child {
+    flex: 1; }
+  .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:first-child,
+  .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:first-child,
+  .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:first-child {
+    flex: 1; }
+  .user-logged-in .block-users-all-tweets-block .item-list ul.header li:nth-child(6),
+  .user-logged-in .block-users-tweeted-tweets-block .item-list ul.header li:nth-child(6) {
+    flex: 3; }
+  .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(8),
+  .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(8) {
+    flex: 4.5; }
+  .user-logged-in .block-users-archived-tweets-block input[type="checkbox"],
+  .user-logged-in .block-users-valid-tweets-block input[type="checkbox"],
+  .user-logged-in .block-users-all-tweets-block input[type="checkbox"],
+  .user-logged-in .block-users-tweeted-tweets-block input[type="checkbox"],
+  .user-logged-in .block-users-in-valid-tweets-block input[type="checkbox"] {
+    opacity: 0; } }

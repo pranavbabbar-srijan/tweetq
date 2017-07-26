@@ -76,15 +76,15 @@ class UsersLeftSideBarBlock extends BlockBase {
     $create_tweet_output = "<div class='create_tweets'>
       <span class='text'>" . $create_tweet_link . "</span></div>" ;
 
-    $import_tweets_prefix = "<span class='import_tweets_prefix'></span><div id='import_tweets_log'> 
-    <span class='text'>Import</span>";
+    $import_tweets_prefix = "<div class='mobile-display import_tweets'>
+      <span class='text'>" . $import_tweet_link . "</span></div><div class='tablet_display import_tweets'>
+      <span class='text'> <a>Import</a> </span>" ;
 
-
-    $import_tweets_output = "<div class='import_tweets'>
-      <span class='text'>" . $import_tweet_link . "</span>" ;
+    $import_tweets_output = "<div class='import_tweets_logs'>
+      <span class='text'>" . $import_tweet_link . "</span></div>" ;
 
     $import_csv_logs_output = "<div class='import_tweets_logs'>
-      <span class='text'>" . $import_csv_logs . "</span></div></div>";
+      <span class='text'>" . $import_csv_logs . "</span></div>";
 
     $import_tweets_suffix = '</div>';
 
@@ -92,7 +92,7 @@ class UsersLeftSideBarBlock extends BlockBase {
     $my_tweets_prefix = "<span class='mobile-display total_twitt_mobile'>" . $total_twitt_link . "</span><div id='my_tweets'> 
     <span class='text'>My Tweets</span>";
 
-    $total_twitt_output = "<div class='archived_tweets'>
+    $total_twitt_output = "<div class='total_tweets'>
       <span class='text'>" . $total_twitt_link . "</span></div>";
 
     $valid_tweets_output = "<div class='valid_tweets'>

@@ -3,17 +3,16 @@ Feature: To check the functionality of New tweets
 
 @1
 Scenario: Click on valid tweets then 'New tweets' will be active
-	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    Given I am on "/"
+	And I login with valid username and password
+    And I wait for 5 seconds
     When I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
  	Then I should see element with css ".new_tweets.active"
 
  @2
  Scenario: Create a valid tweet and click on save for later , tweet moved to New tweet
- 	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+ Given I am on "/"
+ 	And I login with valid username and password
     And I wait for 5 seconds
     Then I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     And I fetch text for new tweet
@@ -27,23 +26,21 @@ Scenario: Click on valid tweets then 'New tweets' will be active
 
 @3
 Scenario: User will upload csv file then all the valid tweets will move to 'new tweets'.
-	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+Given I am on "/"
+	And I login with valid username and password
     And I wait for 5 seconds
     Then I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     And I fetch text for new tweet
-    When I click on the element with xpath "//div[@id='block-usersleftsidebarblock']//div[@class='import_tweets']"
-    And I attach the file "Import/Sample1.csv" to "edit-managed-file-upload"
+    When I click on the element with xpath "//div[@class='import_tweets']/span/a"
+    And I attach the file "Import/Sample3.csv" to "edit-managed-file-upload"
     And I press "edit-submit"
     Then I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"	
     Then new tweet updated
 
 @4
 Scenario: Edit the 'tweeted' tweet upto 140 character then tweet moves to 'new tweets'
-	Given I am on "/"
-    And I am logged in as "nehasingh767@gmail.com" with password "Srijan@123"
-    And I press "Log in"
+    Given I am on "/"
+	And I login with valid username and password
     And I wait for 5 seconds
     Then I click on the element with xpath "//div[@id='block-userstweetsstatisticsblock']//a[2]"
     And I click on the element with xpath "//div[@class='valid-tweets-header']//a[2]"

@@ -4041,8 +4041,8 @@ function tweets_queue_fetch_import_csv_logs() {
   $query->fields('h', ['type', 'total_tweets', 'valid_tweets', 'invalid_tweets', 'duplicate_tweets', 'skipped_tweets', 'created', 'status']);
   // $query->outerjoin(TWITTER_MESSAGE_QUEUE_TABLE, 'p', 'h.nid = p.nid');
   // $query->fields('p', ['uid', 'status']);
-  //$query->orderBy('h.created', 'DESC');
- // $query->condition('h.uid', $uid);
+  $query->orderBy('h.created', 'DESC');
+  $query->condition('h.uid', $uid);
   //$query->condition('h.created', $last_history_read , '>');
   $result = $query->execute()->fetchAll();
   $output = array();
@@ -4723,13 +4723,16 @@ function tweets_queue_decrypt_data($crypted_token) {
 
 function tweets_queue_user_update($account) {
   $uid = \Drupal::currentUser()->id();
-  $twitter_history_info = array(
-     // 'nid' => $message_data->nid,
-      'uid' => $uid,
-      'created' => time(),
-      'type' => 'Settings',
-      'message' => 'Settings has been updated',
-  );
+  $path = \Drupal::service('path.current')->getPath();
+  if ($path != '/dashboard/my-profile') {
+    $twitter_history_info = array(
+       // 'nid' => $message_data->nid,
+        'uid' => $uid,
+        'created' => time(),
+        'type' => 'Settings',
+        'message' => 'Settings has been updated',
+    );
     tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
+  }
 
 }
