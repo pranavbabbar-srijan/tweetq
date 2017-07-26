@@ -243,6 +243,7 @@
 .site-branding__logo {
 	display: block;
 	width: 50px;
+	height: 30px;
 	padding-right: .3em;
 	@media screen and (max-width: $minWidth){
 		width: auto;
@@ -399,10 +400,19 @@ body {
 .block-system-main-block {
 	+ .messages--error {
 		display: block;
-		width: 74vw;
-		background: white;
-		color: #f56a6a;
-		float: left;
+	    width: 100%;
+	    background: white;
+	    color: #f56a6a;
+	    float: left;
+	    position: absolute;
+	    margin-bottom: 20px;
+	    max-width: 40%;
+	    border-radius: 50px;
+	    left: 32%;
+	    bottom: -80px;
+		div[role=alert]:before {
+			top: 13px;
+		}
 	}
 }
 
@@ -433,6 +443,7 @@ body {
 		height: 690px;
 		overflow: hidden;
 		width: 100%;
+		border-radius: 0;
 		.slides {
 			.slider-content {
 				position: absolute;
@@ -600,6 +611,9 @@ body {
 		display: block;
 		margin: 0 auto;
 		text-align: right;
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 }
 
@@ -837,6 +851,9 @@ body.path-update-password {
 		font-weight: normal;
 		background: #f56a6a;
 		cursor: pointer;
+		&:hover {
+			background: #e24343;
+		}
 	}
 }
 
@@ -1504,12 +1521,12 @@ margin-top: 120px;
 	color: #96c85a;
 	font-size: 18px;
 	position: relative;
-	position: absolute;
+	position: fixed;
 	bottom: -80px;
-	left: 20%;
+	left: 50%;
 	border-radius: 35px;
 	padding-left: 50px;
-	max-width: 63%;
+	max-width: 25%;
     background: #ffffff;
     z-index: 999;
     line-height: 20px;
@@ -1581,7 +1598,7 @@ margin-top: 120px;
 				color: #212121;
 			}
 			~ div {
-				padding-left: 35px;
+				padding-left: 30px;
 				display: none;
 			}
 			&:before {
@@ -1593,7 +1610,7 @@ margin-top: 120px;
 				padding: 3px;
 				border-radius: 4px;
 				vertical-align: bottom;
-				margin-right: 10px;
+				margin-right: 15px;
 			}
 			&:after {
 				content: "\f107";
@@ -1603,6 +1620,7 @@ margin-top: 120px;
 			}
 		}
 		#my_tweets {
+			padding-left: 5px;
 			&.active {
 				> span.text {
 					color: #212121;
@@ -1996,7 +2014,7 @@ margin-top: 120px;
 				padding-bottom: .6em;
 				margin-bottom: 0.6em !important;
 				position: relative;
-				/*&:after {
+				&:after {
 					content: "\f107";
 				    position: absolute;
 				    right: 0;
@@ -2008,6 +2026,11 @@ margin-top: 120px;
 				    text-align: center;
 				    cursor: pointer;
 				}
+				> span a {
+					position: relative;
+					z-index: 1;
+				}
+
 				&.active {
 					> span {
 						a {
@@ -2021,19 +2044,39 @@ margin-top: 120px;
 					.import_tweets_logs {
 						transition: .5s ease-in-out;
 						margin-top: 0;
+						.text.active {
+							a {
+							   color: #212121 !important;
+							}
+						}
 						a {
 							color: #979797;
+							&:hover {
+								color: #212121 !important;
+							}
+							&.in-active {
+								color: #979797;
+							}
+							&.active {
+				    		    color: #979797; 
+				    	    }
 						}
 					}
 				}
 				.import_tweets_logs {
+				    position: relative;
+					z-index: 0;
 				    margin-top: -48px;
 				    transition: .5s ease-in-out;
 				    a {
 				    	transition: .5s ease-in-out;
 				    	color: transparent;
+				    	&.active {
+				    		color: transparent; 
+				    	}
 				    }
-				}*/
+
+				}
 			}
 		}
 		.block-sign-in-with-twitter-block {
@@ -2343,10 +2386,6 @@ margin-top: 120px;
 					position: absolute;
 					// top: 70px;
 				}
-				.messages--status {
-					bottom: -490px !important;
-					left: 27.3% !important;
-				}
 			}
 		}
 		.profilesettingform {
@@ -2400,10 +2439,10 @@ margin-top: 120px;
 						padding: 5px 10px;
 						cursor: pointer;
 						background: $white;
-						color: #303030;
-						border: 1px solid #303030;
+						color: #ffffff;
+						background: #96c85a;
 						&:hover {
-							opacity: .8;						}
+							background: #82bb3e;					}
 						&:active {
 							-webkit-transform: translateY(1px);
 							transform: translateY(1px);
@@ -2460,9 +2499,17 @@ margin-top: 120px;
 					color: white;
 					display: block;
 					@include border-radius(4px);
+					&:hover {
+						background: #82bb3e;
+					}
 					&:active {
 						-webkit-transform: translateY(1px);
 						transform: translateY(1px);
+					}
+					&:disabled {
+						&:hover {
+							background: $login-btn;
+						}
 					}
 				}
 			}
@@ -2762,13 +2809,23 @@ margin-top: 120px;
 					}
 					.messages--error {
 						display: block;
-						margin-top: 160px;
-						background: white;
-						left: -24px;
-						width: 74vw;
-						position: absolute;
-						color: #f56a6a;
-						font-size: 18px;
+					    background: white;
+					    left: 42%;
+					    width: 100%;
+					    position: fixed;
+					    color: #f56a6a;
+					    font-size: 18px;
+					    bottom: -130px;
+					    max-width: 40%;
+					    border-radius: 51px;
+					    transition: .5s ease-in-out;
+					    margin-bottom: 20px;
+					    .item-list {
+					    	ul,
+					    	li {
+					    		margin-bottom: 0;
+					    	}
+					    }
 					}
 					#ajax-wrapper {
 						height: 40px;
@@ -3950,11 +4007,14 @@ margin-top: 120px;
 					position: absolute;
 					right: 3%;
 					top: -9px;
-					border: 1px solid;
+					color: $white;
 					border-radius: 5px;
 					padding: 5px 10px;
 					cursor: pointer;
-					background: $white;
+					background: #96c85a;
+					&:hover {
+						background: #82bb3e;
+					}
 					&:active {
 						-webkit-transform: translateY(1px);
 						transform: translateY(1px);
@@ -3978,6 +4038,11 @@ margin-top: 120px;
 						&:active {
 							-webkit-transform: translateY(1px);
 							transform: translateY(1px);
+						}
+						&:disabled {
+							&:hover {
+								background: #96c85a;
+							}
 						}
 					}
 				}
@@ -4110,6 +4175,9 @@ margin-top: 120px;
 					position: relative;
 					z-index: 0;
 				}
+				.region-middle {
+					margin-top: -75px;
+				}
 				.block-page-title-block {
 					position: absolute;
 					width: 100%;
@@ -4147,7 +4215,7 @@ margin-top: 120px;
 					.field--name-body {
 						max-width: 1080px;
 						margin: 0 auto;
-						padding: 60px 10px;
+						padding: 60px 20px;
 						padding-bottom: 0;
 						p {
 							font-size: 16px;
@@ -4558,15 +4626,13 @@ margin-top: 120px;
 			.send-tweets-form,
 			.tweets-queue-tweet-form  {
 				.js-form-type-managed-file {
-					.ajax-progress.ajax-progress-throbber {
-						/*display: none;*/
-						
+					.ajax-progress.ajax-progress-throbber {				
 							height: 80px;
 							width: 80px;
 							text-align: center;
 							border-radius: 7px;		
 							position: relative;
-							display: block !important;
+							display: block ;
 							.throbber {
 								display: inline-block;
 								font: normal normal normal 14px/1 FontAwesome;
@@ -4589,6 +4655,9 @@ margin-top: 120px;
 							}	
 							.message {
 								display: none;
+							}
+							&:last-child {
+								display: none !important;
 							}
 						
 					}
@@ -4626,6 +4695,8 @@ margin-top: 120px;
 					width: 100%;
 					word-wrap: break-word;
 					z-index: -1;
+					min-height: 127px;
+					overflow: auto;
 				}
 
 				.js-keeper-placeholder-back em {
@@ -4639,11 +4710,15 @@ margin-top: 120px;
 /** custom checkbox **/
 .custom-checkbox {
 	input {
-		opacity: 0;
+	pacity: 0;
     z-index: 999;
     height: 20px;
     width: 20px;
     position: relative;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: none;
 	}
 	input[type=checkbox]:checked + label:before {
 	    opacity: 1;
@@ -4783,5 +4858,109 @@ margin-top: 120px;
 
 .feedback_link {
 	display: none !important;
+}
+.messages {
+	transition: .2s ease-in-out;
+	margin-bottom: -10px !important;
+	bottom: -200px;
+}
+/** import log **/
+.block-import-csv-log-block {
+    top: 79px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+    -moz-box-shadow: 0px 0px 3px #bbb;
+    -webkit-box-shadow: 0px 0px 3px #bbb;
+    box-shadow: 0px 0px 3px #bbb;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+    background: white;
+    overflow-y: auto;
+    height: 100%;
+    margin-top: 1.15em;
+	h2 {
+		background: #fafafa;
+	    padding: 15px;
+	    font-size: 20px;
+	    color: #666;
+	    align-items: center;
+	    font-weight: normal;
+	}
+	.content {
+		background: #fff;
+        padding: 0;
+	    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb)";
+	    -moz-box-shadow: 0px 0px 3px #bbb;
+	    -webkit-box-shadow: 0px 0px 3px #bbb;
+	    box-shadow: 0px 0px 3px #bbb;
+	    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=30, Color=#bbb);
+	    background: white;
+	    overflow-y: auto;
+	    height: 100%;
+	    max-height: 62vh;
+	}
+
+	.import_log_items,
+	#import-csv-log-header {
+	    display: flex;
+	    flex-direction: row;
+	    -webkit-box-pack: justify;
+	    -webkit-justify-content: space-between;
+	    -ms-flex-pack: justify;
+	    justify-content: space-between;
+	    width: 100%;
+	    box-sizing: border-box;
+	    -webkit-box-sizing: border-box;
+	    margin: 0;
+	    border-bottom: 1px solid #ddd;
+	    padding: 15px 0;
+	    align-items: center;
+	    position: relative;
+	    span,
+	    div {
+            width: calc(8.33333%*2);
+		    box-sizing: border-box;
+		    margin: 0 0;
+		    padding: 0 15px;
+		    word-wrap: break-word;
+	    }
+	    div {
+	    	font-size: 14px;
+	    	font-weight: bold;
+	    }
+	    span {
+    	    color: #979797;
+    	    font-size: 14px;
+    	    word-break: break-all;
+	    }
+	}
+	.import_log_items {
+		border-bottom: 1px dashed  #ddd;
+	} 
+}
+
+.max_upload--msg {
+	padding: 5px 0;
+	color: red;
+	display: none;
+}
+.success-text {
+	color: $login-btn !important;
+}
+.fail-text {
+	color: red !important;
+}
+span.text {
+	cursor: pointer;
+}
+.import-tweet-page.user-logged-in {
+  	.messages--status {
+  		left: 39%;
+  		padding-left: 40px;
+  		max-width: 46%;
+  		bottom: -200px;
+  		margin-bottom: -80px !important;
+  		&.listing-msg {
+  			margin-bottom: 20px !important;
+  		}
+  	}
 }
 
