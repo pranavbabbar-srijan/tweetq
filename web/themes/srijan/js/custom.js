@@ -1369,6 +1369,12 @@
 		    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
 		    	}
 	         });
+            // remove class for ipad on touch
+	         if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+		        $('.button').hover(function(e) {
+				  $(this).trigger('click');
+				});	    
+			}
 		}
 	}
 
