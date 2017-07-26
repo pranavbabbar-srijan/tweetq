@@ -3823,13 +3823,14 @@ function tweets_queue_delete_submit($form, \Drupal\Core\Form\FormStateInterface 
   }
   $archived = $tweet_info->archived;
   $size = tweets_queue_get_message_size($message);
-  tweets_queue_update_message_queue_priority_info($nid,
-    array(
-      'status' => TWITTER_DELETED_TWEET,
-      'changed' => time(),
-    ),
-    0
-  );
+  tweet_queue_delete_messages($nid);
+  // tweets_queue_update_message_queue_priority_info($nid,
+  //   array(
+  //     'status' => TWITTER_DELETED_TWEET,
+  //     'changed' => time(),
+  //   ),
+  //   0
+  // );
   drupal_set_message(t('Tweet Deleted Successfully'));
   if (isset($input[TWITTER_REDIRECT_PATH]) && !empty($input[TWITTER_REDIRECT_PATH])) {
     header('Location: ' . $base_url . '/' . $input[TWITTER_REDIRECT_PATH]);
@@ -4735,4 +4736,15 @@ function tweets_queue_user_update($account) {
     tweets_queue_update_twittter_tweet_history($uid, $twitter_history_info);
   }
 
+}
+
+function tweet_queue_delete_messages($nid) {
+  if (!is_array($nid)) {
+    $nid = array($nid);
+  }
+  $logged_uid = \Drupal::currentUser()->id();
+  \Drupal::database()->delete('twitter_message_queue')
+    ->condition('nid', $nid, 'IN')
+    ->condition('uid', $logged_uid)
+    ->execute();
 }

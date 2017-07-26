@@ -234,6 +234,7 @@ class TweetsQueueTweetController extends ControllerBase {
         0
       );
       $deleted[] = $value;
+      tweet_queue_delete_messages($value);
       }
     }
     $selected = implode(',', $deleted);
