@@ -44,7 +44,7 @@
 		#block-primaryresponsivemenu {
 			.menu {
 				 li  {
-		        	
+
 					&:first-child {
 						display: none;
 					}
@@ -76,7 +76,7 @@
 					padding: 30px 20px 5px 20px;
 					border-top: 1px solid #fff;
 					a {
-						
+
 					}
 				}
 			}
@@ -88,10 +88,10 @@
           	 margin: 0;
           }
 	   }
-	   .block-users-valid-tweets-block, 
-	   .block-users-in-valid-tweets-block, 
-	   .block-users-archived-tweets-block, 
-	   .block-users-all-tweets-block, 
+	   .block-users-valid-tweets-block,
+	   .block-users-in-valid-tweets-block,
+	   .block-users-archived-tweets-block,
+	   .block-users-all-tweets-block,
 	   .block-users-tweeted-tweets-block {
 	   		max-height: 100%;
 	   }
@@ -244,14 +244,14 @@
 		    border-radius: 10px;
 		}
 	}
-	.c-hamburger--htx span::after, 
+	.c-hamburger--htx span::after,
 	.c-hamburger--htx span::before {
 	    -webkit-transition-duration: .3s,.3s;
 	    transition-duration: .3s,.3s;
 	    -webkit-transition-delay: .3s,0s;
 	    transition-delay: .3s,0s;
 	}
-	.c-hamburger span::after, 
+	.c-hamburger span::after,
 	.c-hamburger span::before {
 	    position: absolute;
 	    display: block;
@@ -271,7 +271,7 @@
 	    -webkit-transition-property: top,-webkit-transform;
 	    transition-property: top,transform;
 	}
-	.c-hamburger--htx span::after, 
+	.c-hamburger--htx span::after,
 	.c-hamburger--htx span::before {
 	    -webkit-transition-duration: .3s,.3s;
 	    transition-duration: .3s,.3s;
@@ -331,7 +331,7 @@
 	}
 	.sidenav a {
 	    padding: 8px 8px 8px 0;
-	    text-decoration: none;	
+	    text-decoration: none;
 	    font-size: 25px;
 	    color: #818181;
 	    display: block;
@@ -401,7 +401,7 @@
 		    		p {
 		    		   padding: 0 30px;
                        text-align: center;
-                       font-size: 14px;	
+                       font-size: 14px;
 		    		}
 		    	}
 		    }
@@ -437,7 +437,7 @@
                 }
 		    }
 	    }
-	     
+
 	}
 	.block-total-twitter-tweets-block ,
 	.block-total-twitter-users-block {
@@ -537,7 +537,7 @@
 	.path-frontpage {
 	  .messages {
 	  	max-width: 95% !important;
-	  	width: auto !important; 
+	  	width: auto !important;
 	  	font-size: 14px;
 	  	line-height: 20px;
 	  	padding-left: 40px;
@@ -550,7 +550,7 @@
 	}
 	.messages {
 	 	max-width: 95% !important;
-	  	width: 100% !important; 
+	  	width: 100% !important;
 	  	line-height: 20px;
 	  	padding-left: 40px;
 	  	padding-right: 20px;
@@ -608,8 +608,8 @@
 	    		padding: 0px 20px;
 			    width: 100%;
 			    text-align: right;
-			    &:nth-child(1), 
-			    &:nth-child(2), 
+			    &:nth-child(1),
+			    &:nth-child(2),
 			    &:nth-child(3),
 			    &:before {
 			    	display: none;
@@ -628,8 +628,8 @@
 	}
 
 	/** css for logged in user for dashbord **/
-	.block-users-dashboard-header-block , 
-	.block-users-dashboard-header-profile-block { 
+	.block-users-dashboard-header-block ,
+	.block-users-dashboard-header-profile-block {
 		float: none;
 	   .profile {
 	        > a {
@@ -657,7 +657,7 @@
                         font-size: 12px;
                         text-align: center;
 	               }
-	               .value {	
+	               .value {
 	               	    font-size: 12px;
 	               	    text-align: center;
 	               }
@@ -696,7 +696,7 @@
 			    justify-content: space-around;
 			}
 		}
-	   .profile, 
+	   .profile,
 	   .non-twitter-profile {
            display: none;
            ~ div {
@@ -724,7 +724,7 @@
            	     		  position: relative;
     					  top: 10px;
     					  margin-right: 0;
-           	     		  
+
            	     	}
            	     	&:after {
            	     		content: none !important;
@@ -793,7 +793,7 @@
 	    		color: #303030;
 	    		font-family: 'Roboto',sans-serif;
 	    	}
-	    	 &:before { 
+	    	 &:before {
                opacity: 1;
 	    	 }
 	    }
@@ -842,9 +842,9 @@
 		    }
         }
 	}
-	.send-tweets-form , 
+	.send-tweets-form ,
 	.tweets-queue-tweet-form {
-		 #edit-save, 		 
+		 #edit-save,
 		 #edit-cancel,
 		 #edit-submit,
 		 #edit-tweet-now,
@@ -853,8 +853,8 @@
 		 	padding-left: 0.5em;
             padding-right: 0.5em;
 		 }
-		
-			
+
+
 	   .message-header {
 	   	    padding: 0em 0.5em 1.5em 0.5em;
 	   	    .form-item-display-box {
@@ -866,7 +866,7 @@
 			    	font-size: 12px;
 			    }
 	   	    }
-	   }	
+	   }
 	   .create-header {
 	   	    padding: 0.8em;
 	   }
@@ -925,7 +925,7 @@
 			.ajax-progress.ajax-progress-throbber {
 				&:last-child {
 					display: none !important;
-				}					
+				}
 			}
 		}
 		#edit-display-box {
@@ -1004,7 +1004,7 @@
 	    }
 	   .profile-setting {
 	   	    margin-left: 0;
-   	        font-size: 16px;	   	        
+   	        font-size: 16px;
 		    font-weight: normal;
 		    padding: 15px 15px;
 	   }
@@ -1165,12 +1165,12 @@
 	    	    	display: block;
 	    	    }
 	    }
-    	.field--name-field-mobile-number-contact, 
-		.field--name-field-contact-, 
+    	.field--name-field-mobile-number-contact,
+		.field--name-field-contact-,
 		.field--name-field-contact {
 			    margin-bottom: 1.2em;
 		}
-		.field--name-field-visit-srijan, 
+		.field--name-field-visit-srijan,
 		.field--name-field-visit-srijan- {
 		    a {
 		    	padding: 10px 50px;
@@ -1374,6 +1374,12 @@
 			padding-left: 55px;
 		}
 	}
+	.block-faq-banner-image {
+		    margin-top: 160px;
+		.field--type-image img {
+			width: auto;
+		}
+	}
 }
 
 /* css for tablet **/
@@ -1392,8 +1398,8 @@
    	  	margin-top: -63px;
    	  	float: none;
    	  }
-   	  .section { 
-	   	     + .section { 
+   	  .section {
+	   	     + .section {
 	   	        .region-middle {
                     margin-top: 50px;
 	   	        }
@@ -1432,7 +1438,7 @@
         .flexslider {
             height: 590px;
             .slides {
-            	
+
             	.slider-content {
             		top: 20%;
             		left: 30px;
@@ -1464,7 +1470,7 @@
             }
         }
     }
-    .block-total-twitter-tweets-block, 
+    .block-total-twitter-tweets-block,
     .block-total-twitter-users-block {
     	margin-top: 170px;
     	margin-left: 2em;
@@ -1534,7 +1540,7 @@
     	width: 100%;
     }
     /** dashboard **/
-    .block-users-dashboard-header-block , 
+    .block-users-dashboard-header-block ,
     .block-users-dashboard-header-profile-block {
         .profile {
            > a {
@@ -1585,7 +1591,7 @@
 	}
 	.send-tweets-form,
 	.tweets-queue-tweet-form {
-		#edit-save, 
+		#edit-save,
 	    #edit-cancel,
 	    #edit-submit,
 	    #edit-clone,
@@ -1605,7 +1611,7 @@
 	       }
 	    }
 	}
-	.block-users-left-side-bar-block .import_tweets, 
+	.block-users-left-side-bar-block .import_tweets,
 	.block-non-twitter-users-left-side-bar-block .import_tweets {
 	    padding-bottom: 1.6em;
 	 }
@@ -1613,8 +1619,8 @@
 	 div.faq-content {
 	 	margin-top: -126px;
 	 }
-	 div.faq { 
-	 	.faq-qa-header { 
+	 div.faq {
+	 	.faq-qa-header {
 	 		a {
 	 		    font-size: 14px;
 	 		    padding: 0px 5px;
@@ -1633,10 +1639,10 @@
 /** portrait view for ipad **/
 @media only screen and (min-width: 768px) and (max-width: 980px) {
    .user-logged-in {
-	    .block-users-valid-tweets-block, 
-	    .block-users-in-valid-tweets-block, 
-	    .block-users-archived-tweets-block, 
-	    .block-users-all-tweets-block, 
+	    .block-users-valid-tweets-block,
+	    .block-users-in-valid-tweets-block,
+	    .block-users-archived-tweets-block,
+	    .block-users-all-tweets-block,
 	    .block-users-tweeted-tweets-block {
             max-height: 75vh;
             .item-list {
@@ -1651,7 +1657,7 @@
                	   }
                }
             }
-	    } 
+	    }
 	}
 	.custom-checkbox {
 	   input {
@@ -1666,7 +1672,7 @@
 	/** My profile **/
 	.profilesettingform {
 	    .message-header {
-	        .js-form-item, 
+	        .js-form-item,
 	        #change-password {
 	      	    margin-right: 75px;
 	      	}
@@ -1702,7 +1708,7 @@
 	    }
 	}
 	.block-import-csv-log-block {
-	     .import_log_items, 
+	     .import_log_items,
 	     #import-csv-log-header {
 	     	span {
               font-size: 10px;
@@ -1714,8 +1720,45 @@
 	 }
 }
 
-@media (hover:on-demand) {
-    .form-submit:hover {
-       display: none !important;
-    }
+
+@media only screen and (min-width: 1200px) {
+	div.view-home-page-carousel {
+		.flexslider {
+			.slides {
+				.views-field.views-field-body {
+					position: relative;
+					max-width: 1280px;
+					margin: 0 auto;
+					width: 100%;
+				}
+				.slider-content {
+					top: 110px;
+					left: 12px;
+				}
+			}
+			.flex-control-paging {
+				width: 100%;
+				max-width: 800px;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				text-align: left;
+			}
+			.flex-direction-nav {
+				bottom: 136px;
+				left: 0;
+				width: 100%;
+				right: 0;
+				margin: 0 auto;
+				max-width: 950px;
+				text-align: left;
+				li {
+					position: absolute;
+					&.flex-nav-next {
+						left: 22%;
+					}
+				}
+			}
+		}
+	}
 }
