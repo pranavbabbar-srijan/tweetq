@@ -994,6 +994,12 @@ body.path-update-password {
 	height: 100%;
 }
 .user-logged-in {
+	&.page-node-type-article,
+	&.path-faq-page {
+		 #header {
+            padding-bottom: .6em;
+		 }
+	}
 	&.path-twitter {
 		.main-content {
 			position: inherit;
@@ -4964,3 +4970,4 @@ span.text {
   		}
   	}
 }
+

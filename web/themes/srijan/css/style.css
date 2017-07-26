@@ -1007,6 +1007,8 @@ body.path-update-password .messages--status {
   /*.region-content {
 margin-top: 120px;
 }*/ }
+  .user-logged-in.page-node-type-article #header, .user-logged-in.path-faq-page #header {
+    padding-bottom: .6em; }
   .user-logged-in.path-twitter .main-content {
     position: inherit;
     width: 100%; }
