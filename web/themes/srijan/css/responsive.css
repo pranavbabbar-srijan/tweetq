@@ -1128,7 +1128,17 @@
     right: 17px; }
   .block-users-left-side-bar-block .import_tweets,
   .block-non-twitter-users-left-side-bar-block .import_tweets {
-    padding-bottom: 1.6em; } }
+    padding-bottom: 1.6em; }
+  /** faq for tab **/
+  div.faq-content {
+    margin-top: -126px; }
+  div.faq .faq-qa-header a {
+    font-size: 14px;
+    padding: 0px 5px; }
+  div.faq .faq-qa-header .faq-header {
+    font-size: 10px; }
+  div.faq .faq-qa-hide {
+    padding: 6em 2em 1em 2em; } }
 
 /** portrait view for ipad **/
 @media only screen and (min-width: 768px) and (max-width: 980px) {

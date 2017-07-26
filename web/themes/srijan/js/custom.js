@@ -1089,17 +1089,17 @@
          //    });
          // });
          var window_width_ = $(window).width();
-         if(window_width_ > 768) {
+         if(window_width_ > 767) {
 	        $( ".faq .faq-qa-header" ).each(function( index ) {
 			  $(this).unwrap();
 			});
 			$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
         
-	        setTimeout(function(){ 
+	        setTimeout(function(){
 	        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
 	        }, 500);
 	    }
-	    if(window_width_ < 768) {
+	    if(window_width_ < 767) {
 	    	$(".faq .faq-category-group").first().children().children().addClass('faq-category-qa-visible');
 	    	setTimeout(function(){ 
 	        	$(".faq .faq-category-group").first().children('.faq-qa-hide').removeClass('collapsed'); 
