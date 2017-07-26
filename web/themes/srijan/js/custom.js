@@ -1093,14 +1093,18 @@
 	        $( ".faq .faq-qa-header" ).each(function( index ) {
 			  $(this).unwrap();
 			});
+			$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
+        
+	        setTimeout(function(){ 
+	        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
+	        }, 500);
 	    }
-		$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
-        
-        setTimeout(function(){ 
-        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
-        }, 500);
-        
-       
+	    if(window_width_ < 768) {
+	    	$(".faq .faq-category-group").first().children().children().addClass('faq-category-qa-visible');
+	    	setTimeout(function(){ 
+	        	$(".faq .faq-category-group").first().children('.faq-qa-hide').removeClass('collapsed'); 
+	        }, 500);
+	    }   
         $('.faq-header').click(function(e){
         	$('.faq-qa-hide').hide();
         	$('.faq-header').removeClass('active');
@@ -1259,8 +1263,7 @@
 				});
 				
 				$(".import_tweets div").click(function(e) {
-				   //do something
-				   e.stopPropagation();
+					   e.stopPropagation();
 				})
 				// added target on a 
 				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
@@ -1272,7 +1275,6 @@
 				$(".import_tweets_logs .text a").each(function() {   
 				    var partss = this.href.split("/");
 				    last_parts = partss[partss.length-1];
-
 				    if (last_parts == last_part) {
 				        $(this).parent().parent().parent().addClass("active");
 				        $(this).parent().addClass('active');
