@@ -4411,7 +4411,8 @@ span.text {
   left: 39%;
   padding-left: 40px;
   max-width: 46%;
-  bottom: -200px;
-  margin-bottom: -80px !important; }
-  .import-tweet-page.user-logged-in .messages--status.listing-msg {
-    margin-bottom: 20px !important; }
+  bottom: -200px; }
+  .import-tweet-page.user-logged-in .messages--status:before {
+    font-size: 28px;
+    margin-left: -31px;
+    top: 11px; }
