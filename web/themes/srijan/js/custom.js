@@ -113,14 +113,14 @@
 			var nid = [];
 		    $("input:checkbox[name=multiple-deletion]:checked").each(function() {
 		         nid.push($(this).val());
-		   });  
+		   });
 			$.post(multiple_selected_deletion, {'nid' : nid}, function(data) {
 				// $("<span id='delete-selected'>" + data + "</p>").insertAfter( "#delete-selected" );
 				 var nids = data.split(",");
-				 
-		    	 for (var i in nids) {  
-			    	$('#' + nids[i]).parent().parent().parent().hide();   
-				 } 
+
+		    	 for (var i in nids) {
+			    	$('#' + nids[i]).parent().parent().parent().hide();
+				 }
 			location.reload();
 		    });
 		});
@@ -130,7 +130,7 @@
       	      $('[name="multiple-deletion"]').prop("checked", true);
       	  } else {
      	       $('[name="multiple-deletion"]').prop("checked", false);
-      	  }                
+      	  }
      	 });
 
 		//Volunteer invite form.
@@ -146,8 +146,8 @@
 	    	$.post(friend_invite_send_token_path, {'email' : emails}, function(data) {
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
-					$('#email-sent').delay(5000).fadeOut(300);	
-					location.reload();		
+					$('#email-sent').delay(5000).fadeOut(300);
+					location.reload();
 					return;
 				}
 				$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
@@ -197,13 +197,13 @@
 	  	// 		$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
 	  	// 	}
 
-	  		
+
 	  	// });
 
 		$("#profilesettingform #change-password .change").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
 	    	//var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			
+
   			$("#profile-settingform-password-validation-error").remove();
   			$("#password-changed").remove();
   			if (password.length == 0) {
@@ -211,11 +211,11 @@
 	    		return;
 	    	}
 
-  		
+
          	$.post(profile_change_password_path, {'password' : password}, function(data) {
 				if  (data == "done") {
 					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
-					$('#password-changed').delay(5000).fadeOut(300);			
+					$('#password-changed').delay(5000).fadeOut(300);
 					location.reload();
 					return;
 				}
@@ -259,7 +259,7 @@
 		});
 
 		//Profile setting form End.
-	
+
 
 		//Twitter signup form
 		//Full name validtaion.
@@ -301,10 +301,10 @@
 	    			$("#email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data == "exist") {
-							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#twitter-signup-form #edit-email" );	    					
+							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#twitter-signup-form #edit-email" );
 	    				}
 				    });
-	    			
+
 	    		}
 	    	}
 	  	});
@@ -328,7 +328,7 @@
 			var passed = true;
 			var name = $('#twitter-signup-form #edit-field-full-name').val();
 	 		var alphabet = /^[a-zA-Z ]+$/.test(name);
-			
+
 			//Full Name check.
 			$("#fname-validation-error").remove();
 			if (name.length > 0) {
@@ -372,7 +372,7 @@
 
 	 		var name = $('#signup-form #edit-field-full-name').val();
 	 		var alphabet = /^[a-zA-Z ]+$/.test(name);
-			
+
 			//Full Name check.
 			$("#fname-validation-error").remove();
 			if (name.length > 0) {
@@ -471,10 +471,10 @@
 	    			$("#email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data == "exist") {
-							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#signup-form #edit-email" );	    					
+							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#signup-form #edit-email" );
 	    				}
 				    });
-	    			
+
 	    		}
 	    	}
 	  	});
@@ -582,7 +582,7 @@
 							return;
 	    				}
 				    });
-	    			
+
 	    		}
 	    	}
 	  	});
@@ -623,7 +623,7 @@
 	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   			var valid = regex.test(email);
   			var passed = true;
-  			
+
   			var password_failed = $("#user-login-form #user-login-validation-error").hasClass('validation-error');
 			if (password_failed) {
 				return false;
@@ -636,7 +636,7 @@
 	    		$("<span id='email-validation-error' class='validation-error'>" + login_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
 	    		passed =  false;
 	    	}
-	    	
+
 			if (email.length > 0) {
 	    		if (!valid) {
 	    			$("#email-validation-error").remove();
@@ -652,7 +652,7 @@
 							passed =  false;
 	    				}
 				    });
-	    			
+
 	    		}
 	    	}
 
@@ -685,7 +685,7 @@
 	    			$("#forgot-email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data != "exist") {
-							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );	    					
+							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
 	    				}
 				    });
 	    		}
@@ -926,7 +926,7 @@
    //          if ($('#message-history-count-section').hasClass('hidden')) {
 			//     $('#message-history-count-section').remove();
 			// }
-            
+
    //          $("#twitter-notification-count").remove();
    //          $("#message-history-count-section").addClass('hidden');
    		});
@@ -1001,7 +1001,7 @@
 	        if (password.length == 0) {
             $('#result').removeClass()
             $('#result').html('');
-              return;       
+              return;
             }
 
 			if (password.length < 6 && password.length > 0) {
@@ -1039,7 +1039,7 @@
 	// js for adding placeholder on newsletter field
 	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
 	$(".contact-message-write-to-us-form").prepend("<div class='heading-write-us'>Write to us</div>");
-	/*$(window).scroll(function() {    
+	/*$(window).scroll(function() {
     var scroll = $(window).scrollTop();
 
        if(scroll >= 200) {
@@ -1060,9 +1060,9 @@
 	    $('#my_tweets').addClass('active');
 	}
 
-	
 
-    // change text of summary 
+
+    // change text of summary
     $(".user-form summary").text("Settings");
 
     // add spinner when click on submit button
@@ -1095,17 +1095,17 @@
 			  $(this).unwrap();
 			});
 			$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
-        
+
 	        setTimeout(function(){
-	        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
+	        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed');
 	        }, 500);
 	    }
 	    if(window_width_ < 767) {
 	    	$(".faq .faq-category-group").first().children().children().addClass('faq-category-qa-visible');
-	    	setTimeout(function(){ 
-	        	$(".faq .faq-category-group").first().children('.faq-qa-hide').removeClass('collapsed'); 
+	    	setTimeout(function(){
+	        	$(".faq .faq-category-group").first().children('.faq-qa-hide').removeClass('collapsed');
 	        }, 500);
-	    }   
+	    }
         $('.faq-header').click(function(e){
         	$('.faq-qa-hide').hide();
         	$('.faq-header').removeClass('active');
@@ -1113,13 +1113,13 @@
            $(this).addClass('active');
            e.preventDefault();
         });
-    
+
         $('.faq-header').append('Articles');
         $('.user-login-form #forgot-password').appendTo('.user-login-form');
 
 
 
-        // twitter text box 
+        // twitter text box
          function onTweetCompose(event) {
 		    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
 		        $placeholderBacker = $('.js-keeper-placeholder-back'),
@@ -1135,11 +1135,11 @@
 
 		     // scroll two bar same time same class
 		    $('.linked').scroll(function(){
-			    $('.linked').scrollTop($(this).scrollTop());    
+			    $('.linked').scrollTop($(this).scrollTop());
 			})
 
 		    if (0 > remainingLength) {
-		      // Split value if greater than 
+		      // Split value if greater than
 		      var allowedValuePart = currentValue.slice(0, realLength),
 		          refusedValuePart = currentValue.slice(realLength)
 		      ;
@@ -1152,8 +1152,8 @@
 		      $('#edit-display-box').removeClass('red-text');
 		    }
 		  }
-           
-		  
+
+
 		  $(document).ready(function () {
 		  	 clicksidenav();
 			 sidebarnav();
@@ -1166,13 +1166,13 @@
 		    onTweetCompose();
 		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
 		  });
-           // js for to prepend button 
+           // js for to prepend button
 	        $('#delete-selected').prependTo('#block-srijan-content');
           // add class
 	        if($('.path-signup .messages').hasClass('messages--status')) {
 	          $('.section').addClass('active');
 	        }
-	       
+
 	        $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
 		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
 		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
@@ -1184,7 +1184,7 @@
 		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 		    	}
 	        });
-	       	           
+
 	        // close popup after open page
 	        $('.feedback_link').click(function(){
                $(this).parent().removeClass('active animate');
@@ -1202,7 +1202,7 @@
                }, 500);
 	        });
             // if checkbox is checked add class
-             
+
               $('#delete-selected input').attr('disabled', true);
 			  $('.custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
@@ -1240,13 +1240,13 @@
 			//   $("#profile-settings-form #edit-submit").remove('disabled');
 			// }
 
-			 // js for mobile 
+			 // js for mobile
 			   var window_width = $(window).width();
 			   function sidebarnav() {
 			     if(window_width < 767) {
 			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
 
-			     } 
+			     }
 			   }
 			   $(window).click(function() {
 				  $('.c-hamburger').removeClass('is-active');
@@ -1262,18 +1262,18 @@
 				    $(this).toggleClass('active');
 
 				});
-				
+
 				$(".import_tweets div").click(function(e) {
 					   e.stopPropagation();
 				})
-				// added target on a 
+				// added target on a
 				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
 				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form').hide();
-                
+
                 var url = $(location).attr('href'),
 			    parts = url.split("/"),
 			    last_part = parts[parts.length-1];
-				$(".import_tweets_logs .text a").each(function() {   
+				$(".import_tweets_logs .text a").each(function() {
 				    var partss = this.href.split("/");
 				    last_parts = partss[partss.length-1];
 				    if (last_parts == last_part) {
@@ -1284,15 +1284,12 @@
 				});
 			     // remove class for ipad on touch
 		         if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
-			        $('.button').hover(function(e) {
-					  $(this).trigger('click');
-					});	    
-				    $('a').hover(function(e) {
-					  $(this).trigger('click');
-					});	
+			        $('.button, .item-list li a').hover(function(e) {
+					        $(this).trigger('click');
+					    });
 				}
-			
-               
+
+
 
 
 })(jQuery);
@@ -1314,7 +1311,7 @@
 	}
 
 	function onFormCheckBoxChange() {
-		$(this).parent().parent().find('.form-type-checkbox').next('.form-submit').trigger('mousedown');		
+		$(this).parent().parent().find('.form-type-checkbox').next('.form-submit').trigger('mousedown');
 	}
     Drupal.behaviors.ajax_send_tweet = {
 	 	attach: function attach() {
@@ -1334,7 +1331,7 @@
 		       	 this.value = '';
 		       }
 
-		    });    
+		    });
 	 	}
 	 };
 })(jQuery);

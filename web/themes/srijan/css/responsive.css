@@ -993,7 +993,190 @@
   .block-faq-banner-image {
     margin-top: 160px; }
     .block-faq-banner-image .field--type-image img {
-      width: auto; } }
+      width: auto; }
+  /** my tweet **/
+  body.user-logged-in .block-users-valid-tweets-block,
+  body.user-logged-in .block-users-in-valid-tweets-block,
+  body.user-logged-in .block-users-archived-tweets-block,
+  body.user-logged-in .block-users-all-tweets-block,
+  body.user-logged-in .block-users-tweeted-tweets-block {
+    box-shadow: none;
+    background: transparent;
+    padding: 0; }
+    body.user-logged-in .block-users-valid-tweets-block .item-list .header,
+    body.user-logged-in .block-users-in-valid-tweets-block .item-list .header,
+    body.user-logged-in .block-users-archived-tweets-block .item-list .header,
+    body.user-logged-in .block-users-all-tweets-block .item-list .header,
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list .header {
+      display: none; }
+    body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list > ul > li,
+    body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list > ul > li,
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list > ul > li,
+    body.user-logged-in .block-users-all-tweets-block .item-list + .item-list > ul > li,
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list > ul > li {
+      padding: 15px 15px 0 15px;
+      border-bottom: none;
+      margin-bottom: 5px;
+      background: #fff; }
+    body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:first-child,
+    body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:first-child,
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:first-child,
+    body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:first-child,
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:first-child {
+      display: none; }
+    body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(3),
+    body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(3),
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(3),
+    body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(3),
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(3) {
+      width: 100%;
+      flex: initial;
+      margin: 0;
+      order: 3; }
+  body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(7),
+  body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(7) {
+    order: 4;
+    margin: 0;
+    flex: 18; }
+    body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(7):before,
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(7):before {
+      content: "Last updated :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(9),
+  body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(9) {
+    order: 5; }
+  body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:last-child,
+  body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:last-child {
+    order: 6; }
+  body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(6),
+  body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(6) {
+    order: 7;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(6):before,
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(6):before {
+      content: "Tweet Date :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(5),
+  body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
+    order: 8;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(5):before,
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(5):before {
+      content: "Created :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(8),
+  body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(8) {
+    order: 9;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(8):before,
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(8):before {
+      content: "Retweeted :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(4),
+  body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(4) {
+    order: 10;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(4):before,
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(4):before {
+      content: "Size :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6),
+  body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6) {
+    order: 4;
+    margin: 0;
+    flex: 18; }
+    body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6):before,
+    body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6):before {
+      content: "Last updated :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(7),
+  body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(7) {
+    order: 5; }
+  body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:last-child,
+  body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:last-child {
+    order: 6; }
+  body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(5),
+  body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
+    order: 7;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(5):before,
+    body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(5):before {
+      content: "Tweet Date :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(4),
+  body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(4) {
+    order: 8;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(4):before,
+    body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(4):before {
+      content: "Size :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
+    order: 4;
+    margin: 0;
+    flex: 18; }
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5):before {
+      content: "Last updated :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:last-child {
+    order: 5; }
+  body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(6) {
+    order: 7;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(6):before {
+      content: "Tweet Date :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
+    order: 8;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5):before {
+      content: "Created :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(8) {
+    order: 9;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(8):before {
+      content: "Retweeted :";
+      width: 110px;
+      display: inline-block; }
+  body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(4) {
+    order: 10;
+    flex: initial;
+    width: 100%;
+    margin: 0; }
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(4):before {
+      content: "Size :";
+      width: 110px;
+      display: inline-block; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

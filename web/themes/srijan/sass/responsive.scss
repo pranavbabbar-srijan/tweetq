@@ -1380,6 +1380,241 @@
 			width: auto;
 		}
 	}
+	/** my tweet **/
+  body.user-logged-in {
+		 .block-users-valid-tweets-block ,
+		 .block-users-in-valid-tweets-block ,
+		 .block-users-archived-tweets-block ,
+		 .block-users-all-tweets-block  ,
+		 .block-users-tweeted-tweets-block {
+			 box-shadow: none;
+			 background: transparent;
+			 padding: 0;
+			 .item-list {
+				 .header {
+					 display: none;
+				 }
+				 + .item-list {
+					 > ul {
+						> li {
+						  padding: 15px 15px 0 15px;
+					    border-bottom: none;
+					    margin-bottom: 5px;
+					    background: #fff;
+						}
+					}
+					ul {
+						ul {
+							li {
+								&:first-child {
+									display: none;
+								}
+								&:nth-child(3) {
+									    width: 100%;
+											flex: initial;
+											margin: 0;
+											order: 3;
+								}
+							}
+						}
+					}
+				 }
+			 }
+		 }
+		 .block-users-all-tweets-block,
+		 .block-users-tweeted-tweets-block {
+			 .item-list {
+				 	+ .item-list {
+						ul {
+							ul {
+								li {
+									 &:nth-child(7) {
+										 order: 4;
+										 margin: 0;
+										 flex: 18;
+										 &:before {
+											 content: "Last updated :";
+											 width: 110px;
+    							 		 display: inline-block;
+										 }
+									 }
+									 &:nth-child(9) {
+										 order: 5;
+									 }
+									 &:last-child {
+										 order: 6;
+									 }
+									 &:nth-child(6) {
+										 order: 7;
+										 flex: initial;
+										 width: 100%;
+										 margin: 0;
+										 &:before {
+											 content: "Tweet Date :";
+											 width: 110px;
+											 display: inline-block;
+										 }
+									 }
+									 &:nth-child(5) {
+										 order: 8;
+										 flex: initial;
+										 width: 100%;
+										 margin: 0;
+										 &:before {
+											 content: "Created :";
+											 width: 110px;
+											 display: inline-block;
+										 }
+									 }
+									 &:nth-child(8) {
+										 order: 9;
+										 flex: initial;
+										 width: 100%;
+										 margin: 0;
+										 &:before {
+											 content: "Retweeted :";
+											 width: 110px;
+											 display: inline-block;
+										 }
+									 }
+									 &:nth-child(4){
+										 order: 10;
+										 flex: initial;
+										 width: 100%;
+										 margin: 0;
+										 &:before {
+											 content: "Size :";
+											 width: 110px;
+											 display: inline-block;
+										 }
+									 }
+								 }
+							 }
+						 }
+					 }
+				}
+		 }
+		 .block-users-valid-tweets-block,
+		 .block-users-in-valid-tweets-block {
+			 .item-list {
+					+ .item-list {
+						ul {
+							ul {
+								li {
+									 &:nth-child(6) {
+										 order: 4;
+										 margin: 0;
+										 flex: 18;
+										 &:before {
+											 content: "Last updated :";
+											 width: 110px;
+											 display: inline-block;
+										 }
+									 }
+									 &:nth-child(7) {
+										 order: 5;
+									 }
+									 &:last-child {
+										 order: 6;
+									 }
+									 &:nth-child(5) {
+										 order: 7;
+										 flex: initial;
+										 width: 100%;
+										 margin: 0;
+										 &:before {
+											 content: "Tweet Date :";
+											 width: 110px;
+											 display: inline-block;
+										 }
+									 }
+									 &:nth-child(4){
+										 order: 8;
+										 flex: initial;
+										 width: 100%;
+										 margin: 0;
+										 &:before {
+											 content: "Size :";
+											 width: 110px;
+											 display: inline-block;
+										 }
+									 }
+								 }
+							 }
+						 }
+					 }
+				}
+		 }
+		 .block-users-archived-tweets-block {
+			.item-list {
+				 + .item-list {
+					 ul {
+						 ul {
+							 li {
+									&:nth-child(5) {
+										order: 4;
+										margin: 0;
+										flex: 18;
+										&:before {
+											content: "Last updated :";
+											width: 110px;
+											display: inline-block;
+										}
+									}
+									&:last-child {
+										order: 5;
+									}
+									&:nth-child(6) {
+										order: 7;
+										flex: initial;
+										width: 100%;
+										margin: 0;
+										&:before {
+											content: "Tweet Date :";
+											width: 110px;
+											display: inline-block;
+										}
+									}
+									&:nth-child(5) {
+										order: 8;
+										flex: initial;
+										width: 100%;
+										margin: 0;
+										&:before {
+											content: "Created :";
+											width: 110px;
+											display: inline-block;
+										}
+									}
+									&:nth-child(8) {
+										order: 9;
+										flex: initial;
+										width: 100%;
+										margin: 0;
+										&:before {
+											content: "Retweeted :";
+											width: 110px;
+											display: inline-block;
+										}
+									}
+									&:nth-child(4){
+										order: 10;
+										flex: initial;
+										width: 100%;
+										margin: 0;
+										&:before {
+											content: "Size :";
+											width: 110px;
+											display: inline-block;
+										}
+									}
+								}
+							}
+						}
+					}
+			 }
+		}
+  }
 }
 
 /* css for tablet **/
