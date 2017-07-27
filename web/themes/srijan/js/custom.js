@@ -1105,6 +1105,24 @@
 	    	setTimeout(function(){
 	        	$(".faq .faq-category-group").first().children('.faq-qa-hide').removeClass('collapsed');
 	        }, 500);
+				$("<span class='hide_show'>...<span>").insertAfter('.item-list + .item-list > ul > li .item-list ul');
+
+				// for my tweet block
+				$("body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul li, body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul li, body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul li").each(function( index ) {
+					$(this).children('.item-list').find('li:nth-child(4),li:nth-child(5) ,li:nth-child(8),li:nth-child(6)').hide();
+				});
+				$("body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul li, body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul li").each(function( index ) {
+					$(this).children('.item-list').find('li:nth-child(4),li:nth-child(5)').hide();
+				});
+				// show on click
+				$(".block-users-all-tweets-block .hide_show, .block-users-tweeted-tweets-block .hide_show, .block-users-archived-tweets-block .hide_show").click(function() {
+          $(this).toggleClass('active');
+					$(this).parent('.item-list').children('ul').find('li:nth-child(4),li:nth-child(5) ,li:nth-child(8),li:nth-child(6)').toggle();
+				});
+				$(".block-users-valid-tweets-block .hide_show, .block-users-in-valid-tweets-block .hide_show").click(function() {
+					$(this).toggleClass('active');
+					$(this).parent('.item-list').children('ul').find('li:nth-child(4),li:nth-child(5)').toggle();
+				});
 	    }
         $('.faq-header').click(function(e){
         	$('.faq-qa-hide').hide();
@@ -1245,7 +1263,6 @@
 			   function sidebarnav() {
 			     if(window_width < 767) {
 			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
-
 			     }
 			   }
 			   $(window).click(function() {
