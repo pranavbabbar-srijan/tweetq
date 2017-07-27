@@ -1094,6 +1094,11 @@
 	        $( ".faq .faq-qa-header" ).each(function( index ) {
 			  $(this).unwrap();
 			});
+
+			  $(document).ready(function () {
+			  	 clicksidenav();
+				   sidebarnav();
+			  });
 			$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
 
 	        setTimeout(function(){
@@ -1135,55 +1140,6 @@
         $('.faq-header').append('Articles');
         $('.user-login-form #forgot-password').appendTo('.user-login-form');
 
-
-
-        // twitter text box
-         function onTweetCompose(event) {
-		    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
-		        $placeholderBacker = $('.js-keeper-placeholder-back'),
-		        currentValue = $textarea.val()
-		    ;
-		    var currentValuelength = twttr.txt.getTweetLength(currentValue);
-
-		    // realLength is not 140, links counts for 23 characters always.
-		    var realLength = 140;
-		    var remainingLength = 140 - currentValuelength;
-		    $($textarea).addClass('linked');
-		    $($placeholderBacker).addClass('linked');
-
-		     // scroll two bar same time same class
-		    $('.linked').scroll(function(){
-			    $('.linked').scrollTop($(this).scrollTop());
-			})
-
-		    if (0 > remainingLength) {
-		      // Split value if greater than
-		      var allowedValuePart = currentValue.slice(0, realLength),
-		          refusedValuePart = currentValue.slice(realLength)
-		      ;
-
-		      // Fill the hidden div.
-		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
-		      $('#edit-display-box').addClass('red-text');
-		    } else {
-		      $placeholderBacker.html('');
-		      $('#edit-display-box').removeClass('red-text');
-		    }
-		  }
-
-
-		  $(document).ready(function () {
-		  	 clicksidenav();
-			 sidebarnav();
-		    $textarea = $('textarea');
-
-		    // Create a pseudo-element that will be hidden behind the placeholder.
-		    var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
-		    $placeholderBacker.insertAfter($textarea);
-
-		    onTweetCompose();
-		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
-		  });
            // js for to prepend button
 	        $('#delete-selected').prependTo('#block-srijan-content');
           // add class
@@ -1322,9 +1278,46 @@
 			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 		}
 		else {
-        	$("#send-tweets-form #edit-submit").removeAttr('disabled');
-			$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+      $("#send-tweets-form #edit-submit").removeAttr('disabled');
+			var tweet_text_elem = $('#tweets-queue-tweet-form #edit-message');
+			if(tweet_text_elem.length){
+				(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
+				:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+			}
 		}
+	}
+  // twitter text box
+   function onTweetCompose(event) {
+    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
+        $placeholderBacker = $('.js-keeper-placeholder-back'),
+        currentValue = $textarea.val()
+    ;
+    var currentValuelength = twttr.txt.getTweetLength(currentValue);
+
+    // realLength is not 140, links counts for 23 characters always.
+    var realLength = 140;
+    var remainingLength = 140 - currentValuelength;
+    $($textarea).addClass('linked');
+    $($placeholderBacker).addClass('linked');
+
+     // scroll two bar same time same class
+    $('.linked').scroll(function(){
+	    $('.linked').scrollTop($(this).scrollTop());
+	  })
+
+    if (0 > remainingLength) {
+      // Split value if greater than
+      var allowedValuePart = currentValue.slice(0, realLength),
+          refusedValuePart = currentValue.slice(realLength)
+      ;
+
+      // Fill the hidden div.
+      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+      $('#edit-display-box').addClass('red-text');
+    } else {
+      $placeholderBacker.html('');
+      $('#edit-display-box').removeClass('red-text');
+    }
 	}
 
 	function onFormCheckBoxChange() {
@@ -1349,6 +1342,13 @@
 		       }
 
 		    });
+				$textarea = $('textarea');
+				// Create a pseudo-element that will be hidden behind the placeholder.
+				var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
+				$placeholderBacker.insertAfter($textarea);
+
+				onTweetCompose();
+				$textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
 	 	}
 	 };
 })(jQuery);
