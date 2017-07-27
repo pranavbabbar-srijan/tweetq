@@ -968,6 +968,8 @@
 	.no-tweet-found {
 		font-size: 28px;
 		padding: .5em 0;
+		background: #ffffff;
+		border-radius: 5px;
 		a {
 			padding: .65em 1em;
 			margin-right: 0;
@@ -1390,6 +1392,16 @@
 			 box-shadow: none;
 			 background: transparent;
 			 padding: 0;
+			 .pager {
+				 background: #ffffff;
+				 padding: 20px 0;
+				 margin-top: 0;
+				 li {
+					 a {
+						 padding: .1em 0.5em;
+					 }
+				 }
+			 }
 			 .item-list {
 				 .header {
 					 display: none;

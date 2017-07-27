@@ -719,7 +719,9 @@
     position: absolute; }
   .no-tweet-found {
     font-size: 28px;
-    padding: .5em 0; }
+    padding: .5em 0;
+    background: #ffffff;
+    border-radius: 5px; }
     .no-tweet-found a {
       padding: .65em 1em;
       margin-right: 0;
@@ -1003,6 +1005,20 @@
     box-shadow: none;
     background: transparent;
     padding: 0; }
+    body.user-logged-in .block-users-valid-tweets-block .pager,
+    body.user-logged-in .block-users-in-valid-tweets-block .pager,
+    body.user-logged-in .block-users-archived-tweets-block .pager,
+    body.user-logged-in .block-users-all-tweets-block .pager,
+    body.user-logged-in .block-users-tweeted-tweets-block .pager {
+      background: #ffffff;
+      padding: 20px 0;
+      margin-top: 0; }
+      body.user-logged-in .block-users-valid-tweets-block .pager li a,
+      body.user-logged-in .block-users-in-valid-tweets-block .pager li a,
+      body.user-logged-in .block-users-archived-tweets-block .pager li a,
+      body.user-logged-in .block-users-all-tweets-block .pager li a,
+      body.user-logged-in .block-users-tweeted-tweets-block .pager li a {
+        padding: .1em 0.5em; }
     body.user-logged-in .block-users-valid-tweets-block .item-list .header,
     body.user-logged-in .block-users-in-valid-tweets-block .item-list .header,
     body.user-logged-in .block-users-archived-tweets-block .item-list .header,
