@@ -1095,10 +1095,7 @@
 			  $(this).unwrap();
 			});
 
-			  $(document).ready(function () {
-			  	 clicksidenav();
-				   sidebarnav();
-			  });
+
 			$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
 
 	        setTimeout(function(){
@@ -1221,6 +1218,10 @@
 			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
 			     }
 			   }
+				 $(document).ready(function () {
+						clicksidenav();
+						sidebarnav();
+				 });
 			   $(window).click(function() {
 				  $('.c-hamburger').removeClass('is-active');
 				});
