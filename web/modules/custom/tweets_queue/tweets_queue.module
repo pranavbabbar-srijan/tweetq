@@ -797,6 +797,7 @@ function tweets_queue_log_undo_retweet_status($message_data, $status, $cron_id =
  * @return [type]               [description]
  */
 function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
+
   $twitter_history_info = array(
       'nid' => $message_data->nid,
       'uid' => $message_data->uid,
@@ -825,7 +826,7 @@ function tweets_queue_log_tweet_status($message_data, $status, $cron_id = 0) {
         $tweet_info['tweeted'] = 1;
         $twitter_history_info = array(
           'retweeted' => 0,
-          'type' => 'Retweet',
+          'type' => 'Tweet',
           'message' => $message_data,
         );
         tweets_queue_update_message_queue_priority_info($message_data->nid, $tweet_info, 1);
@@ -1103,7 +1104,7 @@ function tweets_queue_send_direct_message($message, $images = array(), $nid=0) {
   tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
   drupal_set_message(t('Tweet shared and stored in valid tweets successfully.'));
   $twitter_message_info['tweet_id'] = $tweet_id;
-  if (!$nid) {    
+  if (!$nid) {
    $nid = tweets_queue_insert_message_queue_record($twitter_message_info);
   }
   tweets_queue_map_message_image_record($nid, $images);
@@ -1125,7 +1126,7 @@ function tweets_queue_send_direct_message($message, $images = array(), $nid=0) {
     ),
     0
   );
-  tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info);  
+  tweets_queue_update_twittter_tweet_history($nid, $twitter_history_info);
 }
 
 /**
@@ -1603,7 +1604,7 @@ function tweets_queue_entity_insert(Drupal\Core\Entity\EntityInterface $entity) 
         tweets_queue_verify_signup_send_mail($mail, $full_name);
         //tweets_queue_login_twitter_user($uid);
       }
-     
+
 
       break;
     case 'tweet':
@@ -1739,12 +1740,12 @@ function tweets_queue_contact_form_submit($form, \Drupal\Core\Form\FormStateInte
   $key = 'contact_us_thankyou_mail';
   $to = $form_state->getValue('field_email');
   $to = $to[0]['value'];
-  
+
   $user_hash_key = hash('sha256', $mail);
   $message = t("<div  style='text-align: center;'>Thankyou for reaching to us");
   $params['message'] = $message;
   $params['title'] = 'Thankyou mail';
- 
+
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
 
@@ -1770,14 +1771,14 @@ function tweets_queue_contact_recipient_form_submit($form, \Drupal\Core\Form\For
   $to = 'barbet@srijan.net';
   $name = $form_state->getValue('field_name');
   $email = $form_state->getValue('field_email');
-  $recipient_message = $form_state->getValue('field_message'); 
+  $recipient_message = $form_state->getValue('field_message');
   $user_hash_key = hash('sha256', $mail);
   $message = t("<div style='margin: 30px 0;'>Name: @name</div>
     <div style='margin: 30px 0;'>Email: @email</div>
     <div style='margin: 30px 0;'>Message: @message</div>",array('@name' => $name[0]['value'], '@email' => $email[0]['value'], '@message' => $recipient_message[0]['value']));
   $params['message'] = $message;
   $params['title'] = 'Write to us';
- 
+
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
 
@@ -1812,7 +1813,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   $module = 'tweets_queue';
   $key = 'user_verify_signup_mail';
   $to = $mail;
-  
+
   $user_hash_key = hash('sha256', $mail);
   $link = $base_url . '/' . 'verify' . '/' . $mail . '/' . $user_hash_key;
   $link1 = t('<a style="color: #2aa9e0; font-weight: bold; text-decoration: none;" href="' . $link . '"> Click here </a> to verify your account.');
@@ -1834,7 +1835,7 @@ function tweets_queue_verify_signup_send_mail($mail, $name) {
   <div  style='text-align: center;'>@link</div>", array('@full_name' => $name, '@link' => $link1));
   $params['message'] = $message;
   $params['title'] = 'Barbet Email Verification';
- 
+
   $langcode = \Drupal::currentUser()->getPreferredLangcode();
   $send = true;
 
@@ -2324,7 +2325,7 @@ function tweets_queue_update_8108() {
       'twitter_tweets_recent_activity_nid' => array('nid'),
       'twitter_tweets_recent_activity_uid' => array('uid'),
       'twitter_tweets_recent_activity_created' => array('created'),
-      'twitter_tweets_recent_activity_cron_id' => array('cron_id')      
+      'twitter_tweets_recent_activity_cron_id' => array('cron_id')
     )
   );
   db_create_table(TWITTER_TWEETS_RECENT_ACTIVITY_TABLE, $schema[TWITTER_TWEETS_RECENT_ACTIVITY_TABLE]);
@@ -2451,7 +2452,6 @@ function tweets_queue_schedule_cron($increase_cron_run_limit = 0) {
   \Drupal::configFactory()->getEditable('automated_cron.settings')
     ->set('interval', $cron_interval)
     ->save();
-
   $next_run = time() + $cron_interval;
   $config = \Drupal::service('config.factory')->getEditable('tweets_queue.settings');
   $config->set(CRON_TWEET_LAST_RUN, time())->save();
@@ -3051,7 +3051,7 @@ function tweets_queue_authenticate_twitter_user() {
     header('Location: ' . $default_path);
     die();
   }
-  
+
   function tweets_queue_goto_page_after_verify($path = '') {
     global $base_url;
     $default_path = $base_url;
@@ -4338,7 +4338,7 @@ function tweets_queue_invite_friends_send_mail($mail) {
   $to = $mail;
   $link = $base_url;
   $link1 = t('<a style="color: #2aa9e0; font-weight: bold; text-decoration: none;" href="' . $link . '"> Join Us </a>');
-  $message = t("<div style='text-align: center;'>Friend Invitation, 
+  $message = t("<div style='text-align: center;'>Friend Invitation,
     Your friend have invited you to join the Barbet.</div><br>
       <div  style='text-align: center;'>@link</div>", array('@link' => $link1));
   tweets_queue_debug_info($message);
