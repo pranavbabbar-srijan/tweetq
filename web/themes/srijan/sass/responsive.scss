@@ -1383,6 +1383,31 @@
 		}
 	}
 	/** my tweet **/
+	.total_tweets.active {
+	   .text {
+			 color: #2aa9e0;
+       font-weight: bold;
+		 }
+	 }
+	 .valid_tweets.active {
+		 .text {
+			  color: #96c85a;
+				font-weight: bold
+		 }
+	 }
+	 .invalid_tweets.active {
+		 .text {
+			  color: #f56a6a;
+				font-weight: bold
+		 }
+	 }
+	 .archived_tweets.active {
+		 .text {
+				color: #ffae00;
+				font-weight: bold
+		 }
+	 }
+
   body.user-logged-in {
 		 .block-users-valid-tweets-block ,
 		 .block-users-in-valid-tweets-block ,
@@ -1397,8 +1422,16 @@
 				 padding: 20px 0;
 				 margin-top: 0;
 				 li {
+					 &.pager__item--first,
+					 &.pager__item--previous {
+						     margin-right: 10px;
+					 }
+					 &.pager__item--last,
+					 &.pager__item--next {
+						     margin-left: 10px;
+					 }
 					 a {
-						 padding: .1em 0.5em;
+						 padding: .1em 0.3em;
 					 }
 				 }
 			 }
