@@ -719,7 +719,9 @@
     position: absolute; }
   .no-tweet-found {
     font-size: 28px;
-    padding: .5em 0; }
+    padding: .5em 0;
+    background: #ffffff;
+    border-radius: 5px; }
     .no-tweet-found a {
       padding: .65em 1em;
       margin-right: 0;
@@ -995,6 +997,18 @@
     .block-faq-banner-image .field--type-image img {
       width: auto; }
   /** my tweet **/
+  .total_tweets.active .text {
+    color: #2aa9e0;
+    font-weight: bold; }
+  .valid_tweets.active .text {
+    color: #96c85a;
+    font-weight: bold; }
+  .invalid_tweets.active .text {
+    color: #f56a6a;
+    font-weight: bold; }
+  .archived_tweets.active .text {
+    color: #ffae00;
+    font-weight: bold; }
   body.user-logged-in .block-users-valid-tweets-block,
   body.user-logged-in .block-users-in-valid-tweets-block,
   body.user-logged-in .block-users-archived-tweets-block,
@@ -1003,6 +1017,40 @@
     box-shadow: none;
     background: transparent;
     padding: 0; }
+    body.user-logged-in .block-users-valid-tweets-block .pager,
+    body.user-logged-in .block-users-in-valid-tweets-block .pager,
+    body.user-logged-in .block-users-archived-tweets-block .pager,
+    body.user-logged-in .block-users-all-tweets-block .pager,
+    body.user-logged-in .block-users-tweeted-tweets-block .pager {
+      background: #ffffff;
+      padding: 20px 0;
+      margin-top: 0; }
+      body.user-logged-in .block-users-valid-tweets-block .pager li.pager__item--first, body.user-logged-in .block-users-valid-tweets-block .pager li.pager__item--previous,
+      body.user-logged-in .block-users-in-valid-tweets-block .pager li.pager__item--first,
+      body.user-logged-in .block-users-in-valid-tweets-block .pager li.pager__item--previous,
+      body.user-logged-in .block-users-archived-tweets-block .pager li.pager__item--first,
+      body.user-logged-in .block-users-archived-tweets-block .pager li.pager__item--previous,
+      body.user-logged-in .block-users-all-tweets-block .pager li.pager__item--first,
+      body.user-logged-in .block-users-all-tweets-block .pager li.pager__item--previous,
+      body.user-logged-in .block-users-tweeted-tweets-block .pager li.pager__item--first,
+      body.user-logged-in .block-users-tweeted-tweets-block .pager li.pager__item--previous {
+        margin-right: 10px; }
+      body.user-logged-in .block-users-valid-tweets-block .pager li.pager__item--last, body.user-logged-in .block-users-valid-tweets-block .pager li.pager__item--next,
+      body.user-logged-in .block-users-in-valid-tweets-block .pager li.pager__item--last,
+      body.user-logged-in .block-users-in-valid-tweets-block .pager li.pager__item--next,
+      body.user-logged-in .block-users-archived-tweets-block .pager li.pager__item--last,
+      body.user-logged-in .block-users-archived-tweets-block .pager li.pager__item--next,
+      body.user-logged-in .block-users-all-tweets-block .pager li.pager__item--last,
+      body.user-logged-in .block-users-all-tweets-block .pager li.pager__item--next,
+      body.user-logged-in .block-users-tweeted-tweets-block .pager li.pager__item--last,
+      body.user-logged-in .block-users-tweeted-tweets-block .pager li.pager__item--next {
+        margin-left: 10px; }
+      body.user-logged-in .block-users-valid-tweets-block .pager li a,
+      body.user-logged-in .block-users-in-valid-tweets-block .pager li a,
+      body.user-logged-in .block-users-archived-tweets-block .pager li a,
+      body.user-logged-in .block-users-all-tweets-block .pager li a,
+      body.user-logged-in .block-users-tweeted-tweets-block .pager li a {
+        padding: .1em 0.3em; }
     body.user-logged-in .block-users-valid-tweets-block .item-list .header,
     body.user-logged-in .block-users-in-valid-tweets-block .item-list .header,
     body.user-logged-in .block-users-archived-tweets-block .item-list .header,
@@ -1014,10 +1062,10 @@
     body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list > ul > li,
     body.user-logged-in .block-users-all-tweets-block .item-list + .item-list > ul > li,
     body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list > ul > li {
-      padding: 15px 15px 0 15px;
+      padding: 0;
       border-bottom: none;
       margin-bottom: 5px;
-      background: #fff; }
+      background: #fcfcfc; }
     body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:first-child,
     body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:first-child,
     body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:first-child,
@@ -1032,17 +1080,54 @@
       width: 100%;
       flex: initial;
       margin: 0;
-      order: 3; }
+      order: 3;
+      margin-bottom: 10px;
+      padding: 15px 20px;
+      background: #fff; }
+    body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:last-child,
+    body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:last-child,
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:last-child,
+    body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:last-child,
+    body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:last-child {
+      margin-right: 15px;
+      text-align: right; }
+    body.user-logged-in .block-users-valid-tweets-block .valid-tweets-header,
+    body.user-logged-in .block-users-in-valid-tweets-block .valid-tweets-header,
+    body.user-logged-in .block-users-archived-tweets-block .valid-tweets-header,
+    body.user-logged-in .block-users-all-tweets-block .valid-tweets-header,
+    body.user-logged-in .block-users-tweeted-tweets-block .valid-tweets-header {
+      left: 0;
+      margin-right: 0;
+      margin-bottom: 0;
+      margin-top: 0;
+      padding: 0;
+      display: flex;
+      text-align: center; }
+      body.user-logged-in .block-users-valid-tweets-block .valid-tweets-header a,
+      body.user-logged-in .block-users-in-valid-tweets-block .valid-tweets-header a,
+      body.user-logged-in .block-users-archived-tweets-block .valid-tweets-header a,
+      body.user-logged-in .block-users-all-tweets-block .valid-tweets-header a,
+      body.user-logged-in .block-users-tweeted-tweets-block .valid-tweets-header a {
+        font-size: 14px;
+        width: 50%;
+        padding: 15px;
+        margin: 0 !important; }
+        body.user-logged-in .block-users-valid-tweets-block .valid-tweets-header a.active,
+        body.user-logged-in .block-users-in-valid-tweets-block .valid-tweets-header a.active,
+        body.user-logged-in .block-users-archived-tweets-block .valid-tweets-header a.active,
+        body.user-logged-in .block-users-all-tweets-block .valid-tweets-header a.active,
+        body.user-logged-in .block-users-tweeted-tweets-block .valid-tweets-header a.active {
+          background: #ffffff; }
   body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(7),
   body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(7) {
     order: 4;
-    margin: 0;
     flex: 18; }
     body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(7):before,
     body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(7):before {
       content: "Last updated :";
       width: 110px;
-      display: inline-block; }
+      display: inline-block;
+      color: #303030; }
   body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(9),
   body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(9) {
     order: 5; }
@@ -1054,55 +1139,59 @@
     order: 7;
     flex: initial;
     width: 100%;
-    margin: 0; }
+    margin-bottom: 5px; }
     body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(6):before,
     body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(6):before {
       content: "Tweet Date :";
       width: 110px;
-      display: inline-block; }
+      display: inline-block;
+      color: #303030; }
   body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(5),
   body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
     order: 8;
     flex: initial;
     width: 100%;
-    margin: 0; }
+    margin-bottom: 5px; }
     body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(5):before,
     body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(5):before {
       content: "Created :";
       width: 110px;
-      display: inline-block; }
+      display: inline-block;
+      color: #303030; }
   body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(8),
   body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(8) {
     order: 9;
     flex: initial;
     width: 100%;
-    margin: 0; }
+    margin-bottom: 5px; }
     body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(8):before,
     body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(8):before {
       content: "Retweeted :";
       width: 110px;
-      display: inline-block; }
+      display: inline-block;
+      color: #303030; }
   body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(4),
   body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(4) {
     order: 10;
     flex: initial;
-    width: 100%;
-    margin: 0; }
+    width: 100%; }
     body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li:nth-child(4):before,
     body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li:nth-child(4):before {
       content: "Size :";
       width: 110px;
-      display: inline-block; }
+      display: inline-block;
+      color: #303030; }
   body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6),
   body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6) {
     order: 4;
-    margin: 0;
-    flex: 18; }
+    flex: 18;
+    margin-bottom: 5px; }
     body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6):before,
     body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(6):before {
       content: "Last updated :";
       width: 110px;
-      display: inline-block; }
+      display: inline-block;
+      color: #303030; }
   body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(7),
   body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(7) {
     order: 5; }
@@ -1114,69 +1203,77 @@
     order: 7;
     flex: initial;
     width: 100%;
-    margin: 0; }
+    margin-bottom: 5px; }
     body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(5):before,
     body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(5):before {
       content: "Tweet Date :";
       width: 110px;
-      display: inline-block; }
+      display: inline-block;
+      color: #303030; }
   body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(4),
   body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(4) {
     order: 8;
     flex: initial;
-    width: 100%;
-    margin: 0; }
+    width: 100%; }
     body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul ul li:nth-child(4):before,
     body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul ul li:nth-child(4):before {
       content: "Size :";
       width: 110px;
-      display: inline-block; }
-  body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
+      display: inline-block;
+      color: #303030; }
+  body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(7) {
     order: 4;
-    margin: 0;
     flex: 18; }
-    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5):before {
+    body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(7):before {
       content: "Last updated :";
       width: 110px;
       display: inline-block; }
   body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:last-child {
     order: 5; }
   body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(6) {
-    order: 7;
+    order: 6;
     flex: initial;
     width: 100%;
-    margin: 0; }
+    margin-bottom: 5px; }
     body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(6):before {
       content: "Tweet Date :";
       width: 110px;
       display: inline-block; }
   body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5) {
-    order: 8;
+    order: 7;
     flex: initial;
     width: 100%;
-    margin: 0; }
+    margin-bottom: 5px; }
     body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(5):before {
       content: "Created :";
       width: 110px;
       display: inline-block; }
   body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(8) {
-    order: 9;
+    order: 8;
     flex: initial;
     width: 100%;
-    margin: 0; }
+    margin-bottom: 5px; }
     body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(8):before {
       content: "Retweeted :";
       width: 110px;
       display: inline-block; }
   body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(4) {
-    order: 10;
+    order: 9;
     flex: initial;
-    width: 100%;
-    margin: 0; }
+    width: 100%; }
     body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li:nth-child(4):before {
       content: "Size :";
       width: 110px;
-      display: inline-block; } }
+      display: inline-block; }
+  .hide_show {
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    color: #303030;
+    top: -8px;
+    position: relative; }
+    .hide_show.active {
+      color: #2aa9e0; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {

@@ -1113,6 +1113,8 @@
 	        $( ".faq .faq-qa-header" ).each(function( index ) {
 			  $(this).unwrap();
 			});
+
+
 			$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
 
 	        setTimeout(function(){
@@ -1124,6 +1126,24 @@
 	    	setTimeout(function(){
 	        	$(".faq .faq-category-group").first().children('.faq-qa-hide').removeClass('collapsed');
 	        }, 500);
+				$("<span class='hide_show'>...<span>").insertAfter('.item-list + .item-list > ul > li .item-list ul');
+
+				// for my tweet block
+				$("body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul li, body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul li, body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul li").each(function( index ) {
+					$(this).children('.item-list').find('li:nth-child(4),li:nth-child(5) ,li:nth-child(8),li:nth-child(6)').hide();
+				});
+				$("body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul li, body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul li").each(function( index ) {
+					$(this).children('.item-list').find('li:nth-child(4),li:nth-child(5)').hide();
+				});
+				// show on click
+				$(".block-users-all-tweets-block .hide_show, .block-users-tweeted-tweets-block .hide_show, .block-users-archived-tweets-block .hide_show").click(function() {
+          $(this).toggleClass('active');
+					$(this).parent('.item-list').children('ul').find('li:nth-child(4),li:nth-child(5) ,li:nth-child(8),li:nth-child(6)').toggle();
+				});
+				$(".block-users-valid-tweets-block .hide_show, .block-users-in-valid-tweets-block .hide_show").click(function() {
+					$(this).toggleClass('active');
+					$(this).parent('.item-list').children('ul').find('li:nth-child(4),li:nth-child(5)').toggle();
+				});
 	    }
         $('.faq-header').click(function(e){
         	$('.faq-qa-hide').hide();
@@ -1136,55 +1156,6 @@
         $('.faq-header').append('Articles');
         $('.user-login-form #forgot-password').appendTo('.user-login-form');
 
-
-
-        // twitter text box
-         function onTweetCompose(event) {
-		    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
-		        $placeholderBacker = $('.js-keeper-placeholder-back'),
-		        currentValue = $textarea.val()
-		    ;
-		    var currentValuelength = twttr.txt.getTweetLength(currentValue);
-
-		    // realLength is not 140, links counts for 23 characters always.
-		    var realLength = 140;
-		    var remainingLength = 140 - currentValuelength;
-		    $($textarea).addClass('linked');
-		    $($placeholderBacker).addClass('linked');
-
-		     // scroll two bar same time same class
-		    $('.linked').scroll(function(){
-			    $('.linked').scrollTop($(this).scrollTop());
-			})
-
-		    if (0 > remainingLength) {
-		      // Split value if greater than
-		      var allowedValuePart = currentValue.slice(0, realLength),
-		          refusedValuePart = currentValue.slice(realLength)
-		      ;
-
-		      // Fill the hidden div.
-		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
-		      $('#edit-display-box').addClass('red-text');
-		    } else {
-		      $placeholderBacker.html('');
-		      $('#edit-display-box').removeClass('red-text');
-		    }
-		  }
-
-
-		  $(document).ready(function () {
-		  	 clicksidenav();
-			 sidebarnav();
-		    $textarea = $('textarea');
-
-		    // Create a pseudo-element that will be hidden behind the placeholder.
-		    var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
-		    $placeholderBacker.insertAfter($textarea);
-
-		    onTweetCompose();
-		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
-		  });
            // js for to prepend button
 	        $('#delete-selected').prependTo('#block-srijan-content');
           // add class
@@ -1264,9 +1235,12 @@
 			   function sidebarnav() {
 			     if(window_width < 767) {
 			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
-
 			     }
 			   }
+				 $(document).ready(function () {
+						clicksidenav();
+						sidebarnav();
+				 });
 			   $(window).click(function() {
 				  $('.c-hamburger').removeClass('is-active');
 				});
@@ -1324,9 +1298,46 @@
 			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 		}
 		else {
-        	$("#send-tweets-form #edit-submit").removeAttr('disabled');
-			$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+      $("#send-tweets-form #edit-submit").removeAttr('disabled');
+			var tweet_text_elem = $('#tweets-queue-tweet-form #edit-message');
+			if(tweet_text_elem.length){
+				(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
+				:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+			}
 		}
+	}
+  // twitter text box
+   function onTweetCompose(event) {
+    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
+        $placeholderBacker = $('.js-keeper-placeholder-back'),
+        currentValue = $textarea.val()
+    ;
+    var currentValuelength = twttr.txt.getTweetLength(currentValue);
+
+    // realLength is not 140, links counts for 23 characters always.
+    var realLength = 140;
+    var remainingLength = 140 - currentValuelength;
+    $($textarea).addClass('linked');
+    $($placeholderBacker).addClass('linked');
+
+     // scroll two bar same time same class
+    $('.linked').scroll(function(){
+	    $('.linked').scrollTop($(this).scrollTop());
+	  })
+
+    if (0 > remainingLength) {
+      // Split value if greater than
+      var allowedValuePart = currentValue.slice(0, realLength),
+          refusedValuePart = currentValue.slice(realLength)
+      ;
+
+      // Fill the hidden div.
+      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+      $('#edit-display-box').addClass('red-text');
+    } else {
+      $placeholderBacker.html('');
+      $('#edit-display-box').removeClass('red-text');
+    }
 	}
 
 	function onFormCheckBoxChange() {
@@ -1351,6 +1362,13 @@
 		       }
 
 		    });
+				$textarea = $('textarea');
+				// Create a pseudo-element that will be hidden behind the placeholder.
+				var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
+				$placeholderBacker.insertAfter($textarea);
+
+				onTweetCompose();
+				$textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
 	 	}
 	 };
 })(jQuery);
