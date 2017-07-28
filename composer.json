@@ -35,6 +35,8 @@
         "drupal/blocktabs": "1.0-alpha3",
 	    "drupal/svg_image_field": "1.0",
         "drupal/simplenews": "1.0-alpha3",
+	"drupal/node_class": "1.0-beta1",
+	"drupal/entityqueue": "1.0-alpha6",
 	    "drupal/himalaya": "5.5",
 	    "drupal/faq": "1.x-dev",
         "drupal/bootstrap": "3.5",
