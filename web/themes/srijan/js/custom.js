@@ -88,11 +88,30 @@
 		//Account setting invite friends.
 		$("#user-form #invite-friends").click(function() {
 	   		var emails = $('#user-form #edit-invite-friend-list').val();
+				var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(emails);
   			$("#user-form-email-validation-error").remove();
   			$("#email-sent").remove();
   			if (emails.length == 0) {
 	    		$("<span id='user-form-email-validation-error' class='validation-error'>" + 'Please enter an email address' + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 	    		return;
+	    	}
+
+				if (emails.length > 0) {
+	    		if (!valid) {
+	    			$("#user-form-email-validation-error").remove();
+	    			$("<span id='user-form-email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+						return;
+	    		}
+	    		if (valid) {
+	    			$("#user-form-email-validation-error").remove();
+	    			$.post(invite_friends_path, {'email' : emails}, function(data) {
+	    				if  (data == "exist") {
+							$("<span id='user-form-email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+	    				}
+				    });
+
+	    		}
 	    	}
 
 	    	$.post(invite_friends_path, {'email' : emails}, function(data) {
