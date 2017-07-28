@@ -807,22 +807,43 @@
       margin-top: 0; }
   /** hamburger for loged in white bg **/
   .path-signup #header,
-  .page-node-type-thanku-pages #header {
+  body.page-node-thanku-contact-us #header,
+  body.page-node-thank-you-contact-us #header,
+  body.page-node-thank-you-feedback #header,
+  body.page-node-thank-you-subscribe #header {
     padding-bottom: 0.3em;
     border-bottom: 1px solid #d8d8d8; }
   .path-signup .c-hamburger span,
-  .page-node-type-thanku-pages .c-hamburger span {
+  body.page-node-thanku-contact-us .c-hamburger span,
+  body.page-node-thank-you-contact-us .c-hamburger span,
+  body.page-node-thank-you-feedback .c-hamburger span,
+  body.page-node-thank-you-subscribe .c-hamburger span {
     background: #303030; }
     .path-signup .c-hamburger span:before, .path-signup .c-hamburger span:after,
-    .page-node-type-thanku-pages .c-hamburger span:before,
-    .page-node-type-thanku-pages .c-hamburger span:after {
+    body.page-node-thanku-contact-us .c-hamburger span:before,
+    body.page-node-thanku-contact-us .c-hamburger span:after,
+    body.page-node-thank-you-contact-us .c-hamburger span:before,
+    body.page-node-thank-you-contact-us .c-hamburger span:after,
+    body.page-node-thank-you-feedback .c-hamburger span:before,
+    body.page-node-thank-you-feedback .c-hamburger span:after,
+    body.page-node-thank-you-subscribe .c-hamburger span:before,
+    body.page-node-thank-you-subscribe .c-hamburger span:after {
       background: #303030; }
   .path-signup .c-hamburger.is-active span:before, .path-signup .c-hamburger.is-active span:after,
-  .page-node-type-thanku-pages .c-hamburger.is-active span:before,
-  .page-node-type-thanku-pages .c-hamburger.is-active span:after {
+  body.page-node-thanku-contact-us .c-hamburger.is-active span:before,
+  body.page-node-thanku-contact-us .c-hamburger.is-active span:after,
+  body.page-node-thank-you-contact-us .c-hamburger.is-active span:before,
+  body.page-node-thank-you-contact-us .c-hamburger.is-active span:after,
+  body.page-node-thank-you-feedback .c-hamburger.is-active span:before,
+  body.page-node-thank-you-feedback .c-hamburger.is-active span:after,
+  body.page-node-thank-you-subscribe .c-hamburger.is-active span:before,
+  body.page-node-thank-you-subscribe .c-hamburger.is-active span:after {
     background: #ffffff !important; }
   .path-signup .block-sub-nav-main-menu .menu li a,
-  .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
+  body.page-node-thanku-contact-us .block-sub-nav-main-menu .menu li a,
+  body.page-node-thank-you-contact-us .block-sub-nav-main-menu .menu li a,
+  body.page-node-thank-you-feedback .block-sub-nav-main-menu .menu li a,
+  body.page-node-thank-you-subscribe .block-sub-nav-main-menu .menu li a {
     color: #ffffff; }
   .block-sub-nav-main-menu .menu li {
     margin-bottom: 1em;

@@ -3689,20 +3689,51 @@ margin-top: 120px;
   .thankyou-page .content-wrap .teaser-txt {
     font-size: 18px; }
 
-.page-node-type-thanku-pages {
+body.page-node-thanku-contact-us,
+body.page-node-thank-you-contact-us,
+body.page-node-thank-you-feedback,
+body.page-node-thank-you-subscribe {
   background: #ffffff !important; }
-  .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li a {
+  body.page-node-thanku-contact-us.path-node .block-system-main-block,
+  body.page-node-thank-you-contact-us.path-node .block-system-main-block,
+  body.page-node-thank-you-feedback.path-node .block-system-main-block,
+  body.page-node-thank-you-subscribe.path-node .block-system-main-block {
+    width: 100% !important;
+    max-width: 100%; }
+  body.page-node-thanku-contact-us.path-node .layout-container .region-content,
+  body.page-node-thank-you-contact-us.path-node .layout-container .region-content,
+  body.page-node-thank-you-feedback.path-node .layout-container .region-content,
+  body.page-node-thank-you-subscribe.path-node .layout-container .region-content {
+    padding-top: 0;
+    min-height: auto;
+    max-width: 100%; }
+  body.page-node-thanku-contact-us .block-sub-nav-main-menu .menu li a,
+  body.page-node-thank-you-contact-us .block-sub-nav-main-menu .menu li a,
+  body.page-node-thank-you-feedback .block-sub-nav-main-menu .menu li a,
+  body.page-node-thank-you-subscribe .block-sub-nav-main-menu .menu li a {
     color: #666; }
-  .page-node-type-thanku-pages .block-sub-nav-main-menu .menu li:last-child a {
+  body.page-node-thanku-contact-us .block-sub-nav-main-menu .menu li:last-child a,
+  body.page-node-thank-you-contact-us .block-sub-nav-main-menu .menu li:last-child a,
+  body.page-node-thank-you-feedback .block-sub-nav-main-menu .menu li:last-child a,
+  body.page-node-thank-you-subscribe .block-sub-nav-main-menu .menu li:last-child a {
     color: #ffffff; }
-  .page-node-type-thanku-pages .main-content {
+  body.page-node-thanku-contact-us .main-content,
+  body.page-node-thank-you-contact-us .main-content,
+  body.page-node-thank-you-feedback .main-content,
+  body.page-node-thank-you-subscribe .main-content {
     width: 100%;
     margin: 0;
     position: relative;
     top: 0; }
-  .page-node-type-thanku-pages .messages {
+  body.page-node-thanku-contact-us .messages,
+  body.page-node-thank-you-contact-us .messages,
+  body.page-node-thank-you-feedback .messages,
+  body.page-node-thank-you-subscribe .messages {
     display: none !important; }
-  .page-node-type-thanku-pages .block-block-content .field--name-field-title {
+  body.page-node-thanku-contact-us .block-block-content .field--name-field-title,
+  body.page-node-thank-you-contact-us .block-block-content .field--name-field-title,
+  body.page-node-thank-you-feedback .block-block-content .field--name-field-title,
+  body.page-node-thank-you-subscribe .block-block-content .field--name-field-title {
     font-size: 30px; }
 
 /** css for spinner **/

@@ -1094,7 +1094,10 @@
 	}
 	/** hamburger for loged in white bg **/
     .path-signup,
-    .page-node-type-thanku-pages {
+		body.page-node-thanku-contact-us,
+		body.page-node-thank-you-contact-us,
+		body.page-node-thank-you-feedback,
+		body.page-node-thank-you-subscribe {
     	#header {
     		padding-bottom: 0.3em;
             border-bottom: 1px solid #d8d8d8;
