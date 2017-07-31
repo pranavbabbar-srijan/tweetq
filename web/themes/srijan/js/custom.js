@@ -1144,6 +1144,9 @@
 					$(this).toggleClass('active');
 					$(this).parent('.item-list').children('ul').find('li:nth-child(4),li:nth-child(5)').toggle();
 				});
+				if ($('.archived_tweets').hasClass('active')) {
+						$(this).parent().addClass('active');
+				}
 	    }
         $('.faq-header').click(function(e){
         	$('.faq-qa-hide').hide();
@@ -1221,15 +1224,6 @@
 	        	(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
 	        	:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 	        }
-
-	  //       var number_of_fields = $('.js-form-item-field-mobile-number').val();
-			// var length = number_of_divs.length;
-			// if(length = 0){
-			// 	$("#profile-settings-form #edit-submit").attr('disabled', 'true');
-			// }else {
-			//   $("#profile-settings-form #edit-submit").remove('disabled');
-			// }
-
 			 // js for mobile
 			   var window_width = $(window).width();
 			   function sidebarnav() {
@@ -1276,14 +1270,11 @@
 
 				});
 			     // remove class for ipad on touch
-		         if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+		    if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
 			        $('.button, .item-list li a').hover(function(e) {
 					        $(this).trigger('click');
 					    });
 				}
-
-
-
 
 })(jQuery);
 
