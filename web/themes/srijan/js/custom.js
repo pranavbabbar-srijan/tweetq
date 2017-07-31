@@ -1145,7 +1145,7 @@
 					$(this).parent('.item-list').children('ul').find('li:nth-child(4),li:nth-child(5)').toggle();
 				});
 				if ($('.archived_tweets').hasClass('active')) {
-						$(this).parent().addClass('active');
+						$('div.block_totol_twitt_statistics_mobile').animate({scrollLeft: '1000px'},1000);
 				}
 	    }
         $('.faq-header').click(function(e){
