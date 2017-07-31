@@ -117,9 +117,9 @@
 	    	$.post(invite_friends_path, {'email' : emails}, function(data) {
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
-					$('#email-sent').delay(5000).fadeOut(300);
-					location.reload();
-					return;
+					$('#email-sent').delay(2000).fadeOut(300);
+					   setTimeout(function(){ location.reload(); }, 3000);
+					   return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 		    });

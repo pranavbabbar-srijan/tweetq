@@ -129,7 +129,7 @@ button {
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .edit,
 .user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .edit, .user-logged-in .block-users-all-tweets-block .item-list + .item-list ul ul li .delete,
 .user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .edit,
-.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .messages--status:before, .user-logged-in .messages--status.listing-msg .messages__list li:first-child:before, .block-users-tweets-statistics-block .content > div a > div, .download-csv a:before, .path-frontpage .messages.messages--error:before, .path-frontpage .messages.messages--status:before {
+.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul ul li .delete, .user-logged-in .messages--status:before, .user-logged-in .messages--status.listing-msg .messages__list li:first-child:before, .block-users-tweets-statistics-block .content > div a > div, .download-csv a:before, .path-frontpage .messages.messages--error:before, .path-frontpage .messages.messages--status:before, .import-tweet-page.user-logged-in .messages--status .messages__list .messages__item:first-child:before {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -1513,7 +1513,8 @@ margin-top: 120px;
     max-width: 25%;
     background: #ffffff;
     z-index: 999;
-    line-height: 20px; }
+    line-height: 20px;
+    text-align: center; }
     .user-logged-in .messages--status:before {
       content: "";
       font-size: 38px;
@@ -4446,8 +4447,13 @@ span.text {
   left: 39%;
   padding-left: 40px;
   max-width: 46%;
-  bottom: -200px; }
+  bottom: -200px;
+  text-align: center; }
+  .import-tweet-page.user-logged-in .messages--status .messages__list .messages__item:first-child:before {
+    font-size: 35px;
+    position: absolute;
+    top: 8px;
+    margin-left: -43px;
+    content: ""; }
   .import-tweet-page.user-logged-in .messages--status:before {
-    font-size: 28px;
-    margin-left: -31px;
-    top: 11px; }
+    content: none; }

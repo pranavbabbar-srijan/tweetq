@@ -1533,9 +1533,10 @@ margin-top: 120px;
 	border-radius: 35px;
 	padding-left: 50px;
 	max-width: 25%;
-    background: #ffffff;
-    z-index: 999;
-    line-height: 20px;
+  background: #ffffff;
+  z-index: 999;
+  line-height: 20px;
+	text-align: center;
 	&:before {
 		@extend %icomoon;
 		content: $icon-success;
@@ -4981,10 +4982,23 @@ span.text {
   		padding-left: 40px;
   		max-width: 46%;
   		bottom: -200px;
+			text-align: center;
+			.messages__list {
+				.messages__item {
+					&:first-child {
+							&:before {
+									font-size: 35px;
+									position: absolute;
+									top: 8px;
+									margin-left: -43px;
+									@extend %icomoon;
+									content: $icon-success;
+							}
+					}
+				}
+			}
   		&:before {
-  			font-size: 28px;
-  			margin-left: -31px;
-            top: 11px;
+  			content: none;
   		}
   	}
 }
