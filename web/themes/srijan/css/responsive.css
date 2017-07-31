@@ -1294,7 +1294,22 @@
     top: -8px;
     position: relative; }
     .hide_show.active {
-      color: #2aa9e0; } }
+      color: #2aa9e0; }
+  .block-users-tweets-statistics-block.block_totol_twitt_statistics_mobile {
+    overflow-x: auto;
+    margin-left: -5px;
+    margin-right: -5px;
+    width: auto;
+    box-shadow: none; }
+  .block-users-tweets-statistics-block .content > div {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    width: 120%; }
+    .block-users-tweets-statistics-block .content > div a {
+      width: 33%;
+      padding: 0.5em 0;
+      border-right: none; } }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
