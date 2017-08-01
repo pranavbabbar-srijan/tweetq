@@ -1108,24 +1108,22 @@
          //    $('.option + .form-submit').submit();
          //    });
          // });
+         $( ".faq-qa-header" ).each(function( index ) {
+				      var article_no = $(this).next().find('dt').length;
+							$(this).children('h3').append('(' + article_no + ' Articles)');
+				 });
+				 $('.view-faq .view-content').addClass('faq');
          var window_width_ = $(window).width();
          if(window_width_ > 767) {
 	        $( ".faq .faq-qa-header" ).each(function( index ) {
-			  $(this).unwrap();
-			});
+			       $(this).unwrap();
+			    });
+					$(".faq .faq-qa-header").first().children().addClass('active');
+					$(".faq .faq-qa-hide").first().show();
+	       }
 
-
-			$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
-
-	        setTimeout(function(){
-	        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed');
-	        }, 500);
-	    }
-	    if(window_width_ < 767) {
-	    	$(".faq .faq-category-group").first().children().children().addClass('faq-category-qa-visible');
-	    	setTimeout(function(){
-	        	$(".faq .faq-category-group").first().children('.faq-qa-hide').removeClass('collapsed');
-	        }, 500);
+	      if(window_width_ < 767) {
+	    	$(".faq .faq-category-group").first().children().children().addClass('active');
 				$("<span class='hide_show'>...<span>").insertAfter('.item-list + .item-list > ul > li .item-list ul');
 
 				// for my tweet block
@@ -1155,8 +1153,6 @@
            $(this).addClass('active');
            e.preventDefault();
         });
-
-        $('.faq-header').append('Articles');
         $('.user-login-form #forgot-password').appendTo('.user-login-form');
 
            // js for to prepend button

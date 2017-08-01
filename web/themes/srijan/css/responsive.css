@@ -964,7 +964,7 @@
     display: none; }
   /** faq-page **/
   div.faq-content {
-    margin-top: -50px; }
+    margin-top: 0; }
     div.faq-content:before {
       content: "Frequently asked questions ";
       margin: 0 20px;

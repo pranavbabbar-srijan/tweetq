@@ -3908,14 +3908,14 @@ body {
       font-weight: bold;
       opacity: .8; }
 
-.faq-answer {
+.faqfield-answer {
   padding-left: 65px;
   font-size: 16px;
   line-height: 1.5em;
   position: relative;
   margin-bottom: 20px;
   color: #666; }
-  .faq-answer:before {
+  .faqfield-answer:before {
     content: "Ans.";
     font-size: 18px;
     font-weight: 800;
@@ -3923,30 +3923,34 @@ body {
     position: absolute;
     left: 0;
     color: #303030; }
-  .faq-answer .field--type-entity-reference {
+  .faqfield-answer .field--type-entity-reference {
     display: none; }
-  .faq-answer > a {
+  .faqfield-answer > a {
     display: none; }
 
-.faq-question {
+.faqfield-question {
   padding-left: 65px;
-  position: relative; }
-  .faq-question:before {
+  position: relative;
+  font-size: 18px;
+  color: #303030;
+  font-weight: bold; }
+  .faqfield-question:before {
     content: "Ques.";
     font-size: 18px;
     font-weight: 800;
     padding-right: 15px;
     position: absolute;
     left: 0; }
-  .faq-question span {
-    font-size: 18px;
-    color: #303030;
-    font-weight: bold; }
+
+.faq-qa-hide {
+  display: none; }
 
 /** faq banner image **/
 .block-faq-banner-image {
   margin-top: 115px;
-  text-align: center; }
+  text-align: center;
+  position: absolute;
+  width: 100%; }
   .block-faq-banner-image .field--name-field-title {
     color: #ffffff; }
   .block-faq-banner-image .field--type-image {
@@ -3972,7 +3976,7 @@ body {
       z-index: 1; }
 
 .faq-content {
-  margin-top: -135px;
+  margin-top: -77px;
   z-index: 3;
   position: relative; }
 
