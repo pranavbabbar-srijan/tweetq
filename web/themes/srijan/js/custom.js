@@ -103,15 +103,15 @@
 	    			$("<span id='user-form-email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 						return;
 	    		}
-	    		if (valid) {
-	    			$("#user-form-email-validation-error").remove();
-	    			$.post(invite_friends_path, {'email' : emails}, function(data) {
-	    				if  (data == "exist") {
-							$("<span id='user-form-email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
-	    				}
-				    });
-
-	    		}
+	    		// if (valid) {
+	    		// 	$("#user-form-email-validation-error").remove();
+	    		// 	$.post(invite_friends_path, {'email' : emails}, function(data) {
+	    		// 		if  (data == "exist") {
+					// 		$("<span id='user-form-email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+	    		// 		}
+				  //   });
+					//
+	    		// }
 	    	}
 
 	    	$.post(invite_friends_path, {'email' : emails}, function(data) {
