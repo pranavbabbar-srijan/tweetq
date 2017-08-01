@@ -103,15 +103,15 @@
 	    			$("<span id='user-form-email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 						return;
 	    		}
-	    		if (valid) {
-	    			$("#user-form-email-validation-error").remove();
-	    			$.post(invite_friends_path, {'email' : emails}, function(data) {
-	    				if  (data == "exist") {
-							$("<span id='user-form-email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
-	    				}
-				    });
-
-	    		}
+	    		// if (valid) {
+	    		// 	$("#user-form-email-validation-error").remove();
+	    		// 	$.post(invite_friends_path, {'email' : emails}, function(data) {
+	    		// 		if  (data == "exist") {
+					// 		$("<span id='user-form-email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+	    		// 		}
+				  //   });
+					//
+	    		// }
 	    	}
 
 	    	$.post(invite_friends_path, {'email' : emails}, function(data) {
@@ -1143,7 +1143,7 @@
 					$(this).parent('.item-list').children('ul').find('li:nth-child(4),li:nth-child(5)').toggle();
 				});
 				if ($('.archived_tweets').hasClass('active')) {
-						$(this).parent().addClass('active');
+						$('div.block_totol_twitt_statistics_mobile').animate({scrollLeft: '1000px'},1000);
 				}
 	    }
         $('.faq-header').click(function(e){
