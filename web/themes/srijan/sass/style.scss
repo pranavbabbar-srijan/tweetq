@@ -5006,3 +5006,8 @@ span.text {
   		}
   	}
 }
+
+input::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+}
