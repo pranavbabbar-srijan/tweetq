@@ -1124,6 +1124,7 @@
 
 	      if(window_width_ < 767) {
 	    	$(".faq .faq-category-group").first().children().children().addClass('active');
+				$(".faq .faq-category-group").first().children('.faq-qa-hide').show();
 				$("<span class='hide_show'>...<span>").insertAfter('.item-list + .item-list > ul > li .item-list ul');
 
 				// for my tweet block
