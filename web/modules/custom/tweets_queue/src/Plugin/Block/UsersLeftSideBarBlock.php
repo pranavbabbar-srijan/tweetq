@@ -20,10 +20,10 @@ class UsersLeftSideBarBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
- 
+
   public function build() {
     global $base_url;
-    
+
     $current_path = \Drupal::service('path.current')->getPath();
     $twitter_profile_info = tweets_queue_fetch_twitter_statistics_info(TWITTER_HANDLER_PROFILE);
     $user_twitter_profile_info = unserialize($twitter_profile_info);
@@ -48,7 +48,7 @@ class UsersLeftSideBarBlock extends BlockBase {
     $class = tweets_queue_match_current_path($current_path, TWITTER_IMPORT_TWEET_PATH);
     $import_tweet_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_IMPORT_TWEET_PATH . "'>" .
       TWITTER_IMPORT_TWEET_LABEL ."</a>";
-    
+
     $import_csv_logs = "<a " . $class . " href='" . $base_url .'/' . TWITTER_IMPORT_CSV_LOG . "'>" .
       'logs' ."</a>";
 
@@ -71,7 +71,10 @@ class UsersLeftSideBarBlock extends BlockBase {
     $class = tweets_queue_match_current_path($current_path, TWITTER_TOTAL_TWEET_PATH);
     $total_twitt_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_TOTAL_TWEET_PATH . "'>" .
       TWITTER_TOTAL_TWEET_LABEL ."</a>";
-    
+
+    $class = tweets_queue_match_current_path($current_path, TWITTER_TOTAL_TWEET_PATH);
+    $my_twitt_link = "<a " . $class . " href='" . $base_url .'/' . TWITTER_TOTAL_TWEET_PATH . "'>" . "My Tweets</a>";
+
 
     $create_tweet_output = "<div class='create_tweets'>
       <span class='text'>" . $create_tweet_link . "</span></div>" ;
@@ -89,7 +92,7 @@ class UsersLeftSideBarBlock extends BlockBase {
     $import_tweets_suffix = '</div>';
 
 
-    $my_tweets_prefix = "<span class='mobile-display total_twitt_mobile'>" . $total_twitt_link . "</span><div id='my_tweets'> 
+    $my_tweets_prefix = "<span class='mobile-display total_twitt_mobile'>" . $my_twitt_link . "</span><div id='my_tweets'>
     <span class='text'>My Tweets</span>";
 
     $total_twitt_output = "<div class='total_tweets'>
@@ -120,7 +123,7 @@ class UsersLeftSideBarBlock extends BlockBase {
       '#markup' => $output,
     );
 
-  
+
   }
 
   /**
