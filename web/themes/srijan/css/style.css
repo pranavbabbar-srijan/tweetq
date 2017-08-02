@@ -3677,7 +3677,8 @@ margin-top: 120px;
 
 .thankyou-page .envelop {
   flex: 3;
-  margin-right: 15px; }
+  margin-right: 15px;
+  width: 33%; }
 
 .thankyou-page .content-wrap {
   flex: 7; }
