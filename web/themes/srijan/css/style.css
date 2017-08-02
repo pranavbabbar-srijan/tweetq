@@ -4462,6 +4462,7 @@ span.text {
   .import-tweet-page.user-logged-in .messages--status:before {
     content: none; }
 
-input::-webkit-contacts-auto-fill-button {
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
   visibility: hidden;
   display: none !important; }
