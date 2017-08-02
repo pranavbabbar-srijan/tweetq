@@ -756,7 +756,7 @@ function tweets_queue_log_undo_retweet_status($message_data, $status, $cron_id =
       'status' => 0,
       'message' => $message_data,
       'cron_id' => $cron_id,
-      'type' => 'undo retweet',
+      'type' => 'Retweet',
     );
     if ($status['success']) {
       tweets_queue_update_twitter_tweets_counter_statistics(TWITTER_TWEETS_COUNTER);
