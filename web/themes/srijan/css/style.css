@@ -4461,3 +4461,7 @@ span.text {
     content: ""; }
   .import-tweet-page.user-logged-in .messages--status:before {
     content: none; }
+
+input::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important; }
