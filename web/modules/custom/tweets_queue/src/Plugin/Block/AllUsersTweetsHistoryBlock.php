@@ -28,6 +28,7 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
     $nid = tweets_queue_get_parameter_data(TWITTER_FIELD_NID);
     $uid = tweets_queue_get_parameter_data(TWITTER_FIELD_UID);
     $cron_id = tweets_queue_get_parameter_data('cron_id');
+    $type = tweets_queue_get_parameter_data('type');
     $active = ($nid) ? TWITTER_FIELD_NID : ($uid ? TWITTER_FIELD_UID : ($cron_id ? 'cron_id' : ''));
 
     $user_roles = \Drupal::currentUser()->getRoles();
@@ -35,7 +36,7 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
       $uid = \Drupal::currentUser()->id();
     }
 
-    $query = \Drupal::database()->select(TWITTER_TWEETS_HISTORY_TABLE, 'p');
+    $query = \Drupal::database()->select(TWITTER_TWEETS_RECENT_ACTIVITY_TABLE, 'p');
     $query->fields('p', [TWITTER_FIELD_NID, TWITTER_FIELD_UID, TWITTER_FIELD_STATUS, TWITTER_FIELD_RETWEETED, TWITTER_FIELD_CODE]);
     if ($nid) {
       $query->condition('p.' . TWITTER_FIELD_NID, $nid);
@@ -43,7 +44,10 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
     if ($uid) {
       $query->condition('p.' . TWITTER_FIELD_UID, $uid);
     }
-    $query->addField('p', TWITTER_FIELD_MESSAGE, 'error');
+    if ($type) {
+      $query->condition('p.' . 'type', $type);
+    }
+    $query->addField('p', 'type', 'error');
     $query->addField('p', TWITTER_FIELD_CREATED, 'tweet_created_time');
 
     $query->leftjoin(TWITTER_AUTH_MAP_TABLE, 'a', 'p.uid=a.uid');
@@ -76,16 +80,17 @@ class AllUsersTweetsHistoryBlock extends BlockBase {
       $message = tweets_queue_decrypt_data($row->{TWITTER_FIELD_MESSAGE});
       $message = tweets_queue_perform_hashtag_highlight($message);
 
+      $status_url_link = $this->makeLink(TWITTER_HISTORY_ROUTE_NAME, 'type', $row->error, $row->error, $active);
       $message_url_link = $this->makeLink(TWITTER_HISTORY_ROUTE_NAME, TWITTER_FIELD_NID, $message, $row->{TWITTER_FIELD_NID}, $active);
       $user_url_link = $this->makeLink(TWITTER_HISTORY_ROUTE_NAME, TWITTER_FIELD_UID, $row->screen_name, $row->{TWITTER_FIELD_UID}, $active);
       $cron_url_link = $this->makeLink(TWITTER_HISTORY_ROUTE_NAME, 'cron_id', $row->id, $row->id, $active);
 
       $error = trim(t($row->error));
-      if (empty($error)) {
-        $error = ($row->{TWITTER_FIELD_RETWEETED}) ? t('Retweet') : t("Tweet");
-      }
+      // if (empty($error)) {
+      //   $error = ($row->{TWITTER_FIELD_RETWEETED}) ? t('Retweet') : t("Tweet");
+      // }
 
-      $rows[] = array($cron_url_link, $cron_time, $user_url_link, $message_url_link, $tweet_time, $error);
+      $rows[] = array($cron_url_link, $cron_time, $user_url_link, $message_url_link, $tweet_time, $status_url_link);
     }
 
     $tweet_url = Url::fromRoute(TWITTER_HISTORY_ROUTE_NAME,

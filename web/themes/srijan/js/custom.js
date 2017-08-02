@@ -88,6 +88,8 @@
 		//Account setting invite friends.
 		$("#user-form #invite-friends").click(function() {
 	   		var emails = $('#user-form #edit-invite-friend-list').val();
+				var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  			var valid = regex.test(emails);
   			$("#user-form-email-validation-error").remove();
   			$("#email-sent").remove();
   			if (emails.length == 0) {
@@ -95,12 +97,29 @@
 	    		return;
 	    	}
 
+				if (emails.length > 0) {
+	    		if (!valid) {
+	    			$("#user-form-email-validation-error").remove();
+	    			$("<span id='user-form-email-validation-error' class='validation-error'>" + email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+						return;
+	    		}
+	    		// if (valid) {
+	    		// 	$("#user-form-email-validation-error").remove();
+	    		// 	$.post(invite_friends_path, {'email' : emails}, function(data) {
+	    		// 		if  (data == "exist") {
+					// 		$("<span id='user-form-email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
+	    		// 		}
+				  //   });
+					//
+	    		// }
+	    	}
+
 	    	$.post(invite_friends_path, {'email' : emails}, function(data) {
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#user-form #edit-invite-friend-list" );
-					$('#email-sent').delay(5000).fadeOut(300);
-					location.reload();
-					return;
+					$('#email-sent').delay(2000).fadeOut(300);
+					   setTimeout(function(){ location.reload(); }, 3000);
+					   return;
 				}
 				$("<span id='user-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#user-form #edit-invite-friend-list" );
 		    });
@@ -113,14 +132,14 @@
 			var nid = [];
 		    $("input:checkbox[name=multiple-deletion]:checked").each(function() {
 		         nid.push($(this).val());
-		   });  
+		   });
 			$.post(multiple_selected_deletion, {'nid' : nid}, function(data) {
 				// $("<span id='delete-selected'>" + data + "</p>").insertAfter( "#delete-selected" );
 				 var nids = data.split(",");
-				 
-		    	 for (var i in nids) {  
-			    	$('#' + nids[i]).parent().parent().parent().hide();   
-				 } 
+
+		    	 for (var i in nids) {
+			    	$('#' + nids[i]).parent().parent().parent().hide();
+				 }
 			location.reload();
 		    });
 		});
@@ -130,7 +149,7 @@
       	      $('[name="multiple-deletion"]').prop("checked", true);
       	  } else {
      	       $('[name="multiple-deletion"]').prop("checked", false);
-      	  }                
+      	  }
      	 });
 
 		//Volunteer invite form.
@@ -146,8 +165,8 @@
 	    	$.post(friend_invite_send_token_path, {'email' : emails}, function(data) {
 				if  (data == "done") {
 					$("<span id='email-sent' class='mail-sent'>Friend invitation email sent successfully</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
-					$('#email-sent').delay(5000).fadeOut(300);	
-					location.reload();		
+					$('#email-sent').delay(5000).fadeOut(300);
+					location.reload();
 					return;
 				}
 				$("<span id='profile-account-settings-form-email-validation-error' class='validation-error'>" + data + "</p>").insertAfter( "#profile-account-settings-form #edit-invite-friend-list" );
@@ -197,13 +216,13 @@
 	  	// 		$("<span id='update-message'>Profile has been updated</span>").insertAfter( "#profilesettingform #update-message");
 	  	// 	}
 
-	  		
+
 	  	// });
 
 		$("#profilesettingform #change-password .change").click(function() {
 	   		var password = $('#profilesettingform #edit-changeuser-password').val();
 	    	//var regex = /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,12}$/;
-  			
+
   			$("#profile-settingform-password-validation-error").remove();
   			$("#password-changed").remove();
   			if (password.length == 0) {
@@ -211,11 +230,11 @@
 	    		return;
 	    	}
 
-  		
+
          	$.post(profile_change_password_path, {'password' : password}, function(data) {
 				if  (data == "done") {
 					$("<span id='password-changed' class='mail-sent'>Password Changed successfully</p>").insertAfter( "#profilesettingform #change-password .change" );
-					$('#password-changed').delay(5000).fadeOut(300);			
+					$('#password-changed').delay(5000).fadeOut(300);
 					location.reload();
 					return;
 				}
@@ -259,7 +278,7 @@
 		});
 
 		//Profile setting form End.
-	
+
 
 		//Twitter signup form
 		//Full name validtaion.
@@ -301,10 +320,10 @@
 	    			$("#email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data == "exist") {
-							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#twitter-signup-form #edit-email" );	    					
+							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#twitter-signup-form #edit-email" );
 	    				}
 				    });
-	    			
+
 	    		}
 	    	}
 	  	});
@@ -328,7 +347,7 @@
 			var passed = true;
 			var name = $('#twitter-signup-form #edit-field-full-name').val();
 	 		var alphabet = /^[a-zA-Z ]+$/.test(name);
-			
+
 			//Full Name check.
 			$("#fname-validation-error").remove();
 			if (name.length > 0) {
@@ -372,7 +391,7 @@
 
 	 		var name = $('#signup-form #edit-field-full-name').val();
 	 		var alphabet = /^[a-zA-Z ]+$/.test(name);
-			
+
 			//Full Name check.
 			$("#fname-validation-error").remove();
 			if (name.length > 0) {
@@ -471,10 +490,10 @@
 	    			$("#email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data == "exist") {
-							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#signup-form #edit-email" );	    					
+							$("<span id='email-validation-error' class='validation-error'>" + existing_email_msg + "</p>").insertAfter( "#signup-form #edit-email" );
 	    				}
 				    });
-	    			
+
 	    		}
 	    	}
 	  	});
@@ -582,7 +601,7 @@
 							return;
 	    				}
 				    });
-	    			
+
 	    		}
 	    	}
 	  	});
@@ -623,7 +642,7 @@
 	   		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   			var valid = regex.test(email);
   			var passed = true;
-  			
+
   			var password_failed = $("#user-login-form #user-login-validation-error").hasClass('validation-error');
 			if (password_failed) {
 				return false;
@@ -636,7 +655,7 @@
 	    		$("<span id='email-validation-error' class='validation-error'>" + login_email_missing_msg + "</p>").insertAfter( "#user-login-form #edit-name" );
 	    		passed =  false;
 	    	}
-	    	
+
 			if (email.length > 0) {
 	    		if (!valid) {
 	    			$("#email-validation-error").remove();
@@ -652,7 +671,7 @@
 							passed =  false;
 	    				}
 				    });
-	    			
+
 	    		}
 	    	}
 
@@ -685,7 +704,7 @@
 	    			$("#forgot-email-validation-error").remove();
 	    			$.post(email_validation_path, {'email' : email}, function(data) {
 	    				if  (data != "exist") {
-							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );	    					
+							$("<span id='forgot-email-validation-error' class='validation-error'>" + forgot_non_existing_email_msg + "</p>").insertAfter( "#user-login-form #edit-email" );
 	    				}
 				    });
 	    		}
@@ -926,7 +945,7 @@
    //          if ($('#message-history-count-section').hasClass('hidden')) {
 			//     $('#message-history-count-section').remove();
 			// }
-            
+
    //          $("#twitter-notification-count").remove();
    //          $("#message-history-count-section").addClass('hidden');
    		});
@@ -1001,7 +1020,7 @@
 	        if (password.length == 0) {
             $('#result').removeClass()
             $('#result').html('');
-              return;       
+              return;
             }
 
 			if (password.length < 6 && password.length > 0) {
@@ -1039,7 +1058,7 @@
 	// js for adding placeholder on newsletter field
 	$(".block-simplenews .form-email").attr("placeholder", "Enter Vaild Email ID");
 	$(".contact-message-write-to-us-form").prepend("<div class='heading-write-us'>Write to us</div>");
-	/*$(window).scroll(function() {    
+	/*$(window).scroll(function() {
     var scroll = $(window).scrollTop();
 
        if(scroll >= 200) {
@@ -1060,9 +1079,9 @@
 	    $('#my_tweets').addClass('active');
 	}
 
-	
 
-    // change text of summary 
+
+    // change text of summary
     $(".user-form summary").text("Settings");
 
     // add spinner when click on submit button
@@ -1089,19 +1108,45 @@
          //    $('.option + .form-submit').submit();
          //    });
          // });
+         $( ".faq-qa-header" ).each(function( index ) {
+				      var article_no = $(this).next().find('dt').length;
+							$(this).children('h3').append('(' + article_no + ' Articles)');
+				 });
+				 $('.view-faq .view-content').addClass('faq');
          var window_width_ = $(window).width();
-         if(window_width_ > 768) {
+         if(window_width_ > 767) {
 	        $( ".faq .faq-qa-header" ).each(function( index ) {
-			  $(this).unwrap();
-			});
+			       $(this).unwrap();
+			    });
+					$(".faq .faq-qa-header").first().children().addClass('active');
+					$(".faq .faq-qa-hide").first().show();
+	       }
+
+	      if(window_width_ < 767) {
+	    	$(".faq .faq-category-group").first().children().children().addClass('active');
+				$(".faq .faq-category-group").first().children('.faq-qa-hide').show();
+				$("<span class='hide_show'>...<span>").insertAfter('.item-list + .item-list > ul > li .item-list ul');
+
+				// for my tweet block
+				$("body.user-logged-in .block-users-all-tweets-block .item-list + .item-list ul li, body.user-logged-in .block-users-tweeted-tweets-block .item-list + .item-list ul li, body.user-logged-in .block-users-archived-tweets-block .item-list + .item-list ul li").each(function( index ) {
+					$(this).children('.item-list').find('li:nth-child(4),li:nth-child(5) ,li:nth-child(8),li:nth-child(6)').hide();
+				});
+				$("body.user-logged-in .block-users-valid-tweets-block .item-list + .item-list ul li, body.user-logged-in .block-users-in-valid-tweets-block .item-list + .item-list ul li").each(function( index ) {
+					$(this).children('.item-list').find('li:nth-child(4),li:nth-child(5)').hide();
+				});
+				// show on click
+				$(".block-users-all-tweets-block .hide_show, .block-users-tweeted-tweets-block .hide_show, .block-users-archived-tweets-block .hide_show").click(function() {
+          $(this).toggleClass('active');
+					$(this).parent('.item-list').children('ul').find('li:nth-child(4),li:nth-child(5) ,li:nth-child(8),li:nth-child(6)').toggle();
+				});
+				$(".block-users-valid-tweets-block .hide_show, .block-users-in-valid-tweets-block .hide_show").click(function() {
+					$(this).toggleClass('active');
+					$(this).parent('.item-list').children('ul').find('li:nth-child(4),li:nth-child(5)').toggle();
+				});
+				if ($('.archived_tweets').hasClass('active')) {
+						$('div.block_totol_twitt_statistics_mobile').animate({scrollLeft: '1000px'},1000);
+				}
 	    }
-		$(".faq .faq-qa-header").first().children().addClass('faq-category-qa-visible');
-        
-        setTimeout(function(){ 
-        	$(".faq").children('.faq-qa-hide').first().removeClass('collapsed'); 
-        }, 500);
-        
-       
         $('.faq-header').click(function(e){
         	$('.faq-qa-hide').hide();
         	$('.faq-header').removeClass('active');
@@ -1109,66 +1154,15 @@
            $(this).addClass('active');
            e.preventDefault();
         });
-    
-        $('.faq-header').append('Articles');
         $('.user-login-form #forgot-password').appendTo('.user-login-form');
 
-
-
-        // twitter text box 
-         function onTweetCompose(event) {
-		    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
-		        $placeholderBacker = $('.js-keeper-placeholder-back'),
-		        currentValue = $textarea.val()
-		    ;
-		    var currentValuelength = twttr.txt.getTweetLength(currentValue);
-
-		    // realLength is not 140, links counts for 23 characters always.
-		    var realLength = 140;
-		    var remainingLength = 140 - currentValuelength;
-		    $($textarea).addClass('linked');
-		    $($placeholderBacker).addClass('linked');
-
-		     // scroll two bar same time same class
-		    $('.linked').scroll(function(){
-			    $('.linked').scrollTop($(this).scrollTop());    
-			})
-
-		    if (0 > remainingLength) {
-		      // Split value if greater than 
-		      var allowedValuePart = currentValue.slice(0, realLength),
-		          refusedValuePart = currentValue.slice(realLength)
-		      ;
-
-		      // Fill the hidden div.
-		      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
-		      $('#edit-display-box').addClass('red-text');
-		    } else {
-		      $placeholderBacker.html('');
-		      $('#edit-display-box').removeClass('red-text');
-		    }
-		  }
-           
-		  
-		  $(document).ready(function () {
-		  	 clicksidenav();
-			 sidebarnav();
-		    $textarea = $('textarea');
-
-		    // Create a pseudo-element that will be hidden behind the placeholder.
-		    var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
-		    $placeholderBacker.insertAfter($textarea);
-
-		    onTweetCompose();
-		    $textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
-		  });
-           // js for to prepend button 
+           // js for to prepend button
 	        $('#delete-selected').prependTo('#block-srijan-content');
           // add class
 	        if($('.path-signup .messages').hasClass('messages--status')) {
 	          $('.section').addClass('active');
 	        }
-	       
+
 	        $("#tweets-queue-tweet-form #edit-message").on('keyup', function(e) {
 		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
 		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
@@ -1180,7 +1174,7 @@
 		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 		    	}
 	        });
-	       	           
+
 	        // close popup after open page
 	        $('.feedback_link').click(function(){
                $(this).parent().removeClass('active animate');
@@ -1198,7 +1192,7 @@
                }, 500);
 	        });
             // if checkbox is checked add class
-             
+
               $('#delete-selected input').attr('disabled', true);
 			  $('.custom-checkbox input[type="checkbox"]').click(function() {
 			    if ($('.custom-checkbox input[type="checkbox"]').is(':checked')) {
@@ -1227,23 +1221,17 @@
 	        	(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
 	        	:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 	        }
-
-	  //       var number_of_fields = $('.js-form-item-field-mobile-number').val();
-			// var length = number_of_divs.length;
-			// if(length = 0){
-			// 	$("#profile-settings-form #edit-submit").attr('disabled', 'true');
-			// }else {
-			//   $("#profile-settings-form #edit-submit").remove('disabled');
-			// }
-
-			 // js for mobile 
+			 // js for mobile
 			   var window_width = $(window).width();
 			   function sidebarnav() {
 			     if(window_width < 767) {
 			       $('#notification-display').appendTo('.block-users-left-side-bar-block > div > div');
-
-			     } 
+			     }
 			   }
+				 $(document).ready(function () {
+						clicksidenav();
+						sidebarnav();
+				 });
 			   $(window).click(function() {
 				  $('.c-hamburger').removeClass('is-active');
 				});
@@ -1258,31 +1246,32 @@
 				    $(this).toggleClass('active');
 
 				});
-				
+
 				$(".import_tweets div").click(function(e) {
-				   //do something
-				   e.stopPropagation();
+					   e.stopPropagation();
 				})
-				// added target on a 
+				// added target on a
 				$('.field--name-field-visit-srijan- a').attr('target', '_blank');
 				$("<span class='max_upload--msg'> You can upload only 4 images </span>").insertAfter('.send-tweets-form, .tweets-queue-tweet-form').hide();
-                
+
                 var url = $(location).attr('href'),
 			    parts = url.split("/"),
 			    last_part = parts[parts.length-1];
-				$(".import_tweets_logs .text a").each(function() {   
+				$(".import_tweets_logs .text a").each(function() {
 				    var partss = this.href.split("/");
 				    last_parts = partss[partss.length-1];
-
 				    if (last_parts == last_part) {
 				        $(this).parent().parent().parent().addClass("active");
 				        $(this).parent().addClass('active');
 				    }
 
 				});
-			
-               
-
+			     // remove class for ipad on touch
+		    if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+			        $('.button, .item-list li a').hover(function(e) {
+					        $(this).trigger('click');
+					    });
+				}
 
 })(jQuery);
 
@@ -1297,127 +1286,52 @@
 			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 		}
 		else {
-		    var tweet_text_elem =  $('.tweets-queue-tweet-form .form-textarea');
-		    $(".tweets-queue-tweet-form .form-textarea").on('keyup', function(e) {
-		       	if(tweet_text_elem.val().length <= 140) {
-		        	$("#send-tweets-form #edit-submit").removeAttr('disabled');
-					$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-		        }
-		    });
-		    var tweet_text_elem1 = $(".send-tweets-form .form-textarea");
-		    $(".send-tweets-form .form-textarea ").on('keyup', function(e) {
-
-			       	if(tweet_text_elem1.val().length <= 140) {
-			        	$("#send-tweets-form #edit-submit").removeAttr('disabled');
-						$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-			        }
-		    });
-		    var tweet_msg1 = $('#send-tweets-form #edit-message').val();
-			    	if (tweet_msg1.length < 140) {	
-			    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
-			    	}
-		    
-		}
-
-		if(number_of_divs > 5){
-	        $(".tweets-queue-tweet-form .form-textarea").on('keyup', function(e) {
-		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
-		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
-		    	if (tweet_msg_length < 140) {
-		    		$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
-		    	}
-		   
-	        });
-	        $(".send-tweets-form .form-textarea").on('keyup', function(e) {
-	        	var tweet_msg1 = $('#send-tweets-form #edit-message').val();
-		    	var tweet_msg_length1 = twttr.txt.getTweetLength(tweet_msg1);
-		    	$("#send-tweets-form #edit-display-box").val(140-tweet_msg_length1);
-		    	if (tweet_msg_length1 < 140) {
-		    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
-		    	}
-	        });
-
-		}
-		if(number_of_divs < 5){
-			$(".tweets-queue-tweet-form .form-textarea").on('keyup', function(e) {
-		    	var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
-		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
-		    	if (tweet_msg_length >= 140) {
-		    		$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
-
-		    	}
-		    	else {
-		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-
-		    	}
-		    	
-	        });
-	         $(".send-tweets-form .form-textarea ").on('keyup', function(e) {
-	         	var tweet_msg1 = $('#send-tweets-form #edit-message').val();
-		    	var tweet_msg_length1 = twttr.txt.getTweetLength(tweet_msg1);
-		    	$("#send-tweets-form #edit-display-box").val(140-tweet_msg_length1);
-		    	if (tweet_msg_length1 >= 140) {
-		    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
-
-		    	}
-		    	else {
-		    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
-		    	}
-	         });
-            // remove class for ipad on touch
-	         if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
-		        $('.button').hover(function(e) {
-				  $(this).trigger('click');
-				});	    
-			    $('a').hover(function(e) {
-				  $(this).trigger('click');
-				});	
+      $("#send-tweets-form #edit-submit").removeAttr('disabled');
+			var tweet_text_elem = $('#tweets-queue-tweet-form #edit-message');
+			if(tweet_text_elem.length){
+				(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
+				:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 			}
-
-                    
-
 		}
+	}
+  // twitter text box
+   function onTweetCompose(event) {
+    var $textarea = $('.send-tweets-form #edit-message , .tweets-queue-tweet-form #edit-message'),
+        $placeholderBacker = $('.js-keeper-placeholder-back'),
+        currentValue = $textarea.val()
+    ;
+    var currentValuelength = twttr.txt.getTweetLength(currentValue);
+
+    // realLength is not 140, links counts for 23 characters always.
+    var realLength = 140;
+    var remainingLength = 140 - currentValuelength;
+    $($textarea).addClass('linked');
+    $($placeholderBacker).addClass('linked');
+
+     // scroll two bar same time same class
+    $('.linked').scroll(function(){
+	    $('.linked').scrollTop($(this).scrollTop());
+	  })
+
+    if (0 > remainingLength) {
+      // Split value if greater than
+      var allowedValuePart = currentValue.slice(0, realLength),
+          refusedValuePart = currentValue.slice(realLength)
+      ;
+
+      // Fill the hidden div.
+      $placeholderBacker.html(allowedValuePart + '<em>' + refusedValuePart + '</em>');
+      $('#edit-display-box').addClass('red-text');
+    } else {
+      $placeholderBacker.html('');
+      $('#edit-display-box').removeClass('red-text');
+    }
 	}
 
 	function onFormCheckBoxChange() {
-				$(this).parent().parent().find('.form-type-checkbox').next('.form-submit').trigger('mousedown');
-				var tweet_msg = $('#tweets-queue-tweet-form #edit-message').val();
-		    	var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
-		    	$("#tweets-queue-tweet-form #edit-display-box").val(140-tweet_msg_length);
-		    	if (tweet_msg_length >= 140) {
-		    		$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
-		    	}
-		    	else {
-		    		$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-		    	}
-		    	var tweet_msg1 = $('#send-tweets-form #edit-message').val();
-		    	var tweet_msg_length1 = twttr.txt.getTweetLength(tweet_msg1);
-		    	$("#send-tweets-form #edit-display-box").val(140-tweet_msg_length1);
-		    	if (tweet_msg_length1 >= 140) {
-		    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
-		    	}
-		    	else {
-		    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
-		    	}
-		    	var number_of_divs = $('.form-managed-file').find('div').length;
-		        if(number_of_divs < 5) {
-                    var tweet_msg1 = $('#send-tweets-form #edit-message').val();
-
-			    	if (tweet_msg1.length < 140) {
-			    		
-			    		$("#send-tweets-form #edit-submit").removeAttr('disabled');
-			    	}
-			    	else {
-			    		$("#send-tweets-form #edit-submit").attr('disabled', 'true');
-			    	}
-		        }
-
+		$(this).parent().parent().find('.form-type-checkbox').next('.form-submit').trigger('mousedown');
 	}
-
-
-	 Drupal.behaviors.ajax_send_tweet = {
+    Drupal.behaviors.ajax_send_tweet = {
 	 	attach: function attach() {
 	 		$('.js-form-managed-file .form-checkbox').unbind('change', onFormCheckBoxChange)
 	 		.bind('change', onFormCheckBoxChange);
@@ -1431,11 +1345,18 @@
 	 		$("input[type='file']").change(function(){
 		       var $fileUpload = $("input[type='file']");
 		       if (parseInt($fileUpload.get(0).files.length) > 4){
-		       	$(".max_upload--msg").show(500).delay(8000).fadeOut(300);
+		       	$(".max_upload--msg").show(500).delay(3000).fadeOut(300);
 		       	 this.value = '';
 		       }
 
-		    });    
+		    });
+				$textarea = $('textarea');
+				// Create a pseudo-element that will be hidden behind the placeholder.
+				var $placeholderBacker = $('<div class="js-keeper-placeholder-back"></div>');
+				$placeholderBacker.insertAfter($textarea);
+
+				onTweetCompose();
+				$textarea.on('selectionchange copy paste cut mouseup input', onTweetCompose);
 	 	}
 	 };
 })(jQuery);
