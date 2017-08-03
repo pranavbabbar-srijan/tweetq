@@ -1268,9 +1268,13 @@
 				});
 			     // remove class for ipad on touch
 		    if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
-			        $('.button, .item-list li a').hover(function(e) {
+			        $('.button').hover(function(e) {
 					        $(this).trigger('click');
 					    });
+							$('.item-list li a').hover('touchstart touchend', function(e) {
+									$(this).removeClass('.beautytips .beautytips-module-processed .bt-active');
+									$(this).trigger('click');
+							});
 				}
 
 })(jQuery);
@@ -1347,8 +1351,7 @@
 		       if (parseInt($fileUpload.get(0).files.length) > 4){
 		       	$(".max_upload--msg").show(500).delay(3000).fadeOut(300);
 		       	 this.value = '';
-		       }
-
+		        }
 		    });
 				$textarea = $('textarea');
 				// Create a pseudo-element that will be hidden behind the placeholder.
