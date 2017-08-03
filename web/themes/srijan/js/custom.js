@@ -1286,12 +1286,14 @@
 							var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 							return regex.test(email);
 						}
+
 				    var name, email, message;
 				    name = $('#contact-message-write-to-us-form .field--name-field-name input').val();
 						email = $('#contact-message-write-to-us-form .field--name-field-email input').val();
 						message = $('#contact-message-write-to-us-form .field--name-field-message textarea').val();
+
 						if (name == "" && email == "" && message == "") {
-								$('#contact-message-write-to-us-form .validation-error').show().fadeOut(5000);
+								$('#contact-message-write-to-us-form .validation-error').show();
 								return false;
 						}
 				    if (name == ""  ) {
@@ -1309,17 +1311,48 @@
 								$('#contact-message-write-to-us-form .field--name-field-message .validation-error').show();
 								return false;
 						}
-
 				}
 				$('#contact-message-write-to-us-form #edit-submit').click(function(e){
 					  if(nameEmpty() === false) {
-							alert('false');
 							e.preventDefault();
 							return false;
 						}
 						else {
 							return true;
 						}
+				});
+
+				$('#contact-message-write-to-us-form .field--name-field-name input').on('selectionchange copy paste cut mouseup input', function() {
+				    var namel = $('#contact-message-write-to-us-form .form-text').val();
+						var getnamel = namel.length;
+				    if(getnamel > 0){
+							 $('#contact-message-write-to-us-form .field--name-field-name .validation-error').fadeOut(1000);
+						} else {
+							$('#contact-message-write-to-us-form .field--name-field-name .validation-error').fadeIn(1000);
+						}
+				});
+				$('#contact-message-write-to-us-form .field--name-field-email input').on('selectionchange copy paste cut mouseup input', function()  {
+					 var email1 = $('#contact-message-write-to-us-form .form-email').val();
+					 function isEmail(email) {
+						 var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+						 return regex.test(email);
+					 }
+						if(isEmail(email1)){
+              // alert(email1);
+							 $('#contact-message-write-to-us-form .field--name-field-email .validation-error').fadeOut(1000);
+						}
+						else {
+							$('#contact-message-write-to-us-form .field--name-field-email .validation-error').fadeIn(1000);
+						}
+				});
+				$('#contact-message-write-to-us-form .field--name-field-message textarea').on('selectionchange copy paste cut mouseup input', function() {
+					var messagel = $('#contact-message-write-to-us-form .form-textarea').val();
+					var getmsgl = messagel.length;
+					if(getmsgl > 0) {
+						 $('#contact-message-write-to-us-form .field--name-field-message .validation-error').fadeOut(1000);
+					} else {
+						$('#contact-message-write-to-us-form .field--name-field-message .validation-error').fadeIn(1000);
+					}
 				});
 })(jQuery);
 
