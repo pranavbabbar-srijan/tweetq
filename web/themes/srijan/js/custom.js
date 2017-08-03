@@ -1295,26 +1295,31 @@
 								return false;
 						}
 				    if (name == ""  ) {
-				        $('#contact-message-write-to-us-form .field--name-field-name .validation-error').show().fadeOut(5000);
+				        $('#contact-message-write-to-us-form .field--name-field-name .validation-error').show();
 				        return false;
 				    }
 						if (email == "" ) {
-								$('#contact-message-write-to-us-form .field--name-field-email .validation-error').show().fadeOut(5000);
+								$('#contact-message-write-to-us-form .field--name-field-email .validation-error').show();
 								return false;
 						}else if (!isEmail(email)){
-							$('#contact-message-write-to-us-form .field--name-field-email .validation-error').show().fadeOut(5000);
+							$('#contact-message-write-to-us-form .field--name-field-email .validation-error').show();
 							return false;
 						}
 						if (message == "" ) {
-								$('#contact-message-write-to-us-form .field--name-field-message .validation-error').show().fadeOut(5000);
+								$('#contact-message-write-to-us-form .field--name-field-message .validation-error').show();
 								return false;
 						}
-						$("input").keyup(function(){
-						    $("input").css("background-color", "pink");
-						});
+
 				}
-				$('#contact-message-write-to-us-form #edit-submit').click(function(){
-					  nameEmpty();
+				$('#contact-message-write-to-us-form #edit-submit').click(function(e){
+					  if(nameEmpty() === false) {
+							alert('false');
+							e.preventDefault();
+							return false;
+						}
+						else {
+							return true;
+						}
 				});
 })(jQuery);
 

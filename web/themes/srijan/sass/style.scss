@@ -3776,9 +3776,11 @@ margin-top: 120px;
 					position: relative;
 				}
 				.form-text,
-				.form-textarea {
+				.form-textarea,
+				.form-email {
 					&.error {
 						border: none;
+						border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 					}
 				}
 				.validation-error {

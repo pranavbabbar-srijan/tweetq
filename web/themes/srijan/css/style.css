@@ -3404,8 +3404,10 @@ margin-top: 120px;
   .contact-message-write-to-us-form .form-item {
     position: relative; }
   .contact-message-write-to-us-form .form-text.error,
-  .contact-message-write-to-us-form .form-textarea.error {
-    border: none; }
+  .contact-message-write-to-us-form .form-textarea.error,
+  .contact-message-write-to-us-form .form-email.error {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
   .contact-message-write-to-us-form .validation-error {
     position: absolute;
     bottom: -20px; }
