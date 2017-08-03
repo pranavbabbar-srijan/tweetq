@@ -1276,7 +1276,46 @@
 									$(this).trigger('click');
 							});
 				}
-
+				// validation for contactus page
+				$('#contact-message-write-to-us-form .field--name-field-name').children().append("<span class='validation-error'>Please enter name </span>");
+				$('#contact-message-write-to-us-form .field--name-field-email').children().append("<span class='validation-error'>Please enter valid email id </span>");
+				$('#contact-message-write-to-us-form .field--name-field-message').children().append("<span class='validation-error'>Please enter message </span>");
+				$('#contact-message-write-to-us-form  .validation-error').hide();
+				function nameEmpty() {
+					  function isEmail(email) {
+							var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+							return regex.test(email);
+						}
+				    var name, email, message;
+				    name = $('#contact-message-write-to-us-form .field--name-field-name input').val();
+						email = $('#contact-message-write-to-us-form .field--name-field-email input').val();
+						message = $('#contact-message-write-to-us-form .field--name-field-message textarea').val();
+						if (name == "" && email == "" && message == "") {
+								$('#contact-message-write-to-us-form .validation-error').show().fadeOut(5000);
+								return false;
+						}
+				    if (name == ""  ) {
+				        $('#contact-message-write-to-us-form .field--name-field-name .validation-error').show().fadeOut(5000);
+				        return false;
+				    }
+						if (email == "" ) {
+								$('#contact-message-write-to-us-form .field--name-field-email .validation-error').show().fadeOut(5000);
+								return false;
+						}else if (!isEmail(email)){
+							$('#contact-message-write-to-us-form .field--name-field-email .validation-error').show().fadeOut(5000);
+							return false;
+						}
+						if (message == "" ) {
+								$('#contact-message-write-to-us-form .field--name-field-message .validation-error').show().fadeOut(5000);
+								return false;
+						}
+						$("input").keyup(function(){
+						    $("input").css("background-color", "pink");
+						});
+				}
+				$('#contact-message-write-to-us-form #edit-submit').click(function(){
+					  nameEmpty();
+				});
 })(jQuery);
 
 

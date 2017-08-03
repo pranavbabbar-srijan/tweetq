@@ -3401,6 +3401,14 @@ margin-top: 120px;
       display: none; }
     .contact-message-write-to-us-form .form-submit:hover {
       background: #82bb3e; }
+  .contact-message-write-to-us-form .form-item {
+    position: relative; }
+  .contact-message-write-to-us-form .form-text.error,
+  .contact-message-write-to-us-form .form-textarea.error {
+    border: none; }
+  .contact-message-write-to-us-form .validation-error {
+    position: absolute;
+    bottom: -20px; }
 
 /** simple news letter block **/
 .block-simplenews {
