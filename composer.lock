@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b0fe07fde4449753df1d5a4c17bb828",
+    "content-hash": "93e08f59491e770b7aff077a001a8aa9",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1691,31 +1691,7 @@
             },
             "type": "drupal-core",
             "extra": {
-                "installer-paths": {
-                    "web/core": [
-                        "type:drupal-core"
-                    ],
-                    "web/modules/contrib/{$name}": [
-                        "type:drupal-module"
-                    ],
-                    "web/profiles/contrib/{$name}": [
-                        "type:drupal-profile"
-                    ],
-                    "web/themes/contrib/{$name}": [
-                        "type:drupal-theme"
-                    ],
-                    "drush/contrib/{$name}": [
-                        "type:drupal-drush"
-                    ],
-                    "themes/custom/srijan": [
-                        "type:drupal-custom-theme"
-                    ]
-                },
-                "patches": {
-                    "drupal/core": {
-                        "Redirect to install.php on empty DB": "https://www.drupal.org/files/issues/728702-163.patch"
-                    }
-                }
+                "patches_applied": []
             },
             "autoload": {
                 "psr-4": {
