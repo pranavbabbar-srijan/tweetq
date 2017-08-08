@@ -1356,7 +1356,8 @@
 				});
         // lazy loader
         $('img').addClass('lazyimage');
-				$('img').load( function(){ console.log('loaded'); $(this).removeClass('lazyimage');}).attr('src', imgUrl);
+				//var imgUrl = $("img").src();
+				$('img').load( function(){ console.log('loaded'); $(this).removeClass('lazyimage');}).attr(src);
 })(jQuery);
 
 
