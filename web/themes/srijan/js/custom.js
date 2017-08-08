@@ -1354,10 +1354,9 @@
 						$('#contact-message-write-to-us-form .field--name-field-message .validation-error').fadeIn(1000);
 					}
 				});
-        // lazy loader
-        $('img').addClass('lazyimage');
+   			$("<div class='lazyimage'></div>").insertAfter('img').show();
 				$('img').each(function(){
-						$(this).load( function(){ $(this).removeClass('lazyimage');}).attr('src');
+						$(this).load( function(){ $(this).next('.lazyimage').hide();}).attr('src');
 				});
 
 })(jQuery);
