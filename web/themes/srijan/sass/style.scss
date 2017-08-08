@@ -5028,3 +5028,17 @@ input::-webkit-credentials-auto-fill-button {
   visibility: hidden;
   display: none !important;
 }
+
+.lazyimage {
+	position: relative;
+}
+.lazyimage:before {
+	content: "Please wait ....";
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: red;
+  text-align: center;
+}
