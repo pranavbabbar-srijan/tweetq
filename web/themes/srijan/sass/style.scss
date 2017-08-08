@@ -5033,12 +5033,11 @@ input::-webkit-credentials-auto-fill-button {
 	position: relative;
 }
 .lazyimage:before {
-	content: "Please wait ....";
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-	background: red;
-  text-align: center;
+	content: "\f110";
+	display: inline-block;
+font-family: FontAwesome;
+	-webkit-animation: spin 2s linear infinite;
+animation: spin 2s linear infinite;
+font-size: 30px;
+color: #96c85a;
 }
