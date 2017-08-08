@@ -1356,8 +1356,10 @@
 				});
         // lazy loader
         $('img').addClass('lazyimage');
-				//var imgUrl = $("img").src();
-				$('img').load( function(){ console.log('loaded'); $(this).removeClass('lazyimage');}).attr(src);
+				$('img').each(function(){
+						$(this).load( function(){ $(this).removeClass('lazyimage');}).attr('src');
+				});
+
 })(jQuery);
 
 
