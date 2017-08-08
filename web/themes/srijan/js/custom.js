@@ -1354,6 +1354,9 @@
 						$('#contact-message-write-to-us-form .field--name-field-message .validation-error').fadeIn(1000);
 					}
 				});
+        // lazy loader
+        $('img').addClass('lazyimage');
+				$('img').load( function(){ console.log('loaded'); $(this).removeClass('lazyimage');}).attr('src', imgUrl);
 })(jQuery);
 
 
