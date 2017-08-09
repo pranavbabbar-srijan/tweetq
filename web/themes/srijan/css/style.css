@@ -4478,14 +4478,137 @@ input::-webkit-credentials-auto-fill-button {
   visibility: hidden;
   display: none !important; }
 
-.lazyimage {
-  position: relative; }
+/** plans **/
+.view-plans {
+  padding: 40px; }
+  .view-plans .views-field-title {
+    font-size: 36px;
+    text-transform: uppercase; }
+  .view-plans .views-field-body {
+    color: #303030;
+    opacity: 0.8;
+    font-size: 14px;
+    padding: 15px 0; }
+  .view-plans .views-field-field-join-now a {
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    border: 2px solid #2aa9e0;
+    display: inline-block;
+    color: #2aa9e0; }
 
-.lazyimage:before {
-  content: "\f110";
-  display: inline-block;
-  font-family: FontAwesome;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-  font-size: 30px;
-  color: #96c85a; }
+div#block-views-block-plans-block-3 {
+  float: left;
+  width: 33%;
+  text-align: center; }
+
+div#block-views-block-plans-block-2 {
+  float: left;
+  width: 67%;
+  text-align: center; }
+  div#block-views-block-plans-block-2 .views-field-title {
+    font-size: 24px;
+    position: relative; }
+    div#block-views-block-plans-block-2 .views-field-title:after {
+      content: "";
+      width: 20px;
+      height: 3px;
+      background: #303030;
+      position: absolute;
+      bottom: -3px;
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+      border-radius: 82px; }
+  div#block-views-block-plans-block-2 .view-plans {
+    padding: 0; }
+  div#block-views-block-plans-block-2 .views-row {
+    padding: 40px;
+    text-align: center;
+    float: left;
+    width: 50%;
+    border-left: 1px solid #f8f8f8;
+    min-height: 270px; }
+    div#block-views-block-plans-block-2 .views-row .views-field-field-price {
+      font-size: 42px;
+      font-weight: bold; }
+      div#block-views-block-plans-block-2 .views-row .views-field-field-price .field-content {
+        display: inline-block; }
+        div#block-views-block-plans-block-2 .views-row .views-field-field-price .field-content:before {
+          content: "\f156";
+          font: normal normal normal 35px/1 FontAwesome;
+          margin-right: 10px; }
+    div#block-views-block-plans-block-2 .views-row:first-child .views-field.views-field-field-price {
+      color: #2aa9e0; }
+    div#block-views-block-plans-block-2 .views-row:last-child .views-field.views-field-field-price {
+      color: #96c85a; }
+
+#block-views-block-plans-block-1 {
+  float: left;
+  width: 100%; }
+  #block-views-block-plans-block-1 .view-plans {
+    padding: 0; }
+  #block-views-block-plans-block-1 .views-row .views-field span, #block-views-block-plans-block-1 .views-row .views-field div {
+    padding: 10px 0;
+    border-bottom: 1px solid #f8f8f8;
+    border-right: 1px solid #f8f8f8;
+    color: #303030;
+    opacity: 0.7; }
+  #block-views-block-plans-block-1 .views-row:first-child {
+    width: 67%;
+    float: left; }
+    #block-views-block-plans-block-1 .views-row:first-child .views-field {
+      display: flex; }
+      #block-views-block-plans-block-1 .views-row:first-child .views-field span {
+        width: 50%;
+        text-align: center;
+        background-color: #fbfbfb; }
+      #block-views-block-plans-block-1 .views-row:first-child .views-field div {
+        width: 50%;
+        text-align: center; }
+    #block-views-block-plans-block-1 .views-row:first-child .form-actions {
+      float: right;
+      width: 50%;
+      border-left: 1px solid #f8f8f8;
+      text-align: center; }
+  #block-views-block-plans-block-1 .views-row:last-child {
+    width: 33%;
+    text-align: center;
+    float: left; }
+    #block-views-block-plans-block-1 .views-row:last-child .views-field span {
+      display: none; }
+    #block-views-block-plans-block-1 .views-row:last-child .form-submit {
+      background: #96c85a; }
+
+.product-header {
+  width: 100%;
+  float: left;
+  background: #f6f6f6;
+  padding: 7px;
+  color: #303030;
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 0.8; }
+  .product-header span {
+    text-align: center;
+    display: inline-block; }
+    .product-header span:first-child {
+      width: 33%;
+      text-align: center; }
+    .product-header span:last-child {
+      width: 67%; }
+
+.product-button {
+  float: left;
+  width: 100%;
+  border-right: 1px solid #f8f8f8;
+  border-bottom: 1px solid #f8f8f8; }
+  .product-button .form-actions {
+    margin: 0;
+    padding: 40px 0; }
+  .product-button .form-submit {
+    border: none;
+    padding: 10px 22px;
+    border-radius: 5px;
+    color: #ffffff;
+    background: #2aa9e0; }

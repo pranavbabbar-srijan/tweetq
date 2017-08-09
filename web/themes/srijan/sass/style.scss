@@ -5029,15 +5029,179 @@ input::-webkit-credentials-auto-fill-button {
   display: none !important;
 }
 
-.lazyimage {
-	position: relative;
+/** plans **/
+.view-plans {
+	padding: 40px;
+	.views-field-title {
+		font-size: 36px;
+    text-transform: uppercase;
+	}
+	.views-field-body {
+    color: #303030;
+    opacity: 0.8;
+		font-size: 14px;
+    padding: 15px 0;
+  }
+	.views-field-field-join-now {
+		a {
+			text-decoration: none;
+	    padding: 10px 25px;
+	    border-radius: 5px;
+	    border: 2px solid $twitter;
+	    display: inline-block;
+			color: $twitter;
+		}
+	}
 }
-.lazyimage:before {
-	content: "\f110";
-	display: inline-block;
-font-family: FontAwesome;
-	-webkit-animation: spin 2s linear infinite;
-animation: spin 2s linear infinite;
-font-size: 30px;
-color: #96c85a;
+div#block-views-block-plans-block-3 {
+	float: left;
+  width: 33%;
+  text-align: center;
+}
+div#block-views-block-plans-block-2 {
+	float: left;
+	width: 67%;
+	text-align: center;
+	.views-field-title {
+		font-size: 24px;
+		position: relative;
+		&:after {
+			content: "";
+	    width: 20px;
+	    height: 3px;
+	    background: #303030;
+	    position: absolute;
+	    bottom: -3px;
+	    right: 0;
+	    left: 0;
+	    margin: 0 auto;
+	    border-radius: 82px;
+		}
+	}
+	.view-plans {
+		padding: 0;
+	}
+	.views-row {
+		padding: 40px;
+		text-align: center;
+		float: left;
+		width: 50%;
+		border-left: 1px solid #f8f8f8;
+		min-height: 270px;
+		.views-field-field-price {
+			 font-size: 42px;
+			 font-weight: bold;
+			.field-content {
+				display:  inline-block;
+				&:before {
+			    content: "\f156";
+			    font: normal normal normal 35px/1 FontAwesome;
+					margin-right: 10px;
+				}
+			}
+		}
+		&:first-child {
+			.views-field.views-field-field-price {
+						color: $twitter;
+			}
+		}
+		&:last-child {
+			.views-field.views-field-field-price {
+						color: $login-btn;
+			}
+		}
+	}
+}
+#block-views-block-plans-block-1 {
+	float: left;
+	width: 100%;
+	.view-plans {
+		padding: 0;
+	}
+	.views-row {
+		.views-field {
+			span, div {
+				padding: 10px 0;
+		    border-bottom: 1px solid #f8f8f8;
+		    border-right: 1px solid #f8f8f8;
+				color: #303030;
+				opacity: 0.7;
+			}
+
+		}
+		  &:first-child {
+	       width: 67%;
+	       float: left;
+				 .views-field {
+					 display: flex;
+					 span {
+						 width: 50%;
+						 text-align: center;
+						 background-color: #fbfbfb;
+					 }
+					 div {
+						 width: 50%;
+						 text-align: center;
+					 }
+				 }
+				 .form-actions {
+					 float: right;
+					 width: 50%;
+					 border-left: 1px solid #f8f8f8;
+					 text-align: center;
+				 }
+	    }
+			&:last-child {
+				width: 33%;
+				text-align: center;
+				float: left;
+				.views-field {
+					span {
+						display: none;
+					}
+				}
+				.form-submit {
+					background: $login-btn;
+				}
+			}
+   }
+}
+.product-header {
+	width: 100%;
+	float: left;
+	background: #f6f6f6;
+	padding: 7px;
+	color: #303030;
+	font-weight: bold;
+	font-size: 14px;
+	opacity: 0.8;
+		span {
+			text-align: center;
+			display: inline-block;
+			&:first-child {
+				width: 33%;
+				text-align: center;
+			}
+			&:last-child {
+				width: 67%;
+			}
+		}
+}
+.product-button {
+	float: left;
+	width: 100%;
+	border-right: 1px solid #f8f8f8;
+	border-bottom: 1px solid #f8f8f8;
+	.form-actions {
+		margin: 0;
+		padding: 40px 0;
+
+	}
+	.form-submit {
+		border: none;
+		padding: 10px 22px;
+		border-radius: 5px;
+		color: $white;
+		background: $twitter;
+	}
 }
