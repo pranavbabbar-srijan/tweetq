@@ -1723,6 +1723,129 @@
 			border-right: none;
 		}
    }
+	 // plans
+	 .user-logged-in {
+		 div#block-views-block-plans-block-3 {
+			 display: none;
+		 }
+	 }
+	 .view-plans {
+		 .views-field-field-join-now {
+		    a {
+					 color: #ffffff;
+					 border-color: #ffffff;
+				}
+			}
+	 }
+	 .page-node-plans {
+		 .block-page-title-block  {
+			 top: 115px;
+			 padding: 0 20px;
+		    h1 {
+					font-size: 26px;
+
+				}
+			}
+	 }
+	 #block-views-block-plans-block-1  {
+		 .views-row {
+			 display: none;
+			 &.active {
+				 display: block;
+			 }
+		 }
+
+	 }
+	 .product-button {
+		 border: none;
+		 .form-actions {
+			 padding: 40px 20px;
+			 .form-submit {
+				 width: 100%;
+			 }
+		 }
+	 }
+	 div#block-views-block-plans-block-3 {
+		 width: 100%;
+		 position: relative;
+		 z-index: 1;
+		 margin-top: -200px;
+		  .views-field-title {
+				color: #ffffff;
+				font-size: 20px;
+			}
+			.views-field-body {
+				padding:  0;
+        color: #ffffff;
+			}
+	 }
+	 div#block-views-block-plans-block-2 {
+		 width: 100%;
+		 .views-field-title {
+			 width: 50%;
+			 float: left;
+			 padding: 10px 15px;
+       font-size: 20px;
+			 background: #fbfbfb;
+			 &:after {
+				 content: none;
+			 }
+			 &.active {
+				 background: #ffffff;
+			 }
+		 }
+		 .views-row {
+			 width: 100%;
+			 padding: 15px;
+       min-height: auto;
+			 display: none;
+			 &.active {
+				 display: block;
+			 }
+		 }
+	 }
+	 #block-views-block-plans-block-1 {
+	    .views-row {
+				.views-field {
+					width: 100%;
+          float: left;
+				}
+			   &:first-child {
+            width: 100%;
+						.form-actions {
+							width: 100%;
+						}
+						.views-field span {
+							text-align: left;
+							padding:  10px 20px;
+						}
+				 }
+				 &:last-child {
+					 width: 100%;
+					 .views-field {
+						 span {
+							 text-align: left;
+							 padding: 10px 20px;
+						 }
+						 span,div {
+							 display: inline-block;
+							 width: 49.5%;
+							 float: left;
+						 }
+					 }
+				 }
+			}
+		}
+	 .product-header {
+	    span {
+			 &:first-child {
+         width: 50%;
+			}
+			&:last-child {
+				width: 50%;
+			}
+		}
+	}
 }
 
 /* css for tablet **/
@@ -2081,6 +2204,19 @@
 	     	}
 	     }
 	 }
+	 .view-plans {
+	    .views-field-title {
+				 font-size: 28px;
+			}
+		}
+		div#block-views-block-plans-block-2 {
+		   .views-row .views-field-field-price {
+				  font-size: 24px;
+					 .field-content:before {
+						 font-size: 22px;
+					 }
+			 }
+		 }
 
 }
 

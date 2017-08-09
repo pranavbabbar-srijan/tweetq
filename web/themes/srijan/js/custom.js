@@ -1146,6 +1146,31 @@
 				if ($('.archived_tweets').hasClass('active')) {
 						$('div.block_totol_twitt_statistics_mobile').animate({scrollLeft: '1000px'},1000);
 				}
+
+			   $( "#block-views-block-plans-block-2 .views-field-title" ).each(function( index ) {
+					  $(this).appendTo('<div></div>').insertBefore('#block-views-block-plans-block-2 .view-content');
+				});
+				$('#block-views-block-plans-block-2 .views-field-title').first().addClass('active');
+				$('#block-views-block-plans-block-2 .views-row').first().addClass('active');
+				$('#block-views-block-plans-block-1 .views-row').first().addClass('active');
+				$('#block-views-block-plans-block-2 .views-field-title').first().click(function(){
+					    $('#block-views-block-plans-block-2 .views-field-title').first().addClass('active');
+							$('#block-views-block-plans-block-2 .views-row').first().addClass('active');
+							$('#block-views-block-plans-block-2 .views-field-title').last().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-row').last().removeClass('active');
+							$('#block-views-block-plans-block-1 .views-row').last().removeClass('active');
+							$('#block-views-block-plans-block-1 .views-row').first().addClass('active');
+
+				});
+				$('#block-views-block-plans-block-2 .views-field-title').last().click(function(){
+							$('#block-views-block-plans-block-2 .views-field-title').first().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-row').first().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-field-title').last().addClass('active');
+							$('#block-views-block-plans-block-2 .views-row').last().addClass('active');
+							$('#block-views-block-plans-block-1 .views-row').last().addClass('active');
+							$('#block-views-block-plans-block-1 .views-row').first().removeClass('active');
+				});
+
 	    }
         $('.faq-header').click(function(e){
         	$('.faq-qa-hide').hide();
