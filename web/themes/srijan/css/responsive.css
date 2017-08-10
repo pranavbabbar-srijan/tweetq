@@ -1344,8 +1344,12 @@
       width: 33.3%;
       float: left;
       padding: 10px 15px;
-      font-size: 16px;
-      background: #faf9f9; }
+      font-size: 14px;
+      background: #7d7d7d;
+      color: #ffffff;
+      border-right: 1px solid #fff; }
+      div#block-views-block-plans-block-2 .views-field-title:nth-child(3) {
+        border-right: none; }
       div#block-views-block-plans-block-2 .views-field-title:after {
         content: none; }
       div#block-views-block-plans-block-2 .views-field-title.active {
