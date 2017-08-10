@@ -1409,19 +1409,55 @@
 
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
-		if(number_of_divs > 5) {
+    var valueoftextarea = $('.form-textarea').val();
+		if(number_of_divs > 5 && valueoftextarea.length > 140) {
 			$(".max_upload--msg").show().delay(3000).fadeOut(300);
+			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+		} else if (number_of_divs > 5 && valueoftextarea.length <= 140) {
+			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+		} else if (number_of_divs <= 5 && valueoftextarea.length > 140) {
+			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+		} else if (number_of_divs == 4 && valueoftextarea.length > 140) {
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 		}
 		else {
       $("#send-tweets-form #edit-submit").removeAttr('disabled');
-			var tweet_text_elem = $('#tweets-queue-tweet-form #edit-message');
-			if(tweet_text_elem.length){
-				(tweet_text_elem.val().length > 140)? $(".tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true')
-				:$(".tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
-			}
+			$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
 		}
+
+		//Twitter tweet message character count as per twitter.
+			$("#edit-message").on('keyup', function(e) {
+				var tweet_msg = $('#edit-message').val();
+				var tweet_msg_length = twttr.txt.getTweetLength(tweet_msg);
+			  var limit_chars = 140;
+				if (tweet_msg_length > limit_chars) {
+					$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+					$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+				}
+				else {
+					 if(number_of_divs > 5 && tweet_msg_length >= limit_chars) {
+						 $("#send-tweets-form #edit-submit").attr('disabled', 'true');
+						 $("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+					 } else if(number_of_divs < 5 && tweet_msg_length > limit_chars) {
+						 $("#send-tweets-form #edit-submit").attr('disabled', 'true');
+						 $("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+					 } else if (number_of_divs > 5 && tweet_msg_length < limit_chars) {
+					 	 $("#send-tweets-form #edit-submit").attr('disabled', 'true');
+						 $("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+					 } else if (number_of_divs == 4 && tweet_msg_length > limit_chars) {
+				 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
+				 			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
+				 	 } else {
+						 $("#send-tweets-form #edit-submit").removeAttr('disabled');
+						 $("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+					 }
+				}
+			});
+
 	}
   // twitter text box
    function onTweetCompose(event) {
