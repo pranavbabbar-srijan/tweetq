@@ -1771,12 +1771,13 @@
 			 float: left;
 			 padding: 10px 15px;
        font-size: 16px;
-			 background: #fbfbfb;
+			 background: #faf9f9;
 			 &:after {
 				 content: none;
 			 }
 			 &.active {
 				 background: #ffffff;
+				 color: #2aa9e0;
 			 }
 		 }
 		 .views-row {

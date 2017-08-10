@@ -1345,11 +1345,12 @@
       float: left;
       padding: 10px 15px;
       font-size: 16px;
-      background: #fbfbfb; }
+      background: #faf9f9; }
       div#block-views-block-plans-block-2 .views-field-title:after {
         content: none; }
       div#block-views-block-plans-block-2 .views-field-title.active {
-        background: #ffffff; }
+        background: #ffffff;
+        color: #2aa9e0; }
     div#block-views-block-plans-block-2 .views-row {
       width: 100%;
       padding: 15px;
