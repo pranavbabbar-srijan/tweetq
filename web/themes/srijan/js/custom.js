@@ -1160,6 +1160,21 @@
 							$('#block-views-block-plans-block-2 .views-row').last().removeClass('active');
 							$('#block-views-block-plans-block-1 .views-row').last().removeClass('active');
 							$('#block-views-block-plans-block-1 .views-row').first().addClass('active');
+							$('#block-views-block-plans-block-1 .views-row').first().next().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-row').first().next().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-field-title').first().next().removeClass('active');
+
+				});
+				$('#block-views-block-plans-block-2 .views-field-title').first().next().click(function(){
+							$('#block-views-block-plans-block-2 .views-field-title').first().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-field-title').first().next().addClass('active');
+							$('#block-views-block-plans-block-2 .views-row').first().removeClass('active');
+							$('#block-views-block-plans-block-1 .views-row').first().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-field-title').last().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-row').last().removeClass('active');
+							$('#block-views-block-plans-block-1 .views-row').last().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-row').first().next().addClass('active');
+							$('#block-views-block-plans-block-1 .views-row').first().next().addClass('active');
 
 				});
 				$('#block-views-block-plans-block-2 .views-field-title').last().click(function(){
@@ -1169,6 +1184,9 @@
 							$('#block-views-block-plans-block-2 .views-row').last().addClass('active');
 							$('#block-views-block-plans-block-1 .views-row').last().addClass('active');
 							$('#block-views-block-plans-block-1 .views-row').first().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-row').first().next().removeClass('active');
+							$('#block-views-block-plans-block-1 .views-row').first().next().removeClass('active');
+							$('#block-views-block-plans-block-2 .views-field-title').first().next().removeClass('active');
 				});
 
 	    }

@@ -1313,8 +1313,6 @@
       width: 33%;
       padding: 0.5em 0;
       border-right: none; }
-  .user-logged-in div#block-views-block-plans-block-3 {
-    display: none; }
   .view-plans .views-field-field-join-now a {
     color: #ffffff;
     border-color: #ffffff; }
@@ -1323,34 +1321,30 @@
     padding: 0 20px; }
     .page-node-plans .block-page-title-block h1 {
       font-size: 26px; }
-  #block-views-block-plans-block-1 .views-row {
-    display: none; }
-    #block-views-block-plans-block-1 .views-row.active {
-      display: block; }
   .product-button {
     border: none; }
     .product-button .form-actions {
       padding: 40px 20px; }
       .product-button .form-actions .form-submit {
         width: 100%; }
-  div#block-views-block-plans-block-3 {
+  .choose-plan-block {
     width: 100%;
     position: relative;
     z-index: 1;
-    margin-top: -200px; }
-    div#block-views-block-plans-block-3 .views-field-title {
+    margin-top: -150px; }
+    .choose-plan-block h2 {
       color: #ffffff;
       font-size: 20px; }
-    div#block-views-block-plans-block-3 .views-field-body {
+    .choose-plan-block p {
       padding: 0;
       color: #ffffff; }
   div#block-views-block-plans-block-2 {
     width: 100%; }
     div#block-views-block-plans-block-2 .views-field-title {
-      width: 50%;
+      width: 33.3%;
       float: left;
       padding: 10px 15px;
-      font-size: 20px;
+      font-size: 16px;
       background: #fbfbfb; }
       div#block-views-block-plans-block-2 .views-field-title:after {
         content: none; }
@@ -1363,24 +1357,28 @@
       display: none; }
       div#block-views-block-plans-block-2 .views-row.active {
         display: block; }
-  #block-views-block-plans-block-1 .views-row .views-field {
-    width: 100%;
-    float: left; }
-  #block-views-block-plans-block-1 .views-row:first-child {
+  #block-views-block-plans-block-1 .views-row {
+    display: none;
     width: 100%; }
-    #block-views-block-plans-block-1 .views-row:first-child .form-actions {
+    #block-views-block-plans-block-1 .views-row.active {
+      display: block; }
+    #block-views-block-plans-block-1 .views-row .views-field {
+      width: 100%;
+      display: flex; }
+    #block-views-block-plans-block-1 .views-row:first-child {
       width: 100%; }
-    #block-views-block-plans-block-1 .views-row:first-child .views-field span {
+      #block-views-block-plans-block-1 .views-row:first-child .form-actions {
+        width: 100%; }
+      #block-views-block-plans-block-1 .views-row:first-child .views-field span {
+        text-align: left;
+        padding: 10px 20px;
+        width: 50%; }
+    #block-views-block-plans-block-1 .views-row .views-field span {
       text-align: left;
       padding: 10px 20px; }
-  #block-views-block-plans-block-1 .views-row:last-child {
-    width: 100%; }
-    #block-views-block-plans-block-1 .views-row:last-child .views-field span {
-      text-align: left;
-      padding: 10px 20px; }
-    #block-views-block-plans-block-1 .views-row:last-child .views-field span, #block-views-block-plans-block-1 .views-row:last-child .views-field div {
+    #block-views-block-plans-block-1 .views-row .views-field span, #block-views-block-plans-block-1 .views-row .views-field div {
       display: inline-block;
-      width: 49.5%;
+      width: 50% !important;
       float: left; }
   .product-header span:first-child {
     width: 50%; }
@@ -1611,11 +1609,18 @@
   .block-import-csv-log-block #import-csv-log-header div {
     font-size: 11px; }
   .view-plans .views-field-title {
-    font-size: 28px; }
+    font-size: 18px !important; }
   div#block-views-block-plans-block-2 .views-row .views-field-field-price {
-    font-size: 24px; }
-    div#block-views-block-plans-block-2 .views-row .views-field-field-price .field-content:before {
-      font-size: 22px; } }
+    font-size: 18px; }
+  div#block-views-block-plans-block-2 .views-field-title:after {
+    content: none; }
+  .product-button .form-submit {
+    padding: 10px 15px;
+    font-size: 14px; }
+  div.choose-plan-block h2 {
+    font-size: 18px; }
+  div.choose-plan-block p {
+    font-size: 12px; } }
 
 @media only screen and (min-width: 1200px) {
   div.view-home-page-carousel .flexslider .slides .views-field.views-field-body {

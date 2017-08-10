@@ -5045,28 +5045,17 @@ input::-webkit-credentials-auto-fill-button {
     color: #303030;
     opacity: 0.8;
 		font-size: 14px;
-    padding: 15px 0;
   }
-	.views-field-field-join-now {
-		a {
-			text-decoration: none;
-	    padding: 10px 25px;
-	    border-radius: 5px;
-	    border: 2px solid $twitter;
-	    display: inline-block;
-			color: $twitter;
-		}
-	}
 }
-div#block-views-block-plans-block-3 {
-	float: left;
-  width: 33%;
-  text-align: center;
-}
+
 div#block-views-block-plans-block-2 {
-	float: left;
+	float: right;
 	width: 67%;
 	text-align: center;
+	.view-content {
+		display: flex;
+		width: 100%;
+	}
 	.views-field-title {
 		font-size: 24px;
 		position: relative;
@@ -5087,25 +5076,19 @@ div#block-views-block-plans-block-2 {
 		padding: 0;
 	}
 	.views-row {
-		padding: 40px;
+		padding: 20px;
 		text-align: center;
 		float: left;
-		width: 50%;
+		width: 33%;
 		border-left: 1px solid #f8f8f8;
-		min-height: 270px;
 		.views-field-field-price {
-			 font-size: 42px;
+			 font-size: 24px;
 			 font-weight: bold;
 			.field-content {
 				display:  inline-block;
-				&:before {
-			    content: "\f156";
-			    font: normal normal normal 35px/1 FontAwesome;
-					margin-right: 10px;
-				}
 			}
 		}
-		&:first-child {
+		&:nth-child(2) {
 			.views-field.views-field-field-price {
 						color: $twitter;
 			}
@@ -5135,29 +5118,29 @@ div#block-views-block-plans-block-2 {
 
 		}
 		  &:first-child {
-	       width: 67%;
+	       width: 55%;
 	       float: left;
 				 .views-field {
 					 display: flex;
 					 span {
-						 width: 50%;
+						 width: 60%;
 						 text-align: center;
 						 background-color: #fbfbfb;
+						 display: block;
 					 }
 					 div {
-						 width: 50%;
+						 width: 40%;
 						 text-align: center;
 					 }
 				 }
 				 .form-actions {
 					 float: right;
-					 width: 50%;
+					 width: 40%;
 					 border-left: 1px solid #f8f8f8;
 					 text-align: center;
 				 }
 	    }
-			&:last-child {
-				width: 33%;
+				width: 22.5%;
 				text-align: center;
 				float: left;
 				.views-field {
@@ -5168,7 +5151,7 @@ div#block-views-block-plans-block-2 {
 				.form-submit {
 					background: $login-btn;
 				}
-			}
+
    }
 }
 .product-header {
@@ -5208,5 +5191,18 @@ div#block-views-block-plans-block-2 {
 		border-radius: 5px;
 		color: $white;
 		background: $twitter;
+		text-decoration: none;
 	}
+}
+.choose-plan-block {
+		width: 33%;
+		float: left;
+		padding: 20px;
+		h2 {
+			font-size: 20px;
+		  text-align: center;
+		}
+		p {
+			font-size: 14px;
+		}
 }

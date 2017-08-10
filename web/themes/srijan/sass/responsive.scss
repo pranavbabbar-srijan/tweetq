@@ -1724,11 +1724,6 @@
 		}
    }
 	 // plans
-	 .user-logged-in {
-		 div#block-views-block-plans-block-3 {
-			 display: none;
-		 }
-	 }
 	 .view-plans {
 		 .views-field-field-join-now {
 		    a {
@@ -1743,18 +1738,8 @@
 			 padding: 0 20px;
 		    h1 {
 					font-size: 26px;
-
 				}
 			}
-	 }
-	 #block-views-block-plans-block-1  {
-		 .views-row {
-			 display: none;
-			 &.active {
-				 display: block;
-			 }
-		 }
-
 	 }
 	 .product-button {
 		 border: none;
@@ -1765,16 +1750,16 @@
 			 }
 		 }
 	 }
-	 div#block-views-block-plans-block-3 {
+	 .choose-plan-block {
 		 width: 100%;
 		 position: relative;
 		 z-index: 1;
-		 margin-top: -200px;
-		  .views-field-title {
+		 margin-top: -150px;
+		  h2 {
 				color: #ffffff;
 				font-size: 20px;
 			}
-			.views-field-body {
+			p {
 				padding:  0;
         color: #ffffff;
 			}
@@ -1782,10 +1767,10 @@
 	 div#block-views-block-plans-block-2 {
 		 width: 100%;
 		 .views-field-title {
-			 width: 50%;
+			 width: 33.3%;
 			 float: left;
 			 padding: 10px 15px;
-       font-size: 20px;
+       font-size: 16px;
 			 background: #fbfbfb;
 			 &:after {
 				 content: none;
@@ -1806,9 +1791,13 @@
 	 }
 	 #block-views-block-plans-block-1 {
 	    .views-row {
+				display: none;
+				&.active {
+					display: block;
+				}
 				.views-field {
 					width: 100%;
-          float: left;
+					display: flex;
 				}
 			   &:first-child {
             width: 100%;
@@ -1818,9 +1807,9 @@
 						.views-field span {
 							text-align: left;
 							padding:  10px 20px;
+							width: 50%;
 						}
 				 }
-				 &:last-child {
 					 width: 100%;
 					 .views-field {
 						 span {
@@ -1829,11 +1818,10 @@
 						 }
 						 span,div {
 							 display: inline-block;
-							 width: 49.5%;
+							 width: 50% !important;
 							 float: left;
 						 }
 					 }
-				 }
 			}
 		}
 	 .product-header {
@@ -2206,18 +2194,33 @@
 	 }
 	 .view-plans {
 	    .views-field-title {
-				 font-size: 28px;
+				 font-size: 18px !important;
 			}
 		}
 		div#block-views-block-plans-block-2 {
 		   .views-row .views-field-field-price {
-				  font-size: 24px;
-					 .field-content:before {
-						 font-size: 22px;
-					 }
+				  font-size: 18px;
+			 }
+			 .views-field-title {
+				 &:after {
+					 content: none;
+				 }
 			 }
 		 }
-
+		 .product-button {
+		    .form-submit {
+           padding: 10px 15px;
+					 font-size: 14px;
+				}
+			}
+     div.choose-plan-block {
+			 h2 {
+				 font-size: 18px;
+			 }
+			 p {
+				 font-size: 12px
+			 }
+		 }
 }
 
 

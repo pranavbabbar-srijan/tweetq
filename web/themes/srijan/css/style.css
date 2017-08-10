@@ -4490,25 +4490,15 @@ input::-webkit-credentials-auto-fill-button {
   .view-plans .views-field-body {
     color: #303030;
     opacity: 0.8;
-    font-size: 14px;
-    padding: 15px 0; }
-  .view-plans .views-field-field-join-now a {
-    text-decoration: none;
-    padding: 10px 25px;
-    border-radius: 5px;
-    border: 2px solid #2aa9e0;
-    display: inline-block;
-    color: #2aa9e0; }
-
-div#block-views-block-plans-block-3 {
-  float: left;
-  width: 33%;
-  text-align: center; }
+    font-size: 14px; }
 
 div#block-views-block-plans-block-2 {
-  float: left;
+  float: right;
   width: 67%;
   text-align: center; }
+  div#block-views-block-plans-block-2 .view-content {
+    display: flex;
+    width: 100%; }
   div#block-views-block-plans-block-2 .views-field-title {
     font-size: 24px;
     position: relative; }
@@ -4526,22 +4516,17 @@ div#block-views-block-plans-block-2 {
   div#block-views-block-plans-block-2 .view-plans {
     padding: 0; }
   div#block-views-block-plans-block-2 .views-row {
-    padding: 40px;
+    padding: 20px;
     text-align: center;
     float: left;
-    width: 50%;
-    border-left: 1px solid #f8f8f8;
-    min-height: 270px; }
+    width: 33%;
+    border-left: 1px solid #f8f8f8; }
     div#block-views-block-plans-block-2 .views-row .views-field-field-price {
-      font-size: 42px;
+      font-size: 24px;
       font-weight: bold; }
       div#block-views-block-plans-block-2 .views-row .views-field-field-price .field-content {
         display: inline-block; }
-        div#block-views-block-plans-block-2 .views-row .views-field-field-price .field-content:before {
-          content: "\f156";
-          font: normal normal normal 35px/1 FontAwesome;
-          margin-right: 10px; }
-    div#block-views-block-plans-block-2 .views-row:first-child .views-field.views-field-field-price {
+    div#block-views-block-plans-block-2 .views-row:nth-child(2) .views-field.views-field-field-price {
       color: #2aa9e0; }
     div#block-views-block-plans-block-2 .views-row:last-child .views-field.views-field-field-price {
       color: #96c85a; }
@@ -4551,37 +4536,38 @@ div#block-views-block-plans-block-2 {
   width: 100%; }
   #block-views-block-plans-block-1 .view-plans {
     padding: 0; }
-  #block-views-block-plans-block-1 .views-row .views-field {
-    border-bottom: 1px solid #f8f8f8; }
-    #block-views-block-plans-block-1 .views-row .views-field span, #block-views-block-plans-block-1 .views-row .views-field div {
-      padding: 10px 0;
-      border-right: 1px solid #f8f8f8;
-      color: #303030;
-      opacity: 0.7; }
-  #block-views-block-plans-block-1 .views-row:first-child {
-    width: 67%;
-    float: left; }
-    #block-views-block-plans-block-1 .views-row:first-child .views-field {
-      display: flex; }
-      #block-views-block-plans-block-1 .views-row:first-child .views-field span {
-        width: 50%;
-        text-align: center;
-        background-color: #fbfbfb; }
-      #block-views-block-plans-block-1 .views-row:first-child .views-field div {
-        width: 50%;
-        text-align: center; }
-    #block-views-block-plans-block-1 .views-row:first-child .form-actions {
-      float: right;
-      width: 50%;
-      border-left: 1px solid #f8f8f8;
-      text-align: center; }
-  #block-views-block-plans-block-1 .views-row:last-child {
-    width: 33%;
+  #block-views-block-plans-block-1 .views-row {
+    width: 22.5%;
     text-align: center;
     float: left; }
-    #block-views-block-plans-block-1 .views-row:last-child .views-field span {
+    #block-views-block-plans-block-1 .views-row .views-field {
+      border-bottom: 1px solid #f8f8f8; }
+      #block-views-block-plans-block-1 .views-row .views-field span, #block-views-block-plans-block-1 .views-row .views-field div {
+        padding: 10px 0;
+        border-right: 1px solid #f8f8f8;
+        color: #303030;
+        opacity: 0.7; }
+    #block-views-block-plans-block-1 .views-row:first-child {
+      width: 55%;
+      float: left; }
+      #block-views-block-plans-block-1 .views-row:first-child .views-field {
+        display: flex; }
+        #block-views-block-plans-block-1 .views-row:first-child .views-field span {
+          width: 60%;
+          text-align: center;
+          background-color: #fbfbfb;
+          display: block; }
+        #block-views-block-plans-block-1 .views-row:first-child .views-field div {
+          width: 40%;
+          text-align: center; }
+      #block-views-block-plans-block-1 .views-row:first-child .form-actions {
+        float: right;
+        width: 40%;
+        border-left: 1px solid #f8f8f8;
+        text-align: center; }
+    #block-views-block-plans-block-1 .views-row .views-field span {
       display: none; }
-    #block-views-block-plans-block-1 .views-row:last-child .form-submit {
+    #block-views-block-plans-block-1 .views-row .form-submit {
       background: #96c85a; }
 
 .product-header {
@@ -4615,4 +4601,15 @@ div#block-views-block-plans-block-2 {
     padding: 10px 22px;
     border-radius: 5px;
     color: #ffffff;
-    background: #2aa9e0; }
+    background: #2aa9e0;
+    text-decoration: none; }
+
+.choose-plan-block {
+  width: 33%;
+  float: left;
+  padding: 20px; }
+  .choose-plan-block h2 {
+    font-size: 20px;
+    text-align: center; }
+  .choose-plan-block p {
+    font-size: 14px; }
