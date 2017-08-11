@@ -1410,8 +1410,14 @@
 	function onChangeDisableTweet() {
 		var number_of_divs = $('.form-managed-file').find('div').length;
     var valueoftextarea = $('.form-textarea').val();
+		if(number_of_divs > 5) {
+			$("input[type='file']").change(function(){
+		      $(".max_upload--msg").show();
+		      this.value = '';
+		  });
+		}
 		if(number_of_divs > 5 && valueoftextarea.length > 140) {
-			$(".max_upload--msg").show().delay(3000).fadeOut(300);
+			$(".max_upload--msg").show();
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 		} else if (number_of_divs > 5 && valueoftextarea.length <= 140) {
@@ -1428,6 +1434,7 @@
 		else {
       $("#send-tweets-form #edit-submit").removeAttr('disabled');
 			$("#tweets-queue-tweet-form #edit-tweet-now").removeAttr('disabled');
+			$(".max_upload--msg").hide();
 		}
 
 		//Twitter tweet message character count as per twitter.
