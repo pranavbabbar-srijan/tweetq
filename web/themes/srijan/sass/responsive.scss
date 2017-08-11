@@ -761,7 +761,6 @@
 		}
 	}
 	#notification-display {
-
 	    display: inline-block;
 	    font: normal normal normal 14px/1 FontAwesome;
 	    font-size: inherit;
@@ -840,7 +839,7 @@
 		    		opacity: 1;
 		    	}
 		    }
-        }
+      }
 	}
 	.send-tweets-form ,
 	.tweets-queue-tweet-form {
@@ -1755,6 +1754,7 @@
 		 position: relative;
 		 z-index: 1;
 		 margin-top: -150px;
+		 padding: 20px;
 		  h2 {
 				color: #ffffff;
 				font-size: 20px;
