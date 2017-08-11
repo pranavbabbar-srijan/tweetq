@@ -1415,6 +1415,7 @@
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 		} else if (number_of_divs > 5 && valueoftextarea.length <= 140) {
+			$(".max_upload--msg").show().delay(3000).fadeOut(300);
 			$("#send-tweets-form #edit-submit").attr('disabled', 'true');
 			$("#tweets-queue-tweet-form #edit-tweet-now").attr('disabled', 'true');
 		} else if (number_of_divs <= 5 && valueoftextarea.length > 140) {
