@@ -950,7 +950,8 @@
     padding-right: 20px;
     position: relative !important;
     margin-bottom: 0 !important;
-    z-index: 0 !important; }
+    z-index: 0 !important;
+    top: 0; }
     .path-signup div.messages--status:before {
       background-size: 100px;
       height: 100px;
