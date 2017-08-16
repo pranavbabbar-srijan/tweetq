@@ -1397,10 +1397,12 @@
 						$('#contact-message-write-to-us-form .field--name-field-message .validation-error').fadeIn(1000);
 					}
 				});
-   		// 	$("<div class='lazyimage'></div>").insertAfter('img').show();
-				// $('img').each(function(){
-				// 		$(this).load( function(){ $(this).next('.lazyimage').hide();}).attr('src');
-				// });
+				$(function() {
+				  $('#scroll_down > a').on('click', function(e) {
+				    e.preventDefault();
+				    $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+				  });
+				});
 
 })(jQuery);
 
