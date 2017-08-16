@@ -22,7 +22,8 @@
   #delete-selected,
   #block-submenufooterblock,
   #block-primarymenu,
-  .tablet_display {
+  .tablet_display,
+  .scroll_down {
     display: none !important; }
   .path-dashboard .mobile-menus,
   .path-user .mobile-menus {
@@ -1406,6 +1407,8 @@
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
   /** header **/
+  .scroll_down {
+    display: none; }
   .user-logged-in .messages,
   .user-logged-in .-form-tweets-queue-csv-upload .js-form-managed-file .messages--error {
     left: 35%;
