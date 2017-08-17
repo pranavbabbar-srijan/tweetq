@@ -1354,6 +1354,12 @@
 						$('#contact-message-write-to-us-form .field--name-field-message .validation-error').fadeIn(1000);
 					}
 				});
+        // lazy loader
+        $('img').addClass('lazyimage');
+				$('img').each(function(){
+						$(this).load( function(){ $(this).removeClass('lazyimage');}).attr('src');
+				});
+
 })(jQuery);
 
 
