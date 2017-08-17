@@ -31,7 +31,8 @@
 	#delete-selected,
 	#block-submenufooterblock,
 	#block-primarymenu,
-	.tablet_display {
+	.tablet_display,
+	.scroll_down {
 		display: none !important;
 	}
 	.path-dashboard,
@@ -761,7 +762,6 @@
 		}
 	}
 	#notification-display {
-
 	    display: inline-block;
 	    font: normal normal normal 14px/1 FontAwesome;
 	    font-size: inherit;
@@ -840,7 +840,7 @@
 		    		opacity: 1;
 		    	}
 		    }
-        }
+      }
 	}
 	.send-tweets-form ,
 	.tweets-queue-tweet-form {
@@ -851,20 +851,19 @@
 		 #edit-clone {
 		 	font-size: 14px;
 		 	padding-left: 0.5em;
-            padding-right: 0.5em;
+      padding-right: 0.5em;
 		 }
-
-
 	   .message-header {
 	   	    padding: 0em 0.5em 1.5em 0.5em;
+					position: relative;
 	   	    .form-item-display-box {
    	    	    position: absolute;
-			    right: 10px;
-			    margin-bottom: 0;
-			    margin-top: -105px;
-			    input {
-			    	font-size: 12px;
-			    }
+					    right: 10px;
+					    margin-bottom: 0;
+							top: 138px;
+					    input {
+					    	font-size: 12px;
+					    }
 	   	    }
 	   }
 	   .create-header {
@@ -872,28 +871,38 @@
 	   }
 	   .form-type-managed-file  {
 		   	position: relative;
-		    margin-top: 30px;
+		    margin-top: 15px;
 		    width: 100%;
-		    margin-bottom: 30px;
+		    margin-bottom: 15px;
+				float: left;
 	   	  .form-managed-file {
-   	  	     width: 50px;
-		     height: 50px;
-		     position: relative;
+   	  	 width: 100%;
+				 height: auto;
+				 position: relative;
+				 border: none;
+				 background: none;
+				 > div {
+					 flex-wrap: wrap;
+				 }
 		     .form-file {
 		     	width: 50px;
-                height: 50px;
+          height: 50px;
 		     }
              &:before {
          	    padding-top: 13px;
-			    width: 50px;
-			    font-size: 24px;
+					    width: 50px;
+					    font-size: 24px;
+							background-color: rgba(0, 0, 0, 0.05);
+		          border: 1px solid rgba(0, 0, 0, 0.1);
+							height: 50px;
+							border-radius: 5px;
              }
              .js-form-type-checkbox {
                  input[type="checkbox"] {
              	    height: 20px;
-				    width: 20px;
-				    right: 5px;
-				    top: 5px;
+							    width: 20px;
+							    right: 5px;
+							    top: 5px;
                  }
                  .file {
                  	margin-left: 10px;
@@ -1274,6 +1283,7 @@
 		    position: relative !important;
 			margin-bottom: 0 !important;
 			z-index: 0 !important;
+			top: 0;
 			&:before {
 				background-size: 100px;
 				height: 100px;
@@ -1723,11 +1733,132 @@
 			border-right: none;
 		}
    }
+	 // plans
+	 .view-plans {
+		 .views-field-field-join-now {
+		    a {
+					 color: #ffffff;
+					 border-color: #ffffff;
+				}
+			}
+	 }
+	 .page-node-plans {
+		 .block-page-title-block  {
+			 top: 115px;
+			 padding: 0 20px;
+		    h1 {
+					font-size: 26px;
+				}
+			}
+	 }
+	 .product-button {
+		 border: none;
+		 .form-actions {
+			 padding: 40px 20px;
+			 .form-submit {
+				 width: 100%;
+			 }
+		 }
+	 }
+	 .choose-plan-block {
+		 width: 100%;
+		 position: relative;
+		 z-index: 1;
+		 margin-top: -150px;
+		 padding: 20px;
+		  h2 {
+				color: #ffffff;
+				font-size: 20px;
+			}
+			p {
+				padding:  0;
+        color: #ffffff;
+			}
+	 }
+	 div#block-views-block-plans-block-2 {
+		 width: 100%;
+		 .views-field-title {
+			 width: 33.3%;
+			 float: left;
+			 padding: 10px 15px;
+       font-size: 14px;
+			 background: #7d7d7d;
+			 color: #ffffff;
+			 border-right: 1px solid #fff;
+			 &:nth-child(3) {
+				 border-right: none;
+			 }
+			 &:after {
+				 content: none;
+			 }
+			 &.active {
+				 background: #ffffff;
+				 color: #2aa9e0;
+			 }
+		 }
+		 .views-row {
+			 width: 100%;
+			 padding: 15px;
+       min-height: auto;
+			 display: none;
+			 &.active {
+				 display: block;
+			 }
+		 }
+	 }
+	 #block-views-block-plans-block-1 {
+	    .views-row {
+				display: none;
+				&.active {
+					display: block;
+				}
+				.views-field {
+					width: 100%;
+					display: flex;
+				}
+			   &:first-child {
+            width: 100%;
+						.form-actions {
+							width: 100%;
+						}
+						.views-field span {
+							text-align: left;
+							padding:  10px 20px;
+							width: 50%;
+						}
+				 }
+					 width: 100%;
+					 .views-field {
+						 span {
+							 text-align: left;
+							 padding: 10px 20px;
+						 }
+						 span,div {
+							 display: inline-block;
+							 width: 50% !important;
+							 float: left;
+						 }
+					 }
+			}
+		}
+	 .product-header {
+	    span {
+			 &:first-child {
+         width: 50%;
+			}
+			&:last-child {
+				width: 50%;
+			}
+		}
+	}
 }
 
 /* css for tablet **/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
 	/** header **/
+	.scroll_down {
+		display: none;
+	}
 	.user-logged-in {
 		.messages,
 		.-form-tweets-queue-csv-upload .js-form-managed-file .messages--error {
@@ -2081,7 +2212,35 @@
 	     	}
 	     }
 	 }
-
+	 .view-plans {
+	    .views-field-title {
+				 font-size: 18px !important;
+			}
+		}
+		div#block-views-block-plans-block-2 {
+		   .views-row .views-field-field-price {
+				  font-size: 18px;
+			 }
+			 .views-field-title {
+				 &:after {
+					 content: none;
+				 }
+			 }
+		 }
+		 .product-button {
+		    .form-submit {
+           padding: 10px 15px;
+					 font-size: 14px;
+				}
+			}
+     div.choose-plan-block {
+			 h2 {
+				 font-size: 18px;
+			 }
+			 p {
+				 font-size: 12px
+			 }
+		 }
 }
 
 
