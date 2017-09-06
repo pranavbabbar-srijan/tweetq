@@ -17,3 +17,9 @@ http://barbet.io/:
   ssi:
     enabled: false
   upstream: app:http
+http://www.{default}/:
+  type: redirect
+  redirects:
+    expires: -1s
+    paths: {}
+  to: http://{default}/
