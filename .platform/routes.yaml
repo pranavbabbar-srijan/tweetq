@@ -3,7 +3,10 @@ http://{default}/:
   upstream: app:http
 http://www.{default}/:
   type: redirect
-  to: http://{default}/
+  redirects:
+    expires: -1s
+    paths: {}
+  to: https://{default}/
 http://barbet.io/:
   type: upstream
   redirects:
